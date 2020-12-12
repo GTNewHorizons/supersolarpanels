@@ -17,7 +17,6 @@ public class SSPOre extends Block {
 	public SSPOre(Material material, String name, float hardness, float resistance, String harvLevel, int level, SoundType soundType) {
 		super(material);
 		setRegistryName(Constants.MOD_ID, name);
-		setUnlocalizedName(name);
 		setHardness(hardness);
 		setResistance(resistance);
 		setHarvestLevel(harvLevel, level);

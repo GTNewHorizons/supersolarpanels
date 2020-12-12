@@ -16,9 +16,7 @@ import javax.annotation.Nonnull;
 import java.util.Set;
 
 
-public enum BotaniaMain implements ITeBlock
-//implements ITeBlock
-{
+public enum BotaniaMain implements ITeBlock {
 
 	manasteel_solar_panel(),
 	elementium_solar_panel(TileEntityElementiumSolar.class, 72, EnumRarity.RARE),

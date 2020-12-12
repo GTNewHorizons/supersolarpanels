@@ -276,24 +276,6 @@ public final class SPPRecipes {
 
 				'U', IC2Items.getItem("dust", "energium"));
 
-//
-
-		addShapedRecipe(SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.ENRICHED_SUNNARIUM), "UUU", "USU", "UUU",
-
-				'U', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.IRRADIANT_URANIUM),
-				'S', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM));
-		addShapedRecipe(SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.ENRICHED_SUNNARIUM_ALLOY), " S ", "SAS", " S ",
-
-				'S', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.ENRICHED_SUNNARIUM),
-				'A', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM_ALLOY));
-		addShapedRecipe(SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM_ALLOY), "III", "ISI", "III",
-
-				'I', IC2Items.getItem("crafting", "iridium"),
-				'S', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM));
-		addShapedRecipe(SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM), "SSS", "SSS", "SSS",
-
-				'S', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.SUNNARIUM_PART));
-		//
 		addShapedRecipe(SuperSolarPanels.machines.getItemStack(SSPBlock.spectral_solar_panelsun), "BA", 'A', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.sunlinse), 'B', SuperSolarPanels.machines.getItemStack(SSPBlock.spectral_solar_panel));
 		addShapedRecipe(SuperSolarPanels.machines.getItemStack(SSPBlock.singular_solar_panelsun), "BA", 'A', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.sunlinse), 'B', SuperSolarPanels.machines.getItemStack(SSPBlock.singular_solar_panel));
 		addShapedRecipe(SuperSolarPanels.machines.getItemStack(SSPBlock.admin_solar_panelsun), "BA", 'A', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.sunlinse), 'B', SuperSolarPanels.machines.getItemStack(SSPBlock.admin_solar_panel));
@@ -390,7 +372,7 @@ public final class SPPRecipes {
 				// IC2Items.getItem("cable", "type:glass,insulation:0"),
 				//  Character.valueOf('T'), IC2Items.getItem("te", "hv_transformer")
 		);
-		addShapedColourRecipe(new ItemStack(SSPItems.COMPRESSIRIDIUM.getInstance()), " S ",
+		addShapedColourRecipe(new ItemStack(SSPItems.COMPRESS_IRIDIUM.getInstance()), " S ",
 				"CQC",
 				" S ",
 
@@ -407,7 +389,7 @@ public final class SPPRecipes {
 
 				'S', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems2),
 				'C', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.compresscarbonultra),
-				'Q', new ItemStack(SSPItems.COMPRESSIRIDIUM.getInstance())
+				'Q', new ItemStack(SSPItems.COMPRESS_IRIDIUM.getInstance())
 				// Character.valueOf('G'),
 				// IC2Items.getItem("cable", "type:glass,insulation:0"),
 				//  Character.valueOf('T'), IC2Items.getItem("te", "hv_transformer")

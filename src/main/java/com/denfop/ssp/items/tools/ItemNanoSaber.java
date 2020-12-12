@@ -87,9 +87,8 @@ public class ItemNanoSaber extends ItemElectricTool {
 			case 1:
 				return "Tools/Nanosabre/NanosabreSwing2.ogg";
 			case 2:
-				break;
+				return "Tools/Nanosabre/NanosabreSwing3.ogg";
 		}
-		return "Tools/Nanosabre/NanosabreSwing3.ogg";
 	}
 
 	public static void drainSaber(ItemStack stack, double amount, EntityLivingBase entity) {
@@ -148,9 +147,9 @@ public class ItemNanoSaber extends ItemElectricTool {
 		if (!isActive(stack))
 			return;
 		if (ticker % 16 == 0 && entity instanceof EntityPlayerMP)
-			if (slot < 9) {
+			if (slot < 9)
 				drainSaber(stack, 64.0D, (EntityLivingBase) entity);
-			} else if (ticker % 64 == 0) {
+			else if (ticker % 64 == 0) {
 				drainSaber(stack, 32.0D, (EntityLivingBase) entity);
 			}
 	}

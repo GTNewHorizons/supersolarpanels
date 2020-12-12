@@ -1,8 +1,8 @@
 package com.denfop.ssp.tiles.panels.sun;
 
-import com.denfop.ssp.tiles.panels.entity.TileEntitySolarPanelsun;
+import com.denfop.ssp.tiles.panels.entity.TileEntitySolarPanelSun;
 
-public class TileEntityQuantumSolarsun extends TileEntitySolarPanelsun {
+public class TileEntityQuantumSolarsun extends TileEntitySolarPanelSun {
 	public static SolarConfig settings;
 
 	public TileEntityQuantumSolarsun() {

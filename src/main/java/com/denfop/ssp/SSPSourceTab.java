@@ -9,12 +9,13 @@ import javax.annotation.Nonnull;
 
 public class SSPSourceTab extends CreativeTabs {
 	public SSPSourceTab(String label) {
-		super("SSPSourceTab");
+		super(label);
 	}
 
 	@Nonnull
-	public ItemStack getTabIconItem() {
-
+	@Override
+	public ItemStack createIcon() {
 		return SuperSolarPanels.machines.getItemStack(SSPBlock.admin_solar_panel);
 	}
+
 }

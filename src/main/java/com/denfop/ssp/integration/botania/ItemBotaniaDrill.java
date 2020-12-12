@@ -1,7 +1,7 @@
 package com.denfop.ssp.integration.botania;
 
+import com.denfop.ssp.SuperSolarPanels;
 import com.denfop.ssp.common.Configs;
-import com.denfop.ssp.common.Constants;
 import com.google.common.base.CaseFormat;
 import ic2.core.IC2;
 import ic2.core.init.BlocksItems;
@@ -21,7 +21,10 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketBlockChange;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -42,7 +45,7 @@ public class ItemBotaniaDrill extends ItemDrill {
 
 	public ItemBotaniaDrill() {
 		super(null, 46, HarvestLevel.Iridium, 8888888, Configs.transferLimitdrill, 4, DrillMode.NORMAL.drillSpeed);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, "ItemBotaniaDrill")).setUnlocalizedName("ItemBotaniaDrill");
+		BlocksItems.registerItem((Item) this, SuperSolarPanels.getIdentifier("ItemBotaniaDrill"));
 	}
 
 	public static Collection<BlockPos> getBrokenBlocks(EntityPlayer player, RayTraceResult ray) {
@@ -64,7 +67,7 @@ public class ItemBotaniaDrill extends ItemDrill {
 				break;
 		}
 		World world = player.world;
-		Collection<BlockPos> list = new ArrayList<>(25);
+		List<BlockPos> list = new ArrayList<>(25);
 		for (int x = pos.getX() - xMove; x <= pos.getX() + xMove; x++) {
 			for (int y = pos.getY() - yMove; y <= pos.getY() + yMove; y++) {
 				for (int z = pos.getZ() - zMove; z <= pos.getZ() + zMove; z++) {
@@ -109,7 +112,7 @@ public class ItemBotaniaDrill extends ItemDrill {
 				break;
 		}
 		World world = player.world;
-		Collection<BlockPos> list = new ArrayList<>(9);
+		List<BlockPos> list = new ArrayList<>(9);
 		for (int x = pos.getX() - xMove; x <= pos.getX() + xMove; x++) {
 			for (int y = pos.getY() - yMove; y <= pos.getY() + yMove; y++) {
 				for (int z = pos.getZ() - zMove; z <= pos.getZ() + zMove; z++) {
@@ -192,10 +195,10 @@ public class ItemBotaniaDrill extends ItemDrill {
 					block.onBlockHarvested(world, blockPos, state, player);
 					if (player.isCreative()) {
 						if (block.removedByPlayer(state, world, blockPos, player, false))
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 					} else {
 						if (block.removedByPlayer(state, world, blockPos, player, true)) {
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 							block.harvestBlock(world, player, blockPos, state, world.getTileEntity(blockPos), stack);
 							if (experience > 0)
 								block.dropXpOnBlockBreak(world, blockPos, experience);
@@ -207,8 +210,6 @@ public class ItemBotaniaDrill extends ItemDrill {
 						((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
 				}
 			}
-			if (powerRanOut)
-				IC2.platform.messagePlayer(player, "super_solar_panels.advancedDrill.ranOut");
 			return true;
 		}
 		if (readDrillMode(stack) == DrillMode.BIG_HOLES1 && !(world = player.world).isRemote) {
@@ -233,10 +234,10 @@ public class ItemBotaniaDrill extends ItemDrill {
 					block.onBlockHarvested(world, blockPos, state, player);
 					if (player.isCreative()) {
 						if (block.removedByPlayer(state, world, blockPos, player, false))
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 					} else {
 						if (block.removedByPlayer(state, world, blockPos, player, true)) {
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 							block.harvestBlock(world, player, blockPos, state, world.getTileEntity(blockPos), stack);
 							if (experience > 0)
 								block.dropXpOnBlockBreak(world, blockPos, experience);
@@ -248,8 +249,6 @@ public class ItemBotaniaDrill extends ItemDrill {
 						((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
 				}
 			}
-			if (powerRanOut)
-				IC2.platform.messagePlayer(player, "super_solar_panels.ItemUltDrill.ranOut");
 			return true;
 		}
 		return super.onBlockStartBreak(stack, pos, player);

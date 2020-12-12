@@ -46,7 +46,7 @@ public class ItemAdvancedElectricJetpack extends ItemArmorElectric implements IB
 
 	protected ItemAdvancedElectricJetpack(String name, double maxCharge, double transferLimit, int tier) {
 		super(null, null, EntityEquipmentSlot.CHEST, maxCharge, transferLimit, tier);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name));
 		setMaxDamage(27);
 		setMaxStackSize(1);
 		setNoRepair();
@@ -65,6 +65,7 @@ public class ItemAdvancedElectricJetpack extends ItemArmorElectric implements IB
 		return "super_solar_panels:textures/armour/" + this.name + ".png";
 	}
 
+	@Nonnull
 	public String getTranslationKey() {
 		return "ssp." + super.getUnlocalizedName().substring(4);
 	}
@@ -96,7 +97,7 @@ public class ItemAdvancedElectricJetpack extends ItemArmorElectric implements IB
 		NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
-		if (SSPKeys.Isremovepoison2(player) && toggleTimer == 0) {
+		if (SSPKeys.removePoison2(player) && toggleTimer == 0) {
 			toggleTimer = 10;
 			Nightvision = !Nightvision;
 			if (IC2.platform.isSimulating()) {

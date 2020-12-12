@@ -16,11 +16,6 @@ public class ItemReactorProton extends ItemReactorUranium {
 	}
 
 	protected int getFinalHeat(ItemStack stack, IReactor reactor, int x, int y, int heat) {
-		if (reactor.isFluidCooled()) {
-			float breedereffectiveness = reactor.getHeat() / reactor.getMaxHeat();
-			if (breedereffectiveness > 0.5D)
-				heat *= 1;
-		}
 		return heat;
 	}
 
@@ -43,10 +38,11 @@ public class ItemReactorProton extends ItemReactorUranium {
 		throw new RuntimeException("invalid cell count: " + this.numberOfCells);
 	}
 
+	@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 	public boolean acceptUraniumPulse(ItemStack stack, IReactor reactor, ItemStack pulsingStack, int youX, int youY, int pulseX, int pulseY, boolean heatrun) {
 		if (!heatrun) {
-			float breedereffectiveness = (reactor.getHeat() / reactor.getMaxHeat()) * 32.0F;
-			float ReaktorOutput = 32.0F * breedereffectiveness + 3.0F;
+			float breederEffectiveness = (reactor.getHeat() / reactor.getMaxHeat()) * 32.0F;
+			float ReaktorOutput = 32.0F * breederEffectiveness + 3.0F;
 			reactor.addOutput(ReaktorOutput);
 		}
 		return true;

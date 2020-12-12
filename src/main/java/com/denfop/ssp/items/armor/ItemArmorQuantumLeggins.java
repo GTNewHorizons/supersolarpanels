@@ -18,7 +18,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -32,16 +31,15 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 
 	@Override
 	public String getArmorTexture(final ItemStack stack, final Entity entity, final EntityEquipmentSlot slot, final String type) {
-		return "super_solar_panels:textures/armour/" + this.name + ((type != null) ? "Overlay" : "") + ".png";
+		return "super_solar_panels:textures/armour/" + this.name + "Overlay" + ".png";
 	}
 
 	@Override
-	public void onArmorTick(final World world, final EntityPlayer player, final ItemStack stack) {
+	public void onArmorTick(@Nonnull final World world, @Nonnull final EntityPlayer player, @Nonnull final ItemStack stack) {
 		super.onArmorTick(world, player, stack);
 		player.extinguish();
 		final NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		byte toggleTimer = nbtData.getByte("toggleTimer");
-		boolean ret = false;
 		final boolean enableQuantumSpeedOnSprint = !IC2.platform.isRendering() || ConfigUtil.getBool(MainConfig.get(), "misc/quantumSpeedOnSprint");
 		if (ElectricItem.manager.canUse(stack, 1000.0) && (player.onGround || player.isInWater()) && IC2.keyboard.isForwardKeyDown(player) && ((enableQuantumSpeedOnSprint && player.isSprinting()) || (!enableQuantumSpeedOnSprint && IC2.keyboard.isBoostKeyDown(player)))) {
 			byte speedTicker = nbtData.getByte("speedTicker");
@@ -58,16 +56,14 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 					player.motionY += 0.12000000149011612;
 				}
 			}
-			if (speed > 0.0f) {
-				player.moveRelative(0.0f, 0.0f, 1.0f, speed);
-			}
+			player.moveRelative(0.0f, 0.0f, 1.0f, speed);
 		}
 		IC2.platform.profilerEndSection();
 
 
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
-		if (SSPKeys.Isremovepoison(player) && toggleTimer == 0) {
+		if (SSPKeys.removePoison(player) && toggleTimer == 0) {
 			toggleTimer = 10;
 			Nightvision = !Nightvision;
 			if (IC2.platform.isSimulating()) {
@@ -97,8 +93,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 			nbtData.setByte(s, toggleTimer);
 		}
 		if (Nightvision && IC2.platform.isSimulating() && ElectricItem.manager.use(stack, 1.0, player)) {
-			final BlockPos pos = new BlockPos((int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
-			final int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
 			if (Configs.canCraftHSP) {
 				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
 			} else {
@@ -106,7 +100,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 			}
 			if (Configs.canCraftHSH) {
 				player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 300, 2, true, true));
-			} else {
 			}
 		}
 	}
@@ -218,8 +211,10 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 			return;
 		}
 		nbt.removeTag("colour");
-		if (nbt.hasNoTags()) {
-			stack.getTagCompound().removeTag("display");
+		if (nbt.isEmpty()) {
+			if (stack.getTagCompound() != null) {
+				stack.getTagCompound().removeTag("display");
+			}
 		}
 	}
 

@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import java.util.Objects;
+
 public class BlocksRegister {
 	public static final Block iridiumOre = new com.denfop.ssp.SSPOre(Material.ROCK, "iridium_ore", 5.0F, 8.0F, "pickaxe", 3, SoundType.STONE);
 
@@ -54,7 +56,9 @@ public class BlocksRegister {
 
 	private static void setRegister(Block block) {
 		ForgeRegistries.BLOCKS.register(block);
-		ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(
+				Objects.requireNonNull(block.getRegistryName()))
+		);
 	}
 
 	public static void registerRender() {
@@ -75,6 +79,9 @@ public class BlocksRegister {
 	}
 
 	private static void setRender(Block block) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0,
+				new ModelResourceLocation(
+						Objects.requireNonNull(block.getRegistryName()),
+						"inventory"));
 	}
 }

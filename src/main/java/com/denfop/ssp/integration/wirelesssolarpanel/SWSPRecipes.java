@@ -16,7 +16,6 @@ public class SWSPRecipes {
 	public static void addCraftingRecipes() {
 		addShapedRecipe(MainWV.machines.getItemStack(TileEntitiesWV.singular_solar_panel_personal), "AAA", "ABA", "AAA",
 				'B', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore),
-
 				'A', MainWV.machines.getItemStack(TileEntitiesWV.spectral_solar_panel_personal));
 		addShapedRecipe(MainWV.machines.getItemStack(TileEntitiesWV.absorbing_solar_panel_personal), "AAA", "ABA", "AAA",
 				'B', SSPItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantcore2),
@@ -37,5 +36,4 @@ public class SWSPRecipes {
 	private static void addShapedRecipe(ItemStack output, Object... inputs) {
 		Recipes.advRecipes.addRecipe(output, inputs);
 	}
-
 }

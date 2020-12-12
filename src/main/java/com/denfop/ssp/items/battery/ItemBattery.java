@@ -30,7 +30,7 @@ public class ItemBattery extends BaseElectricItem {
 		super(null, maxCharge, transferLimit, tier);
 
 		setMaxStackSize(16);
-		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, this.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, this.name = name));
 	}
 
 	@SideOnly(Side.CLIENT)

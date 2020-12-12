@@ -10,7 +10,6 @@ import ic2.core.IC2;
 import ic2.core.init.BlocksItems;
 import ic2.core.init.Localization;
 import ic2.core.item.ElectricItemManager;
-import ic2.core.item.ItemTinCan;
 import ic2.core.ref.IItemModelProvider;
 import ic2.core.ref.ItemName;
 import ic2.core.util.StackUtil;
@@ -55,15 +54,11 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 
 	public ItemArmorQuantumHelmet(final SolarHelmetTypes type) {
 		super(ItemArmor.ArmorMaterial.DIAMOND, -1, EntityEquipmentSlot.HEAD);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, type.getName())).setUnlocalizedName(type.getLocalisedName());
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, type.getName()));
 		this.setCreativeTab(IC2.tabIC2);
 		this.setMaxDamage(27);
 		this.type = type;
 
-	}
-
-	public String func_77658_a() {
-		return "super_solar_panels." + super.getUnlocalizedName().substring(5);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -73,11 +68,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 
 	public boolean getIsRepairable(@Nonnull final ItemStack toRepair, @Nonnull final ItemStack repair) {
 		return false;
-	}
-
-	@Nonnull
-	public String getUnlocalizedName(@Nonnull final ItemStack stack) {
-		return this.getUnlocalizedName();
 	}
 
 	public boolean canBeDyed() {
@@ -97,7 +87,7 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 
 	@Nonnull
 	public String getItemStackDisplayName(@Nonnull final ItemStack stack) {
-		return Localization.translate(this.getUnlocalizedName(stack));
+		return Localization.translate(this.getTranslationKey(stack));
 	}
 
 	protected NBTTagCompound getDisplayNbt(final ItemStack stack, final boolean create) {
@@ -146,46 +136,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 		return nbt.getInteger("colour");
 	}
 
-	public void func_82815_c(final ItemStack stack) {
-		final NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-		if (nbt == null || !nbt.hasKey("colour", 3)) {
-			return;
-		}
-		nbt.removeTag("colour");
-		if (nbt.hasNoTags()) {
-			stack.getTagCompound().removeTag("display");
-		}
-	}
-
-	public boolean isMetalArmor(final ItemStack stack, final EntityPlayer player) {
-		return true;
-	}
-
-	public void damageArmor(final EntityLivingBase entity, @Nonnull final ItemStack stack, final DamageSource source, final int damage, final int slot) {
-		ElectricItem.manager.discharge(stack, damage * this.type.energyPerDamage, Integer.MAX_VALUE, true, false, false);
-	}
-
-	public String getArmorTexture(@Nonnull final ItemStack stack, @Nonnull final Entity entity, @Nonnull final EntityEquipmentSlot slot, @Nonnull final String type) {
-		return "super_solar_panels:textures/armour/" + this.type.getName() + ((type != null) ? "Overlay" : "") + ".png";
-	}
-
-	public int getItemEnchantability() {
-		return 0;
-	}
-
-
-	public boolean canProvideEnergy(final ItemStack stack) {
-		return false;
-	}
-
-	public double getMaxCharge(final ItemStack stack) {
-		return this.type.maxCharge;
-	}
-
-	public int getTier(final ItemStack stack) {
-		return this.type.tier;
-	}
-
 	public void onArmorTick(final World world, @Nonnull final EntityPlayer player, @Nonnull final ItemStack stack) {
 		if (this.HUDstuff(world.isRemote, player, stack)) {
 			return;
@@ -230,7 +180,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 		}
 		final NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		byte toggleTimer = nbtData.getByte("toggleTimer");
-		boolean ret = false;
 		ElectricItem.manager.charge(stack, output, Integer.MAX_VALUE, true, false);
 		final int air = player.getAir();
 		if (ElectricItem.manager.canUse(stack, 1000.0) && air < 100) {
@@ -239,12 +188,8 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 		} else if (air <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
-		if (ElectricItem.manager.canUse(stack, 1000.0) && player.getFoodStats().needFood()) {
+		/*if (ElectricItem.manager.canUse(stack, 1000.0) && player.getFoodStats().needFood()) {
 			int slot = -1;
-			for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-				final ItemStack playerStack = player.inventory.mainInventory.get(i);
-
-			}
 			if (slot > -1) {
 				ItemStack playerStack2 = player.inventory.mainInventory.get(slot);
 				final ItemTinCan can = (ItemTinCan) playerStack2.getItem();
@@ -257,7 +202,8 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 					ElectricItem.manager.use(stack, 1000.0, null);
 				}
 			}
-		} else if (player.getFoodStats().getFoodLevel() <= 0) {
+		} else */
+		if (player.getFoodStats().getFoodLevel() <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
 
@@ -268,9 +214,10 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 				ElectricItem.manager.use(stack, 400D, null);
 			}
 		}
+
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
-		if (SSPKeys.Isremovepoison(player) && toggleTimer == 0) {
+		if (SSPKeys.removePoison(player) && toggleTimer == 0) {
 			toggleTimer = 10;
 			Nightvision = !Nightvision;
 			if (IC2.platform.isSimulating()) {
@@ -303,20 +250,11 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 			final BlockPos pos = new BlockPos((int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
 			final int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
 			if (skylight > 8) {
-
 				player.removeActivePotionEffect(MobEffects.NIGHT_VISION);
 			} else {
-
-
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, true));
-
 			}
 		}
-
-
-		player.removePotionEffect(MobEffects.POISON);
-		player.removePotionEffect(MobEffects.UNLUCK);
-		player.removePotionEffect(MobEffects.WITHER);
 
 		//   potionRemovalCost.put(IC2Potion.radiation, Integer.valueOf(10000));
 		//      IC2.platform.removePotion((EntityLivingBase)player, MobEffects.WITHER);

@@ -44,8 +44,7 @@ public class ItemWindRotor extends ItemGradualInt implements IKineticRotor {
 		this.renderTexture = RenderTexture;
 		this.minWindStrength = minWindStrength;
 		this.maxWindStrength = maxWindStrength;
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name)).setUnlocalizedName(name);
-
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name));
 	}
 
 	@SideOnly(Side.CLIENT)

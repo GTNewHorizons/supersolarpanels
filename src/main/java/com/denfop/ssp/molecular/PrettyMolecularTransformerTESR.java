@@ -1,6 +1,6 @@
 package com.denfop.ssp.molecular;
 
-import com.denfop.ssp.common.Constants;
+import com.denfop.ssp.SuperSolarPanels;
 import com.denfop.ssp.tiles.panels.entity.TileEntityMolecularAssembler;
 import gnu.trove.map.TObjectIntMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
@@ -33,9 +33,9 @@ import java.util.List;
 public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<TileEntityMolecularAssembler> {
 	public static final PrettyMolecularTransformerModel model = new PrettyMolecularTransformerModel();
 	public static final boolean drawActiveCore = false;
-	private static final ResourceLocation transfTextloc = new ResourceLocation(Constants.MOD_ID, "textures/models/textureMolecularTransformer.png");
-	private static final ResourceLocation plazmaTextloc = new ResourceLocation(Constants.MOD_ID, "textures/models/plazma.png");
-	private static final ResourceLocation particlesTextloc = new ResourceLocation(Constants.MOD_ID, "textures/models/particles.png");
+	private static final ResourceLocation transformerRes = SuperSolarPanels.getIdentifier("textures/models/textureMolecularTransformer.png");
+	private static final ResourceLocation plazmaRes = SuperSolarPanels.getIdentifier("textures/models/plazma.png");
+	private static final ResourceLocation perticleRes = SuperSolarPanels.getIdentifier("textures/models/particles.png");
 	private static final TObjectIntMap<List<Serializable>> textureSizeCache = new TObjectIntHashMap<>();
 	private static final IResourceManager resources = Minecraft.getMinecraft().getResourceManager();
 	public int ticker;
@@ -63,7 +63,7 @@ public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<Ti
 		}
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-		bindTexture(transfTextloc);
+		bindTexture(transformerRes);
 		model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GlStateManager.popMatrix();
 		if (destroyStage >= 0) {
@@ -85,8 +85,8 @@ public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<Ti
 		this.ticker++;
 		if (this.ticker > 160)
 			this.ticker = 0;
-		int plazmaSize = getTextureSize(plazmaTextloc.getResourcePath(), 64);
-		int particleSize = getTextureSize(particlesTextloc.getResourcePath(), 32);
+		int plazmaSize = getASPTextureSize(plazmaRes.getPath(), 64);
+		int particleSize = getASPTextureSize(perticleRes.getPath(), 32);
 		float rotationX = ActiveRenderInfo.getRotationX();
 		float rotationXZ = ActiveRenderInfo.getRotationXZ();
 		float rotationZ = ActiveRenderInfo.getRotationZ();
@@ -103,14 +103,14 @@ public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<Ti
 		GL11.glDepthMask(false);
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 1);
-		bindTexture(plazmaTextloc);
+		bindTexture(plazmaRes);
 		int phase = this.ticker % 16;
 		float quadPlazmaSize = (plazmaSize * 4);
 		float plasmaEdge = plazmaSize - 0.01F;
 		float xBottom = ((phase % 4 * plazmaSize) + 0.0F) / quadPlazmaSize;
 		float xTop = ((phase % 4 * plazmaSize) + plasmaEdge) / quadPlazmaSize;
-		float yBottom = ((phase / 4 * plazmaSize) + 0.0F) / quadPlazmaSize;
-		float yTop = ((phase / 4 * plazmaSize) + plasmaEdge) / quadPlazmaSize;
+		float yBottom = (phase / 4f * plazmaSize) / quadPlazmaSize;
+		float yTop = (phase / 4f * plazmaSize + plasmaEdge) / quadPlazmaSize;
 		buffer.begin(7, DefaultVertexFormats.BLOCK);
 		GL11.glColor4f(colour.getRed() / 255.0F, colour.getGreen() / 255.0F, colour.getBlue() / 255.0F, 1.0F);
 		buffer.pos((posX - rotationX * scaleCore - rotationYZ * scaleCore), (posY - rotationXZ * scaleCore), (posZ - rotationZ * scaleCore - rotationXY * scaleCore)).tex(xTop, yTop)
@@ -129,14 +129,14 @@ public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<Ti
 		GL11.glDepthMask(false);
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 1);
-		bindTexture(particlesTextloc);
+		bindTexture(perticleRes);
 		phase += 24;
 		float octParticleSize = (particleSize * 8);
 		plasmaEdge = particleSize - 0.01F;
-		xBottom = ((phase % 8 * particleSize) + 0.0F) / octParticleSize;
-		xTop = ((phase % 8 * particleSize) + plasmaEdge) / octParticleSize;
-		yBottom = ((phase / 8 * particleSize) + 0.0F) / octParticleSize;
-		yTop = ((phase / 8 * particleSize) + plasmaEdge) / octParticleSize;
+		xBottom = phase % 8f * particleSize / octParticleSize;
+		xTop = (phase % 8 * particleSize + plasmaEdge) / octParticleSize;
+		yBottom = phase / 8f * particleSize / octParticleSize;
+		yTop = phase / 8f * particleSize / octParticleSize + plasmaEdge / octParticleSize;
 		scaleCore = 0.4F + MathHelper.sin(this.ticker / 10.0F) * 0.1F;
 		buffer.begin(7, DefaultVertexFormats.BLOCK);
 		GlStateManager.disableLighting();
@@ -155,7 +155,7 @@ public class PrettyMolecularTransformerTESR extends TileEntitySpecialRenderer<Ti
 		GL11.glPopMatrix();
 	}
 
-	public static int getTextureSize(String s, int dv) {
+	public static int getASPTextureSize(String s, int dv) {
 		if (textureSizeCache.containsKey(Arrays.asList(s, dv)))
 			return textureSizeCache.get(Arrays.asList(s, dv));
 		try {

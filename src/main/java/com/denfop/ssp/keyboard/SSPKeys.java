@@ -39,15 +39,15 @@ public final class SSPKeys extends Keyboard {
 		IC2.keyboard.addKeyWatcher(SSPKeys.poison);
 	}
 
-	public static boolean Isremovepoison(final EntityPlayer player) {
+	public static boolean removePoison(final EntityPlayer player) {
 		return IC2.keyboard.isKeyDown(player, SSPKeys.poison);
 	}
 
-	public static boolean Isremovepoison1(final EntityPlayer player) {
+	public static boolean removePoison1(final EntityPlayer player) {
 		return IC2.keyboard.isKeyDown(player, SSPKeys.poison1);
 	}
 
-	public static boolean Isremovepoison2(final EntityPlayer player) {
+	public static boolean removePoison2(final EntityPlayer player) {
 		return IC2.keyboard.isKeyDown(player, SSPKeys.poison2);
 	}
 

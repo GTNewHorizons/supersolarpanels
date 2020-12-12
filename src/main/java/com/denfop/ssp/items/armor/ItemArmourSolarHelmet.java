@@ -60,7 +60,7 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 
 	public ItemArmourSolarHelmet(final SolarHelmetTypes type) {
 		super(ItemArmor.ArmorMaterial.DIAMOND, -1, EntityEquipmentSlot.HEAD);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, type.getName())).setUnlocalizedName(type.getLocalisedName());
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, type.getName()));
 		this.setCreativeTab(IC2.tabIC2);
 		this.setMaxDamage(27);
 		this.type = type;
@@ -71,20 +71,10 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 		//   potionRemovalCost.replace(MobEffects.WITHER, Integer.valueOf(25000));
 	}
 
-	public String func_77658_a() {
-		return "super_solar_panels." + super.getUnlocalizedName().substring(5);
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerModels(final ItemName name) {
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("super_solar_panels:" + CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, this.type.getName()), null));
-	}
-
-	@Override
-	@Nonnull
-	public String getUnlocalizedName(@Nonnull final ItemStack stack) {
-		return this.getUnlocalizedName();
 	}
 
 	@Override
@@ -104,7 +94,7 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 	@Override
 	@Nonnull
 	public String getItemStackDisplayName(@Nonnull final ItemStack stack) {
-		return Localization.translate(this.getUnlocalizedName(stack));
+		return Localization.translate(this.getTranslationKey(stack));
 	}
 
 	@Override
@@ -119,112 +109,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 			return -1;
 		}
 		return nbt.getInteger("colour");
-	}
-
-	@Override
-	public void removeColor(@Nonnull final ItemStack stack) {
-		final NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-		if (nbt == null || !nbt.hasKey("colour", 3)) {
-			return;
-		}
-		nbt.removeTag("colour");
-		if (nbt.hasNoTags()) {
-			stack.getTagCompound().removeTag("display");
-		}
-	}
-
-	@Override
-	public int getMetadata(@Nonnull final ItemStack stack) {
-		return 0;
-	}
-
-	@Override
-	public void setColor(@Nonnull final ItemStack stack, final int colour) {
-		this.getDisplayNbt(stack, true).setInteger("colour", colour);
-	}
-
-	@Override
-	public boolean getIsRepairable(@Nonnull final ItemStack toRepair, @Nonnull final ItemStack repair) {
-		return false;
-	}
-
-	@Override
-	public ISpecialArmor.ArmorProperties getProperties(final EntityLivingBase player, @Nonnull final ItemStack armour, final DamageSource source, final double damage, final int slot) {
-		if (source.isUnblockable()) {
-			return new ISpecialArmor.ArmorProperties(0, 0.0, 0);
-		}
-		return new ISpecialArmor.ArmorProperties(0, 0.15 * this.type.damageAbsorptionRatio, (int) (25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
-	}
-
-	@Override
-	public int getArmorDisplay(final EntityPlayer player, @Nonnull final ItemStack armour, final int slot) {
-		if (ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage) {
-			return (int) Math.round(3.0 * this.type.damageAbsorptionRatio);
-		}
-		return 0;
-	}
-
-	@Override
-	public String getArmorTexture(@Nonnull final ItemStack stack, @Nonnull final Entity entity, @Nonnull final EntityEquipmentSlot slot, @Nonnull final String type) {
-		return "super_solar_panels:textures/armour/" + this.type.getName() + ((type != null) ? "Overlay" : "") + ".png";
-	}
-
-	@Override
-	public void damageArmor(final EntityLivingBase entity, @Nonnull final ItemStack stack, final DamageSource source, final int damage, final int slot) {
-		ElectricItem.manager.discharge(stack, damage * this.type.energyPerDamage, Integer.MAX_VALUE, true, false, false);
-	}
-
-	@Override
-	public boolean canProvideEnergy(final ItemStack stack) {
-		return false;
-	}
-
-	protected NBTTagCompound getDisplayNbt(final ItemStack stack, final boolean create) {
-		NBTTagCompound nbt = stack.getTagCompound();
-		if (nbt == null) {
-			if (!create) {
-				return null;
-			}
-			nbt = new NBTTagCompound();
-			stack.setTagCompound(nbt);
-		}
-		NBTTagCompound out;
-		if (!nbt.hasKey("display", 50)) {
-			if (!create) {
-				return null;
-			}
-			out = new NBTTagCompound();
-			nbt.setTag("display", out);
-		} else {
-			out = nbt.getCompoundTag("display");
-		}
-		return out;
-
-	}
-
-	@Override
-	public double getMaxCharge(final ItemStack stack) {
-		return this.type.maxCharge;
-	}
-
-	@Override
-	public int getTier(final ItemStack stack) {
-		return this.type.tier;
-	}
-
-	@Override
-	public double getTransferLimit(final ItemStack stack) {
-		return this.type.transferLimit;
-	}
-
-	@Override
-	public boolean doesProvideHUD(final ItemStack stack) {
-		return ElectricItem.manager.getCharge(stack) > 0.0;
-	}
-
-	@Override
-	public HudMode getHudMode(final ItemStack stack) {
-		return HudMode.getFromID(StackUtil.getOrCreateNbtData(stack).getByte("hudMode"));
 	}
 
 	@Override
@@ -284,7 +168,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 		}
 		final NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		byte toggleTimer = nbtData.getByte("toggleTimer");
-		boolean ret = false;
 		ElectricItem.manager.charge(stack, output, Integer.MAX_VALUE, true, false);
 		final int air = player.getAir();
 		if (ElectricItem.manager.canUse(stack, 1000.0) && air < 100) {
@@ -293,10 +176,9 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 		} else if (air <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
-		if (ElectricItem.manager.canUse(stack, 1000.0) && player.getFoodStats().needFood()) {
+		/*if (ElectricItem.manager.canUse(stack, 1000.0) && player.getFoodStats().needFood()) {
 			int slot = -1;
 			for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-				final ItemStack playerStack = player.inventory.mainInventory.get(i);
 
 			}
 			if (slot > -1) {
@@ -311,7 +193,8 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 					ElectricItem.manager.use(stack, 1000.0, null);
 				}
 			}
-		} else if (player.getFoodStats().getFoodLevel() <= 0) {
+		} else */
+		if (player.getFoodStats().getFoodLevel() <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
 		for (final PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
@@ -321,6 +204,7 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 				ElectricItem.manager.use(stack, 400D, null);
 			}
 		}
+
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
 		if (IC2.keyboard.isAltKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
@@ -368,16 +252,13 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 			Potion potion = effect.getPotion();
 			Integer cost = potionRemovalCost.get(potion);
 			if (cost != null) {
-				cost = cost.intValue() * (effect.getAmplifier() + 1);
+				cost *= effect.getAmplifier() + 1;
 				if (ElectricItem.manager.canUse(stack, cost)) {
 					ElectricItem.manager.use(stack, cost, null);
 					IC2.platform.removePotion(player, potion);
 				}
 			}
 		}
-		player.removePotionEffect(MobEffects.POISON);
-		player.removePotionEffect(MobEffects.UNLUCK);
-		player.removePotionEffect(MobEffects.WITHER);
 
 		//   potionRemovalCost.put(IC2Potion.radiation, Integer.valueOf(10000));
 		//      IC2.platform.removePotion((EntityLivingBase)player, MobEffects.WITHER);

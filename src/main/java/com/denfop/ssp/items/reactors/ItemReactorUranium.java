@@ -39,7 +39,7 @@ public class ItemReactorUranium extends AbstractDamageableReactorComponent {
 		super(null, duration);
 		setMaxStackSize(64);
 		this.numberOfCells = cells;
-		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, this.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, this.name = name));
 	}
 
 	@SideOnly(Side.CLIENT)

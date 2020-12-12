@@ -66,17 +66,14 @@ public enum AvaritiaMod implements ITeBlock
 		if (mc == null || !Constants.MOD_ID.equals(mc.getModId())) {
 			throw new IllegalAccessError("Don't mess with this please.");
 		}
-		for (final AvaritiaMod block : AvaritiaMod.VALUES2) {
-			if (block.teClass2 != null) {
+		for (final AvaritiaMod block : AvaritiaMod.VALUES2)
+			if (block.teClass2 != null)
 				try {
 					block.dummyTe2 = block.teClass2.newInstance();
 				} catch (Exception e) {
-					if (Util.inDev()) {
+					if (Util.inDev())
 						e.printStackTrace();
-					}
 				}
-			}
-		}
 	}
 
 	@SuppressWarnings("EmptyMethod")

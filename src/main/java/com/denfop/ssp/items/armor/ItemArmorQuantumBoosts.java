@@ -16,7 +16,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -31,15 +30,14 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 	}
 
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		return "super_solar_panels:textures/armour/" + this.name + ((type != null) ? "Overlay" : "") + ".png";
+		return "super_solar_panels:textures/armour/" + this.name + "Overlay" + ".png";
 	}
 
-	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+	public void onArmorTick(World world, @Nonnull EntityPlayer player, @Nonnull ItemStack stack) {
 		super.onArmorTick(world, player, stack);
 		player.fallDistance = 0;
 		NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		byte toggleTimer = nbtData.getByte("toggleTimer");
-		boolean ret = false;
 		if (IC2.platform.isSimulating()) {
 			boolean wasOnGround = (!nbtData.hasKey("wasOnGround") || nbtData.getBoolean("wasOnGround"));
 			if (wasOnGround && !player.onGround && IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isBoostKeyDown(player)) {
@@ -64,7 +62,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
-		if (SSPKeys.Isremovepoison1(player) && toggleTimer == 0) {
+		if (SSPKeys.removePoison1(player) && toggleTimer == 0) {
 			toggleTimer = 10;
 			Nightvision = !Nightvision;
 			if (IC2.platform.isSimulating()) {
@@ -94,8 +92,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 			nbtData.setByte(s, toggleTimer);
 		}
 		if (Nightvision && IC2.platform.isSimulating() && ElectricItem.manager.use(stack, 1.0, player)) {
-			final BlockPos pos = new BlockPos((int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
-			final int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
 			if (Configs.canCraftMT) {
 				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
 			} else {
@@ -108,7 +104,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 			}
 			if (Configs.canCraftASH) {
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 4, true, true));
-			} else {
 			}
 		}
 	}
@@ -184,8 +179,9 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 		if (nbt == null || !nbt.hasKey("colour", 3))
 			return;
 		nbt.removeTag("colour");
-		if (nbt.hasNoTags())
-			stack.getTagCompound().removeTag("display");
+		if (nbt.isEmpty())
+			if (stack.getTagCompound() != null)
+				stack.getTagCompound().removeTag("display");
 	}
 
 	public void setColor(@Nonnull ItemStack stack, int colour) {

@@ -52,8 +52,8 @@ import java.util.Map;
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, dependencies = Constants.MOD_DEPS, version = Constants.MOD_VERSION, acceptedMinecraftVersions = "[1.12,1.12.2]")
 public final class SuperSolarPanels {
 
-    public static final CreativeTabs SSPTab = new SSPSourceTab("SSPtab");
-    public static Logger log;
+    public static final CreativeTabs SSPTab = new SSPSourceTab("SSPSourceTab");
+	public static Logger log;
 
     public static boolean avaritiaLoaded = false;
     public static boolean botaniaLoaded = false;
@@ -152,7 +152,6 @@ public final class SuperSolarPanels {
     private static void setupRenderingGuf() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMolecularAssembler.class, new com.denfop.ssp.molecular.PrettyMolecularTransformerTESR());
         ForgeHooksClient.registerTESRItemStack(machines.getItem(), SSPBlock.molecular_transformer.getId(), SSPBlock.molecular_transformer.getTeClass());
-
     }
 
     @Mod.EventHandler

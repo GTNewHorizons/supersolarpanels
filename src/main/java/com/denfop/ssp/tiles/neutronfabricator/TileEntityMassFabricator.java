@@ -114,32 +114,16 @@ public class TileEntityMassFabricator extends TileEntityElectricMachine implemen
     return nbt;
   }
 
-  public void markDirty() {
-    super.markDirty();
-    if (IC2.platform.isSimulating())
-      setUpgradestat();
-  }
-
   protected void onLoaded() {
     super.onLoaded();
     if (!(getWorld()).isRemote)
-      setUpgradestat();
-  }
-
-  protected void onUnloaded() {
-    if (IC2.platform.isRendering() && this.audioSource != null) {
-      IC2.audioManager.removeSources(this);
-      this.audioSource = null;
-      this.audioSourceScrap = null;
-    }
-    super.onUnloaded();
+      setUpgradeStat();
   }
 
   protected void updateEntityServer() {
     super.updateEntityServer();
     this.redstonePowered = false;
-    boolean needsInvUpdate = false;
-    needsInvUpdate |= this.upgradeSlot.tickNoMark();
+    boolean needsInvUpdate = this.upgradeSlot.tickNoMark();
     if (this.redstone.hasRedstoneInput() || this.energy.getEnergy() <= 0.0D) {
       setState(0);
       setActive(false);
@@ -169,6 +153,21 @@ public class TileEntityMassFabricator extends TileEntityElectricMachine implemen
       if (needsInvUpdate)
         markDirty();
     }
+  }
+
+  protected void onUnloaded() {
+    if (IC2.platform.isRendering() && this.audioSource != null) {
+      IC2.audioManager.removeSources(this);
+      this.audioSource = null;
+      this.audioSourceScrap = null;
+    }
+    super.onUnloaded();
+  }
+
+  public void markDirty() {
+    super.markDirty();
+    if (IC2.platform.isSimulating())
+      setUpgradeStat();
   }
 
   private void setState(int aState) {
@@ -226,7 +225,7 @@ public class TileEntityMassFabricator extends TileEntityElectricMachine implemen
     super.onNetworkUpdate(field);
   }
 
-  public void setUpgradestat() {
+  public void setUpgradeStat() {
     this.upgradeSlot.onChanged();
     this.energy.setSinkTier(applyModifier(this.upgradeSlot.extraTier));
   }

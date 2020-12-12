@@ -106,8 +106,9 @@ public class ItemGraviChestplate extends ItemAdvancedElectricJetpack {
 		if (nbt == null || !nbt.hasKey("colour", 3))
 			return;
 		nbt.removeTag("colour");
-		if (nbt.hasNoTags())
-			stack.getTagCompound().removeTag("display");
+		if (nbt.isEmpty())
+			if (stack.getTagCompound() != null)
+				stack.getTagCompound().removeTag("display");
 	}
 
 	public void setColor(@Nonnull ItemStack stack, int colour) {

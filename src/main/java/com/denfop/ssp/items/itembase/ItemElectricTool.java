@@ -60,7 +60,7 @@ public abstract class ItemElectricTool extends ItemToolIC2 implements IPseudoDam
 		this.operationEnergyCost = operationEnergyCost;
 		setMaxDamage(27);
 		setNoRepair();
-		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, ItemElectricTool.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, ItemElectricTool.name = name));
 
 	}
 

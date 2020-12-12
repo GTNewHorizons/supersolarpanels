@@ -19,7 +19,7 @@ public class CraftingThings extends ItemMulti {
 
 	public CraftingThings() {
 		super(null, CraftingTypes.class);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, "crafting")).setUnlocalizedName("crafting");
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, "crafting"));
 	}
 
 	@SideOnly(Side.CLIENT)

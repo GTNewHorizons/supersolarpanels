@@ -42,7 +42,7 @@ public class ItemUltDrill extends ItemDrill {
 
 	public ItemUltDrill() {
 		super(null, Configs.operationEnergyCost, HarvestLevel.Iridium, Configs.maxChargedrill, Configs.transferLimitdrill, Configs.tierdrill, DrillMode.NORMAL.drillSpeed);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, "ItemUltDrill")).setUnlocalizedName("ItemUltDrill");
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, "ItemUltDrill"));
 	}
 
 	public static Collection<BlockPos> getBrokenBlocks(EntityPlayer player, RayTraceResult ray) {
@@ -51,7 +51,7 @@ public class ItemUltDrill extends ItemDrill {
 
 	protected static Collection<BlockPos> getBrokenBlocks(EntityPlayer player, BlockPos pos, EnumFacing side) {
 		assert side != null;
-		int xMove = 2, yMove = xMove, zMove = yMove;
+		int xMove = 2, yMove = 2, zMove = 2;
 		switch (side.getAxis()) {
 			case X:
 				xMove = 0;
@@ -96,7 +96,7 @@ public class ItemUltDrill extends ItemDrill {
 
 	protected static Collection<BlockPos> getBrokenBlocks1(EntityPlayer player, BlockPos pos, EnumFacing side) {
 		assert side != null;
-		int xMove = 1, yMove = xMove, zMove = yMove;
+		int xMove = 1, yMove = 1, zMove = 1;
 		switch (side.getAxis()) {
 			case X:
 				xMove = 0;
@@ -192,10 +192,10 @@ public class ItemUltDrill extends ItemDrill {
 					block.onBlockHarvested(world, blockPos, state, player);
 					if (player.isCreative()) {
 						if (block.removedByPlayer(state, world, blockPos, player, false))
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 					} else {
 						if (block.removedByPlayer(state, world, blockPos, player, true)) {
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 							block.harvestBlock(world, player, blockPos, state, world.getTileEntity(blockPos), stack);
 							if (experience > 0)
 								block.dropXpOnBlockBreak(world, blockPos, experience);
@@ -203,7 +203,9 @@ public class ItemUltDrill extends ItemDrill {
 						stack.onBlockDestroyed(world, state, blockPos, player);
 					}
 					world.playEvent(2001, blockPos, Block.getStateId(state));
-					((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
+					if (player instanceof EntityPlayerMP) {
+						((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
+					}
 				}
 			}
 			if (powerRanOut)
@@ -233,10 +235,10 @@ public class ItemUltDrill extends ItemDrill {
 					block.onBlockHarvested(world, blockPos, state, player);
 					if (player.isCreative()) {
 						if (block.removedByPlayer(state, world, blockPos, player, false))
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 					} else {
 						if (block.removedByPlayer(state, world, blockPos, player, true)) {
-							block.onBlockDestroyedByPlayer(world, blockPos, state);
+							block.onPlayerDestroy(world, blockPos, state);
 							block.harvestBlock(world, player, blockPos, state, world.getTileEntity(blockPos), stack);
 							if (experience > 0)
 								block.dropXpOnBlockBreak(world, blockPos, experience);
@@ -244,7 +246,9 @@ public class ItemUltDrill extends ItemDrill {
 						stack.onBlockDestroyed(world, state, blockPos, player);
 					}
 					world.playEvent(2001, blockPos, Block.getStateId(state));
-					((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
+					if (player instanceof EntityPlayerMP) {
+						((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, blockPos));
+					}
 				}
 			}
 			if (powerRanOut)

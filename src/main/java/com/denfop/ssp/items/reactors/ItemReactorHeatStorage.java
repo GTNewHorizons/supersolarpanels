@@ -23,7 +23,7 @@ public class ItemReactorHeatStorage extends AbstractDamageableReactorComponent {
 
 	public ItemReactorHeatStorage(String name, int heatStorage) {
 		super(null, heatStorage);
-		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, ItemReactorHeatStorage.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem(this, new ResourceLocation(Constants.MOD_ID, ItemReactorHeatStorage.name = name));
 	}
 
 	@SideOnly(Side.CLIENT)

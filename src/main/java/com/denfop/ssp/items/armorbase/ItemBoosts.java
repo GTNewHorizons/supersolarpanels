@@ -41,7 +41,7 @@ public class ItemBoosts extends ItemArmorElectric implements IBoostingJetpack {
 
 	protected ItemBoosts(final String name, final double maxCharge, final double transferLimit, final int tier) {
 		super(null, null, EntityEquipmentSlot.FEET, maxCharge, transferLimit, tier);
-		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name)).setUnlocalizedName(name);
+		BlocksItems.registerItem((Item) this, new ResourceLocation(Constants.MOD_ID, this.name = name));
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		this.setNoRepair();
