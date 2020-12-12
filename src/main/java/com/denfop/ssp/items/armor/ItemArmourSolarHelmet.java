@@ -11,7 +11,6 @@ import ic2.core.IC2Potion;
 import ic2.core.init.BlocksItems;
 import ic2.core.init.Localization;
 import ic2.core.item.ElectricItemManager;
-import ic2.core.item.ItemTinCan;
 import ic2.core.ref.IItemModelProvider;
 import ic2.core.ref.ItemName;
 import ic2.core.util.StackUtil;
@@ -29,7 +28,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -313,10 +314,12 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 		} else if (player.getFoodStats().getFoodLevel() <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
-		for (final Object effect : new LinkedList<Object>(player.getActivePotionEffects())) {
-			final Potion potion = ((PotionEffect) effect).getPotion();
-
-
+		for (final PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
+			final Potion potion = effect.getPotion();
+			if (potion.isBadEffect()) {
+				player.removePotionEffect(potion);
+				ElectricItem.manager.use(stack, 400D, null);
+			}
 		}
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
@@ -379,6 +382,112 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 		//   potionRemovalCost.put(IC2Potion.radiation, Integer.valueOf(10000));
 		//      IC2.platform.removePotion((EntityLivingBase)player, MobEffects.WITHER);
 		//   IC2.platform.removePotion((EntityLivingBase)player, MobEffects.POISON);
+	}
+
+	@Override
+	public int getMetadata(@Nonnull final ItemStack stack) {
+		return 0;
+	}
+
+	@Override
+	public void setColor(@Nonnull final ItemStack stack, final int colour) {
+		this.getDisplayNbt(stack, true).setInteger("colour", colour);
+	}
+
+	@Override
+	public boolean getIsRepairable(@Nonnull final ItemStack toRepair, @Nonnull final ItemStack repair) {
+		return false;
+	}
+
+	@Override
+	public ISpecialArmor.ArmorProperties getProperties(final EntityLivingBase player, @Nonnull final ItemStack armour, final DamageSource source, final double damage, final int slot) {
+		if (source.isUnblockable()) {
+			return new ISpecialArmor.ArmorProperties(0, 0.0, 0);
+		}
+		return new ISpecialArmor.ArmorProperties(0, 0.15 * this.type.damageAbsorptionRatio, (int) (25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
+	}
+
+	@Override
+	public int getArmorDisplay(final EntityPlayer player, @Nonnull final ItemStack armour, final int slot) {
+		if (ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage) {
+			return (int) Math.round(3.0 * this.type.damageAbsorptionRatio);
+		}
+		return 0;
+	}
+
+	@Override
+	public String getArmorTexture(@Nonnull final ItemStack stack, @Nonnull final Entity entity, @Nonnull final EntityEquipmentSlot slot, @Nonnull final String type) {
+		return "super_solar_panels:textures/armour/" + this.type.getName() + "Overlay" + ".png";
+	}
+
+	@Override
+	public void damageArmor(final EntityLivingBase entity, @Nonnull final ItemStack stack, final DamageSource source, final int damage, final int slot) {
+		ElectricItem.manager.discharge(stack, damage * this.type.energyPerDamage, Integer.MAX_VALUE, true, false, false);
+	}
+
+	@Override
+	public boolean canProvideEnergy(final ItemStack stack) {
+		return false;
+	}
+
+	protected NBTTagCompound getDisplayNbt(final ItemStack stack, final boolean create) {
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null) {
+			if (!create) {
+				return null;
+			}
+			nbt = new NBTTagCompound();
+			stack.setTagCompound(nbt);
+		}
+		NBTTagCompound out;
+		if (!nbt.hasKey("display", 50)) {
+			if (!create) {
+				return null;
+			}
+			out = new NBTTagCompound();
+			nbt.setTag("display", out);
+		} else {
+			out = nbt.getCompoundTag("display");
+		}
+		return out;
+
+	}
+
+	@Override
+	public double getMaxCharge(final ItemStack stack) {
+		return this.type.maxCharge;
+	}
+
+	@Override
+	public int getTier(final ItemStack stack) {
+		return this.type.tier;
+	}
+
+	@Override
+	public double getTransferLimit(final ItemStack stack) {
+		return this.type.transferLimit;
+	}
+
+	@Override
+	public boolean doesProvideHUD(final ItemStack stack) {
+		return ElectricItem.manager.getCharge(stack) > 0.0;
+	}
+
+	@Override
+	public HudMode getHudMode(final ItemStack stack) {
+		return HudMode.getFromID(StackUtil.getOrCreateNbtData(stack).getByte("hudMode"));
+	}
+
+	@Override
+	public void removeColor(@Nonnull final ItemStack stack) {
+		final NBTTagCompound nbt = this.getDisplayNbt(stack, false);
+		if (nbt == null || !nbt.hasKey("colour", 3)) {
+			return;
+		}
+		nbt.removeTag("colour");
+		if (nbt.isEmpty()) {
+			stack.getTagCompound().removeTag("display");
+		}
 	}
 
 

@@ -28,7 +28,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -258,10 +260,13 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 		} else if (player.getFoodStats().getFoodLevel() <= 0) {
 			IC2.achievements.issueAchievement(player, "starveWithQHelmet");
 		}
-		for (final Object effect : new LinkedList<Object>(player.getActivePotionEffects())) {
-			final Potion potion = ((PotionEffect) effect).getPotion();
 
-
+		for (final PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
+			final Potion potion = effect.getPotion();
+			if (potion.isBadEffect()) {
+				player.removePotionEffect(potion);
+				ElectricItem.manager.use(stack, 400D, null);
+			}
 		}
 		boolean Nightvision = nbtData.getBoolean("Nightvision");
 		short hubmode = nbtData.getShort("HudMode");
@@ -316,6 +321,47 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 		//   potionRemovalCost.put(IC2Potion.radiation, Integer.valueOf(10000));
 		//      IC2.platform.removePotion((EntityLivingBase)player, MobEffects.WITHER);
 		//   IC2.platform.removePotion((EntityLivingBase)player, MobEffects.POISON);
+	}
+
+	public boolean isMetalArmor(final ItemStack stack, final EntityPlayer player) {
+		return true;
+	}
+
+	public void damageArmor(final EntityLivingBase entity, @Nonnull final ItemStack stack, final DamageSource source, final int damage, final int slot) {
+		ElectricItem.manager.discharge(stack, damage * this.type.energyPerDamage, Integer.MAX_VALUE, true, false, false);
+	}
+
+	public String getArmorTexture(@Nonnull final ItemStack stack, @Nonnull final Entity entity, @Nonnull final EntityEquipmentSlot slot, @Nonnull final String type) {
+		return "super_solar_panels:textures/armour/" + this.type.getName() + "Overlay" + ".png";
+	}
+
+	public int getItemEnchantability() {
+		return 0;
+	}
+
+
+	public boolean canProvideEnergy(final ItemStack stack) {
+		return false;
+	}
+
+	public double getMaxCharge(final ItemStack stack) {
+		return this.type.maxCharge;
+	}
+
+	public int getTier(final ItemStack stack) {
+		return this.type.tier;
+	}
+
+	public void func_82815_c(final ItemStack stack) {
+		final NBTTagCompound nbt = this.getDisplayNbt(stack, false);
+		if (nbt == null || !nbt.hasKey("colour", 3)) {
+			return;
+		}
+		nbt.removeTag("colour");
+		if (nbt.isEmpty()) {
+			if (stack.getTagCompound() != null)
+				stack.getTagCompound().removeTag("display");
+		}
 	}
 
 	public double getTransferLimit(final ItemStack stack) {
@@ -373,16 +419,12 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 			this.transferLimit = transferLimit;
 			this.energyPerDamage = 42000;
 			this.damageAbsorptionRatio = 9;
-			assert (double) 9 > 0.0;
 		}
 
 		public String getName() {
 			return this.name + "SolarHelmet";
 		}
 
-		protected String getLocalisedName() {
-			return "solar_helmets." + this.name;
-		}
 	}
 
 	protected int tickRate() {
@@ -411,6 +453,4 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 	public EnumRarity getRarity(@Nonnull final ItemStack stack) {
 		return this.type.rarity;
 	}
-
-
 }
