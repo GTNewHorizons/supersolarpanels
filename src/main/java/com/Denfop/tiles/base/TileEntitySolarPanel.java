@@ -338,10 +338,22 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 	b9 = module6.Output(kk);}
 
 }
-        	this.genDay  = (int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend);
-        	this.genNight  = (int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn);
-        	this.maxStorage  = (int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);
-        	this.production  = (int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);
+if((int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend) < 999999999) {
+        	this.genDay  = (int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend);}else {
+        		this.genDay = 999999998;
+        	}
+if((int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn) < 999999999) {
+        	this.genNight  = (int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn);}else {
+        		this.genNight = 999999998;
+        	}
+        if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 999999999) {
+        	this.maxStorage  = (int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);}else {
+        		this.maxStorage = 999999998;
+        	}
+        if((int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 999999999)	{
+        this.production  = (int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);}else {
+        	this.production = 999999998;
+        }
 
             		
             	            	
@@ -658,12 +670,8 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 	v9 = module6.storage(kk);}
 
 }
-        if((  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)) <100000000) {
-        return (int)( this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
-        }else {
-        	return (int)( this.storage * (i-1) /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
-            
-        } 
+         return (int)( this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
+        
         
     }
     

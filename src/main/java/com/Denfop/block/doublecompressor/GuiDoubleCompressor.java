@@ -25,8 +25,8 @@ public class GuiDoubleCompressor extends GuiIC2 {
   
   protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
     super.drawGuiContainerBackgroundLayer(f, x, y);
-    int chargeLevel = (int)(14.0F * ((TileEntityDoubleMachine)this.container.base).getChargeLevel());
-    int progress = (int)(24.0F * ((TileEntityDoubleMachine)this.container.base).getProgress());
+    int chargeLevel = (int)(14.0F * this.container.base.getChargeLevel());
+    int progress = (int)(24.0F * this.container.base.getProgress());
     if (chargeLevel > 0)
       drawTexturedModalRect(this.xoffset + 56, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
     if (progress > 0)

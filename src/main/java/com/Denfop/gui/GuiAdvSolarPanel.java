@@ -141,8 +141,16 @@ v9 = module6.storage(kk);
 b9 = module6.Output(kk);}
 
 }
-            this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" +(int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1), 50, 22, 13487565);
-             this.fontRendererObj.drawString(maxOutputString + (int) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) + (" " + energyPerTickString), 50, 32, 13487565);
+if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 999999999) {
+	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" +(int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1), 50, 22, 13487565);
+}else	{	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + "999999999", 50, 22, 13487565);
+
+	}
+if((int) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 999999999)	{
+	 this.fontRendererObj.drawString(maxOutputString + (int) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) + (" " + energyPerTickString), 50, 32, 13487565);
+}else {   	 this.fontRendererObj.drawString(maxOutputString + "999999999" + (" " + energyPerTickString), 50, 32, 13487565);
+
+    }
              this.fontRendererObj.drawString(generatingString + this.tileentity.generating + (" " + energyPerTickString), 50, 42, 13487565);
     }
     protected void drawGuiContainerBackgroundLayer(final float f, final int i, final int j) {
@@ -213,9 +221,9 @@ b9 = module6.Output(kk);}
         final int k = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(h, k, 0, 0, this.xSize, this.ySize);
         if (this.tileentity.storage > 0 || this.tileentity.storage <= this.tileentity.maxStorage ) {
-            final int l = this.tileentity.gaugeEnergyScaled(24);
+            final float l = this.tileentity.gaugeEnergyScaled(24);
            
-            this.drawTexturedModalRect(h + 19, k + 24, 195, 0, l + 1, 14);
+            this.drawTexturedModalRect(h + 19, k + 24, 195, 0, (int) (l + 1), 14);
         }
         if (this.tileentity.skyIsVisible && this.tileentity.solarType != 3 && this.tileentity.solarType != 4) {
             if (this.tileentity.sunIsUp) {
