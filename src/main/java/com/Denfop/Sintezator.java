@@ -29,11 +29,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Adminsolarpanel extends Block implements ITileEntityProvider {
+public class Sintezator extends Block implements ITileEntityProvider {
   public boolean qgActive;
   
   
-  public Adminsolarpanel() {
+  public Sintezator() {
     super(Material.iron);
     setHardness(3.0F);
     setCreativeTab(SuperSolarPanels.tabssp);
@@ -42,7 +42,7 @@ public class Adminsolarpanel extends Block implements ITileEntityProvider {
   
   @Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
-		return new TileEntityAdminSolarPanel();
+		return new TileEntitySintezator();
 	}
 
 	public int getRenderType() {
@@ -61,7 +61,7 @@ public class Adminsolarpanel extends Block implements ITileEntityProvider {
     TileEntity tileentity = world.getTileEntity(i, j, k);
     if (tileentity != null)
      
-        dropItems((TileEntitySolarPanel)tileentity, world);  
+        dropItems((TileSintezator)tileentity, world);  
     world.removeTileEntity(i, j, k);
     super.breakBlock(world, i, j, k, par5, par6);
   }
@@ -89,11 +89,11 @@ public class Adminsolarpanel extends Block implements ITileEntityProvider {
     return true;
   }
   
-  private void dropItems(TileEntitySolarPanel tileentity, World world) {
+  private void dropItems(TileSintezator tileentity, World world) {
     Random rand = new Random();
     if (!(tileentity instanceof net.minecraft.inventory.IInventory))
       return; 
-    TileEntitySolarPanel tileEntitySolarPanel = tileentity;
+    TileSintezator tileEntitySolarPanel = tileentity;
     for (int i = 0; i < tileEntitySolarPanel.getSizeInventory(); i++) {
       ItemStack item = tileEntitySolarPanel.getStackInSlot(i);
       if (item != null && item.stackSize > 0) {

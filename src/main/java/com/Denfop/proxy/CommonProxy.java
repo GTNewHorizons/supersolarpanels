@@ -4,6 +4,7 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.MTAPI;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.utils.MTRecipeManager;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -55,7 +56,9 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntitySolarPanel) {
           return ((TileEntitySolarPanel)te).getGuiContainer(player.inventory);
       }
-      
+      if (te instanceof TileSintezator) {
+          return ((TileSintezator)te).getGuiContainer(player.inventory);
+      }
       if (te instanceof TileEntityMolecularTransformer) {
           return ((TileEntityMolecularTransformer)te).getGuiContainer(player.inventory);
       }

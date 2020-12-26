@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.TileEntityAdminSolarPanel;
+import com.Denfop.TileEntitySintezator;
 import com.Denfop.api.MTAPI;
 import com.Denfop.events.EventDarkQuantumSuitEffect;
 import com.Denfop.gui.GuiAdvSolarPanel;
@@ -20,8 +21,10 @@ import com.Denfop.render.block.BlockMolecularTransformerRenderer;
 import com.Denfop.render.tile.TileEntityPanelItemRender;
 import com.Denfop.render.tile.TileEntityPanelRender;
 import com.Denfop.render.tile.TileMolecularTransformerRenderer;
+import com.Denfop.tiles.base.GUISintezator;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
 import com.Denfop.utils.MTRecipeManager;
 import com.brandon3055.draconicevolution.client.render.IRenderTweak;
@@ -109,6 +112,10 @@ public boolean isClient() {
 	  ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdminSolarPanel.class, new TileEntityPanelRender());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SuperSolarPanels.blockadmin),
 				new TileEntityPanelItemRender());
+		//
+		  ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySintezator.class, new TileEntitySintezatorRender());
+			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SuperSolarPanels.blocksintezator),
+					new TileEntitySintezatorItemRender());
 	 	
   }
   
@@ -127,6 +134,9 @@ public boolean isClient() {
       }
       if (te instanceof TileEntitySolarPanel) {
           return new GuiAdvSolarPanel(player.inventory, (TileEntitySolarPanel)te);
+      }
+      if (te instanceof TileSintezator) {
+          return new GUISintezator(player.inventory, (TileSintezator)te);
       }
       
       if (te instanceof TileEntitySolarPanel) {

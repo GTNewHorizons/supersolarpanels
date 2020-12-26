@@ -509,6 +509,7 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static ItemCable cable;
 		public static Item itemSSP;
 		public static BlockMachine machine1;
+		public static Block blocksintezator;
 	    public static final String CATEGORY_RECIPES = "recipes settings";
 	    public static final String CATEGORY_QGENERATOR = "quantum generator";
 	 
@@ -860,7 +861,10 @@ public class SuperSolarPanels implements IWorldGenerator
         GameRegistry.registerTileEntity((Class)TileEntityHybridSolarPanel.class, "Hybrid Solar Panel1");
         GameRegistry.registerTileEntity((Class)TileEntityUltimateSolarPanel.class, "Ultimate Hybrid Solar Panel1");
         GameRegistry.registerTileEntity((Class)TileEntityQuantumSolarPanel.class, "Quantum Solar Panel1");
-    
+    //
+        GameRegistry.registerBlock(blocksintezator = (Block)new Sintezator(), (Class)ItemSintezator.class, "BlockSintezator");
+        
+        //
         GameRegistry.registerBlock(blockMolecularTransformer = (Block)new BlockMolecularTransformer(), (Class)ItemMolecularTransformer.class, "BlockMolecularTransformer1");
         GameRegistry.registerTileEntity((Class)com.Denfop.tiles.base.TileEntityMolecularTransformer.class, "Molecular Transformer1");
           GameRegistry.registerItem(advancedSolarHelmet = new ItemAdvancedSolarHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("advancedSolarHelmet"), 0, 1).setUnlocalizedName("advancedSolarHelmet"), "advanced_solar_helmet");
@@ -909,6 +913,7 @@ public class SuperSolarPanels implements IWorldGenerator
         GameRegistry.registerItem(SuperSolarPanels.netherlinse = new SSPItem().setMaxStackSize(64).setUnlocalizedName("netherlinse").setTextureName("supersolarpanel:netherlinse"), "netherlinse");
         GameRegistry.registerItem(SuperSolarPanels.endlinse = new SSPItem().setMaxStackSize(64).setUnlocalizedName("endlinse").setTextureName("supersolarpanel:endlinse"), "endlinse");
         GameRegistry.registerTileEntity((Class)TileEntityAdminSolarPanel.class, "TileEntityAdminSolarPanel");
+        GameRegistry.registerTileEntity((Class)TileEntitySintezator.class, "TileEntitySintezator");
         
         GameRegistry.registerItem(SuperSolarPanels.module1 = new module1().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
         GameRegistry.registerItem(SuperSolarPanels.module2 = new module2().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
