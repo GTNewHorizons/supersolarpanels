@@ -140,7 +140,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.m = gNight;
         this.l = 0;
         this.targetSet = false;
-		this.o = tier;
 		this.wirelles = false;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
@@ -285,7 +284,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		}
         	}
         }
-        this.tier = this.o + tierplus -  minus;
+        this.o = this.tier + tierplus -  minus;
         int m1 = 0; int m2 = 0; int m3 = 0; int m4 = 0; int m5 = 0; int m6 = 0; int m7 = 0; int m8 = 0; int m9 = 0;
         int n1 = 0; int n2 = 0;  int n3 = 0; int n4 = 0;  int n5 = 0; int n6 = 0;  int n7 = 0; int n8 = 0;  int n9 = 0;
         int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
@@ -327,7 +326,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         	if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module6) {
         		int g = chargeSlots[0].getItemDamage();
-        		if(tier >= g+1) {
+        		if(o >= g+1) {
         		m1 = module6.GenDay(g);
         		n1 = module6.GenNight(g);
         		v1 = module6.storage(g);
@@ -338,7 +337,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	if(this.chargeSlots[1] != null && this.chargeSlots[1].getItem() instanceof module6) {
         		
         		int kk = chargeSlots[1].getItemDamage();
-        		if(tier >= kk+1) {
+        		if(o >= kk+1) {
         		m2 = module6.GenDay(kk);
         		n2 = module6.GenNight(kk);
         		v2 = module6.storage(kk);
@@ -348,7 +347,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 if(this.chargeSlots[2] != null && this.chargeSlots[2].getItem() instanceof module6) {
         		
         		int kk = chargeSlots[2].getItemDamage();
-        		if(tier >= kk+1) {
+        		if(o >= kk+1) {
         		m3 = module6.GenDay(kk);
         		n3 = module6.GenNight(kk);
         		v3 = module6.storage(kk);
@@ -358,7 +357,7 @@ if(this.chargeSlots[2] != null && this.chargeSlots[2].getItem() instanceof modul
 if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[3].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m4 = module6.GenDay(kk);
 	n4 = module6.GenNight(kk);
 	v4 = module6.storage(kk);
@@ -368,7 +367,7 @@ if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof modul
 if(this.chargeSlots[4] != null && this.chargeSlots[4].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[4].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m5 = module6.GenDay(kk);
 	n5 = module6.GenNight(kk);
 	v5 = module6.storage(kk);
@@ -378,7 +377,7 @@ if(this.chargeSlots[4] != null && this.chargeSlots[4].getItem() instanceof modul
 if(this.chargeSlots[5] != null && this.chargeSlots[5].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[5].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m6 = module6.GenDay(kk);
 	n6 = module6.GenNight(kk);
 	v6 = module6.storage(kk);
@@ -388,7 +387,7 @@ if(this.chargeSlots[5] != null && this.chargeSlots[5].getItem() instanceof modul
 if(this.chargeSlots[6] != null && this.chargeSlots[6].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[6].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m7 = module6.GenDay(kk);
 	n7 = module6.GenNight(kk);
 	v7 = module6.storage(kk);
@@ -398,7 +397,7 @@ if(this.chargeSlots[6] != null && this.chargeSlots[6].getItem() instanceof modul
 if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[7].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m8 = module6.GenDay(kk);
 	n8 = module6.GenNight(kk);
 	v8 = module6.storage(kk);
@@ -408,7 +407,7 @@ if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof modul
 if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[8].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	m9 = module6.GenDay(kk);
 	n9 = module6.GenNight(kk);
 	v9 = module6.storage(kk);
@@ -787,7 +786,22 @@ return this.generating = 0;
     }
     
     public int gaugeEnergyScaled(final int i) {
-    	
+    	  int tierplus = 0;
+          int minus = 0;
+          for(int j = 0; j < 9;j++) {
+          	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module7) {
+          		int kk = chargeSlots[j].getItemDamage();
+          		
+          		 if(kk == 1) {
+          			tierplus++;
+          		}
+          		else if(kk == 2) {
+          			minus++;
+          		}
+          		
+          	}
+          }
+          this.o = this.tier + tierplus -  minus;
     	int maxstorage1 = 0;
     	 int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
     	//
@@ -801,7 +815,7 @@ return this.generating = 0;
     	 
     	 if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module6) {
      		int g = chargeSlots[0].getItemDamage();
-     		if(tier >= g+1) {
+     		if(tier+tierplus-minus >= g+1) {
      		v1 = module6.storage(g);
      		}
      	
@@ -809,49 +823,49 @@ return this.generating = 0;
      	if(this.chargeSlots[1] != null && this.chargeSlots[1].getItem() instanceof module6) {
      		
      		int kk = chargeSlots[1].getItemDamage();
-     		if(tier >= kk+1) {
+     		if(o >= kk+1) {
      		v2 = module6.storage(kk);}
      	
      }
 if(this.chargeSlots[2] != null && this.chargeSlots[2].getItem() instanceof module6) {
      		
      		int kk = chargeSlots[2].getItemDamage();
-     		if(tier >= kk+1) {
+     		if(o >= kk+1) {
      		v3 = module6.storage(kk);}
      	
      }
 if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[3].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	v4 = module6.storage(kk);}
 
 }
 if(this.chargeSlots[4] != null && this.chargeSlots[4].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[4].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	v5 = module6.storage(kk);}
 
 }
 if(this.chargeSlots[5] != null && this.chargeSlots[5].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[5].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	v6 = module6.storage(kk);}
 
 }
 if(this.chargeSlots[6] != null && this.chargeSlots[6].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[6].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	v7 = module6.storage(kk);}
 
 }
 if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[7].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	
 	v8 = module6.storage(kk);}
 
@@ -859,7 +873,7 @@ if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof modul
 if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module6) {
 	
 	int kk = chargeSlots[8].getItemDamage();
-	if(tier >= kk+1) {
+	if(o >= kk+1) {
 	
 	v9 = module6.storage(kk);}
 

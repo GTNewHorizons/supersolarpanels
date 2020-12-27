@@ -9,6 +9,7 @@ import com.Denfop.item.Modules.module3;
 import com.Denfop.item.Modules.module4;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
+import com.Denfop.item.Modules.module7;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.client.resources.I18n;
@@ -53,12 +54,24 @@ public class GuiAdvSolarPanel extends GuiContainer
 
         int maxstorage1 = 0;
         int output = 0;
-        
+        int tierplus = 0;
+        int minus = 0;
         for(int i= 0; i < 9; i++) {
             if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module3)
         		maxstorage1++;
         	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module4)
         		output++;
+        	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module7) {
+        		int kk = this.tileentity.chargeSlots[i].getItemDamage();
+        		
+        	    if(kk == 1) {
+        			tierplus++;
+        		}
+        		else if(kk == 2) {
+        			minus++;
+        		}
+        		
+        	}
         }
         int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
         int b1 = 0; int b2 = 0; int b3 = 0; int b4 = 0; int b5 = 0; int b6 = 0; int b7 = 0; int b8 = 0; int b9 = 0; 
@@ -66,7 +79,7 @@ public class GuiAdvSolarPanel extends GuiContainer
         	
         if(this.tileentity.chargeSlots[0] != null && this.tileentity.chargeSlots[0].getItem() instanceof module6) {
     		int g = this.tileentity.chargeSlots[0].getItemDamage();
-    		if(this.tileentity.tier >= g+1) {
+    		if(this.tileentity.tier+tierplus-minus>= g+1) {
     		
     		v1 = module6.storage(g);
     		b1 = module6.Output(g);
@@ -76,7 +89,7 @@ public class GuiAdvSolarPanel extends GuiContainer
     	if(this.tileentity.chargeSlots[1] != null && this.tileentity.chargeSlots[1].getItem() instanceof module6) {
     		
     		int kk = this.tileentity.chargeSlots[1].getItemDamage();
-    		if(this.tileentity.tier >= kk+1) {
+    		if(this.tileentity.tier+tierplus-minus >= kk+1) {
     		
     		v2 = module6.storage(kk);
     		b2 = module6.Output(kk);}
@@ -85,7 +98,7 @@ public class GuiAdvSolarPanel extends GuiContainer
 if(this.tileentity.chargeSlots[2] != null && this.tileentity.chargeSlots[2].getItem() instanceof module6) {
     		
     		int kk = this.tileentity.chargeSlots[2].getItemDamage();
-    		if(this.tileentity.tier >= kk+1) {
+    		if(this.tileentity.tier+tierplus-minus >= kk+1) {
     		
     		v3 = module6.storage(kk);
     		b3 = module6.Output(kk);}
@@ -94,7 +107,7 @@ if(this.tileentity.chargeSlots[2] != null && this.tileentity.chargeSlots[2].getI
 if(this.tileentity.chargeSlots[3] != null && this.tileentity.chargeSlots[3].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[3].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v4 = module6.storage(kk);
 b4 = module6.Output(kk);}
 
@@ -102,7 +115,7 @@ b4 = module6.Output(kk);}
 if(this.tileentity.chargeSlots[4] != null && this.tileentity.chargeSlots[4].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[4].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v5 = module6.storage(kk);
 b5 = module6.Output(kk);}
 
@@ -110,7 +123,7 @@ b5 = module6.Output(kk);}
 if(this.tileentity.chargeSlots[5] != null && this.tileentity.chargeSlots[5].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[5].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v6 = module6.storage(kk);
 b6 = module6.Output(kk);}
 
@@ -118,7 +131,7 @@ b6 = module6.Output(kk);}
 if(this.tileentity.chargeSlots[6] != null && this.tileentity.chargeSlots[6].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[6].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v7 = module6.storage(kk);
 b7 = module6.Output(kk);}
 
@@ -126,7 +139,7 @@ b7 = module6.Output(kk);}
 if(this.tileentity.chargeSlots[7] != null && this.tileentity.chargeSlots[7].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[7].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v8 = module6.storage(kk);
 b8 = module6.Output(kk);}
 
@@ -134,7 +147,7 @@ b8 = module6.Output(kk);}
 if(this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof module6) {
 
 int kk = this.tileentity.chargeSlots[8].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v9 = module6.storage(kk);
 b9 = module6.Output(kk);}
 

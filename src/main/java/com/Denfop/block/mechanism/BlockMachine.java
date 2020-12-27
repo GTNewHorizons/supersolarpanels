@@ -49,7 +49,7 @@ public class BlockMachine extends BlockMultiID {
     super(internalName1, Material.iron, ItemMachine1.class);
     setHardness(2.0F);
     setStepSound(soundTypeMetal);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    this.setCreativeTab(SuperSolarPanels.tabssp);
     SuperSolarPanels.macerator = new ItemStack((Block)this, 1, 1);
     SuperSolarPanels.extractor = new ItemStack((Block)this, 1, 2);
     SuperSolarPanels.compressor = new ItemStack((Block)this, 1, 3);

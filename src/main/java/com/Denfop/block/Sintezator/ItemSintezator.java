@@ -5,8 +5,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
+
 import java.util.ArrayList;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
@@ -29,7 +34,12 @@ public class ItemSintezator extends ItemBlock
     public int getMetadata(final int i) {
         return i;
     }
-    
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+        NBTTagCompound nbttagcompound;
+        
+        
+        	   info.add(StatCollector.translateToLocal("ssp.sintezator") );
+            }
     public String getUnlocalizedName(final ItemStack itemstack) {
         return this.itemNames.get(itemstack.getItemDamage());
     }

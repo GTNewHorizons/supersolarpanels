@@ -57,35 +57,24 @@ public class module7 extends Item
         this.IIconsList[2] = IIconRegister.registerIcon("supersolarpanel:module73");
 
     }
-  /*  public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+  public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
         NBTTagCompound nbttagcompound;
         int meta = itemStack.getItemDamage();
         switch (meta) {
           case 0:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("aerpanel") );
+        	  info.add(StatCollector.translateToLocal("ssp.modules"));
+        	  info.add(StatCollector.translateToLocal("wirelles") );
               
           
             break;
           case 1:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("earthpanel") );   break;
+        	  info.add(StatCollector.translateToLocal("ssp.modules"));
+        	  info.add(StatCollector.translateToLocal("transformator") );   break;
           case 2:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("netherpanel") );           break;
-          case 3:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("endpanel") );          break;
-          case 4:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("nightpanel") );          break;
-          case 5:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("sunpanel") );         break;
-          case 6:
-        	  info.add(StatCollector.translateToLocal("ssp.modules12"));
-        	  info.add(StatCollector.translateToLocal("rainpanel") );         break;
-         }}*/
+        	  info.add(StatCollector.translateToLocal("ssp.modules"));
+        	  info.add(StatCollector.translateToLocal("transformator1") );           break;
+         
+         }}
     public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
         for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
             final ItemStack stack = new ItemStack((Item)this, 1, meta);

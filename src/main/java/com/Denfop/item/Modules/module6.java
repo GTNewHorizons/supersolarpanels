@@ -111,7 +111,7 @@ public class module6 extends Item
               
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.protonOutput  + " EU/t " );
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.AdminpanelStorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + " 6");
+            info.add(StatCollector.translateToLocal("ssp.tier") + "6");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
             break;
           case 6:
@@ -123,7 +123,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.singularpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
             break;
-          case 7:
+          case 8:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.photonicpanelGenDay  + " EU/t " );
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.photonicpanelGenNight  + " EU/t " );
               
@@ -132,7 +132,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.photonicpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
             break;
-          case 8:
+          case 7:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.adminpanelGenDay  + " EU/t " );
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.adminpanelGenNight  + " EU/t " );
               
