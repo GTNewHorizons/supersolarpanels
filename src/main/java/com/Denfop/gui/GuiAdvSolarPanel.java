@@ -4,13 +4,11 @@ package com.Denfop.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.Denfop.module1;
-import com.Denfop.module2;
-import com.Denfop.module3;
-import com.Denfop.module4;
-import com.Denfop.module5;
-import com.Denfop.module6;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.module3;
+import com.Denfop.item.Modules.module4;
+import com.Denfop.item.Modules.module5;
+import com.Denfop.item.Modules.module6;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.client.resources.I18n;

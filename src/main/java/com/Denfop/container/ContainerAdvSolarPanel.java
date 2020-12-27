@@ -1,10 +1,6 @@
 package com.Denfop.container;
 
 
-import com.Denfop.module3;
-import com.Denfop.module4;
-import com.Denfop.module5;
-import com.Denfop.module6;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.entity.player.EntityPlayer;

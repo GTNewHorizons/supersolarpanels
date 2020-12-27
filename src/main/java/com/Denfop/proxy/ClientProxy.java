@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.TileEntityAdminSolarPanel;
-import com.Denfop.TileEntitySintezator;
 import com.Denfop.api.MTAPI;
+import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
+import com.Denfop.block.Sintezator.TileEntitySintezator;
+import com.Denfop.block.expgen.TextureHooks;
+import com.Denfop.block.expgen.TileExpGen2;
 import com.Denfop.events.EventDarkQuantumSuitEffect;
 import com.Denfop.gui.GuiAdvSolarPanel;
+import com.Denfop.gui.GuiExpGen;
 import com.Denfop.gui.GuiMolecularTransformer;
 import com.Denfop.handler.EntityStreak;
 import com.Denfop.integration.DE.DraconicIntegration;
@@ -17,6 +20,11 @@ import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
 import com.Denfop.render.EntityRendererStreak;
+import com.Denfop.render.Cable.RenderBlock;
+import com.Denfop.render.Cable.RenderBlockCable;
+import com.Denfop.render.Cable.RenderBlockWall;
+import com.Denfop.render.Sintezaor.TileEntitySintezatorItemRender;
+import com.Denfop.render.Sintezaor.TileEntitySintezatorRender;
 import com.Denfop.render.block.BlockMolecularTransformerRenderer;
 import com.Denfop.render.tile.TileEntityPanelItemRender;
 import com.Denfop.render.tile.TileEntityPanelRender;
@@ -51,7 +59,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
-import ru.wirelesstools.gui.GuiExpGen;
 
 public class ClientProxy extends CommonProxy  implements IGuiHandler {
 	
@@ -117,7 +124,7 @@ public boolean isClient() {
 		  ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySintezator.class, new TileEntitySintezatorRender());
 			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SuperSolarPanels.blocksintezator),
 					new TileEntitySintezatorItemRender());
-	 	
+			MinecraftForge.EVENT_BUS.register(new TextureHooks());
   }
   
   public void registerEvents() {
@@ -133,6 +140,12 @@ public boolean isClient() {
       if (te == null) {
           return null;
       }
+      if(te instanceof TileExpGen2) {
+			
+			return new GuiExpGen(player.inventory, (TileExpGen2) te,X, Y, Z, world);
+			
+		}
+	
       if (te instanceof TileEntitySolarPanel) {
           return new GuiAdvSolarPanel(player.inventory, (TileEntitySolarPanel)te);
       }

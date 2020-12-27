@@ -1,9 +1,9 @@
 package com.Denfop.item.energy;
 
-import com.Denfop.Helpers;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.blockCoord;
 import com.Denfop.proxy.CommonProxy;
+import com.Denfop.utils.Helpers;
+import com.Denfop.utils.blockCoord;
 import com.google.common.collect.ImmutableSet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

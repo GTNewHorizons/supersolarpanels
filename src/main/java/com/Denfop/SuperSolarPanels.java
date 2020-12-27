@@ -25,37 +25,72 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.api.TickHandlerWV;
+import com.Denfop.block.AdminPanel.Adminsolarpanel;
+import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
+import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
 import com.Denfop.block.Base.BlockIC2Fluid;
 import com.Denfop.block.Base.BlockSSP;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.block.Base.BlocksItems;
-import com.Denfop.block.Base.ItemCable;
+import com.Denfop.block.BlockVajra.BlockVajraCharger;
+import com.Denfop.block.BlockVajra.ItemBlockVCh;
+import com.Denfop.block.BlockVajra.TileVajraCharger;
+import com.Denfop.block.BlockVajra.TileVajraChargerElectric;
+import com.Denfop.block.BlockVajra.WirelessVajra;
+import com.Denfop.block.Sintezator.ItemSintezator;
+import com.Denfop.block.Sintezator.Sintezator;
+import com.Denfop.block.Sintezator.TileEntitySintezator;
 import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
 import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
+import com.Denfop.block.WirellesStorage.BlockWStorage;
+import com.Denfop.block.WirellesStorage.BlockWStorage2;
+import com.Denfop.block.WirellesStorage.ItemBlockWirelessStorage;
+import com.Denfop.block.WirellesStorage.ItemBlockWirelessStorage2;
+import com.Denfop.block.WirellesStorage.TileWirelessStorage1Tier;
+import com.Denfop.block.WirellesStorage.TileWirelessStorageTier2;
+import com.Denfop.block.armorcharge.BlockArmorCharger;
+import com.Denfop.block.armorcharge.ItemBlockArmorCharger;
+import com.Denfop.block.cable.ItemCable;
 import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
 import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
 import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
 import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
+import com.Denfop.block.expgen.BlockExpGen;
+import com.Denfop.block.expgen.ItemBlockEG;
+import com.Denfop.block.expgen.TextureHooks;
+import com.Denfop.block.expgen.TileXPGenPublic;
 import com.Denfop.block.mechanism.BlockMachine;
 import com.Denfop.block.moleculartransformer.BlockMolecularTransformer;
 import com.Denfop.block.neutroniumgenerator.Blockbitgen;
+import com.Denfop.block.ore.BlockSSPCoal;
+import com.Denfop.block.ore.BlockSSPDiamond;
+import com.Denfop.block.ore.BlockSSPEmerald;
+import com.Denfop.block.ore.BlockSSPLapis;
+import com.Denfop.block.ore.BlockSSPRedstone;
 import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
 import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
 import com.Denfop.events.EventHandlerEntity;
 import com.Denfop.handler.ASPPacketHandler;
+import com.Denfop.integration.ASP.ASPIntegration;
 import com.Denfop.integration.Avaritia.AvaritiaIntegration;
+import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.item.ItemSSPCrafring;
+import com.Denfop.item.Connector.ItemWirelessConnector3;
+import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
 import com.Denfop.item.Upgrade.ItemUpgradeModule;
 import com.Denfop.item.armour.ItemArmorQuantumSuit1;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.ItemAdvSolarPanel1;
+import com.Denfop.item.base.ItemGoldenWrench;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.item.base.SSPItem;
 import com.Denfop.item.energy.ItemBattery;
 import com.Denfop.item.energy.ItemNanoSaber;
 import com.Denfop.item.solarhelmet.ItemAdvancedSolarHelmet;
+import com.Denfop.packets.WVPacketHandler;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.CreativeTabSSP;
@@ -66,6 +101,8 @@ import com.Denfop.tiles.overtimepanel.TileSingularSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileSpectralSolarPanel;
 import com.Denfop.utils.InternalName;
 import com.Denfop.utils.MTRecipeConfig;
+import com.Denfop.utils.RecipeUtil;
+import com.Denfop.utils.StackUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
@@ -91,7 +128,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import ru.wirelesstools.packets.WVPacketHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -117,6 +153,31 @@ import net.minecraft.creativetab.CreativeTabs;
 public class SuperSolarPanels implements IWorldGenerator
 {
 	   
+	
+	public static Item connector3;
+	public static Block blockvajracharger;
+	public static Block blockwirelessreciever;
+	public static Block blockwirelessreciever2;
+	public static Block blockwirelessrecieverpersonal;
+	public static Block armorcharger;
+	public static Block wirelessspsp;
+	public static Block wirelessspsppersonal;
+	public static Block wirelesssingsp;
+	public static Block wirelesssingsppersonal;
+	public static Block wirelessabssp;
+	public static Block wirelessabssppersonal;
+	public static Block wirelessphotonicsp;
+	public static Block wirelessphotonicsppersonal;
+	public static Block wirelessneutronsp;
+	public static ItemStack vajraCharger;
+	public static TickHandlerWV th;
+	
+	
+	
+	public static Block blockfluidxp;
+	
+	public static Fluid fluidXpJuice;
+	
 	 public static Item dust;
 	public static Block blockSSPSolarPanel;
 	 public static boolean seasonal = false;
@@ -384,17 +445,9 @@ public class SuperSolarPanels implements IWorldGenerator
 		private boolean Botania;
 		private boolean Avaritia;
 		private boolean ASPLoaded;
-		private Block blockwirelessreciever;
-		private Block blockwirelessreciever2;
-		private Block wirelessspsp;
-		private Block wirelessspsppersonal;
-		private Block blockwirelessrecieverpersonal;
 		private Block expgen;
 		private Item module8;
 		private Item goldenwrench;
-		private Item connector3;
-		private Block blockvajracharger;
-		private Block armorcharger;
 		private ItemStack module71;
 		private ItemStack module72;
 		private ItemStack module73;
@@ -952,13 +1005,13 @@ public class SuperSolarPanels implements IWorldGenerator
         GameRegistry.registerTileEntity((Class)TileEntityAdminSolarPanel.class, "TileEntityAdminSolarPanel");
         GameRegistry.registerTileEntity((Class)TileEntitySintezator.class, "TileEntitySintezator");
         
-        GameRegistry.registerItem(SuperSolarPanels.module1 = new module1().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
-        GameRegistry.registerItem(SuperSolarPanels.module2 = new module2().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
-        GameRegistry.registerItem(SuperSolarPanels.module3 = new module3().setMaxStackSize(64).setUnlocalizedName("module3").setTextureName("supersolarpanel:module3"), "module3");
-        GameRegistry.registerItem(SuperSolarPanels.module4 = new module4().setMaxStackSize(64).setUnlocalizedName("module4").setTextureName("supersolarpanel:module4"), "module4");
-        GameRegistry.registerItem(SuperSolarPanels.module5 = new module5().setMaxStackSize(64).setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");
+        GameRegistry.registerItem(SuperSolarPanels.module1 = new com.Denfop.item.Modules.module1().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
+        GameRegistry.registerItem(SuperSolarPanels.module2 = new com.Denfop.item.Modules.module2().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
+        GameRegistry.registerItem(SuperSolarPanels.module3 = new com.Denfop.item.Modules.module3().setMaxStackSize(64).setUnlocalizedName("module3").setTextureName("supersolarpanel:module3"), "module3");
+        GameRegistry.registerItem(SuperSolarPanels.module4 = new com.Denfop.item.Modules.module4().setMaxStackSize(64).setUnlocalizedName("module4").setTextureName("supersolarpanel:module4"), "module4");
+        GameRegistry.registerItem(SuperSolarPanels.module5 = new com.Denfop.item.Modules.module5().setMaxStackSize(64).setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");
         
-        GameRegistry.registerItem(SuperSolarPanels.module6 = new module6(), "module6");
+        GameRegistry.registerItem(SuperSolarPanels.module6 = new com.Denfop.item.Modules.module6(), "module6");
         module61  = new ItemStack(module6.setUnlocalizedName("module61"), 1, 0);
         module62 = new ItemStack(module6.setUnlocalizedName("module62"), 1, 1);
         module63= new ItemStack(module6.setUnlocalizedName("module63"), 1, 2);
@@ -970,12 +1023,10 @@ public class SuperSolarPanels implements IWorldGenerator
         module69= new ItemStack(module6.setUnlocalizedName("module69"), 1, 8);
         module70 = new ItemStack(module6.setUnlocalizedName("module70"), 1, 9);
         //
-        GameRegistry.registerItem(SuperSolarPanels.module7 = new module7(), "module7");
+        GameRegistry.registerItem(SuperSolarPanels.module7 = new com.Denfop.item.Modules.module7(), "module7");
         module71  = new ItemStack(module7.setUnlocalizedName("module71"), 1, 0);
         module72 = new ItemStack(module7.setUnlocalizedName("module72"), 1, 1);
         module73= new ItemStack(module7.setUnlocalizedName("module73"), 1, 2);
-        module74= new ItemStack(module7.setUnlocalizedName("module74"), 1, 3);
-        module75= new ItemStack(module7.setUnlocalizedName("module75"), 1, 4);
         //
         
         GameRegistry.registerItem(SuperSolarPanels.photoniyglass1 = new SSPItem().setMaxStackSize(64).setUnlocalizedName("photoniyglass1").setTextureName("supersolarpanel:photoniyglass1"), "photoniyglass1");
@@ -997,6 +1048,48 @@ public class SuperSolarPanels implements IWorldGenerator
        TileEntityDoubleExtractor.init();
        ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
        GameRegistry.registerItem(ultDDrill , "ultDDrill");
+       //
+       wirelessVajra = new WirelessVajra(ToolMaterial.EMERALD);
+		 blockvajracharger = new BlockVajraCharger("vajracharger", Material.rock);
+		 armorcharger = new BlockArmorCharger("creativearmorcharger", Material.rock);
+		 blockwirelessreciever = new BlockWStorage("wirelessStorage1Tier", Material.rock);
+		 blockwirelessreciever2 = new BlockWStorage2("wirelessStorage2Tier", Material.rock);
+		 expgen = new BlockExpGen("expGen", Material.rock);
+		 module8 = new ItemWirelessModule();
+		 goldenwrench = new ItemGoldenWrench();
+		 connector3 = new ItemWirelessConnector3("itemConnector3");
+		 
+		 if (!Loader.isModLoaded("OpenBlocks")) {
+			 
+	
+		 FluidRegistry.registerFluid(FluidXP.xpJuice);
+		 FluidXP.xpJuice.setIcons(TextureHooks.Icons.xpJuiceStill, TextureHooks.Icons.xpJuiceFlowing);
+		 
+		 
+		
+		 }else {
+			 
+			 FluidXP.xpJuice = FluidRegistry.getFluid("xpjuice");
+		 }
+		 
+		 GameRegistry.registerBlock(blockwirelessreciever, ItemBlockWirelessStorage.class, "WRes1");
+		 GameRegistry.registerBlock(blockwirelessreciever2, ItemBlockWirelessStorage2.class, "WRes2");
+			 GameRegistry.registerItem(wirelessVajra, "WirelessVajra");
+			 GameRegistry.registerBlock(expgen, ItemBlockEG.class, "ExpGen");
+		 GameRegistry.registerItem(goldenwrench, "GoldenWrench");
+		 GameRegistry.registerItem(module8, "WirelessModule");
+		 GameRegistry.registerItem(connector3, "WirelessConnector3");
+		 GameRegistry.registerBlock(blockvajracharger, ItemBlockVCh.class, "WCh");
+		 GameRegistry.registerBlock(armorcharger, ItemBlockArmorCharger.class, "ArCh");
+		 GameRegistry.registerTileEntity(TileVajraCharger.class, "TileVajraCharger");
+		
+		 GameRegistry.registerTileEntity(TileWirelessStorage1Tier.class, "TileStorageWireless1");
+		 GameRegistry.registerTileEntity(TileWirelessStorageTier2.class, "TileStorageWireless2");
+		 GameRegistry.registerTileEntity(TileXPGenPublic.class, "TileEG");
+		 GameRegistry.registerTileEntity(TileVajraChargerElectric.class, "TileVajraCharger1");
+		 
+		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+       //
     }
  
     public static ItemStack setItemsSize(final ItemStack itemStack, final int newSize) {
@@ -1290,7 +1383,44 @@ GameRegistry.addRecipe(itemMolecularTransformer, new Object[] {
     
         //
          GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.enderquantumcomponent, 1), new Object[] { "ABA", "BCB", "ABA", 'A', IC2Items.getItem("iridiumPlate"), 'B', Items.ender_eye, 'C', Items.nether_star });
-    
+    //
+    	 Recipes.advRecipes.addRecipe(new ItemStack(wirelessVajra), new Object[]{ "ABA", 
+				  "CDE",
+				  "FBF",  'A', IC2Items.getItem("iridiumPlate"),
+ 						  'B', RecipeUtil.copyWithWildCard(IC2Items.getItem("miningLaser")),
+ 						  'C', Blocks.lapis_block,
+ 						  'D', RecipeUtil.copyWithWildCard(IC2Items.getItem("iridiumDrill")),
+ 						  'E', Blocks.emerald_block, 
+ 						  'F', IC2Items.getItem("advancedCircuit") });
+
+
+GameRegistry.addRecipe(new ItemStack(blockvajracharger), new Object[]{ " A ", 
+				"BCB",
+				" A ", Character.valueOf('A'), IC2Items.getItem("advancedMachine"), Character.valueOf('B'), Blocks.redstone_block, Character.valueOf('C'), IC2Items.getItem("mfsUnit")});
+GameRegistry.addRecipe(new ItemStack(blockwirelessreciever, 1), new Object[] { 
+	    "AAA",
+		"ABA",
+		"AAA", Character.valueOf('A'), new ItemStack(module8), Character.valueOf('B'), IC2Items.getItem("advancedMachine")});
+
+GameRegistry.addRecipe(new ItemStack(blockwirelessreciever2, 1), new Object[] { 
+	    "BAB",
+		"A A",
+		"BAB", Character.valueOf('A'), new ItemStack(blockwirelessreciever), Character.valueOf('B'), IC2Items.getItem("glassFiberCableItem")});
+
+GameRegistry.addShapelessRecipe(new ItemStack(connector3, 1), new Object[]{IC2Items.getItem("glassFiberCableItem"), IC2Items.getItem("advancedCircuit")});
+
+hudPos = 1;
+GameRegistry.addRecipe(new ItemStack(goldenwrench, 1), new Object[] {
+		" A ",
+		"ABA",
+		" A ", Character.valueOf('A'), Items.gold_ingot, Character.valueOf('B'), IC2Items.getItem("wrench")});
+
+GameRegistry.addRecipe(new ItemStack(expgen, 1), new Object[] { 
+	    "BAB",
+		"BCB",
+		"BAB", Character.valueOf('A'), IC2Items.getItem("advancedMachine"), Character.valueOf('B'), IC2Items.getItem("cell"), Character.valueOf('C'), IC2Items.getItem("massFabricator")});
+
+
         //
         GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.enderquantumcomponent, 1), new Object[] { "ABA", "BCB", "ABA", 'A', IC2Items.getItem("iridiumPlate"), 'B', Items.ender_eye, 'C', Items.nether_star });
         GameRegistry.addShapelessRecipe(new ItemStack(SuperSolarPanels.greencomponent, 1), new Object[] { SuperSolarPanels.itemIrradiantGlassPane });

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import net.minecraftforge.common.util.ForgeDirection;
-import ru.wirelesstools.TileWirelessStorageBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.inventory.Container;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -32,14 +31,15 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.module1;
-import com.Denfop.module2;
-import com.Denfop.module3;
-import com.Denfop.module4;
-import com.Denfop.module5;
-import com.Denfop.module6;
-import com.Denfop.module7;
+import com.Denfop.block.WirellesStorage.TileWirelessStorageBase;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.module1;
+import com.Denfop.item.Modules.module2;
+import com.Denfop.item.Modules.module3;
+import com.Denfop.item.Modules.module4;
+import com.Denfop.item.Modules.module5;
+import com.Denfop.item.Modules.module6;
+import com.Denfop.item.Modules.module7;
 
 import ic2.api.network.INetworkUpdateListener;
 import ic2.api.network.INetworkDataProvider;

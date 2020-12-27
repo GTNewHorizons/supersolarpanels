@@ -26,14 +26,10 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.module1;
-import com.Denfop.module2;
-import com.Denfop.module3;
-import com.Denfop.module4;
-import com.Denfop.module5;
-import com.Denfop.module6;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.module5;
+import com.Denfop.item.Modules.module6;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 
 import ic2.api.network.INetworkUpdateListener;

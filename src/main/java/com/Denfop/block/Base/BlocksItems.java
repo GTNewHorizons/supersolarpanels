@@ -16,11 +16,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import com.Denfop.BotaniaIntegration;
-import com.Denfop.ItemReactorTerasteel;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.block.Chargepad.BlockChargepad;
+import com.Denfop.block.cable.BlockCable;
+import com.Denfop.block.cable.ItemCable;
 import com.Denfop.block.mechanism.BlockMachine;
 import com.Denfop.fluid.Ic2Fluid;
+import com.Denfop.integration.Botania.BotaniaIntegration;
+import com.Denfop.integration.Botania.ItemReactorTerasteel;
 import com.Denfop.item.Upgrade.ItemUpgradeModule;
 import com.Denfop.item.reactor.ItemRadioactive;
 import com.Denfop.item.reactor.ItemReactorHeatStorage;

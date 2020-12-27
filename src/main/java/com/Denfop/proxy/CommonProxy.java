@@ -2,6 +2,8 @@ package com.Denfop.proxy;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.MTAPI;
+import com.Denfop.block.expgen.TileExpGen2;
+import com.Denfop.render.Cable.RenderBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
@@ -56,6 +58,10 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntitySolarPanel) {
           return ((TileEntitySolarPanel)te).getGuiContainer(player.inventory);
       }
+      if(te instanceof TileExpGen2) {
+			
+			return ((TileExpGen2) te).getGuiContainer(player.inventory);			
+		}
       if (te instanceof TileSintezator) {
           return ((TileSintezator)te).getGuiContainer(player.inventory);
       }

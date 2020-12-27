@@ -3,7 +3,7 @@ package com.Denfop.render.tile;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.TileEntityAdminSolarPanel;
+import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

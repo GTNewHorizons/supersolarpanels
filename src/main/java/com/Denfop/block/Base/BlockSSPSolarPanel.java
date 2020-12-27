@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.module5;
+import com.Denfop.item.Modules.module5;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
