@@ -32,8 +32,8 @@ public class MTRecipeConfig
     
     public static void populateDefaults() {
         if (!MTRecipeConfig.filled) {
-        	MTRecipeConfig.defaultLines.add("minecraft:skull:1; minecraft:skull-1:1; 900000");
-            MTRecipeConfig.defaultLines.add("minecraft:skull-1:1; minecraft:nether_star:1; 100000000");
+        	MTRecipeConfig.defaultLines.add("minecraft:skull:1; minecraft:skull-1:1; 1000000");
+            MTRecipeConfig.defaultLines.add("minecraft:skull-1:1; minecraft:nether_star:1; 150000000");
             MTRecipeConfig.defaultLines.add("minecraft:iron_ingot:1; IC2:itemOreIridium:1; 15500000");
             MTRecipeConfig.defaultLines.add("IC2:itemPlutonium:1; supersolarpanel:proton:1; 7500000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:spinel_ingot:1; supersolarpanel:photoniy:1; 1000000");
@@ -79,6 +79,7 @@ public class MTRecipeConfig
             MTRecipeConfig.defaultLines.add("supersolarpanel:protoncore:4; supersolarpanel:singularcore:1; 275000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:singularcore:4; supersolarpanel:admincore:1; 400000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:admincore:4; supersolarpanel:photoniccore:1; 800000");
+            MTRecipeConfig.defaultLines.add("supersolarpanel:photoniccore:2; supersolarpanel:BlockSintezator:1; 1000000000");
             MTRecipeConfig.filled = true;
             
             MTRecipeConfig.defaultLines.add("Avaritia:Resource-4:4; supersolarpanel:neutroncore:1; 150000000");

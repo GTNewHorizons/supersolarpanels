@@ -3,8 +3,13 @@
 
 package com.Denfop.tiles.base;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import net.minecraftforge.common.util.ForgeDirection;
+import ru.wirelesstools.TileWirelessStorageBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.inventory.Container;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,6 +25,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,6 +38,7 @@ import com.Denfop.module3;
 import com.Denfop.module4;
 import com.Denfop.module5;
 import com.Denfop.module6;
+import com.Denfop.module7;
 import com.Denfop.container.ContainerAdvSolarPanel;
 
 import ic2.api.network.INetworkUpdateListener;
@@ -75,12 +82,48 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	private module6 panel;
 	public int tier;
 	public int l;
-	public boolean modules;
+		
 	
-    private static List<String> fields;
+	public boolean wirelles;
+	
+	
+	public boolean isconnected;
+		
+	public ArrayList<Integer> xvalue = new ArrayList();
+	public ArrayList<Integer> yvalue = new ArrayList();
+	public ArrayList<Integer> zvalue = new ArrayList();
+	
+	public ArrayList<ArrayList<Integer>> xlist = new ArrayList();
+	public ArrayList<ArrayList<Integer>> ylist = new ArrayList();
+	public ArrayList<ArrayList<Integer>> zlist = new ArrayList();
+	
+	public ArrayList<TileWirelessStorageBase> listtiles = new ArrayList<TileWirelessStorageBase>();
+	
+	public Map<Double, Double> mapofcoords = new HashMap<Double, Double>();
+	
+	public ArrayList<Double> lista = new ArrayList<Double>();
+	public ArrayList<Double> listb = new ArrayList<Double>();
+	public ArrayList<Double> listc = new ArrayList<Double>();
+	
+	public Integer targetX;
+	public Integer targetY;
+	public Integer targetZ;
+	
+	protected int lasttargetX;
+	protected int lasttargetY;
+	protected int lasttargetZ;
+	
+	public Boolean targetSet;
+	
+	protected int wirelesstransferlimit;
+	
+	public TileWirelessStorageBase twsb;
+	private int o;
+	
+	
     
     public TileEntitySolarPanel(final String gName,final int tier, final int typeSolar, final int gDay, final int gNight, final int gOutput, final int gmaxStorage) {
-        
+    	
     	this.loaded = false;
         this.created = false;
         this.facing = 2;
@@ -96,7 +139,9 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.k =  gDay;
         this.m = gNight;
         this.l = 0;
-        
+        this.targetSet = false;
+		this.o = tier;
+		this.wirelles = false;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
         this.production = gOutput;
@@ -107,6 +152,15 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.lastZ = this.zCoord;
         this.machineTire = tier;
         this.tier = tier;
+        
+        this.lasttargetX = 0;
+		this.lasttargetY = 0;
+		this.lasttargetZ = 0;
+		
+		this.isconnected = false;
+		
+		
+		this.wirelesstransferlimit = gOutput;
     }
     public int getSolarType() {
     	int type = this.solarType;
@@ -202,13 +256,36 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4)
         		output++;
         	
-        	 if (this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ic2.api.item.IElectricItem && this.storage > 0) {
-   	          sentPacket = ElectricItem.manager.charge(this.chargeSlots[i], this.storage, this.tier, true, false);
-   	          if (sentPacket > 0.0D)
-   	            needInvUpdate = true; 
-   	          this.storage -= (int)sentPacket;
-   	        } 
+        	if (this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ic2.api.item.IElectricItem && this.storage > 0.0D) {
+		        sentPacket = ElectricItem.manager.charge(this.chargeSlots[i], this.storage, 2147483647, false, false);
+		        if (sentPacket > 0.0D)
+		          needInvUpdate = true; 
+		        this.storage -= (int)sentPacket;
+		      } 
+        	
         }
+        int tierplus = 0;
+        int minus = 0;
+        for(int i = 0; i < 9;i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
+        		int kk = chargeSlots[i].getItemDamage();
+        		if(kk == 0) {
+        			  compareTargets();
+        		}
+        		else if(kk == 1) {
+        			tierplus++;
+        		}
+        		else if(kk == 2) {
+        			minus++;
+        		}
+        		else if(kk == 3) {
+        			
+        			      
+        			    
+        		}
+        	}
+        }
+        this.tier = this.o + tierplus -  minus;
         int m1 = 0; int m2 = 0; int m3 = 0; int m4 = 0; int m5 = 0; int m6 = 0; int m7 = 0; int m8 = 0; int m9 = 0;
         int n1 = 0; int n2 = 0;  int n3 = 0; int n4 = 0;  int n5 = 0; int n6 = 0;  int n7 = 0; int n8 = 0;  int n9 = 0;
         int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
@@ -354,18 +431,17 @@ if((int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 +
         this.production  = (int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);}else {
         	this.production = 999999998;
         }
+       
 
-            		
-            	            	
-            		
-            	   
+          
+           
             	       
             	      
         if (needInvUpdate) {
             super.markDirty();
         }
     }
-    
+
     public int gainFuel() {
     	if(solarType == 0) {
         if (this.ticker++ % this.tickRate() == 0) {
@@ -526,6 +602,68 @@ return this.generating = 0;
         }
        
     }
+    
+    protected void compareTargets() {
+        if (!this.worldObj.isRemote)
+          if (!this.lista.contains(null) && !this.listb.contains(null) && !this.listc.contains(null))
+            for (Iterator<Double> iterator = this.lista.iterator(); iterator.hasNext(); ) {
+              double i = ((Double)iterator.next()).doubleValue();
+              for (Iterator<Double> iterator1 = this.listb.iterator(); iterator1.hasNext(); ) {
+                double j = ((Double)iterator1.next()).doubleValue();
+                for (Iterator<Double> iterator2 = this.listc.iterator(); iterator2.hasNext(); ) {
+                  double k = ((Double)iterator2.next()).doubleValue();
+                  if (this.mapofcoords.get(Double.valueOf(i)) != null && this.mapofcoords.get(Double.valueOf(j)) != null && this.mapofcoords.get(Double.valueOf(k)) != null) {
+                    if ((TileWirelessStorageBase)this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(Double.valueOf(i))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(j))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(k))).doubleValue()) != null) {
+                      this.listtiles.add((TileWirelessStorageBase)this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(Double.valueOf(i))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(j))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(k))).doubleValue()));
+                      tryChargeBlocks(this.listtiles);
+                      markDirty();
+                    } 
+                    continue;
+                  } 
+                  this.isconnected = false;
+                } 
+              } 
+            }   
+      }
+      
+      public void tryChargeBlocks(ArrayList<TileWirelessStorageBase> listtiles1) {
+        if (!this.worldObj.isRemote)
+          for (TileWirelessStorageBase te : listtiles1) {
+            if ((this.isconnected & te.isconnected) != false) {
+              if ((this.targetSet = Boolean.valueOf(true & (te.targetSet = true))).booleanValue()) 
+                chargeBlocks(te); 
+              continue;
+            } 
+            if (this.isconnected != te.isconnected && 
+              this.targetSet.booleanValue() != te.targetSet) {
+              if (te.isInvalid()) {
+                te.targetSet = this.targetSet.booleanValue();
+                this.isconnected = false;
+                continue;
+              } 
+              if (!te.isInvalid()) {
+                te.isconnected = false;
+                this.isconnected = false;
+                this.targetSet = Boolean.valueOf(false);
+              } 
+            } 
+          }  
+      }
+      
+      public void chargeBlocks(TileWirelessStorageBase te) {
+        int sentPacket = this.wirelesstransferlimit;
+        if (!this.worldObj.isRemote && (this.targetSet = Boolean.valueOf(true & (te.targetSet = true))).booleanValue() && (
+          this.isconnected = true & (te.isconnected = true)))
+          if ((((this.storage > 0.0D) ? 1 : 0) & ((this.storage != 0.0D) ? 1 : 0)) != 0)
+            if (te.energy < te.maxStorage) {
+            	System.out.println("invokes-te-Valid");
+              te.energy += sentPacket;
+              this.storage -= sentPacket;
+              if (this.storage < 0)
+                this.storage = 0; 
+            }   
+      }
+
     public void readFromNBT(final NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         this.storage = nbttagcompound.getInteger("storage");
@@ -539,33 +677,89 @@ return this.generating = 0;
         this.production = nbttagcompound.getInteger("production");
         
         final NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+    	for(int l = 0,  m = 0, n = 0; l < this.lista.size() && m < this.listb.size() && n < this.listc.size(); l++, m++, n++) {
+			NBTTagCompound com = new NBTTagCompound();
+			
+			if(this.worldObj.getTileEntity((int)this.mapofcoords.get(this.lista.get(l)).doubleValue(), (int)this.mapofcoords.get(this.listb.get(m)).doubleValue(), (int)this.mapofcoords.get(this.listc.get(n)).doubleValue()) != null) {
+			
+			com.setDouble("A", this.lista.get(l));
+			com.setDouble("B", this.listb.get(m));
+			com.setDouble("C", this.listc.get(n));
+			
+			com.setDouble("X", this.mapofcoords.get(this.lista.get(l))); // System.out.println("X value written: " + this.mapofcoords.get(this.lista.get(l)));
+			com.setDouble("Y", this.mapofcoords.get(this.listb.get(m))); // System.out.println("Y value written: " + this.mapofcoords.get(this.listb.get(m)));
+			com.setDouble("Z", this.mapofcoords.get(this.listc.get(n))); // System.out.println("Z value written: " + this.mapofcoords.get(this.listc.get(n)));
+			
+		//	System.out.println("A value written: " + this.lista.get(l));
+		//	System.out.println("B value written: " + this.listb.get(m));
+		//	System.out.println("C value written: " + this.listc.get(n));
+			
+			nbttaglist.appendTag(com);
+			
+			}
+		}
+		
+		
+		nbttagcompound.setTag("positions", nbttaglist);
+		
+		
+		
+	nbttagcompound.setDouble("energy", this.storage);
+	nbttagcompound.setBoolean("targetset", this.targetSet);
+	nbttagcompound.setBoolean("isconnected", this.isconnected);
         this.chargeSlots = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
             final NBTTagCompound nbttagcompound2 = nbttaglist.getCompoundTagAt(i);
             final int j = nbttagcompound2.getByte("Slot") & 0xFF;
-            if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
-            	this.modules = nbttagcompound.getBoolean("modules");
-            	nbttagcompound.getBoolean("RenderNewTexture");
-            	
-        		
-        	}
+            
             if (j >= 0 && j < this.chargeSlots.length) {
                 this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound2);
             }
             
         }
+      
     }
     
     public void writeToNBT(final NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
-        final NBTTagList nbttaglist = new NBTTagList();
+        
         nbttagcompound.setInteger("storage", this.storage);
         nbttagcompound.setInteger("lastX", this.lastX);
         nbttagcompound.setInteger("lastY", this.lastY);
         nbttagcompound.setInteger("lastZ", this.lastZ);
         nbttagcompound.setInteger("genDay",this.genDay);
         nbttagcompound.setInteger("genNight",this.genNight);
-        
+        NBTTagList nbttaglist = (NBTTagList) nbttagcompound.getTag("positions");
+		 
+		 for(int i = 0; i < nbttaglist.tagCount(); i++) {
+			 NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
+			 
+			 
+			 this.mapofcoords.put(nbttagcompound1.getDouble("A"), nbttagcompound1.getDouble("X"));
+			 this.mapofcoords.put(nbttagcompound1.getDouble("B"), nbttagcompound1.getDouble("Y"));
+			 this.mapofcoords.put(nbttagcompound1.getDouble("C"), nbttagcompound1.getDouble("Z"));
+			 
+			 
+			 this.lista.add(nbttagcompound1.getDouble("A"));
+			 this.listb.add(nbttagcompound1.getDouble("B"));
+			 this.listc.add(nbttagcompound1.getDouble("C"));
+			 
+			
+			 
+		//	 System.out.println("X value read: " + nbttagcompound1.getInteger("X"));
+		//	 System.out.println("Y value read: " + nbttagcompound1.getInteger("Y"));
+		//	 System.out.println("Z value read: " + nbttagcompound1.getInteger("Z"));
+			 
+		//	 System.out.println("A value read: " + nbttagcompound1.getInteger("A"));
+		//	 System.out.println("B value read: " + nbttagcompound1.getInteger("B"));
+		//	 System.out.println("C value read: " + nbttagcompound1.getInteger("C"));
+			 
+			 
+		 }
+		 
+		 this.storage = (int) nbttagcompound.getDouble("energy");
+		 this.targetSet = nbttagcompound.getBoolean("targetset");
+		 this.isconnected = nbttagcompound.getBoolean("isconnected");
          nbttagcompound.setInteger("production",this.production);
         nbttagcompound.setInteger("solarType", this.solarType);
         for (int i = 0; i < this.chargeSlots.length; ++i) {
@@ -799,7 +993,7 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
     
     public void onNetworkUpdate(final String field) {
     }
-    
+    private static List<String> fields = Arrays.asList(new String[0]);
     @Override
     public List<String> getNetworkedFields() {
         return TileEntitySolarPanel.fields;

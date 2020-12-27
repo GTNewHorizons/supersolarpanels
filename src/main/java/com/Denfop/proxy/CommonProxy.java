@@ -62,6 +62,7 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntityMolecularTransformer) {
           return ((TileEntityMolecularTransformer)te).getGuiContainer(player.inventory);
       }
+     
       return null;
   }
  

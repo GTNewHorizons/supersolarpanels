@@ -51,6 +51,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
+import ru.wirelesstools.gui.GuiExpGen;
 
 public class ClientProxy extends CommonProxy  implements IGuiHandler {
 	
@@ -145,6 +146,10 @@ public boolean isClient() {
       if (te instanceof TileEntityMolecularTransformer) {
           return new GuiMolecularTransformer(player.inventory, (TileEntityMolecularTransformer)te);
       }
+     
+		
+		
+		
       return null;
   }
   
