@@ -1,6 +1,6 @@
-package com.Denfop.tiles.base;
+package com.Denfop.container;
 
-import com.Denfop.container.ModUtils;
+
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,16 +11,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class ContainerSinSolarPanel extends Container
+public class ContainerAdvSolarPanel extends Container
 {
-	private TileSintezator tileentity;
+	private TileEntitySolarPanel tileentity;
 	private int storage = 0;
 	private int fuel = 0;
 	private boolean sunIsUp;
 	private boolean skyIsVisible;
 	private int generating;
 
-	public ContainerSinSolarPanel(InventoryPlayer inventoryplayer, TileSintezator tileentitysolarpanel)
+	public ContainerAdvSolarPanel(InventoryPlayer inventoryplayer, TileEntitySolarPanel tileentitysolarpanel)
 	{
 		this.tileentity = tileentitysolarpanel;
 
@@ -111,22 +111,23 @@ public class ContainerSinSolarPanel extends Container
 		{
 			ItemStack stackInSlot = slotObject.getStack();
 			stack = stackInSlot.copy();
-			if (slotNumber >= 4 && slotNumber <= 5)
+			if (slotNumber >= 0 && slotNumber < 9)
 			{
-				if (!this.mergeItemStack(stackInSlot, 4, 40, true))
+				if (!this.mergeItemStack(stackInSlot, 10, 45, true))
 					return null;
 			}
-			else if (slotNumber >= 6 && slotNumber < 33)
+				
+			else if (slotNumber >= 9 && slotNumber < 38)
 			{
-				if (!this.mergeItemStack(stackInSlot, 0, 4, false) && !this.mergeItemStack(stackInSlot, 31, 40, false))
+				if (!this.mergeItemStack(stackInSlot, 0, 8, false) && !this.mergeItemStack(stackInSlot, 39, 45, false))
 					return null;
 			}
-			else if (slotNumber >= 33 && slotNumber < 41)
+			else if (slotNumber >= 39 && slotNumber < 45)
 			{
-				if (!this.mergeItemStack(stackInSlot, 0, 30, false))
+				if (!this.mergeItemStack(stackInSlot, 0, 38, false))
 					return null;
 			}
-			else if (!this.mergeItemStack(stackInSlot, 0, 30, false))
+			else if (!this.mergeItemStack(stackInSlot, 0, 45, false))
 				return null;
 
 			if (stackInSlot.stackSize == 0)

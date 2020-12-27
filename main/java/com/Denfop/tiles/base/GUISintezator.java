@@ -50,89 +50,135 @@ public class GUISintezator extends GuiContainer
       
         int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
         int b1 = 0; int b2 = 0; int b3 = 0; int b4 = 0; int b5 = 0; int b6 = 0; int b7 = 0; int b8 = 0; int b9 = 0; 
-      
+      int yy = 0;
         	
         if(this.tileentity.chargeSlots[0] != null && this.tileentity.chargeSlots[0].getItem() instanceof ItemSSPSolarPanel) {
     		int g = this.tileentity.chargeSlots[0].getItemDamage();
     		int p = this.tileentity.chargeSlots[0].stackSize;
-    		if(this.tileentity.tier >= g+1) {
-    		
+    		if(p <= 2) {
+    			yy = 1;
     		v1 = module6.storage(g)*p;
     		b1 = module6.Output(g)*p;
+    		}else {
+    			v1 = module6.storage(g)*2;
+        		b1 = module6.Output(g)*2;
+        		yy = 1;
     		}
     	
     }
     	if(this.tileentity.chargeSlots[1] != null && this.tileentity.chargeSlots[1].getItem() instanceof ItemSSPSolarPanel) {
     		int p = this.tileentity.chargeSlots[1].stackSize;
     		int kk = this.tileentity.chargeSlots[1].getItemDamage();
-    		if(this.tileentity.tier >= kk+1) {
+    		if(p <= 2) {
     		
     		v2 = module6.storage(kk)*p;
-    		b2 = module6.Output(kk)*p;}
+    		b2 = module6.Output(kk)*p;
+    		yy = 1;}else {
+    			v2 = module6.storage(kk)*2;
+        		b2 = module6.Output(kk)*2;
+        		yy = 1;
+    		}
     	
     }
 if(this.tileentity.chargeSlots[2] != null && this.tileentity.chargeSlots[2].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[2].stackSize;
     		int kk = this.tileentity.chargeSlots[2].getItemDamage();
-    		if(this.tileentity.tier >= kk+1) {
+    		if(p <= 2) {
     		
     		v3 = module6.storage(kk)*p;
-    		b3 = module6.Output(kk)*p;}
+    		b3 = module6.Output(kk)*p;
+    		yy = 1;}else {
+    			v3 = module6.storage(kk)*2;
+        		b3 = module6.Output(kk)*2;
+        		yy = 1;
+    		}
     	
     }
 if(this.tileentity.chargeSlots[3] != null && this.tileentity.chargeSlots[3].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[3].stackSize;
 int kk = this.tileentity.chargeSlots[3].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 v4 = module6.storage(kk)*p;
-b4 = module6.Output(kk)*p;}
+b4 = module6.Output(kk)*p;
+yy = 1;}else {
+	v4 = module6.storage(kk)*2;
+	b4 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
 if(this.tileentity.chargeSlots[4] != null && this.tileentity.chargeSlots[4].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[4].stackSize;
 int kk = this.tileentity.chargeSlots[4].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 v5 = module6.storage(kk)*p;
-b5 = module6.Output(kk)*p;}
+b5 = module6.Output(kk)*p;
+yy = 1;}else {
+	v5 = module6.storage(kk)*2;
+	b5 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
 if(this.tileentity.chargeSlots[5] != null && this.tileentity.chargeSlots[5].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[5].stackSize;
 int kk = this.tileentity.chargeSlots[5].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 v6 = module6.storage(kk)*p;
-b6 = module6.Output(kk)*p;}
+b6 = module6.Output(kk)*p;
+yy = 1;}else {
+	v6 = module6.storage(kk)*2;
+	b6 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
 if(this.tileentity.chargeSlots[6] != null && this.tileentity.chargeSlots[6].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[6].stackSize;
 int kk = this.tileentity.chargeSlots[6].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 v7 = module6.storage(kk)*p;
-b7 = module6.Output(kk)*p;}
+b7 = module6.Output(kk)*p;
+yy = 1;}else {
+	v7 = module6.storage(kk)*2;
+	b7 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
 if(this.tileentity.chargeSlots[7] != null && this.tileentity.chargeSlots[7].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[7].stackSize;
 int kk = this.tileentity.chargeSlots[7].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 	
 v8 = module6.storage(kk)*p;
-b8 = module6.Output(kk)*p;}
+b8 = module6.Output(kk)*p;
+yy = 1;}else {
+	v8 = module6.storage(kk)*2;
+	b8 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
 if(this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof ItemSSPSolarPanel) {
 	int p = this.tileentity.chargeSlots[8].stackSize;
 int kk = this.tileentity.chargeSlots[8].getItemDamage();
-if(this.tileentity.tier >= kk+1) {
+if(p <= 2) {
 v9 = module6.storage(kk)*p;
-b9 = module6.Output(kk)*p;}
+b9 = module6.Output(kk)*p;
+yy = 1;}else {
+	v9 = module6.storage(kk)*2;
+	b9 = module6.Output(kk)*2;
+	yy = 1;
+}
 
 }
-if(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 < 999999999) {
+if(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 < 999999999 && yy != 0) {
 	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" +(int) (v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9), 50, 22, 13487565);
-}else	{	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + "999999999", 50, 22, 13487565);
+}else	if(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 > 999999999 && yy != 0){	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + "999999999", 50, 22, 13487565);
 
+	}else {
+		this.fontRendererObj.drawString(storageString + 0 + "/" + this.tileentity.maxStorage, 50, 22, 13487565);
 	}
 if(b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9 < 999999999)	{
 	 this.fontRendererObj.drawString(maxOutputString + (b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (" " + energyPerTickString), 50, 32, 13487565);

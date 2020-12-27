@@ -302,5 +302,5 @@ module73.name=Module: Lower panel level
 wirelles=§eAllows you to transmit power without wires
 transformator=Raises the panel level
 transformator1-Lowers the panel level
-block.Sintezator.name=Unifier panels
+blockSintezator.name=Unifier panels
 ssp.sintezator=Ability to put panels in a block (2 pieces per slot)
