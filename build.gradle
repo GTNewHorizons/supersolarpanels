@@ -67,6 +67,7 @@ jar {
                 "Git-Commit-Hash": getGitHash()
         ])
     }
+    from 'LICENSE'
 }
 
 static def getGitHash() {
