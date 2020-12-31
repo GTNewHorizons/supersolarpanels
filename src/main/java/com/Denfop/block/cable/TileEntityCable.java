@@ -16,24 +16,34 @@ import ic2.core.ITickCallback;
 import ic2.core.block.IObscurable;
 import ic2.core.block.TileEntityBlock;
 import ic2.core.block.wiring.TileEntityLuminator;
+import ic2.core.item.armor.ItemArmorHazmat;
 import ic2.core.network.ClientModifiable;
 import ic2.core.network.NetworkManager;
 import ic2.core.util.ReflectionUtil;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import com.Denfop.block.Base.BlockMultiID;
+import com.Denfop.item.armour.ItemArmorQuantumSuit1;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 public class TileEntityCable extends TileEntityBlock implements IEnergyConductor, INetworkTileEntityEventListener, IObscurable {
   public short cableType;
@@ -115,7 +125,11 @@ public class TileEntityCable extends TileEntityBlock implements IEnergyConductor
       } 
     } 
   }
-  
+  public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity p_149670_5_)
+  {
+  	
+      p_149670_5_.attackEntityFrom(DamageSource.cactus, 100000000.0F);
+  }
   public void writeToNBT(NBTTagCompound nbttagcompound) {
     super.writeToNBT(nbttagcompound);
     nbttagcompound.setShort("cableType", this.cableType);
@@ -152,8 +166,10 @@ public class TileEntityCable extends TileEntityBlock implements IEnergyConductor
       if (this.foamed == 1)
         changeFoam(this.foamed, true); 
     } 
+   
+	
   }
-  
+
   public void onUnloaded() {
     if (IC2.platform.isSimulating() && this.addedToEnergyNet) {
       MinecraftForge.EVENT_BUS.post((Event)new EnergyTileUnloadEvent((IEnergyTile)this));

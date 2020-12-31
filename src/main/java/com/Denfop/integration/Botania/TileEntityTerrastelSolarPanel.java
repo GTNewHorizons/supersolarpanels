@@ -2,6 +2,7 @@
 
 package com.Denfop.integration.Botania;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
@@ -9,7 +10,7 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 public class TileEntityTerrastelSolarPanel extends TileEntitySolarPanel
 {
     public TileEntityTerrastelSolarPanel() {
-        super("blockTerrastelSolarPanel.name", 4,0, SuperSolarPanels.qpGenDay, SuperSolarPanels.qpGenNight, SuperSolarPanels.qpOutput, SuperSolarPanels.qpStorage);
+        super("blockTerrastelSolarPanel.name", Config.terasteeltier,0, Config.terasteelgenday, Config.terasteelgennight, Config.terasteeloutput, Config.terasteelstorage);
     }
     
     @Override

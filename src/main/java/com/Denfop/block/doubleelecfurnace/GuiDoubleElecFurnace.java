@@ -25,7 +25,7 @@ public class GuiDoubleElecFurnace extends GuiIC2 {
     int chargeLevel = (int)(14.0F * ((TileEntityDoubleElectricFurnace)this.container.base).getChargeLevel());
     int progress = (int)(24.0F * ((TileEntityDoubleElectricFurnace)this.container.base).getProgress());
     if (chargeLevel > 0)
-      drawTexturedModalRect(this.xoffset + 56, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
+      drawTexturedModalRect(this.xoffset + 56+1, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
     if (progress > 0)
       drawTexturedModalRect(this.xoffset + 79, this.yoffset + 34, 176, 14, progress + 1, 16); 
   }

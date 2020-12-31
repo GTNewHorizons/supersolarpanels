@@ -117,14 +117,14 @@ public class ContainerAdvSolarPanel extends Container
 					return null;
 			}
 				
-			else if (slotNumber >= 9 && slotNumber < 38)
+			else if (slotNumber >= 9 && slotNumber <= 38)
 			{
-				if (!this.mergeItemStack(stackInSlot, 0, 8, false) && !this.mergeItemStack(stackInSlot, 39, 45, false))
+				if (!this.mergeItemStack(stackInSlot, 0, 9, false) && !this.mergeItemStack(stackInSlot, 39, 45, false))
 					return null;
 			}
 			else if (slotNumber >= 39 && slotNumber < 45)
 			{
-				if (!this.mergeItemStack(stackInSlot, 0, 38, false))
+				if (!this.mergeItemStack(stackInSlot, 0, 9, false) && !this.mergeItemStack(stackInSlot, 9, 38, false))
 					return null;
 			}
 			else if (!this.mergeItemStack(stackInSlot, 0, 45, false))

@@ -13,6 +13,11 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class CompressorRecipe {
 	public static void recipe() {
+		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedtoriyDual, 1), (NBTTagCompound)null,new ItemStack[]{ new ItemStack(SuperSolarPanels.toriy,2)} );
+		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedtoriyQuad, 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.toriy,4) });
+		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedtoriySimple, 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.toriy,1) });
+	
+		//
 		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedprotonDual, 1), (NBTTagCompound)null,new ItemStack[]{ new ItemStack(SuperSolarPanels.proton,2)} );
 		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedprotonQuad, 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.proton,4) });
 		Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(SuperSolarPanels.reactorDepletedprotoneit, 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.proton,8) });
@@ -29,6 +34,10 @@ public class CompressorRecipe {
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.chromium_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.chromium_plate,1)});
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.wolfram_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.wolfram_plate,1) });
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.mikhail_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.michail_plate,1) });
+	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.nickel),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.nickelplate,1) });
+	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.electriumingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.electriumplate,1) });
+	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.invaringot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.invarplate,1) });
+	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.magnesium_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.magnesium_plate,1) });
 
 		if( SuperSolarPanels.ASPLoaded) {
 	       	  ASPIntegration.init();   

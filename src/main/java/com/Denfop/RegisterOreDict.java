@@ -8,6 +8,9 @@ public static void oredict() {
     OreDictionary.registerOre("ingotIridium", SuperSolarPanels.ingotIridium);
     OreDictionary.registerOre("ingotPlatinum", SuperSolarPanels.platium_ingot);
     OreDictionary.registerOre("ingotSpinel", SuperSolarPanels.spinel_ingot);
+    OreDictionary.registerOre("ingotNickel", SuperSolarPanels.nickel);
+    OreDictionary.registerOre("ingotInvar", SuperSolarPanels.invaringot);
+    OreDictionary.registerOre("ingotElectrum", SuperSolarPanels.electriumingot);
     OreDictionary.registerOre("ingotMikhalov", SuperSolarPanels.mikhail_ingot);
     OreDictionary.registerOre("ingotChromium", SuperSolarPanels.chromium_ingot);
     OreDictionary.registerOre("ingotTungsten", SuperSolarPanels.wolfram_ingot);

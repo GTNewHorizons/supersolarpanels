@@ -1,6 +1,7 @@
 
 package com.Denfop.integration.DE;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
@@ -8,7 +9,7 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 public class TileEntityDraconSolarPanel extends TileEntitySolarPanel
 {
     public TileEntityDraconSolarPanel() {
-        super("blockHDraconSolarPanel.name",2, 0, SuperSolarPanels.hGenDay, SuperSolarPanels.hGenNight, SuperSolarPanels.hOutput, SuperSolarPanels.hStorage);
+        super("blockDraconSolarPanel.name",Config.draconictier, 0, Config.draconicgenday, Config.draconicgennight, Config.draconicoutput, Config.draconicstorage);
     }
     
     @Override

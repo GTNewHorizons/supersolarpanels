@@ -68,6 +68,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.advStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "1");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 1:
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.hGenDay  + " EU/t " );
@@ -77,6 +78,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.hStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "2");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 2:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.uhGenDay  + " EU/t " );
@@ -86,6 +88,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.uhStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "3");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 3:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.qpGenDay  + " EU/t " );
@@ -95,6 +98,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.qpStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "4");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 4:
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.spectralpanelGenDay  + " EU/t " );
@@ -104,6 +108,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.spectralpanelstorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.spectralpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
           break;
           case 5:
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.protongenDay  + " EU/t " );
@@ -113,6 +118,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.AdminpanelStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "6");
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 6:
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.singularpanelGenDay  + " EU/t " );
@@ -122,6 +128,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.singularpanelstorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.singularpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 8:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.photonicpanelGenDay  + " EU/t " );
@@ -131,6 +138,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.photonicpanelStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.photonicpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 7:
          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.adminpanelGenDay  + " EU/t " );
@@ -140,6 +148,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.AdminpanelStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.adminpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
             break;
           case 9:
           	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.neutronpanelGenDay  + " EU/t " );
@@ -149,6 +158,7 @@ public class module6 extends Item
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.neutronpanelStorage + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.neutronpaneltier);
             info.add(StatCollector.translateToLocal("ssp.modules1") );
+            info.add(StatCollector.translateToLocal("ssp.modules2") );
           break;
         } }
     @SideOnly(Side.CLIENT)

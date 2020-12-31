@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Chargepad.BlockChargepad;
 import com.Denfop.block.cable.BlockCable;
@@ -77,11 +78,20 @@ public class BlocksItems {
 	  SuperSolarPanels.reactorDepletedprotonDual = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedprotonDual, 10, 100));
 	    SuperSolarPanels.reactorDepletedprotonQuad = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedprotonQuad, 10, 100));
 	    SuperSolarPanels.reactorDepletedprotoneit = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedprotoneit, 10, 100));
-	    SuperSolarPanels.reactorprotonSimple = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonSimple, 1));
-	    SuperSolarPanels.reactorprotonDual = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonDual, 2));
-	    SuperSolarPanels.reactorprotonQuad = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonQuad, 4));
-	    SuperSolarPanels.reactorprotoneit = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotoneit, 8));
+	    SuperSolarPanels.reactorprotonSimple = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonSimple, 1,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
+	    SuperSolarPanels.reactorprotonDual = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonDual, 2,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
+	    SuperSolarPanels.reactorprotonQuad = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotonQuad, 4,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
+	    SuperSolarPanels.reactorprotoneit = new ItemStack((Item)new ItemReactorproton(InternalName.reactorprotoneit, 8,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
 	    SuperSolarPanels.proton = new ItemRadioactive(InternalName.proton, 150, 100);
+	    SuperSolarPanels.toriy = new ItemRadioactive(InternalName.toriy, 150, 100);
+	    //
+	    SuperSolarPanels.reactortoriySimple = new ItemStack((Item)new ItemReactorproton(InternalName.reactortoriySimple, 1,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+	    SuperSolarPanels.reactortoriyDual = new ItemStack((Item)new ItemReactorproton(InternalName.reactortoriyDual, 2,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+	    SuperSolarPanels.reactortoriyQuad = new ItemStack((Item)new ItemReactorproton(InternalName.reactortoriyQuad, 4,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+		  SuperSolarPanels.reactorDepletedtoriySimple = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedtoriySimple, 10, 100));
+		  SuperSolarPanels.reactorDepletedtoriyDual = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedtoriyDual, 10, 100));
+		    SuperSolarPanels.reactorDepletedtoriyQuad = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedtoriyQuad, 10, 100));
+	    //
 	    SuperSolarPanels.protonshard = new ItemRadioactive(InternalName.protonshard, 150, 100);
 	    SuperSolarPanels.reactorCoolantmax = new ItemStack((Item)new ItemReactorHeatStorage(InternalName.reactorCoolantmax, 240000));
 	    SuperSolarPanels.reactorCoolanttwelve = new ItemStack((Item)new ItemReactorHeatStorage(InternalName.reactorCoolanttwelve, 120000));

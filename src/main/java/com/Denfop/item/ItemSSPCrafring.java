@@ -23,8 +23,8 @@ public class ItemSSPCrafring extends Item
     
     public ItemSSPCrafring() {
         this.itemNames = new ArrayList<String>();
-        this.IIconsList = new IIcon[12];
-        this.itemsCount = 11;
+        this.IIconsList = new IIcon[11];
+        this.itemsCount = 10;
         this.setHasSubtypes(true);
         this.setCreativeTab(SuperSolarPanels.tabssp);
         this.setMaxStackSize(64);
@@ -51,7 +51,6 @@ public class ItemSSPCrafring extends Item
         this.itemNames.add("itemUranIngot");
         this.itemNames.add("itemMTCore");
         this.itemNames.add("itemQuantumCore");
-        this.itemNames.add("proton");
     }
     
     @SideOnly(Side.CLIENT)
@@ -67,7 +66,6 @@ public class ItemSSPCrafring extends Item
         this.IIconsList[8] = IIconRegister.registerIcon("supersolarpanel:UranIngot");
         this.IIconsList[9] = IIconRegister.registerIcon("supersolarpanel:MTCore");
         this.IIconsList[10] = IIconRegister.registerIcon("supersolarpanel:QuantumCore");
-        this.IIconsList[11] = IIconRegister.registerIcon("supersolarpanel:proton");
     }
     
     public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {

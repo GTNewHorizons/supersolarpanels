@@ -8,15 +8,22 @@ import ic2.core.Ic2Items;
 import net.minecraft.item.ItemStack;
 
 public class ItemReactorproton extends ItemReactorUranium {
-  public ItemReactorproton(InternalName internalName, int cells) {
-    super(internalName, cells, SuperSolarPanels.ProtonRodCells);
+  private int time;
+private int heat;
+private float power;
+
+public ItemReactorproton(InternalName internalName, int cells,int time,int heat,float power) {
+    super(internalName, cells, time);
+    this.time = time;
+    this.heat=heat;
+    this.power = power;
   }
   
   protected int getFinalHeat(IReactor reactor, ItemStack stack, int x, int y, int heat) {
     if (reactor.isFluidCooled()) {
       float breedereffectiveness = reactor.getHeat() / reactor.getMaxHeat();
       if (breedereffectiveness > 0.5D)
-        heat *= SuperSolarPanels.ProtonRodHeat; 
+        heat *= this.heat; 
     } 
     return heat;
   }
@@ -43,7 +50,7 @@ public class ItemReactorproton extends ItemReactorUranium {
   public boolean acceptUraniumPulse(IReactor reactor, ItemStack yourStack, ItemStack pulsingStack, int youX, int youY, int pulseX, int pulseY, boolean heatrun) {
     if (!heatrun) {
       float breedereffectiveness = reactor.getHeat() / reactor.getMaxHeat();
-      float ReaktorOutput = SuperSolarPanels.ProtonPower * breedereffectiveness + 3.0F;
+      float ReaktorOutput = this.power * breedereffectiveness + 3.0F;
       reactor.addOutput(ReaktorOutput);
     } 
     return true;

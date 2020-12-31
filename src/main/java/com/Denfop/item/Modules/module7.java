@@ -28,8 +28,8 @@ public class module7 extends Item
     
     public module7() {
         this.itemNames = new ArrayList<String>();
-        this.IIconsList = new IIcon[3];
-        this.itemsCount = 2;
+        this.IIconsList = new IIcon[5];
+        this.itemsCount = 4;
         this.setHasSubtypes(true);
         this.setCreativeTab(SuperSolarPanels.tabssp);
         this.setMaxStackSize(64);
@@ -48,6 +48,8 @@ public class module7 extends Item
         this.itemNames.add("module71");
         this.itemNames.add("module72");
         this.itemNames.add("module73");
+        this.itemNames.add("module74");
+        this.itemNames.add("module75");
     }
     
     @SideOnly(Side.CLIENT)
@@ -55,6 +57,8 @@ public class module7 extends Item
         this.IIconsList[0] = IIconRegister.registerIcon("supersolarpanel:module71");
         this.IIconsList[1] = IIconRegister.registerIcon("supersolarpanel:module72");
         this.IIconsList[2] = IIconRegister.registerIcon("supersolarpanel:module73");
+        this.IIconsList[3] = IIconRegister.registerIcon("supersolarpanel:module74");
+        this.IIconsList[4] = IIconRegister.registerIcon("supersolarpanel:module75");
 
     }
   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {

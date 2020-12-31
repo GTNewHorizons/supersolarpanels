@@ -41,6 +41,7 @@ import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.Modules.module7;
 
+import cofh.api.energy.IEnergyHandler;
 import ic2.api.network.INetworkUpdateListener;
 import ic2.api.network.INetworkDataProvider;
 import net.minecraft.inventory.IInventory;
@@ -82,8 +83,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	private module6 panel;
 	public int tier;
 	public int l;
-		
-	
+	public int convertState = 0;
+	 public int elapsedTicks;
 	public boolean wirelles;
 	
 	
@@ -96,11 +97,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public ArrayList<ArrayList<Integer>> xlist = new ArrayList();
 	public ArrayList<ArrayList<Integer>> ylist = new ArrayList();
 	public ArrayList<ArrayList<Integer>> zlist = new ArrayList();
-	
+	 public int outputEnergyBuffer;
 	public ArrayList<TileWirelessStorageBase> listtiles = new ArrayList<TileWirelessStorageBase>();
-	
+	  public long lastTimeStamp;
 	public Map<Double, Double> mapofcoords = new HashMap<Double, Double>();
-	
+	  public int outputEnergyValue;
 	public ArrayList<Double> lista = new ArrayList<Double>();
 	public ArrayList<Double> listb = new ArrayList<Double>();
 	public ArrayList<Double> listc = new ArrayList<Double>();
@@ -108,7 +109,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public Integer targetX;
 	public Integer targetY;
 	public Integer targetZ;
-	
+	  public int inputEnergyBuffer;
 	protected int lasttargetX;
 	protected int lasttargetY;
 	protected int lasttargetZ;
@@ -118,10 +119,18 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	protected int wirelesstransferlimit;
 	
 	public TileWirelessStorageBase twsb;
-	private int o;
-	
-	
-    
+	public int o;
+	public int storage2;
+	  
+	 public int tickRate = 40;  
+	  public int inputEnergyValue;
+	  public int maxStorage2;
+	public int jj; 
+	public int jj1; 
+	public int jj2; 
+	public int jj3;
+	 public int maxRFproduction;
+	  public int tickRateFlush = 5;
     public TileEntitySolarPanel(final String gName,final int tier, final int typeSolar, final int gDay, final int gNight, final int gOutput, final int gmaxStorage) {
     	
     	this.loaded = false;
@@ -139,17 +148,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.k =  gDay;
         this.m = gNight;
         this.l = 0;
+        this.maxStorage2 = this.maxStorage;
         this.targetSet = false;
 		this.wirelles = false;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
         this.production = gOutput;
         this.u = gOutput;
+        this.maxRFproduction = gOutput * 8;
         this.ticker = TileEntitySolarPanel.randomizer.nextInt(this.tickRate());
         this.lastX = this.xCoord;
         this.lastY = this.yCoord;
         this.lastZ = this.zCoord;
-        this.machineTire = tier;
+        this.machineTire = this.o;
         this.tier = tier;
         
         this.lasttargetX = 0;
@@ -211,6 +222,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         if (!this.addedToEnergyNet) {
             this.onLoaded();
         }
+        this.lastTimeStamp = System.currentTimeMillis();
     }
     
     public void updateEntity() {
@@ -244,25 +256,43 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         int genn = 0;
         int maxstorage1 = 0;
         int output = 0;
-        
+        long nowTimeStamp = System.currentTimeMillis();
+        int testStamp = Math.round((float)(nowTimeStamp - this.lastTimeStamp) / 1000.0F * 20.0F);
+        this.elapsedTicks += testStamp;
+        if (this.elapsedTicks == 0)
+          this.elapsedTicks = 1; 
+        if (this.inputEnergyBuffer > 0) {
+          this.inputEnergyValue = Math.round((this.inputEnergyBuffer / this.elapsedTicks));
+        } else {
+          this.inputEnergyValue = 0;
+        } 
+        if (this.outputEnergyBuffer > 0) {
+            this.outputEnergyValue = Math.round((this.outputEnergyBuffer / this.elapsedTicks));
+          } else {
+            this.outputEnergyValue = 0;
+          } 
+        if (this.elapsedTicks >= this.tickRate * this.tickRateFlush) {
+            this.outputEnergyBuffer = 0;
+            this.inputEnergyBuffer = 0;
+            this.elapsedTicks = 0;
+          } 
+          this.lastTimeStamp = System.currentTimeMillis();
         for(int i= 0; i < 9; i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module1)
-        	gend++;
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module2)
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module1) {
+        		
+        	gend++;}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module2) {
         		genn++;
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module3)
-        		maxstorage1++;
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4)
-        		output++;
+        		}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module3) {
+        		maxstorage1++;}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4) {
+        		output++;}
         	
-        	if (this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ic2.api.item.IElectricItem && this.storage > 0.0D) {
-		        sentPacket = ElectricItem.manager.charge(this.chargeSlots[i], this.storage, 2147483647, false, false);
-		        if (sentPacket > 0.0D)
-		          needInvUpdate = true; 
-		        this.storage -= (int)sentPacket;
-		      } 
+        	
         	
         }
+      
         int tierplus = 0;
         int minus = 0;
         for(int i = 0; i < 9;i++) {
@@ -278,13 +308,45 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			minus++;
         		}
         		else if(kk == 3) {
+        			for(int j = 0; j < 9;j++) {
+        			if (this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof ic2.api.item.IElectricItem && this.storage > 0.0D) {
+        		        sentPacket = ElectricItem.manager.charge(this.chargeSlots[j], this.storage, 2147483647, false, false);
+        		        if (sentPacket > 0.0D)
+        		          needInvUpdate = true; 
+        		        this.storage -= (int)sentPacket;
+        		      }     
+        			}
+        		}else if(kk == 4) {
+        			if (this.convertState == 0 && this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord) || this.noSunWorld ) {
+        			      if (this.storage >= 0 && this.storage2 < this.maxStorage2 ) {
+        			        int maxConvertEnergy = this.storage * 8;
+        			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
+        			          int requestRFEnergy = this.maxStorage2 - this.storage2;
+        			          int requestEUEnergy = requestRFEnergy / 8;
+        			        
+        			          this.storage2 += requestRFEnergy;
+        			          this.storage -= requestEUEnergy;
+        			        } else {
+        			          this.storage2 += maxConvertEnergy;
+        			         
+        			        } 
+        			      } 
         			
-        			      
-        			    
+        			for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+        		        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
+        		        if (tile instanceof IEnergyHandler)
+        		          extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), (this.production * 8), true), false), false); 
+        		      } 
+        			
+        			}
         		}
         	}
         }
-        this.o = this.tier + tierplus -  minus;
+        if(this.tier + tierplus -  minus > 0) {
+        this.o = this.tier + tierplus -  minus;}
+        else {
+        	this.o = 0;
+        }
         int m1 = 0; int m2 = 0; int m3 = 0; int m4 = 0; int m5 = 0; int m6 = 0; int m7 = 0; int m8 = 0; int m9 = 0;
         int n1 = 0; int n2 = 0;  int n3 = 0; int n4 = 0;  int n5 = 0; int n6 = 0;  int n7 = 0; int n8 = 0;  int n9 = 0;
         int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
@@ -414,21 +476,27 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 	b9 = module6.Output(kk);}
 
 }
-if((int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend) < 999999999) {
+if((int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend) < 2147000000) {
         	this.genDay  = (int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend);}else {
-        		this.genDay = 999999998;
+        		this.genDay = 2146999999;
         	}
-if((int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn) < 999999999) {
+if((int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn) < 2147000000) {
         	this.genNight  = (int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn);}else {
-        		this.genNight = 999999998;
-        	}
-        if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 999999999) {
-        	this.maxStorage  = (int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);}else {
-        		this.maxStorage = 999999998;
-        	}
-        if((int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 999999999)	{
+        		this.genNight = 2146999999;
+        	}//
+       
+        
+        if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 0) {
+    		this.maxStorage = 2146999999;
+    	}else if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) > 2147000000){
+    		this.maxStorage = 2146999999;
+    	}else {
+    		this.maxStorage = (int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);
+    	}
+        //
+        if((int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 2147000000)	{
         this.production  = (int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);}else {
-        	this.production = 999999998;
+        	this.production = 2146999999;
         }
        
 
@@ -580,7 +648,18 @@ if(solarType == 7) {
 	}
 return this.generating = 0;
     }
- 
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+        if (this.convertState == 0 && this.storage2 > 0) {
+          int energyExtracted = Math.min(this.storage2, maxExtract);
+          if (!simulate) {
+            this.storage2 -= energyExtracted;
+            this.outputEnergyBuffer += energyExtracted;
+          } 
+          return energyExtracted;
+        } 
+        if (this.convertState == 0);
+        return 0;
+      }
     public void updateVisibility() {
         
        
@@ -663,119 +742,68 @@ return this.generating = 0;
             }   
       }
 
-    public void readFromNBT(final NBTTagCompound nbttagcompound) {
-        super.readFromNBT(nbttagcompound);
-        this.storage = nbttagcompound.getInteger("storage");
-        this.lastX = nbttagcompound.getInteger("lastX");
-        this.lastY = nbttagcompound.getInteger("lastY");
-        this.lastZ = nbttagcompound.getInteger("lastZ");
-        this.solarType = nbttagcompound.getInteger("solarType");
-        this.genDay = nbttagcompound.getInteger("genDay");
-        this.genNight = nbttagcompound.getInteger("genNight");
-     
-        this.production = nbttagcompound.getInteger("production");
-        
-        final NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-    	for(int l = 0,  m = 0, n = 0; l < this.lista.size() && m < this.listb.size() && n < this.listc.size(); l++, m++, n++) {
-			NBTTagCompound com = new NBTTagCompound();
-			
-			if(this.worldObj.getTileEntity((int)this.mapofcoords.get(this.lista.get(l)).doubleValue(), (int)this.mapofcoords.get(this.listb.get(m)).doubleValue(), (int)this.mapofcoords.get(this.listc.get(n)).doubleValue()) != null) {
-			
-			com.setDouble("A", this.lista.get(l));
-			com.setDouble("B", this.listb.get(m));
-			com.setDouble("C", this.listc.get(n));
-			
-			com.setDouble("X", this.mapofcoords.get(this.lista.get(l))); // System.out.println("X value written: " + this.mapofcoords.get(this.lista.get(l)));
-			com.setDouble("Y", this.mapofcoords.get(this.listb.get(m))); // System.out.println("Y value written: " + this.mapofcoords.get(this.listb.get(m)));
-			com.setDouble("Z", this.mapofcoords.get(this.listc.get(n))); // System.out.println("Z value written: " + this.mapofcoords.get(this.listc.get(n)));
-			
-		//	System.out.println("A value written: " + this.lista.get(l));
-		//	System.out.println("B value written: " + this.listb.get(m));
-		//	System.out.println("C value written: " + this.listc.get(n));
-			
-			nbttaglist.appendTag(com);
-			
-			}
-		}
-		
-		
-		nbttagcompound.setTag("positions", nbttaglist);
-		
-		
-		
-	nbttagcompound.setDouble("energy", this.storage);
-	nbttagcompound.setBoolean("targetset", this.targetSet);
-	nbttagcompound.setBoolean("isconnected", this.isconnected);
-        this.chargeSlots = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            final NBTTagCompound nbttagcompound2 = nbttaglist.getCompoundTagAt(i);
-            final int j = nbttagcompound2.getByte("Slot") & 0xFF;
-            
-            if (j >= 0 && j < this.chargeSlots.length) {
-                this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound2);
-            }
-            
-        }
-      
-    }
-    
-    public void writeToNBT(final NBTTagCompound nbttagcompound) {
-        super.writeToNBT(nbttagcompound);
-        
-        nbttagcompound.setInteger("storage", this.storage);
-        nbttagcompound.setInteger("lastX", this.lastX);
-        nbttagcompound.setInteger("lastY", this.lastY);
-        nbttagcompound.setInteger("lastZ", this.lastZ);
-        nbttagcompound.setInteger("genDay",this.genDay);
-        nbttagcompound.setInteger("genNight",this.genNight);
-        NBTTagList nbttaglist = (NBTTagList) nbttagcompound.getTag("positions");
-		 
-		 for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			 NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
-			 
-			 
-			 this.mapofcoords.put(nbttagcompound1.getDouble("A"), nbttagcompound1.getDouble("X"));
-			 this.mapofcoords.put(nbttagcompound1.getDouble("B"), nbttagcompound1.getDouble("Y"));
-			 this.mapofcoords.put(nbttagcompound1.getDouble("C"), nbttagcompound1.getDouble("Z"));
-			 
-			 
-			 this.lista.add(nbttagcompound1.getDouble("A"));
-			 this.listb.add(nbttagcompound1.getDouble("B"));
-			 this.listc.add(nbttagcompound1.getDouble("C"));
-			 
-			
-			 
-		//	 System.out.println("X value read: " + nbttagcompound1.getInteger("X"));
-		//	 System.out.println("Y value read: " + nbttagcompound1.getInteger("Y"));
-		//	 System.out.println("Z value read: " + nbttagcompound1.getInteger("Z"));
-			 
-		//	 System.out.println("A value read: " + nbttagcompound1.getInteger("A"));
-		//	 System.out.println("B value read: " + nbttagcompound1.getInteger("B"));
-		//	 System.out.println("C value read: " + nbttagcompound1.getInteger("C"));
-			 
-			 
-		 }
-		 
-		 this.storage = (int) nbttagcompound.getDouble("energy");
-		 this.targetSet = nbttagcompound.getBoolean("targetset");
-		 this.isconnected = nbttagcompound.getBoolean("isconnected");
-         nbttagcompound.setInteger("production",this.production);
-        nbttagcompound.setInteger("solarType", this.solarType);
-        for (int i = 0; i < this.chargeSlots.length; ++i) {
-        	  final NBTTagCompound nbttagcompound2 = new NBTTagCompound();
-            if (this.chargeSlots[i] != null) {
-            	if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
-            		nbttagcompound.setBoolean("RenderNewTexture", true);
-            		nbttagcompound.setBoolean("modules",true);
-            	}
-              
-                nbttagcompound2.setByte("Slot", (byte)i);
-                this.chargeSlots[i].writeToNBT(nbttagcompound2);
-                nbttaglist.appendTag((NBTBase)nbttagcompound2);
-            }
-        }
-        nbttagcompound.setTag("Items", (NBTBase)nbttaglist);
-    }
+      public void readFromNBT(NBTTagCompound nbttagcompound) {
+    	    super.readFromNBT(nbttagcompound);
+    	    this.storage = nbttagcompound.getInteger("storage");
+    	    this.lastX = nbttagcompound.getInteger("lastX");
+    	    this.lastY = nbttagcompound.getInteger("lastY");
+    	    this.lastZ = nbttagcompound.getInteger("lastZ");
+    	    NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+    	    this.chargeSlots = new ItemStack[getSizeInventory()];
+    	    for (int i = 0; i < nbttaglist.tagCount(); i++) {
+    	      NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+    	      int j = nbttagcompound1.getByte("Slot") & 0xFF;
+    	      if (j >= 0 && j < this.chargeSlots.length)
+    	        this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1); 
+    	    } 
+    	    NBTTagList nbttaglist1 = (NBTTagList)nbttagcompound.getTag("positions");
+    	    for (int i = 0; i < nbttaglist1.tagCount(); i++) {
+    	      NBTTagCompound nbttagcompound1 = nbttaglist1.getCompoundTagAt(i);
+    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("A")), Double.valueOf(nbttagcompound1.getDouble("X")));
+    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("B")), Double.valueOf(nbttagcompound1.getDouble("Y")));
+    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("C")), Double.valueOf(nbttagcompound1.getDouble("Z")));
+    	      this.lista.add(Double.valueOf(nbttagcompound1.getDouble("A")));
+    	      this.listb.add(Double.valueOf(nbttagcompound1.getDouble("B")));
+    	      this.listc.add(Double.valueOf(nbttagcompound1.getDouble("C")));
+    	    } 
+    	    this.targetSet = Boolean.valueOf(nbttagcompound.getBoolean("targetset"));
+    	    this.isconnected = nbttagcompound.getBoolean("isconnected");
+    	  }
+    	  
+    	  public void writeToNBT(NBTTagCompound nbttagcompound) {
+    	    super.writeToNBT(nbttagcompound);
+    	    NBTTagList nbttaglist = new NBTTagList();
+    	    nbttagcompound.setInteger("storage", this.storage);
+    	    nbttagcompound.setInteger("lastX", this.lastX);
+    	    nbttagcompound.setInteger("lastY", this.lastY);
+    	    nbttagcompound.setInteger("lastZ", this.lastZ);
+    	    for (int i = 0; i < this.chargeSlots.length; i++) {
+    	      if (this.chargeSlots[i] != null) {
+    	        NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+    	        nbttagcompound1.setByte("Slot", (byte)i);
+    	        this.chargeSlots[i].writeToNBT(nbttagcompound1);
+    	        nbttaglist.appendTag((NBTBase)nbttagcompound1);
+    	      } 
+    	    } 
+    	    nbttagcompound.setTag("Items", (NBTBase)nbttaglist);
+    	    NBTTagList list1 = new NBTTagList();
+    	    for (int l = 0, m = 0, n = 0; l < this.lista.size() && m < this.listb.size() && n < this.listc.size(); l++, m++, n++) {
+    	      NBTTagCompound com = new NBTTagCompound();
+    	      if (this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(this.lista.get(l))).doubleValue(), (int)((Double)this.mapofcoords.get(this.listb.get(m))).doubleValue(), (int)((Double)this.mapofcoords.get(this.listc.get(n))).doubleValue()) != null) {
+    	        com.setDouble("A", ((Double)this.lista.get(l)).doubleValue());
+    	        com.setDouble("B", ((Double)this.listb.get(m)).doubleValue());
+    	        com.setDouble("C", ((Double)this.listc.get(n)).doubleValue());
+    	        com.setDouble("X", ((Double)this.mapofcoords.get(this.lista.get(l))).doubleValue());
+    	        com.setDouble("Y", ((Double)this.mapofcoords.get(this.listb.get(m))).doubleValue());
+    	        com.setDouble("Z", ((Double)this.mapofcoords.get(this.listc.get(n))).doubleValue());
+    	        list1.appendTag((NBTBase)com);
+    	      } 
+    	    } 
+    	    nbttagcompound.setTag("positions", (NBTBase)list1);
+    	    nbttagcompound.setDouble("energy", this.storage);
+    	    nbttagcompound.setBoolean("targetset", this.targetSet.booleanValue());
+    	    nbttagcompound.setBoolean("isconnected", this.isconnected);
+    	  }
     
     public boolean isAddedToEnergyNet() {
         return this.addedToEnergyNet;
@@ -785,9 +813,10 @@ return this.generating = 0;
         return this.production;
     }
     
-    public int gaugeEnergyScaled(final int i) {
+    public float gaugeEnergyScaled(final float i) {
     	  int tierplus = 0;
           int minus = 0;
+          int gg = 0;
           for(int j = 0; j < 9;j++) {
           	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module7) {
           		int kk = chargeSlots[j].getItemDamage();
@@ -797,7 +826,27 @@ return this.generating = 0;
           		}
           		else if(kk == 2) {
           			minus++;
-          		}
+          		}else if(kk == 4) {
+        			if (this.convertState == 0 && this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord) || this.noSunWorld ) {
+        				gg = 1;
+      			      if (this.storage >= 0 && this.storage2 < this.maxStorage2) {
+      			        int maxConvertEnergy = this.storage * 8;
+      			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
+      			          int requestRFEnergy = this.maxStorage2 - this.storage2;
+      			          int requestEUEnergy = requestRFEnergy / 8;
+      			          
+      			          this.storage2 += requestRFEnergy;
+      			          this.storage -= requestEUEnergy;
+      			        } else {
+      			          this.storage2 += maxConvertEnergy;
+      			          
+      			        } 
+      			      } 
+        			}
+      			
+      			
+      			
+      		}
           		
           	}
           }
@@ -878,10 +927,15 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 	v9 = module6.storage(kk);}
 
 }
-         return (int)( this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
+if(gg != 1) {
+         return  (float) (this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
+}else {
+	
+} return  this.storage2 * i /this.maxStorage2;
+
+}
         
-        
-    }
+    
     
     public int gaugeFuelScaled(final int i) {
         return i;
@@ -903,7 +957,7 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
     }
     
     public int tickRate() {
-        return 128;
+        return 40;
     }
     
     @Override

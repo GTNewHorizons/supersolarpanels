@@ -9,7 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 public class TileEntitySintezator extends TileSintezator 
 {
     public TileEntitySintezator() {
-        super("BlockSitezator.name",11);
+        super("blockSintezator.name",11);
     }
     
     @Override

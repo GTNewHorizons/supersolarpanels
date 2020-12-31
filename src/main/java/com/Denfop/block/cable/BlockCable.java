@@ -8,7 +8,9 @@ import ic2.api.Direction;
 import ic2.api.energy.EnergyNet;
 import ic2.api.event.PaintEvent;
 import ic2.api.event.RetextureEvent;
+import ic2.core.IC2Potion;
 import ic2.core.block.BlockTextureStitched;
+import ic2.core.item.armor.ItemArmorHazmat;
 import ic2.core.item.tool.ItemToolCutter;
 import ic2.core.util.AabbUtil;
 import ic2.core.util.StackUtil;
@@ -24,12 +26,14 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -41,6 +45,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlockMultiID;
+import com.Denfop.item.armour.ItemArmorQuantumSuit1;
 import com.Denfop.item.base.ItemBlockIC2;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
@@ -77,7 +82,13 @@ public class BlockCable extends BlockMultiID {
   public String getTextureFolder(int id) {
     return null;
   }
-  
+  public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, EntityLivingBase p_149670_5_)
+  {
+  	if(!ItemArmorHazmat.hasCompleteHazmat( p_149670_5_) ||  ItemArmorQuantumSuit1.hasCompleteHazmat( p_149670_5_))
+  		return;
+  	else 
+      p_149670_5_.attackEntityFrom(DamageSource.cactus , 4.0F);
+  }
   public String getTextureName(int index) {
 	    Item item = SuperSolarPanels.copperCableItem.getItem();
 	    ItemStack itemStack = new ItemStack((Block)this, 1, index);
@@ -234,6 +245,12 @@ public class BlockCable extends BlockMultiID {
       TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
       if (te == null)
         return false; 
+      if (player instanceof EntityLivingBase) {
+          EntityLivingBase entityLiving = (EntityLivingBase)player;
+          if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving))
+            IC2Potion.radiation.applyTo(entityLiving, 200, 100); 
+        } 
+      
       if ((StackUtil.equals((Block)Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte)2)) || (cur.getItem() == SuperSolarPanels.constructionFoam.getItem() && te.foamed == 0 && te.changeFoam((byte)1))) {
         if (SuperSolarPanels.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
           cur.stackSize--;

@@ -45,11 +45,11 @@ public class ItemNanoSaber extends ItemElectricTool {
     this.tier = SuperSolarPanels.tier;
   }
   public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + " " + SuperSolarPanels.spectralsaberactive);
+  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + SuperSolarPanels.spectralsaberactive);
       
       info.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + this.tier);
-      info.add(StatCollector.translateToLocal("ssp.maxCharge") + " " + this.maxCharge + " EU");
-      info.add(StatCollector.translateToLocal("ssp.transferLimit") + " " + this.transferLimit);
+      info.add(StatCollector.translateToLocal("ssp.maxCharge") + this.maxCharge + " EU");
+      info.add(StatCollector.translateToLocal("ssp.transferLimit") + this.transferLimit);
  
   }
   public void SubItems(Item item, CreativeTabs tabs, List<ItemStack> itemList) {
@@ -90,7 +90,7 @@ public class ItemNanoSaber extends ItemElectricTool {
   }
   
   public Multimap getAttributeModifiers(ItemStack stack) {
-    int dmg = SuperSolarPanels.spectralsabernotactive;
+    int dmg = SuperSolarPanels.spectralsabernotactive1;
     if (ElectricItem.manager.canUse(stack, 400.0D)) {
       NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
       if (nbtData.getBoolean("active"))

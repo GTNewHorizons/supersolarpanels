@@ -47,10 +47,10 @@ public class ItemChargepadBlock extends ItemBlockIC2 {
     int meta = itemStack.getItemDamage();
     switch (meta) {
       case 0:
-        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") +  SuperSolarPanels.enegry1 + " EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + SuperSolarPanels.storage1 +" EU");
+        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output")+ " " +  SuperSolarPanels.enegry1 + " EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + SuperSolarPanels.storage1 +" EU");
         break;
       case 1:
-        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + SuperSolarPanels.enegry2 + " EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + SuperSolarPanels.storage2 + " EU");
+        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output")+ " " + SuperSolarPanels.enegry2 + " EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + SuperSolarPanels.storage2 + " EU");
         break;
     } 
     switch (meta) {

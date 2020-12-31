@@ -1,6 +1,8 @@
 package com.Denfop.integration.Avaritia;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.integration.Botania.TileEntityElementumSolarPanel;
+import com.Denfop.integration.Botania.TileEntityManasteelSolarPanel;
 import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.integration.DE.SSPDEItem;
 import com.Denfop.integration.DE.blockDESolarPanel;
@@ -21,7 +23,9 @@ public class AvaritiaIntegration {
 		GameRegistry.registerBlock(blockAvSolarPanel = (Block)new blockAvSolarPanel(), (Class)ItemAvSolarPanel.class, "blockAvSolarPanel");
 		 GameRegistry.registerItem( neutroncore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("neutroncore").setTextureName("supersolarpanel:neutroncore"),"neutroncore");    
 		 GameRegistry.registerItem( infinitycore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("infinitycore").setTextureName("supersolarpanel:infinitycore"),"infinitycore");    
-		 
+	     GameRegistry.registerTileEntity((Class)TileEntityNeutronSolarPanel.class, "Neutron Solar Panel Avaritia");
+	      GameRegistry.registerTileEntity((Class)TileEntityInfinitySolarPanel.class, "Infinity Solar Panel");
+	
 	}
 	public static void recipe() {
 		 GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SuperSolarPanels.blockSSPSolarPanel, 1,3) ,'A',neutroncore});

@@ -2,6 +2,7 @@ package com.Denfop.integration.DE;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.base.SSPItem;
+import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
 import com.brandon3055.draconicevolution.common.ModItems;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 
@@ -86,10 +87,12 @@ public static void Recipes() {
     
     GameRegistry.addRecipe(new ItemStack(ChaosDestructionStaff, 1), new Object[] { "CDC","ACE","CBC", 'B', new ItemStack(ChaosSword, 1) ,'A', ChaosPickaxe,'D',ModItems.chaoticCore,'C',chaosingot,'E', ChaosShovel});
     GameRegistry.addRecipe(new ItemStack(ChaosFluxCapacitor, 1), new Object[] { "CDC","CAC","CBC", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicFluxCapacitor,'D',ModItems.chaoticCore,'C',chaosingot});
-    GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SuperSolarPanels.blockAdvSolarPanel, 1) ,'A',ModItems.wyvernCore});
+    GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SuperSolarPanels.blockSSPSolarPanel, 1) ,'A',ModItems.wyvernCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,1), new Object[] { "AB ","BAB"," BA", 'B', new ItemStack(blockDESolarPanel, 1,0) ,'A',ModItems.awakenedCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,2), new Object[] { "ABC","BAB","CBA", 'B', new ItemStack(blockDESolarPanel, 1,1) ,'A',ModItems.chaoticCore , 'C',ChaosEnergyCore});
-    
+    GameRegistry.registerTileEntity((Class)TileEntityDraconSolarPanel.class, "Dracon Solar Panel");
+    GameRegistry.registerTileEntity((Class)TileEntityAwakenedSolarPanel.class, "Awakened Solar Panel");
+    GameRegistry.registerTileEntity((Class)TileEntityChaosSolarPanel.class, "Chaos Solar Panel");
 }
 }
 

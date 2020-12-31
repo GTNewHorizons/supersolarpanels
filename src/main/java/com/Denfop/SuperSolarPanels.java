@@ -25,10 +25,12 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Recipes.AlloySmelterRecipe;
 import com.Denfop.Recipes.BasicRecipe;
 import com.Denfop.Recipes.CannerRecipe;
 import com.Denfop.Recipes.CompressorRecipe;
 import com.Denfop.Recipes.FurnaceRecipes;
+import com.Denfop.Recipes.MaceratorRecipe;
 import com.Denfop.api.TickHandlerWV;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
 import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
@@ -65,6 +67,7 @@ import com.Denfop.block.expgen.ItemBlockEG;
 import com.Denfop.block.expgen.TextureHooks;
 import com.Denfop.block.expgen.TileXPGenPublic;
 import com.Denfop.block.mechanism.BlockMachine;
+import com.Denfop.block.mechanism.TileEntityAlloySmelter;
 import com.Denfop.block.moleculartransformer.BlockMolecularTransformer;
 import com.Denfop.block.neutroniumgenerator.Blockbitgen;
 import com.Denfop.block.ore.BlockSSPCoal;
@@ -430,7 +433,7 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Block magnesiumore;
 		public static Block mikhail_ore;
 		public static Block spinelore;
-		public boolean AvaritiaLoaded;
+		public static boolean AvaritiaLoaded;
 		public static boolean BotaniaLoaded;
 		public static  Item ultDDrill;
 		public ItemStack module61;
@@ -586,17 +589,42 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Item itemSSP;
 		public static BlockMachine machine1;
 		public static Block blocksintezator;
-		//
-
 		public static boolean displayHud;
 		public static int hudPos;
+		public static Item magnesium_ingot;
+		public static Item magnesium_plate;
+		public static Item magnesium_nugget;
+		public static Block toriyore;
+		public static Item toriy;
+		public static Item chromiumcrushedore;
+		public static Item electriumdust;
+		public static Item electriumingot;
+		public static Item electriumplate;
+		public static Item blast;
+		public static Item invardust;
+		public static Item invaringot;
+		public static Item invarplate;
+		public static Item nickel;
+		public static Item nickelplate;
+		public static Item michalovcrushedore;
+		public static Block nicelore;
+		public static Block magnetitore;
+		public static ItemStack reactorDepletedtoriySimple;
+		public static ItemStack reactorDepletedtoriyDual;
+		public static ItemStack reactorDepletedtoriyQuad;
+		public static ItemStack reactortoriySimple;
+		public static ItemStack reactortoriyDual;
+		public static ItemStack reactortoriyQuad;
+		public static Item iridiumcrushedore;
+		public static Item wolframcrushedore;
+		public static Item magnesiumcrushedore;
+		public static Item nickelcrushedore;
+		public static Item platiumcrushedore;
+		public static Item spinelcrushedore;
 		public static class FluidXP {
 			public static Fluid xpJuice = new Fluid("xpjuice.wv");
 			
 		}
-		
-		
-		//
 	    public static final String CATEGORY_RECIPES = "recipes settings";
 	    public static final String CATEGORY_QGENERATOR = "quantum generator";
 	 
@@ -683,6 +711,7 @@ public class SuperSolarPanels implements IWorldGenerator
        TileEntityDoubleMetalFormer.init();
        TileEntityTripleMetalFormer.init();
        TileEntityDoubleExtractor.init();
+       TileEntityAlloySmelter.init();
     
 		 if (!Loader.isModLoaded("OpenBlocks")) {
 		 FluidRegistry.registerFluid(FluidXP.xpJuice);
@@ -739,11 +768,14 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
     private void generateSurface(World world, Random random, int x, int y) {
     	 this.addOreSpawn(SuperSolarPanels.mikhail_ore, world, random, x, y, 16, 16, 3+random.nextInt(2), 3, 10, 60);
 	        this.addOreSpawn(SuperSolarPanels.spinelore, world, random, x, y, 16, 16, 3+random.nextInt(2), 1, 20, 30);
-	        this.addOreSpawn(SuperSolarPanels.platiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 2, 0, 20);
+	        this.addOreSpawn(SuperSolarPanels.platiumore, world, random, x, y, 16, 16, 1+random.nextInt(2), 2, 0, 20);
 	        this.addOreSpawn(SuperSolarPanels.wolframore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 10, 60);
 	        this.addOreSpawn(SuperSolarPanels.chromiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 30, 60);
-	        this.addOreSpawn(SuperSolarPanels.iridiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 2, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.iridiumore, world, random, x, y, 16, 16, 1+random.nextInt(1), 2, 10, 60);
 	        this.addOreSpawn(SuperSolarPanels.magnesiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.nicelore, world, random, x, y, 16, 16, 2+random.nextInt(1), 8, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.toriyore, world, random, x, y, 16, 16, 2+random.nextInt(1), 8, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.magnetitore, world, random, x, y, 16, 16, 2+random.nextInt(1), 10, 10, 70);
 
     }
     
@@ -856,10 +888,12 @@ if(DraconicLoaded && Draconic == true)
         DraconicIntegration.Recipes();
 if(AvaritiaLoaded && Avaritia == true)
 	AvaritiaIntegration.recipe();
-
+AlloySmelterRecipe.recipe();
 CompressorRecipe.recipe();
 CannerRecipe.recipe();
-FurnaceRecipes.recipe();  }
+FurnaceRecipes.recipe();  
+MaceratorRecipe.recipe();
+    }
 
       
     

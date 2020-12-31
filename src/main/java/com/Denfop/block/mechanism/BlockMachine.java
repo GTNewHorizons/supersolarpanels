@@ -78,6 +78,7 @@ public class BlockMachine extends BlockMultiID {
     GameRegistry.registerTileEntity(TileEntityUltimateMatter.class, "Mass Fabricator Ultimate");
     GameRegistry.registerTileEntity(TileEntityDoubleMetalFormer.class, "Metal Former Double");
     GameRegistry.registerTileEntity(TileEntityTripleMetalFormer.class, "Metal Former Triple");
+    GameRegistry.registerTileEntity(TileEntityAlloySmelter.class, "AlloySmelter");
   }
   
   public String getTextureFolder(int id) {
@@ -132,6 +133,8 @@ public class BlockMachine extends BlockMultiID {
           return (Class)TileEntityDoubleMetalFormer.class;
       case 12:
           return (Class)TileEntityTripleMetalFormer.class;
+      case 13:
+    	  return (Class)TileEntityAlloySmelter.class;
     	  
       
     } 
@@ -139,7 +142,7 @@ public class BlockMachine extends BlockMultiID {
   }
   private IIcon[][] iconBuffer;
   public void registerBlockIcons(final IIconRegister par1IconRegister) {
-      this.iconBuffer = new IIcon[13][12];
+      this.iconBuffer = new IIcon[14][12];
       this.iconBuffer[1][0] = par1IconRegister.registerIcon("supersolarpanel:blockMacerator");
       this.iconBuffer[1][1] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_1");
       this.iconBuffer[1][2] = par1IconRegister.registerIcon("supersolarpanel:blockMacerator_1");
@@ -297,7 +300,18 @@ public class BlockMachine extends BlockMultiID {
       this.iconBuffer[12][11] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2"); 
 	 
 
-
+      this.iconBuffer[13][0] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_1");
+      this.iconBuffer[13][1] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_1");
+      this.iconBuffer[13][2] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
+      this.iconBuffer[13][3] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
+      this.iconBuffer[13][4] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2");
+      this.iconBuffer[13][5] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
+      this.iconBuffer[13][6] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_2");
+      this.iconBuffer[13][7] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_2");
+      this.iconBuffer[13][8] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2");
+      this.iconBuffer[13][9] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
+      this.iconBuffer[13][10] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_3");
+      this.iconBuffer[13][11] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2"); 
 
   }
   

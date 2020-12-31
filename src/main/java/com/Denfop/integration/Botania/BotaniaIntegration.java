@@ -3,6 +3,9 @@ package com.Denfop.integration.Botania;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.integration.DE.SSPDEItem;
+import com.Denfop.integration.DE.TileEntityAwakenedSolarPanel;
+import com.Denfop.integration.DE.TileEntityChaosSolarPanel;
+import com.Denfop.integration.DE.TileEntityDraconSolarPanel;
 import com.Denfop.integration.DE.blockDESolarPanel;
 import com.Denfop.item.base.SSPItem;
 import com.Denfop.utils.StackUtils;
@@ -56,7 +59,10 @@ public class BotaniaIntegration {
 		 GameRegistry.registerItem( rune_night = new SSPItem().setMaxStackSize(64).setUnlocalizedName("rune_night").setTextureName("supersolarpanel:rune_night"),"rune_night");    
 		 GameRegistry.registerItem( rune_energy = new SSPItem().setMaxStackSize(64).setUnlocalizedName("rune_energy").setTextureName("supersolarpanel:rune_energy"),"rune_energy");    
 	      GameRegistry.registerItem(teraDDrill = new Terradrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("teraDDrill"), "teraDDrill");
-	      
+	      GameRegistry.registerTileEntity((Class)TileEntityManasteelSolarPanel.class, "Manasteel Solar Panel");
+	      GameRegistry.registerTileEntity((Class)TileEntityElementumSolarPanel.class, "Elementum Solar Panel");
+	      GameRegistry.registerTileEntity((Class)TileEntityTerrastelSolarPanel.class, "Terrastel Solar Panel");
+
 	 
 	}
 	
@@ -71,7 +77,7 @@ public class BotaniaIntegration {
 		 GameRegistry.addRecipe(new ItemStack(terrasteel_core), new Object[] { "KLM", "DOD", "CHC",  'C',  terrasteel_plate, 'D' ,SuperSolarPanels.itemIrradiantGlassPane, 'O' ,terrasteel_plate,'L',IC2Items.getItem("advancedAlloy"),'K',rune_night,'M',rune_sun,'H',rune_energy});
 		 GameRegistry.addRecipe(new ItemStack(elementium_core), new Object[] { "KLM", "DOD", "CHC",  'C',  elementium_plate, 'D' ,SuperSolarPanels.photoniy_ingot, 'O' ,manasteel_core,'L',IC2Items.getItem("advancedCircuit"),'K',rune_night,'M',rune_sun,'H',rune_energy});
 		 GameRegistry.addRecipe(new ItemStack(manasteel_core), new Object[] { "KLM", "DOD", "CHC",  'C',  manasteel_plate, 'D' ,SuperSolarPanels.photoniy_ingot, 'O' ,SuperSolarPanels.advanced_core ,'L',IC2Items.getItem("advancedCircuit"),'K',rune_night,'M',rune_sun,'H',rune_energy});
-		 GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 0), new Object[] { "BBB", "BAB", "BBB", 'A',  manasteel_core, 'B' , new ItemStack(SuperSolarPanels.blockAdvSolarPanel, 1, 1)}); 
+		 GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 0), new Object[] { "BBB", "BAB", "BBB", 'A',  manasteel_core, 'B' , new ItemStack(SuperSolarPanels.blockSSPSolarPanel, 1, 0)}); 
 		 GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 1), new Object[] { "BBB", "BAB", "BBB", 'A',  elementium_core, 'B' ,new ItemStack(blockBotSolarPanel, 1, 0)}); 
 		 GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 2), new Object[] { "BBB", "BAB", "BBB", 'A',  terrasteel_core, 'B' ,new ItemStack(blockBotSolarPanel, 1, 1)}); 
 

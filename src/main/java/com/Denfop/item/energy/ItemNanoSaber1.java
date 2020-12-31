@@ -38,16 +38,16 @@ public class ItemNanoSaber1 extends ItemElectricTool {
   public ItemNanoSaber1(InternalName internalName, int operationEnergyCost, ItemElectricTool.HarvestLevel harvestLevel) {
     super(internalName, operationEnergyCost, harvestLevel, EnumSet.of(ItemElectricTool.ToolClass.Sword));
     this.soundTicker = 0;
-    this.maxCharge = SuperSolarPanels.MaxChangesaber;
-    this.transferLimit = SuperSolarPanels.transferLimitsaber;
-    this.tier = SuperSolarPanels.tiersaber;
+    this.maxCharge = SuperSolarPanels.maxCharge1;
+    this.transferLimit = SuperSolarPanels.transferLimit1;
+    this.tier = SuperSolarPanels.tier1;
   }
   public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + " " + SuperSolarPanels.Quantumsaberactive);
+  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + SuperSolarPanels.spectralsaberactive1);
       
       info.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + this.tier);
-      info.add(StatCollector.translateToLocal("ssp.maxCharge") + " " + this.maxCharge + " EU");
-      info.add(StatCollector.translateToLocal("ssp.transferLimit") + " " + this.transferLimit);
+      info.add(StatCollector.translateToLocal("ssp.maxCharge") + this.maxCharge + " EU");
+      info.add(StatCollector.translateToLocal("ssp.transferLimit") + this.transferLimit);
  
   }
   @SideOnly(Side.CLIENT)
@@ -195,7 +195,7 @@ public class ItemNanoSaber1 extends ItemElectricTool {
   
   private static void updateAttributes(NBTTagCompound nbtData) {
     boolean active = nbtData.getBoolean("active");
-    int damage = active ? SuperSolarPanels.Quantumsaberactive : SuperSolarPanels.Quantumsabernotactive;
+    int damage = active ? SuperSolarPanels.spectralsaberactive1 : SuperSolarPanels.spectralsabernotactive1;
     NBTTagCompound entry = new NBTTagCompound();
     entry.setString("AttributeName", SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
     entry.setLong("UUIDMost", field_111210_e.getMostSignificantBits());

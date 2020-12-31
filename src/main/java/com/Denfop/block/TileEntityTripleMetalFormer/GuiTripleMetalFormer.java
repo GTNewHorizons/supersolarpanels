@@ -68,7 +68,7 @@ public class GuiTripleMetalFormer extends GuiIC2 {
     int chargeLevel = (int)(14.0F * ((TileEntityTripleMetalFormer)this.container.base).getChargeLevel());
     int progress = (int)(48.0F * ((TileEntityTripleMetalFormer)this.container.base).getProgress());
     if (chargeLevel > 0)
-      drawTexturedModalRect(this.xoffset + 17, this.yoffset + 50 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
+      drawTexturedModalRect(this.xoffset + 17+1, this.yoffset + 50 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
     if (progress > 0)
       drawTexturedModalRect(this.xoffset + 51, this.yoffset + 37, 177, 14, progress, 13); 
   }

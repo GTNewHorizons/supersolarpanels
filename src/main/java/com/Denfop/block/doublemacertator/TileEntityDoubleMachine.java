@@ -39,7 +39,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
   
   public int operationsPerTick;
   
-  protected double guiProgress;
+  protected float guiProgress;
   
   public AudioSource audioSource;
   
@@ -83,7 +83,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     nbttagcompound.setShort("progress", this.progress);
   }
   
-  public double getProgress() {
+  public float getProgress() {
     return this.guiProgress;
   }
   
@@ -189,7 +189,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
   public void setOverclockRates() {
     this.upgradeSlot.onChanged();
 
-    double previousProgress = this.progress / this.operationLength;
+    float previousProgress = this.progress / this.operationLength;
     this.guiProgress = previousProgress;
     double stackOpLen = (this.defaultOperationLength + this.upgradeSlot.extraProcessTime) * 64.0D * this.upgradeSlot.processTimeMultiplier;
     this.operationsPerTick = (int)Math.min(Math.ceil(64.0D / stackOpLen), 2.147483647E9D);

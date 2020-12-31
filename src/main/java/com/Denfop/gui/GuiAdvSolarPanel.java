@@ -4,7 +4,10 @@ package com.Denfop.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Config;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.module1;
+import com.Denfop.item.Modules.module2;
 import com.Denfop.item.Modules.module3;
 import com.Denfop.item.Modules.module4;
 import com.Denfop.item.Modules.module5;
@@ -41,16 +44,25 @@ public class GuiAdvSolarPanel extends GuiContainer
         this.xSize = 194;
         this.ySize = 168;
     }
-    
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
     protected void drawGuiContainerForegroundLayer(final int par1, final int par2) {
         final String formatPanelName = I18n.format(this.tileentity.panelName, new Object[0]);
         final int nmPos = (this.xSize - this.fontRendererObj.getStringWidth(formatPanelName)) / 2;
         this.fontRendererObj.drawString(formatPanelName, nmPos, 7, 7718655);
-        final String storageString = I18n.format("gui.AdvancedSolarPanel.storage", new Object[0]) + ": ";
-        final String maxOutputString = I18n.format("gui.AdvancedSolarPanel.maxOutput", new Object[0]) + ": ";
-        final String generatingString = I18n.format("gui.AdvancedSolarPanel.generating", new Object[0]) + ": ";
-        final String energyPerTickString = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]);
-        
+        final String storageString = I18n.format("gui.SuperSolarPanel.storage", new Object[0]) + ": ";
+        final String maxOutputString = I18n.format("gui.SuperSolarPanel.maxOutput", new Object[0]) + ": ";
+        final String generatingString = I18n.format("gui.SuperSolarPanel.generating", new Object[0]) + ": ";
+        final String energyPerTickString = I18n.format("gui.SuperSolarPanel.energyPerTick", new Object[0]);
+        final String tierString = I18n.format("gui.ssp.tier", new Object[0]) + ": ";
+        final String  ModulesString= I18n.format("ssp.genday", new Object[0]);
+        final String  ModulesString1= I18n.format("ssp.gennight", new Object[0]);
+        final String  ModulesString2= I18n.format("ssp.storage", new Object[0]);
+        final String  ModulesString3= I18n.format("ssp.output", new Object[0]);
+        final String  ModulesString4= I18n.format("ssp.tier1", new Object[0]);
+        final String  ModulesString5= I18n.format("ssp.tier2", new Object[0]);
 
         int maxstorage1 = 0;
         int output = 0;
@@ -151,19 +163,636 @@ if(this.tileentity.tier+tierplus-minus >= kk+1) {
 v9 = module6.storage(kk);
 b9 = module6.Output(kk);}
 
-}
-if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 999999999) {
-	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" +(int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1), 50, 22, 13487565);
-}else	{	  this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + "999999999", 50, 22, 13487565);
+}//
+float a[];
+a = new float[4];
+a[0] = (float) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);
+if(maxstorage1 !=0 && Config.EnglishFix == false) {
+if(a[0] < 2147000000 && a[0] > 0) {
+	 float h = a[0];
+	 float hh = 0;
+	 int i = 0;
+	 for(;h >= 10;i++) {
+	 h =(float)( h / 10) ;
+
+	
+	 }
+	 String maxstorage_1= "2";
+	if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+		hh=(float)(a[0]/(1000));
+		 maxstorage_1= String.format("%.1fK", hh);	}
+	else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+		hh= (float)(a[0]/(1000000));
+	maxstorage_1= String.format("%.1fM", hh);	}
+	else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+		hh= (float)(a[0]/(1000000000));
+    maxstorage_1= String.format("%.1fG", hh);	}
+		
+		
+	
+		 float g = this.tileentity.storage;
+		 float hhh = this.tileentity.storage;
+		 float gg = 0;
+		  i = 0;
+		 for(;g >= 10;i++) {
+		 g =(float)( g / 10) ;
+
+		
+		 }
+		 String maxstorage_2= "2";
+		 if(i >=0 && i <3 && hhh <= 1000) {
+			 
+		 
+				gg=(float)(hhh);
+				 maxstorage_2= String.format("%.1f", gg);	}
+		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+			gg=(float)(hhh/(1000));
+		 maxstorage_2= String.format("%.1fK", gg);	}
+		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+			gg= (float)(hhh/(1000000));
+maxstorage_2= String.format("%.2fM", gg);	}
+		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+			gg= (float)(hhh/(1000000000));
+maxstorage_2= String.format("%.2fG", gg);	}
+		
+	this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" +maxstorage_1, 50, 16, 13487565);
+	this.fontRendererObj.drawString(ModulesString2 + 20*maxstorage1+"%", 160, 16, 13487565);
+	
+}else	if(a[0] > 2147000000 ){
+	
+	 float h = 2146999999;
+	 float hh = 0;
+	 int i = 0;
+	 for(;h >= 10;i++) {
+	 h =(float)( h / 10) ;
+
+	
+	 }
+	 String maxstorage_1= "2";
+	if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+		hh=(float)(a[0]/(1000));
+		 maxstorage_1= String.format("%.1fK", hh);	}
+	else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+		hh= (float)(a[0]/(1000000));
+	maxstorage_1= String.format("%.1fM", hh);	}
+	else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+		hh= (float)(a[0]/(1000000000));
+    maxstorage_1= String.format("%.1fG", hh);	}
+	 float g = this.tileentity.storage;
+	 float hhh = this.tileentity.storage;
+	 float gg = 0;
+	   i = 0;
+	 for(;g >= 10;i++) {
+	 g =(float)( g / 10) ;
+
+	
+	 }
+	 String maxstorage_2= "2";
+	 if(i >=0 && i <3 && hhh <= 1000) {
+		 
+	 
+			gg=(float)(hhh);
+			 maxstorage_2= String.format("%.1f", gg);	}
+	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+		gg=(float)(hhh/(1000));
+	 maxstorage_2= String.format("%.1fK", gg);	}
+	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+		gg= (float)(hhh/(1000000));
+maxstorage_2= String.format("%.2fM", gg);	}
+	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+		gg= (float)(hhh/(1000000000));
+maxstorage_2= String.format("%.2fG", gg);	}
+this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+this.fontRendererObj.drawString(ModulesString2 + 20*maxstorage1+"%", 160, 16, 13487565);
+
+	}else if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
+		 float h = a[0];
+		 float hh = 0;
+		 int i = 0;
+		 for(;h >= 10;i++) {
+		 h =(float)( h / 10) ;
+
+		
+		 }
+		 String maxstorage_1= "2";
+		if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+			hh=(float)(a[0]/(1000));
+			 maxstorage_1= String.format("%.1fK", hh);	}
+		else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+			hh= (float)(a[0]/(1000000));
+		maxstorage_1= String.format("%.1fM", hh);	}
+		else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+			hh= (float)(a[0]/(1000000000));
+	    maxstorage_1= String.format("%.1fG", hh);	}
+			
+			
+		
+			 float g = this.tileentity.storage;
+			 float hhh = this.tileentity.storage;
+			 float gg = 0;
+			  i = 0;
+			 for(;g >= 10;i++) {
+			 g =(float)( g / 10) ;
+
+			
+			 }
+			 String maxstorage_2= "2";
+			 if(i >=0 && i <3 && hhh <= 1000) {
+				 
+			 
+					gg=(float)(hhh);
+					 maxstorage_2= String.format("%.1f", gg);	}
+			 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+				gg=(float)(hhh/(1000));
+			 maxstorage_2= String.format("%.1fK", gg);	}
+			else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+				gg= (float)(hhh/(1000000));
+	maxstorage_2= String.format("%.2fM", gg);	}
+			else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+				gg= (float)(hhh/(1000000000));
+	maxstorage_2= String.format("%.2fG", gg);	}
+		this.fontRendererObj.drawString(ModulesString2 + 20*maxstorage1+"%", 160, 16, 13487565);
+		 this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
 
 	}
-if((int) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 999999999)	{
-	 this.fontRendererObj.drawString(maxOutputString + (int) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) + (" " + energyPerTickString), 50, 32, 13487565);
-}else {   	 this.fontRendererObj.drawString(maxOutputString + "999999999" + (" " + energyPerTickString), 50, 32, 13487565);
+else {
+	 float h = 2146999999;
+	 float hh = 0;
+	 int i = 0;
+	 for(;h >= 10;i++) {
+	 h =(float)( h / 10) ;
 
+	
+	 }
+	 String maxstorage_1= "2";
+	if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+		hh=(float)(a[0]/(1000));
+		 maxstorage_1= String.format("%.1K", hh);	}
+	else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+		hh= (float)(a[0]/(1000000));
+	maxstorage_1= String.format("%.1fM", hh);	}
+	else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+		hh= (float)(a[0]/(1000000000));
+    maxstorage_1= String.format("%.1fG", hh);	}
+		
+		
+	
+		 float g = this.tileentity.storage;
+		 float hhh = this.tileentity.storage;
+		 float gg = 0;
+		  i = 0;
+		 for(;g >= 10;i++) {
+		 g =(float)( g / 10) ;
+
+		
+		 }
+		 String maxstorage_2= "2";
+		 if(i >=0 && i <3 && hhh <= 1000) {
+			 
+		 
+				gg=(float)(hhh);
+				 maxstorage_2= String.format("%.1f", gg);	}
+		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+			gg=(float)(hhh/(1000));
+		 maxstorage_2= String.format("%.1fK", gg);	}
+		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+			gg= (float)(hhh/(1000000));
+maxstorage_2= String.format("%.2fM", gg);	}
+		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+			gg= (float)(hhh/(1000000000));
+maxstorage_2= String.format("%.2fG", gg);	}
+	this.fontRendererObj.drawString(ModulesString2 + 20*maxstorage1+"%", 160, 16, 13487565);
+	
+		this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+	
+
+}}else {
+		if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 2147000000 && (int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) > 0) {
+			 float h = a[0];
+			 float hh = 0;
+			 int i = 0;
+			 for(;h >= 10;i++) {
+			 h =(float)( h / 10) ;
+
+			
+			 }
+			 String maxstorage_1= "2";
+			if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+				hh=(float)(a[0]/(1000));
+				 maxstorage_1= String.format("%.1fK", hh);	}
+			else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+				hh= (float)(a[0]/(1000000));
+			maxstorage_1= String.format("%.1fM", hh);	}
+			else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+				hh= (float)(a[0]/(1000000000));
+		    maxstorage_1= String.format("%.1fG", hh);	}
+				
+				
+			
+				 float g = this.tileentity.storage;
+				 float hhh = this.tileentity.storage;
+				 float gg = 0;
+				  i = 0;
+				 for(;g >= 10;i++) {
+				 g =(float)( g / 10) ;
+
+				
+				 }
+				 String maxstorage_2= "2";
+				 if(i >=0 && i <3 && hhh <= 1000) {
+					 
+				 
+						gg=(float)(hhh);
+						 maxstorage_2= String.format("%.1f", gg);	}
+				 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+					gg=(float)(hhh/(1000));
+				 maxstorage_2= String.format("%.1fK", gg);	}
+				else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+					gg= (float)(hhh/(1000000));
+		maxstorage_2= String.format("%.2fM", gg);	}
+				else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+					gg= (float)(hhh/(1000000000));
+		maxstorage_2= String.format("%.2fG", gg);	}
+			this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" +maxstorage_1, 50, 16, 13487565);
+		}else	if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) > 2147000000 ){	 
+			float h = 2146999999;
+			 float hh = 0;
+			 int i = 0;
+			 for(;h >= 10;i++) {
+			 h =(float)( h / 10) ;
+
+			
+			 }
+			 String maxstorage_1= "2";
+			if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+				hh=(float)(a[0]/(1000));
+				 maxstorage_1= String.format("%.1fK", hh);	}
+			else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+				hh= (float)(a[0]/(1000000));
+			maxstorage_1= String.format("%.1fM", hh);	}
+			else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+				hh= (float)(a[0]/(1000000000));
+		    maxstorage_1= String.format("%.1fG", hh);	}
+				
+			
+			float g = this.tileentity.storage;
+			 float hhh = this.tileentity.storage;
+			 float gg = 0;
+			  i = 0;
+			 for(;g >= 10;i++) {
+			 g =(float)( g / 10) ;
+
+			
+			 }
+			 String maxstorage_2= "2";
+			 if(i >=0 && i <3 && hhh <= 1000) {
+				 
+			 
+					gg=(float)(hhh);
+					 maxstorage_2= String.format("%.1f", gg);	}
+			 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+				gg=(float)(hhh/(1000));
+			 maxstorage_2= String.format("%.1fK", gg);	}
+			else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+				gg= (float)(hhh/(1000000));
+	maxstorage_2= String.format("%.2fM", gg);	}
+			else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+				gg= (float)(hhh/(1000000000));
+	maxstorage_2= String.format("%.2fG", gg);	}
+			this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+
+			}else if((int) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
+				
+				 float h = a[0];
+				 float hh = 0;
+				 int i = 0;
+				 for(;h >= 10;i++) {
+				 h =(float)( h / 10) ;
+
+				
+				 }
+				 String maxstorage_1= "2";
+				if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+					hh=(float)(a[0]/(1000));
+					 maxstorage_1= String.format("%.1fK", hh);	}
+				else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+					hh= (float)(a[0]/(1000000));
+				maxstorage_1= String.format("%.1fM", hh);	}
+				else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+					hh= (float)(a[0]/(1000000000));
+			    maxstorage_1= String.format("%.1fG", hh);	}
+					
+					
+				
+					 float g = this.tileentity.storage;
+					 float hhh = this.tileentity.storage;
+					 float gg = 0;
+					  i = 0;
+					 for(;g >= 10;i++) {
+					 g =(float)( g / 10) ;
+
+					
+					 }
+					 String maxstorage_2= "2";
+					 if(i >=0 && i <3 && hhh <= 1000) {
+						 
+					 
+							gg=(float)(hhh);
+							 maxstorage_2= String.format("%.1f", gg);	}
+					 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+						gg=(float)(hhh/(1000));
+					 maxstorage_2= String.format("%.1fK", gg);	}
+					else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+						gg= (float)(hhh/(1000000));
+			maxstorage_2= String.format("%.2fM", gg);	}
+					else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+						gg= (float)(hhh/(1000000000));
+			maxstorage_2= String.format("%.2fG", gg);	}
+				 this.fontRendererObj.drawString(storageString +maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+
+			}
+		else {
+			
+			 float h = 999999997;
+			 float hh = 0;
+			 int i = 0;
+			 for(;h >= 10;i++) {
+			 h =(float)( h / 10) ;
+
+			
+			 }
+			 String maxstorage_1= "2";
+			if(i >=3 && i <6 && a[0] >= 1000 && a[0] < 1000000) {
+				hh=(float)(a[0]/(1000));
+				 maxstorage_1= String.format("%.1fK", hh);	}
+			else if(i >=6 && i <9&& a[0] >= 1000000 && a[0] < 1000000000) {
+				hh= (float)(a[0]/(1000000));
+			maxstorage_1= String.format("%.1fM", hh);	}
+			else	if(i >=9 && i <12&& a[0] >= 1000000000 && a[0] < 2100000000) {
+				hh= (float)(a[0]/(1000000000));
+		    maxstorage_1= String.format("%.1fG", hh);	}
+				
+				
+			
+				 float g = this.tileentity.storage;
+				 float hhh = this.tileentity.storage;
+				 float gg = 0;
+				  i = 0;
+				 for(;g >= 10;i++) {
+				 g =(float)( g / 10) ;
+
+				
+				 }
+				 String maxstorage_2= "2";
+				 if(i >=0 && i <3 && hhh <= 1000 ) {
+					 
+				 
+						gg=(float)(hhh);
+						 maxstorage_2= String.format("%.2f", gg);	}
+				 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+					gg=(float)(hhh/(1000));
+				 maxstorage_2= String.format("%.2fK", gg);	}
+				else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+					gg= (float)(hhh/(1000000));
+		maxstorage_2= String.format("%.2fM", gg);	}
+				else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+					gg= (float)(hhh/(1000000000));
+		maxstorage_2= String.format("%.2fG", gg);	}
+				this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+			}
+	}
+//
+a[1]=(float) ((this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);
+if(output !=0&& Config.EnglishFix == false) {
+if(a[1] < 2147000000)	{
+	 float g = a[1];
+	 float hhh = a[1];
+	 float gg = 0;
+	int  i = 0;
+	 for(;g >= 10;i++) {
+	 g =(float)( g / 10) ;
+
+	
+	 }
+	 String maxstorage_2= "2";
+	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
+		 
+	 
+			gg=(float)(hhh);
+			 maxstorage_2= String.format("%.2f", gg);	}
+	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+		gg=(float)(hhh/(1000));
+	 maxstorage_2= String.format("%.2fK", gg);	}
+	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+		gg= (float)(hhh/(1000000));
+maxstorage_2= String.format("%.2fM", gg);	}
+	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+		gg= (float)(hhh/(1000000000));
+maxstorage_2= String.format("%.2fG", gg);	}
+	
+	
+	 this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 26, 13487565);
+	 this.fontRendererObj.drawString(ModulesString3 + 20*output+"%", 150, 26, 13487565);
+		
+}else {   	
+	
+	 float g = 2146999999;
+	 float hhh = 2146999999;
+	 float gg = 0;
+	int  i = 0;
+	 for(;g >= 10;i++) {
+	 g =(float)( g / 10) ;
+
+	
+	 }
+	 String maxstorage_2= "2";
+	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
+		 
+	 
+			gg=(float)(hhh);
+			 maxstorage_2= String.format("%.2f", gg);	}
+	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+		gg=(float)(hhh/(1000));
+	 maxstorage_2= String.format("%.2fK", gg);	}
+	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+		gg= (float)(hhh/(1000000));
+maxstorage_2= String.format("%.2fM", gg);	}
+	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+		gg= (float)(hhh/(1000000000));
+maxstorage_2= String.format("%.2fG", gg);	}
+	this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 26, 13487565);
+this.fontRendererObj.drawString(ModulesString3 + 20*output+"%", 150, 26, 13487565);
+    }}else {
+    	
+    	if(a[1] < 2147000000)	{
+    		 float g = a[1];
+    		 float hhh = a[1];
+    		 float gg = 0;
+    		int  i = 0;
+    		 for(;g >= 10;i++) {
+    		 g =(float)( g / 10) ;
+
+    		
+    		 }
+    		 String maxstorage_2= "2";
+    		 if(i >=0 && i <3 && hhh <= 1000) {
+    			 
+    		 
+    				gg=(float)(hhh);
+    				 maxstorage_2= String.format("%.0f", gg);	}
+    		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+    			gg=(float)(hhh/(1000));
+    		 maxstorage_2= String.format("%.2fK", gg);	}
+    		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+    			gg= (float)(hhh/(1000000));
+    	maxstorage_2= String.format("%.2fM", gg);	}
+    		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+    			gg= (float)(hhh/(1000000000));
+    	maxstorage_2= String.format("%.2fG", gg);	}
+    		
+    		
+    		 this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 26, 13487565);
+    	}else {   	 
+    		
+    		float g = 2146999999;
+   		 float hhh = 2146999999;
+   		 float gg = 0;
+   		int  i = 0;
+   		 for(;g >= 10;i++) {
+   		 g =(float)( g / 10) ;
+
+   		
+   		 }
+   		 String maxstorage_2= "2";
+   		 if(i >=0 && i <3 && hhh <= 1000) {
+   			 
+   		 
+   				gg=(float)(hhh);
+   				 maxstorage_2= String.format("%.0f", gg);	}
+   		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+   			gg=(float)(hhh/(1000));
+   		 maxstorage_2= String.format("%.2fK", gg);	}
+   		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+   			gg= (float)(hhh/(1000000));
+   	maxstorage_2= String.format("%.2fM", gg);	}
+   		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+   			gg= (float)(hhh/(1000000000));
+   	maxstorage_2= String.format("%.2fG", gg);	}
+    		this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 26, 13487565);
+
+    	    }
     }
-             this.fontRendererObj.drawString(generatingString + this.tileentity.generating + (" " + energyPerTickString), 50, 42, 13487565);
-    }
+int gend = 0;
+int genn = 0;
+
+for(int i= 0; i < 9; i++) {
+	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module1) {
+		
+	gend++;}
+	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module2) {
+		genn++;
+		}
+
+	
+}
+
+            
+              if(this.tileentity.sunIsUp == true && gend !=0&& Config.EnglishFix == false){
+            	  float g = this.tileentity.generating;
+         		 float hhh = this.tileentity.generating;
+         		 float gg = 0;
+         		int  i = 0;
+         		 for(;g >= 10;i++) {
+         		 g =(float)( g / 10) ;
+
+         		
+         		 }
+         		 String maxstorage_2= "2";
+         		 if(i >=0 && i <3 && hhh <= 1000) {
+         			 
+         		 
+         				gg=(float)(hhh);
+         				 maxstorage_2= String.format("%.0f", gg);	}
+         		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+         			gg=(float)(hhh/(1000));
+         		 maxstorage_2= String.format("%.2fK", gg);	}
+         		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+         			gg= (float)(hhh/(1000000));
+         	maxstorage_2= String.format("%.2fM", gg);	}
+         		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+         			gg= (float)(hhh/(1000000000));
+         	maxstorage_2= String.format("%.2fG", gg);	}
+            	  this.fontRendererObj.drawString(generatingString + maxstorage_2 + (" " + energyPerTickString), 50, 36, 13487565);
+               	  this.fontRendererObj.drawString(ModulesString  +gend*20 + "%", 165, 36, 13487565);
+             }else if(this.tileentity.sunIsUp == false && genn !=0&& Config.EnglishFix == false) 
+             {
+           	  float g = this.tileentity.generating;
+      		 float hhh = this.tileentity.generating;
+      		 float gg = 0;
+      		int  i = 0;
+      		 for(;g >= 10;i++) {
+      		 g =(float)( g / 10) ;
+
+      		
+      		 }
+      		 String maxstorage_2= "2";
+      		 if(i >=0 && i <3 && hhh <= 1000) {
+      			 
+      		 
+      				gg=(float)(hhh);
+      				 maxstorage_2= String.format("%.0f", gg);	}
+      		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+      			gg=(float)(hhh/(1000));
+      		 maxstorage_2= String.format("%.2fK", gg);	}
+      		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+      			gg= (float)(hhh/(1000000));
+      	maxstorage_2= String.format("%.2fM", gg);	}
+      		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+      			gg= (float)(hhh/(1000000000));
+      	maxstorage_2= String.format("%.2fG", gg);	}
+            	 this.fontRendererObj.drawString(generatingString + maxstorage_2 + (" " + energyPerTickString), 50, 36, 13487565);
+        	  this.fontRendererObj.drawString(ModulesString1  +genn*20 + "%", 165, 36, 13487565);
+        	  }
+              else {   
+              	  float g = this.tileentity.generating;
+           		 float hhh = this.tileentity.generating;
+           		 float gg = 0;
+           		int  i = 0;
+           		 for(;g >= 10;i++) {
+           		 g =(float)( g / 10) ;
+
+           		
+           		 }
+           		 String maxstorage_2= "2";
+           		 if(i >=0 && i <3 && hhh <= 1000) {
+           			 
+           		 
+           				gg=(float)(hhh);
+           				 maxstorage_2= String.format("%.0f", gg);	}
+           		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
+           			gg=(float)(hhh/(1000));
+           		 maxstorage_2= String.format("%.2fK", gg);	}
+           		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
+           			gg= (float)(hhh/(1000000));
+           	maxstorage_2= String.format("%.2fM", gg);	}
+           		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
+           			gg= (float)(hhh/(1000000000));
+           	maxstorage_2= String.format("%.2fG", gg);	}
+            	  this.fontRendererObj.drawString(generatingString + maxstorage_2 + (" " + energyPerTickString), 50, 36, 13487565);}
+             if(tierplus !=0 && (tierplus - minus) > 0 && this.tileentity.o > 0) {
+            	 this.fontRendererObj.drawString(tierString + this.tileentity.o , 50, 46, 13487565);
+             this.fontRendererObj.drawString(ModulesString4 + (tierplus - minus) , 93, 46, 13487565);}
+    else if(minus != 0 && (tierplus - minus) < 0  && this.tileentity.o > 0) {
+    	this.fontRendererObj.drawString(tierString + this.tileentity.o , 50, 46, 13487565);
+    	this.fontRendererObj.drawString(ModulesString5 + (minus - tierplus), 93, 46, 13487565);
+    }else if(this.tileentity.o > 0){
+    	
+    	this.fontRendererObj.drawString(tierString + this.tileentity.o , 50, 46, 13487565);}
+    else if(this.tileentity.o == 0){
+    	
+    	this.fontRendererObj.drawString(tierString + 0 , 50, 46, 13487565);}else {
+    		this.fontRendererObj.drawString(tierString + 0 , 50, 46, 13487565);
+    	}}
     protected void drawGuiContainerBackgroundLayer(final float f, final int i, final int j) {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         

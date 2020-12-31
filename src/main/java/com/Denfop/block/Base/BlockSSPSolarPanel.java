@@ -862,10 +862,10 @@ public class BlockSSPSolarPanel extends BlockContainer {
             case 6: {
                 return new TileSingularSolarPanel();
             }
-            case 7: {
+            case 8: {
                 return new TilePhotonicSolarPanel();
             }
-            case 8: {
+            case 7: {
                 return new TileAdminSolarPanel();
             }
             case 9: {

@@ -29,6 +29,7 @@ import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.item.base.SSPItem;
+import com.Denfop.item.reactor.ItemRadioactive;
 import com.Denfop.item.solarhelmet.ItemAdvancedSolarHelmet;
 import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileEntityAdvancedSolarPanel;
@@ -48,6 +49,15 @@ import net.minecraft.item.ItemArmor;
 
 public class Register {
 public static void register() {
+   
+    GameRegistry.registerBlock(SuperSolarPanels.toriyore = new RadiationBlock()
+			.setBlockTextureName("supersolarpanel:toriyore" ).setHardness(0.6f)
+			.setStepSound(Block.soundTypeStone).setBlockName("toriyore"), (Class)ItemRadioactive1.class, "toriyore");
+
+	 GameRegistry.registerItem(SuperSolarPanels.magnesium_ingot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("magnesium_ingot").setTextureName("supersolarpanel:magnesium_ingot"), "magnesium_ingot");
+	 GameRegistry.registerItem(SuperSolarPanels.magnesium_plate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("magnesium_plate").setTextureName("supersolarpanel:magnesium_plate"), "magnesium_plate");
+	 GameRegistry.registerItem(SuperSolarPanels.magnesium_nugget = new SSPItem().setMaxStackSize(64).setUnlocalizedName("magnesium_nugget").setTextureName("supersolarpanel:magnesium_nugget"), "magnesium_nugget");
+	    
 	  GameRegistry.registerItem(SuperSolarPanels.advanced_core = new SSPItem().setMaxStackSize(64).setUnlocalizedName("advanced_core").setTextureName("supersolarpanel:advanced_core"), "advanced_core");
       GameRegistry.registerItem(SuperSolarPanels.hybrid_core = new SSPItem().setMaxStackSize(64).setUnlocalizedName("hybrid_core").setTextureName("supersolarpanel:hybrid_core"), "hybrid_core");
       GameRegistry.registerItem(SuperSolarPanels.ultimate_core = new SSPItem().setMaxStackSize(64).setUnlocalizedName("ultimate_core").setTextureName("supersolarpanel:ultimate_core"), "ultimate_core");
@@ -66,7 +76,14 @@ public static void register() {
       GameRegistry.registerItem( SuperSolarPanels.photoniy = new SSPItem().setMaxStackSize(64).setUnlocalizedName("photoniy").setTextureName("supersolarpanel:photoniy"),"photoniy");
       GameRegistry.registerItem( SuperSolarPanels.photoniy_ingot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("photoniy_ingot").setTextureName("supersolarpanel:photoniy_ingot"),"photoniy_ingot");
       GameRegistry.registerItem( SuperSolarPanels.dust = new SSPItem().setMaxStackSize(64).setUnlocalizedName("dust").setTextureName("supersolarpanel:dust"),"dust");
-      
+      //
+      GameRegistry.registerItem( SuperSolarPanels.spinelcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("spinelcrushedore").setTextureName("supersolarpanel:spinelcrushedore"),"spinelcrushedore");
+      GameRegistry.registerItem( SuperSolarPanels.platiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("platiumcrushedore").setTextureName("supersolarpanel:platiumcrushedore"),"platiumcrushedore");
+      GameRegistry.registerItem( SuperSolarPanels.nickelcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("nickelcrushedore").setTextureName("supersolarpanel:nickelcrushedore"),"nickelcrushedore");
+      GameRegistry.registerItem( SuperSolarPanels.magnesiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("magnesiumcrushedore").setTextureName("supersolarpanel:magnesiumcrushedore"),"magnesiumcrushedore");
+      GameRegistry.registerItem( SuperSolarPanels.wolframcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("wolframcrushedore").setTextureName("supersolarpanel:wolframcrushedore"),"wolframcrushedore");
+      GameRegistry.registerItem( SuperSolarPanels.iridiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("iridiumcrushedore").setTextureName("supersolarpanel:iridiumcrushedore"),"iridiumcrushedore");
+      //
       GameRegistry.registerItem( SuperSolarPanels.iridium_nugget = new SSPItem().setMaxStackSize(64).setUnlocalizedName("iridium_nugget").setTextureName("supersolarpanel:iridium_nugget"),"iridium_nugget");
       GameRegistry.registerItem( SuperSolarPanels.michail_plate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("michail_plate").setTextureName("supersolarpanel:michail_plate"),"michail_plate");
       GameRegistry.registerItem( SuperSolarPanels.mikhail_ingot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("mikhail_ingot").setTextureName("supersolarpanel:mikhail_ingot"),"mikhail_ingot");
@@ -107,7 +124,15 @@ public static void register() {
       GameRegistry.registerBlock(SuperSolarPanels.endgold_stone = new BlockSSP(Material.rock)
 				.setBlockTextureName("supersolarpanel:endgold_stone" ).setHardness(0.6f)
 				.setStepSound(Block.soundTypeStone).setBlockName("endgold_stone"), "endgold_stone").setHarvestLevel("pickaxe", 3);
-    
+    //
+      GameRegistry.registerBlock(SuperSolarPanels.magnetitore = new BlockSSP(Material.rock)
+				.setBlockTextureName("supersolarpanel:magnetitore" ).setHardness(0.6f)
+				.setStepSound(Block.soundTypeStone).setBlockName("magnetitore"), "magnetitore").setHarvestLevel("pickaxe", 3);
+      GameRegistry.registerBlock(SuperSolarPanels.nicelore = new BlockSSP(Material.rock)
+				.setBlockTextureName("supersolarpanel:nicelore" ).setHardness(0.6f)
+				.setStepSound(Block.soundTypeStone).setBlockName("nicelore"), "nicelore").setHarvestLevel("pickaxe", 3);
+
+      //
       GameRegistry.registerBlock(SuperSolarPanels.nethergoldrack = new BlockSSP(Material.rock)
 				.setBlockTextureName("supersolarpanel:nethergoldrack" ).setHardness(0.6f)
 				.setStepSound(Block.soundTypeStone).setBlockName("nethergoldrack"), "nethergoldrack").setHarvestLevel("pickaxe", 3);
@@ -254,9 +279,23 @@ public static void register() {
       
       GameRegistry.registerItem(SuperSolarPanels.module6 = new com.Denfop.item.Modules.module6(), "module6");
 
-  
+      //
+      GameRegistry.registerItem(SuperSolarPanels.chromiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("chromiumcrushedore").setTextureName("supersolarpanel:chromiumcrushedore"), "chromiumcrushedore");
+      GameRegistry.registerItem(SuperSolarPanels.electriumdust = new SSPItem().setMaxStackSize(64).setUnlocalizedName("electriumdust").setTextureName("supersolarpanel:electriumdust"), "electriumdust");
+      GameRegistry.registerItem(SuperSolarPanels.electriumingot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("electriumingot").setTextureName("supersolarpanel:electriumingot"), "electriumingot");
+      GameRegistry.registerItem(SuperSolarPanels.electriumplate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("electriumplate").setTextureName("supersolarpanel:electriumplate"), "electriumplate");
+      GameRegistry.registerItem(SuperSolarPanels.blast = new SSPItem().setMaxStackSize(64).setUnlocalizedName("blast").setTextureName("supersolarpanel:blast"), "blast");
+      GameRegistry.registerItem(SuperSolarPanels.invardust = new SSPItem().setMaxStackSize(64).setUnlocalizedName("invardust").setTextureName("supersolarpanel:invardust"), "invardust");
+      GameRegistry.registerItem(SuperSolarPanels.invaringot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("invaringot").setTextureName("supersolarpanel:invaringot"), "invaringot");
+      GameRegistry.registerItem(SuperSolarPanels.invarplate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("invarplate").setTextureName("supersolarpanel:invarplate"), "invarplate");
+      GameRegistry.registerItem(SuperSolarPanels.nickel = new SSPItem().setMaxStackSize(64).setUnlocalizedName("nickel").setTextureName("supersolarpanel:nickel"), "nickel");
+      GameRegistry.registerItem(SuperSolarPanels.nickelplate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("nickelplate").setTextureName("supersolarpanel:nickelplate"), "nickelplate");
+      GameRegistry.registerItem(SuperSolarPanels.michalovcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("michalovcrushedore").setTextureName("supersolarpanel:michalovcrushedore"), "michalovcrushedore");
+      
+      
 }
 public static void registertiles() {
+	 GameRegistry.registerTileEntity(TileRadioation.class, "RadiationOre");
 	 GameRegistry.registerTileEntity(TileVajraCharger.class, "TileVajraCharger");
 	 GameRegistry.registerTileEntity(TileWirelessStorage1Tier.class, "TileStorageWireless1");
 	 GameRegistry.registerTileEntity(TileWirelessStorageTier2.class, "TileStorageWireless2");

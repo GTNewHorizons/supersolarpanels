@@ -16,7 +16,22 @@ public class FurnaceRecipes {
 	        GameRegistry.addSmelting(SuperSolarPanels.mikhail_ore,new ItemStack(SuperSolarPanels.mikhail_ingot),5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.iridiumore,new ItemStack(SuperSolarPanels.itemSSP,1,7),5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.chromiumore,new ItemStack(SuperSolarPanels.chromium_ingot),5.0F);
-	    
+	        
+	        GameRegistry.addSmelting(SuperSolarPanels.magnesiumore,new ItemStack(SuperSolarPanels.magnesium_ingot,1),5.0F);
+	        GameRegistry.addSmelting(SuperSolarPanels.nicelore,new ItemStack(SuperSolarPanels.nickel),5.0F);
+	    //
+	    	GameRegistry.addSmelting(SuperSolarPanels.platiumcrushedore,new ItemStack(SuperSolarPanels.platium_ingot),5.0F);
+
+			  GameRegistry.addSmelting(SuperSolarPanels.wolframcrushedore,new ItemStack(SuperSolarPanels.wolfram_ingot),5.0F);
+		        GameRegistry.addSmelting(SuperSolarPanels.spinelcrushedore,new ItemStack(SuperSolarPanels.spinel_ingot),5.0F);
+		        GameRegistry.addSmelting(SuperSolarPanels.michalovcrushedore,new ItemStack(SuperSolarPanels.mikhail_ingot),5.0F);
+		        GameRegistry.addSmelting(SuperSolarPanels.iridiumcrushedore,new ItemStack(SuperSolarPanels.itemSSP,1,7),5.0F);
+		        GameRegistry.addSmelting(SuperSolarPanels.chromiumcrushedore,new ItemStack(SuperSolarPanels.chromium_ingot),5.0F);
+		        
+		        GameRegistry.addSmelting(SuperSolarPanels.magnesiumcrushedore,new ItemStack(SuperSolarPanels.magnesium_ingot,1),5.0F);
+		        GameRegistry.addSmelting(SuperSolarPanels.nickelcrushedore,new ItemStack(SuperSolarPanels.nickel),5.0F);
+		 
+	        //
 	        GameRegistry.addSmelting(SuperSolarPanels.nethercoalrack,new ItemStack(Items.coal),5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.endcoal_stone,new ItemStack(Items.coal),5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.nethercopperrack,Ic2Items.copperIngot,5.0F);

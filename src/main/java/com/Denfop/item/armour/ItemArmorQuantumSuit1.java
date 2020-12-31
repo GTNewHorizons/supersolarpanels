@@ -472,7 +472,15 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     IC2.platform.resetPlayerInAirTime(player);
     return true;
   }
-  
+  public static boolean hasCompleteHazmat(EntityLivingBase living) {
+	    for (int i = 1; i < 5; i++) {
+	      ItemStack stack = living.getEquipmentInSlot(i);
+	      if (stack == null || 
+	        !(stack.getItem() instanceof ItemArmorQuantumSuit1))
+	        return false; 
+	    } 
+	    return true;
+	  }
   protected static final Map<Integer, Integer> potionRemovalCost = new HashMap<Integer, Integer>();
   
   private float jumpCharge;

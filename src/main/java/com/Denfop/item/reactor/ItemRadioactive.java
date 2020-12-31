@@ -25,17 +25,11 @@ public class ItemRadioactive extends ItemSSP {
     this.amplifier = amplifier1;
   }
   
-  public void onUpdate(Item stack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
-    if (entity instanceof EntityLivingBase) {
-      EntityLivingBase entityLiving = (EntityLivingBase)entity;
-      if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving)) {
-        PotionEffect effect = ((EntityPlayer)entity).getActivePotionEffect((Potion)IC2Potion.radiation);
-        if (effect == null) {
-          IC2Potion.radiation.applyTo(entityLiving, this.radiationLength * 20, this.amplifier);
-        } else {
-          IC2Potion.radiation.applyTo(entityLiving, ((EntityPlayer)entity).getActivePotionEffect((Potion)IC2Potion.radiation).getDuration() + this.radiationLength, this.amplifier);
-        } 
+  public void onUpdate(ItemStack stack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
+      if (entity instanceof EntityLivingBase) {
+        EntityLivingBase entityLiving = (EntityLivingBase)entity;
+        if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving))
+          IC2Potion.radiation.applyTo(entityLiving, 200, 100); 
       } 
-    } 
-  }
+    }
 }
