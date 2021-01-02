@@ -13,9 +13,9 @@ import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
 public class GuiExtractor extends GuiIC2 {
-  public ContainerDoubleMachine<? extends TileEntityDoubleExtractor> container;
+  public ContainerDoubleMachine container;
   
-  public GuiExtractor(ContainerDoubleMachine<? extends TileEntityDoubleExtractor> container1) {
+  public GuiExtractor(ContainerDoubleMachine container1) {
     super((ContainerBase)container1);
     this.container = container1;
   }

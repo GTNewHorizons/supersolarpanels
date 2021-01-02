@@ -8,6 +8,6 @@ import com.Denfop.SuperSolarPanels;
 public class TilePhotonicSolarPanel extends TileEntitySolarPanel
 {
     public TilePhotonicSolarPanel() {
-        super("blockPhotonicSolarPanel.name",6, 0, SuperSolarPanels.photonicpanelGenDay, SuperSolarPanels.photonicpanelGenNight, SuperSolarPanels.photonicpanelOutput, SuperSolarPanels.photonicpanelStorage);
+        super("blockPhotonicSolarPanel.name",SuperSolarPanels.photonicpaneltier, 0, SuperSolarPanels.photonicpanelGenDay, SuperSolarPanels.photonicpanelGenNight, SuperSolarPanels.photonicpanelOutput, SuperSolarPanels.photonicpanelStorage);
     }
 }

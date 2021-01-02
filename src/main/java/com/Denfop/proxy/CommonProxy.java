@@ -1,5 +1,8 @@
 package com.Denfop.proxy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.MTAPI;
 import com.Denfop.block.expgen.TileExpGen2;
@@ -9,11 +12,13 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.utils.MTRecipeManager;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -43,7 +48,9 @@ public class CommonProxy implements IGuiHandler{
   
   public void registerRenderers() {}
   
-  public void registerEvents() {}
+  public void registerEvents() {
+	  
+  }
   
   public void registerPackets(SimpleNetworkWrapper netInstance) {}
 
@@ -89,6 +96,39 @@ public static void sendPlayerMessage(EntityPlayer player, String message) {
     if (SuperSolarPanels.isSimulating())
       player.addChatMessage((IChatComponent)new ChatComponentTranslation(message, new Object[0])); 
   }
+public static Minecraft mc = FMLClientHandler.instance().getClient();
+private Map isFlyActiveByMod = new HashMap<Object, Object>();
+public boolean checkFlyActiveByMod(EntityPlayer player) {
+    ItemStack itemstack = mc.thePlayer.inventory.armorItemInSlot(2);
+    if (this.isFlyActiveByMod.containsKey(player)&&itemstack != null && (itemstack.getItem() == SuperSolarPanels.quantumBodyarmor)) {
+      return ((Boolean)this.isFlyActiveByMod.get(player)).booleanValue();
+    }else {
+    	
+    return false;
+    }
+  }
+private Map lastUndressed = new HashMap<Object, Object>();
+public boolean checkLastUndressed(EntityPlayer player) {
+    if (this.lastUndressed.containsKey(player))
+      return ((Boolean)this.lastUndressed.get(player)).booleanValue(); 
+    return false;
+  }
+public void SetLastUndressed(EntityPlayer player, Boolean value) {
+    this.lastUndressed.put(player, value);
+  }
+  
+public void SetFlyActiveByMod(EntityPlayer player, Boolean value) {
+	
+	if(value == true) {
+		  
+    this.isFlyActiveByMod.put(player, value);}
+	else {
+		
+	}
+  }
+
+ public void initCore() {}
+  
   
 
 }

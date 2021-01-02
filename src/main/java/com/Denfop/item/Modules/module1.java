@@ -21,6 +21,6 @@ public class module1 extends Item{
 	 public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
 		  info.add(StatCollector.translateToLocal("ssp.module1") + " " +"+20% "  + StatCollector.translateToLocal("ssp.module") );
 		  info.add(StatCollector.translateToLocal("ssp.modules") );
-		  info.add(StatCollector.translateToLocal("ssp.error") ); 
+		  
 	 }
 }

@@ -23,7 +23,6 @@ public class DraconicIntegration {
 
 	  public static Item.ToolMaterial CHAOS= EnumHelper.addToolMaterial("CHAOS", 15, -1, 600.0F, 90.0F, 60);
 	public static Item ChaosDestructionStaff;
- public static Item ChaosHoe;
  public static Item ChaosPickaxe;
  public static Item ChaosAxe;
  public static ItemArmor ChaosHelm;
@@ -50,7 +49,7 @@ public static void Chaos() {
 		ChaosPickaxe = (Item)new ChaosPickaxe();
 		ChaosAxe = (Item)new ChaosAxe();
 		ChaosShovel = (Item)new ChaosShovel();
-		ChaosHoe = (Item)new ChaosHoe();
+	
 	ChaosSword = (Item)new ChaosSword();
 	ChaosBow = (Item)new ChaosBow();
 	
@@ -81,8 +80,7 @@ public static void Recipes() {
     GameRegistry.addRecipe(new ItemStack(ChaosPickaxe, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicPickaxe,'D',ModItems.chaoticCore,'C',chaosingot});
     GameRegistry.addRecipe(new ItemStack(ChaosAxe, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicAxe,'D',ModItems.chaoticCore,'C',chaosingot});
     GameRegistry.addRecipe(new ItemStack(ChaosShovel, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicShovel,'D',ModItems.chaoticCore,'C',chaosingot});
-    GameRegistry.addRecipe(new ItemStack(ChaosHoe, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicHoe,'D',ModItems.chaoticCore,'C',chaosingot});
-    GameRegistry.addRecipe(new ItemStack(ChaosSword, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicSword,'D',ModItems.chaoticCore,'C',chaosingot});
+     GameRegistry.addRecipe(new ItemStack(ChaosSword, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicSword,'D',ModItems.chaoticCore,'C',chaosingot});
     GameRegistry.addRecipe(new ItemStack(ChaosBow, 1), new Object[] { " D ","CAC"," B ", 'B', new ItemStack(ChaosEnergyCore, 1) ,'A', ModItems.draconicBow,'D',ModItems.chaoticCore,'C',chaosingot});
     
     GameRegistry.addRecipe(new ItemStack(ChaosDestructionStaff, 1), new Object[] { "CDC","ACE","CBC", 'B', new ItemStack(ChaosSword, 1) ,'A', ChaosPickaxe,'D',ModItems.chaoticCore,'C',chaosingot,'E', ChaosShovel});

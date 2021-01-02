@@ -56,6 +56,7 @@ public class GuiAdvSolarPanel extends GuiContainer
         final String maxOutputString = I18n.format("gui.SuperSolarPanel.maxOutput", new Object[0]) + ": ";
         final String generatingString = I18n.format("gui.SuperSolarPanel.generating", new Object[0]) + ": ";
         final String energyPerTickString = I18n.format("gui.SuperSolarPanel.energyPerTick", new Object[0]);
+        final String energyPerTickString1 = I18n.format("gui.SuperSolarPanel.energyPerTick1", new Object[0]);
         final String tierString = I18n.format("gui.ssp.tier", new Object[0]) + ": ";
         final String  ModulesString= I18n.format("ssp.genday", new Object[0]);
         final String  ModulesString1= I18n.format("ssp.gennight", new Object[0]);
@@ -68,6 +69,7 @@ public class GuiAdvSolarPanel extends GuiContainer
         int output = 0;
         int tierplus = 0;
         int minus = 0;
+        int rf = 1;
         for(int i= 0; i < 9; i++) {
             if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module3)
         		maxstorage1++;
@@ -81,6 +83,9 @@ public class GuiAdvSolarPanel extends GuiContainer
         		}
         		else if(kk == 2) {
         			minus++;
+        		}
+        		else if(kk == 4) {
+        			rf = 4;
         		}
         		
         	}
@@ -166,7 +171,7 @@ b9 = module6.Output(kk);}
 }//
 float a[];
 a = new float[4];
-a[0] = (float) ((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);
+a[0] = (float) (((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1))*rf;
 if(maxstorage1 !=0 && Config.EnglishFix == false) {
 if(a[0] < 2147000000 && a[0] > 0) {
 	 float h = a[0];
@@ -575,6 +580,10 @@ if(a[1] < 2147000000)	{
 	
 	 }
 	 String maxstorage_2= "2";
+	 if(hhh < 100) {
+		 
+		 
+			gg=(float)(hhh);}
 	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
 		 
 	 
@@ -606,6 +615,10 @@ maxstorage_2= String.format("%.2fG", gg);	}
 	
 	 }
 	 String maxstorage_2= "2";
+	 if(hhh < 100) {
+		 
+		 
+			gg=(float)(hhh);}
 	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
 		 
 	 
@@ -635,6 +648,10 @@ this.fontRendererObj.drawString(ModulesString3 + 20*output+"%", 150, 26, 1348756
     		
     		 }
     		 String maxstorage_2= "2";
+    		 if(hhh < 100) {
+    			 
+    			 
+    				gg=(float)(hhh);}
     		 if(i >=0 && i <3 && hhh <= 1000) {
     			 
     		 
@@ -664,6 +681,10 @@ this.fontRendererObj.drawString(ModulesString3 + 20*output+"%", 150, 26, 1348756
    		
    		 }
    		 String maxstorage_2= "2";
+   		 if(hhh < 100) {
+   			 
+   			 
+ 			gg=(float)(hhh);}
    		 if(i >=0 && i <3 && hhh <= 1000) {
    			 
    		 

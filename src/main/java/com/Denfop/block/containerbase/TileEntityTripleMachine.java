@@ -126,7 +126,10 @@ public InvSlotProcessable inputSlotC;
         }
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
         	operate3(output,output1,output2);
@@ -145,7 +148,10 @@ public InvSlotProcessable inputSlotC;
         }
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
           operate2(output,output1);
@@ -165,7 +171,10 @@ public InvSlotProcessable inputSlotC;
         }
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
           operate5(output2,output1);
@@ -185,7 +194,10 @@ public InvSlotProcessable inputSlotC;
         }
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
           operate4(output2,output);
@@ -202,7 +214,10 @@ public InvSlotProcessable inputSlotC;
         ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
       this.progress = (short)(this.progress + 1);
       this.energy -= this.energyConsume;
-      this.guiProgress = (this.progress / this.operationLength);
+      double k = this.progress;
+      double p = (k/ this.operationLength);
+    
+      this.guiProgress = p;
       if (this.progress >= this.operationLength) {
         operate(output1);
         needsInvUpdate = true;
@@ -217,7 +232,10 @@ public InvSlotProcessable inputSlotC;
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
         if (this.progress >= this.operationLength) {
           operate6(output2);
           needsInvUpdate = true;
@@ -232,7 +250,10 @@ public InvSlotProcessable inputSlotC;
            ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
          this.progress = (short)(this.progress + 1);
          this.energy -= this.energyConsume;
-         this.guiProgress = (this.progress / this.operationLength);
+         double k = this.progress;
+         double p = (k/ this.operationLength);
+       
+         this.guiProgress = p;
          if (this.progress >= this.operationLength) {
            operate1(output);
            needsInvUpdate = true;

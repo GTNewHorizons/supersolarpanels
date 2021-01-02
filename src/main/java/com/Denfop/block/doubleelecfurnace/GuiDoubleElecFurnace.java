@@ -13,9 +13,9 @@ import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
 public class GuiDoubleElecFurnace extends GuiIC2 {
-  public ContainerDoubleMachine<? extends TileEntityDoubleElectricFurnace> container;
+  public ContainerDoubleMachine container;
   
-  public GuiDoubleElecFurnace(ContainerDoubleMachine<? extends TileEntityDoubleElectricFurnace> container1) {
+  public GuiDoubleElecFurnace(ContainerDoubleMachine container1) {
     super((ContainerBase)container1);
     this.container = container1;
   }

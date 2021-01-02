@@ -34,8 +34,8 @@ public class BlockMolecularTransformer extends BlockContainer
         this.setCreativeTab(SuperSolarPanels.tabssp);
     }
     
-    public void registerIcons(final IIconRegister par1IconRegister) {
-        this.icon = par1IconRegister.registerIcon("advancedsolarpanel:qgen_a_side");
+    public void registerBlockIcons(final IIconRegister par1IconRegister) {
+        this.icon = par1IconRegister.registerIcon("supersolarpanel:blockMacerator");
     }
     
     public boolean isOpaqueCube() {

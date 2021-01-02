@@ -71,6 +71,11 @@ public class BlocksItems {
   }
   
   private static void initItems() {
+	  SuperSolarPanels.photon = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.photon, SuperSolarPanels.Radius3, SuperSolarPanels.durability3, SuperSolarPanels.efficiency3, SuperSolarPanels.minWindStrength3, SuperSolarPanels.maxWindStrength3, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model6.png")));
+	  SuperSolarPanels.neutron = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.neutron, SuperSolarPanels.Radius4, SuperSolarPanels.durability4, SuperSolarPanels.efficiency4, SuperSolarPanels.minWindStrength4, SuperSolarPanels.maxWindStrength4, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model5.png")));
+	  SuperSolarPanels.myphical = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.myphical, SuperSolarPanels.Radius5, SuperSolarPanels.durability5, SuperSolarPanels.efficiency5, SuperSolarPanels.minWindStrength5, SuperSolarPanels.maxWindStrength5, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model4.png")));
+	
+	  //
 	  SuperSolarPanels.iridium = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.iridium, SuperSolarPanels.Radius, SuperSolarPanels.durability, SuperSolarPanels.efficiency, SuperSolarPanels.minWindStrength, SuperSolarPanels.maxWindStrength, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model1.png")));
 	  SuperSolarPanels.compressiridium = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.compressiridium, SuperSolarPanels.Radius1, SuperSolarPanels.durability1, SuperSolarPanels.efficiency1, SuperSolarPanels.minWindStrength1, SuperSolarPanels.maxWindStrength1, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model2.png")));
 	  SuperSolarPanels.spectral = new ItemStack((Item)new ItemAdvancedWindRotor(InternalName.spectral, SuperSolarPanels.Radius2, SuperSolarPanels.durability2, SuperSolarPanels.efficiency2, SuperSolarPanels.minWindStrength2, SuperSolarPanels.maxWindStrength2, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model3.png")));
@@ -92,6 +97,7 @@ public class BlocksItems {
 		  SuperSolarPanels.reactorDepletedtoriyDual = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedtoriyDual, 10, 100));
 		    SuperSolarPanels.reactorDepletedtoriyQuad = new ItemStack((Item)new ItemRadioactive(InternalName.reactorDepletedtoriyQuad, 10, 100));
 	    //
+		 
 	    SuperSolarPanels.protonshard = new ItemRadioactive(InternalName.protonshard, 150, 100);
 	    SuperSolarPanels.reactorCoolantmax = new ItemStack((Item)new ItemReactorHeatStorage(InternalName.reactorCoolantmax, 240000));
 	    SuperSolarPanels.reactorCoolanttwelve = new ItemStack((Item)new ItemReactorHeatStorage(InternalName.reactorCoolanttwelve, 120000));

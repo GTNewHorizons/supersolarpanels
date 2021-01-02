@@ -300,18 +300,18 @@ public class BlockMachine extends BlockMultiID {
       this.iconBuffer[12][11] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2"); 
 	 
 
-      this.iconBuffer[13][0] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_1");
-      this.iconBuffer[13][1] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_1");
-      this.iconBuffer[13][2] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
-      this.iconBuffer[13][3] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
-      this.iconBuffer[13][4] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2");
-      this.iconBuffer[13][5] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
-      this.iconBuffer[13][6] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_2");
-      this.iconBuffer[13][7] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_2");
-      this.iconBuffer[13][8] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2");
-      this.iconBuffer[13][9] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_2");
-      this.iconBuffer[13][10] = par1IconRegister.registerIcon("supersolarpanel:blockMetalFormer2_3");
-      this.iconBuffer[13][11] = par1IconRegister.registerIcon("supersolarpanel:blockmachineside_2"); 
+      this.iconBuffer[13][0] = par1IconRegister.registerIcon("supersolarpanel:blockcompressor_3");
+      this.iconBuffer[13][1] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][2] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][3] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][4] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][5] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][6] = par1IconRegister.registerIcon("supersolarpanel:blockcompressor3_1");
+      this.iconBuffer[13][7] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][8] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][9] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][10] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
+      this.iconBuffer[13][11] = par1IconRegister.registerIcon("supersolarpanel:blockMatter3_2");
 
   }
   

@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 
 import net.minecraft.item.ItemBlock;
@@ -38,7 +39,7 @@ public class ItemSintezator extends ItemBlock
         NBTTagCompound nbttagcompound;
         
         
-        	   info.add(StatCollector.translateToLocal("ssp.sintezator") );
+        	   info.add(StatCollector.translateToLocal("ssp.sintezator") + Config.limit);
             }
     public String getUnlocalizedName(final ItemStack itemstack) {
         return this.itemNames.get(itemstack.getItemDamage());

@@ -177,7 +177,8 @@ if(sum2 < 2147000000 && yy != 0 && sum2 > 0) {
 		hh= (sum2/(1000000));
 	maxstorage_1= String.format("%.2fM", hh);	}
 	else	if(i >=9 && i <12&& sum2 >= 1000000000 && sum2 < 2100000000) {
-		hh= (sum2/(1000000000));
+		hh= (sum2/(1000000));
+		hh = hh /1000;
    maxstorage_1= String.format("%.2fG", hh);	}
 		
 		
@@ -333,6 +334,11 @@ if(sum3 < 2147000000)	{
 	
 	 }
 	 String maxstorage_2= "0";
+	 if(hhh >= 0 && hhh< 1000) {
+		 
+		 
+			gg=(float)(hhh);
+			 maxstorage_2= String.format("%.0f", gg);	}
 	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
 		 
 	 
@@ -359,11 +365,16 @@ maxstorage_2= String.format("%.2fG", gg);	}
 	
 	 }
 	 String maxstorage_2= "0";
+	 if(hhh >= 0 && hhh< 1000) {
+		 
+		 
+			gg=(float)(hhh);
+			 maxstorage_2= String.format("%.2f", gg);	}
 	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
 		 
 	 
 			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.0f", gg);	}
+			 maxstorage_2= String.format("%.2f", gg);	}
 	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
 		gg=(float)(hhh/(1000));
 	 maxstorage_2= String.format("%.2fK", gg);	}
@@ -523,7 +534,7 @@ else {
     }
     
     static {
-        GUISintezator.tex = new ResourceLocation("supersolarpanel", "textures/gui/GUIAdvancedSolarPanel.png");
+        GUISintezator.tex = new ResourceLocation("supersolarpanel", "textures/gui/GUI_Sintezator_Slots.png");
         GUISintezator.tex1 = new ResourceLocation("supersolarpanel", "textures/gui/GUInetherSolarPanel.png");
         GUISintezator.tex2 = new ResourceLocation("supersolarpanel", "textures/gui/GUIendSolarPanel.png");
         GUISintezator.tex3 = new ResourceLocation("supersolarpanel", "textures/gui/GUIearthSolarPanel.png");

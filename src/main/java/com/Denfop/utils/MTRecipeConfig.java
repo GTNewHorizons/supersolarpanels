@@ -70,7 +70,7 @@ public class MTRecipeConfig
             MTRecipeConfig.defaultLines.add("supersolarpanel:photoniy_ingot:9; supersolarpanel:module5-4:1; 15000000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:QuantumItems7:9; supersolarpanel:module5-6:1; 15000000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:wolfram_ingot:1; supersolarpanel:asp_crafting_items-7; 5000000");
-            MTRecipeConfig.defaultLines.add("supersolarpanel:asp_crafting_items-7:1; supersolarpanel:advanced_core:1; 1500");
+            MTRecipeConfig.defaultLines.add("supersolarpanel:ssp_crafting_items-7:1; supersolarpanel:advanced_core:1; 1500");
             MTRecipeConfig.defaultLines.add("supersolarpanel:advanced_core:4; supersolarpanel:hybrid_core:1; 7500");
             MTRecipeConfig.defaultLines.add("supersolarpanel:hybrid_core:4; supersolarpanel:ultimate_core:1; 40000");
             MTRecipeConfig.defaultLines.add("supersolarpanel:ultimate_core:4; supersolarpanel:ssp_crafting_items-10:1; 90000");

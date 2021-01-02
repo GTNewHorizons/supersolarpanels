@@ -33,7 +33,7 @@ import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFE;
 import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFSU;
 import com.Denfop.tiles.base.TileEntityBase;
-import com.Denfop.utils.InternalName;
+import com.Denfop.utils.InternalName;;
 
 
 public class BlockElectric extends BlockMultiID {

@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 
 public class Adminsolarpanel extends Block implements ITileEntityProvider {
   public boolean qgActive;
+private IIcon icon;
   
   
   public Adminsolarpanel() {
@@ -39,7 +40,9 @@ public class Adminsolarpanel extends Block implements ITileEntityProvider {
     setCreativeTab(SuperSolarPanels.tabssp);
    
   }
-  
+  public void registerBlockIcons(final IIconRegister par1IconRegister) {
+      this.icon = par1IconRegister.registerIcon("supersolarpanel:blockMacerator");
+  }
   @Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
 		return new TileEntityAdminSolarPanel();

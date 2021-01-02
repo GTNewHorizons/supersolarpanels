@@ -84,6 +84,7 @@ public static void register() {
       GameRegistry.registerItem( SuperSolarPanels.wolframcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("wolframcrushedore").setTextureName("supersolarpanel:wolframcrushedore"),"wolframcrushedore");
       GameRegistry.registerItem( SuperSolarPanels.iridiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("iridiumcrushedore").setTextureName("supersolarpanel:iridiumcrushedore"),"iridiumcrushedore");
       //
+      
       GameRegistry.registerItem( SuperSolarPanels.iridium_nugget = new SSPItem().setMaxStackSize(64).setUnlocalizedName("iridium_nugget").setTextureName("supersolarpanel:iridium_nugget"),"iridium_nugget");
       GameRegistry.registerItem( SuperSolarPanels.michail_plate = new SSPItem().setMaxStackSize(64).setUnlocalizedName("michail_plate").setTextureName("supersolarpanel:michail_plate"),"michail_plate");
       GameRegistry.registerItem( SuperSolarPanels.mikhail_ingot = new SSPItem().setMaxStackSize(64).setUnlocalizedName("mikhail_ingot").setTextureName("supersolarpanel:mikhail_ingot"),"mikhail_ingot");

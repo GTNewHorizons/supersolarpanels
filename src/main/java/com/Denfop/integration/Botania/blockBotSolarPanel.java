@@ -41,19 +41,19 @@ public class blockBotSolarPanel extends BlockContainer {
   
   public void registerBlockIcons(IIconRegister par1IconRegister) {
     this.iconBuffer = new IIcon[3][12];
-    this.iconBuffer[0][0] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
+    this.iconBuffer[0][0] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
     this.iconBuffer[0][1] = par1IconRegister.registerIcon("supersolarpanel:manasteel_top");
-    this.iconBuffer[0][2] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][3] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][4] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][5] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][6] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
+    this.iconBuffer[0][2] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][3] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][4] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][5] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][6] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
     this.iconBuffer[0][7] = par1IconRegister.registerIcon("supersolarpanel:manasteel_top");
-    this.iconBuffer[0][8] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][9] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][10] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[0][11] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
-    this.iconBuffer[1][0] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
+    this.iconBuffer[0][8] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][9] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][10] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[0][11] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
+    this.iconBuffer[1][0] = par1IconRegister.registerIcon("supersolarpanel:manasteel_side");
     this.iconBuffer[1][1] = par1IconRegister.registerIcon("supersolarpanel:elementium_top");
     this.iconBuffer[1][2] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");
     this.iconBuffer[1][3] = par1IconRegister.registerIcon("supersolarpanel:usp_bottom");

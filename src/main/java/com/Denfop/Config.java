@@ -1,8 +1,16 @@
 package com.Denfop;
 
+import java.io.File;
+
 import com.Denfop.utils.MTRecipeConfig;
+import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameData;
+import java.util.Set;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {
@@ -51,11 +59,12 @@ public static boolean ASP;
 public static int toriyRodCells;
 public static int toriyRodHeat;
 public static float toriyPower;
-
+public static File configFile;
 public static void config(final FMLPreInitializationEvent event) {
-	 final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
+         configFile = event.getSuggestedConfigurationFile();
         
          SuperSolarPanels.singularpanelstorage = config.get("Singular Solar panel", "SingularSPStorage", 10000000).getInt(10000000); 
          SuperSolarPanels.configFileName = event.getSuggestedConfigurationFile().getAbsolutePath();
@@ -187,7 +196,25 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.minWindStrength2 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
          SuperSolarPanels.maxWindStrength2 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
          SuperSolarPanels.Streak = config.get("Quantum Armor", "Allow Streak", true).getBoolean(true); 
-         
+         //
+         SuperSolarPanels.Radius5 = config.get("Spectral rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability5 = config.get("Spectral rotor", "durability", 345600).getInt(345600);
+         SuperSolarPanels.efficiency5 = config.get("Spectral rotor", "efficiency", 5.0F).getInt((int) 5.0F);
+         SuperSolarPanels.minWindStrength5 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength5 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
+        
+         //
+         SuperSolarPanels.Radius4 = config.get("Spectral rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability4 = config.get("Spectral rotor", "durability", 2764800).getInt(2764800);
+         SuperSolarPanels.efficiency4 = config.get("Spectral rotor", "efficiency", 7.0F).getInt((int) 7.0F);
+         SuperSolarPanels.minWindStrength4 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength4 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
+         //
+         SuperSolarPanels.Radius3 = config.get("Spectral rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability3 = config.get("Spectral rotor", "durability", 691200).getInt(691200);
+         SuperSolarPanels.efficiency3 = config.get("Spectral rotor", "efficiency", 6.0F).getInt((int) 6.0F);
+         SuperSolarPanels.minWindStrength3 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength3 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
          limit = config.get("Unifier panels", "Limit", 2).getInt(2); 
         //
          manasteelgenday= config.get("Manasteel Solar Panel", "genday", 160).getInt(160);

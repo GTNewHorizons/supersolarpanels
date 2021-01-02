@@ -17,4 +17,5 @@ public class TileEntityAdminSolarPanel extends TileEntitySolarPanel
         return "Manasteel Solar Panel";
     }
     
+    
 }

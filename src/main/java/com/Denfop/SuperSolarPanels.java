@@ -142,10 +142,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -155,7 +157,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-@Mod(modid = "supersolarpanel", name = "Super Solar Panel && Industrial Upgrade", version = "1.4.1", dependencies = "required-after:IC2;after:wirelessvajra;after:Thaumcraft;after:AppliedEnergistics;")
+@Mod(modid = "supersolarpanel", name = "Super Solar Panel && Industrial Upgrade", version = "1.4.2", dependencies = "required-after:IC2;after:wirelessvajra;after:Thaumcraft;after:AppliedEnergistics;")
 public class SuperSolarPanels implements IWorldGenerator
 {
 	   
@@ -621,6 +623,25 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Item nickelcrushedore;
 		public static Item platiumcrushedore;
 		public static Item spinelcrushedore;
+		public static Item updatekits;
+		public static ItemStack photon;
+		public static ItemStack neutron;
+		public static ItemStack myphical;
+		public static int Radius3;
+		public static int durability3;
+		public static int efficiency3;
+		public static int minWindStrength3;
+		public static int maxWindStrength3;
+		public static int Radius4;
+		public static int durability4;
+		public static int efficiency4;
+		public static int minWindStrength4;
+		public static int maxWindStrength4;
+		public static int Radius5;
+		public static int durability5;
+		public static int efficiency5;
+		public static int maxWindStrength5;
+		public static int minWindStrength5;
 		public static class FluidXP {
 			public static Fluid xpJuice = new Fluid("xpjuice.wv");
 			
@@ -721,7 +742,7 @@ public class SuperSolarPanels implements IWorldGenerator
 			 FluidXP.xpJuice = FluidRegistry.getFluid("xpjuice");
 		 }
 		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		
+		  proxy.initCore();
     }
  
     public static ItemStack setItemsSize(final ItemStack itemStack, final int newSize) {
@@ -876,7 +897,7 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
        
       } 
     }
-  
+   
     @Mod.EventHandler
     public void afterModsLoaded(final FMLPostInitializationEvent event) {
     	BasicRecipe.recipe();
@@ -911,8 +932,10 @@ MaceratorRecipe.recipe();
           return 0.0F; 
         return par1 / 255.0F;
       }
-
+    public static Minecraft mc = FMLClientHandler.instance().getClient();
+    @EventHandler
     public static boolean isSimulating() {
+
         return !FMLCommonHandler.instance().getEffectiveSide().isClient();
     }
     
@@ -922,6 +945,8 @@ MaceratorRecipe.recipe();
             nbttagcompound = new NBTTagCompound();
             itemstack.setTagCompound(nbttagcompound);
             nbttagcompound.setInteger("charge", 0);
+            nbttagcompound.setInteger("Fly", 0);
+            nbttagcompound.setBoolean("isFlyActive", false);
         }
         return nbttagcompound;
     }

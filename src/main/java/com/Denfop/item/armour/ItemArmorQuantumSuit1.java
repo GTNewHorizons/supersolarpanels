@@ -1,5 +1,6 @@
 package com.Denfop.item.armour;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -22,9 +23,12 @@ import java.util.Map;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.base.ItemElerctirc;
+import com.Denfop.proxy.CommonProxy;
+import com.Denfop.utils.Helpers;
 import com.Denfop.utils.InternalName;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +48,19 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 public class ItemArmorQuantumSuit1 extends ItemElerctirc {
-  public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
+  private static int   minCharge = 10000;;
+
+private int dischargeInFlight= 278;
+
+private int dischargeIdleMode= 1;
+
+private float boostSpeed= 0.2F;
+
+private int hoverModeFallSpeed;
+
+private int  boostMultiplier = 3;;
+
+public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
     super(internalName, InternalName.quantum, armorType1, SuperSolarPanels.Storagequantumsuit, 12000.0D, 4);
     if (armorType1 == 3)
       MinecraftForge.EVENT_BUS.register(this); 
@@ -63,7 +79,7 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
   public boolean requiresMultipleRenderPasses() {
     return true;
   }
-  
+  public static int status  = 0;
   public boolean hasColor(ItemStack aStack) {
     return (getColor(aStack) != 10511680);
   }
@@ -110,7 +126,7 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     tNBT = tNBT.getCompoundTag("display");
     tNBT.setInteger("color", par2);
   }
-  
+  public static Minecraft mc = FMLClientHandler.instance().getClient();
   public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase entity, ItemStack armor, DamageSource source, double damage, int slot) {
     if (source == DamageSource.fall && this.armorType == 3) {
       int energyPerDamage = getEnergyPerDamage();
@@ -161,6 +177,7 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     byte toggleTimer = nbtData.getByte("toggleTimer");
     boolean ret = false;
+   
     switch (this.armorType) {
       case 0:
         IC2.platform.profilerStartSection("QuantumHelmet");
@@ -258,70 +275,64 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
         IC2.platform.profilerEndSection();
         break;
       case 1:
-        IC2.platform.profilerStartSection("QuantumBodyarmor");
-        jetpack = nbtData.getBoolean("jetpack");
-        hoverMode = nbtData.getBoolean("hoverMode");
-        jetpackUsed = false;
-        if (IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
-          toggleTimer = 10;
-          hoverMode = !hoverMode;
-         
-          if (IC2.platform.isSimulating()) {
-        	 
-            nbtData.setBoolean("hoverMode", hoverMode);
-            if (hoverMode) {
-              IC2.platform.messagePlayer(player, "Quantum Hover Mode enabled.", new Object[0]);
-            } else {
-              IC2.platform.messagePlayer(player, "Quantum Hover Mode disabled.", new Object[0]);
+    	  jetpack = nbtData.getBoolean("jetpack");
+          hoverMode = nbtData.getBoolean("hoverMode");
+          jetpackUsed = false;
+          if (IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
+            toggleTimer = 10;
+            hoverMode = !hoverMode;
+            if (IC2.platform.isSimulating()) {
+              nbtData.setBoolean("hoverMode", hoverMode);
+              if (hoverMode) {
+                IC2.platform.messagePlayer(player, "Quantum Hover Mode enabled.", new Object[0]);
+              } else {
+                IC2.platform.messagePlayer(player, "Quantum Hover Mode disabled.", new Object[0]);
+              } 
             } 
           } 
-        } 
-       
-        if(SuperSolarPanels.disableeffect) {
-        
-        } else {
-        	player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 300));
-        }
-        
-        
-
-        if (IC2.keyboard.isBoostKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
-          toggleTimer = 10;
-          jetpack = !jetpack;
-          if (IC2.platform.isSimulating()) {
-            nbtData.setBoolean("jetpack", jetpack);
-            if (jetpack) {
-              IC2.platform.messagePlayer(player, "Quantum Jetpack enabled.", new Object[0]);
-            } else {
-              IC2.platform.messagePlayer(player, "Quantum Jetpack disabled.", new Object[0]);
+          if (IC2.keyboard.isBoostKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
+            toggleTimer = 10;
+            jetpack = !jetpack;
+            if (IC2.platform.isSimulating()) {
+              nbtData.setBoolean("jetpack", jetpack);
+              if (jetpack) {
+                IC2.platform.messagePlayer(player, "Quantum Jetpack enabled.", new Object[0]);
+              } else {
+                IC2.platform.messagePlayer(player, "Quantum Jetpack disabled.", new Object[0]);
+              } 
             } 
           } 
-        } 
-        if (jetpack && (IC2.keyboard.isJumpKeyDown(player) || (hoverMode && player.motionY < -0.029999999329447746D)))
-          jetpackUsed = useJetpack(player, hoverMode); 
-        if (IC2.platform.isSimulating() && toggleTimer > 0) {
-          toggleTimer = (byte)(toggleTimer - 1);
-          nbtData.setByte("toggleTimer", toggleTimer);
-        } 
-        if (IC2.platform.isRendering() && player == IC2.platform.getPlayerInstance()) {
-          if (lastJetpackUsed != jetpackUsed) {
-            if (jetpackUsed) {
-              if (audioSource == null)
-                audioSource = IC2.audioManager.createSource(player, PositionSpec.Backpack, "Tools/Jetpack/JetpackLoop.ogg", true, false, IC2.audioManager.getDefaultVolume()); 
-              if (audioSource != null)
-                audioSource.play(); 
-            } else if (audioSource != null) {
-              audioSource.remove();
-              audioSource = null;
-            } 
-            lastJetpackUsed = jetpackUsed;
+          if (jetpack && (IC2.keyboard.isJumpKeyDown(player) || (hoverMode && player.motionY < -0.029999999329447746D)))
+            jetpackUsed = useJetpack(player, hoverMode); 
+          if (IC2.platform.isSimulating() && toggleTimer > 0) {
+            toggleTimer = (byte)(toggleTimer - 1);
+            nbtData.setByte("toggleTimer", toggleTimer);
           } 
-          if (audioSource != null)
-            audioSource.updatePosition(); 
-        } 
-        ret = jetpackUsed;
-        player.extinguish();
-        IC2.platform.profilerEndSection();
+          if (IC2.platform.isRendering() && player == IC2.platform.getPlayerInstance()) {
+            if (lastJetpackUsed != jetpackUsed) {
+              if (jetpackUsed) {
+                if (audioSource == null)
+                  audioSource = IC2.audioManager.createSource(player, PositionSpec.Backpack, "Tools/Jetpack/JetpackLoop.ogg", true, false, IC2.audioManager.getDefaultVolume()); 
+                if (audioSource != null)
+                  audioSource.play(); 
+              } else if (audioSource != null) {
+                audioSource.remove();
+                audioSource = null;
+              } 
+              lastJetpackUsed = jetpackUsed;
+            } 
+            if (audioSource != null)
+              audioSource.updatePosition(); 
+          } 
+          if(SuperSolarPanels.disableeffect) {
+              
+          } else {
+          	
+          	
+          	player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 300));
+          }
+          ret = jetpackUsed;
+          player.extinguish();
         break;
       case 2:
         IC2.platform.profilerStartSection("QuantumLeggings");
@@ -381,6 +392,7 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
                 player.motionX *= 4.5D;
                 player.motionZ *= 4.5D;
               } 
+          	
               player.motionY += (this.jumpCharge * 0.3F);
               this.jumpCharge = (float)(this.jumpCharge * 0.75D);
             } else if (this.jumpCharge < 1.0F) {
@@ -418,6 +430,8 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
         break;
        
     } 
+   
+   
     if (ret)
       player.inventoryContainer.detectAndSendChanges(); 
   }
@@ -426,6 +440,18 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     return 0;
   }
 
+  
+  
+  public static int getCharge(ItemStack itemstack) {
+	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
+	    int k = nbttagcompound.getInteger("charge");
+	    return k;
+	  }
+  public static boolean readWorkMode(ItemStack itemstack) {
+	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
+	    return nbttagcompound.getBoolean("isLevitationActive");
+	  }
+ 
   public boolean useJetpack(EntityPlayer player, boolean hoverMode) {
     ItemStack jetpack = player.inventory.armorInventory[2];
     if (ElectricItem.manager.getCharge(jetpack) == 0.0D)
@@ -435,6 +461,7 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     if ((float)ElectricItem.manager.getCharge(jetpack) / getMaxCharge(jetpack) <= dropPercentage)
       power = (float)(power * ElectricItem.manager.getCharge(jetpack) / getMaxCharge(jetpack) * dropPercentage); 
     if (IC2.keyboard.isForwardKeyDown(player)) {
+
       float retruster = 3.5F;
       if (hoverMode)
         retruster = 0.5F; 
@@ -472,6 +499,21 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
     IC2.platform.resetPlayerInAirTime(player);
     return true;
   }
+  public static boolean saveWorkMode(ItemStack itemstack, boolean workMode) {
+	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
+	    nbttagcompound.setBoolean("isLevitationActive", workMode);
+	    return true;
+	  }
+public static int switchWorkMode(EntityPlayer player, ItemStack itemstack) {
+	    if (readWorkMode(itemstack)) {
+	      saveWorkMode(itemstack, false);
+	      CommonProxy.sendPlayerMessage(player, "§e"+ Helpers.formatMessage("message.graviChestPlate.levitationMode") + " " + "§c"+ Helpers.formatMessage("message.text.disabled"));
+	    } else {
+	      saveWorkMode(itemstack, true);
+	      CommonProxy.sendPlayerMessage(player, "§e"+ Helpers.formatMessage("message.graviChestPlate.levitationMode") + " " + "§c"+ Helpers.formatMessage("message.text.enabled"));
+	    } 
+	    return 0;
+	  }
   public static boolean hasCompleteHazmat(EntityLivingBase living) {
 	    for (int i = 1; i < 5; i++) {
 	      ItemStack stack = living.getEquipmentInSlot(i);
@@ -488,4 +530,5 @@ public class ItemArmorQuantumSuit1 extends ItemElerctirc {
   public static AudioSource audioSource;
   
   private static boolean lastJetpackUsed = false;
+  
 }

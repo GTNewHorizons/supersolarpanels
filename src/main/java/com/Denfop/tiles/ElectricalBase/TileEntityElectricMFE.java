@@ -1,7 +1,6 @@
 package com.Denfop.tiles.ElectricalBase;
 
 import com.Denfop.SuperSolarPanels;
-
 import ic2.core.block.wiring.TileEntityElectricBlock;
 
 public class TileEntityElectricMFE extends TileEntityElectricBlock {

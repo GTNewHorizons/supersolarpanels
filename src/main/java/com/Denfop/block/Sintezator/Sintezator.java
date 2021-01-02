@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 
 public class Sintezator extends Block implements ITileEntityProvider {
   public boolean qgActive;
+private IIcon icon;
   
   
   public Sintezator() {
@@ -44,7 +45,9 @@ public class Sintezator extends Block implements ITileEntityProvider {
 	public TileEntity createNewTileEntity(World world, int metadata) {
 		return new TileEntitySintezator();
 	}
-
+  public void registerBlockIcons(final IIconRegister par1IconRegister) {
+      this.icon = par1IconRegister.registerIcon("supersolarpanel:blockMacerator");
+  }
 	public int getRenderType() {
 		return -1;
 	}

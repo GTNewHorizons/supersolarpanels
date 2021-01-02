@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.lwjgl.input.Keyboard;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.item.ElectricItem;
@@ -54,6 +55,8 @@ public class WirelessVajra extends ItemTool implements IElectricItem {
 		this.effPower = 20000F;
 		this.efficiencyOnProperMaterial = this.effPower;
 		this.energyPerOperation = 3000; setCreativeTab(SuperSolarPanels.tabssp);
+		this.setNoRepair();
+		this.getItemEnchantability(null);
 		
 		
 	}
@@ -238,6 +241,7 @@ public class WirelessVajra extends ItemTool implements IElectricItem {
 				
 				
 			}
+			  
 		}
 		
 		

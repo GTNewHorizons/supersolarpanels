@@ -94,7 +94,9 @@ public boolean isClient() {
 	    this.renders.put(name, renderer);
 	  }  
  
-  
+  public void initCore() {
+	   
+	  }
   public void registerRenderers() {
     RenderingRegistry.registerEntityRenderingHandler(EntityStreak.class, (Render)new EntityRendererStreak());
     SuperSolarPanels.blockMolecularTransformerRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -110,9 +112,7 @@ public boolean isClient() {
 	      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosAxe, (IItemRenderer)new RenderTool("models/tools/DraconicLumberAxe.obj", "textures/models/tools/DraconicLumberAxe.png", (IRenderTweak)DraconicIntegration.ChaosAxe));
 	      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosShovel, (IItemRenderer)new RenderTool("models/tools/DraconicShovel.obj", "textures/models/tools/DraconicShovel.png", (IRenderTweak)DraconicIntegration.ChaosShovel));
 	      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosDestructionStaff, (IItemRenderer)new RenderTool("models/tools/DraconicStaffOfPower.obj", "textures/models/tools/DraconicStaffOfPower.png", (IRenderTweak)DraconicIntegration.ChaosDestructionStaff));
-	      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosHoe, (IItemRenderer)new RenderTool("models/tools/DraconicHoe.obj", "textures/models/tools/DraconicHoe.png", (IRenderTweak)DraconicIntegration.ChaosHoe));
-	    
-	      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosHelm, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosHelm));
+	       MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosHelm, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosHelm));
 	      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosChest, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosChest));
 	      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosLeggs, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosLeggs));
 	      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosBoots, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosBoots));

@@ -16,6 +16,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTUtil;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.nbt.NBTTagCompound;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
@@ -29,6 +31,7 @@ import java.util.Map;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import java.util.Random;
+import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.WirellesStorage.TileWirelessStorageBase;
@@ -40,6 +43,7 @@ import com.Denfop.item.Modules.module4;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.Modules.module7;
+import com.mojang.authlib.GameProfile;
 
 import cofh.api.energy.IEnergyHandler;
 import ic2.api.network.INetworkUpdateListener;
@@ -47,9 +51,12 @@ import ic2.api.network.INetworkDataProvider;
 import net.minecraft.inventory.IInventory;
 import ic2.api.energy.tile.IEnergySource;
 import ic2.api.tile.IWrenchable;
+import ic2.core.IC2;
+import ic2.core.block.personal.IPersonalBlock;
+import ic2.core.network.NetworkManager;
 import ic2.api.energy.tile.IEnergyTile;
 
-public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener
+public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IPersonalBlock
 {private TileEntitySolarPanel tileentity;
     public static Random randomizer;
     public int ticker;
@@ -87,7 +94,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	 public int elapsedTicks;
 	public boolean wirelles;
 	
-	
+	private GameProfile owner = null;
 	public boolean isconnected;
 		
 	public ArrayList<Integer> xvalue = new ArrayList();
@@ -172,6 +179,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 		
 		this.wirelesstransferlimit = gOutput;
     }
+    private int ticksSinceSync;
     public int getSolarType() {
     	int type = this.solarType;
     	return type;
@@ -213,7 +221,10 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         this.loaded = false;
     }
-    
+    private int numUsingPlayers;
+    private void syncNumUsingPlayers() {
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.numUsingPlayers);
+      }
     public void intialize() {
         this.wetBiome = (this.worldObj.getWorldChunkManager().getBiomeGenAt(this.xCoord, this.zCoord).getIntRainfall() > 0);
         this.noSunWorld = this.worldObj.provider.hasNoSky;
@@ -224,7 +235,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         this.lastTimeStamp = System.currentTimeMillis();
     }
-    
+   
+        
     public void updateEntity() {
     	
         super.updateEntity();
@@ -234,6 +246,16 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         if (this.worldObj.isRemote) {
             return;
         }
+        for(int i= 0; i < 9; i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
+        		
+        	if(this.chargeSlots[i].getItemDamage() == 5)
+        if (++this.ticksSinceSync % 20 * 4 == 0 && IC2.platform.isSimulating())
+            syncNumUsingPlayers(); 
+        	System.out.println("Hello World!");
+        }
+        }
+        
         if (this.lastX != this.xCoord || this.lastZ != this.zCoord || this.lastY != this.yCoord) {
             this.lastX = this.xCoord;
             this.lastY = this.yCoord;
@@ -322,7 +344,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			        int maxConvertEnergy = this.storage * 8;
         			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
         			          int requestRFEnergy = this.maxStorage2 - this.storage2;
-        			          int requestEUEnergy = requestRFEnergy / 8;
+        			          int requestEUEnergy = requestRFEnergy / 4;
         			        
         			          this.storage2 += requestRFEnergy;
         			          this.storage -= requestEUEnergy;
@@ -749,6 +771,8 @@ return this.generating = 0;
     	    this.lastY = nbttagcompound.getInteger("lastY");
     	    this.lastZ = nbttagcompound.getInteger("lastZ");
     	    NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+    	    if (nbttagcompound.hasKey("ownerGameProfile"))
+    	        this.owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("ownerGameProfile")); 
     	    this.chargeSlots = new ItemStack[getSizeInventory()];
     	    for (int i = 0; i < nbttaglist.tagCount(); i++) {
     	      NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
@@ -769,9 +793,34 @@ return this.generating = 0;
     	    this.targetSet = Boolean.valueOf(nbttagcompound.getBoolean("targetset"));
     	    this.isconnected = nbttagcompound.getBoolean("isconnected");
     	  }
+      public boolean permitsAccess(GameProfile profile) {
+    	    if (profile == null)
+    	      return (this.owner == null); 
+    	    if (IC2.platform.isSimulating()) {
+    	      if (this.owner == null) {
+    	        this.owner = profile;
+    	        ((NetworkManager)IC2.network.get()).updateTileEntityField((TileEntity)this, "owner");
+    	        return true;
+    	      } 
+    	      if (MinecraftServer.getServer().getConfigurationManager().func_152596_g(profile))
+    	        return true; 
+    	    } else if (this.owner == null) {
+    	      return true;
+    	    } 
+    	    return this.owner.equals(profile);
+    	  }
     	  
+    	  public GameProfile getOwner() {
+    	    return this.owner;
+    	  }
     	  public void writeToNBT(NBTTagCompound nbttagcompound) {
     	    super.writeToNBT(nbttagcompound);
+    
+    	    if (this.owner != null) {
+    	        NBTTagCompound ownerNbt = new NBTTagCompound();
+    	        NBTUtil.func_152460_a(ownerNbt, this.owner);
+    	        nbttagcompound.setTag("ownerGameProfile", (NBTBase)ownerNbt);
+    	      } 
     	    NBTTagList nbttaglist = new NBTTagList();
     	    nbttagcompound.setInteger("storage", this.storage);
     	    nbttagcompound.setInteger("lastX", this.lastX);
@@ -833,7 +882,7 @@ return this.generating = 0;
       			        int maxConvertEnergy = this.storage * 8;
       			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
       			          int requestRFEnergy = this.maxStorage2 - this.storage2;
-      			          int requestEUEnergy = requestRFEnergy / 8;
+      			          int requestEUEnergy = requestRFEnergy / 4;
       			          
       			          this.storage2 += requestRFEnergy;
       			          this.storage -= requestEUEnergy;
@@ -949,11 +998,29 @@ if(gg != 1) {
 	}
 
 
-    
+  
+      
     public void openInventory() {
+    	for(int i= 0; i < 9; i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
+        		
+        	if(this.chargeSlots[i].getItemDamage() == 5) {
+        		 this.numUsingPlayers++;
+    	    syncNumUsingPlayers();}
+        }
+        }
     }
     
     public void closeInventory() {
+    	for(int i= 0; i < 9; i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
+        		
+        	if(this.chargeSlots[i].getItemDamage() == 5) {
+        		 this.numUsingPlayers--;
+    	    syncNumUsingPlayers();}
+        }
+        }
+    	 
     }
     
     public int tickRate() {
@@ -1064,7 +1131,10 @@ if(gg != 1) {
     private static List<String> fields = Arrays.asList(new String[0]);
     @Override
     public List<String> getNetworkedFields() {
+    	List<String> ret = new Vector<String>(1);
+    	  ret.add("owner");
         return TileEntitySolarPanel.fields;
+        
     }
     
     public boolean emitsEnergyTo(final TileEntity receiver, final ForgeDirection direction) {

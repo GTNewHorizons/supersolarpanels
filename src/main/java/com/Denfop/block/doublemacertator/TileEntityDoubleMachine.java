@@ -39,7 +39,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
   
   public int operationsPerTick;
   
-  protected float guiProgress;
+  protected double guiProgress;
   
   public AudioSource audioSource;
   
@@ -83,7 +83,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     nbttagcompound.setShort("progress", this.progress);
   }
   
-  public float getProgress() {
+  public double getProgress() {
     return this.guiProgress;
   }
   
@@ -122,7 +122,10 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
         }
         this.progress = (short)(this.progress + 1);
         this.energy -= this.energyConsume;
-        this.guiProgress = (this.progress / this.operationLength);
+        double k = this.progress;
+        double p = (k/ this.operationLength);
+      
+        this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
           operate2(output,output1);
@@ -139,7 +142,10 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
         ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
       this.progress = (short)(this.progress + 1);
       this.energy -= this.energyConsume;
-      this.guiProgress = (this.progress / this.operationLength);
+      double k = this.progress;
+      double p = (k/ this.operationLength);
+    
+      this.guiProgress = p;
       if (this.progress >= this.operationLength) {
         operate(output1);
         needsInvUpdate = true;
@@ -155,7 +161,10 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
            ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
          this.progress = (short)(this.progress + 1);
          this.energy -= this.energyConsume;
-         this.guiProgress = (this.progress / this.operationLength);
+         double k = this.progress;
+         double p = (k/ this.operationLength);
+       
+         this.guiProgress = p;
          if (this.progress >= this.operationLength) {
            operate1(output);
            needsInvUpdate = true;
@@ -190,7 +199,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     this.upgradeSlot.onChanged();
 
     float previousProgress = this.progress / this.operationLength;
-    this.guiProgress = previousProgress;
+  
     double stackOpLen = (this.defaultOperationLength + this.upgradeSlot.extraProcessTime) * 64.0D * this.upgradeSlot.processTimeMultiplier;
     this.operationsPerTick = (int)Math.min(Math.ceil(64.0D / stackOpLen), 2.147483647E9D);
     this.operationLength = (int)Math.round(stackOpLen * this.operationsPerTick / 64.0D);
