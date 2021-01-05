@@ -90,7 +90,10 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {
     return true;
   }
-  
+  public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
+	    return false;
+	  }
+	  
   public void init() {}
   
   public boolean canProvideEnergy(ItemStack itemStack) {

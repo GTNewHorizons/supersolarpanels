@@ -8,6 +8,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.entity.player.EntityPlayer;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
@@ -49,7 +51,21 @@ public class BlockMolecularTransformer extends BlockContainer
     public int getRenderType() {
         return SuperSolarPanels.blockMolecularTransformerRenderID;
     }
-    
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> dropList = super.getDrops(world, x, y, z, metadata, fortune);
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof IInventory) {
+          IInventory iinv = (IInventory)te;
+          for (int index = 0; index < iinv.getSizeInventory(); index++) {
+            ItemStack itemstack = iinv.getStackInSlot(index);
+            if (itemstack != null) {
+              dropList.add(itemstack);
+              iinv.setInventorySlotContents(index, (ItemStack)null);
+            } 
+          } 
+        } 
+        return dropList;
+      }
     public static boolean isActive(final IBlockAccess var0, final int var1, final int var2, final int var3) {
         return ((TileEntityBase)var0.getTileEntity(var1, var2, var3)).getActive();
     }

@@ -215,7 +215,10 @@ public class WirelessVajra extends ItemTool implements IElectricItem {
 				return false;
 	}
 	 
-	
+	  public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
+		    return false;
+		  }
+		  
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
 		if(!world.isRemote) {
 		if(player.isSneaking()) {

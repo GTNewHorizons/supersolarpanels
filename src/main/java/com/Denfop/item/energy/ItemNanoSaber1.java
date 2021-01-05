@@ -15,12 +15,14 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -170,7 +172,22 @@ public class ItemNanoSaber1 extends ItemElectricTool {
   }
   
   public static int ticker = 0;
-  
+  @SideOnly(Side.CLIENT)
+  public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+    ItemStack itemStack = new ItemStack(this, 1);
+    if (getChargedItem(itemStack) == this) {
+      ItemStack charged = new ItemStack(this, 1);
+      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
+      itemList.add(charged);
+      
+    } 
+   
+    if (getEmptyItem(itemStack) == this) {
+      ItemStack charged = new ItemStack(this, 1);
+      ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
+      itemList.add(charged);
+    } 
+  }
   @SideOnly(Side.CLIENT)
   private IIcon[] textures;
   

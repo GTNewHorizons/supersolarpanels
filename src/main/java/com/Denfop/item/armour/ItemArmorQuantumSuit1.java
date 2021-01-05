@@ -46,7 +46,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-
+import java.util.LinkedList;
 public class ItemArmorQuantumSuit1 extends ItemElerctirc {
   private static int   minCharge = 10000;;
 
@@ -174,7 +174,7 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
     boolean Nightvision;
     short hubmode;
     boolean jetpack, hoverMode, jetpackUsed, enableQuantumSpeedOnSprint;
-    NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
+    NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(itemStack);
     byte toggleTimer = nbtData.getByte("toggleTimer");
     boolean ret = false;
    
@@ -211,8 +211,17 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
           IC2.achievements.issueAchievement(player, "starveWithQHelmet");
         } 
        
-          
-          
+        for (Object effect : new LinkedList(player.getActivePotionEffects())) {
+            int id = ((PotionEffect) effect).getPotionID();
+            Integer cost = potionRemovalCost.get(Integer.valueOf(id));
+            if (cost != null) {
+              cost = Integer.valueOf(cost.intValue() * (((PotionEffect) effect).getAmplifier() + 1));
+              if (ElectricItem.manager.canUse(itemStack, cost.intValue())) {
+                ElectricItem.manager.use(itemStack, cost.intValue(), null);
+                IC2.platform.removePotion((EntityLivingBase)player, id);
+              } 
+            } 
+          } 
         Nightvision = nbtData.getBoolean("Nightvision");
         hubmode = nbtData.getShort("HudMode");
         if (IC2.keyboard.isAltKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
@@ -275,11 +284,16 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
         IC2.platform.profilerEndSection();
         break;
       case 1:
+    	  if(player.capabilities.isFlying) {
+    	        if (ElectricItem.manager.canUse(itemStack, 3000)) {
+    	            ElectricItem.manager.use(itemStack, 3000, null);}}
     	  jetpack = nbtData.getBoolean("jetpack");
           hoverMode = nbtData.getBoolean("hoverMode");
           jetpackUsed = false;
           if (IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
-            toggleTimer = 10;
+        	  ItemStack jetpack1 = player.inventory.armorInventory[2];
+        	  ElectricItem.manager.discharge(jetpack1, 3000, 2147483647, true, false, false);
+        	  toggleTimer = 10;
             hoverMode = !hoverMode;
             if (IC2.platform.isSimulating()) {
               nbtData.setBoolean("hoverMode", hoverMode);
@@ -290,6 +304,7 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
               } 
             } 
           } 
+          
           if (IC2.keyboard.isBoostKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
             toggleTimer = 10;
             jetpack = !jetpack;
@@ -297,33 +312,22 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
               nbtData.setBoolean("jetpack", jetpack);
               if (jetpack) {
                 IC2.platform.messagePlayer(player, "Quantum Jetpack enabled.", new Object[0]);
+    			player.capabilities.isFlying = true;
+				player.capabilities.setFlySpeed(2);
+				player.capabilities.allowFlying = true;
+				player.fallDistance = 0.0F;
+			    player.distanceWalkedModified = 0.0F;
               } else {
                 IC2.platform.messagePlayer(player, "Quantum Jetpack disabled.", new Object[0]);
+       
+
               } 
             } 
           } 
-          if (jetpack && (IC2.keyboard.isJumpKeyDown(player) || (hoverMode && player.motionY < -0.029999999329447746D)))
-            jetpackUsed = useJetpack(player, hoverMode); 
-          if (IC2.platform.isSimulating() && toggleTimer > 0) {
-            toggleTimer = (byte)(toggleTimer - 1);
-            nbtData.setByte("toggleTimer", toggleTimer);
-          } 
-          if (IC2.platform.isRendering() && player == IC2.platform.getPlayerInstance()) {
-            if (lastJetpackUsed != jetpackUsed) {
-              if (jetpackUsed) {
-                if (audioSource == null)
-                  audioSource = IC2.audioManager.createSource(player, PositionSpec.Backpack, "Tools/Jetpack/JetpackLoop.ogg", true, false, IC2.audioManager.getDefaultVolume()); 
-                if (audioSource != null)
-                  audioSource.play(); 
-              } else if (audioSource != null) {
-                audioSource.remove();
-                audioSource = null;
-              } 
-              lastJetpackUsed = jetpackUsed;
-            } 
+       
             if (audioSource != null)
               audioSource.updatePosition(); 
-          } 
+          
           if(SuperSolarPanels.disableeffect) {
               
           } else {
@@ -341,6 +345,7 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
         } else {
           enableQuantumSpeedOnSprint = true;
         } 
+       
         if (ElectricItem.manager.canUse(itemStack, 1000.0D) && (player.onGround || player
           .isInWater()) && IC2.keyboard
           .isForwardKeyDown(player) && ((enableQuantumSpeedOnSprint && player
@@ -453,49 +458,12 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
 	  }
  
   public boolean useJetpack(EntityPlayer player, boolean hoverMode) {
-    ItemStack jetpack = player.inventory.armorInventory[2];
-    if (ElectricItem.manager.getCharge(jetpack) == 0.0D)
-      return false; 
-    float power = 1.0F;
-    float dropPercentage = 0.05F;
-    if ((float)ElectricItem.manager.getCharge(jetpack) / getMaxCharge(jetpack) <= dropPercentage)
-      power = (float)(power * ElectricItem.manager.getCharge(jetpack) / getMaxCharge(jetpack) * dropPercentage); 
-    if (IC2.keyboard.isForwardKeyDown(player)) {
+   
+    
 
-      float retruster = 3.5F;
-      if (hoverMode)
-        retruster = 0.5F; 
-      float forwardpower = power * retruster * 2.0F;
-      if (forwardpower > 0.0F)
-        player.moveFlying(0.0F, 0.4F * forwardpower, 0.02F); 
-    } 
-    int worldHeight = IC2.getWorldHeight(player.worldObj);
-    double y = player.posY;
-    if (y > (worldHeight - 25)) {
-      if (y > worldHeight)
-        y = worldHeight; 
-      power = (float)(power * (worldHeight - y) / 25.0D);
-    } 
-    double prevmotion = player.motionY;
-    player.motionY = Math.min(player.motionY + (power * 0.2F), 0.6000000238418579D);
-    if (hoverMode) {
-      float maxHoverY = -0.025F;
-      if (IC2.keyboard.isSneakKeyDown(player))
-        maxHoverY = -0.1F; 
-      if (IC2.keyboard.isJumpKeyDown(player))
-        maxHoverY = 0.1F; 
-      if (player.motionY > maxHoverY) {
-        player.motionY = maxHoverY;
-        if (prevmotion > player.motionY)
-          player.motionY = prevmotion; 
-      } 
-    } 
-    double consume = 8.0D;
-    if (hoverMode)
-      consume = 10.0D; 
-    ElectricItem.manager.discharge(jetpack, consume, 2147483647, true, false, false);
-    player.fallDistance = 0.0F;
-    player.distanceWalkedModified = 0.0F;
+  
+  
+    
     IC2.platform.resetPlayerInAirTime(player);
     return true;
   }

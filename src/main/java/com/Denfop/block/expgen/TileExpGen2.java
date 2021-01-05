@@ -42,7 +42,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, IFluidHandler, IStandOn {
 	
 	
-	public double energy;
+	public int energy;
 	public int maxEnergy;
 	private boolean addedToEnergyNet = false;
 	private int tier;
@@ -59,7 +59,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 		this.fluidTank = new FluidTank(1000 * maxtankcapacity);
 		this.initialized = false;
 		this.loaded = false;
-		this.energy = 0D;
+		this.energy = 0;
 		this.maxEnergy = maxenergy;
 		this.tier = tier1;
 		this.nametile = tileName;
@@ -83,7 +83,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		      super.readFromNBT(nbttagcompound);
 		      this.active = nbttagcompound.getBoolean("active");
-		     this.energy = nbttagcompound.getDouble("energy");
+		     this.energy = nbttagcompound.getInteger("energy");
 		     this.fluidTank.readFromNBT(nbttagcompound.getCompoundTag("fluidTank"));
 		     
 		     
@@ -164,9 +164,10 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 				
 				this.energy = this.maxEnergy;
 			}
-			
+			if(this.energy >= 9000) {
 			attemptGeneration();
-			
+			this.energy -= 9000;
+			}
 			
 		
 			
@@ -204,8 +205,8 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 			 
 			 int requiredXPJuice = 20 * requiredXP;
 			 FluidStack drained = this.fluidTank.drain(requiredXPJuice, true);
-			 if(drained != null) {
-			 int xp = drained.amount/2;
+			 if(drained != null && drained.amount%8 != 0) {
+			 int xp = drained.amount/8;
 			 ExperienceUtils.addPlayerXP(entityplayer, xp);
 		
 			 }
@@ -290,7 +291,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 		
 		if(this.energy > 0) {
 		this.fluidTank.fill(new FluidStack(SuperSolarPanels.FluidXP.xpJuice, 3), true);
-		this.energy -= 256;
+		
 		markDirty();
 	
 		

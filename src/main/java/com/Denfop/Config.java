@@ -163,7 +163,7 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.uhOutput = config.get("general", "UltimateHSPOutput", 320).getInt(320);
          SuperSolarPanels.qpGenDay = config.get("general", "QuantumSPGenDay", 640).getInt(640);
          SuperSolarPanels.qpGenNight = config.get("general", "QuantumSPGenNight", 160).getInt(160);
-         SuperSolarPanels.qpStorage = config.get("general", "QuantumSPStorage", 1000000).getInt(1000000);
+         SuperSolarPanels.qpStorage = config.get("general", "QuantumSPStorage", 200000).getInt(200000);
          SuperSolarPanels.qpOutput = config.get("general", "QuantumSPOutput", 1280).getInt(1280);
       //
          SuperSolarPanels.TerrasteelRodHeat = config.get("TerrasteelRod", "Heat", 1).getInt(1);
@@ -249,7 +249,7 @@ public static void config(final FMLPreInitializationEvent event) {
          //
          chaosgenday= config.get("Chaos Solar Panel", "genday", 1310720).getInt(1310720);
          chaosgennight= config.get("Chaos Solar Panel", "gennight", 1310720).getInt(1310720);
-         chaosstorage= config.get("Chaos Solar Panel", "storage", 500000000).getInt(500000000);
+         chaosstorage= config.get("Chaos Solar Panel", "storage", 50000000).getInt(50000000);
          chaosoutput= config.get("Chaos Solar Panel", "output", 2621440).getInt(2621440);
          chaostier= config.get("Chaos Solar Panel", "tier", 10).getInt(10);
          ASP = config.get("Integrestion", "Integrestion Advanced Solar Panels", true).getBoolean(true);

@@ -73,7 +73,7 @@ public InvSlotProcessable inputSlotC;
     this.defaultEnergyStorage = energyPerTick * length;
     this.outputSlotA = new InvSlotOutput(this, "outputA", 2, outputSlots);
     this.outputSlotB = new InvSlotOutput(this, "outputB", 2, outputSlots);
-    this.outputSlotC = new InvSlotOutput(this, "outputB", 2, outputSlots);
+    this.outputSlotC = new InvSlotOutput(this, "outputÑ", 2, outputSlots);
     this.upgradeSlot = new InvSlotUpgrade(this, "upgrade", 4, 4);
   }
   
@@ -114,9 +114,10 @@ public InvSlotProcessable inputSlotC;
   protected void updateEntityServer() {
     super.updateEntityServer();
     boolean needsInvUpdate = false;
+    
     RecipeOutput output = getOutput1();
     RecipeOutput output1 = getOutput();
-    RecipeOutput output2 = getOutput3();
+    RecipeOutput output2 = getOutput2();
     
     if ((output != null && output1 != null && output2 != null) && this.energy >= this.energyConsume) {
         setActive(true);
@@ -132,15 +133,16 @@ public InvSlotProcessable inputSlotC;
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
-        	operate3(output,output1,output2);
+        	this.guiProgress = 0;
+          operate3(output,output1,output2);
           needsInvUpdate = true;
           this.progress = 0;
           
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
         } 
       }
-   
-    else  if ((output != null && output1 != null) && this.energy >= this.energyConsume) {
+    
+    else if ((output != null && output1 != null) && this.energy >= this.energyConsume) {
         setActive(true);
         if (this.progress == 0) {
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
@@ -154,6 +156,7 @@ public InvSlotProcessable inputSlotC;
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
+        	this.guiProgress = 0;
           operate2(output,output1);
           needsInvUpdate = true;
           this.progress = 0;
@@ -161,9 +164,7 @@ public InvSlotProcessable inputSlotC;
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
         } 
       }
-    
-     
-     else  if ((output2 != null && output1 != null) && this.energy >= this.energyConsume) {
+    else if ((output != null && output2 != null) && this.energy >= this.energyConsume) {
         setActive(true);
         if (this.progress == 0) {
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
@@ -177,16 +178,15 @@ public InvSlotProcessable inputSlotC;
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
-          operate5(output2,output1);
+        	this.guiProgress = 0;
+          operate10(output,output2);
           needsInvUpdate = true;
           this.progress = 0;
           
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
         } 
       }
-    
-     
-     else if ((output2 != null && output != null) && this.energy >= this.energyConsume) {
+    else if ((output1 != null && output2 != null) && this.energy >= this.energyConsume) {
         setActive(true);
         if (this.progress == 0) {
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
@@ -200,14 +200,14 @@ public InvSlotProcessable inputSlotC;
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
-          operate4(output2,output);
+        	this.guiProgress = 0;
+          operate7(output1,output2);
           needsInvUpdate = true;
           this.progress = 0;
           
           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
         } 
       }
-    
     else if ((output1 != null) && this.energy >= this.energyConsume) {
       setActive(true);
       if (this.progress == 0)
@@ -219,6 +219,7 @@ public InvSlotProcessable inputSlotC;
     
       this.guiProgress = p;
       if (this.progress >= this.operationLength) {
+    		this.guiProgress = 0;
         operate(output1);
         needsInvUpdate = true;
         this.progress = 0;
@@ -226,24 +227,7 @@ public InvSlotProcessable inputSlotC;
       } 
     } 
     
-    else if ((output2 != null) && this.energy >= this.energyConsume) {
-        setActive(true);
-        if (this.progress == 0)
-          ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
-        this.progress = (short)(this.progress + 1);
-        this.energy -= this.energyConsume;
-        double k = this.progress;
-        double p = (k/ this.operationLength);
-      
-        this.guiProgress = p;
-        if (this.progress >= this.operationLength) {
-          operate6(output2);
-          needsInvUpdate = true;
-          this.progress = 0;
-          ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
-        } 
-      } 
-      
+
     else if (output != null && this.energy >= this.energyConsume) {
          setActive(true);
          if (this.progress == 0)
@@ -255,7 +239,27 @@ public InvSlotProcessable inputSlotC;
        
          this.guiProgress = p;
          if (this.progress >= this.operationLength) {
+        		this.guiProgress = 0;
            operate1(output);
+           needsInvUpdate = true;
+           this.progress = 0;
+           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
+         } 
+       }
+      
+    else if (output2 != null && this.energy >= this.energyConsume) {
+         setActive(true);
+         if (this.progress == 0)
+           ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
+         this.progress = (short)(this.progress + 1);
+         this.energy -= this.energyConsume;
+         double k = this.progress;
+         double p = (k/ this.operationLength);
+       
+         this.guiProgress = p;
+         if (this.progress >= this.operationLength) {
+        		this.guiProgress = 0;
+           operate7(output2);
            needsInvUpdate = true;
            this.progress = 0;
            ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
@@ -284,7 +288,72 @@ public InvSlotProcessable inputSlotC;
     
   }
   
-  public void setOverclockRates() {
+  private void operate10(RecipeOutput output, RecipeOutput output2) {
+	  for (int i = 0; i < this.operationsPerTick; i++) {
+	    	List<ItemStack> processResult = output.items;
+	    	  List<ItemStack> processResult2 = output2.items;
+	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+	        ItemStack stack = this.upgradeSlot.get(j);
+	            if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult2); 
+	      } 
+	      
+	      operateOnce5(output, processResult,output2, processResult2);
+	    
+	      output = getOutput();
+	      output2 = getOutput2();
+	      
+	      if (output == null)
+	          break; 
+	      if (output2 == null)
+	          break;
+	    } 
+	
+}
+
+private void operate3(RecipeOutput output, RecipeOutput output1, RecipeOutput output2) {
+	  for (int i = 0; i < this.operationsPerTick; i++) {
+	    	List<ItemStack> processResult = output.items;
+	    	  List<ItemStack> processResult2 = output2.items;
+	      List<ItemStack> processResult1 = output1.items;
+	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+	        ItemStack stack = this.upgradeSlot.get(j);
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult2); 
+	      } 
+	      
+	      operateOnce4(output1, processResult1,output, processResult,output2, processResult2);
+	      output1 = getOutput1();
+	      output = getOutput();
+	      output2 = getOutput2();
+	      if (output1 == null)
+	          break; 
+	      if (output == null)
+	          break; 
+	      if (output2 == null)
+	          break;
+	    } 
+	
+}
+
+private void operateOnce4(RecipeOutput output1, List<ItemStack> processResult1, RecipeOutput output,
+		List<ItemStack> processResult, RecipeOutput output2, List<ItemStack> processResult2) {
+	  this.inputSlotB.consume();
+	  this.outputSlotB.add(processResult);
+	  this.inputSlotA.consume();
+	   this.outputSlotA.add(processResult1);
+		  this.inputSlotC.consume();
+		   this.outputSlotC.add(processResult2);
+	
+}
+
+public void setOverclockRates() {
     this.upgradeSlot.onChanged();
 
     double previousProgress = this.progress / this.operationLength;
@@ -301,24 +370,24 @@ public InvSlotProcessable inputSlotC;
   }
   
   public void operate1(RecipeOutput output1) {
-    for (int i = 0; i < this.operationsPerTick; i++) {
+	    for (int i = 0; i < this.operationsPerTick; i++) {
 
-      List<ItemStack> processResult1 = output1.items;
-      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-        ItemStack stack = this.upgradeSlot.get(j);
-        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
-      } 
-      
-      operateOnce1(output1, processResult1);
-     
-      output1 = getOutput1();
-      
-      if (output1 == null)
-          break; 
-    } 
-  }//
-  public void operate(RecipeOutput output) {
+	      List<ItemStack> processResult1 = output1.items;
+	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+	        ItemStack stack = this.upgradeSlot.get(j);
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+	      } 
+	      
+	      operateOnce1(output1, processResult1);
+	     
+	      output1 = getOutput1();
+	      
+	      if (output1 == null)
+	          break; 
+	    } 
+	  }//
+  public void operate7(RecipeOutput output) {
 	    for (int i = 0; i < this.operationsPerTick; i++) {
 
 	      List<ItemStack> processResult = output.items;
@@ -328,216 +397,193 @@ public InvSlotProcessable inputSlotC;
 	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
 	      } 
 	      
-	      operateOnce(output, processResult);
+	      operateOnce3(output, processResult);
 	     
-	      output = getOutput();
+	      output = getOutput2();
 	      
 	      if (output == null)
 	          break; 
 	    } 
 	  }
-  
-  
-  public void operate2(RecipeOutput output,RecipeOutput output1) {
-	    for (int i = 0; i < this.operationsPerTick; i++) {
-	    	List<ItemStack> processResult = output.items;
-	    	
-	      List<ItemStack> processResult1 = output1.items;
-	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-	        ItemStack stack = this.upgradeSlot.get(j);
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
-	      } 
-	      
-	      operateOnce2(output1, processResult1,output, processResult);
-	      output1 = getOutput1();
-	      output = getOutput();
-	      if (output1 == null)
-	          break; 
-	      if (output == null)
-	          break; 
-	    } 
-	  }
+	  public void operate(RecipeOutput output) {
+		    for (int i = 0; i < this.operationsPerTick; i++) {
 
-  
-  public void operate3(RecipeOutput output,RecipeOutput output1,RecipeOutput output2) {
-	    for (int i = 0; i < this.operationsPerTick; i++) {
-	    	List<ItemStack> processResult = output.items;
+		      List<ItemStack> processResult = output.items;
+		      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+		        ItemStack stack = this.upgradeSlot.get(j);
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+		      } 
+		      
+		      operateOnce(output, processResult);
+		     
+		      output = getOutput();
+		      
+		      if (output == null)
+		          break; 
+		    } 
+		  }
+	  public void operate5(RecipeOutput output,RecipeOutput output2) {
+		    for (int i = 0; i < this.operationsPerTick; i++) {
+		    	List<ItemStack> processResult = output.items;
+		    	
 		      List<ItemStack> processResult2 = output2.items;
-	      List<ItemStack> processResult1 = output1.items;
-	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-	        ItemStack stack = this.upgradeSlot.get(j);
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult2); 
-	      } 
-	      
-	      
-	
-	      operateOnce(output1, processResult1);
-	      operateOnce1(output, processResult);
-	      
-	      operateOnce6(output2, processResult2);
-	      output = getOutput();
-	      output2 = getOutput3();
-	      output1 = getOutput1();
-	      if (output1 == null)
-	          break; 
-	      if (output == null)
-	          break; 
-	      if (output2 == null)
-	          break;
-	    } 
-	  }
+		      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+		        ItemStack stack = this.upgradeSlot.get(j);
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult2); 
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+		      } 
+		      
+		      operateOnce2(output2, processResult2,output, processResult);
+		      output2 = getOutput2();
+		      output = getOutput();
+		      if (output2 == null)
+		          break; 
+		      if (output == null)
+		          break; 
+		    } 
+		  }
+	  public void operate6(RecipeOutput output1,RecipeOutput output2) {
+		    for (int i = 0; i < this.operationsPerTick; i++) {
+		    	List<ItemStack> processResult1 = output1.items;
+		    	
+		      List<ItemStack> processResult2 = output2.items;
+		      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+		        ItemStack stack = this.upgradeSlot.get(j);
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult2); 
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+		      } 
+		      
+		      operateOnce6(output2, processResult2,output1, processResult1);
+		      output1 = getOutput1();
+		      output2 = getOutput2();
+		      if (output2 == null)
+		          break; 
+		      if (output1 == null)
+		          break; 
+		    } 
+		  }
+	 
 
-  public void operate4(RecipeOutput output,RecipeOutput output1) {
-	    for (int i = 0; i < this.operationsPerTick; i++) {
-	    	List<ItemStack> processResult = output.items;
-	    	
-	      List<ItemStack> processResult1 = output1.items;
-	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-	        ItemStack stack = this.upgradeSlot.get(j);
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
-	      } 
-	      
-	      operateOnce4(output1, processResult1,output, processResult);
-	      output1 = getOutput();
-	      output = getOutput3();
-	      if (output1 == null)
-	          break; 
-	      if (output == null)
-	          break; 
-	    } 
-	  }
-
-  public void operate5(RecipeOutput output1,RecipeOutput output3) {
-	    for (int i = 0; i < this.operationsPerTick; i++) {
-	    	List<ItemStack> processResult3 = output3.items;
-	    	
-	      List<ItemStack> processResult1 = output1.items;
-	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-	        ItemStack stack = this.upgradeSlot.get(j);
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult3); 
-	      } 
-	      
-	      operateOnce5(output1, processResult1,output3, processResult3);
-	      output1 = getOutput1();
-	      output3 = getOutput3();
-	      if (output1 == null)
-	          break; 
-	      if (output3 == null)
-	          break; 
-	    } 
-	  }
-
-  public void operate6(RecipeOutput output) {
-	    for (int i = 0; i < this.operationsPerTick; i++) {
-
-	      List<ItemStack> processResult = output.items;
-	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
-	        ItemStack stack = this.upgradeSlot.get(j);
-	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
-	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
-	      } 
-	      
-	      operateOnce6(output, processResult);
-	     
-	      output = getOutput3();
-	      
-	      if (output == null)
-	          break; 
-	    } 
-	  }
-
-  public void operateOnce1(RecipeOutput output, List<ItemStack> processResult) {
-    this.inputSlotA.consume();
-    this.outputSlotA.add(processResult);
-  
-    
- }
-  public void operateOnce(RecipeOutput output, List<ItemStack> processResult) {
-	  this.inputSlotB.consume();
-	  this.outputSlotB.add(processResult);
+	public void operate2(RecipeOutput output,RecipeOutput output1) {
+		    for (int i = 0; i < this.operationsPerTick; i++) {
+		    	List<ItemStack> processResult = output.items;
+		    	
+		      List<ItemStack> processResult1 = output1.items;
+		      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+		        ItemStack stack = this.upgradeSlot.get(j);
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+		      } 
+		      
+		      operateOnce2(output1, processResult1,output, processResult);
+		      output1 = getOutput1();
+		      output = getOutput();
+		      if (output1 == null)
+		          break; 
+		      if (output == null)
+		          break; 
+		    } 
+		  }
+	  public void operate7(RecipeOutput output,RecipeOutput output1) {
+		    for (int i = 0; i < this.operationsPerTick; i++) {
+		    	List<ItemStack> processResult = output.items;
+		    	
+		      List<ItemStack> processResult1 = output1.items;
+		      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+		        ItemStack stack = this.upgradeSlot.get(j);
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+		        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+		            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
+		      } 
+		      
+		      operateOnce6(output1, processResult1,output, processResult);
+		      output1 = getOutput1();
+		      output = getOutput2();
+		      if (output1 == null)
+		          break; 
+		      if (output == null)
+		          break; 
+		    } 
+		  }
+	  public void operateOnce5(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
+		  this.inputSlotA.consume();
+		  this.outputSlotA.add(processResult);
+		  this.inputSlotC.consume();
+		   this.outputSlotC.add(processResult1);
+		    
+		 }
+	  
+	  public void operateOnce6(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
+		  this.inputSlotB.consume();
+		  this.outputSlotB.add(processResult);
+		  this.inputSlotC.consume();
+		   this.outputSlotC.add(processResult1);
+		    
+		 }
+	  public void operateOnce1(RecipeOutput output, List<ItemStack> processResult) {
+	    this.inputSlotA.consume();
+	    this.outputSlotA.add(processResult);
 	  
 	    
 	 }
-  public void operateOnce2(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
-	  this.inputSlotB.consume();
-	  this.outputSlotB.add(processResult);
-	  this.inputSlotA.consume();
-	   this.outputSlotA.add(processResult1);
-	    
-	 }
-  public void operateOnce3(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1,RecipeOutput output2, List<ItemStack> processResult2) {
-	  this.inputSlotB.consume();
-	  this.outputSlotB.add(processResult);
-	  this.inputSlotA.consume();
-	   this.outputSlotA.add(processResult1);
-	   this.inputSlotC.consume();
-	   this.outputSlotC.add(processResult2);
-	    
-	 }
-  public void operateOnce4(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
-	  this.inputSlotA.consume();
-	  this.outputSlotA.add(processResult);
-	  this.inputSlotC.consume();
-	   this.outputSlotC.add(processResult1);
-	    
-	 }
-  public void operateOnce5(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
-	  this.inputSlotC.consume();
-	  this.outputSlotC.add(processResult);
-	  this.inputSlotB.consume();
-	   this.outputSlotB.add(processResult1);
-	    
-	 }
-  public void operateOnce6(RecipeOutput output, List<ItemStack> processResult) {
-	 
-	  this.inputSlotC.consume();
-	   this.outputSlotC.add(processResult);
-	    
-	 }
-  public RecipeOutput getOutput1() {
-	    if (this.inputSlotA.isEmpty())
-	      return null; 
-	    RecipeOutput output = this.inputSlotA.process();
-	    if (output == null)
-	      return null; 
-	    if (this.outputSlotA.canAdd(output.items))
-	      return output; 
-	    return null;
-	  }
-  public RecipeOutput getOutput() {
-	    if (this.inputSlotB.isEmpty())
-	      return null; 
-	    RecipeOutput output = this.inputSlotB.process();
-	    if (output == null)
-	      return null; 
-	    if (this.outputSlotB.canAdd(output.items))
-	      return output; 
-	    return null;
-	  }
-  public RecipeOutput getOutput3() {
-	    if (this.inputSlotC.isEmpty())
-	      return null; 
-	    RecipeOutput output = this.inputSlotC.process();
-	    if (output == null)
-	      return null; 
-	    if (this.outputSlotC.canAdd(output.items))
-	      return output; 
-	    return null;
-	  }
+	  public void operateOnce(RecipeOutput output, List<ItemStack> processResult) {
+		  this.inputSlotB.consume();
+		  this.outputSlotB.add(processResult);
+		  
+		    
+		 }
+	  public void operateOnce3(RecipeOutput output, List<ItemStack> processResult) {
+		  this.inputSlotC.consume();
+		  this.outputSlotC.add(processResult);
+		  
+		    
+		 }
+	  public void operateOnce2(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
+		  this.inputSlotB.consume();
+		  this.outputSlotB.add(processResult);
+		  this.inputSlotA.consume();
+		   this.outputSlotA.add(processResult1);
+		    
+		 }
+	  public RecipeOutput getOutput1() {
+		    if (this.inputSlotA.isEmpty())
+		      return null; 
+		    RecipeOutput output = this.inputSlotA.process();
+		    if (output == null)
+		      return null; 
+		    if (this.outputSlotA.canAdd(output.items))
+		      return output; 
+		    return null;
+		  }
+	  public RecipeOutput getOutput() {
+		    if (this.inputSlotB.isEmpty())
+		      return null; 
+		    RecipeOutput output = this.inputSlotB.process();
+		    if (output == null)
+		      return null; 
+		    if (this.outputSlotB.canAdd(output.items))
+		      return output; 
+		    return null;
+		  }
+	  public RecipeOutput getOutput2() {
+		    if (this.inputSlotC.isEmpty())
+		      return null; 
+		    RecipeOutput output = this.inputSlotC.process();
+		    if (output == null)
+		      return null; 
+		    if (this.outputSlotC.canAdd(output.items))
+		      return output; 
+		    return null;
+		  }
+	  
   public abstract String getInventoryName();
   
   public ContainerBase<? extends TileEntityTripleMachine> getGuiContainer(EntityPlayer entityPlayer) {

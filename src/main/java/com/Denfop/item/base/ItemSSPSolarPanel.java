@@ -141,13 +141,7 @@ public class ItemSSPSolarPanel extends ItemBlock
             break;
        
         } 
-        switch (meta) {
-          case 11:
-          case 12:
-            nbttagcompound = StackUtil.getOrCreateNbtData(itemStack);
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbttagcompound.getInteger("energy") + " EU");
-            break;
-        }}
+        }
         @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(final ItemStack itemstack) {
         final int i = itemstack.getItemDamage();

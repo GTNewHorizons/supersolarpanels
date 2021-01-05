@@ -16,7 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class TileEntityTripleElectricFurnace extends TileEntityTripleMachine {
   public TileEntityTripleElectricFurnace() {
-    super(3, 100, 3);
+    super(3, 100, 1);
     this.inputSlotA = (InvSlotProcessable)new InvSlotProcessableSmelting(this, "inputA", 0, 1);
     this.inputSlotB = (InvSlotProcessable)new InvSlotProcessableSmelting(this, "inputB", 0, 1);
     this.inputSlotC = (InvSlotProcessable)new InvSlotProcessableSmelting(this, "inputC", 0, 1);

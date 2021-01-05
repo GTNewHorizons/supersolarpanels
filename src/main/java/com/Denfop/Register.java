@@ -3,6 +3,7 @@ package com.Denfop;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
 import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
 import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
+import com.Denfop.block.Base.BlockElectric;
 import com.Denfop.block.Base.BlockSSP;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.block.BlockVajra.ItemBlockVCh;
@@ -27,6 +28,7 @@ import com.Denfop.block.ore.BlockSSPRedstone;
 import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
+import com.Denfop.item.base.ItemElectricBlock;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.item.base.SSPItem;
 import com.Denfop.item.reactor.ItemRadioactive;
@@ -211,7 +213,9 @@ public static void register() {
       GameRegistry.registerBlock(SuperSolarPanels.endcopper_stone = new BlockSSP(Material.rock)
 				.setBlockTextureName("supersolarpanel:endcopper_stone" ).setHardness(0.6f)
 				.setStepSound(Block.soundTypeStone).setBlockName("endcopper_stone"), "endcopper_stone").setHarvestLevel("pickaxe", 3);
+     //
      
+      //
       GameRegistry.registerItem(SuperSolarPanels.bluecomponent, "bluecomponent");
       GameRegistry.registerItem(SuperSolarPanels.greencomponent, "greencomponent");
       GameRegistry.registerItem(SuperSolarPanels.redcomponent, "redcomponent");

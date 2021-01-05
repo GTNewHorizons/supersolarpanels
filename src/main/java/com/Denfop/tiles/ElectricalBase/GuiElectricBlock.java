@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.tiles.base.TileEntityElectricBlock;
+
 @SideOnly(Side.CLIENT)
 public class GuiElectricBlock extends GuiContainer {
   private final ContainerElectricBlock container;

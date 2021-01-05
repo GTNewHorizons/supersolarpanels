@@ -50,7 +50,6 @@ public class module7 extends Item
         this.itemNames.add("module73");
         this.itemNames.add("module74");
         this.itemNames.add("module75");
-        this.itemNames.add("module76");
     }
     
     @SideOnly(Side.CLIENT)
@@ -60,7 +59,6 @@ public class module7 extends Item
         this.IIconsList[2] = IIconRegister.registerIcon("supersolarpanel:module73");
         this.IIconsList[3] = IIconRegister.registerIcon("supersolarpanel:module74");
         this.IIconsList[4] = IIconRegister.registerIcon("supersolarpanel:module75");
-        this.IIconsList[5] = IIconRegister.registerIcon("supersolarpanel:module76");
 
     }
   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {

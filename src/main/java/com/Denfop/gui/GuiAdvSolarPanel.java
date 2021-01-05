@@ -69,7 +69,6 @@ public class GuiAdvSolarPanel extends GuiContainer
         int output = 0;
         int tierplus = 0;
         int minus = 0;
-        int rf = 1;
         for(int i= 0; i < 9; i++) {
             if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module3)
         		maxstorage1++;
@@ -84,9 +83,7 @@ public class GuiAdvSolarPanel extends GuiContainer
         		else if(kk == 2) {
         			minus++;
         		}
-        		else if(kk == 4) {
-        			rf = 4;
-        		}
+        		
         		
         	}
         }
@@ -171,7 +168,7 @@ b9 = module6.Output(kk);}
 }//
 float a[];
 a = new float[4];
-a[0] = (float) (((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1))*rf;
+a[0] = (float) (((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1));
 if(maxstorage1 !=0 && Config.EnglishFix == false) {
 if(a[0] < 2147000000 && a[0] > 0) {
 	 float h = a[0];

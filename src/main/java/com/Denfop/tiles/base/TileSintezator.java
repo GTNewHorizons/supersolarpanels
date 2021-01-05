@@ -277,15 +277,15 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         			int g = chargeSlots[i].getItemDamage();
             		int p = chargeSlots[i].stackSize;
             		if(p <=  Config.limit) {
-            			n[i] = modules1.GenDay(g) * p;
-            			n1[i] = modules1.GenNight(g)* p;
-            			n2[i] = modules1.storage(g)* p;
-            			n3[i] = modules1.Output(g)* p;
+            			n[i] = com.Denfop.integration.DE.modules.GenDay(g) * p;
+            			n1[i] =  com.Denfop.integration.DE.modules.GenNight(g)* p;
+            			n2[i] =  com.Denfop.integration.DE.modules.storage(g)* p;
+            			n3[i] =  com.Denfop.integration.DE.modules.Output(g)* p;
                 		}else {
-                			n[i] = modules1.GenDay(g) *  Config.limit ;
-                			n1[i] = modules1.GenNight(g)*  Config.limit ;
-                			n2[i] = modules1.storage(g)*  Config.limit ;
-                			n3[i]  = modules1.Output(g)*  Config.limit ;
+                			n[i] =  com.Denfop.integration.DE.modules.GenDay(g) *  Config.limit ;
+                			n1[i] =  com.Denfop.integration.DE.modules.GenNight(g)*  Config.limit ;
+                			n2[i] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
+                			n3[i]  =  com.Denfop.integration.DE.modules.Output(g)*  Config.limit ;
                 		}
         		}
         	
@@ -494,9 +494,9 @@ if(sum1 < 2146999999) {
           			int g = chargeSlots[j].getItemDamage();
               		int p = chargeSlots[j].stackSize;
               		if(p <=  Config.limit) {
-              			n2[j] = modules1.storage(g)* p;
+              			n2[j] =  com.Denfop.integration.DE.modules.storage(g)* p;
                   		}else {
-                  			n2[j] = modules1.storage(g)*  Config.limit ;
+                  			n2[j] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
                   		}
           		}
           	

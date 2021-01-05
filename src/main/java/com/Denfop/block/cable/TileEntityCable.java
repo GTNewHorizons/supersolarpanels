@@ -482,11 +482,11 @@ public class TileEntityCable extends TileEntityBlock implements IEnergyConductor
       case 10:
         return 8.0D;
     } 
-    return 9001.0D;
+    return 0.0D;
   }
   
   public double getInsulationBreakdownEnergy() {
-    return 9001.0D;
+    return 0.0D;
   }
   
   public double getConductorBreakdownEnergy() {

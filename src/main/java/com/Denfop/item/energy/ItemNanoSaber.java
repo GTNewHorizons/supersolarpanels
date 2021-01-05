@@ -52,6 +52,9 @@ public class ItemNanoSaber extends ItemElectricTool {
       info.add(StatCollector.translateToLocal("ssp.transferLimit") + this.transferLimit);
  
   }
+  public double getMaxCharge(ItemStack itemStack) {
+	    return this.maxCharge;
+	  }
   public void SubItems(Item item, CreativeTabs tabs, List<ItemStack> itemList) {
 	    ItemStack charged = new ItemStack((Item)this, 1);
 	    ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
@@ -64,7 +67,25 @@ public class ItemNanoSaber extends ItemElectricTool {
     this.textures[0] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.off.name());
     this.textures[1] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.active.name());
   }
-  
+  @SideOnly(Side.CLIENT)
+  public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+    ItemStack itemStack = new ItemStack(this, 1);
+    if (getChargedItem(itemStack) == this) {
+      ItemStack charged = new ItemStack(this, 1);
+      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
+      itemList.add(charged);
+      
+    } 
+   
+    if (getEmptyItem(itemStack) == this) {
+      ItemStack charged = new ItemStack(this, 1);
+      ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
+      itemList.add(charged);
+    } 
+  }
+  public boolean canProvideEnergy(ItemStack itemStack) {
+	    return true;
+	  }
   @SideOnly(Side.CLIENT)
   public boolean requiresMultipleRenderPasses() {
     return true;

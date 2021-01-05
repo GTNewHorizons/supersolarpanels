@@ -79,4 +79,6 @@ public class ItemElectricBlock extends ItemBlockIC2 {
     nbttagcompound.setDouble("energy",  SuperSolarPanels.storage2);
     itemList.add(itemStack);
   }
+
+  
 }

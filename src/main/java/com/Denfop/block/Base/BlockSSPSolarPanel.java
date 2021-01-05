@@ -2,6 +2,14 @@ package com.Denfop.block.Base;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.item.IC2Items;
+import ic2.api.tile.IWrenchable;
+import ic2.core.Ic2Items;
+import ic2.core.init.MainConfig;
+import ic2.core.util.ConfigUtil;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -31,6 +39,7 @@ import com.Denfop.tiles.overtimepanel.TileSpectralSolarPanel;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -824,25 +833,63 @@ public class BlockSSPSolarPanel extends BlockContainer {
     
   
     
-    public void breakBlock(final World world, final int i, final int j, final int k, final Block par5, final int par6) {
-        final TileEntity tileentity = world.getTileEntity(i, j, k);
-        if (tileentity != null) {
-            
-                this.dropItems((TileEntitySolarPanel)tileentity, world);
-           
-        }
-        world.removeTileEntity(i, j, k);
-        super.breakBlock(world, i, j, k, par5, par6);
-    }
+   
     
-    public int quantityDropped(final Random random) {
-        return 1;
-    }
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> dropList = super.getDrops(world, x, y, z, metadata, fortune);
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof IInventory) {
+          IInventory iinv = (IInventory)te;
+          for (int index = 0; index < iinv.getSizeInventory(); index++) {
+            ItemStack itemstack = iinv.getStackInSlot(index);
+            if (itemstack != null) {
+              dropList.add(itemstack);
+              iinv.setInventorySlotContents(index, (ItemStack)null);
+            } 
+          } 
+        } 
+        return dropList;
+      }
+    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
+        if (axis == ForgeDirection.UNKNOWN)
+          return false; 
+        TileEntity tileEntity = worldObj.getTileEntity(x, y, z);
+        if (tileEntity instanceof IWrenchable) {
+          IWrenchable te = (IWrenchable)tileEntity;
+          int newFacing = ForgeDirection.getOrientation(te.getFacing()).getRotation(axis).ordinal();
+          if (te.wrenchCanSetFacing(null, newFacing))
+            te.setFacing((short)newFacing); 
+        } 
+        return false;
+      }
+      public void breakBlock(World world, int x, int y, int z, Block blockID, int blockMeta) {
+        super.breakBlock(world, x, y, z, blockID, blockMeta);
+        boolean var5 = true;
+        for (Iterator<ItemStack> iter = getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0).iterator(); iter.hasNext(); var5 = false) {
+          ItemStack var7 = iter.next();
+          if (!var5) {
+            if (var7 == null)
+              return; 
+            double var8 = 0.7D;
+            double var10 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
+            double var12 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
+            double var14 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
+            EntityItem var16 = new EntityItem(world, x + var10, y + var12, z + var14, var7);
+            var16.delayBeforeCanPickup = 10;
+            world.spawnEntityInWorld((Entity)var16);
+            return;
+          } 
+        } 
+      }
     
-    public int damageDropped(final int i) {
-        return i;
-    }
-    
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return Item.getItemFromBlock(SuperSolarPanels.blockSSPSolarPanel);
+      }
+      
+      public int getDamageValue(World world, int x, int y, int z) {
+        return world.getBlockMetadata(x, y, z);
+      }
+  
     public TileEntity getBlockEntity(final int i) {
         switch (i) {
             case 0:
@@ -891,31 +938,7 @@ public class BlockSSPSolarPanel extends BlockContainer {
         return true;
     }
     
-    private void dropItems(final TileEntitySolarPanel tileentity, final World world) {
-        final Random rand = new Random();
-        if (!(tileentity instanceof IInventory)) {
-            return;
-        }
-        final IInventory inventory = (IInventory)tileentity;
-        for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-            final ItemStack item = inventory.getStackInSlot(i);
-            if (item != null && item.stackSize > 0) {
-                final float rx = rand.nextFloat() * 0.8f + 0.1f;
-                final float ry = rand.nextFloat() * 0.8f + 0.1f;
-                final float rz = rand.nextFloat() * 0.8f + 0.1f;
-                final EntityItem entityItem = new EntityItem(world, (double)(tileentity.xCoord + rx), (double)(tileentity.yCoord + ry), (double)(tileentity.zCoord + rz), new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
-                if (item.hasTagCompound()) {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound)item.getTagCompound().copy());
-                }
-                final float factor = 0.05f;
-                entityItem.motionX = rand.nextGaussian() * factor;
-                entityItem.motionY = rand.nextGaussian() * factor + 0.20000000298023224;
-                entityItem.motionZ = rand.nextGaussian() * factor;
-                world.spawnEntityInWorld((Entity)entityItem);
-                item.stackSize = 0;
-            }
-        }
-    }
+   
     
     public TileEntity createNewTileEntity(final World var1, final int var2) {
         return this.getBlockEntity(var2);

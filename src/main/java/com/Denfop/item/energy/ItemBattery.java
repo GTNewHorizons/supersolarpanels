@@ -38,7 +38,9 @@ public class ItemBattery extends BaseElectricItem {
   public boolean canProvideEnergy(ItemStack itemStack) {
     return true;
   }
-  
+  public double getTransferLimit(ItemStack itemStack) {
+	    return this.transferLimit;
+	  }
   public Item getEmptyItem(ItemStack itemStack) {
     if (this == Ic2Items.chargedReBattery.getItem())
       return Ic2Items.reBattery.getItem(); 

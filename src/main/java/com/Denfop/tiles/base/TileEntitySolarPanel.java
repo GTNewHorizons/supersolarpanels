@@ -53,7 +53,10 @@ import ic2.api.energy.tile.IEnergySource;
 import ic2.api.tile.IWrenchable;
 import ic2.core.IC2;
 import ic2.core.block.personal.IPersonalBlock;
+import ic2.core.init.MainConfig;
 import ic2.core.network.NetworkManager;
+import ic2.core.util.ConfigUtil;
+import ic2.core.util.StackUtil;
 import ic2.api.energy.tile.IEnergyTile;
 
 public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IPersonalBlock
@@ -976,16 +979,27 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 	v9 = module6.storage(kk);}
 
 }
-if(gg != 1) {
+
          return  (float) (this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
-}else {
-	
-} return  this.storage2 * i /this.maxStorage2;
 
 }
         
-    
-    
+    public boolean canConnectEnergy(ForgeDirection arg0) {
+        return true;
+      }
+      
+      public int getEnergyStored(ForgeDirection from) {
+        return this.storage2;
+      }
+      
+      public int getMaxEnergyStored(ForgeDirection from) {
+        return this.maxStorage2;
+      }
+      public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+    	    if (this.convertState == 0)
+    	      return true; 
+    	    return false;
+    	  }
     public int gaugeFuelScaled(final int i) {
         return i;
     }
@@ -1010,7 +1024,16 @@ if(gg != 1) {
         }
         }
     }
-    
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        ItemStack ret = super.getWrenchDrop(entityPlayer);
+        float energyRetainedInStorageBlockDrops = ConfigUtil.getFloat(MainConfig.get(), "balance/energyRetainedInStorageBlockDrops");
+      
+        return ret;
+      }
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return (getFacing() != side);
+      }
+        
     public void closeInventory() {
     	for(int i= 0; i < 9; i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
@@ -1037,25 +1060,10 @@ if(gg != 1) {
         this.facing = facing;
     }
     
-    @Override
-    public boolean wrenchCanSetFacing(final EntityPlayer entityplayer, final int i) {
-        return false;
-    }
+   
   
-    @Override
-    public boolean wrenchCanRemove(final EntityPlayer entityplayer) {
-        return true;
-    }
     
-    @Override
-    public float getWrenchDropRate() {
-        return 1.0f;
-    }
-    
-    @Override
-    public ItemStack getWrenchDrop(final EntityPlayer entityPlayer) {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
-    }
+   
     
     public ItemStack[] getContents() {
         return this.chargeSlots;

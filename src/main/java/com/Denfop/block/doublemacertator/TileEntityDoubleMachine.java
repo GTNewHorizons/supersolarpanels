@@ -128,6 +128,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
+        	this.guiProgress = 0;
           operate2(output,output1);
           needsInvUpdate = true;
           this.progress = 0;
@@ -147,6 +148,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     
       this.guiProgress = p;
       if (this.progress >= this.operationLength) {
+    		this.guiProgress = 0;
         operate(output1);
         needsInvUpdate = true;
         this.progress = 0;
@@ -166,6 +168,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
        
          this.guiProgress = p;
          if (this.progress >= this.operationLength) {
+        		this.guiProgress = 0;
            operate1(output);
            needsInvUpdate = true;
            this.progress = 0;

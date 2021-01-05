@@ -157,7 +157,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-@Mod(modid = "supersolarpanel", name = "Super Solar Panel && Industrial Upgrade", version = "1.4.2", dependencies = "required-after:IC2;after:wirelessvajra;after:Thaumcraft;after:AppliedEnergistics;")
+@Mod(modid = "supersolarpanel", name = "Super Solar Panel && Industrial Upgrade", version = "1.4.3", dependencies = "required-after:IC2;after:wirelessvajra;after:Thaumcraft;after:AppliedEnergistics;")
 public class SuperSolarPanels implements IWorldGenerator
 {
 	   
@@ -233,7 +233,7 @@ public class SuperSolarPanels implements IWorldGenerator
     public static Item toolBox;
     public static final String MOD_ID = "supersolarpanel";
     public static final String MOD_NAME = "Super Solar Panel";
-    public static final String MOD_VERSION = "1.4";
+    public static final String MOD_VERSION = "1.4.3";
     public static final String TEXTURES_BLOCKS = "supersolarpanel:textures/blocks/";
     public static final String TEXTURES_ITEMS = "supersolarpanel:textures/items/";
     public static final String TEXTURES = "supersolarpanel";
@@ -461,6 +461,8 @@ public class SuperSolarPanels implements IWorldGenerator
 		public ItemStack module73;
 		public ItemStack module74;
 		public ItemStack module75;
+		private boolean EnchantingPlus;
+		private boolean MineFactory;
 		 public static int Radius;
 		 public static int durability;
 		 public static int efficiency;
@@ -656,7 +658,8 @@ public class SuperSolarPanels implements IWorldGenerator
         DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
         AvaritiaLoaded = Loader.isModLoaded("Avaritia");
         BotaniaLoaded = Loader.isModLoaded("Botania");
-       
+        EnchantingPlus = Loader.isModLoaded("eplus");
+MineFactory = Loader.isModLoaded("MineFactoryReloaded");
         if(DraconicLoaded && Draconic == true) {
         	DraconicIntegration.init();
         }
@@ -752,6 +755,29 @@ public class SuperSolarPanels implements IWorldGenerator
     }
     @Mod.EventHandler
     public void load(final FMLInitializationEvent event) {
+    	
+    	if(DraconicLoaded && EnchantingPlus &&MineFactory) {
+    		 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());
+    		
+    	}else if(DraconicLoaded && EnchantingPlus) {
+    		MinecraftForge.EVENT_BUS.register(new SSPDEEPEventHandler());
+    	}else if(DraconicLoaded && MineFactory) {
+    		MinecraftForge.EVENT_BUS.register(new SSPDEMFEventHandler());
+    	}else if(EnchantingPlus && MineFactory) {
+    		MinecraftForge.EVENT_BUS.register(new SSPMPMFEventHandler());
+    	}
+    	else {
+    		 if(DraconicLoaded) {
+    			 MinecraftForge.EVENT_BUS.register(new SSPDEEventHandler());
+    	        }
+    		
+			if(EnchantingPlus) {
+    			 MinecraftForge.EVENT_BUS.register(new SSPEPEventHandler());
+    	        }
+			if(MineFactory) {
+   			 MinecraftForge.EVENT_BUS.register(new SSPMFEventHandler());
+   	        }}
+    	MinecraftForge.EVENT_BUS.register(new SSPEventHandler());
         ASPPacketHandler.load();
     }
     public static int getSeaLevel(World world) {
@@ -933,6 +959,7 @@ MaceratorRecipe.recipe();
         return par1 / 255.0F;
       }
     public static Minecraft mc = FMLClientHandler.instance().getClient();
+	public static Block electicralblock;
     @EventHandler
     public static boolean isSimulating() {
 

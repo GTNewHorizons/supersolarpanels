@@ -118,12 +118,12 @@ public class GUISintezator extends GuiContainer
        			int g = this.tileentity.chargeSlots[i].getItemDamage();
            		int p = this.tileentity.chargeSlots[i].stackSize;
            		if(p <=  Config.limit) {
-           			n2[i] = modules1.storage(g)* p;
-           			n3[i] = modules1.Output(g)* p;
+           			n2[i] =  com.Denfop.integration.DE.modules.storage(g)* p;
+           			n3[i] =  com.Denfop.integration.DE.modules.Output(g)* p;
            			yy =1;
                		}else {
-               			n2[i] = modules1.storage(g)*  Config.limit ;
-               			n3[i]  = modules1.Output(g)*  Config.limit ;
+               			n2[i] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
+               			n3[i]  =  com.Denfop.integration.DE.modules.Output(g)*  Config.limit ;
                			yy =1;
                		}
        		}

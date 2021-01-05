@@ -14,6 +14,8 @@ public class NEIASPConfig implements IConfigureNEI
         API.registerRecipeHandler((ICraftingHandler)new MTRecipeHandler());
         API.registerRecipeHandler((ICraftingHandler)new NEIAlloySmelter());
         API.registerUsageHandler((IUsageHandler)new NEIAlloySmelter());
+        API.registerRecipeHandler((ICraftingHandler)new NEIDoubleMacerator());
+        API.registerUsageHandler((IUsageHandler)new NEIDoubleMacerator());
     }
     
     public String getName() {
