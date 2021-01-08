@@ -51,7 +51,6 @@ public class SSPEventHandler {
 				  nbtData = SuperSolarPanels.getOrCreateNbtData(player.inventory.armorInventory[2]);
 		if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor && player.capabilities.isFlying == true ) {
 			player.capabilities.isFlying = false;
-			player.capabilities.setFlySpeed(1);
 			player.capabilities.allowFlying = false;
 			player.fallDistance = 1.0F;
 		    player.distanceWalkedModified = 1.0F;
@@ -59,13 +58,11 @@ public class SSPEventHandler {
 			boolean jetpack = nbtData.getBoolean("jetpack");
 			if(jetpack == false) {
 				player.capabilities.isFlying = false;
-				player.capabilities.setFlySpeed(1);
 				player.capabilities.allowFlying = false;
 				player.fallDistance = 1.0F;
 			    player.distanceWalkedModified = 1.0F;
 			}else {
 				player.capabilities.isFlying = true;
-				player.capabilities.setFlySpeed(2);
 				player.capabilities.allowFlying = true;
 			}
 		}
@@ -74,7 +71,7 @@ public class SSPEventHandler {
 			
 		}
 			 }else {
-					player.capabilities.setFlySpeed(1);
+				
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
 				}}else {
@@ -88,43 +85,31 @@ public class SSPEventHandler {
 		
 		   if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
 			  return;
-		   
+		   for(int i = -1;i < 1; i++) {
+			   for(int j = -1;j < 1; j++){
 		   EntityPlayer player = (EntityPlayer) event.entity;
 		   int x = (int) player.posX;
 		   int y = (int) player.posY;
 		   int z = (int) player.posZ;
-		   Block block =  player.worldObj.getBlock(x-1, y, z);
+		   Block block =  player.worldObj.getBlock(x+i, y, z+j);
 		   
 		 if(block instanceof BlockCable) {
-			 if(player.inventory.armorInventory[1] != null && player.inventory.armorInventory[2] != null && player.inventory.armorInventory[0] != null && player.inventory.armorInventory[3] != null) {
-			if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor && player.inventory.armorInventory[3].getItem() != SuperSolarPanels.quantumHelmet && player.inventory.armorInventory[1].getItem() != SuperSolarPanels.quantumLeggings && player.inventory.armorInventory[0].getItem() != SuperSolarPanels.quantumBoots) {
+			//if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor && player.inventory.armorInventory[3].getItem() != SuperSolarPanels.quantumHelmet && player.inventory.armorInventory[1].getItem() != SuperSolarPanels.quantumLeggings && player.inventory.armorInventory[0].getItem() != SuperSolarPanels.quantumBoots) {
+				if(!ItemArmorQuantumSuit1.hasCompleteHazmat(player) && !ItemArmorHazmat.hasCompleteHazmat(player)) {
 				 player.attackEntityFrom(SSPDamageSource.current, 1.0F);}else {
 					 return;
 				 }
-			 }
-			 else {
-				 player.attackEntityFrom(SSPDamageSource.current, 1.0F);
-			 }
+			 
+			 
 		 } 
 		 else if(block instanceof ic2.core.block.wiring.BlockCable) {
-			 if(player.inventory.armorInventory[1] != null && player.inventory.armorInventory[2] != null && player.inventory.armorInventory[0] != null && player.inventory.armorInventory[3] != null) {
-			if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor && player.inventory.armorInventory[3].getItem() != SuperSolarPanels.quantumHelmet && player.inventory.armorInventory[1].getItem() != SuperSolarPanels.quantumLeggings && player.inventory.armorInventory[0].getItem() != SuperSolarPanels.quantumBoots) {
+			 if(!ItemArmorQuantumSuit1.hasCompleteHazmat(player) && !ItemArmorHazmat.hasCompleteHazmat(player)) {
 				 player.attackEntityFrom(SSPDamageSource.current, 1.0F);}else {
 					 return;
 				 }
-			 }
-			 else {
-				 player.attackEntityFrom(SSPDamageSource.current, 1.0F);
-			 }
-		 } 
-		 else {
-			 return;
 		 }
-		 
-		  
+		   }} 
 	}
 
-	public void cable(TickEvent.WorldTickEvent event) {
-
-	}
+	
 }

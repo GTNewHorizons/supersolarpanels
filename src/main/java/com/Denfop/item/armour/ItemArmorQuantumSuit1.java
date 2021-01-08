@@ -126,7 +126,7 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
     tNBT = tNBT.getCompoundTag("display");
     tNBT.setInteger("color", par2);
   }
-  public static Minecraft mc = FMLClientHandler.instance().getClient();
+  
   public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase entity, ItemStack armor, DamageSource source, double damage, int slot) {
     if (source == DamageSource.fall && this.armorType == 3) {
       int energyPerDamage = getEnergyPerDamage();
@@ -313,11 +313,11 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
               if (jetpack) {
                 IC2.platform.messagePlayer(player, "Quantum Jetpack enabled.", new Object[0]);
     			player.capabilities.isFlying = true;
-				player.capabilities.setFlySpeed(2);
+				
 				player.capabilities.allowFlying = true;
 				player.fallDistance = 0.0F;
 			    player.distanceWalkedModified = 0.0F;
-              } else {
+              } else if(!jetpack){
                 IC2.platform.messagePlayer(player, "Quantum Jetpack disabled.", new Object[0]);
        
 
@@ -452,43 +452,18 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
 	    int k = nbttagcompound.getInteger("charge");
 	    return k;
 	  }
-  public static boolean readWorkMode(ItemStack itemstack) {
-	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
-	    return nbttagcompound.getBoolean("isLevitationActive");
-	  }
- 
-  public boolean useJetpack(EntityPlayer player, boolean hoverMode) {
-   
-    
 
-  
-  
-    
-    IC2.platform.resetPlayerInAirTime(player);
-    return true;
-  }
-  public static boolean saveWorkMode(ItemStack itemstack, boolean workMode) {
-	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
-	    nbttagcompound.setBoolean("isLevitationActive", workMode);
-	    return true;
-	  }
-public static int switchWorkMode(EntityPlayer player, ItemStack itemstack) {
-	    if (readWorkMode(itemstack)) {
-	      saveWorkMode(itemstack, false);
-	      CommonProxy.sendPlayerMessage(player, "§e"+ Helpers.formatMessage("message.graviChestPlate.levitationMode") + " " + "§c"+ Helpers.formatMessage("message.text.disabled"));
-	    } else {
-	      saveWorkMode(itemstack, true);
-	      CommonProxy.sendPlayerMessage(player, "§e"+ Helpers.formatMessage("message.graviChestPlate.levitationMode") + " " + "§c"+ Helpers.formatMessage("message.text.enabled"));
-	    } 
-	    return 0;
-	  }
   public static boolean hasCompleteHazmat(EntityLivingBase living) {
+	
 	    for (int i = 1; i < 5; i++) {
 	      ItemStack stack = living.getEquipmentInSlot(i);
+	  
 	      if (stack == null || 
 	        !(stack.getItem() instanceof ItemArmorQuantumSuit1))
 	        return false; 
 	    } 
+	   
+	    
 	    return true;
 	  }
   protected static final Map<Integer, Integer> potionRemovalCost = new HashMap<Integer, Integer>();

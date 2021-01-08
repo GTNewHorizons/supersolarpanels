@@ -872,7 +872,7 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
             int posX = blockXPos + random.nextInt(maxX);
             int posY = minY + random.nextInt(maxY - minY);
             int posZ = blockZPos + random.nextInt(maxZ);
-          
+     
           
             (new WorldGenMinable(block, 0, maxVeinSize, Blocks.end_stone)).generate(world, random, posX, posY, posZ);
             }
@@ -958,8 +958,7 @@ MaceratorRecipe.recipe();
           return 0.0F; 
         return par1 / 255.0F;
       }
-    public static Minecraft mc = FMLClientHandler.instance().getClient();
-	public static Block electicralblock;
+   
     @EventHandler
     public static boolean isSimulating() {
 

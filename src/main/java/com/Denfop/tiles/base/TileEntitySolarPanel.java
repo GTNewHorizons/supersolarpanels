@@ -59,7 +59,7 @@ import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
 import ic2.api.energy.tile.IEnergyTile;
 
-public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IPersonalBlock
+public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IPersonalBlock,IEnergyHandler
 {private TileEntitySolarPanel tileentity;
     public static Random randomizer;
     public int ticker;
@@ -252,12 +252,12 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         for(int i= 0; i < 9; i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
         		
-        	if(this.chargeSlots[i].getItemDamage() == 5)
-        if (++this.ticksSinceSync % 20 * 4 == 0 && IC2.platform.isSimulating())
-            syncNumUsingPlayers(); 
-        	System.out.println("Hello World!");
+        	if(this.chargeSlots[i].getItemDamage() == 5) {
+        if (++this.ticksSinceSync % 20 * 4 == 0 && IC2.platform.isSimulating()) {
+            syncNumUsingPlayers(); }
+        
         }
-        }
+        }}
         
         if (this.lastX != this.xCoord || this.lastZ != this.zCoord || this.lastY != this.yCoord) {
             this.lastX = this.xCoord;
@@ -280,6 +280,9 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         int gend = 0;
         int genn = 0;
         int maxstorage1 = 0;
+        
+        int tierplus = 0;
+        int minus = 0;
         int output = 0;
         long nowTimeStamp = System.currentTimeMillis();
         int testStamp = Math.round((float)(nowTimeStamp - this.lastTimeStamp) / 1000.0F * 20.0F);
@@ -313,14 +316,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		maxstorage1++;}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4) {
         		output++;}
-        	
-        	
-        	
-        }
-      
-        int tierplus = 0;
-        int minus = 0;
-        for(int i = 0; i < 9;i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
         		int kk = chargeSlots[i].getItemDamage();
         		if(kk == 0) {
@@ -366,161 +361,76 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			}
         		}
         	}
+        	
+        	
+        	
         }
+     
+      
         if(this.tier + tierplus -  minus > 0) {
         this.o = this.tier + tierplus -  minus;}
         else {
         	this.o = 0;
         }
-        int m1 = 0; int m2 = 0; int m3 = 0; int m4 = 0; int m5 = 0; int m6 = 0; int m7 = 0; int m8 = 0; int m9 = 0;
-        int n1 = 0; int n2 = 0;  int n3 = 0; int n4 = 0;  int n5 = 0; int n6 = 0;  int n7 = 0; int n8 = 0;  int n9 = 0;
-        int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
-        int b1 = 0; int b2 = 0; int b3 = 0; int b4 = 0; int b5 = 0; int b6 = 0; int b7 = 0; int b8 = 0; int b9 = 0; 
+        int a[];
+    	a = new int[9];
+    	int b[];
+    	b = new int[9];
+    	int c[];
+    	c = new int[9];
+    	int d[];
+    	d = new int[9];
         
         if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
         	int g = chargeSlots[8].getItemDamage();
-        	if( g == 0) {
-        		this.solarType =1;
+        	if( g < 7 && g >=0) {
+        		this.solarType =g+1;
         		
         	}
-        	else if( g == 1) {
-        		this.solarType =2;
-        		
-        	}
-        	else if( g == 2) {
-        		this.solarType =3;
-        	}
-        	else if( g == 3) {
-        		this.solarType =4;
-        	}
-        	else if( g == 4) {
-        		this.solarType =5;
-        	}
-        	else if( g == 5) {
-        		this.solarType =6;
-        	}
-        	else	if( g == 6) {
-        		this.solarType =7;
-        	}
-        	else {
-        		this.solarType = 0;
-        		
-        	}
-        
         }else {
-        	
         	this.solarType = 0;
         }
-        	if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module6) {
-        		int g = chargeSlots[0].getItemDamage();
+        for(int i =0;i<9;i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module6) {
+        		int g = chargeSlots[i].getItemDamage();
         		if(o >= g+1) {
-        		m1 = module6.GenDay(g);
-        		n1 = module6.GenNight(g);
-        		v1 = module6.storage(g);
-        		b1 = module6.Output(g);
+        		a[i] = module6.GenDay(g);
+        		b[i] = module6.GenNight(g);
+        		c[i] = module6.storage(g);
+        		d[i] = module6.Output(g);
         		}
         	
         }
-        	if(this.chargeSlots[1] != null && this.chargeSlots[1].getItem() instanceof module6) {
-        		
-        		int kk = chargeSlots[1].getItemDamage();
-        		if(o >= kk+1) {
-        		m2 = module6.GenDay(kk);
-        		n2 = module6.GenNight(kk);
-        		v2 = module6.storage(kk);
-        		b2 = module6.Output(kk);}
-        	
         }
-if(this.chargeSlots[2] != null && this.chargeSlots[2].getItem() instanceof module6) {
-        		
-        		int kk = chargeSlots[2].getItemDamage();
-        		if(o >= kk+1) {
-        		m3 = module6.GenDay(kk);
-        		n3 = module6.GenNight(kk);
-        		v3 = module6.storage(kk);
-        		b3 = module6.Output(kk);}
-        	
+        
+        int sum = 0,sum1 = 0,sum2 = 0,sum3 = 0;
+        for(int i =0;i<9;i++) {
+        sum = sum+a[i];
+        sum1=	sum1+b[i];	
+        sum2=sum2+c[i];
+        sum3=sum3+d[i];
         }
-if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[3].getItemDamage();
-	if(o >= kk+1) {
-	m4 = module6.GenDay(kk);
-	n4 = module6.GenNight(kk);
-	v4 = module6.storage(kk);
-	b4 = module6.Output(kk);}
-
-}
-if(this.chargeSlots[4] != null && this.chargeSlots[4].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[4].getItemDamage();
-	if(o >= kk+1) {
-	m5 = module6.GenDay(kk);
-	n5 = module6.GenNight(kk);
-	v5 = module6.storage(kk);
-	b5 = module6.Output(kk);}
-
-}
-if(this.chargeSlots[5] != null && this.chargeSlots[5].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[5].getItemDamage();
-	if(o >= kk+1) {
-	m6 = module6.GenDay(kk);
-	n6 = module6.GenNight(kk);
-	v6 = module6.storage(kk);
-	b6 = module6.Output(kk);}
-
-}
-if(this.chargeSlots[6] != null && this.chargeSlots[6].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[6].getItemDamage();
-	if(o >= kk+1) {
-	m7 = module6.GenDay(kk);
-	n7 = module6.GenNight(kk);
-	v7 = module6.storage(kk);
-	b7 = module6.Output(kk);}
-
-}
-if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[7].getItemDamage();
-	if(o >= kk+1) {
-	m8 = module6.GenDay(kk);
-	n8 = module6.GenNight(kk);
-	v8 = module6.storage(kk);
-	b8 = module6.Output(kk);}
-
-}
-if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[8].getItemDamage();
-	if(o >= kk+1) {
-	m9 = module6.GenDay(kk);
-	n9 = module6.GenNight(kk);
-	v9 = module6.storage(kk);
-	b9 = module6.Output(kk);}
-
-}
-if((int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend) < 2147000000) {
-        	this.genDay  = (int) ((this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9) + (this.k + m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9)*0.2*gend);}else {
+        	
+if((int) ((this.k + sum) + (this.k +sum)*0.2*gend) < 2147000000) {
+        	this.genDay  = (int) ((this.k + sum) + (sum)*0.2*gend);}else {
         		this.genDay = 2146999999;
         	}
-if((int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn) < 2147000000) {
-        	this.genNight  = (int) ((this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9) + (this.m + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9)*0.2*genn);}else {
+if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
+        	this.genNight  = (int) ((this.m + sum1) + (this.m + sum1)*0.2*genn);}else {
         		this.genNight = 2146999999;
         	}//
        
         
-        if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) < 0) {
+        if((int) ((this.p +sum2) + (this.p +  sum2)*0.2*maxstorage1) < 0) {
     		this.maxStorage = 2146999999;
-    	}else if((int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1) > 2147000000){
+    	}else if((int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1) > 2147000000){
     		this.maxStorage = 2146999999;
     	}else {
-    		this.maxStorage = (int) ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1);
+    		this.maxStorage = (int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1);
     	}
         //
-        if((int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output) < 2147000000)	{
-        this.production  = (int) ((this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.u +  b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9)*0.2*output);}else {
+        if((int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output) < 2147000000)	{
+        this.production  = (int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output);}else {
         	this.production = 2146999999;
         }
        
@@ -878,109 +788,41 @@ return this.generating = 0;
           		}
           		else if(kk == 2) {
           			minus++;
-          		}else if(kk == 4) {
-        			if (this.convertState == 0 && this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord) || this.noSunWorld ) {
-        				gg = 1;
-      			      if (this.storage >= 0 && this.storage2 < this.maxStorage2) {
-      			        int maxConvertEnergy = this.storage * 8;
-      			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
-      			          int requestRFEnergy = this.maxStorage2 - this.storage2;
-      			          int requestEUEnergy = requestRFEnergy / 4;
-      			          
-      			          this.storage2 += requestRFEnergy;
-      			          this.storage -= requestEUEnergy;
-      			        } else {
-      			          this.storage2 += maxConvertEnergy;
-      			          
-      			        } 
-      			      } 
-        			}
-      			
-      			
-      			
-      		}
+          		}
           		
           	}
           }
           this.o = this.tier + tierplus -  minus;
     	int maxstorage1 = 0;
-    	 int v1 = 0; int v2 = 0; int v3 = 0; int v4 = 0; int v5 = 0; int v6 = 0; int v7 = 0; int v8 = 0; int v9 = 0; 
-    	//
+    	
     	 for(int j= 0; j < 9; j++) {
          
          	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module3)
          		maxstorage1++;
          	
          }
-    	 //
-    	 
-    	 if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module6) {
-     		int g = chargeSlots[0].getItemDamage();
-     		if(tier+tierplus-minus >= g+1) {
-     		v1 = module6.storage(g);
-     		}
-     	
-     }
-     	if(this.chargeSlots[1] != null && this.chargeSlots[1].getItem() instanceof module6) {
-     		
-     		int kk = chargeSlots[1].getItemDamage();
-     		if(o >= kk+1) {
-     		v2 = module6.storage(kk);}
-     	
-     }
-if(this.chargeSlots[2] != null && this.chargeSlots[2].getItem() instanceof module6) {
-     		
-     		int kk = chargeSlots[2].getItemDamage();
-     		if(o >= kk+1) {
-     		v3 = module6.storage(kk);}
-     	
-     }
-if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[3].getItemDamage();
-	if(o >= kk+1) {
-	v4 = module6.storage(kk);}
+    	
+      	int c[];
+      	c = new int[9];
+      	for(int j =0;j<9;j++) {
+        	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module6) {
+        		int g = chargeSlots[j].getItemDamage();
+        		if(o >= g+1) {
+        		c[j] = module6.storage(g);
+        		}
+        	
+        }
+        	
+        }
+        
+        int sum = 0,sum1 = 0,sum2 = 0,sum3 = 0;
+        for(int j =0;j<9;j++) {
 
-}
-if(this.chargeSlots[4] != null && this.chargeSlots[4].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[4].getItemDamage();
-	if(o >= kk+1) {
-	v5 = module6.storage(kk);}
+        sum2=sum2+c[j];
+        }
+    	
 
-}
-if(this.chargeSlots[5] != null && this.chargeSlots[5].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[5].getItemDamage();
-	if(o >= kk+1) {
-	v6 = module6.storage(kk);}
-
-}
-if(this.chargeSlots[6] != null && this.chargeSlots[6].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[6].getItemDamage();
-	if(o >= kk+1) {
-	v7 = module6.storage(kk);}
-
-}
-if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[7].getItemDamage();
-	if(o >= kk+1) {
-	
-	v8 = module6.storage(kk);}
-
-}
-if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module6) {
-	
-	int kk = chargeSlots[8].getItemDamage();
-	if(o >= kk+1) {
-	
-	v9 = module6.storage(kk);}
-
-}
-
-         return  (float) (this.storage * i /(  ((this.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.p +  v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)*0.2*maxstorage1)));
+         return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1)));
 
 }
         
@@ -1011,7 +853,13 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistance((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
-
+    public short getFacing() {
+        return this.facing;
+      }
+      
+      public void setFacing(short facing) {
+        this.facing = facing;
+      }
   
       
     public void openInventory() {
@@ -1050,17 +898,7 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
         return 40;
     }
     
-    @Override
-    public short getFacing() {
-        return this.facing;
-    }
-    
-    @Override
-    public void setFacing(final short facing) {
-        this.facing = facing;
-    }
-    
-   
+ 
   
     
    
@@ -1166,6 +1004,28 @@ if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof modul
         TileEntitySolarPanel.randomizer = new Random();
         TileEntitySolarPanel.fields = Arrays.asList(new String[0]);
     }
+
+	@Override
+	 public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+	    if (this.convertState == 1) {
+	      if (this.storage2 >= this.maxStorage2)
+	        return 0; 
+	      if (this.storage2 + maxReceive > this.maxStorage2) {
+	        int energyReceived = this.maxStorage2 - this.storage2;
+	        if (!simulate) {
+	          this.storage2 = this.maxStorage2;
+	          this.inputEnergyBuffer += energyReceived;
+	        } 
+	        return energyReceived;
+	      } 
+	      if (!simulate) {
+	        this.inputEnergyBuffer += maxReceive;
+	        this.storage2 += maxReceive;
+	      } 
+	      return maxReceive;
+	    } 
+	    return 0;
+	  }
 
 	
 }
