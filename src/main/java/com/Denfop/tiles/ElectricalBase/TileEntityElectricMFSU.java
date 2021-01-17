@@ -1,8 +1,8 @@
 package com.Denfop.tiles.ElectricalBase;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.tiles.base.TileEntityElectricBlock;
 
-import ic2.core.block.wiring.TileEntityElectricBlock;
 
 
 

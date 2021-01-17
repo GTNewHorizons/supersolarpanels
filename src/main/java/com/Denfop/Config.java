@@ -14,6 +14,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {
+public static final boolean EnglishFix = false;
 public static int limit;
 public static int tier;
 public static int neutrongenday;
@@ -54,18 +55,78 @@ public static int draconicoutput;
 public static int draconicstorage;
 public static int draconicgennight;
 public static int draconicgenday;
-public static boolean EnglishFix;
 public static boolean ASP;
 public static int toriyRodCells;
 public static int toriyRodHeat;
 public static float toriyPower;
 public static File configFile;
+public static boolean registerDraconicPanels;
+public static boolean registerChaosArmour;
+public static boolean registerChaosFluxCapacitor;
+public static boolean registerChaosAxe;
+public static boolean registerChaosBow;
+public static boolean registerChaosSword;
+public static boolean registerChaosShovel;
+public static boolean registerChaosPickaxe;
+public static boolean registerChaosDestructionStaff;
+public static boolean nightvision;
+public static float effPower;
+public static float bigHolePower;
+public static float lowPower;
+public static float ultraLowPower;
+public static int ultdrillmaxCharge;
+public static int ultdrilltier;
+public static int energyPerOperation;
+public static int energyPerLowOperation;
+public static int energyPerultraLowPowerOperation;
+public static int energyPerbigHolePowerOperation;
+public static int ultdrilltransferLimit;
+public static boolean enableefficiency;
+public static int efficiencylevel;
+public static boolean enableefficiency1;
+public static int efficiencylevel1;
+public static boolean enablesilkTouch;
+public static boolean enablefortune;
+public static int fortunelevel;
+public static boolean enableexlposion;
+public static boolean enableIC2EasyMode;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
          configFile = event.getSuggestedConfigurationFile();
-        
+        //
+         
+         effPower= config.get("UltimateDrill", "Mode 0 efficiency", 35).getInt(35); 
+         lowPower=config.get("UltimateDrill", "Mode 1 efficiency", 20).getInt(20); 
+         bigHolePower =config.get("UltimateDrill", "Mode 2 efficiency", 16).getInt(16); 
+         ultraLowPower=config.get("UltimateDrill", "Mode 3 efficiency", 10).getInt(10); 
+         ultdrillmaxCharge=config.get("UltimateDrill", "maxCharge", 750000).getInt(750000); 
+         ultdrilltier=config.get("UltimateDrill", "tier", 2).getInt(2); 
+         ultdrilltransferLimit=config.get("UltimateDrill", "transfer Limit", 500).getInt(500); 
+         energyPerOperation=config.get("UltimateDrill", "energyPerOperation", 160).getInt(160); 
+         energyPerLowOperation=config.get("UltimateDrill", "energyPerLowOperation", 80).getInt(80); 
+         energyPerbigHolePowerOperation=config.get("UltimateDrill", "energyPerBigHolesOperation",300).getInt(300); 
+         energyPerultraLowPowerOperation=config.get("UltimateDrill", "energyPerUltraBigHolesOperation", 500).getInt(500); 
+         enableefficiency=config.get("UltimateDrill", "Enable Efficiency tool mode 0", true).getBoolean(true); 
+         if(efficiencylevel > 1 && efficiencylevel <15) {
+         efficiencylevel=config.get("UltimateDrill", "Level efficiency(tool mode 0)", 10).getInt(10); }else {
+        	 efficiencylevel =10;
+         }
+         enableIC2EasyMode=config.get("general", "Easy Mode", false).getBoolean(false);
+         enableexlposion=config.get("general", "Enable exlposion", true).getBoolean(true);
+         enableefficiency=config.get("UltimateDrill", "Enable Efficiency tool mode 1", true).getBoolean(true); 
+         if(efficiencylevel1 > 1 && efficiencylevel1 <15) {
+         efficiencylevel1=config.get("UltimateDrill", "Level efficiency(tool mode 1)", 10).getInt(10); }else {
+        	 efficiencylevel1 =10;
+         }
+         enablesilkTouch=config.get("UltimateDrill", "Enable silk Touch tool mode 2", true).getBoolean(true); 
+         enablefortune=config.get("UltimateDrill", "Enable fortune tool mode 3", true).getBoolean(true); 
+         if(fortunelevel > 1 && fortunelevel < 10) {
+         fortunelevel=config.get("UltimateDrill", "Level fortune(tool mode 3)", 5).getInt(5); }else {
+        	 fortunelevel = 5;
+         }
+         //
          SuperSolarPanels.singularpanelstorage = config.get("Singular Solar panel", "SingularSPStorage", 10000000).getInt(10000000); 
          SuperSolarPanels.configFileName = event.getSuggestedConfigurationFile().getAbsolutePath();
          SuperSolarPanels.spectralpanelGenDay = config.get("Spectral Solar panel", "SpectralSPGenDay", 2560).getInt(2560);
@@ -129,7 +190,9 @@ public static void config(final FMLPreInitializationEvent event) {
          neutronGenNight = config.get("Neutron Solar panel(Avaritia)", "GenNight", 1310720).getInt(1310720);
          neutronOutput = config.get("Neutron Solar panel(Avaritia)", "Output", 2621440).getInt(2621440);
          neutronStorage = config.get("Neutron Solar panel(Avaritia)", "Storage", 40000000).getInt(40000000);
+         //
          
+         //
          SuperSolarPanels.tier2= config.get("Advanced MFSU", "tier", 6).getInt(6);
          SuperSolarPanels.singularpaneltier= config.get("Singular Solar panel", "tier", 7).getInt(7);
          SuperSolarPanels.spectralpaneltier= config.get("Spectral Solar panel", "tier", 5).getInt(5);
@@ -137,8 +200,16 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.photonicpaneltier= config.get("Photonic Solar panel", "tier", 9).getInt(9);
          SuperSolarPanels.neutronpaneltier= config.get("Neutronium Solar panel", "tier", 10).getInt(10);
  	 //
-         
-         EnglishFix = config.get("Main", "Fix English in GUI Panels", false).getBoolean(false);
+          registerDraconicPanels= config.get("Draconic Integration", "Register Draconic Panels", true).getBoolean(true);
+         registerChaosArmour = config.get("Draconic Integration", "Register Chaos Armour", true).getBoolean(true);
+         registerChaosFluxCapacitor = config.get("Draconic Integration", "Register Chaos Flux Capacitor", true).getBoolean(true);
+         registerChaosDestructionStaff = config.get("Draconic Integration", "Register Chaos Destruction Staff", true).getBoolean(true);
+         registerChaosPickaxe = config.get("Draconic Integration", "Register Chaos Pickaxe", true).getBoolean(true);
+         registerChaosShovel = config.get("Draconic Integration", "Register Chaos Shovel", true).getBoolean(true);
+         registerChaosSword = config.get("Draconic Integration", "Register Chaos Sword", true).getBoolean(true);
+         registerChaosBow = config.get("Draconic Integration", "Register Chaos Bow", true).getBoolean(true);
+         registerChaosAxe = config.get("Draconic Integration", "Register Chaos Axe", true).getBoolean(true);
+         nightvision= config.get("Events", "If player have quantum or nano or improvemed helmet and it was dressed and if player has coord y < 60 and skylight < 8,nightvision allow", true).getBoolean(true);
          SuperSolarPanels.disableeffect = config.get("Disable Effect", "Disable fireResistance", false).getBoolean(false);
          SuperSolarPanels.disableeffect1 = config.get("Disable Effect", "Disable waterBreathing", false).getBoolean(false);
          SuperSolarPanels.disableeffect2 = config.get("Disable Effect", "Disable jump", false).getBoolean(false);
@@ -197,24 +268,24 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.maxWindStrength2 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
          SuperSolarPanels.Streak = config.get("Quantum Armor", "Allow Streak", true).getBoolean(true); 
          //
-         SuperSolarPanels.Radius5 = config.get("Spectral rotor", "Radius", 11).getInt(11);
-         SuperSolarPanels.durability5 = config.get("Spectral rotor", "durability", 345600).getInt(345600);
-         SuperSolarPanels.efficiency5 = config.get("Spectral rotor", "efficiency", 5.0F).getInt((int) 5.0F);
-         SuperSolarPanels.minWindStrength5 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
-         SuperSolarPanels.maxWindStrength5 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
+         SuperSolarPanels.Radius5 = config.get("Myphical rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability5 = config.get("Myphical rotor", "durability", 345600).getInt(345600);
+         SuperSolarPanels.efficiency5 = config.get("Myphical rotor", "efficiency", 5.0F).getInt((int) 5.0F);
+         SuperSolarPanels.minWindStrength5 = config.get("Myphical rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength5 = config.get("Myphical rotor", "maxWindStrength", 110).getInt(110);
         
          //
-         SuperSolarPanels.Radius4 = config.get("Spectral rotor", "Radius", 11).getInt(11);
-         SuperSolarPanels.durability4 = config.get("Spectral rotor", "durability", 2764800).getInt(2764800);
-         SuperSolarPanels.efficiency4 = config.get("Spectral rotor", "efficiency", 7.0F).getInt((int) 7.0F);
-         SuperSolarPanels.minWindStrength4 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
-         SuperSolarPanels.maxWindStrength4 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
+         SuperSolarPanels.Radius4 = config.get("Neutron rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability4 = config.get("Neutron rotor", "durability", 2764800).getInt(2764800);
+         SuperSolarPanels.efficiency4 = config.get("Neutron rotor", "efficiency", 7.0F).getInt((int) 7.0F);
+         SuperSolarPanels.minWindStrength4 = config.get("Neutron rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength4 = config.get("Neutron rotor", "maxWindStrength", 110).getInt(110);
          //
-         SuperSolarPanels.Radius3 = config.get("Spectral rotor", "Radius", 11).getInt(11);
-         SuperSolarPanels.durability3 = config.get("Spectral rotor", "durability", 691200).getInt(691200);
-         SuperSolarPanels.efficiency3 = config.get("Spectral rotor", "efficiency", 6.0F).getInt((int) 6.0F);
-         SuperSolarPanels.minWindStrength3 = config.get("Spectral rotor", "minWindStrength", 25).getInt(25);
-         SuperSolarPanels.maxWindStrength3 = config.get("Spectral rotor", "maxWindStrength", 110).getInt(110);
+         SuperSolarPanels.Radius3 = config.get("Photon rotor", "Radius", 11).getInt(11);
+         SuperSolarPanels.durability3 = config.get("Photon rotor", "durability", 691200).getInt(691200);
+         SuperSolarPanels.efficiency3 = config.get("Photon rotor", "efficiency", 6.0F).getInt((int) 6.0F);
+         SuperSolarPanels.minWindStrength3 = config.get("Photon rotor", "minWindStrength", 25).getInt(25);
+         SuperSolarPanels.maxWindStrength3 = config.get("Photon rotor", "maxWindStrength", 110).getInt(110);
          limit = config.get("Unifier panels", "Limit", 2).getInt(2); 
         //
          manasteelgenday= config.get("Manasteel Solar Panel", "genday", 160).getInt(160);
@@ -263,4 +334,5 @@ public static void config(final FMLPreInitializationEvent event) {
          config.save();
      }
 }
+
 }

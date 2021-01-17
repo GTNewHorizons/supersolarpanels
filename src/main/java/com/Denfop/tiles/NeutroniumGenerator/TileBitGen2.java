@@ -78,7 +78,6 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   
   public final InvSlotUpgrade upgradeSlot;
   
-  public final InvSlotProcessableGeneric amplifierSlot;
   
   public final InvSlotOutput outputSlot;
   
@@ -96,8 +95,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
     this.prevState = 0;
     this.redstonePowered = false;
     this.soundTicker = IC2.random.nextInt(32);
-    this.amplifierSlot = new InvSlotProcessableGeneric((TileEntityInventory)this, "scrap", 0, 1, Recipes.matterAmplifier);
-    this.outputSlot = new InvSlotOutput((TileEntityInventory)this, "output", 1, 1);
+     this.outputSlot = new InvSlotOutput((TileEntityInventory)this, "output", 1, 1);
     this.containerslot = (InvSlotConsumableLiquid)new InvSlotConsumableLiquidByList((TileEntityInventory)this, "containerslot", 2, InvSlot.Access.I, 1, InvSlot.InvSide.TOP, InvSlotConsumableLiquid.OpType.Fill, new Fluid[] { com.Denfop.block.Base.BlocksItems.getFluid(InternalName.fluidUuMatter) });
     this.upgradeSlot = new InvSlotUpgrade((TileEntityInventory)this, "upgrade", 3, 4);
     this.defaultTier = 3;
@@ -105,18 +103,10 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   }
   
   public static void init() {
-    Recipes.matterAmplifier = (IMachineRecipeManager)new BasicMachineRecipeManager();
-    addAmplifier(Ic2Items.scrap, 1, 1000);
-    addAmplifier(Ic2Items.scrapBox, 1, 1500);
+   
   }
   
-  public static void addAmplifier(ItemStack input, int amount, int amplification) {
-    addAmplifier((IRecipeInput)new RecipeInputItemStack(input, amount), amplification);
-  }
   
-  public static void addAmplifier(String input, int amount, int amplification) {
-    addAmplifier((IRecipeInput)new RecipeInputOreDict(input, amount), amplification);
-  }
   
   public static void addAmplifier(IRecipeInput input, int amplification) {
     NBTTagCompound metadata = new NBTTagCompound();
@@ -126,16 +116,12 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   
   public void readFromNBT(NBTTagCompound nbttagcompound) {
     super.readFromNBT(nbttagcompound);
-    try {
-      this.scrap = nbttagcompound.getInteger("scrap");
-    } catch (Throwable e) {
-      this.scrap = nbttagcompound.getShort("scrap");
-    } 
+    
   }
   
   public void writeToNBT(NBTTagCompound nbttagcompound) {
     super.writeToNBT(nbttagcompound);
-    nbttagcompound.setInteger("scrap", this.scrap);
+    
   }
   
   public String getInventoryName() {
@@ -158,13 +144,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
     } else {
       setState((this.scrap > 0) ? 2 : 1);
       setActive(true);
-      if (this.scrap < 10000) {
-        RecipeOutput amplifier = this.amplifierSlot.process();
-        if (amplifier != null) {
-          this.amplifierSlot.consume();
-          this.scrap += amplifier.metadata.getInteger("amplification");
-        } 
-      } 
+       
       if (this.energy >= this.maxEnergy)
         needsInvUpdate = attemptGeneration(); 
       MutableObject<ItemStack> output = new MutableObject();
@@ -277,12 +257,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
     return 0.7F;
   }
   
-  public boolean amplificationIsAvailable() {
-    if (this.scrap > 0)
-      return true; 
-    RecipeOutput amplifier = this.amplifierSlot.process();
-    return (amplifier != null && amplifier.metadata.getInteger("amplification") > 0);
-  }
+ 
   
   public boolean canFill(ForgeDirection from, Fluid fluid) {
     return (fluid == BlocksItems.getFluid(InternalName.fluidUuMatter));

@@ -1,10 +1,11 @@
 
 
 package com.Denfop;
-
 import com.Denfop.item.energy.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import ic2.api.energy.EnergyNet;
+import ic2.api.energy.IEnergyNet;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
@@ -35,6 +36,7 @@ import com.Denfop.api.TickHandlerWV;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
 import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
 import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
+import com.Denfop.block.Base.BlockElectric;
 import com.Denfop.block.Base.BlockIC2Fluid;
 import com.Denfop.block.Base.BlockSSP;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
@@ -49,12 +51,6 @@ import com.Denfop.block.Sintezator.Sintezator;
 import com.Denfop.block.Sintezator.TileEntitySintezator;
 import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
 import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
-import com.Denfop.block.WirellesStorage.BlockWStorage;
-import com.Denfop.block.WirellesStorage.BlockWStorage2;
-import com.Denfop.block.WirellesStorage.ItemBlockWirelessStorage;
-import com.Denfop.block.WirellesStorage.ItemBlockWirelessStorage2;
-import com.Denfop.block.WirellesStorage.TileWirelessStorage1Tier;
-import com.Denfop.block.WirellesStorage.TileWirelessStorageTier2;
 import com.Denfop.block.armorcharge.BlockArmorCharger;
 import com.Denfop.block.armorcharge.ItemBlockArmorCharger;
 import com.Denfop.block.cable.ItemCable;
@@ -69,7 +65,7 @@ import com.Denfop.block.expgen.TileXPGenPublic;
 import com.Denfop.block.mechanism.BlockMachine;
 import com.Denfop.block.mechanism.TileEntityAlloySmelter;
 import com.Denfop.block.moleculartransformer.BlockMolecularTransformer;
-import com.Denfop.block.neutroniumgenerator.Blockbitgen;
+import com.Denfop.block.neutroniumgenerator.BlockGeneratorNeutronium;
 import com.Denfop.block.ore.BlockSSPCoal;
 import com.Denfop.block.ore.BlockSSPDiamond;
 import com.Denfop.block.ore.BlockSSPEmerald;
@@ -79,12 +75,10 @@ import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
 import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
 import com.Denfop.events.EventHandlerEntity;
 import com.Denfop.handler.ASPPacketHandler;
-import com.Denfop.integration.ASP.ASPIntegration;
 import com.Denfop.integration.Avaritia.AvaritiaIntegration;
 import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.item.ItemSSPCrafring;
-import com.Denfop.item.Connector.ItemWirelessConnector3;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
 import com.Denfop.item.Upgrade.ItemUpgradeModule;
@@ -101,6 +95,7 @@ import com.Denfop.packets.WVPacketHandler;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.CreativeTabSSP;
+import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.overtimepanel.*;
 import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
 import com.Denfop.tiles.overtimepanel.TilePhotonicSolarPanel;
@@ -110,12 +105,15 @@ import com.Denfop.utils.InternalName;
 import com.Denfop.utils.MTRecipeConfig;
 import com.Denfop.utils.StackUtils;
 
+import aroma1997.uncomplication.enet.EnergyNetGlobal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -145,6 +143,7 @@ import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -152,6 +151,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.LoaderException;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -452,7 +452,6 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static boolean Draconic;
 		public static  boolean Botania;
 		public static boolean Avaritia;
-		public static boolean ASPLoaded;
 		public static Block expgen;
 		public static Item module8;
 		public static Item goldenwrench;
@@ -644,6 +643,10 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static int efficiency5;
 		public static int maxWindStrength5;
 		public static int minWindStrength5;
+		public static Block machines;
+		public static Block electricblock;
+		
+		
 		public static class FluidXP {
 			public static Fluid xpJuice = new Fluid("xpjuice.wv");
 			
@@ -654,7 +657,8 @@ public class SuperSolarPanels implements IWorldGenerator
     @Mod.EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
         Config.config(event);
-        ASPLoaded = Loader.isModLoaded("AdvancedSolarPanel");
+        if (Loader.isModLoaded("AdvancedSolarPanel"))
+            proxy.throwInitException(new LoaderException("SuperSolarPanels is incompatible with Advanced Solar Panels.Please delete Advanced solar Panels")); 
         DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
         AvaritiaLoaded = Loader.isModLoaded("Avaritia");
         BotaniaLoaded = Loader.isModLoaded("Botania");
@@ -670,16 +674,18 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
         if(BotaniaLoaded && Botania == true) {
         	BotaniaIntegration.init();
         }
+        electricblock = new BlockElectric();
+        SuperSolarPanels.mfeUnit = new ItemStack(electricblock, 1, 0);
+        SuperSolarPanels.mfsUnit = new ItemStack(electricblock, 1, 1);
+        electricblock.setCreativeTab(tabssp);
+        machines = new BlockMachine();
+        machines.setCreativeTab(tabssp);
         ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
         wirelessVajra = new WirelessVajra(ToolMaterial.EMERALD);
  		 blockvajracharger = new BlockVajraCharger("vajracharger", Material.rock);
  		 armorcharger = new BlockArmorCharger("creativearmorcharger", Material.rock);
- 		 blockwirelessreciever = new BlockWStorage("wirelessStorage1Tier", Material.rock);
- 		 blockwirelessreciever2 = new BlockWStorage2("wirelessStorage2Tier", Material.rock);
  		 expgen = new BlockExpGen("expGen", Material.rock);
  		 module8 = new ItemWirelessModule();
- 		 goldenwrench = new ItemGoldenWrench();
- 		 connector3 = new ItemWirelessConnector3("itemConnector3");
 		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
       BlocksItems.init();
         lapotronCrystal = new ItemBattery(InternalName.itemBatLamaCrystal, SuperSolarPanels.Storagequantumsuit, 8092.0D, 4).setRarity(1);
@@ -690,7 +696,7 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
         quantumLeggings = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumLegs, 2);
         quantumBoots = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumBoots, 3);
     	GameRegistry.registerWorldGenerator(this, 0);
-        new Blockbitgen(InternalName.Blockbitgen);
+        new BlockGeneratorNeutronium(InternalName.Blockbitgen);
         SuperSolarPanels.bluecomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("BlueSpectralComponent").setTextureName("supersolarpanel:Blue_Spectral_Component");
         SuperSolarPanels.greencomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("GreenSpectralComponent").setTextureName("supersolarpanel:Green_Spectral_Component");
         SuperSolarPanels.redcomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("RedSpectralComponent").setTextureName("supersolarpanel:Red_Spectral_Component");
@@ -727,6 +733,22 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
          module71  = new ItemStack(module7.setUnlocalizedName("module71"), 1, 0);
         module72 = new ItemStack(module7.setUnlocalizedName("module72"), 1, 1);
         module73= new ItemStack(module7.setUnlocalizedName("module73"), 1, 2);
+        SuperSolarPanels.macerator = new ItemStack(machines, 1, 1);
+        SuperSolarPanels.extractor = new ItemStack(machines, 1, 2);
+        SuperSolarPanels.compressor = new ItemStack(machines, 1, 3);
+
+      
+
+        SuperSolarPanels.compressor1 = new ItemStack(machines, 1, 4);
+        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 5);
+        SuperSolarPanels.macerator1 = new ItemStack(machines, 1, 6);
+        SuperSolarPanels.electroFurnace = new ItemStack(machines, 1, 7);
+        SuperSolarPanels.electroFurnace1 = new ItemStack(machines, 1, 8);
+        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 9);
+        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 10);
+        SuperSolarPanels.metalformer = new ItemStack(machines, 1, 11);
+        SuperSolarPanels.metalformer1 = new ItemStack(machines, 1, 12);
+        SuperSolarPanels.alloymachine = new ItemStack(machines, 1, 13);
         
        TileEntityDoubleMacerator.init();
        TileEntityTripleMacerator.init();
@@ -755,7 +777,9 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
     }
     @Mod.EventHandler
     public void load(final FMLInitializationEvent event) {
-    	
+    	 if(Config.enableexlposion)
+             this.initENet();
+         
     	if(DraconicLoaded && EnchantingPlus &&MineFactory) {
     		 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());
     		
@@ -778,9 +802,17 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
    			 MinecraftForge.EVENT_BUS.register(new SSPMFEventHandler());
    	        }}
     	MinecraftForge.EVENT_BUS.register(new SSPEventHandler());
+    	
         ASPPacketHandler.load();
     }
-    public static int getSeaLevel(World world) {
+
+    
+
+    private void initENet() {
+        EnergyNet.instance = (IEnergyNet)EnergyNetGlobal.initialize();
+    }
+
+	public static int getSeaLevel(World world) {
         return world.provider.getAverageGroundLevel();
       }
       
@@ -972,9 +1004,32 @@ MaceratorRecipe.recipe();
             itemstack.setTagCompound(nbttagcompound);
             nbttagcompound.setInteger("charge", 0);
             nbttagcompound.setInteger("Fly", 0);
+            nbttagcompound.setInteger("solarType", 0);
+            nbttagcompound.setInteger("energy", 0);
+            nbttagcompound.setInteger("energy2", 0);
             nbttagcompound.setBoolean("isFlyActive", false);
+            nbttagcompound.setBoolean("EnableWirelles", false);
+            nbttagcompound.setInteger("World", 0);
+            nbttagcompound.setInteger("Xcoord", 0);
+            nbttagcompound.setInteger("Ycoord", 0);
+            nbttagcompound.setInteger("Zcoord", 0);
+            nbttagcompound.setInteger("tier", 0);
+            nbttagcompound.setString("Name", "Name electical block");
+            
+        }
+        return nbttagcompound;
+    }
+   
+    public static NBTTagCompound getOrCreateNbtData1(final EntityPlayer player) {
+        NBTTagCompound nbttagcompound = player.getEntityData();
+
+        if (nbttagcompound == null) {
+            nbttagcompound = new NBTTagCompound();
+            nbttagcompound.setBoolean("isFlyActive", false);
+            nbttagcompound.setBoolean("isNightVision", false);
         }
         return nbttagcompound;
     }
     
+   
 }

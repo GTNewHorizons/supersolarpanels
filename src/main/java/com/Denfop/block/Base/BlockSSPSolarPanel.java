@@ -14,7 +14,9 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.IInventory;
@@ -25,6 +27,7 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
+import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileEntityAdvancedSolarPanel;
@@ -45,6 +48,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 
@@ -793,26 +797,30 @@ public class BlockSSPSolarPanel extends BlockContainer {
     		    TileEntity te = world.getTileEntity(x, y, z);
     		    TileEntitySolarPanel tile = (TileEntitySolarPanel) world.getTileEntity(x, y, z) ;
     		    int facing = (te instanceof TileEntityBase) ? ((com.Denfop.tiles.base.TileEntityBase)te).getFacing() : 0;
-    		    
+    		  
     		 
-  if(tile.chargeSlots[8] != null && tile.chargeSlots[8].getItem() instanceof module5) {
-    		    int g = tile.chargeSlots[8].getItemDamage();
-    		   
-    		    if(g == 0) {
+    		 
+    		    NBTTagCompound nbttagcompound = new NBTTagCompound();
+    		    tile.readFromNBT(nbttagcompound);
+    		 
+    		    
+    		    int g = tile.solarType;
+    		    System.out.print(g);
+    		    if(g == 1) {
 
     		      return this.iconBuffer1[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
-    		    }else if(g == 1) {
+    		    } if(g == 2) {
     		     	return this.iconBuffer2[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
-    		    }else if(g == 2) {
+    		    }else if(g == 3) {
     		    	return this.iconBuffer3[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
-    		  }else if(g == 3) {
+    		  }else if(g == 4) {
     		  		return this.iconBuffer4[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
-    		}else if(g == 4) {
-    				return this.iconBuffer5[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
     		}else if(g == 5) {
+    				return this.iconBuffer5[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
+    		}else if(g == 6) {
     			return this.iconBuffer6[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
     		}
-    		else if(g == 6) {
+    		else if(g == 7) {
     			return this.iconBuffer7[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
     		}
     		    else {
@@ -820,9 +828,6 @@ public class BlockSSPSolarPanel extends BlockContainer {
     		     	   return this.iconBuffer[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
     		    }
     		    
-    		  }else {
-    		   return this.iconBuffer[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];}
-    			
     		  }
     
     public IIcon getIcon(final int blockSide, final int blockMeta) {
@@ -939,7 +944,34 @@ public class BlockSSPSolarPanel extends BlockContainer {
     }
     
    
-    
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
+    {
+        super.onBlockPlacedBy(world, x, y, z, player, stack);
+        int heading = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        TileEntitySolarPanel te = (TileEntitySolarPanel) world.getTileEntity(x, y, z);
+       
+        NBTTagCompound nbttagcompound1 = SuperSolarPanels.getOrCreateNbtData(stack);
+        int storage1 = nbttagcompound1.getInteger("storage");
+        int storage2 = nbttagcompound1.getInteger("storage2");
+        te.storage=storage1;
+        te.storage2=storage2;
+        switch (heading)
+        {
+        case 0:
+            te.setFacing((short) 2);
+            break;
+        case 1:
+            te.setFacing((short) 5);
+            break;
+        case 2:
+            te.setFacing((short) 3);
+            break;
+        case 3:
+            te.setFacing((short) 4);
+            break;
+        }
+    }
     public TileEntity createNewTileEntity(final World var1, final int var2) {
         return this.getBlockEntity(var2);
     }

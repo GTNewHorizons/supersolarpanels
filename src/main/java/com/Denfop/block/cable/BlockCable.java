@@ -82,13 +82,7 @@ public class BlockCable extends BlockMultiID {
   public String getTextureFolder(int id) {
     return null;
   }
-  public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, EntityLivingBase p_149670_5_)
-  {
-  	if(!ItemArmorHazmat.hasCompleteHazmat( p_149670_5_) ||  ItemArmorQuantumSuit1.hasCompleteHazmat( p_149670_5_))
-  		return;
-  	else 
-      p_149670_5_.attackEntityFrom(DamageSource.cactus , 4.0F);
-  }
+ 
   public String getTextureName(int index) {
 	    Item item = SuperSolarPanels.copperCableItem.getItem();
 	    ItemStack itemStack = new ItemStack((Block)this, 1, index);
@@ -122,7 +116,7 @@ public class BlockCable extends BlockMultiID {
 	    if (te == null)
 	      return null; 
 	    if (te.foamed == 0) {
-	      if (te instanceof TileEntityCableDetector || te instanceof TileEntityCableSplitter || te.color == 0)
+	      if (  te.color == 0)
 	        return super.getIcon(blockAccess, x, y, z, side); 
 	      int cableType = (te.cableType == 14) ? 13 : te.cableType;
 	      return this.coloredTextures[Arrays.binarySearch(coloredMetas, cableType)][(te.color - 1) * 6 + side];
@@ -245,11 +239,7 @@ public class BlockCable extends BlockMultiID {
       TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
       if (te == null)
         return false; 
-      if (player instanceof EntityLivingBase) {
-          EntityLivingBase entityLiving = (EntityLivingBase)player;
-          if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving))
-            IC2Potion.radiation.applyTo(entityLiving, 200, 100); 
-        } 
+      
       
       if ((StackUtil.equals((Block)Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte)2)) || (cur.getItem() == SuperSolarPanels.constructionFoam.getItem() && te.foamed == 0 && te.changeFoam((byte)1))) {
         if (SuperSolarPanels.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
@@ -336,12 +326,7 @@ public class BlockCable extends BlockMultiID {
       ctorArgTypes.setValue(new Class[] { short.class }); 
     if (ctorArgs != null)
       ctorArgs.setValue(new Object[] { Short.valueOf((short)meta) }); 
-    switch (meta) {
-      case 11:
-        return (Class)TileEntityCableDetector.class;
-      case 12:
-        return (Class)TileEntityCableSplitter.class;
-    } 
+    
     return (Class)TileEntityCable.class;
   }
   
@@ -366,8 +351,7 @@ public class BlockCable extends BlockMultiID {
     TileEntityCable te = (TileEntityCable)getOwnTe(blockAccess, x, y, z);
     if (te == null)
       return 0; 
-    if (te instanceof TileEntityCableDetector)
-      return te.getActive() ? 15 : 0; 
+    
     return 0;
   }
   
@@ -388,9 +372,8 @@ public class BlockCable extends BlockMultiID {
     TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
     if (te == null)
       return 0.0F; 
-    if (te.foamed == 2)
-      return 90.0F; 
-    return 6.0F;
+    
+    return 0.0F;
   }
   
   public int getLightOpacity(IBlockAccess world, int x, int y, int z) {
@@ -423,10 +406,7 @@ public class BlockCable extends BlockMultiID {
       TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
       if (te == null)
         return 0; 
-      if (te instanceof TileEntityCableDetector) {
-        TileEntityCableDetector tec = (TileEntityCableDetector)te;
-        return (int)Util.map(EnergyNet.instance.getNodeStats((TileEntity)te).getEnergyIn() / (tec.getConductorBreakdownEnergy() - 1.0D), 1.0D, 15.0D);
-      } 
+      
     } 
     return 0;
   }

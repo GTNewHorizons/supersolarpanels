@@ -60,4 +60,6 @@ public class TileEntityBase extends TileEntity implements IWrenchable, INetworkD
     public ItemStack getWrenchDrop(final EntityPlayer entityPlayer) {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
+
+	
 }

@@ -56,6 +56,10 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
   public final InvSlotUpgrade upgradeSlot;
 
   public final InvSlotOutput outputSlotB;
+
+private int p;
+
+private int k;
   
   public TileEntityDoubleMachine(int energyPerTick, int length, int outputSlots) {
     this(energyPerTick, length, outputSlots, 1);
@@ -71,6 +75,8 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     this.outputSlotA = new InvSlotOutput(this, "outputA", 2, outputSlots);
     this.outputSlotB = new InvSlotOutput(this, "outputB", 2, outputSlots);
     this.upgradeSlot = new InvSlotUpgrade(this, "upgrade", 4, 4);
+    this.p = 64;
+    this.k =0;
   }
   
   public void readFromNBT(NBTTagCompound nbttagcompound) {
@@ -112,8 +118,8 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     boolean needsInvUpdate = false;
     RecipeOutput output = getOutput1();
     RecipeOutput output1 = getOutput();
-    
-   
+    RecipeOutput output2 = getOutput2();
+    RecipeOutput output3 = getOutput3();
      if ((output != null && output1 != null) && this.energy >= this.energyConsume) {
         setActive(true);
         if (this.progress == 0) {
@@ -124,7 +130,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
         this.energy -= this.energyConsume;
         double k = this.progress;
         double p = (k/ this.operationLength);
-      
+        this.k++;
         this.guiProgress = p;
          
         if (this.progress >= this.operationLength) {
@@ -137,7 +143,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
         } 
       }
     
-    else if ((output1 != null) && this.energy >= this.energyConsume) {
+    else if ((output1 != null) && this.energy >= this.energyConsume )  {
       setActive(true);
       if (this.progress == 0)
         ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
@@ -157,7 +163,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
     } 
     
 
-    else if (output != null && this.energy >= this.energyConsume) {
+    else if (output != null && this.energy >= this.energyConsume ) {
          setActive(true);
          if (this.progress == 0)
            ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 0, true); 
@@ -175,8 +181,8 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
            ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 2, true);
          } 
        }
-     
-    
+     //
+   
     else {
       if (this.progress != 0 && getActive())
         ((NetworkManager)IC2.network.get()).initiateTileEntityEvent((TileEntity)this, 1, true); 
@@ -241,7 +247,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
 	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
 	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult); 
 	      } 
-	      
+	   
 	      operateOnce(output, processResult);
 	     
 	      output = getOutput();
@@ -249,8 +255,42 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
 	      if (output == null)
 	          break; 
 	    } 
-	  }
-  
+	  }//
+  public void operate3(RecipeOutput output1) {
+	    for (int i = 0; i < this.operationsPerTick; i++) {
+
+	      List<ItemStack> processResult1 = output1.items;
+	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+	        ItemStack stack = this.upgradeSlot.get(j);
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+	      } 
+	      
+	      operateOnce3(output1, processResult1);
+	     
+	      output1 = getOutput2();
+	      
+	      if (output1 == null)
+	          break; 
+	    } } 
+  public void operate4(RecipeOutput output1) {
+	    for (int i = 0; i < this.operationsPerTick; i++) {
+
+	      List<ItemStack> processResult1 = output1.items;
+	      for (int j = 0; j < this.upgradeSlot.size(); j++) {
+	        ItemStack stack = this.upgradeSlot.get(j);
+	        if (stack != null && stack.getItem() instanceof IUpgradeItem)
+	            ((IUpgradeItem)stack.getItem()).onProcessEnd(stack, this, processResult1); 
+	      } 
+	      
+	      operateOnce5(output1, processResult1);
+	     
+	      output1 = getOutput3();
+	      
+	      if (output1 == null)
+	          break; 
+	    } } 
+  //
   public void operate2(RecipeOutput output,RecipeOutput output1) {
 	    for (int i = 0; i < this.operationsPerTick; i++) {
 	    	List<ItemStack> processResult = output.items;
@@ -286,6 +326,18 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
 	  
 	    
 	 }
+  public void operateOnce3(RecipeOutput output, List<ItemStack> processResult) {
+	  this.inputSlotA.consume();
+	  this.outputSlotB.add(processResult);
+	  
+	    
+	 }
+  public void operateOnce5(RecipeOutput output, List<ItemStack> processResult) {
+	  this.inputSlotB.consume();
+	  this.outputSlotA.add(processResult);
+	  
+	    
+	 }
   public void operateOnce2(RecipeOutput output, List<ItemStack> processResult,RecipeOutput output1, List<ItemStack> processResult1) {
 	  this.inputSlotB.consume();
 	  this.outputSlotB.add(processResult);
@@ -303,6 +355,26 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
 	      return output; 
 	    return null;
 	  }
+  public RecipeOutput getOutput2() {
+	    if (this.inputSlotA.isEmpty())
+	      return null; 
+	    RecipeOutput output = this.inputSlotA.process();
+	    if (output == null)
+	      return null; 
+	    if (this.outputSlotB.canAdd(output.items))
+	      return output; 
+	    return null;
+	  }
+  public RecipeOutput getOutput3() {
+	    if (this.inputSlotB.isEmpty())
+	      return null; 
+	    RecipeOutput output = this.inputSlotB.process();
+	    if (output == null)
+	      return null; 
+	    if (this.outputSlotA.canAdd(output.items))
+	      return output; 
+	    return null;
+	  }
   public RecipeOutput getOutput() {
 	    if (this.inputSlotB.isEmpty())
 	      return null; 
@@ -311,6 +383,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
 	      return null; 
 	    if (this.outputSlotB.canAdd(output.items))
 	      return output; 
+	   
 	    return null;
 	  }
   
@@ -356,6 +429,7 @@ public abstract class TileEntityDoubleMachine extends TileEntityElectricMachine 
   }
   
   public double getEnergy() {
+	 
     return this.energy;
   }
   

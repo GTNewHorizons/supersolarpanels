@@ -100,6 +100,7 @@ public class ContainerSinSolarPanel extends Container
 
 		this.tileentity.generating = ModUtils.recieveContainerInt(2, 5, id, val, this.tileentity.generating);
 		this.tileentity.storage = ModUtils.recieveContainerInt(3, 4, id, val, this.tileentity.storage);
+		
 			}
 
 	@Override

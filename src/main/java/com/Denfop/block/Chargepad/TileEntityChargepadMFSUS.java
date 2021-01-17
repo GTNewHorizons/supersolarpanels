@@ -12,7 +12,7 @@ public class TileEntityChargepadMFSUS extends TileEntityChargepadBlock {
   }
   
   public String getInventoryName() {
-    return "Chargepad MFSU";
+    return "Chargepad MFSS";
   }
   
   protected void getItems(EntityPlayer player) {

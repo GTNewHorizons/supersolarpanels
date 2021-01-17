@@ -8,8 +8,41 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.MTAPI;
 import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
 import com.Denfop.block.Sintezator.TileEntitySintezator;
+import com.Denfop.block.TileEntityDoubleMetalFormer.ContainerDoubleMetalFormer;
+import com.Denfop.block.TileEntityDoubleMetalFormer.GuiDoubleMetalFormer;
+import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
+import com.Denfop.block.TileEntityTripleMetalFormer.ContainerTripleMetalFormer;
+import com.Denfop.block.TileEntityTripleMetalFormer.GuiTripleMetalFormer;
+import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
+import com.Denfop.block.advancedmatter.ContainerAdvancedMatter;
+import com.Denfop.block.advancedmatter.GuiAdvancedMatter;
+import com.Denfop.block.advancedmatter.TileEntityAdvancedMatter;
+import com.Denfop.block.containerbase.ContainerDoubleMachine;
+import com.Denfop.block.containerbase.ContainerTripleMachine;
+import com.Denfop.block.containerbase.GuiDoubleMacerator;
+import com.Denfop.block.doublecompressor.GuiDoubleCompressor;
+import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
+import com.Denfop.block.doubleelecfurnace.GuiDoubleElecFurnace;
+import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
+import com.Denfop.block.doubleextractor.GuiExtractor;
+import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
+import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
 import com.Denfop.block.expgen.TextureHooks;
 import com.Denfop.block.expgen.TileExpGen2;
+import com.Denfop.block.improvematter.ContainerImprovedMatter;
+import com.Denfop.block.improvematter.GuiImprovedMatter;
+import com.Denfop.block.improvematter.TileEntityImprovedMatter;
+import com.Denfop.block.mechanism.GuiMacerator;
+import com.Denfop.block.mechanism.TileEntityAlloySmelter;
+import com.Denfop.block.triplecompressor.GuiTripleCompressor;
+import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
+import com.Denfop.block.tripleelecfurnace.GuiTripleElecFurnace;
+import com.Denfop.block.tripleelecfurnace.TileEntityTripleElectricFurnace;
+import com.Denfop.block.triplemacerator.GuiTripleMacerator;
+import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
+import com.Denfop.block.ultimatematter.ContainerUltimateMatter;
+import com.Denfop.block.ultimatematter.GuiUltimateMatter;
+import com.Denfop.block.ultimatematter.TileEntityUltimateMatter;
 import com.Denfop.events.EventDarkQuantumSuitEffect;
 import com.Denfop.gui.GuiAdvSolarPanel;
 import com.Denfop.gui.GuiExpGen;
@@ -29,6 +62,10 @@ import com.Denfop.render.block.BlockMolecularTransformerRenderer;
 import com.Denfop.render.tile.TileEntityPanelItemRender;
 import com.Denfop.render.tile.TileEntityPanelRender;
 import com.Denfop.render.tile.TileMolecularTransformerRenderer;
+import com.Denfop.tiles.ElectricalBase.ContainerElectricBlock;
+import com.Denfop.tiles.ElectricalBase.GuiElectricBlock;
+import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFE;
+import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFSU;
 import com.Denfop.tiles.base.GUISintezator;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
@@ -44,6 +81,9 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import ic2.core.ContainerBase;
+import ic2.core.Ic2Items;
+import ic2.core.block.machine.container.ContainerStandardMachine;
+import ic2.core.block.machine.tileentity.TileEntityStandardMachine;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -82,11 +122,27 @@ public boolean isClient() {
   @Override
   public void load() {
 	
-	  try {
-    	  ClientProxy.sideAndFacingToSpriteOffset = (int[][])Class.forName("ic2.core.block.BlockMultiID").getField("sideAndFacingToSpriteOffset").get(null);
+	  try
+      {
+          sideAndFacingToSpriteOffset = (int[][])Class.forName("ic2.core.block.BlockMultiID").getField("sideAndFacingToSpriteOffset").get(null);
       }
-      catch (Exception e) {
-    	  ClientProxy.sideAndFacingToSpriteOffset = new int[][] { { 3, 2, 0, 0, 0, 0 }, { 2, 3, 1, 1, 1, 1 }, { 1, 1, 3, 2, 5, 4 }, { 0, 0, 2, 3, 4, 5 }, { 4, 5, 4, 5, 3, 2 }, { 5, 4, 5, 4, 2, 3 } };
+      catch (Exception e)
+      {
+          sideAndFacingToSpriteOffset = new int[][]{
+                  {
+                      3, 2, 0, 0, 0, 0
+                  }, {
+                      2, 3, 1, 1, 1, 1
+                  }, {
+                      1, 1, 3, 2, 5, 4
+                  }, {
+                      0, 0, 2, 3, 4, 5
+                  }, {
+                      4, 5, 4, 5, 3, 2
+                  }, {
+                      5, 4, 5, 4, 2, 3
+                  }
+          };
       }
   }     
   private void addBlockRenderer(String name, RenderBlock renderer) {
@@ -153,16 +209,75 @@ public boolean isClient() {
           return new GUISintezator(player.inventory, (TileSintezator)te);
       }
       
-      if (te instanceof TileEntitySolarPanel) {
-          return new GuiAdvSolarPanel(player.inventory, (TileEntitySolarPanel)te);
-      }
+ 
       if (te instanceof TileEntityMolecularTransformer) {
           return new GuiMolecularTransformer(player.inventory, (TileEntityMolecularTransformer)te);
       }
+      if(player.getHeldItem() != Ic2Items.electricWrench) {
+      if (te instanceof TileEntityDoubleMacerator)
+      {
+          return new GuiDoubleMacerator(new ContainerDoubleMachine(player, (TileEntityDoubleMacerator) te));
+      }
+      if (te instanceof TileEntityDoubleExtractor)
+      {
+          return new GuiExtractor(new ContainerDoubleMachine(player, (TileEntityDoubleExtractor) te));
+      }
+      if (te instanceof TileEntityDoubleElectricFurnace)
+      {
+          return new GuiDoubleElecFurnace(new ContainerDoubleMachine(player, (TileEntityDoubleElectricFurnace) te));
+      }
+      if (te instanceof TileEntityDoubleCompressor)
+      {
+          return new GuiDoubleCompressor(new ContainerDoubleMachine(player, (TileEntityDoubleCompressor) te));
+      }
+      if (te instanceof TileEntityDoubleMetalFormer)
+      {
+          return new GuiDoubleMetalFormer(new ContainerDoubleMetalFormer(player, (TileEntityDoubleMetalFormer) te));
+      }
+      //
+      if (te instanceof TileEntityTripleMacerator)
+      {
+          return new GuiTripleMacerator(new ContainerTripleMachine(player, (TileEntityTripleMacerator) te));
+      }
      
-		
-		
-		
+      if (te instanceof TileEntityTripleElectricFurnace)
+      {
+          return new GuiTripleElecFurnace(new ContainerTripleMachine(player, (TileEntityTripleElectricFurnace) te));
+      }
+      if (te instanceof TileEntityTripleCompressor)
+      {
+          return new GuiTripleCompressor(new ContainerTripleMachine(player, (TileEntityTripleCompressor) te));
+      }
+      if (te instanceof TileEntityTripleMetalFormer)
+      {
+          return new GuiTripleMetalFormer(new ContainerTripleMetalFormer(player, (TileEntityTripleMetalFormer) te));
+      }
+      if (te instanceof TileEntityAdvancedMatter)
+      {
+          return new GuiAdvancedMatter(new ContainerAdvancedMatter(player, (TileEntityAdvancedMatter) te));
+      }
+      if (te instanceof TileEntityImprovedMatter)
+      {
+          return new GuiImprovedMatter(new ContainerImprovedMatter(player, (TileEntityImprovedMatter) te));
+      }
+      if (te instanceof TileEntityUltimateMatter)
+      {
+          return new GuiUltimateMatter(new ContainerUltimateMatter(player, (TileEntityUltimateMatter) te));
+      }
+      if (te instanceof TileEntityAlloySmelter)
+      {
+          return new GuiMacerator(new ContainerStandardMachine(player, (TileEntityAlloySmelter) te));
+      }
+      if (te instanceof TileEntityElectricMFE)
+      {
+    	  
+          return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricMFE) te));
+      }
+      if (te instanceof TileEntityElectricMFSU)
+      {
+    	  
+          return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricMFSU) te));
+      }}
       return null;
   }
   

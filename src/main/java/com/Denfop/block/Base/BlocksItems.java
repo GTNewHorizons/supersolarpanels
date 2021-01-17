@@ -59,8 +59,8 @@ public class BlocksItems {
    }
   
   private static void initBlocks() {
-	  new BlockElectric(InternalName.blockElectric);
-	  SuperSolarPanels.machine1=  new BlockMachine(InternalName.blockMachine);
+	 
+	  
 	  new BlockCable(InternalName.blockCable);
 	  new BlockChargepad(InternalName.blockChargepad);
    }

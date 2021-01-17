@@ -27,7 +27,6 @@ import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
-import com.Denfop.integration.ASP.aspmodules;
 import com.Denfop.integration.Avaritia.ItemAvSolarPanel;
 import com.Denfop.integration.Avaritia.modules2;
 import com.Denfop.integration.Botania.ItemBotSolarPanel;

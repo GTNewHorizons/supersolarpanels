@@ -19,6 +19,8 @@ public class ContainerAdvSolarPanel extends Container
 	private boolean sunIsUp;
 	private boolean skyIsVisible;
 	private int generating;
+	private int storage2;
+	private boolean rain;
 
 	public ContainerAdvSolarPanel(InventoryPlayer inventoryplayer, TileEntitySolarPanel tileentitysolarpanel)
 	{
@@ -56,10 +58,11 @@ public class ContainerAdvSolarPanel extends Container
 
 		icrafting.sendProgressBarUpdate(this, 0, this.tileentity.sunIsUp ? 1 : 0);
 		icrafting.sendProgressBarUpdate(this, 1, this.tileentity.skyIsVisible ? 1 : 0);
-
+		icrafting.sendProgressBarUpdate(this, 8, this.tileentity.rain ? 1 : 0);
 	
 		ModUtils.sendContainerInt(this, icrafting, 2, 5, this.tileentity.generating);
 		ModUtils.sendContainerInt(this, icrafting, 3, 4, this.tileentity.storage);
+		ModUtils.sendContainerInt(this, icrafting, 6, 7, this.tileentity.storage2);
 		
 	}
 
@@ -74,19 +77,24 @@ public class ContainerAdvSolarPanel extends Container
 
 					if (this.sunIsUp != this.tileentity.sunIsUp)
 				icrafting.sendProgressBarUpdate(this, 0, this.tileentity.sunIsUp ? 1 : 0);
+					if (this.rain != this.tileentity.rain)
+						icrafting.sendProgressBarUpdate(this, 8, this.tileentity.rain ? 1 : 0);
 			if (this.skyIsVisible != this.tileentity.skyIsVisible)
 				icrafting.sendProgressBarUpdate(this, 1, this.tileentity.skyIsVisible ? 1 : 0);
 			if (this.generating != this.tileentity.generating)
 				ModUtils.sendContainerInt(this, icrafting, 2, 5, this.tileentity.generating);
 			if (this.storage != this.tileentity.storage)
 				ModUtils.sendContainerInt(this, icrafting, 3, 4, this.tileentity.storage);
+			if (this.storage2 != this.tileentity.storage2)
+				ModUtils.sendContainerInt(this, icrafting, 6, 7, this.tileentity.storage2);
 		
 		}
-
+		this.rain = this.tileentity.rain;
 		this.sunIsUp = this.tileentity.sunIsUp;
 		this.skyIsVisible = this.tileentity.skyIsVisible;
 		this.generating = this.tileentity.generating;
 		this.storage = this.tileentity.storage;
+		this.storage2 = this.tileentity.storage2;
 	}
 
 	@Override
@@ -95,11 +103,14 @@ public class ContainerAdvSolarPanel extends Container
 		
 		if (id == 0)
 			this.tileentity.sunIsUp = val != 0;
+		if (id == 8)
+			this.tileentity.rain = val != 0;
 		if (id == 1)
 			this.tileentity.skyIsVisible = val != 0;
 
 			this.tileentity.generating = ModUtils.recieveContainerInt(2, 5, id, val, this.tileentity.generating);
 		this.tileentity.storage = ModUtils.recieveContainerInt(3, 4, id, val, this.tileentity.storage);
+		this.tileentity.storage2 = ModUtils.recieveContainerInt(6, 7, id, val, this.tileentity.storage2);
 			}
 
 	@Override

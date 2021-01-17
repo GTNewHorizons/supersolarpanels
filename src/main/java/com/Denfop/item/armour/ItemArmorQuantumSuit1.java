@@ -128,15 +128,15 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
   }
   
   public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase entity, ItemStack armor, DamageSource source, double damage, int slot) {
-    if (source == DamageSource.fall && this.armorType == 3) {
-      int energyPerDamage = getEnergyPerDamage();
-      int damageLimit = Integer.MAX_VALUE;
-      if (energyPerDamage > 0)
-        damageLimit = (int)Math.min(damageLimit, 25.0D * ElectricItem.manager.getCharge(armor) / energyPerDamage); 
-      return new ISpecialArmor.ArmorProperties(10, 1.0D, damageLimit);
-    } 
-    return super.getProperties(entity, armor, source, damage, slot);
-  }
+	    if (source == DamageSource.fall && this.armorType == 3) {
+	      int energyPerDamage = getEnergyPerDamage();
+	      int damageLimit = Integer.MAX_VALUE;
+	      if (energyPerDamage > 0)
+	        damageLimit = (int)Math.min(damageLimit, 25.0D * ElectricItem.manager.getCharge(armor) / energyPerDamage); 
+	      return new ISpecialArmor.ArmorProperties(10, 1.0D, damageLimit);
+	    } 
+	    return super.getProperties(entity, armor, source, damage, slot);
+	  }
   
   @SubscribeEvent
   public void onEntityLivingFallEvent(LivingFallEvent event) {
@@ -168,7 +168,9 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.rare;
   }
-  
+  public boolean canProvideEnergy(ItemStack itemStack) {
+	    return true;
+	  }
   public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
     int air;
     boolean Nightvision;
@@ -271,11 +273,11 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
           int skylight = player.worldObj.getBlockLightValue(x, y, z);
           if (skylight > 15) {
             IC2.platform.removePotion((EntityLivingBase)player, Potion.nightVision.id);
-            player.getFoodStats();
+           
             
           } else {
         	 
-        	  player.getFoodStats().addStats(10, 10F);
+        	  
             player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true));
           } 
           ret = true;
@@ -309,6 +311,7 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
             toggleTimer = 10;
             jetpack = !jetpack;
             if (IC2.platform.isSimulating()) {
+            	
               nbtData.setBoolean("jetpack", jetpack);
               if (jetpack) {
                 IC2.platform.messagePlayer(player, "Quantum Jetpack enabled.", new Object[0]);

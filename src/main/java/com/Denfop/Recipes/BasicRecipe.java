@@ -93,14 +93,8 @@ public static void recipe() {
     GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.photoniyglass10,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SuperSolarPanels.michail_plate,'D',SuperSolarPanels.chromium_plate ,'H',SuperSolarPanels.photoniyglass9});
  
 	//TODO Recipe Connector and Exp Generator
-	GameRegistry.addShapelessRecipe(new ItemStack(SuperSolarPanels.connector3, 1), new Object[]{IC2Items.getItem("glassFiberCableItem"), IC2Items.getItem("advancedCircuit")});
-
-	SuperSolarPanels.hudPos = 1;
-	GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.goldenwrench, 1), new Object[] {
-			" A ",
-			"ABA",
-			" A ", Character.valueOf('A'), Items.gold_ingot, Character.valueOf('B'), IC2Items.getItem("wrench")});
-
+	
+	
 	GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.expgen, 1), new Object[] { 
 		    "BAB",
 			"BCB",
@@ -144,13 +138,7 @@ public static void recipe() {
      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.QuantumItems3, 1), new Object[] { "CBC", "BAB", "CBC", 'A', new ItemStack(SuperSolarPanels.QuantumItems7, 1), 'B' ,SuperSolarPanels.itemIridiumIronPlate, 'C' ,IC2Items.getItem("carbonPlate")});
 
 	// TODO Recipe Wirelles Storage
-     GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.module8, 1), new Object[] {
-				"ABA",
-				"CDC",
-				"ABA", Character.valueOf('A'), IC2Items.getItem("iridiumOre"), 
-					   Character.valueOf('B'), Blocks.redstone_block, 
-					   Character.valueOf('C'), IC2Items.getItem("advancedCircuit"),
-					   Character.valueOf('D'), Items.ender_pearl});
+    
 
 	GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.blockwirelessreciever, 1), new Object[] { 
 		    "AAA",
@@ -205,7 +193,7 @@ public static void recipe() {
        GameRegistry.addShapelessRecipe(new ItemStack(SuperSolarPanels.module6, 1, 8), new Object[] { new ItemStack(SuperSolarPanels.blockSSPSolarPanel, 1, 8) });
        GameRegistry.addShapelessRecipe(new ItemStack(SuperSolarPanels.module6, 1, 9), new Object[] { new ItemStack(SuperSolarPanels.blockSSPSolarPanel, 1, 9) });
 //TODO modules wirelles and transformer
-       GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.module7, 1, 0) ,new Object[] {  "AAA","BDB","ECE",   'A' , SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.module8,'C',SuperSolarPanels.michail_plate,'D',new ItemStack(SuperSolarPanels.itemSSP, 1,4),'E',SuperSolarPanels.QuantumItems4 });
+       GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.module8, 1) ,new Object[] {  "AAA"," D ","ECE",   'A' , SuperSolarPanels.spinel_plate,'C',SuperSolarPanels.michail_plate,'D',new ItemStack(SuperSolarPanels.itemSSP, 1,4),'E',SuperSolarPanels.QuantumItems4 });
        GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.module7, 1, 1) ,new Object[] {  "AAA","BDB","ECE",   'A' , SuperSolarPanels.compresscarbonultra,'B',SuperSolarPanels.chromium_plate,'C',SuperSolarPanels.wolfram_plate,'D',new ItemStack(SuperSolarPanels.itemSSP, 1,4),'E',SuperSolarPanels.QuantumItems4  });
        GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.module7, 1, 2) ,new Object[] {  "AAA","BDB","ECE",   'A' , SuperSolarPanels.compresscarbon,'B',SuperSolarPanels.michail_plate,'C',SuperSolarPanels.chromium_plate,'D',new ItemStack(SuperSolarPanels.itemSSP, 1,4),'E',SuperSolarPanels.QuantumItems4  });
       

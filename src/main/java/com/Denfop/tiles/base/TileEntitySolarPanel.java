@@ -34,8 +34,8 @@ import java.util.Random;
 import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.WirellesStorage.TileWirelessStorageBase;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.module1;
 import com.Denfop.item.Modules.module2;
 import com.Denfop.item.Modules.module3;
@@ -87,8 +87,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     public int maxStorage;
     public int p;
     public boolean loaded;
-	private int k;
-	private int m;
+    public int k;
+    public int m;
 	public int u;
 	private module6 panel;
 	public int tier;
@@ -96,42 +96,28 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int convertState = 0;
 	 public int elapsedTicks;
 	public boolean wirelles;
-	
+	public boolean changesolartype = false;
 	private GameProfile owner = null;
-	public boolean isconnected;
-		
-	public ArrayList<Integer> xvalue = new ArrayList();
-	public ArrayList<Integer> yvalue = new ArrayList();
-	public ArrayList<Integer> zvalue = new ArrayList();
-	
-	public ArrayList<ArrayList<Integer>> xlist = new ArrayList();
-	public ArrayList<ArrayList<Integer>> ylist = new ArrayList();
-	public ArrayList<ArrayList<Integer>> zlist = new ArrayList();
+	 public int panelx=0;
+	  public int panely=0;
+	  public int panelz=0;
+
 	 public int outputEnergyBuffer;
-	public ArrayList<TileWirelessStorageBase> listtiles = new ArrayList<TileWirelessStorageBase>();
+	
 	  public long lastTimeStamp;
-	public Map<Double, Double> mapofcoords = new HashMap<Double, Double>();
+
 	  public int outputEnergyValue;
-	public ArrayList<Double> lista = new ArrayList<Double>();
-	public ArrayList<Double> listb = new ArrayList<Double>();
-	public ArrayList<Double> listc = new ArrayList<Double>();
-	
-	public Integer targetX;
-	public Integer targetY;
-	public Integer targetZ;
+
+
 	  public int inputEnergyBuffer;
-	protected int lasttargetX;
-	protected int lasttargetY;
-	protected int lasttargetZ;
 	
-	public Boolean targetSet;
 	
-	protected int wirelesstransferlimit;
+
 	
-	public TileWirelessStorageBase twsb;
+
 	public int o;
 	public int storage2;
-	  
+	public boolean rain;
 	 public int tickRate = 40;  
 	  public int inputEnergyValue;
 	  public int maxStorage2;
@@ -139,6 +125,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int jj1; 
 	public int jj2; 
 	public int jj3;
+	public int type = 0;
 	 public int maxRFproduction;
 	  public int tickRateFlush = 5;
     public TileEntitySolarPanel(final String gName,final int tier, final int typeSolar, final int gDay, final int gNight, final int gOutput, final int gmaxStorage) {
@@ -159,7 +146,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.m = gNight;
         this.l = 0;
         this.maxStorage2 = this.maxStorage;
-        this.targetSet = false;
 		this.wirelles = false;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
@@ -172,21 +158,14 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.lastZ = this.zCoord;
         this.machineTire = this.o;
         this.tier = tier;
-        
-        this.lasttargetX = 0;
-		this.lasttargetY = 0;
-		this.lasttargetZ = 0;
-		
-		this.isconnected = false;
+        this.rain = false;
+
 		
 		
-		this.wirelesstransferlimit = gOutput;
+		
     }
     private int ticksSinceSync;
-    public int getSolarType() {
-    	int type = this.solarType;
-    	return type;
-    }
+    
     public void validate() {
         super.validate();
         if (this.isInvalid() || !this.worldObj.blockExists(this.xCoord, this.yCoord, this.zCoord)) {
@@ -225,12 +204,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.loaded = false;
     }
     private int numUsingPlayers;
+	public int wirellesdives =0;
+	private String nameblock;
+	private int world1;
+	private int blocktier;
+	private boolean usewirelles =false;
+	
     private void syncNumUsingPlayers() {
         this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.numUsingPlayers);
       }
     public void intialize() {
         this.wetBiome = (this.worldObj.getWorldChunkManager().getBiomeGenAt(this.xCoord, this.zCoord).getIntRainfall() > 0);
         this.noSunWorld = this.worldObj.provider.hasNoSky;
+        
         this.updateVisibility();
         this.initialized = true;
         if (!this.addedToEnergyNet) {
@@ -268,11 +254,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         this.gainFuel();
         if (this.generating > 0) {
-            if (this.storage + this.generating <= this.maxStorage) {
+        	
+        	 if (this.storage + this.generating <= this.maxStorage) {
                 this.storage += this.generating;
             }
             else {
                 this.storage = this.maxStorage;
+            }
+        }else if(this.generating  ==0) {
+        	if (this.storage > this.production && wirelles == true) {
+                this.storage -= this.production;
+            }else if(this.storage < this.production && wirelles == true) {
+            	wirelles = false;
+            	this.storage += this.generating;
             }
         }
         boolean needInvUpdate = false;
@@ -284,27 +278,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         int tierplus = 0;
         int minus = 0;
         int output = 0;
-        long nowTimeStamp = System.currentTimeMillis();
-        int testStamp = Math.round((float)(nowTimeStamp - this.lastTimeStamp) / 1000.0F * 20.0F);
-        this.elapsedTicks += testStamp;
-        if (this.elapsedTicks == 0)
-          this.elapsedTicks = 1; 
-        if (this.inputEnergyBuffer > 0) {
-          this.inputEnergyValue = Math.round((this.inputEnergyBuffer / this.elapsedTicks));
-        } else {
-          this.inputEnergyValue = 0;
-        } 
-        if (this.outputEnergyBuffer > 0) {
-            this.outputEnergyValue = Math.round((this.outputEnergyBuffer / this.elapsedTicks));
-          } else {
-            this.outputEnergyValue = 0;
-          } 
-        if (this.elapsedTicks >= this.tickRate * this.tickRateFlush) {
-            this.outputEnergyBuffer = 0;
-            this.inputEnergyBuffer = 0;
-            this.elapsedTicks = 0;
-          } 
-          this.lastTimeStamp = System.currentTimeMillis();
+    
+      
         for(int i= 0; i < 9; i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module1) {
         		
@@ -318,10 +293,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		output++;}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
         		int kk = chargeSlots[i].getItemDamage();
-        		if(kk == 0) {
-        			  compareTargets();
-        		}
-        		else if(kk == 1) {
+        		
+        		 if(kk == 1) {
         			tierplus++;
         		}
         		else if(kk == 2) {
@@ -339,17 +312,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		}else if(kk == 4) {
         			if (this.convertState == 0 && this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord) || this.noSunWorld ) {
         			      if (this.storage >= 0 && this.storage2 < this.maxStorage2 ) {
-        			        int maxConvertEnergy = this.storage * 8;
-        			        if (this.maxStorage2 < maxConvertEnergy + this.storage2) {
-        			          int requestRFEnergy = this.maxStorage2 - this.storage2;
-        			          int requestEUEnergy = requestRFEnergy / 4;
-        			        
-        			          this.storage2 += requestRFEnergy;
-        			          this.storage -= requestEUEnergy;
-        			        } else {
-        			          this.storage2 += maxConvertEnergy;
-        			         
-        			        } 
+        			       
+        			       
+        			          this.storage2 += this.storage*4;
+        			          this.storage -= this.storage;
+        			       
         			      } 
         			
         			for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
@@ -380,14 +347,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     	c = new int[9];
     	int d[];
     	d = new int[9];
-        
+    	
         if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
         	int g = chargeSlots[8].getItemDamage();
+
+			
         	if( g < 7 && g >=0) {
+        		this.type =g+1;
         		this.solarType =g+1;
+        		
         		
         	}
         }else {
+        	this.type= 0;
         	this.solarType = 0;
         }
         for(int i =0;i<9;i++) {
@@ -402,7 +374,58 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         }
         }
+        for(int i =0;i <9;i++) {
+            if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemWirelessModule) {
+       		
         
+            	int x = 0;int y = 0; int z = 0; String name = null;int tier1 = 0;
+            	
+      		NBTTagCompound    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
+      		
+      	 x=nbttagcompound.getInteger("Xcoord");
+      		 y=nbttagcompound.getInteger("Ycoord");
+      		 z=nbttagcompound.getInteger("Zcoord");
+      	 tier1=nbttagcompound.getInteger("tier");
+      	 name = nbttagcompound.getString("Name");
+      	int world = nbttagcompound.getInteger("World");
+      		
+      if(nbttagcompound != null && x != 0 && y != 0 && z != 0) {
+      	this.panelx = x;
+      	this.panely = y;
+      	this.panelz = z;
+      	this.nameblock = name;
+      	this.world1 = world;
+      	this.blocktier = tier1;
+      	
+      }
+      	
+      	}
+            
+        }
+        
+
+       
+     
+        	if(this.worldObj.getTileEntity(panelx, panely, panelz) != null && this.worldObj.getTileEntity(panelx, panely, panelz) instanceof TileEntityElectricBlock&& panelx != 0 && panely != 0 && panelz != 0) {
+        		
+          		TileEntityElectricBlock tile =  (TileEntityElectricBlock) this.worldObj.getTileEntity(panelx, panely, panelz);
+
+          		if(tile.tier == this.blocktier && tile.getWorldObj().provider.dimensionId == this.world1) {
+          		if( this.storage > 0 &&  tile.energy <= tile.maxStorage ) {
+          			
+          			tile.energy +=(this.storage);
+          			this.storage=0;
+          			
+          		}else {
+          			
+          		}
+          	}else {
+      			
+      		}
+          		
+        	}else {
+          	}
+        	
         int sum = 0,sum1 = 0,sum2 = 0,sum3 = 0;
         for(int i =0;i<9;i++) {
         sum = sum+a[i];
@@ -412,7 +435,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         	
 if((int) ((this.k + sum) + (this.k +sum)*0.2*gend) < 2147000000) {
-        	this.genDay  = (int) ((this.k + sum) + (sum)*0.2*gend);}else {
+        	this.genDay  = (int) ((this.k + sum) + (this.k+sum)*0.2*gend);}else {
         		this.genDay = 2146999999;
         	}
 if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
@@ -445,6 +468,11 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
     }
 
     public int gainFuel() {
+    	
+    	double rain_efficenty = 1;
+    	if(this.rain == true)
+    		rain_efficenty = 0.65;
+    	
     	if(solarType == 0) {
         if (this.ticker++ % this.tickRate() == 0) {
             this.updateVisibility();
@@ -453,10 +481,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
      
         
         	if (this.sunIsUp && this.skyIsVisible) {
-                return this.generating = 0 + this.genDay;
+                return this.generating = (int) (0 + this.genDay*rain_efficenty);
             }
             if (this.skyIsVisible) {
-                return this.generating = 0 + this.genNight;
+                return this.generating = (int) (0 + this.genNight*rain_efficenty);
             }
         
         return this.generating = 0;
@@ -467,10 +495,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0 + 2 * this.genDay;
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = 0 + 2 * this.genNight;
+            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty);
         }
         
       
@@ -480,10 +508,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0 + this.genDay;
+            return this.generating = (int) (0 + this.genDay*rain_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = 0 + this.genNight;
+            return this.generating = (int) (0 + this.genNight*rain_efficenty);
         }
         return this.generating = 0;
     }  
@@ -495,10 +523,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0 + 2 * this.genDay;
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = 0 + 2 * this.genNight;
+            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty);
         }
         
       
@@ -508,10 +536,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0 + this.genDay;
+            return this.generating = (int) (0 + this.genDay*rain_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = 0 + this.genNight;
+            return this.generating = (int) (0 + this.genNight*rain_efficenty);
         }
         return this.generating = 0;
     }  
@@ -524,10 +552,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
 	            this.updateVisibility();
 	        }
 	        if (this.sunIsUp && this.skyIsVisible) {
-	            return this.generating = 0 + this.genDay;
+	            return this.generating = (int) (0 + this.genDay*rain_efficenty);
 	        }
 	        if (this.skyIsVisible) {
-	            return this.generating = 0 + this.genNight;
+	            return this.generating = (int) (0 + this.genNight*rain_efficenty);
 	        }
 	        return this.generating = 0;
 			}  }
@@ -538,10 +566,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
         this.updateVisibility();
     }
     if (this.sunIsUp && this.skyIsVisible) {
-        return this.generating = 0 + this.genDay;
+        return this.generating = (int) (0 + this.genDay*rain_efficenty);
     }
     if (this.skyIsVisible) {
-        return this.generating = 0 + this.genNight;
+        return this.generating = (int) (0 + this.genNight*rain_efficenty);
     }
     return this.generating = 0;}}
 	
@@ -554,7 +582,7 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             return this.generating = 0;
         }
         if (this.skyIsVisible) {
-            return this.generating = 2 * this.genNight;
+            return this.generating = (int) (2 * this.genNight*rain_efficenty);
         }
 	}
 if(solarType == 6) {
@@ -563,21 +591,37 @@ if(solarType == 6) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0 + 2 * this.genDay;
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
         }
         if (this.skyIsVisible) {
             return this.generating = 0 + 0 * this.genNight;
         }
 	}
 if(solarType == 7) {
-	if(this.worldObj.isRaining() || this.worldObj.isThundering() && this.worldObj.provider.dimensionId != 1 && this.worldObj.provider.dimensionId != -1) {
-    if (this.ticker++ % this.tickRate() == 0) {
-        this.updateVisibility();
-    }
-        return this.generating = 0 + 2 * this.genDay;
+	if((this.worldObj.isRaining() || this.worldObj.isThundering()) && this.worldObj.provider.dimensionId != 1 && this.worldObj.provider.dimensionId != -1) {
+   
+		
+		if (this.ticker++ % this.tickRate() == 0) {
+            this.updateVisibility();
+        }
+        if (this.sunIsUp && this.skyIsVisible) {
+            return this.generating = (int) (0 + 1.5 * this.genDay);
+        }
+        if (this.skyIsVisible) {
+            return this.generating = 0 + (int)(1.5 * this.genNight);
+        }
 	}
 	else { 
-		return this.generating = 0;
+		if (this.ticker++ % this.tickRate() == 0) {
+            this.updateVisibility();
+        }
+    
+    if (this.sunIsUp && this.skyIsVisible) {
+        return this.generating = 0 +   this.genDay;
+    }
+    if (this.skyIsVisible) {
+        return this.generating = 0 +  this.genNight;
+    }
 	}
 	    
 	}
@@ -597,9 +641,12 @@ return this.generating = 0;
       }
     public void updateVisibility() {
         
-       
-        	final Boolean rainWeather = this.wetBiome && (this.worldObj.isRaining() || this.worldObj.isThundering());
-        if (!this.worldObj.isDaytime() || rainWeather) {
+       if((this.wetBiome && (this.worldObj.isRaining() || this.worldObj.isThundering()))) {
+    	   this.rain = true; 
+       }else {
+    	   this.rain= false;
+       }
+        if (!this.worldObj.isDaytime()) {
         	
             this.sunIsUp = false;
         }
@@ -616,73 +663,28 @@ return this.generating = 0;
        
     }
     
-    protected void compareTargets() {
-        if (!this.worldObj.isRemote)
-          if (!this.lista.contains(null) && !this.listb.contains(null) && !this.listc.contains(null))
-            for (Iterator<Double> iterator = this.lista.iterator(); iterator.hasNext(); ) {
-              double i = ((Double)iterator.next()).doubleValue();
-              for (Iterator<Double> iterator1 = this.listb.iterator(); iterator1.hasNext(); ) {
-                double j = ((Double)iterator1.next()).doubleValue();
-                for (Iterator<Double> iterator2 = this.listc.iterator(); iterator2.hasNext(); ) {
-                  double k = ((Double)iterator2.next()).doubleValue();
-                  if (this.mapofcoords.get(Double.valueOf(i)) != null && this.mapofcoords.get(Double.valueOf(j)) != null && this.mapofcoords.get(Double.valueOf(k)) != null) {
-                    if ((TileWirelessStorageBase)this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(Double.valueOf(i))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(j))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(k))).doubleValue()) != null) {
-                      this.listtiles.add((TileWirelessStorageBase)this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(Double.valueOf(i))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(j))).doubleValue(), (int)((Double)this.mapofcoords.get(Double.valueOf(k))).doubleValue()));
-                      tryChargeBlocks(this.listtiles);
-                      markDirty();
-                    } 
-                    continue;
-                  } 
-                  this.isconnected = false;
-                } 
-              } 
-            }   
-      }
-      
-      public void tryChargeBlocks(ArrayList<TileWirelessStorageBase> listtiles1) {
-        if (!this.worldObj.isRemote)
-          for (TileWirelessStorageBase te : listtiles1) {
-            if ((this.isconnected & te.isconnected) != false) {
-              if ((this.targetSet = Boolean.valueOf(true & (te.targetSet = true))).booleanValue()) 
-                chargeBlocks(te); 
-              continue;
-            } 
-            if (this.isconnected != te.isconnected && 
-              this.targetSet.booleanValue() != te.targetSet) {
-              if (te.isInvalid()) {
-                te.targetSet = this.targetSet.booleanValue();
-                this.isconnected = false;
-                continue;
-              } 
-              if (!te.isInvalid()) {
-                te.isconnected = false;
-                this.isconnected = false;
-                this.targetSet = Boolean.valueOf(false);
-              } 
-            } 
-          }  
-      }
-      
-      public void chargeBlocks(TileWirelessStorageBase te) {
-        int sentPacket = this.wirelesstransferlimit;
-        if (!this.worldObj.isRemote && (this.targetSet = Boolean.valueOf(true & (te.targetSet = true))).booleanValue() && (
-          this.isconnected = true & (te.isconnected = true)))
-          if ((((this.storage > 0.0D) ? 1 : 0) & ((this.storage != 0.0D) ? 1 : 0)) != 0)
-            if (te.energy < te.maxStorage) {
-            	System.out.println("invokes-te-Valid");
-              te.energy += sentPacket;
-              this.storage -= sentPacket;
-              if (this.storage < 0)
-                this.storage = 0; 
-            }   
-      }
-
+    
+    
+   
       public void readFromNBT(NBTTagCompound nbttagcompound) {
     	    super.readFromNBT(nbttagcompound);
     	    this.storage = nbttagcompound.getInteger("storage");
     	    this.lastX = nbttagcompound.getInteger("lastX");
     	    this.lastY = nbttagcompound.getInteger("lastY");
     	    this.lastZ = nbttagcompound.getInteger("lastZ");
+    	    
+    	 //TODO
+    	   
+    	    this.type= nbttagcompound.getInteger("type");
+    	    
+    	    	panelx=nbttagcompound.getInteger("panelx");
+    	    	panely=nbttagcompound.getInteger("panely");
+    	    	panelz=nbttagcompound.getInteger("panelz");
+    	    	this.nameblock=nbttagcompound.getString("nameblock");
+    	    	this.world1=nbttagcompound.getInteger("worldid");
+    	    	
+    	    	blocktier=	nbttagcompound.getInteger("blocktier");
+    	    	this.wirelles =   	nbttagcompound.getBoolean("wireless");
     	    NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
     	    if (nbttagcompound.hasKey("ownerGameProfile"))
     	        this.owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("ownerGameProfile")); 
@@ -691,21 +693,17 @@ return this.generating = 0;
     	      NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
     	      int j = nbttagcompound1.getByte("Slot") & 0xFF;
     	      if (j >= 0 && j < this.chargeSlots.length)
-    	        this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1); 
+    	        this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+    	      if(j == 8) {
+    	    	  if(ItemStack.loadItemStackFromNBT(nbttagcompound1) != null && ItemStack.loadItemStackFromNBT(nbttagcompound1).getItem() instanceof module5) {
+    	    		  this.solarType = nbttagcompound.getInteger("solarType"); 
+    	    	  }else {
+    	    		  this.solarType = 0;
+    	    	  }
+    	      }
     	    } 
     	    NBTTagList nbttaglist1 = (NBTTagList)nbttagcompound.getTag("positions");
-    	    for (int i = 0; i < nbttaglist1.tagCount(); i++) {
-    	      NBTTagCompound nbttagcompound1 = nbttaglist1.getCompoundTagAt(i);
-    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("A")), Double.valueOf(nbttagcompound1.getDouble("X")));
-    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("B")), Double.valueOf(nbttagcompound1.getDouble("Y")));
-    	      this.mapofcoords.put(Double.valueOf(nbttagcompound1.getDouble("C")), Double.valueOf(nbttagcompound1.getDouble("Z")));
-    	      this.lista.add(Double.valueOf(nbttagcompound1.getDouble("A")));
-    	      this.listb.add(Double.valueOf(nbttagcompound1.getDouble("B")));
-    	      this.listc.add(Double.valueOf(nbttagcompound1.getDouble("C")));
-    	    } 
-    	    this.targetSet = Boolean.valueOf(nbttagcompound.getBoolean("targetset"));
-    	    this.isconnected = nbttagcompound.getBoolean("isconnected");
-    	  }
+      }
       public boolean permitsAccess(GameProfile profile) {
     	    if (profile == null)
     	      return (this.owner == null); 
@@ -735,6 +733,19 @@ return this.generating = 0;
     	        nbttagcompound.setTag("ownerGameProfile", (NBTBase)ownerNbt);
     	      } 
     	    NBTTagList nbttaglist = new NBTTagList();
+    	    if(panelx !=0&& panely !=0 && panelz !=0) {
+    	    	nbttagcompound.setInteger("lastX1",panelx);
+    	    	nbttagcompound.setInteger("lastY1",panely);
+    	    	nbttagcompound.setInteger("lastZ1",panelz);
+    	    	nbttagcompound.setString("nameblock",nameblock);
+    	    	nbttagcompound.setInteger("worldid",world1);
+    	    	nbttagcompound.setInteger("blocktier",this.blocktier);
+    	    	 
+    	    	nbttagcompound.setBoolean("wireless", this.wirelles);
+    	    	nbttagcompound.setBoolean("usewireless", this.usewirelles);
+    	        }
+    	    
+    	  
     	    nbttagcompound.setInteger("storage", this.storage);
     	    nbttagcompound.setInteger("lastX", this.lastX);
     	    nbttagcompound.setInteger("lastY", this.lastY);
@@ -742,29 +753,18 @@ return this.generating = 0;
     	    for (int i = 0; i < this.chargeSlots.length; i++) {
     	      if (this.chargeSlots[i] != null) {
     	        NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+    	       
     	        nbttagcompound1.setByte("Slot", (byte)i);
+    	        if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
+    	        	  nbttagcompound.setInteger("solarType", this.solarType);
+            	    }
     	        this.chargeSlots[i].writeToNBT(nbttagcompound1);
     	        nbttaglist.appendTag((NBTBase)nbttagcompound1);
     	      } 
     	    } 
     	    nbttagcompound.setTag("Items", (NBTBase)nbttaglist);
-    	    NBTTagList list1 = new NBTTagList();
-    	    for (int l = 0, m = 0, n = 0; l < this.lista.size() && m < this.listb.size() && n < this.listc.size(); l++, m++, n++) {
-    	      NBTTagCompound com = new NBTTagCompound();
-    	      if (this.worldObj.getTileEntity((int)((Double)this.mapofcoords.get(this.lista.get(l))).doubleValue(), (int)((Double)this.mapofcoords.get(this.listb.get(m))).doubleValue(), (int)((Double)this.mapofcoords.get(this.listc.get(n))).doubleValue()) != null) {
-    	        com.setDouble("A", ((Double)this.lista.get(l)).doubleValue());
-    	        com.setDouble("B", ((Double)this.listb.get(m)).doubleValue());
-    	        com.setDouble("C", ((Double)this.listc.get(n)).doubleValue());
-    	        com.setDouble("X", ((Double)this.mapofcoords.get(this.lista.get(l))).doubleValue());
-    	        com.setDouble("Y", ((Double)this.mapofcoords.get(this.listb.get(m))).doubleValue());
-    	        com.setDouble("Z", ((Double)this.mapofcoords.get(this.listc.get(n))).doubleValue());
-    	        list1.appendTag((NBTBase)com);
-    	      } 
-    	    } 
-    	    nbttagcompound.setTag("positions", (NBTBase)list1);
+    	  
     	    nbttagcompound.setDouble("energy", this.storage);
-    	    nbttagcompound.setBoolean("targetset", this.targetSet.booleanValue());
-    	    nbttagcompound.setBoolean("isconnected", this.isconnected);
     	  }
     
     public boolean isAddedToEnergyNet() {
@@ -874,8 +874,11 @@ return this.generating = 0;
     }
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         ItemStack ret = super.getWrenchDrop(entityPlayer);
-        float energyRetainedInStorageBlockDrops = ConfigUtil.getFloat(MainConfig.get(), "balance/energyRetainedInStorageBlockDrops");
-      
+       	
+          NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(ret);
+          nbttagcompound.setInteger("storage", this.storage);
+          nbttagcompound.setInteger("storage2", this.storage2 );
+        
         return ret;
       }
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
@@ -995,7 +998,7 @@ return this.generating = 0;
         this.storage -= (int)amount;
     }
     public void onGuiClosed(EntityPlayer entityPlayer) {}
-    
+   
     public int getSourceTier() {
         return this.machineTire;
     }
@@ -1005,7 +1008,7 @@ return this.generating = 0;
         TileEntitySolarPanel.fields = Arrays.asList(new String[0]);
     }
 
-	@Override
+	
 	 public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 	    if (this.convertState == 1) {
 	      if (this.storage2 >= this.maxStorage2)
@@ -1026,6 +1029,9 @@ return this.generating = 0;
 	    } 
 	    return 0;
 	  }
-
+	public int getSolarType() {
+    	int type = this.solarType;
+    	return type;
+    }
 	
 }

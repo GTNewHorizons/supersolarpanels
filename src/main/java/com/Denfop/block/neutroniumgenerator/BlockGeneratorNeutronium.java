@@ -29,8 +29,8 @@ import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.utils.InternalName;
 
 
-public class Blockbitgen extends BlockMultiID {
-  public Blockbitgen(InternalName internalName1) {
+public class BlockGeneratorNeutronium extends BlockMultiID {
+  public BlockGeneratorNeutronium(InternalName internalName1) {
     super(internalName1, Material.iron, ItemMachine.class);
     setHardness(2.0F);
     setStepSound(soundTypeMetal);

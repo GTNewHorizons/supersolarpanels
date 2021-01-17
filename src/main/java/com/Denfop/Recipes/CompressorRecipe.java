@@ -1,7 +1,6 @@
 package com.Denfop.Recipes;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.integration.ASP.ASPIntegration;
 
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
@@ -39,13 +38,11 @@ public class CompressorRecipe {
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.invaringot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.invarplate,1) });
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.magnesium_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.magnesium_plate,1) });
 
-		if( SuperSolarPanels.ASPLoaded) {
-	       	  ASPIntegration.init();   
-	         }else {
+		
 	          Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(Ic2Items.uraniumOre, 1), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.itemSSP,1,8) });
 	          Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("UranFuel"), 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.itemSSP,1,8) });
 	          Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("crushedUraniumOre"), 1), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.itemSSP,1,8) });
 
-	         } 
+	         
 	}
 }

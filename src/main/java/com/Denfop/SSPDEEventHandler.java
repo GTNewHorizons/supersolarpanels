@@ -6,6 +6,7 @@ import com.brandon3055.draconicevolution.common.container.ContainerDissEnchanter
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import ic2.core.Ic2Items;
 import ic2.core.util.StackUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,11 +25,11 @@ public class SSPDEEventHandler {
 		  //TODO start for 
 		  for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
 			  //  TODO start Check inventory
-			  if(player.inventory.mainInventory[i] != null) {
+			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SuperSolarPanels.ultDDrill || player.inventory.mainInventory[i].getItem() == SuperSolarPanels.wirelessVajra || player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem())) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   ItemStack input1 = new ItemStack(SuperSolarPanels.ultDDrill);
 				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input); 
-				  if((input.getItem() == SuperSolarPanels.ultDDrill || input.getItem() == SuperSolarPanels.wirelessVajra )) {
+				  if((input.getItem() == SuperSolarPanels.ultDDrill || input.getItem() == SuperSolarPanels.wirelessVajra ||input.getItem() == Ic2Items.iridiumDrill.getItem() )) {
 					  Map<Integer, Integer> map = null;
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 
 			  map = EnchantmentHelper.getEnchantments(input);

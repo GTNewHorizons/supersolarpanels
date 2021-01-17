@@ -6,22 +6,25 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.base.ItemBlockIC2;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-public class ItemMachine1 extends ItemBlockIC2 {
+public class ItemMachine1 extends ItemBlock {
   public ItemMachine1(Block block) {
     super(block);
     setMaxDamage(0);
     setHasSubtypes(true);
     setCreativeTab(SuperSolarPanels.tabssp);
   }
-  
+  @Override
   public int getMetadata(int i) {
     return i;
   }
-  
+  @Override
   public String getUnlocalizedName(ItemStack itemstack) {
     int meta = itemstack.getItemDamage();
     switch (meta) {
@@ -54,7 +57,7 @@ public class ItemMachine1 extends ItemBlockIC2 {
     } 
     return null;
   }
-  
+  @Override
   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
     int meta = itemStack.getItemDamage();
     switch (meta) {
@@ -80,5 +83,22 @@ public class ItemMachine1 extends ItemBlockIC2 {
           break;
       
     } 
+  }
+  @Override
+  public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+  {
+      par3List.add(new ItemStack(par1, 1, 1));
+      par3List.add(new ItemStack(par1, 1, 2));
+      par3List.add(new ItemStack(par1, 1, 3));
+      par3List.add(new ItemStack(par1, 1, 4));
+      par3List.add(new ItemStack(par1, 1, 5));
+      par3List.add(new ItemStack(par1, 1, 6));
+      par3List.add(new ItemStack(par1, 1, 7));
+      par3List.add(new ItemStack(par1, 1, 8));
+      par3List.add(new ItemStack(par1, 1, 9));
+      par3List.add(new ItemStack(par1, 1, 10));
+      par3List.add(new ItemStack(par1, 1, 11));
+      par3List.add(new ItemStack(par1, 1, 12));
+      par3List.add(new ItemStack(par1, 1, 13));
   }
 }

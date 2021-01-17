@@ -1,6 +1,7 @@
 package com.Denfop.item.energy;
 
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
@@ -52,29 +53,30 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   
   private static final Set<String> toolType = (Set<String>)ImmutableSet.of("pickaxe", "shovel");
   
-  private float effPower = 35.0F;
+
   
-  private float bigHolePower = 16.0F;
+  private float bigHolePower =  Config.bigHolePower;
   
-  private float normalPower = 35.0F;
+  private float normalPower = Config.effPower;
   
-  private float lowPower = 16.0F;
+  private float lowPower = Config.lowPower;
   
-  private float ultraLowPower = 10.0F;
+  private float ultraLowPower = Config.ultraLowPower;
   
-  private int maxCharge = 45000;
+  private int maxCharge = Config.ultdrillmaxCharge;
   
-  private int tier = 2;
+  private int tier = Config.ultdrilltier;
   
   private int maxWorkRange = 1;
   
-  private int energyPerOperation = 160;
+  private int energyPerOperation = Config.energyPerOperation;
   
-  private int energyPerLowOperation = 80;
+  private int energyPerLowOperation = Config.energyPerLowOperation;
   
-  private int energyPerUltraLowOperation = 50;
+  private int energyPerbigHolePowerOperation = Config.energyPerbigHolePowerOperation;
+  private int energyPerultraLowPowerOperation = Config.energyPerultraLowPowerOperation;
   
-  private int transferLimit = 500;
+  private int transferLimit =  Config.ultdrilltransferLimit;
   
   public int soundTicker;
   
@@ -90,9 +92,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {
     return true;
   }
-  public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
-	    return false;
-	  }
+
 	  
   public void init() {}
   
@@ -136,9 +136,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
     return this.damageVsEntity;
   }
   
-  public boolean isRepairable() {
-    return false;
-  }
+ 
   
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister register) {
@@ -306,6 +304,12 @@ public class ultDDrill extends ItemTool implements IElectricItem {
         case 1:
           energy = this.energyPerLowOperation;
           break;
+        case 2:
+        	energy = this.energyPerbigHolePowerOperation;
+            break;
+        case 3:
+        	energy = this.energyPerultraLowPowerOperation;
+            break;
         default:
           energy = 0.0F;
           break;
@@ -365,16 +369,29 @@ public class ultDDrill extends ItemTool implements IElectricItem {
         case 0:
           CommonProxy.sendPlayerMessage(player, EnumChatFormatting.GREEN + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.normal"));
           this.efficiencyOnProperMaterial = this.normalPower;
+
           Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
-          
-          enchantmentMap.clear();
-          enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(10));
+          if(Config.enableefficiency) {
+              enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
+              }
+          if(Config.enablefortune) {
+          enchantmentMap.remove(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(Config.fortunelevel));
+          }
+          if(Config.enablefortune || Config.enableefficiency)
           EnchantmentHelper.setEnchantments(enchantmentMap, itemStack);
           break;
           
         case 1:
-        	 Map<Integer, Integer> enchantmentMap3 = new HashMap<Integer, Integer>();
-       	  enchantmentMap3.clear();
+        	Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
+            
+        	  if(Config.enableefficiency) {
+        	enchantmentMap4.remove(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
+        	  }
+        	  if(Config.enableefficiency1) {
+        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel1));
+        	  }
+        	  if(Config.enableefficiency1 || Config.enableefficiency) 
+            EnchantmentHelper.setEnchantments(enchantmentMap4, itemStack);
         	CommonProxy.sendPlayerMessage(player, EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.lowPower"));
           this.efficiencyOnProperMaterial = this.lowPower;
           break;
@@ -383,17 +400,26 @@ public class ultDDrill extends ItemTool implements IElectricItem {
           this.efficiencyOnProperMaterial = this.bigHolePower;
           Map<Integer, Integer> enchantmentMap2 = new HashMap<Integer, Integer>();
 
-          
-          enchantmentMap2.clear();
+          if(Config.enableefficiency1) {
+          enchantmentMap2.remove(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel1));
+          }
+          if(Config.enablesilkTouch) {
           enchantmentMap2.put(Integer.valueOf(Enchantment.silkTouch.effectId), Integer.valueOf(1));
+          }
+          if(Config.enableefficiency1 ||Config.enablesilkTouch )
           EnchantmentHelper.setEnchantments(enchantmentMap2, itemStack);
           break;
         case 3:
         	CommonProxy.sendPlayerMessage(player, EnumChatFormatting.LIGHT_PURPLE + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.bigHoles1"));
-          this.efficiencyOnProperMaterial = this.bigHolePower * 2;
+          this.efficiencyOnProperMaterial = this.ultraLowPower;
           Map<Integer, Integer> enchantmentMap1 = new HashMap<Integer, Integer>();
-          enchantmentMap1.clear();
-          enchantmentMap1.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(5));
+          if(Config.enablesilkTouch) {
+          enchantmentMap1.remove(Integer.valueOf(Enchantment.silkTouch.effectId), Integer.valueOf(1));
+          }
+          if(Config.enablefortune) {
+          enchantmentMap1.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(Config.fortunelevel));
+          }
+          if(Config.enablefortune || Config.enablesilkTouch)
           EnchantmentHelper.setEnchantments(enchantmentMap1, itemStack);
           break;
       } 
@@ -451,9 +477,17 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   @SideOnly(Side.CLIENT)
   public void getSubItems(Item item, CreativeTabs tab, List subs) {
     ItemStack stack = new ItemStack((Item)this, 1);
+    Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
+    
+	
+	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(10));
+    EnchantmentHelper.setEnchantments(enchantmentMap4, stack);
     ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
     subs.add(stack);
-    subs.add(new ItemStack((Item)this, 1, getMaxDamage()));
+ ItemStack itemstack = new ItemStack((Item)this,1,getMaxDamage());
+    EnchantmentHelper.setEnchantments(enchantmentMap4, itemstack);
+    
+    subs.add(itemstack);
   }
   
   @SideOnly(Side.CLIENT)

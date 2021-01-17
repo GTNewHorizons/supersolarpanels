@@ -14,7 +14,6 @@ import net.minecraft.inventory.Slot;
 public class ContainerbitGen extends ContainerFullInv<TileBitGen2> {
   public ContainerbitGen(EntityPlayer entityPlayer, TileBitGen2 tileEntity1) {
     super(entityPlayer, (TileBitGen2)tileEntity1, 166);
-    addSlotToContainer((Slot)new SlotInvSlot((InvSlot)tileEntity1.amplifierSlot, 0, 72, 40));
     addSlotToContainer((Slot)new SlotInvSlot((InvSlot)tileEntity1.outputSlot, 0, 125, 59));
     addSlotToContainer((Slot)new SlotInvSlot((InvSlot)tileEntity1.containerslot, 0, 125, 23));
     for (int i = 0; i < 4; i++)

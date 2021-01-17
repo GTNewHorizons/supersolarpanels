@@ -5,8 +5,27 @@ import java.util.Map;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.MTAPI;
+import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
+import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
+import com.Denfop.block.advancedmatter.TileEntityAdvancedMatter;
+import com.Denfop.block.containerbase.ContainerDoubleMachine;
+import com.Denfop.block.containerbase.GuiDoubleMacerator;
+import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
+import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
+import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
+import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
 import com.Denfop.block.expgen.TileExpGen2;
+import com.Denfop.block.improvematter.TileEntityImprovedMatter;
+import com.Denfop.block.mechanism.TileEntityAlloySmelter;
+import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
+import com.Denfop.block.tripleelecfurnace.TileEntityTripleElectricFurnace;
+import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
+import com.Denfop.block.ultimatematter.TileEntityUltimateMatter;
 import com.Denfop.render.Cable.RenderBlock;
+import com.Denfop.tiles.ElectricalBase.ContainerElectricBlock;
+import com.Denfop.tiles.ElectricalBase.GuiElectricBlock;
+import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFE;
+import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFSU;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
@@ -15,6 +34,7 @@ import com.Denfop.utils.MTRecipeManager;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
+import cpw.mods.fml.common.LoaderException;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -75,7 +95,57 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntityMolecularTransformer) {
           return ((TileEntityMolecularTransformer)te).getGuiContainer(player.inventory);
       }
+      if (te instanceof TileEntityDoubleMacerator) {
+          return ((TileEntityDoubleMacerator)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityDoubleExtractor) {
+          return ((TileEntityDoubleExtractor)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityDoubleElectricFurnace) {
+          return ((TileEntityDoubleElectricFurnace)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityDoubleCompressor) {
+          return ((TileEntityDoubleCompressor)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityDoubleMetalFormer) {
+          return ((TileEntityDoubleMetalFormer)te).getGuiContainer(player);
+      }
+      //
+      if (te instanceof TileEntityTripleMacerator) {
+          return ((TileEntityTripleMacerator)te).getGuiContainer(player);
+      }
+      
+      if (te instanceof TileEntityTripleElectricFurnace) {
+          return ((TileEntityTripleElectricFurnace)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityTripleCompressor) {
+          return ((TileEntityTripleCompressor)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityTripleMetalFormer) {
+          return ((TileEntityTripleMetalFormer)te).getGuiContainer(player);
+      }
+      //
+      if (te instanceof TileEntityAdvancedMatter) {
+          return ((TileEntityAdvancedMatter)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityImprovedMatter) {
+          return ((TileEntityImprovedMatter)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityUltimateMatter) {
+          return ((TileEntityUltimateMatter)te).getGuiContainer(player);
+      }
      
+      if (te instanceof TileEntityAlloySmelter) {
+          return ((TileEntityAlloySmelter)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityElectricMFE)
+      {
+    	  return ((TileEntityElectricMFE)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityElectricMFSU)
+      {
+    	  return ((TileEntityElectricMFSU)te).getGuiContainer(player);
+      }
       return null;
   }
  
@@ -101,6 +171,10 @@ public static void sendPlayerMessage(EntityPlayer player, String message) {
 
 
  public void initCore() {}
+
+ public Void throwInitException(LoaderException e) {
+	    throw e;
+	  }
   
   
 

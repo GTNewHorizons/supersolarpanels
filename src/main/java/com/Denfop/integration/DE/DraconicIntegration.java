@@ -1,5 +1,6 @@
 package com.Denfop.integration.DE;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.base.SSPItem;
 import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
@@ -44,21 +45,28 @@ public static void init() {
 
 public static void Chaos() {
 	   GameRegistry.registerItem(ChaosEnergyCore =   new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("ChaosEnergyCore").setTextureName("supersolarpanel:ChaosEnergyCore"),"ChaosEnergyCore");
+	if(Config.registerChaosFluxCapacitor)
 	   ChaosFluxCapacitor = (ItemDC)new ChaosFluxCapacitor();
+	if(Config.registerChaosDestructionStaff)
 		ChaosDestructionStaff = (Item)new ChaosDistructionStaff();
+	if(Config.registerChaosPickaxe)
 		ChaosPickaxe = (Item)new ChaosPickaxe();
+	if(Config.registerChaosAxe)
 		ChaosAxe = (Item)new ChaosAxe();
+	if(Config.registerChaosShovel)
 		ChaosShovel = (Item)new ChaosShovel();
-	
+	if(Config.registerChaosSword)
 	ChaosSword = (Item)new ChaosSword();
+	if(Config.registerChaosBow)
 	ChaosBow = (Item)new ChaosBow();
-	
+	if(Config.registerChaosArmour) {
 	ChaosHelm = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 0, "ChaosHelm");
 	ChaosChest = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 1, "ChaosChest");
 	ChaosLeggs = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 2, "ChaosLeggs");
-	ChaosBoots = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 3, "ChaosBoots");
+	ChaosBoots = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 3, "ChaosBoots");}
 	 GameRegistry.registerItem( chaosingot = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("chaosingot").setTextureName("supersolarpanel:chaosingot"),"chaosingot");    
- GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
+if(Config.registerDraconicPanels)
+	 GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
 	
 }
 public static void register(ItemDC item) {

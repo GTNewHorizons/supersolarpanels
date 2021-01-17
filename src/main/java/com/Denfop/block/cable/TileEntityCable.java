@@ -125,11 +125,7 @@ public class TileEntityCable extends TileEntityBlock implements IEnergyConductor
       } 
     } 
   }
-  public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity p_149670_5_)
-  {
-  	
-      p_149670_5_.attackEntityFrom(DamageSource.cactus, 100000000.0F);
-  }
+ 
   public void writeToNBT(NBTTagCompound nbttagcompound) {
     super.writeToNBT(nbttagcompound);
     nbttagcompound.setShort("cableType", this.cableType);
@@ -490,7 +486,7 @@ public class TileEntityCable extends TileEntityBlock implements IEnergyConductor
   }
   
   public double getConductorBreakdownEnergy() {
-    return (getMaxCapacity(this.cableType) + 1);
+    return (getMaxCapacity(this.cableType));
   }
   
   public void removeInsulation() {}
