@@ -9,6 +9,7 @@ import com.Denfop.block.cable.BlockCable;
 import com.Denfop.block.cable.SSPDamageSource;
 import com.Denfop.block.cable.TileEntityCable;
 import com.Denfop.item.armour.ItemArmorQuantumSuit1;
+import com.Denfop.item.energy.ultDDrill;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -23,10 +24,12 @@ import ic2.core.IC2;
 import ic2.core.Ic2Items;
 import ic2.core.WorldData;
 import ic2.core.item.armor.ItemArmorHazmat;
+import ic2.core.item.tool.ItemDrill;
 import ic2.core.util.LogCategory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEventData;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,17 +77,20 @@ public class SSPEventHandler {
 					player.capabilities.allowFlying = false;
 					nbtData1.setBoolean("isFlyActive",false);
 					nbtData.setBoolean("isFlyActive",false);
+					player.capabilities.setFlySpeed((float) 0.05);
 				}else {
 					player.capabilities.isFlying = true;
 					player.capabilities.allowFlying = true;
 				    nbtData.setBoolean("isFlyActive",true);
 				    nbtData1.setBoolean("isFlyActive",true);
+				    player.capabilities.setFlySpeed((float) 0.15);
 				}
 			}else if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor&& player.inventory.armorInventory[2] != null) {
 				if(nbtData.getBoolean("isFlyActive") == true) {
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
 				    nbtData.setBoolean("isFlyActive",false);
+				    player.capabilities.setFlySpeed((float) 0.05);
 				}
 			}	
 			}else {
@@ -92,6 +98,7 @@ public class SSPEventHandler {
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
 				    nbtData.setBoolean("isFlyActive",false);
+				    player.capabilities.setFlySpeed((float) 0.05);
 				}
 			}
 			
@@ -151,6 +158,29 @@ public class SSPEventHandler {
 		}
 	}
 	@SubscribeEvent
+	public void checkdrill(LivingEvent.LivingUpdateEvent event) {
+		if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
+			  return;
+		 EntityPlayer player = (EntityPlayer) event.entity;
+		 for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
+			  //  TODO start Check inventory
+			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SuperSolarPanels.ultDDrill )) {
+				   ItemStack input = player.inventory.mainInventory[i];
+				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input);
+				   if(nbtData.getBoolean("create") == true) {
+				   Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
+				   ultDDrill drill = (ultDDrill) input.getItem();
+		        	  if(Config.enableefficiency && drill.mode == 0) {
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
+		        	 nbtData.setBoolean("create",false);
+		        	 EnchantmentHelper.setEnchantments(enchantmentMap4, input);
+		        	  }
+		        	  
+		        	 
+		        	  
+			  }}}
+	}
+	@SubscribeEvent
 	public void DamageCable(LivingEvent.LivingUpdateEvent event) {
 		
 		   if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
@@ -173,10 +203,12 @@ public class SSPEventHandler {
 			 
 		 } 
 		 else if(block instanceof ic2.core.block.wiring.BlockCable) {
+			int blockmeta = player.worldObj.getBlockMetadata(x+i, y, z+j);
+			if(blockmeta != 0 && blockmeta != 13 && blockmeta != 3 && blockmeta != 6) {
 			 if(!ItemArmorQuantumSuit1.hasCompleteHazmat(player) && !ItemArmorHazmat.hasCompleteHazmat(player)) {
 				 player.attackEntityFrom(SSPDamageSource.current, 1.0F);}else {
 					 return;
-				 }
+				 }}
 		 }
 		   }} 
 	}

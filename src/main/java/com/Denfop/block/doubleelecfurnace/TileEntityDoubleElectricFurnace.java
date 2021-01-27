@@ -24,7 +24,7 @@ public class TileEntityDoubleElectricFurnace extends TileEntityDoubleMachine {
   }
   
   public String getInventoryName() {
-    return "Electric Furnace";
+    return "Double Electric Furnace";
   }
   
   @SideOnly(Side.CLIENT)

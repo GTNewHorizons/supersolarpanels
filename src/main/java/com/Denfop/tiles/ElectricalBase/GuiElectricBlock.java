@@ -8,6 +8,7 @@ import ic2.core.network.NetworkManager;
 import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -41,7 +42,7 @@ public class GuiElectricBlock extends GuiContainer {
   
   public void initGui() {
     super.initGui();
-    
+    this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 113, (this.height - this.ySize) / 2 + 34, 17, 17, I18n.format("button.rg")));
   }
   
   protected void drawGuiContainerForegroundLayer(int par1, int par2) {
@@ -54,8 +55,7 @@ public class GuiElectricBlock extends GuiContainer {
     this.fontRendererObj.drawString(" " + e1, 124, 55, 4210752);
     String output = StatCollector.translateToLocalFormatted("ic2.EUStorage.gui.info.output", new Object[] { Integer.valueOf(((TileEntityElectricBlock)this.container.base).output) });
     this.fontRendererObj.drawString(output, 85, 70, 4210752);
-    GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, ((TileEntityElectricBlock)this.container.base).getredstoneMode(), 153, 3, 172, 22);
-  }
+    }
   
   protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

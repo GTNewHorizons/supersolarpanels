@@ -44,19 +44,19 @@ public static void recipe() {
        //TODO Recipes Machines and Quantum/Nano Chip
       GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.QuantumItems9,1) ,new Object[] {  " D ","BAB"," C ",   'A' , Ic2Items.advancedCircuit,'B',SuperSolarPanels.nanoBox,'C',SuperSolarPanels.nickel,'D',SuperSolarPanels.compresscarbon });
       GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.QuantumItems8,1) ,new Object[] {  "DCD","HAH",   'A' , SuperSolarPanels.QuantumItems9,'C',SuperSolarPanels.magnesium_ingot,'D',SuperSolarPanels.compresscarbonultra ,'H',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,1),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.macerator,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,2),new Object[] {"AAA","BCB","DDD", 'A',SuperSolarPanels. chromium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.extractor,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,3),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.wolfram_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.compressor,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,4),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',new ItemStack(SuperSolarPanels.machine1,1,3),'D',SuperSolarPanels.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,5),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.massFabricator,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,6),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.chromium_plate,'B',SuperSolarPanels.QuantumItems8,'C',new ItemStack(SuperSolarPanels.machine1,1,1),'D',SuperSolarPanels.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,7),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.chromium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.electroFurnace,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,8),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.wolfram_plate,'B',SuperSolarPanels.QuantumItems8,'C',new ItemStack(SuperSolarPanels.machine1,1,7),'D',SuperSolarPanels.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,9),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',new ItemStack(SuperSolarPanels.machine1,1,5),'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,10),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems5,'C',new ItemStack(SuperSolarPanels.machine1,1,9),'D',SuperSolarPanels.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,11),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.metalformer,'D',SuperSolarPanels.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,12),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',new ItemStack(SuperSolarPanels.machine1,1,11),'D',SuperSolarPanels.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.machine1,1,13),new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.nickelplate,'B',SuperSolarPanels.QuantumItems9,'C',new ItemStack(SuperSolarPanels.machine1,1,1),'D',SuperSolarPanels.magnesium_plate});
+      GameRegistry.addRecipe(SuperSolarPanels.macerator,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.macerator,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.extractor,new Object[] {"AAA","BCB","DDD", 'A',SuperSolarPanels. chromium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.extractor,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.compressor,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.wolfram_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.compressor,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.compressor1,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',SuperSolarPanels.compressor,'D',SuperSolarPanels.QuantumItems3});
+      GameRegistry.addRecipe(SuperSolarPanels.massFabricator1,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.massFabricator,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.macerator1,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.chromium_plate,'B',SuperSolarPanels.QuantumItems8,'C',SuperSolarPanels.macerator,'D',SuperSolarPanels.QuantumItems3});
+      GameRegistry.addRecipe(SuperSolarPanels.electroFurnace,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.chromium_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.electroFurnace,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.electroFurnace1,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.wolfram_plate,'B',SuperSolarPanels.QuantumItems8,'C',SuperSolarPanels.electroFurnace,'D',SuperSolarPanels.QuantumItems3});
+      GameRegistry.addRecipe(SuperSolarPanels.massFabricator2,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',SuperSolarPanels.massFabricator1,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.massFabricator3,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems5,'C',SuperSolarPanels.massFabricator2,'D',SuperSolarPanels.QuantumItems3});
+      GameRegistry.addRecipe(SuperSolarPanels.metalformer,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.spinel_plate,'B',SuperSolarPanels.QuantumItems9,'C',Ic2Items.metalformer,'D',SuperSolarPanels.QuantumItems6});
+      GameRegistry.addRecipe(SuperSolarPanels.metalformer1,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.platium_plate,'B',SuperSolarPanels.QuantumItems8,'C',SuperSolarPanels.metalformer,'D',SuperSolarPanels.QuantumItems3});
+      GameRegistry.addRecipe(SuperSolarPanels.alloymachine,new Object[] {"AAA","BCB","DDD", 'A', SuperSolarPanels.nickelplate,'B',SuperSolarPanels.QuantumItems9,'C',SuperSolarPanels.extractor,'D',SuperSolarPanels.magnesium_plate});
       
   
 	//TODO Old Recipe from Advanced Solar Panels
@@ -67,8 +67,8 @@ public static void recipe() {
    // TODO Recipe Neutron Generator
     GameRegistry.addRecipe(SuperSolarPanels.massFabricator, new Object[] { " B ", "ACA", " B ", 'C', Ic2Items.massFabricator, 'A', new ItemStack(SuperSolarPanels.QuantumItems5, 1), 'B',new ItemStack(SuperSolarPanels.enderquantumcomponent, 1) });
    //TODO Recipe Advanced and Improvemed MFSU
-    GameRegistry.addRecipe(SuperSolarPanels.mfeUnit, new Object[] {  "ACA", 'C', Ic2Items.mfsUnit,  'A' , SuperSolarPanels.photoniy_ingot });
-    GameRegistry.addRecipe(SuperSolarPanels.mfsUnit, new Object[] {  "ACA", 'C', SuperSolarPanels.mfeUnit,  'A' , SuperSolarPanels.QuantumItems5 });
+    GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.electricblock,1,0), new Object[] {  "ACA", 'C', Ic2Items.mfsUnit,  'A' , SuperSolarPanels.photoniy_ingot });
+    GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.electricblock,1,1), new Object[] {  "ACA", 'C', new ItemStack(SuperSolarPanels.electricblock,1,0),  'A' , SuperSolarPanels.QuantumItems5 });
     //TODO Recipe dust
     GameRegistry.addRecipe(new ItemStack(SuperSolarPanels.dust,1) ,new Object[] {  "AAA","AAA","AAA",   'A' , IC2Items.getItem("energiumDust") });
 //TODO Old Recipe from Advanced Solar Panels

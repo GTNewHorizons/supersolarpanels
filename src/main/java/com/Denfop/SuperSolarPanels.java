@@ -88,8 +88,6 @@ import com.Denfop.item.base.ItemAdvSolarPanel1;
 import com.Denfop.item.base.ItemGoldenWrench;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.item.base.SSPItem;
-import com.Denfop.item.energy.ItemBattery;
-import com.Denfop.item.energy.ItemNanoSaber;
 import com.Denfop.item.solarhelmet.ItemAdvancedSolarHelmet;
 import com.Denfop.packets.WVPacketHandler;
 import com.Denfop.proxy.ClientProxy;
@@ -125,6 +123,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -645,6 +644,9 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static int minWindStrength5;
 		public static Block machines;
 		public static Block electricblock;
+		public static Item matter;
+		public static ItemStack massFabricator2;
+		public static ItemStack massFabricator3;
 		
 		
 		public static class FluidXP {
@@ -744,8 +746,8 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
         SuperSolarPanels.macerator1 = new ItemStack(machines, 1, 6);
         SuperSolarPanels.electroFurnace = new ItemStack(machines, 1, 7);
         SuperSolarPanels.electroFurnace1 = new ItemStack(machines, 1, 8);
-        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 9);
-        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 10);
+        SuperSolarPanels.massFabricator2 = new ItemStack(machines, 1, 9);
+        SuperSolarPanels.massFabricator3 = new ItemStack(machines, 1, 10);
         SuperSolarPanels.metalformer = new ItemStack(machines, 1, 11);
         SuperSolarPanels.metalformer1 = new ItemStack(machines, 1, 12);
         SuperSolarPanels.alloymachine = new ItemStack(machines, 1, 13);
@@ -757,7 +759,7 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
        TileEntityDoubleMetalFormer.init();
        TileEntityTripleMetalFormer.init();
        TileEntityDoubleExtractor.init();
-       TileEntityAlloySmelter.init();
+       com.Denfop.block.mechanism.TileEntityAlloySmelter.init();
     
 		 if (!Loader.isModLoaded("OpenBlocks")) {
 		 FluidRegistry.registerFluid(FluidXP.xpJuice);
@@ -845,17 +847,16 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
     }
    
     private void generateSurface(World world, Random random, int x, int y) {
-    	 this.addOreSpawn(SuperSolarPanels.mikhail_ore, world, random, x, y, 16, 16, 3+random.nextInt(2), 3, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.spinelore, world, random, x, y, 16, 16, 3+random.nextInt(2), 1, 20, 30);
-	        this.addOreSpawn(SuperSolarPanels.platiumore, world, random, x, y, 16, 16, 1+random.nextInt(2), 2, 0, 20);
-	        this.addOreSpawn(SuperSolarPanels.wolframore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.chromiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 30, 60);
-	        this.addOreSpawn(SuperSolarPanels.iridiumore, world, random, x, y, 16, 16, 1+random.nextInt(1), 2, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.magnesiumore, world, random, x, y, 16, 16, 3+random.nextInt(2), 8, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.nicelore, world, random, x, y, 16, 16, 2+random.nextInt(1), 8, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.toriyore, world, random, x, y, 16, 16, 2+random.nextInt(1), 8, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.magnetitore, world, random, x, y, 16, 16, 2+random.nextInt(1), 10, 10, 70);
-
+    	 this.addOreSpawn(SuperSolarPanels.mikhail_ore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.spinelore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.platiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 0, 60);
+	        this.addOreSpawn(SuperSolarPanels.wolframore, world, random, x, y, 16, 16, 2+random.nextInt(2), 15, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.chromiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.iridiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.magnesiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 12, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.nicelore, world, random, x, y, 16, 16, 2+random.nextInt(2), 12, 10, 60);
+	        this.addOreSpawn(SuperSolarPanels.toriyore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 70);
+	        this.addOreSpawn(SuperSolarPanels.magnetitore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 70);
     }
     
     private void generateEnd(World world, Random random, int x, int y) {
@@ -951,11 +952,31 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
         EntityLiving entity = (EntityLiving)event.entityLiving;
         for (int i = 0; i <= 4; i++)
           entity.setEquipmentDropChance(i, Float.NEGATIVE_INFINITY); 
-        
-       
+        if (entity instanceof net.minecraft.entity.monster.EntityZombie) {
+          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber).copy()); 
+          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber1).copy()); 
+        }
+        if (event.entityLiving.worldObj.rand.nextFloat() < 0.1F) {
+          entity.setCurrentItemOrArmor(1, new ItemStack(SuperSolarPanels.quantumHelmet).copy());
+          entity.setCurrentItemOrArmor(2, new ItemStack(SuperSolarPanels.quantumBodyarmor).copy());
+          entity.setCurrentItemOrArmor(3, new ItemStack(SuperSolarPanels.quantumLeggings).copy());
+          entity.setCurrentItemOrArmor(4, new ItemStack(SuperSolarPanels.quantumBoots).copy());
+        } else {
+         
+        } 
       } 
     }
-   
+    
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void textureHook(TextureStitchEvent.Post event) {
+      if (event.map.getTextureType() == 0)
+        for (InternalName name : BlocksItems.getIc2FluidNames()) {
+          Block block = BlocksItems.getFluidBlock(name);
+          Fluid fluid = BlocksItems.getFluid(name);
+          fluid.setIcons(block.getBlockTextureFromSide(1), block.getBlockTextureFromSide(2));
+        }  
+    }
     @Mod.EventHandler
     public void afterModsLoaded(final FMLPostInitializationEvent event) {
     	BasicRecipe.recipe();
@@ -1009,12 +1030,14 @@ MaceratorRecipe.recipe();
             nbttagcompound.setInteger("energy2", 0);
             nbttagcompound.setBoolean("isFlyActive", false);
             nbttagcompound.setBoolean("EnableWirelles", false);
-            nbttagcompound.setInteger("World", 0);
+            nbttagcompound.setBoolean("create", true);
+            nbttagcompound.setString("World", "");
+            nbttagcompound.setInteger("World1", 0);
             nbttagcompound.setInteger("Xcoord", 0);
             nbttagcompound.setInteger("Ycoord", 0);
             nbttagcompound.setInteger("Zcoord", 0);
             nbttagcompound.setInteger("tier", 0);
-            nbttagcompound.setString("Name", "Name electical block");
+            nbttagcompound.setString("Name", "");
             
         }
         return nbttagcompound;

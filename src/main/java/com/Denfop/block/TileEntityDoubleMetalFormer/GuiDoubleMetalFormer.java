@@ -74,7 +74,7 @@ public class GuiDoubleMetalFormer extends GuiIC2 {
   }
   
   public String getName() {
-    return StatCollector.translateToLocal("ssp.MetalFormer1");
+    return this.container.base.getInventoryName();
   }
   
   public ResourceLocation getResourceLocation() {

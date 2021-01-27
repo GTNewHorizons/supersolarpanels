@@ -36,7 +36,7 @@ public class TileEntityTripleCompressor extends TileEntityTripleMachine {
   }
   
   public String getInventoryName() {
-    return "Compressor";
+    return "Triple Compressor";
   }
   
   @SideOnly(Side.CLIENT)

@@ -34,6 +34,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,9 +66,11 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
     if (armorType1 == 3)
       MinecraftForge.EVENT_BUS.register(this); 
     potionRemovalCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(100));
-    potionRemovalCost.put(Integer.valueOf(IC2Potion.radiation.id), Integer.valueOf(1000));
+    potionRemovalCost.put(Integer.valueOf(IC2Potion.radiation.id), Integer.valueOf(300));
     potionRemovalCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(100));
+    potionRemovalCost.put(Integer.valueOf(Potion.hunger.id), Integer.valueOf(200));
   }
+
   @SideOnly(Side.CLIENT)
   public void getSubItems(final Item item, final CreativeTabs var2, final List var3) {
       final ItemStack var4 = new ItemStack((Item)this, 1);
@@ -127,17 +130,27 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
     tNBT.setInteger("color", par2);
   }
   
-  public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase entity, ItemStack armor, DamageSource source, double damage, int slot) {
-	    if (source == DamageSource.fall && this.armorType == 3) {
-	      int energyPerDamage = getEnergyPerDamage();
-	      int damageLimit = Integer.MAX_VALUE;
-	      if (energyPerDamage > 0)
-	        damageLimit = (int)Math.min(damageLimit, 25.0D * ElectricItem.manager.getCharge(armor) / energyPerDamage); 
-	      return new ISpecialArmor.ArmorProperties(10, 1.0D, damageLimit);
-	    } 
-	    return super.getProperties(entity, armor, source, damage, slot);
+  public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+	    double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
+	    int energyPerDamage = getEnergyPerDamage();
+	    int damageLimit = (int)((energyPerDamage > 0) ? (25.0D * ElectricItem.manager.getCharge(armor) / energyPerDamage) : 0.0D);
+	    return new ISpecialArmor.ArmorProperties(0, absorptionRatio, damageLimit);
 	  }
+  public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
+	    return true;
+	  }
+  public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+	    ElectricItem.manager.discharge(stack, (damage * getEnergyPerDamage()), 2147483647, true, false, false);
+	  }
+
   
+  public Item getChargedItem(ItemStack itemStack) {
+    return (Item)this;
+  }
+  
+  public Item getEmptyItem(ItemStack itemStack) {
+    return (Item)this;
+  }
   @SubscribeEvent
   public void onEntityLivingFallEvent(LivingFallEvent event) {
     if (IC2.platform.isSimulating() && event.entity instanceof EntityLivingBase) {
@@ -159,14 +172,17 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
       return 1.1D; 
     return 1.0D;
   }
-  
+  private double getBaseAbsorptionRatio() {
+	    return 0.4D;
+	  }
+	  
   public int getEnergyPerDamage() {
     return 20000;
   }
   
   @SideOnly(Side.CLIENT)
   public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.rare;
+    return EnumRarity.epic;
   }
   public boolean canProvideEnergy(ItemStack itemStack) {
 	    return true;
@@ -195,15 +211,15 @@ public ItemArmorQuantumSuit1(InternalName internalName, int armorType1) {
           int slot = -1;
           for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i]
-              .getItem() == Ic2Items.filledTinCan.getItem()) {
+              .getItem() instanceof ItemFood) {
               slot = i;
               break;
             } 
           } 
           if (slot > -1) {
             ItemStack stack = player.inventory.mainInventory[slot];
-            ItemTinCan can = (ItemTinCan)stack.getItem();
-            stack = can.onEaten(player, stack);
+            ItemFood can = (ItemFood)stack.getItem();
+            stack = can.onEaten(stack, world, player);
             if (stack.stackSize <= 0)
               player.inventory.mainInventory[slot] = null; 
             ElectricItem.manager.use(itemStack, 1000.0D, null);

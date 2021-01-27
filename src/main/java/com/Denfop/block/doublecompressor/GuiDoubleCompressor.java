@@ -35,7 +35,7 @@ public class GuiDoubleCompressor extends GuiIC2 {
   }
   
   public String getName() {
-    return StatCollector.translateToLocal("ssp.blockCompressor1");
+    return  this.container.base.getInventoryName();
   }
   
   public ResourceLocation getResourceLocation() {

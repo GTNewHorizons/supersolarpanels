@@ -81,6 +81,8 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   public int soundTicker;
   
   public int damageVsEntity = 1;
+
+public int mode;
   
   public ultDDrill(Item.ToolMaterial toolMaterial) {
     super(0.0F, toolMaterial, new HashSet());
@@ -369,7 +371,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
         case 0:
           CommonProxy.sendPlayerMessage(player, EnumChatFormatting.GREEN + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.normal"));
           this.efficiencyOnProperMaterial = this.normalPower;
-
+mode = 0;
           Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
           if(Config.enableefficiency) {
               enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
@@ -383,7 +385,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
           
         case 1:
         	Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
-            
+        	mode = 1;
         	  if(Config.enableefficiency) {
         	enchantmentMap4.remove(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
         	  }
@@ -399,7 +401,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
         	CommonProxy.sendPlayerMessage(player, EnumChatFormatting.AQUA + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.bigHoles"));
           this.efficiencyOnProperMaterial = this.bigHolePower;
           Map<Integer, Integer> enchantmentMap2 = new HashMap<Integer, Integer>();
-
+          mode = 2;
           if(Config.enableefficiency1) {
           enchantmentMap2.remove(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel1));
           }
@@ -416,6 +418,7 @@ public class ultDDrill extends ItemTool implements IElectricItem {
           if(Config.enablesilkTouch) {
           enchantmentMap1.remove(Integer.valueOf(Enchantment.silkTouch.effectId), Integer.valueOf(1));
           }
+          mode = 3;
           if(Config.enablefortune) {
           enchantmentMap1.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(Config.fortunelevel));
           }

@@ -32,7 +32,7 @@ public class GuiTripleMacerator extends GuiIC2 {
   }
   
   public String getName() {
-    return StatCollector.translateToLocal("ssp.blockMacerator1");
+    return this.container.base.getInventoryName();
   }
   
   public ResourceLocation getResourceLocation() {

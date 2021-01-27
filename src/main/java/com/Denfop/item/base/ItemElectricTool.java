@@ -70,12 +70,12 @@ public abstract class ItemElectricTool extends ItemTool implements IElectricItem
     } 
     GameRegistry.registerItem((Item)this, internalName.name());
   }
-  
+  @Override
   public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
     ElectricItem.manager.use(stack, 0.0D, (EntityLivingBase)player);
     return super.onItemUse(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
   }
-  
+  @Override
   public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
     ElectricItem.manager.use(stack, 0.0D, (EntityLivingBase)player);
     return super.onItemRightClick(stack, world, player);
@@ -85,19 +85,19 @@ public abstract class ItemElectricTool extends ItemTool implements IElectricItem
   public void registerIcons(IIconRegister iconRegister) {
     this.itemIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES_ITEMS + ":" + getUnlocalizedName().substring(4));
   }
-  
+  @Override
   public String getUnlocalizedName() {
     return "ssp." + super.getUnlocalizedName().substring(5);
   }
-  
+  @Override
   public String getUnlocalizedName(ItemStack itemStack) {
     return getUnlocalizedName();
   }
-  
+  @Override
   public String getItemStackDisplayName(ItemStack itemStack) {
     return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
   }
-  
+  @Override
   public boolean canHarvestBlock(Block block, ItemStack stack) {
     Material material = block.getMaterial();
     for (ToolClass toolClass : this.toolClasses) {
@@ -107,19 +107,19 @@ public abstract class ItemElectricTool extends ItemTool implements IElectricItem
     } 
     return super.canHarvestBlock(block, stack);
   }
-  
+  @Override
   public float getDigSpeed(ItemStack tool, Block block, int meta) {
     if (!ElectricItem.manager.canUse(tool, this.operationEnergyCost))
       return 1.0F; 
     return super.getDigSpeed(tool, block, meta);
   }
-  
+  @Override
   public float func_150893_a(ItemStack stack, Block block) {
     if (canHarvestBlock(block, stack))
       return this.efficiencyOnProperMaterial; 
     return super.func_150893_a(stack, block);
   }
-  
+  @Override
   public boolean hitEntity(ItemStack itemstack, EntityLivingBase entityliving, EntityLivingBase entityliving1) {
     return true;
   }
@@ -155,7 +155,7 @@ public abstract class ItemElectricTool extends ItemTool implements IElectricItem
   public double getTransferLimit(ItemStack itemStack) {
     return this.transferLimit;
   }
-  
+  @Override
   public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block block, int par4, int par5, int par6, EntityLivingBase par7EntityLiving) {
     if (block.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
       if (par7EntityLiving != null) {
@@ -177,7 +177,7 @@ public abstract class ItemElectricTool extends ItemTool implements IElectricItem
   public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
     return false;
   }
-  
+ 
   @SideOnly(Side.CLIENT)
   public void SubItems(Item item, CreativeTabs tabs, List<ItemStack> itemList) {
     itemList.add(getItemStack(Double.POSITIVE_INFINITY));

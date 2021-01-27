@@ -8,5 +8,5 @@ package com.Denfop.block.mechanism;
  * @author Richard
  */
 public class Recipes {
-	public static ic2.api.recipe.IMachineRecipeManager Alloysmelter;
+	public static ic2.api.recipe.ICannerBottleRecipeManager Alloysmelter;
 }

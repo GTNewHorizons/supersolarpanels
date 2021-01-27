@@ -59,7 +59,7 @@ public class GuiUltimateMatter extends GuiIC2 {
   }
   
   public String getName() {
-    return StatCollector.translateToLocal("ssp.blockMatter3");
+    return this.container.base.getInventoryName();
   }
   
   public ResourceLocation getResourceLocation() {

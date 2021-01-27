@@ -34,7 +34,7 @@ public class TileEntityDoubleMacerator extends TileEntityDoubleMachine {
   }
   
   public String getInventoryName() {
-    return "Macerator";
+    return "Double Macerator";
   }
   
   @SideOnly(Side.CLIENT)

@@ -137,7 +137,7 @@ public class TileEntityImprovedMatter extends TileEntityLiquidTankElectricMachin
   }
   
   public String getInventoryName() {
-    return "Mass Fabricator";
+    return "Improved Mass Fabricator";
   }
   
   protected void updateEntityServer() {

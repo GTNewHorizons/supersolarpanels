@@ -33,6 +33,10 @@ public class MaceratorRecipe {
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.nethertinrack)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(IC2Items.getItem("crushedTinOre").getItem(),2,3) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.endlead_stone)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(IC2Items.getItem("crushedLeadOre").getItem(),2,6) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.netherleadrack)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(IC2Items.getItem("crushedLeadOre").getItem(),2,6) });
+		//
+		 //  Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(Ic2Items.advIronIngot.getItem())), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.blast) });
+		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.electriumingot)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.electriumdust) });
+		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.invaringot)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.invardust) });
 		
 	}
 }

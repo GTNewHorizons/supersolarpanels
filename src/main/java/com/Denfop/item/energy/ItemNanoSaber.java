@@ -8,14 +8,19 @@ import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -32,7 +37,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemNanoSaber extends ItemElectricTool {
+public class ItemNanoSaber extends ItemElectricTool implements IElectricItem{
   public ItemNanoSaber(InternalName internalName) {
     this(internalName, 10, ItemElectricTool.HarvestLevel.Diamond);
   }
@@ -52,45 +57,53 @@ public class ItemNanoSaber extends ItemElectricTool {
       info.add(StatCollector.translateToLocal("ssp.transferLimit") + this.transferLimit);
  
   }
+  @Override
   public double getMaxCharge(ItemStack itemStack) {
 	    return this.maxCharge;
 	  }
-  public void SubItems(Item item, CreativeTabs tabs, List<ItemStack> itemList) {
-	    ItemStack charged = new ItemStack((Item)this, 1);
-	    ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
-	    itemList.add(charged);
-	    itemList.add(new ItemStack((Item)this, 1, getMaxDamage()));
-	  }
+  
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
     this.textures = new IIcon[2];
     this.textures[0] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.off.name());
     this.textures[1] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.active.name());
   }
-  @SideOnly(Side.CLIENT)
-  public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
-    ItemStack itemStack = new ItemStack(this, 1);
-    if (getChargedItem(itemStack) == this) {
-      ItemStack charged = new ItemStack(this, 1);
-      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
-      itemList.add(charged);
-      
-    } 
-   
-    if (getEmptyItem(itemStack) == this) {
-      ItemStack charged = new ItemStack(this, 1);
-      ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
-      itemList.add(charged);
-    } 
-  }
+ @Override
   public boolean canProvideEnergy(ItemStack itemStack) {
 	    return true;
 	  }
   @SideOnly(Side.CLIENT)
+  public void getSubItems(Item item, CreativeTabs tab, List subs) {
+    ItemStack stack = new ItemStack((Item)this, 1);
+  
+    
+	
+
+    ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
+    subs.add(stack);
+ ItemStack itemstack = new ItemStack((Item)this,1,getMaxDamage());
+    
+    
+    subs.add(itemstack);
+  }
+  
+  @SideOnly(Side.CLIENT)
+  public EnumRarity getRarity(ItemStack var1) {
+    return EnumRarity.uncommon;
+  }
+  @Override
+  public Item getChargedItem(ItemStack itemStack) {
+    return (Item)this;
+  }
+  @Override
+  public Item getEmptyItem(ItemStack itemStack) {
+    return (Item)this;
+  }
+  @SideOnly(Side.CLIENT)
   public boolean requiresMultipleRenderPasses() {
     return true;
   }
-  
+  @Override
   @SideOnly(Side.CLIENT)
   public IIcon getIcon(ItemStack itemStack, int pass) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
@@ -98,7 +111,7 @@ public class ItemNanoSaber extends ItemElectricTool {
       return this.textures[1]; 
     return this.textures[0];
   }
-  
+  @Override
   public float getDigSpeed(ItemStack itemStack, Block block, int meta) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (nbtData.getBoolean("active")) {
@@ -109,7 +122,7 @@ public class ItemNanoSaber extends ItemElectricTool {
     } 
     return 1.0F;
   }
-  
+  @Override
   public Multimap getAttributeModifiers(ItemStack stack) {
     int dmg = SuperSolarPanels.spectralsabernotactive1;
     if (ElectricItem.manager.canUse(stack, 400.0D)) {
@@ -121,7 +134,7 @@ public class ItemNanoSaber extends ItemElectricTool {
     hashMultimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", dmg, 0));
     return (Multimap)hashMultimap;
   }
-  
+  @Override
   public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase source) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
     if (!nbtData.getBoolean("active"))
@@ -163,14 +176,14 @@ public class ItemNanoSaber extends ItemElectricTool {
     } 
     return "Tools/Nanosabre/NanosabreSwing3.ogg";
   }
-  
+  @Override
   public boolean onBlockStartBreak(ItemStack itemStack, int i, int j, int k, EntityPlayer player) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (nbtData.getBoolean("active"))
       drainSaber(itemStack, 80.0D, (EntityLivingBase)player); 
     return false;
   }
-  
+  @Override
   public boolean isFull3D() {
     return true;
   }
@@ -182,7 +195,7 @@ public class ItemNanoSaber extends ItemElectricTool {
       updateAttributes(nbtData);
     } 
   }
-  
+  @Override
   public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityplayer) {
     if (!IC2.platform.isSimulating())
       return itemStack; 
@@ -204,7 +217,7 @@ public class ItemNanoSaber extends ItemElectricTool {
   private IIcon[] textures;
   
   private int soundTicker;
-  
+  @Override
   public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, boolean par5) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (!nbtData.getBoolean("active"))
@@ -217,10 +230,7 @@ public class ItemNanoSaber extends ItemElectricTool {
       }  
   }
   
-  @SideOnly(Side.CLIENT)
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.uncommon;
-  }
+  
   
   private static void updateAttributes(NBTTagCompound nbtData) {
     boolean active = nbtData.getBoolean("active");

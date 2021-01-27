@@ -35,7 +35,7 @@ public class TileEntityDoubleCompressor extends TileEntityDoubleMachine {
   }
   
   public String getInventoryName() {
-    return "Compressor";
+    return "Double Compressor";
   }
   
   @SideOnly(Side.CLIENT)

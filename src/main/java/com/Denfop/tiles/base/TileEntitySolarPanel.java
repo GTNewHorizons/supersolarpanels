@@ -387,7 +387,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
       		 z=nbttagcompound.getInteger("Zcoord");
       	 tier1=nbttagcompound.getInteger("tier");
       	 name = nbttagcompound.getString("Name");
-      	int world = nbttagcompound.getInteger("World");
+      	int world = nbttagcompound.getInteger("World1");
       		
       if(nbttagcompound != null && x != 0 && y != 0 && z != 0) {
       	this.panelx = x;
@@ -424,6 +424,9 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
       		}
           		
         	}else {
+        		panelx=0;
+        		panely=0;
+        		panelz=0;
           	}
         	
         int sum = 0,sum1 = 0,sum2 = 0,sum3 = 0;

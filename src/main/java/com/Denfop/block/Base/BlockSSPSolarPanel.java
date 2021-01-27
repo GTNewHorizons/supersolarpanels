@@ -855,18 +855,7 @@ public class BlockSSPSolarPanel extends BlockContainer {
         } 
         return dropList;
       }
-    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
-        if (axis == ForgeDirection.UNKNOWN)
-          return false; 
-        TileEntity tileEntity = worldObj.getTileEntity(x, y, z);
-        if (tileEntity instanceof IWrenchable) {
-          IWrenchable te = (IWrenchable)tileEntity;
-          int newFacing = ForgeDirection.getOrientation(te.getFacing()).getRotation(axis).ordinal();
-          if (te.wrenchCanSetFacing(null, newFacing))
-            te.setFacing((short)newFacing); 
-        } 
-        return false;
-      }
+  
       public void breakBlock(World world, int x, int y, int z, Block blockID, int blockMeta) {
         super.breakBlock(world, x, y, z, blockID, blockMeta);
         boolean var5 = true;

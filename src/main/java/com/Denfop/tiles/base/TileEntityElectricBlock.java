@@ -7,6 +7,7 @@ import com.Denfop.tiles.ElectricalBase.ContainerElectricBlock;
 import com.Denfop.tiles.ElectricalBase.GuiElectricBlock;
 
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,7 +41,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class TileEntityElectricBlock extends TileEntityInventory implements IEnergySink, IEnergySource, IHasGui, INetworkClientTileEntityEventListener, IEnergyStorage,IEnergyHandler {
+public abstract class TileEntityElectricBlock extends TileEntityInventory implements IEnergySink, IEnergySource, IHasGui, INetworkClientTileEntityEventListener, IEnergyStorage,IEnergyHandler,IEnergyReceiver {
   public final int tier;
   
   public final int output;
@@ -59,6 +60,8 @@ public double energy2;
 public boolean lastenergy_1=false;
 public boolean lastenergy_2=false;
 public boolean rf;
+
+public boolean rfeu = false;
 
   public TileEntityElectricBlock(int tier1, int output1, int maxStorage1) {
     this.energy = 0.0D;
@@ -188,6 +191,25 @@ public int getInventoryStackLimit() {
     } 
     super.onUnloaded();
   }
+  public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+	    
+	      if (this.energy2 >= this.maxStorage2)
+	        return 0; 
+	      if (this.energy2 + maxReceive > this.maxStorage2) {
+	        int energyReceived = (int) (this.maxStorage2 - this.energy2);
+	        if (!simulate) {
+	          this.energy2 = this.maxStorage2;
+	        } 
+	        return energyReceived;
+	      } 
+	      if (!simulate) {
+	        
+	        this.energy2 += maxReceive;
+	      } 
+	      return maxReceive;
+	    } 
+	   
+	  
   public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
       if ( this.energy2 > 0) {
         int energyExtracted = (int) Math.min(this.energy2, maxExtract);
@@ -200,11 +222,7 @@ public int getInventoryStackLimit() {
       if (this.rf == true);
       return 0;
     }
-  @Override
-	 public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-	    
-	    return 0;
-	  }
+  
   public boolean canConnectEnergy(ForgeDirection arg0) {
       return true;
     }
@@ -226,6 +244,7 @@ public int getInventoryStackLimit() {
     	this.rf = true;}else {
     		this.rf=false;
     	}
+    	if(this.rfeu == false) {
     	if (this.rf == true ) {
 		      if (this.energy >= 0 && this.energy2 <= this.maxStorage2 ) {
 		       
@@ -243,6 +262,22 @@ public int getInventoryStackLimit() {
 		}
 		
 		
+		}}else {
+			if (this.rf == true ) {
+			      if (this.energy2 >= 0 && this.energy <= this.maxStorage ) {
+			       
+			   
+			          
+			        
+			          this.energy += this.energy2/4;
+			          this.energy2 -= this.energy2;
+			       
+			      } 
+			if(this.energy >= this.maxStorage) {
+			int rf	= (int) (this.energy-this.maxStorage);
+			this.energy2 += rf*4;
+			this.energy=this.maxStorage2;
+			}}
 		}
     }else {
     	this.rf = false;
@@ -260,7 +295,8 @@ public int getInventoryStackLimit() {
    		 nbttagcompound.setInteger("Ycoord", this.yCoord);
    		 nbttagcompound.setInteger("Zcoord", this.zCoord);
    		 nbttagcompound.setInteger("tier", this.tier);
-   		nbttagcompound.setInteger("World", this.worldObj.provider.dimensionId);
+   		nbttagcompound.setInteger("World1", this.worldObj.provider.dimensionId);
+   		nbttagcompound.setString("World", this.worldObj.provider.getDimensionName());
    		nbttagcompound.setString("Name", this.getInventoryName());
    		
    		
@@ -388,17 +424,12 @@ public int getInventoryStackLimit() {
   }
   
   public void onNetworkEvent(EntityPlayer player, int event) {
-    this.redstoneMode = (byte)(this.redstoneMode + 1);
-    if (this.redstoneMode >= redstoneModes)
-      this.redstoneMode = 0; 
-    IC2.platform.messagePlayer(player, getredstoneMode(), new Object[0]);
+    this.rfeu = !this.rfeu;
+  
+  
   }
   
-  public String getredstoneMode() {
-    if (this.redstoneMode > 6 || this.redstoneMode < 0)
-      return ""; 
-    return StatCollector.translateToLocal("ic2.EUStorage.gui.mod.redstone" + this.redstoneMode);
-  }
+  
   
   public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
     ItemStack ret = super.getWrenchDrop(entityPlayer);

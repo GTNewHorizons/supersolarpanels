@@ -52,6 +52,11 @@ public class FurnaceRecipes {
 	        GameRegistry.addSmelting(SuperSolarPanels.endlapis_stone,new ItemStack(Items.dye,1,4),5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.netherleadrack,Ic2Items.leadIngot,5.0F);
 	        GameRegistry.addSmelting(SuperSolarPanels.endlead_stone,Ic2Items.leadIngot,5.0F);
+	        //
+	        GameRegistry.addSmelting(SuperSolarPanels.invardust,new ItemStack(SuperSolarPanels.invaringot),5.0F);
+	        GameRegistry.addSmelting(SuperSolarPanels.electriumdust,new ItemStack(SuperSolarPanels.electriumingot),5.0F);
+	        GameRegistry.addSmelting(SuperSolarPanels.blast,Ic2Items.advIronIngot,5.0F);
+	
 	     
 	}
 }

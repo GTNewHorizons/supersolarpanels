@@ -32,7 +32,8 @@ import com.Denfop.block.expgen.TileExpGen2;
 import com.Denfop.block.improvematter.ContainerImprovedMatter;
 import com.Denfop.block.improvematter.GuiImprovedMatter;
 import com.Denfop.block.improvematter.TileEntityImprovedMatter;
-import com.Denfop.block.mechanism.GuiMacerator;
+import com.Denfop.block.mechanism.ContainerStandardMachine;
+import com.Denfop.block.mechanism.GuiAlloySmelter;
 import com.Denfop.block.mechanism.TileEntityAlloySmelter;
 import com.Denfop.block.triplecompressor.GuiTripleCompressor;
 import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
@@ -82,8 +83,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import ic2.core.ContainerBase;
 import ic2.core.Ic2Items;
-import ic2.core.block.machine.container.ContainerStandardMachine;
-import ic2.core.block.machine.tileentity.TileEntityStandardMachine;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -266,7 +265,7 @@ public boolean isClient() {
       }
       if (te instanceof TileEntityAlloySmelter)
       {
-          return new GuiMacerator(new ContainerStandardMachine(player, (TileEntityAlloySmelter) te));
+          return new GuiAlloySmelter(new ContainerStandardMachine(player, (TileEntityAlloySmelter) te));
       }
       if (te instanceof TileEntityElectricMFE)
       {

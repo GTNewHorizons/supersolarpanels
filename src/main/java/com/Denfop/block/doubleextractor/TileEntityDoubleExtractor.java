@@ -33,7 +33,7 @@ public class TileEntityDoubleExtractor extends TileEntityDoubleMachine {
   }
   
   public String getInventoryName() {
-    return "Extractor";
+    return "Double Extractor";
   }
   
   @SideOnly(Side.CLIENT)

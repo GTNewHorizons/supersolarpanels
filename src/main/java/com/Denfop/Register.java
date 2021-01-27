@@ -37,6 +37,7 @@ import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
 import com.Denfop.block.ultimatematter.TileEntityUltimateMatter;
 import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Machina.ItemMachine1;
+import com.Denfop.item.matter;
 import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.ItemElectricBlock;
@@ -295,7 +296,8 @@ public static void register() {
       GameRegistry.registerItem(SuperSolarPanels.module5 = new com.Denfop.item.Modules.module5().setMaxStackSize(64).setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");
       
       GameRegistry.registerItem(SuperSolarPanels.module6 = new com.Denfop.item.Modules.module6(), "module6");
-
+//
+      GameRegistry.registerItem(SuperSolarPanels.matter = new matter().setMaxStackSize(64).setUnlocalizedName("matter").setTextureName("supersolarpanel:matter"), "matter");
       //
       GameRegistry.registerItem(SuperSolarPanels.chromiumcrushedore = new SSPItem().setMaxStackSize(64).setUnlocalizedName("chromiumcrushedore").setTextureName("supersolarpanel:chromiumcrushedore"), "chromiumcrushedore");
       GameRegistry.registerItem(SuperSolarPanels.electriumdust = new SSPItem().setMaxStackSize(64).setUnlocalizedName("electriumdust").setTextureName("supersolarpanel:electriumdust"), "electriumdust");
@@ -324,7 +326,7 @@ public static void registertiles() {
     GameRegistry.registerTileEntity(TileEntityUltimateMatter.class, "Mass Fabricator Ultimate");
     GameRegistry.registerTileEntity(TileEntityDoubleMetalFormer.class, "Metal Former Double");
     GameRegistry.registerTileEntity(TileEntityTripleMetalFormer.class, "Metal Former Triple");
-    GameRegistry.registerTileEntity(TileEntityAlloySmelter.class, "AlloySmelter");
+    GameRegistry.registerTileEntity(com.Denfop.block.mechanism.TileEntityAlloySmelter.class, "AlloySmelter");
 	 GameRegistry.registerTileEntity(TileRadioation.class, "RadiationOre");
 	 GameRegistry.registerTileEntity(TileVajraCharger.class, "TileVajraCharger1");
 	 GameRegistry.registerTileEntity(TileXPGenPublic.class, "TileEG1");

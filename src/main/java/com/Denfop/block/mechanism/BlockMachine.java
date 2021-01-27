@@ -100,7 +100,7 @@ public class BlockMachine extends BlockContainer {
         case 12:
         	return new TileEntityTripleMetalFormer();
         case 13:
-        	return new TileEntityAlloySmelter();
+        	return new com.Denfop.block.mechanism.TileEntityAlloySmelter();
     } 
     return null;
   }
@@ -131,7 +131,7 @@ public class BlockMachine extends BlockContainer {
       this.iconBuffer[2][5] = par1IconRegister.registerIcon("supersolarpanel:blockExtractor_1");
       this.iconBuffer[2][6] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_1");
       this.iconBuffer[2][7] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_1");
-      this.iconBuffer[2][8] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_1g");
+      this.iconBuffer[2][8] = par1IconRegister.registerIcon("supersolarpanel:blockmachine_1");
       this.iconBuffer[2][9] = par1IconRegister.registerIcon("supersolarpanel:blockExtractor2");
       this.iconBuffer[2][10] = par1IconRegister.registerIcon("supersolarpanel:blockExtractor_2");
       this.iconBuffer[2][11] = par1IconRegister.registerIcon("supersolarpanel:blockExtractor_2");

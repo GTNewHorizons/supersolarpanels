@@ -66,7 +66,7 @@ public class TileEntityDoubleMetalFormer extends TileEntityDoubleMachine impleme
   }
   
   public String getInventoryName() {
-    return "MetalFormer";
+    return "Double MetalFormer";
   }
   
   public ContainerBase<TileEntityDoubleMetalFormer> getGuiContainer(EntityPlayer entityPlayer) {

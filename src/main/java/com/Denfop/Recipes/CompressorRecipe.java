@@ -37,6 +37,7 @@ public class CompressorRecipe {
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.electriumingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.electriumplate,1) });
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.invaringot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.invarplate,1) });
 	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.magnesium_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.magnesium_plate,1) });
+	        Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.platium_ingot),9), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SuperSolarPanels.platium_plate,1) });
 
 		
 	          Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(Ic2Items.uraniumOre, 1), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.itemSSP,1,8) });

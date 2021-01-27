@@ -6,7 +6,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.Denfop.SuperSolarPanels;
 
@@ -25,9 +29,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import ic2.api.item.IMetalArmor;
 import ic2.core.IC2;
+import ic2.core.IC2Potion;
 import ic2.core.util.StackUtil;
 import ic2.api.item.IElectricItem;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemFood;
 
 public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem, IMetalArmor, ISpecialArmor
 {
@@ -47,12 +53,17 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
     private boolean skyIsVisible;
     private boolean noSunWorld;
     private boolean wetBiome;
+	private boolean ret = false;
     
     public ItemAdvancedSolarHelmet(final ItemArmor.ArmorMaterial par2EnumArmorMaterial, final int par3, final int par4, final int htype) {
         super(par2EnumArmorMaterial, par3, par4);
         this.solarType = htype;
         this.maxCharge = 1000000.0;
         this.transferLimit = 3000.0;
+        potionRemovalCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(100));
+        potionRemovalCost.put(Integer.valueOf(IC2Potion.radiation.id), Integer.valueOf(300));
+        potionRemovalCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(100));
+        potionRemovalCost.put(Integer.valueOf(Potion.hunger.id), Integer.valueOf(200));
         this.tier = 4;
         if (this.solarType == 1) {
             this.genDay = SuperSolarPanels.advGenDay;
@@ -92,6 +103,38 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
         if (worldObj.isRemote)
           return; 
         gainFuel(player);
+        for (Object effect : new LinkedList(player.getActivePotionEffects())) {
+            int id = ((PotionEffect) effect).getPotionID();
+            Integer cost = potionRemovalCost.get(Integer.valueOf(id));
+            if (cost != null) {
+              cost = Integer.valueOf(cost.intValue() * (((PotionEffect) effect).getAmplifier() + 1));
+              if (ElectricItem.manager.canUse(itemStack, cost.intValue())) {
+                ElectricItem.manager.use(itemStack, cost.intValue(), null);
+                IC2.platform.removePotion((EntityLivingBase)player, id);
+              } 
+            } 
+          } 
+        if (ElectricItem.manager.canUse(itemStack, 1000.0D) && player.getFoodStats().needFood()) {
+            int slot = -1;
+            for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+              if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i]
+                .getItem() instanceof ItemFood) {
+                slot = i;
+                break;
+              } 
+            } 
+            if (slot > -1) {
+              ItemStack stack = player.inventory.mainInventory[slot];
+              ItemFood can = (ItemFood)stack.getItem();
+              stack = can.onEaten(stack, worldObj, player);
+              if (stack.stackSize <= 0)
+                player.inventory.mainInventory[slot] = null; 
+              ElectricItem.manager.use(itemStack, 1000.0D, null);
+              ret  = true;
+            } 
+          } else if (player.getFoodStats().getFoodLevel() <= 0) {
+            IC2.achievements.issueAchievement(player, "starveWithQHelmet");
+          } 
         if (this.solarType == 2 || this.solarType == 3) {
           int airLevel = player.getAir();
           if (ElectricItem.manager.canUse(itemStack, 1000.0D) && airLevel < 100) {
@@ -104,7 +147,7 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
           for (int i = 0; i < player.inventory.armorInventory.length; i++) {
             if (energyLeft > 0) {
               if (player.inventory.armorInventory[i] != null && player.inventory.armorInventory[i].getItem() instanceof IElectricItem) {
-                double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], energyLeft, 4, false, false);
+                double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], energyLeft, 2147483647, false, false);
                 energyLeft = (int)(energyLeft - sentPacket);
               } 
             } else {
@@ -114,7 +157,7 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
           for (int j = 0; j < player.inventory.mainInventory.length; j++) {
             if (energyLeft > 0) {
               if (player.inventory.mainInventory[j] != null && player.inventory.mainInventory[j].getItem() instanceof IElectricItem) {
-                double sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], energyLeft, 4, false, false);
+                double sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], energyLeft, 2147483647, false, false);
                 energyLeft = (int)(energyLeft - sentPacket);
               } 
             } else {
@@ -122,6 +165,8 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
             } 
           } 
         } 
+        if (ret )
+            player.inventoryContainer.detectAndSendChanges(); 
       }
       
       public int gainFuel(EntityPlayer player) {
@@ -261,7 +306,7 @@ public class ItemAdvancedSolarHelmet extends ItemArmor implements IElectricItem,
     public int getTier(final ItemStack itemStack) {
         return this.tier;
     }
-    
+    protected static final Map<Integer, Integer> potionRemovalCost = new HashMap<Integer, Integer>();
     public double getTransferLimit(final ItemStack itemStack) {
         return this.transferLimit;
     }

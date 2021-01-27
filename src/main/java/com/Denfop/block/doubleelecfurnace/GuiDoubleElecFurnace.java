@@ -31,7 +31,7 @@ public class GuiDoubleElecFurnace extends GuiIC2 {
   }
   
   public String getName() {
-    return StatCollector.translateToLocal("ssp.blockElecFurnace1");
+    return  this.container.base.getInventoryName();
   }
   
   public ResourceLocation getResourceLocation() {
