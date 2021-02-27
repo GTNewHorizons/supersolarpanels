@@ -101,14 +101,14 @@ for(int i = 0; i<9;i++) {
     	a[0] = 0;
     }
     
-      if (a[0] >= 0) {
+     
     	String maxstorage_1 =  GuiNumberUtils.getString(a[0]);
     	String maxstorage_2 =  GuiNumberUtils.getString(this.tileentity.storage);
       
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
        if(maxstorage1 != 0)
         this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-      } 
+      
     
     a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) * 0.2D * output);
     if(a[1] > 2000000000) {
@@ -118,11 +118,11 @@ for(int i = 0; i<9;i++) {
     	a[1] = 0;
     }
  
-      if (a[1] >=0) {
+      
         this.fontRendererObj.drawString(maxOutputString +  GuiNumberUtils.getString(a[1]) + " " + energyPerTickString, 50, 26, 13487565);
         if(output != 0)
 this.fontRendererObj.drawString(ModulesString3 + (20 * output) + "%", 150, 26, 13487565);
-      } 
+      
     
     int gend = 0;
     int genn = 0;

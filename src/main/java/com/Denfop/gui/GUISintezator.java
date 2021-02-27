@@ -16,6 +16,7 @@ import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
+import com.Denfop.utils.GuiNumberUtils;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
@@ -51,7 +52,7 @@ public class GUISintezator extends GuiContainer
         final String energyPerTickString = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]);
 
       
-       int yy = 0;
+
     
        int[] myArray2; 
        int[] myArray3; 
@@ -73,12 +74,12 @@ public class GUISintezator extends GuiContainer
        			
        			myArray2[i] = storage* p;
        			myArray3[i] = output* p;
-       			yy =1;
+       			
            		}else {
            			
            			myArray2[i] = storage*  Config.limit ;
            			myArray3[i]  = output*  Config.limit ;
-           			yy =1;
+           			
            		}
        	}
        }
@@ -106,152 +107,27 @@ public class GUISintezator extends GuiContainer
     if(sum3 <= 0) {
    	 sum3 = 0;
    }
-
-if( yy != 0 ) {
-	float h = sum2;
-	 float hh = 0;
-	 int i = 0;
-	 for(;h >= 10;i++) {
-	 h =(float)( h / 10) ;
-
-	
-	 }
-	 String maxstorage_1= "0";
-	if(i >=3 && i <6 && sum2 >= 1000 && sum2 < 1000000) {
-		hh=(sum2/(1000));
-		 maxstorage_1= String.format("%.2fK", hh);	}
-	else if(i >=6 && i <9&& sum2 >= 1000000 && sum2 < 1000000000) {
-		hh= (sum2/(1000000));
-	maxstorage_1= String.format("%.2fM", hh);	}
-	else	if(i >=9 && i <12&& sum2 >= 1000000000 && sum2 < 2100000000) {
-		hh= (sum2/(1000000));
-		hh = hh /1000;
-   maxstorage_1= String.format("%.2fG", hh);	}
-		
-		
-	
-		 float g = this.tileentity.storage;
-		 float hhh = this.tileentity.storage;
-		 float gg = 0;
-		  i = 0;
-		 for(;g >= 10;i++) {
-		 g =( g / 10) ;
-
-		
-		 }
-		 String maxstorage_2= "0";
-		 if(i >=0 && i <3 && hhh <= 1000) {
-			 
-		 
-				gg=(float)(hhh);
-				 maxstorage_2= String.format("%.0f", gg);	}
-		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-			gg=(hhh/(1000));
-		 maxstorage_2= String.format("%.2fK", gg);	}
-		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-			gg= (hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-			gg= (hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
+    String maxstorage_1 = GuiNumberUtils.getString(sum2);
+    String maxstorage_2 = GuiNumberUtils.getString(this.tileentity.storage);
 	  this.fontRendererObj.drawString(storageString +maxstorage_2 + "/" +maxstorage_1, 50, 22, 13487565);
 
 
 
 
-}else {
-	 this.fontRendererObj.drawString(storageString +0 + "/" +0, 50, 22, 13487565);
-}
+
 //TODO
-if( yy != 0 ) {
-	float h = sum3;
-	 float hh = 0;
-	 int i = 0;
-	 for(;h >= 10;i++) {
-	 h =(float)( h / 10) ;
 
-	
-	 }
-	 String maxstorage_1= "0";
-	 if(i >= 0 && i < 3 && sum3 >= 0 && sum3 < 1000) {
-		 hh=sum3;
-		 maxstorage_1= String.format("%.0f", hh);
-	 }
-	if(i >=3 && i <6 && sum3 >= 1000 && sum3 < 1000000) {
-		hh=(sum3/(1000));
-		 maxstorage_1= String.format("%.2fK", hh);	}
-	else if(i >=6 && i <9&& sum3 >= 1000000 && sum3 < 1000000000) {
-		hh= (sum3/(1000000));
-	maxstorage_1= String.format("%.2fM", hh);	}
-	else	if(i >=9 && i <12&& sum3 >= 1000000000 && sum3 < 2100000000) {
-		hh= (sum3/(1000000));
-		hh = hh /1000;
-   maxstorage_1= String.format("%.2fG", hh);	}
-		
-		 this.fontRendererObj.drawString(maxOutputString + maxstorage_1 + (" " + energyPerTickString), 50, 32, 13487565);
+	  String output = GuiNumberUtils.getString(sum3);
+		 this.fontRendererObj.drawString(maxOutputString + output + (" " + energyPerTickString), 50, 32, 13487565);
 
 
 
 
-}else {
-	this.fontRendererObj.drawString(maxOutputString + 0 + (" " + energyPerTickString), 50, 32, 13487565);
-}
+
 //
 
-if(this.tileentity.sunIsUp == true ) {
-	  float g = this.tileentity.generating;
-	 float hhh = this.tileentity.generating;
-	 float gg = 0;
-	int  i = 0;
-	 for(;g >= 10;i++) {
-	 g =(float)( g / 10) ;
-
-	
-	 }
-	 String maxstorage_2= "0";
-	 if(i >=0 && i <3 && hhh <= 1000) {
-		 
-	 
-			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.0f", gg);	}
-	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-		gg=(float)(hhh/(1000));
-	 maxstorage_2= String.format("%.2fK", gg);	}
-	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-		gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-		gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	  this.fontRendererObj.drawString(generatingString + maxstorage_2 + (" " + energyPerTickString), 50, 42, 13487565);
-}else if(this.tileentity.sunIsUp == false ) 
-{
-	  float g = this.tileentity.generating;
- float hhh = this.tileentity.generating;
- float gg = 0;
-int  i = 0;
- for(;g >= 10;i++) {
- g =(float)( g / 10) ;
-
-
- }
- String maxstorage_2= "0";
- if(i >=0 && i <3 && hhh <= 1000) {
-	 
- 
-		gg=(float)(hhh);
-		 maxstorage_2= String.format("%.0f", gg);	}
- else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-	gg=(float)(hhh/(1000));
- maxstorage_2= String.format("%.2fK", gg);	}
-else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-	gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-	gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	 this.fontRendererObj.drawString(generatingString + maxstorage_2 + (" " + energyPerTickString), 50, 42, 13487565);
-}
+String generation =  GuiNumberUtils.getString(this.tileentity.generating);
+this.fontRendererObj.drawString(generatingString + generation + " " + energyPerTickString, 50, 42, 13487565);
 
 
     }
@@ -276,7 +152,7 @@ maxstorage_2= String.format("%.2fG", gg);	}
            
             this.drawTexturedModalRect(h + 19, k + 24, 195, 0, (int) (l + 1), 14);
         }
-        if (this.tileentity.skyIsVisible && this.tileentity.solarType != 3 && this.tileentity.solarType != 4) {
+        if (this.tileentity.skyIsVisible ) {
             if (this.tileentity.sunIsUp) {
                 this.drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
             }
@@ -285,38 +161,7 @@ maxstorage_2= String.format("%.2fG", gg);	}
             }
         }
        
-        if (this.tileentity.solarType == 3 && this.tileentity.getWorldObj().provider.dimensionId == -1) {
-            if (this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-            }
-            else if (!this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-            }
-        } 
-        if (this.tileentity.solarType == 3 && this.tileentity.getWorldObj().provider.dimensionId != -1) {
-            if (this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-            }
-            else if (!this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-            }
-        }
-        if (this.tileentity.solarType == 4 && this.tileentity.getWorldObj().provider.dimensionId == 1) {
-            if (this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-            }
-            else if (!this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-            }
-        } 
-        if (this.tileentity.solarType == 4 && this.tileentity.getWorldObj().provider.dimensionId != 1) {
-            if (this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-            }
-            else if (!this.tileentity.sunIsUp) {
-                this.drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-            }
-        } 
+       
     }
     
     static {
