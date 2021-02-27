@@ -1,4 +1,4 @@
-package com.Denfop.utils;
+ package com.Denfop.utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 

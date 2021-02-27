@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.Event;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +36,10 @@ import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.integration.GC.ExtraPlanetsIntegration;
+import com.Denfop.integration.GC.GalacticraftIntegration;
+import com.Denfop.integration.GC.GalaxySpaceIntegration;
+import com.Denfop.integration.GC.MorePlanetsIntegration;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.module1;
 import com.Denfop.item.Modules.module2;
@@ -45,6 +50,7 @@ import com.Denfop.item.Modules.module6;
 import com.Denfop.item.Modules.module7;
 import com.mojang.authlib.GameProfile;
 
+import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import ic2.api.network.INetworkUpdateListener;
 import ic2.api.network.INetworkDataProvider;
@@ -59,7 +65,7 @@ import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
 import ic2.api.energy.tile.IEnergyTile;
 
-public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IPersonalBlock,IEnergyHandler
+public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IEnergyHandler
 {private TileEntitySolarPanel tileentity;
     public static Random randomizer;
     public int ticker;
@@ -77,6 +83,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     private boolean created;
     public  ItemStack[] chargeSlots;
     public int fuel;
+    public boolean personality = false;
     private int lastX;
     private int lastY;
     private int lastZ;
@@ -95,7 +102,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int l;
 	public int convertState = 0;
 	 public int elapsedTicks;
-	public boolean wirelles;
 	public boolean changesolartype = false;
 	private GameProfile owner = null;
 	 public int panelx=0;
@@ -110,7 +116,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 
 
 	  public int inputEnergyBuffer;
-	
+	  public String player = null;
 	
 
 	
@@ -125,7 +131,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int jj1; 
 	public int jj2; 
 	public int jj3;
-	public int type = 0;
 	 public int maxRFproduction;
 	  public int tickRateFlush = 5;
     public TileEntitySolarPanel(final String gName,final int tier, final int typeSolar, final int gDay, final int gNight, final int gOutput, final int gmaxStorage) {
@@ -146,7 +151,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.m = gNight;
         this.l = 0;
         this.maxStorage2 = this.maxStorage;
-		this.wirelles = false;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
         this.production = gOutput;
@@ -208,7 +212,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	private String nameblock;
 	private int world1;
 	private int blocktier;
-	private boolean usewirelles =false;
 	
     private void syncNumUsingPlayers() {
         this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.numUsingPlayers);
@@ -216,7 +219,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     public void intialize() {
         this.wetBiome = (this.worldObj.getWorldChunkManager().getBiomeGenAt(this.xCoord, this.zCoord).getIntRainfall() > 0);
         this.noSunWorld = this.worldObj.provider.hasNoSky;
-        
+         
         this.updateVisibility();
         this.initialized = true;
         if (!this.addedToEnergyNet) {
@@ -225,7 +228,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.lastTimeStamp = System.currentTimeMillis();
     }
    
-        
+    public boolean running = false;
     public void updateEntity() {
     	
         super.updateEntity();
@@ -261,13 +264,6 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
             else {
                 this.storage = this.maxStorage;
             }
-        }else if(this.generating  ==0) {
-        	if (this.storage > this.production && wirelles == true) {
-                this.storage -= this.production;
-            }else if(this.storage < this.production && wirelles == true) {
-            	wirelles = false;
-            	this.storage += this.generating;
-            }
         }
         boolean needInvUpdate = false;
         double sentPacket = 0.0;
@@ -291,9 +287,12 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		maxstorage1++;}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4) {
         		output++;}
+        	
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
         		int kk = chargeSlots[i].getItemDamage();
-        		
+        		if(kk == 0) {
+        			personality = true;
+        		}
         		 if(kk == 1) {
         			tierplus++;
         		}
@@ -309,7 +308,30 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		        this.storage -= (int)sentPacket;
         		      }     
         			}
+        			for(int j = 0; j < 9;j++) {
+        				if (this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module7) {
+        					int meta = chargeSlots[j].getItemDamage();
+        					if(meta == 4) {
+        						for(int jj =0; jj <9;jj++) {
+        							if (this.chargeSlots[jj] != null && this.chargeSlots[jj].getItem() instanceof IEnergyContainerItem && this.storage2 > 0.0D) {
+        								if(jj == j || jj == i)
+        									continue;
+        								
+        								      IEnergyContainerItem item = (IEnergyContainerItem)this.chargeSlots[jj].getItem();
+        								      setTransfer((extractEnergy(null, item.receiveEnergy(this.chargeSlots[jj], this.storage2, false), false) > 0));
+        								    } else {
+        								      setTransfer(false);
+        								    } 
+        							
+        			        			
+        								
+        						}
+        						
+        					}
+        				}
+        			}
         		}else if(kk == 4) {
+        			
         			if (this.convertState == 0 && this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord) || this.noSunWorld ) {
         			      if (this.storage >= 0 && this.storage2 < this.maxStorage2 ) {
         			       
@@ -347,19 +369,23 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     	c = new int[9];
     	int d[];
     	d = new int[9];
-    	
+    	Block block =	this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
+    	NBTTagCompound nbttagcompound1 = SuperSolarPanels.getOrCreateNbtData(new ItemStack(block));
+    	nbttagcompound1.setInteger("type", -1);
         if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
         	int g = chargeSlots[8].getItemDamage();
 
 			
         	if( g < 7 && g >=0) {
-        		this.type =g+1;
+        		nbttagcompound1.setInteger("type", g+1);
+        		
         		this.solarType =g+1;
         		
         		
         	}
         }else {
-        	this.type= 0;
+        	
+        	nbttagcompound1.setInteger("type",0);
         	this.solarType = 0;
         }
         for(int i =0;i<9;i++) {
@@ -402,7 +428,16 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
       	}
             
         }
-        
+        for(int i =0;i<9;i++) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7 && this.chargeSlots[i].getItemDamage() == 0) {
+        		NBTTagCompound    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
+        		nbttagcompound.setInteger("Xcoord", this.xCoord);
+        		nbttagcompound.setInteger("Ycoord", this.yCoord);
+        		nbttagcompound.setInteger("Zcoord", this.zCoord);
+        		nbttagcompound.setInteger("SolarType", this.solarType);
+        		nbttagcompound.setInteger("Tier", this.tier);
+        	}
+        }
 
        
      
@@ -469,9 +504,26 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             super.markDirty();
         }
     }
+    public boolean transfer = false;
+	
+    private void setTransfer(boolean t) {
+        this.transfer = t;
+      }
 
-    public int gainFuel() {
-    	
+	public int gainFuel() {
+		double planet_efficenty = 1;
+    	if(Loader.isModLoaded("GalacticraftCore")) {
+    		planet_efficenty=	GalacticraftIntegration.GetPlanetefficienty(this.worldObj.provider.dimensionId,this.worldObj);
+    	}
+    	if(Loader.isModLoaded("ExtraPlanets")) {
+    		planet_efficenty=	ExtraPlanetsIntegration.GetPlanetefficienty(this.worldObj.provider.dimensionId,this.worldObj);
+    	}
+    	if(Loader.isModLoaded("MorePlanet")) {
+    	planet_efficenty=	MorePlanetsIntegration.GetPlanetefficienty(this.worldObj.provider.dimensionId,this.worldObj);
+    	}
+    	if(Loader.isModLoaded("GalaxySpace")) {
+        	planet_efficenty=	GalaxySpaceIntegration.GetPlanetefficienty(this.worldObj.provider.dimensionId,this.worldObj);
+        	}
     	double rain_efficenty = 1;
     	if(this.rain == true)
     		rain_efficenty = 0.65;
@@ -484,10 +536,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
      
         
         	if (this.sunIsUp && this.skyIsVisible) {
-                return this.generating = (int) (0 + this.genDay*rain_efficenty);
+                return this.generating = (int) (0 + this.genDay*rain_efficenty*planet_efficenty);
             }
             if (this.skyIsVisible) {
-                return this.generating = (int) (0 + this.genNight*rain_efficenty);
+                return this.generating = (int) (0 + this.genNight*rain_efficenty*planet_efficenty);
             }
         
         return this.generating = 0;
@@ -498,10 +550,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty*planet_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty);
+            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty*planet_efficenty);
         }
         
       
@@ -511,10 +563,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + this.genDay*rain_efficenty);
+            return this.generating = (int) (0 + this.genDay*rain_efficenty*planet_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = (int) (0 + this.genNight*rain_efficenty);
+            return this.generating = (int) (0 + this.genNight*rain_efficenty*planet_efficenty);
         }
         return this.generating = 0;
     }  
@@ -526,10 +578,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty*planet_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty);
+            return this.generating = (int) (0 + 2 * this.genNight*rain_efficenty*planet_efficenty);
         }
         
       
@@ -539,10 +591,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + this.genDay*rain_efficenty);
+            return this.generating = (int) (0 + this.genDay*rain_efficenty*planet_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = (int) (0 + this.genNight*rain_efficenty);
+            return this.generating = (int) (0 + this.genNight*rain_efficenty*planet_efficenty);
         }
         return this.generating = 0;
     }  
@@ -555,10 +607,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
 	            this.updateVisibility();
 	        }
 	        if (this.sunIsUp && this.skyIsVisible) {
-	            return this.generating = (int) (0 + this.genDay*rain_efficenty);
+	            return this.generating = (int) (0 + this.genDay*rain_efficenty*planet_efficenty);
 	        }
 	        if (this.skyIsVisible) {
-	            return this.generating = (int) (0 + this.genNight*rain_efficenty);
+	            return this.generating = (int) (0 + this.genNight*rain_efficenty*planet_efficenty);
 	        }
 	        return this.generating = 0;
 			}  }
@@ -569,10 +621,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
         this.updateVisibility();
     }
     if (this.sunIsUp && this.skyIsVisible) {
-        return this.generating = (int) (0 + this.genDay*rain_efficenty);
+        return this.generating = (int) (0 + this.genDay*rain_efficenty*planet_efficenty);
     }
     if (this.skyIsVisible) {
-        return this.generating = (int) (0 + this.genNight*rain_efficenty);
+        return this.generating = (int) (0 + this.genNight*rain_efficenty*planet_efficenty);
     }
     return this.generating = 0;}}
 	
@@ -582,10 +634,10 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = 0;
+            return this.generating = 0 + 0 * this.genDay;
         }
         if (this.skyIsVisible) {
-            return this.generating = (int) (2 * this.genNight*rain_efficenty);
+            return this.generating = (int) (2 * this.genNight*rain_efficenty*planet_efficenty);
         }
 	}
 if(solarType == 6) {
@@ -594,7 +646,7 @@ if(solarType == 6) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty);
+            return this.generating = (int) (0 + 2 * this.genDay*rain_efficenty*planet_efficenty);
         }
         if (this.skyIsVisible) {
             return this.generating = 0 + 0 * this.genNight;
@@ -608,10 +660,10 @@ if(solarType == 7) {
             this.updateVisibility();
         }
         if (this.sunIsUp && this.skyIsVisible) {
-            return this.generating = (int) (0 + 1.5 * this.genDay);
+            return this.generating = (int) (0 + 1.5 * this.genDay*planet_efficenty);
         }
         if (this.skyIsVisible) {
-            return this.generating = 0 + (int)(1.5 * this.genNight);
+            return this.generating = 0 + (int)(1.5 * this.genNight*planet_efficenty);
         }
 	}
 	else { 
@@ -620,10 +672,10 @@ if(solarType == 7) {
         }
     
     if (this.sunIsUp && this.skyIsVisible) {
-        return this.generating = 0 +   this.genDay;
+        return this.generating = (int) (0 +   this.genDay*planet_efficenty);
     }
     if (this.skyIsVisible) {
-        return this.generating = 0 +  this.genNight;
+        return this.generating = (int) (0 +  this.genNight*planet_efficenty);
     }
 	}
 	    
@@ -678,16 +730,17 @@ return this.generating = 0;
     	    
     	 //TODO
     	   
-    	    this.type= nbttagcompound.getInteger("type");
+    	    
+    	   
     	    
     	    	panelx=nbttagcompound.getInteger("panelx");
     	    	panely=nbttagcompound.getInteger("panely");
     	    	panelz=nbttagcompound.getInteger("panelz");
     	    	this.nameblock=nbttagcompound.getString("nameblock");
     	    	this.world1=nbttagcompound.getInteger("worldid");
-    	    	
+    	    	this.player = nbttagcompound.getString("player");
     	    	blocktier=	nbttagcompound.getInteger("blocktier");
-    	    	this.wirelles =   	nbttagcompound.getBoolean("wireless");
+    	    	
     	    NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
     	    if (nbttagcompound.hasKey("ownerGameProfile"))
     	        this.owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("ownerGameProfile")); 
@@ -707,26 +760,9 @@ return this.generating = 0;
     	    } 
     	    NBTTagList nbttaglist1 = (NBTTagList)nbttagcompound.getTag("positions");
       }
-      public boolean permitsAccess(GameProfile profile) {
-    	    if (profile == null)
-    	      return (this.owner == null); 
-    	    if (IC2.platform.isSimulating()) {
-    	      if (this.owner == null) {
-    	        this.owner = profile;
-    	        ((NetworkManager)IC2.network.get()).updateTileEntityField((TileEntity)this, "owner");
-    	        return true;
-    	      } 
-    	      if (MinecraftServer.getServer().getConfigurationManager().func_152596_g(profile))
-    	        return true; 
-    	    } else if (this.owner == null) {
-    	      return true;
-    	    } 
-    	    return this.owner.equals(profile);
-    	  }
+    
     	  
-    	  public GameProfile getOwner() {
-    	    return this.owner;
-    	  }
+    	
     	  public void writeToNBT(NBTTagCompound nbttagcompound) {
     	    super.writeToNBT(nbttagcompound);
     
@@ -744,11 +780,13 @@ return this.generating = 0;
     	    	nbttagcompound.setInteger("worldid",world1);
     	    	nbttagcompound.setInteger("blocktier",this.blocktier);
     	    	 
-    	    	nbttagcompound.setBoolean("wireless", this.wirelles);
-    	    	nbttagcompound.setBoolean("usewireless", this.usewirelles);
-    	        }
-    	    
+    	    	
     	  
+    	        }
+    	    if(player != null) {
+    	    	nbttagcompound.setString("player",player);
+    	    }
+    	
     	    nbttagcompound.setInteger("storage", this.storage);
     	    nbttagcompound.setInteger("lastX", this.lastX);
     	    nbttagcompound.setInteger("lastY", this.lastY);
@@ -866,14 +904,7 @@ return this.generating = 0;
   
       
     public void openInventory() {
-    	for(int i= 0; i < 9; i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
-        		
-        	if(this.chargeSlots[i].getItemDamage() == 5) {
-        		 this.numUsingPlayers++;
-    	    syncNumUsingPlayers();}
-        }
-        }
+    	
     }
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         ItemStack ret = super.getWrenchDrop(entityPlayer);
@@ -889,19 +920,12 @@ return this.generating = 0;
       }
         
     public void closeInventory() {
-    	for(int i= 0; i < 9; i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
-        		
-        	if(this.chargeSlots[i].getItemDamage() == 5) {
-        		 this.numUsingPlayers--;
-    	    syncNumUsingPlayers();}
-        }
-        }
+    	
     	 
     }
     
     public int tickRate() {
-        return 40;
+        return 80;
     }
     
  
@@ -958,7 +982,12 @@ return this.generating = 0;
     }
     
     public Container getGuiContainer(final InventoryPlayer inventoryplayer) {
-        return new ContainerAdvSolarPanel(inventoryplayer, this);
+    	
+    		return new ContainerAdvSolarPanel(inventoryplayer, this);
+    		
+    	
+    	
+		
     }
     
     public String getInvName() {
@@ -1036,5 +1065,7 @@ return this.generating = 0;
     	int type = this.solarType;
     	return type;
     }
+
+
 	
 }

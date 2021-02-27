@@ -7,10 +7,10 @@ import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.ClientProxy;
+import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
-import com.Denfop.tiles.overtimepanel.TileEntityAdvancedSolarPanel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

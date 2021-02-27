@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SSPDEItem extends Item {
 
 	public SSPDEItem() {
-		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp3);
 	}
 
 	public int getItemStackLimit() {

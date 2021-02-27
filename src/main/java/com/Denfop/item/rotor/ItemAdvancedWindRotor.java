@@ -3,8 +3,8 @@ package com.Denfop.item.rotor;
 import ic2.api.item.IKineticRotor;
 import java.util.List;
 
-import com.Denfop.item.base.ItemGradualInt;
-import com.Denfop.utils.InternalName;
+import com.Denfop.SuperSolarPanels;
+import com.Denfop.item.base.ReactorItemCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class ItemAdvancedWindRotor extends ItemGradualInt implements IKineticRotor {
+public class ItemAdvancedWindRotor extends ReactorItemCore implements IKineticRotor {
   private final int maxWindStrength;
   
   private final int minWindStrength;
@@ -25,7 +25,7 @@ public class ItemAdvancedWindRotor extends ItemGradualInt implements IKineticRot
   
   private final boolean water;
   
-  public ItemAdvancedWindRotor(InternalName internalName, int Radius, int durability, float efficiency, int minWindStrength, int maxWindStrength, ResourceLocation RenderTexture) {
+  public ItemAdvancedWindRotor(String internalName, int Radius, int durability, float efficiency, int minWindStrength, int maxWindStrength, ResourceLocation RenderTexture) {
     super(internalName, durability);
     setMaxStackSize(1);
     setMaxDamage(durability);
@@ -34,7 +34,8 @@ public class ItemAdvancedWindRotor extends ItemGradualInt implements IKineticRot
     this.renderTexture = RenderTexture;
     this.minWindStrength = minWindStrength;
     this.maxWindStrength = maxWindStrength;
-    this.water = (internalName != InternalName.itemwoodrotor);
+    this.water = false;
+    this.setCreativeTab(SuperSolarPanels.tabssp3);
   }
   
   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {

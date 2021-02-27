@@ -15,15 +15,17 @@ public class ItemWirelessModule extends Item {
 	public ItemWirelessModule() {
 		 setCreativeTab(SuperSolarPanels.tabssp);
 		this.setUnlocalizedName("WirelessModule");
-		this.setTextureName("wirelessvajra:wirelessmodule");
+		this.setTextureName("supersolarpanel:wirelessmodule");
 		this.setMaxStackSize(64);
-		
+		this.setCreativeTab(SuperSolarPanels.tabssp1);
 		
 		
 		
 	}
 	   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
 	        NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+	        info.add(StatCollector.translateToLocal("ssp.modules"));
+      	    info.add(StatCollector.translateToLocal("wirelles") );
 	        info.add(StatCollector.translateToLocal("ssp.Name") + ": " +nbttagcompound.getString("Name"));
 	        info.add(StatCollector.translateToLocal("ssp.World") + ": " +nbttagcompound.getString("World"));
 	        
@@ -31,6 +33,7 @@ public class ItemWirelessModule extends Item {
 	        info.add(StatCollector.translateToLocal("ssp.Xcoord") + ": " +nbttagcompound.getInteger("Xcoord"));
 	        info.add(StatCollector.translateToLocal("ssp.Ycoord") + ": " +nbttagcompound.getInteger("Ycoord"));
 	        info.add(StatCollector.translateToLocal("ssp.Zcoord") + ": " +nbttagcompound.getInteger("Zcoord"));
+
 	       }
 	
 	

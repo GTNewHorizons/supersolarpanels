@@ -3,7 +3,7 @@ package com.Denfop.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Denfop.block.expgen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen2;
 
 import ic2.core.IC2;
 import ic2.core.network.NetworkManager;

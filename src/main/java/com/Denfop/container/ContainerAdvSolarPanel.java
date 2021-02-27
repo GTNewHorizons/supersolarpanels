@@ -2,6 +2,7 @@ package com.Denfop.container;
 
 
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.ModUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,6 +21,7 @@ public class ContainerAdvSolarPanel extends Container
 	private boolean skyIsVisible;
 	private int generating;
 	private int storage2;
+	private int solarType;
 	private boolean rain;
 
 	public ContainerAdvSolarPanel(InventoryPlayer inventoryplayer, TileEntitySolarPanel tileentitysolarpanel)
@@ -59,6 +61,7 @@ public class ContainerAdvSolarPanel extends Container
 		icrafting.sendProgressBarUpdate(this, 0, this.tileentity.sunIsUp ? 1 : 0);
 		icrafting.sendProgressBarUpdate(this, 1, this.tileentity.skyIsVisible ? 1 : 0);
 		icrafting.sendProgressBarUpdate(this, 8, this.tileentity.rain ? 1 : 0);
+		
 	
 		ModUtils.sendContainerInt(this, icrafting, 2, 5, this.tileentity.generating);
 		ModUtils.sendContainerInt(this, icrafting, 3, 4, this.tileentity.storage);

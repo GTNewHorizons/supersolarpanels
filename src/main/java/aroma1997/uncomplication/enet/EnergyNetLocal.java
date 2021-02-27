@@ -640,14 +640,16 @@ public class EnergyNetLocal
     }
     
     void explodeMachineAt(final int x, final int y, final int z, final TileEntity tile) {
+    	 if(Config.enableexlposion) {
        this.world.setBlockToAir(x, y, z);
     	
         float power = 1.0f;
         
         final EntityPlayer player = this.world.getClosestPlayer((double)x, (double)y, (double)z, 15.0);
-        
+       
         final ExplosionIC2 explosion = new ExplosionIC2(this.world, (Entity)null, 0.5 + x, 0.5 + y, 0.5 + z, power, 1f);
-        explosion.doExplosion();
+        explosion.doExplosion();}
+    	
     }
     
     void update(final int x, final int y, final int z) {

@@ -2,8 +2,8 @@ package com.Denfop.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.Denfop.block.expgen.TileExpGen2;
 import com.Denfop.container.ContainerExpGen;
+import com.Denfop.tiles.ExpGen.TileExpGen2;
 
 import ic2.core.util.DrawUtil;
 import ic2.core.util.GuiTooltipHelper;
@@ -20,7 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class GuiExpGen extends GuiContainer {
 	
-	private static ResourceLocation tex = new ResourceLocation("wirelessvajra", "textures/gui/GUIExpGen.png");
+	private static ResourceLocation tex = new ResourceLocation("supersolarpanel", "textures/gui/GUIExpGen.png");
 	
 	public TileExpGen2 tileentity;
 	

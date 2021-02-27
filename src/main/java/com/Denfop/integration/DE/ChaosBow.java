@@ -1,4 +1,5 @@
 package com.Denfop.integration.DE;
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.brandonscore.BrandonsCore;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
@@ -51,7 +52,7 @@ public class ChaosBow extends ItemBow implements IInventoryTool, IUpgradableItem
   public ChaosBow() {
     this.maxStackSize = 1;
     setMaxDamage(-1);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
     setUnlocalizedName("ChaosBow");
       GameRegistry.registerItem((Item)this, "ChaosBow"); 
   }
@@ -72,10 +73,10 @@ public class ChaosBow extends ItemBow implements IInventoryTool, IUpgradableItem
   
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
-    this.itemIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + "ChaosBow" + "_standby");
+    this.itemIcon = iconRegister.registerIcon(Constants.TEXTURES + ":" + "ChaosBow" + "_standby");
     this.iconArray = new IIcon[bowPullIconNameArray.length];
     for (int i = 0; i < this.iconArray.length; i++)
-      this.iconArray[i] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" +"ChaosBow" + "_" + bowPullIconNameArray[i]); 
+      this.iconArray[i] = iconRegister.registerIcon(Constants.TEXTURES + ":" +"ChaosBow" + "_" + bowPullIconNameArray[i]); 
   }
   
   @SideOnly(Side.CLIENT)

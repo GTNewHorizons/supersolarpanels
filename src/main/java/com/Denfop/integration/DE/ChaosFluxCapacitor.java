@@ -27,7 +27,7 @@ public class ChaosFluxCapacitor extends RFItemBase implements IUpgradableItem {
   
   public ChaosFluxCapacitor() {
     setUnlocalizedName("ChaosFluxCapacitor");
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
     setHasSubtypes(true);
     setMaxStackSize(1);
     DraconicIntegration.register((ItemDC)this);

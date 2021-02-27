@@ -32,76 +32,49 @@ import com.Denfop.Recipes.CannerRecipe;
 import com.Denfop.Recipes.CompressorRecipe;
 import com.Denfop.Recipes.FurnaceRecipes;
 import com.Denfop.Recipes.MaceratorRecipe;
-import com.Denfop.api.TickHandlerWV;
+import com.Denfop.Register.Register;
+import com.Denfop.Register.RegisterOreDict;
+import com.Denfop.World.GenOre;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
 import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
-import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
 import com.Denfop.block.Base.BlockElectric;
 import com.Denfop.block.Base.BlockIC2Fluid;
 import com.Denfop.block.Base.BlockSSP;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.block.Base.BlocksItems;
-import com.Denfop.block.BlockVajra.BlockVajraCharger;
-import com.Denfop.block.BlockVajra.ItemBlockVCh;
-import com.Denfop.block.BlockVajra.TileVajraCharger;
-import com.Denfop.block.BlockVajra.TileVajraChargerElectric;
-import com.Denfop.block.BlockVajra.WirelessVajra;
 import com.Denfop.block.Sintezator.ItemSintezator;
-import com.Denfop.block.Sintezator.Sintezator;
-import com.Denfop.block.Sintezator.TileEntitySintezator;
-import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
-import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
-import com.Denfop.block.armorcharge.BlockArmorCharger;
-import com.Denfop.block.armorcharge.ItemBlockArmorCharger;
-import com.Denfop.block.cable.ItemCable;
-import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
-import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
-import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
-import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
+import com.Denfop.block.cable.BlockCable;
 import com.Denfop.block.expgen.BlockExpGen;
-import com.Denfop.block.expgen.ItemBlockEG;
 import com.Denfop.block.expgen.TextureHooks;
-import com.Denfop.block.expgen.TileXPGenPublic;
 import com.Denfop.block.mechanism.BlockMachine;
-import com.Denfop.block.mechanism.TileEntityAlloySmelter;
-import com.Denfop.block.moleculartransformer.BlockMolecularTransformer;
-import com.Denfop.block.neutroniumgenerator.BlockGeneratorNeutronium;
-import com.Denfop.block.ore.BlockSSPCoal;
-import com.Denfop.block.ore.BlockSSPDiamond;
-import com.Denfop.block.ore.BlockSSPEmerald;
-import com.Denfop.block.ore.BlockSSPLapis;
-import com.Denfop.block.ore.BlockSSPRedstone;
-import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
-import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
 import com.Denfop.events.EventHandlerEntity;
-import com.Denfop.handler.ASPPacketHandler;
+import com.Denfop.events.SSPEventHandler;
+import com.Denfop.events.DE.SSPDEEventHandler;
+import com.Denfop.events.DE_MF.SSPDEMFEventHandler;
+import com.Denfop.events.DE_MF_EP.SSPMFDEEventHandler;
+import com.Denfop.events.EP.SSPEPEventHandler;
+import com.Denfop.events.EP_DE.SSPDEEPEventHandler;
+import com.Denfop.events.MF.SSPMFEventHandler;
+import com.Denfop.events.MF_EP.SSPMPMFEventHandler;
 import com.Denfop.integration.Avaritia.AvaritiaIntegration;
 import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
-import com.Denfop.item.ItemSSPCrafring;
+import com.Denfop.integration.TE.TERecipes;
 import com.Denfop.item.Modules.ItemWirelessModule;
-import com.Denfop.item.Moleculartransformer.ItemMolecularTransformer;
-import com.Denfop.item.Upgrade.ItemUpgradeModule;
-import com.Denfop.item.armour.ItemArmorQuantumSuit1;
-import com.Denfop.item.armour.ItemSolarPanelHelmet;
-import com.Denfop.item.base.ItemAdvSolarPanel1;
-import com.Denfop.item.base.ItemGoldenWrench;
-import com.Denfop.item.base.ItemSSPSolarPanel;
+import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
+import com.Denfop.item.base.ItemCable;
 import com.Denfop.item.base.SSPItem;
-import com.Denfop.item.solarhelmet.ItemAdvancedSolarHelmet;
-import com.Denfop.packets.WVPacketHandler;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.CreativeTabSSP;
-import com.Denfop.tiles.base.TileEntitySolarPanel;
-import com.Denfop.tiles.overtimepanel.*;
-import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
-import com.Denfop.tiles.overtimepanel.TilePhotonicSolarPanel;
-import com.Denfop.tiles.overtimepanel.TileSingularSolarPanel;
-import com.Denfop.tiles.overtimepanel.TileSpectralSolarPanel;
-import com.Denfop.utils.InternalName;
-import com.Denfop.utils.MTRecipeConfig;
-import com.Denfop.utils.StackUtils;
+import com.Denfop.tab.CreativeTabSSP1;
+import com.Denfop.tab.CreativeTabSSP2;
+import com.Denfop.tab.CreativeTabSSP3;
+import com.Denfop.tab.CreativeTabSSP4;
+import com.Denfop.tiles.Mechanism.*;
+import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
+import com.Denfop.tiles.base.TileEntityMolecularTransformer;
+
 
 import aroma1997.uncomplication.enet.EnergyNetGlobal;
 import net.minecraft.item.ItemStack;
@@ -156,8 +129,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-@Mod(modid = "supersolarpanel", name = "Super Solar Panel && Industrial Upgrade", version = "1.4.3", dependencies = "required-after:IC2;after:wirelessvajra;after:Thaumcraft;after:AppliedEnergistics;")
-public class SuperSolarPanels implements IWorldGenerator
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, dependencies = Constants.DEPENDENCES,acceptedMinecraftVersions = Constants.acceptedMinecraftVersions,certificateFingerprint = "Denfop-certificate")
+public class SuperSolarPanels
 {
 	   
 	
@@ -177,7 +150,7 @@ public class SuperSolarPanels implements IWorldGenerator
 	public static Block wirelessphotonicsppersonal;
 	public static Block wirelessneutronsp;
 	public static ItemStack vajraCharger;
-	public static TickHandlerWV th;
+	
 	
 	
 	
@@ -205,10 +178,6 @@ public class SuperSolarPanels implements IWorldGenerator
     public static int photonicpanelStorage;
     public static String configFileName;
     public static Item enderquantumcomponent;
-    public static Item solarsplitter;
-    public static Item bluecomponent;
-    public static Item greencomponent;
-    public static Item redcomponent;
     public static Item singularcore;
     public static Item spectralcore;
     public static Item photoniy;
@@ -230,12 +199,7 @@ public class SuperSolarPanels implements IWorldGenerator
     public static Item quantumBox;
     public static Item nanoBox;
     public static Item toolBox;
-    public static final String MOD_ID = "supersolarpanel";
-    public static final String MOD_NAME = "Super Solar Panel";
-    public static final String MOD_VERSION = "1.4.3";
-    public static final String TEXTURES_BLOCKS = "supersolarpanel:textures/blocks/";
-    public static final String TEXTURES_ITEMS = "supersolarpanel:textures/items/";
-    public static final String TEXTURES = "supersolarpanel";
+
 	public static int maxCharge;
 	public static int transferLimit;
     @Mod.Instance("supersolarpanel")
@@ -259,7 +223,6 @@ public class SuperSolarPanels implements IWorldGenerator
 	public static int neutronpanelOutput;
 	public static int neutronpanelGenNight;
 	public static int neutronpanelStorage;
-	public EventHandlerEntity entityEventHandler;
 	
 	public static int protonOutput;
 	public static int protontier;
@@ -303,6 +266,7 @@ public class SuperSolarPanels implements IWorldGenerator
 	  public static Fluid neutronium1 = new Fluid("neutronium1");
 	    public static Block blockfluidneutronium;
 		public static ItemStack cell;
+		public static  Item cell_all;
 		public static ItemStack uuMatterCell;
 		public static ItemStack massFabricator;
 		 @SidedProxy(clientSide = "com.Denfop.proxy.ClientProxy", serverSide = "com.Denfop.proxy.CommonProxy")
@@ -316,7 +280,6 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static int neutronpaneltier;
 		public static boolean thaumcraft;
 	    public static Block blockAdvSolarPanel;
-	    public static Block blockMolecularTransformer;
 	    public static Item advancedSolarHelmet;
 	    public static Item hybridSolarHelmet;
 	    public static Item ultimateSolarHelmet;
@@ -331,7 +294,6 @@ public class SuperSolarPanels implements IWorldGenerator
 	    public static ItemStack itemUranIngot;
 	    public static ItemStack itemUHSP;
 	    public static ItemStack itemMTCore;
-	    public static ItemStack itemMolecularTransformer;
 	    public static Configuration config;
 	    public static int advGenDay;
 	    public static int advGenNight;
@@ -351,8 +313,7 @@ public class SuperSolarPanels implements IWorldGenerator
 	    public static int qpOutput;
 	    public static int qgbaseProduction;
 	    public static int qgbaseMaxPacketSize;
-	    public static int blockMolecularTransformerRenderID;
-	    public static CreativeTabs ic2Tab;
+	    
 	    public static boolean disableAdvancedSolarHelmetRecipe;
 	    public static boolean disableHybridSolarHelmetRecipe;
 	    public static boolean disableUltimateSolarHelmetRecipe;
@@ -365,19 +326,7 @@ public class SuperSolarPanels implements IWorldGenerator
 	    public static boolean enableSimpleAdvancedSolarPanelRecipes;
 	    public static boolean enableHardRecipes;
 	    public static Block blockSSPSolarPanel1;
-	    public static Item wirelessVajra;
-		public Block blockAdvSolarPanel1;
-	    public static Block blockSSPSolarPanel2;
-		public Block blockAdvSolarPanel2;
-	    public static Block blockSSPSolarPanel3;
-		public Block blockAdvSolarPanel3;
-	    public static Block blockSSPSolarPanel4;
-		public Block blockAdvSolarPanel4;
-	    public static Block blockSSPSolarPanel5;
-		public Block blockAdvSolarPanel5;
-	    public static Block blockSSPSolarPanel6;
-		public Block blockAdvSolarPanel6;
-	    public static Block blockSSPSolarPanel7;
+		
 		public static ItemStack spectralcable;
 		public static ItemStack protoncable;
 		public static ItemStack singularcable;
@@ -437,16 +386,16 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static boolean AvaritiaLoaded;
 		public static boolean BotaniaLoaded;
 		public static  Item ultDDrill;
-		public ItemStack module61;
-		public ItemStack module62;
-		public ItemStack module63;
-		public ItemStack module65;
-		public ItemStack module66;
-		public ItemStack module64;
-		public ItemStack module67;
-		public ItemStack module68;
-		public ItemStack module69;
-		public ItemStack module70;
+		public static ItemStack module61;
+		public static ItemStack module62;
+		public static ItemStack module63;
+		public static ItemStack module65;
+		public static  ItemStack module66;
+		public static ItemStack module64;
+		public static ItemStack module67;
+		public static ItemStack module68;
+		public static ItemStack module69;
+		public static ItemStack module70;
 		public static boolean AE2Loaded;
 		public static boolean Draconic;
 		public static  boolean Botania;
@@ -454,13 +403,13 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Block expgen;
 		public static Item module8;
 		public static Item goldenwrench;
-		public ItemStack module71;
-		public ItemStack module72;
-		public ItemStack module73;
-		public ItemStack module74;
-		public ItemStack module75;
-		private boolean EnchantingPlus;
-		private boolean MineFactory;
+		public static ItemStack module71;
+		public static ItemStack module72;
+		public static ItemStack module73;
+		public static ItemStack module74;
+		public static ItemStack module75;
+		public static boolean EnchantingPlus;
+		public static  boolean MineFactory;
 		 public static int Radius;
 		 public static int durability;
 		 public static int efficiency;
@@ -532,6 +481,7 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static ItemStack goldCableBlock;
 		public static ItemStack doubleInsulatedGoldCableBlock;
 		public static ItemStack insulatedGoldCableBlock;
+		public static Block BlockCable;
 		public static ItemStack ironCableBlock;
 		public static ItemStack doubleInsulatedIronCableBlock;
 		public static ItemStack trippleInsulatedIronCableBlock;
@@ -572,7 +522,7 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Item hybrid_core;
 		public static Item ultimate_core;
 		public static Block blockadmin;
-		public static ItemStack module;
+		public static Item module;
 		public static Item module1;
 		public static Item module2;
 		public static Item module3;
@@ -647,15 +597,20 @@ public class SuperSolarPanels implements IWorldGenerator
 		public static Item matter;
 		public static ItemStack massFabricator2;
 		public static ItemStack massFabricator3;
-		
+		public static ItemStack generationmicrochip;
+		public static ItemStack moleculartransformer;
+		public static CreativeTabSSP1 tabssp1;
+		public static CreativeTabSSP2 tabssp2;
+		public static CreativeTabSSP3 tabssp3;
+		public static CreativeTabSSP4 tabssp4;
+		public static Block machines_base;
+		public static Block Chargepadelectricblock;
+		public static Block cableblock;
 		
 		public static class FluidXP {
 			public static Fluid xpJuice = new Fluid("xpjuice.wv");
 			
 		}
-	    public static final String CATEGORY_RECIPES = "recipes settings";
-	    public static final String CATEGORY_QGENERATOR = "quantum generator";
-	 
     @Mod.EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
         Config.config(event);
@@ -666,110 +621,35 @@ public class SuperSolarPanels implements IWorldGenerator
         BotaniaLoaded = Loader.isModLoaded("Botania");
         EnchantingPlus = Loader.isModLoaded("eplus");
 MineFactory = Loader.isModLoaded("MineFactoryReloaded");
-        if(DraconicLoaded && Draconic == true) {
-        	DraconicIntegration.init();
-        }
-        if(AvaritiaLoaded && Avaritia == true) {
-        	AvaritiaIntegration.init();
-        }
+if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.Draconic == true) {
+	DraconicIntegration.init();
+}
+if(SuperSolarPanels.AvaritiaLoaded && SuperSolarPanels.Avaritia == true) {
+	AvaritiaIntegration.init();
+}
+
+if(SuperSolarPanels.BotaniaLoaded && SuperSolarPanels.Botania == true) {
+	BotaniaIntegration.init();
+}
+BlocksItems.init();
        
-        if(BotaniaLoaded && Botania == true) {
-        	BotaniaIntegration.init();
-        }
-        electricblock = new BlockElectric();
-        SuperSolarPanels.mfeUnit = new ItemStack(electricblock, 1, 0);
-        SuperSolarPanels.mfsUnit = new ItemStack(electricblock, 1, 1);
-        electricblock.setCreativeTab(tabssp);
-        machines = new BlockMachine();
-        machines.setCreativeTab(tabssp);
-        ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
-        wirelessVajra = new WirelessVajra(ToolMaterial.EMERALD);
- 		 blockvajracharger = new BlockVajraCharger("vajracharger", Material.rock);
- 		 armorcharger = new BlockArmorCharger("creativearmorcharger", Material.rock);
- 		 expgen = new BlockExpGen("expGen", Material.rock);
- 		 module8 = new ItemWirelessModule();
 		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-      BlocksItems.init();
-        lapotronCrystal = new ItemBattery(InternalName.itemBatLamaCrystal, SuperSolarPanels.Storagequantumsuit, 8092.0D, 4).setRarity(1);
-        nanoSaber = new ItemNanoSaber(InternalName.itemNanoSaber);
-        nanoSaber1 = new ItemNanoSaber1(InternalName.itemNanoSaber1);
-       quantumHelmet = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumHelmet, 0);
-        quantumBodyarmor = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumChestplate, 1);
-        quantumLeggings = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumLegs, 2);
-        quantumBoots = new ItemArmorQuantumSuit1(InternalName.itemArmorQuantumBoots, 3);
-    	GameRegistry.registerWorldGenerator(this, 0);
-        new BlockGeneratorNeutronium(InternalName.Blockbitgen);
-        SuperSolarPanels.bluecomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("BlueSpectralComponent").setTextureName("supersolarpanel:Blue_Spectral_Component");
-        SuperSolarPanels.greencomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("GreenSpectralComponent").setTextureName("supersolarpanel:Green_Spectral_Component");
-        SuperSolarPanels.redcomponent = new SSPItem().setMaxStackSize(64).setUnlocalizedName("RedSpectralComponent").setTextureName("supersolarpanel:Red_Spectral_Component");
+       	GenOre.init();
+       
         Register.register();
 		 Register.registertiles();
-        itemIrradiantUranium = new ItemStack(itemSSP.setUnlocalizedName("itemIrradiantUranium"), 1, 0);
-       itemEnrichedPhotoniyAlloy = new ItemStack(itemSSP.setUnlocalizedName("itemEnrichedSunnariumAlloy"), 1, 1);
-        itemIrradiantGlassPane = new ItemStack(itemSSP.setUnlocalizedName("itemIrradiantGlassPlane"), 1, 3);
-        itemIridiumIronPlate = new ItemStack(itemSSP.setUnlocalizedName("itemIridiumIronPlate"), 1, 4);
-        itemReinforcedIridiumIronPlate = new ItemStack(itemSSP.setUnlocalizedName("itemReinforcedIridiumIronPlate"), 1, 5);
-        itemIrradiantReinforcedPlate = new ItemStack(itemSSP.setUnlocalizedName("itemIrradiantReinforcedPlate"), 1, 6);
-       
-        ingotIridium = new ItemStack(itemSSP.setUnlocalizedName("ingotIridium"), 1, 7);
-        itemUranIngot = new ItemStack(itemSSP.setUnlocalizedName("itemUranIngot"), 1, 8);
-        itemMTCore = new ItemStack(itemSSP.setUnlocalizedName("itemMTCore"), 1, 9);
-        itemQuantumCore = new ItemStack(itemSSP.setUnlocalizedName("itemQuantumCore"), 1, 10);
-        itemMolecularTransformer = new ItemStack(blockMolecularTransformer, 1, 0);
-        
+		 BlocksItems.registermetadata();
+		 
         RegisterOreDict.oredict();
           SuperSolarPanels.proxy.registerRenderers();
         SuperSolarPanels.proxy.load();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, (IGuiHandler)SuperSolarPanels.proxy);
-        MTRecipeConfig.doDebug();
-           module61  = new ItemStack(module6.setUnlocalizedName("module61"), 1, 0);
-        module62 = new ItemStack(module6.setUnlocalizedName("module62"), 1, 1);
-        module63= new ItemStack(module6.setUnlocalizedName("module63"), 1, 2);
-        module64= new ItemStack(module6.setUnlocalizedName("module64"), 1, 3);
-        module65= new ItemStack(module6.setUnlocalizedName("module65"), 1, 4);
-        module66= new ItemStack(module6.setUnlocalizedName("module66"), 1, 5);
-        module67= new ItemStack(module6.setUnlocalizedName("module67"), 1, 6);
-        module68= new ItemStack(module6.setUnlocalizedName("module68"), 1, 7);
-        module69= new ItemStack(module6.setUnlocalizedName("module69"), 1, 8);
-        module70 = new ItemStack(module6.setUnlocalizedName("module70"), 1, 9);
-         module71  = new ItemStack(module7.setUnlocalizedName("module71"), 1, 0);
-        module72 = new ItemStack(module7.setUnlocalizedName("module72"), 1, 1);
-        module73= new ItemStack(module7.setUnlocalizedName("module73"), 1, 2);
-        SuperSolarPanels.macerator = new ItemStack(machines, 1, 1);
-        SuperSolarPanels.extractor = new ItemStack(machines, 1, 2);
-        SuperSolarPanels.compressor = new ItemStack(machines, 1, 3);
 
-      
-
-        SuperSolarPanels.compressor1 = new ItemStack(machines, 1, 4);
-        SuperSolarPanels.massFabricator1 = new ItemStack(machines, 1, 5);
-        SuperSolarPanels.macerator1 = new ItemStack(machines, 1, 6);
-        SuperSolarPanels.electroFurnace = new ItemStack(machines, 1, 7);
-        SuperSolarPanels.electroFurnace1 = new ItemStack(machines, 1, 8);
-        SuperSolarPanels.massFabricator2 = new ItemStack(machines, 1, 9);
-        SuperSolarPanels.massFabricator3 = new ItemStack(machines, 1, 10);
-        SuperSolarPanels.metalformer = new ItemStack(machines, 1, 11);
-        SuperSolarPanels.metalformer1 = new ItemStack(machines, 1, 12);
-        SuperSolarPanels.alloymachine = new ItemStack(machines, 1, 13);
-        
-       TileEntityDoubleMacerator.init();
-       TileEntityTripleMacerator.init();
-       TileEntityDoubleCompressor.init();
-       TileEntityTripleCompressor.init();
-       TileEntityDoubleMetalFormer.init();
-       TileEntityTripleMetalFormer.init();
-       TileEntityDoubleExtractor.init();
-       com.Denfop.block.mechanism.TileEntityAlloySmelter.init();
-    
-		 if (!Loader.isModLoaded("OpenBlocks")) {
-		 FluidRegistry.registerFluid(FluidXP.xpJuice);
-		 FluidXP.xpJuice.setIcons(TextureHooks.Icons.xpJuiceStill, TextureHooks.Icons.xpJuiceFlowing);
-		 }else {
-			 
-			 FluidXP.xpJuice = FluidRegistry.getFluid("xpjuice");
-		 }
-		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		  proxy.initCore();
+        proxy.initCore();
+   
+	
+		
+		 
     }
  
     public static ItemStack setItemsSize(final ItemStack itemStack, final int newSize) {
@@ -779,38 +659,12 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
     }
     @Mod.EventHandler
     public void load(final FMLInitializationEvent event) {
-    	 if(Config.enableexlposion)
-             this.initENet();
-         
-    	if(DraconicLoaded && EnchantingPlus &&MineFactory) {
-    		 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());
-    		
-    	}else if(DraconicLoaded && EnchantingPlus) {
-    		MinecraftForge.EVENT_BUS.register(new SSPDEEPEventHandler());
-    	}else if(DraconicLoaded && MineFactory) {
-    		MinecraftForge.EVENT_BUS.register(new SSPDEMFEventHandler());
-    	}else if(EnchantingPlus && MineFactory) {
-    		MinecraftForge.EVENT_BUS.register(new SSPMPMFEventHandler());
-    	}
-    	else {
-    		 if(DraconicLoaded) {
-    			 MinecraftForge.EVENT_BUS.register(new SSPDEEventHandler());
-    	        }
-    		
-			if(EnchantingPlus) {
-    			 MinecraftForge.EVENT_BUS.register(new SSPEPEventHandler());
-    	        }
-			if(MineFactory) {
-   			 MinecraftForge.EVENT_BUS.register(new SSPMFEventHandler());
-   	        }}
-    	MinecraftForge.EVENT_BUS.register(new SSPEventHandler());
     	
-        ASPPacketHandler.load();
     }
 
     
 
-    private void initENet() {
+    public static void initENet() {
         EnergyNet.instance = (IEnergyNet)EnergyNetGlobal.initialize();
     }
 
@@ -818,98 +672,7 @@ MineFactory = Loader.isModLoaded("MineFactoryReloaded");
         return world.provider.getAverageGroundLevel();
       }
       
-public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        
-        switch(world.provider.dimensionId){
-        case -1:
-            generateNether(world, random, chunkX*16,chunkZ*16);
-        case 0 :
-            generateSurface(world, random, chunkX*16,chunkZ*16);
-        case 1:
-            generateEnd(world, random, chunkX*16,chunkZ*16);
-        }
-    }
-    
-    private void generateNether(World world, Random random, int x, int y) {
-    	addOreSpawn1(SuperSolarPanels.nethercopperrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 20, 20, 80);
-    	addOreSpawn1(SuperSolarPanels.netheruranrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 20, 70);
-    	 addOreSpawn1(SuperSolarPanels.nethertinrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 16, 5, 70);
-	        addOreSpawn1(SuperSolarPanels.netherleadrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 10, 80);
-	        addOreSpawn1(SuperSolarPanels.netheremeraldrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 30, 60);
-	        addOreSpawn1(SuperSolarPanels.netherdiamondrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 10, 60);
-	      
-	        addOreSpawn1(SuperSolarPanels.nethercoalrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 30, 10, 70);
-	        addOreSpawn1(SuperSolarPanels.netherredstonerack,  world, random, x, y, 16, 16, 3+random.nextInt(2), 15, 10, 70);
-	        addOreSpawn1(SuperSolarPanels.netherlapisrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 12, 10, 70);
-	       addOreSpawn1(SuperSolarPanels.netherironrack, world, random, x, y, 16, 16, 3+random.nextInt(2), 16, 10, 70);
-	        addOreSpawn1(SuperSolarPanels.nethergoldrack, world, random, x, y,16,16, 10, 10, 0, 128);
-	        
-    }
-   
-    private void generateSurface(World world, Random random, int x, int y) {
-    	 this.addOreSpawn(SuperSolarPanels.mikhail_ore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.spinelore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.platiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 0, 60);
-	        this.addOreSpawn(SuperSolarPanels.wolframore, world, random, x, y, 16, 16, 2+random.nextInt(2), 15, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.chromiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 14, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.iridiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.magnesiumore, world, random, x, y, 16, 16, 2+random.nextInt(2), 12, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.nicelore, world, random, x, y, 16, 16, 2+random.nextInt(2), 12, 10, 60);
-	        this.addOreSpawn(SuperSolarPanels.toriyore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 70);
-	        this.addOreSpawn(SuperSolarPanels.magnetitore, world, random, x, y, 16, 16, 2+random.nextInt(2), 10, 10, 70);
-    }
-    
-    private void generateEnd(World world, Random random, int x, int y) {
-      	addOreSpawn2(SuperSolarPanels.endcopper_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 20, 0, 128);
-      	addOreSpawn2(SuperSolarPanels.enduran_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 0, 128);
-      	addOreSpawn2(SuperSolarPanels.endtin_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 16, 0, 128);
-      	addOreSpawn2(SuperSolarPanels.endlead_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 0, 128);
-      	addOreSpawn2(SuperSolarPanels.endemerald_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 0, 128);
-      	addOreSpawn2(SuperSolarPanels.enddiamond_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 4, 0, 128);
-	      
-      	addOreSpawn2(SuperSolarPanels.endcoal_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 30, 0, 128);
-	        addOreSpawn2(SuperSolarPanels.endredstone_stone,  world, random, x, y, 16, 16, 3+random.nextInt(2), 15, 0, 128);
-	        addOreSpawn2(SuperSolarPanels.endlapis_stone, world, random, x, y, 16, 16, 3+random.nextInt(2), 12, 0, 128);
-	        addOreSpawn2(SuperSolarPanels.endiron_stone, world, random, x, y, 16, 16, 6+random.nextInt(2), 10, 0, 128);
-	        addOreSpawn2(SuperSolarPanels.endgold_stone, world, random, x, y,16,16, 4, 10, 0, 128);
-	
-    }
 
-    public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
-        for(int i = 0; i < chancesToSpawn; i++) {
-            int posX = blockXPos + random.nextInt(maxX);
-            int posY = minY + random.nextInt(maxY - minY);
-            int posZ = blockZPos + random.nextInt(maxZ);
-          
-            
-          
-            (new WorldGenMinable(block, 0, maxVeinSize, Blocks.stone)).generate(world, random, posX, posY, posZ);
-           
-        }
-    }
-
-    public void addOreSpawn1(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
-        for(int i = 0; i < chancesToSpawn; i++) {
-            int posX = blockXPos + random.nextInt(maxX);
-            int posY = minY + random.nextInt(maxY - minY);
-            int posZ = blockZPos + random.nextInt(maxZ);
-          
-            
-            
-            (new WorldGenMinable(block, 0, maxVeinSize, Blocks.netherrack)).generate(world, random, posX, posY, posZ);
-        }
-    }
-
-    public void addOreSpawn2(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
-        for(int i = 0; i < chancesToSpawn; i++) {
-            int posX = blockXPos + random.nextInt(maxX);
-            int posY = minY + random.nextInt(maxY - minY);
-            int posZ = blockZPos + random.nextInt(maxZ);
-     
-          
-            (new WorldGenMinable(block, 0, maxVeinSize, Blocks.end_stone)).generate(world, random, posX, posY, posZ);
-            }
-    }
     @EventHandler
     public void onMissingMappings(FMLMissingMappingsEvent event) {
       BlocksItems.onMissingMappings(event);
@@ -917,82 +680,22 @@ public void generate(Random random, int chunkX, int chunkZ, World world, IChunkP
     public static void addLog(final String logLine) {
         System.out.println("[SuperSolarPanel] " + logLine);
     }
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onViewRenderFogDensity(EntityViewRenderEvent.FogDensity event) {
-      if (!(event.block instanceof BlockIC2Fluid))
-        return; 
-      event.setCanceled(true);
-      Fluid fluid = ((BlockIC2Fluid)event.block).getFluid();
-      GL11.glFogi(2917, 2048);
-      event.density = (float)Util.map(Math.abs(fluid.getDensity()), 20000.0D, 2.0D);
-    }
-    
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onViewRenderFogColors(EntityViewRenderEvent.FogColors event) {
-      if (!(event.block instanceof BlockIC2Fluid))
-        return; 
-      int color = ((BlockIC2Fluid)event.block).getColor();
-      event.red = (color >>> 16 & 0xFF) / 255.0F;
-      event.green = (color >>> 8 & 0xFF) / 255.0F;
-      event.blue = (color & 0xFF) / 255.0F;
-    }
+  
     @Mod.EventHandler
     public void Init(final FMLInitializationEvent event) {
-		WVPacketHandler.load();
+		
 		
 		
      
         proxy.registerEvents();
     }
-    @SubscribeEvent
-    public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
-      if (seasonal && (event.entityLiving instanceof net.minecraft.entity.monster.EntityZombie || event.entityLiving instanceof net.minecraft.entity.monster.EntitySkeleton) && event.entityLiving.worldObj.rand.nextFloat() < 0.1F) {
-        EntityLiving entity = (EntityLiving)event.entityLiving;
-        for (int i = 0; i <= 4; i++)
-          entity.setEquipmentDropChance(i, Float.NEGATIVE_INFINITY); 
-        if (entity instanceof net.minecraft.entity.monster.EntityZombie) {
-          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber).copy()); 
-          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber1).copy()); 
-        }
-        if (event.entityLiving.worldObj.rand.nextFloat() < 0.1F) {
-          entity.setCurrentItemOrArmor(1, new ItemStack(SuperSolarPanels.quantumHelmet).copy());
-          entity.setCurrentItemOrArmor(2, new ItemStack(SuperSolarPanels.quantumBodyarmor).copy());
-          entity.setCurrentItemOrArmor(3, new ItemStack(SuperSolarPanels.quantumLeggings).copy());
-          entity.setCurrentItemOrArmor(4, new ItemStack(SuperSolarPanels.quantumBoots).copy());
-        } else {
-         
-        } 
-      } 
-    }
-    
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void textureHook(TextureStitchEvent.Post event) {
-      if (event.map.getTextureType() == 0)
-        for (InternalName name : BlocksItems.getIc2FluidNames()) {
-          Block block = BlocksItems.getFluidBlock(name);
-          Fluid fluid = BlocksItems.getFluid(name);
-          fluid.setIcons(block.getBlockTextureFromSide(1), block.getBlockTextureFromSide(2));
-        }  
-    }
+   
     @Mod.EventHandler
     public void afterModsLoaded(final FMLPostInitializationEvent event) {
-    	BasicRecipe.recipe();
+    	
          proxy.registerRenderers();
-        if(BotaniaLoaded && Botania == true)
-        	BotaniaIntegration.recipe();
-        proxy.initRecipes();
-if(DraconicLoaded && Draconic == true)
-        DraconicIntegration.Recipes();
-if(AvaritiaLoaded && Avaritia == true)
-	AvaritiaIntegration.recipe();
-AlloySmelterRecipe.recipe();
-CompressorRecipe.recipe();
-CannerRecipe.recipe();
-FurnaceRecipes.recipe();  
-MaceratorRecipe.recipe();
+         proxy.registerRecipe();
+      
     }
 
       
@@ -1000,7 +703,10 @@ MaceratorRecipe.recipe();
     
     static {
         tabssp = new CreativeTabSSP();
-        
+         tabssp1 = new CreativeTabSSP1();
+         tabssp2 = new CreativeTabSSP2();
+         tabssp3 = new CreativeTabSSP3();
+         tabssp4 = new CreativeTabSSP4();
         SuperSolarPanels.instance = new SuperSolarPanels();
     }
     
@@ -1012,11 +718,9 @@ MaceratorRecipe.recipe();
         return par1 / 255.0F;
       }
    
-    @EventHandler
     public static boolean isSimulating() {
-
         return !FMLCommonHandler.instance().getEffectiveSide().isClient();
-    }
+      }
     
     public static NBTTagCompound getOrCreateNbtData(final ItemStack itemstack) {
         NBTTagCompound nbttagcompound = itemstack.getTagCompound();
@@ -1050,6 +754,7 @@ MaceratorRecipe.recipe();
             nbttagcompound = new NBTTagCompound();
             nbttagcompound.setBoolean("isFlyActive", false);
             nbttagcompound.setBoolean("isNightVision", false);
+            nbttagcompound.setBoolean("stepHeight", false);
         }
         return nbttagcompound;
     }

@@ -1,8 +1,6 @@
 package com.Denfop.Recipes;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.mechanism.Recipes;
-import com.Denfop.block.mechanism.TileEntityAlloySmelter;
 
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;

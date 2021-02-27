@@ -1,7 +1,6 @@
 package com.Denfop.item.reactor;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.utils.InternalName;
 
 import ic2.api.reactor.IReactor;
 import ic2.core.Ic2Items;
@@ -12,11 +11,12 @@ public class ItemReactorproton extends ItemReactorUranium {
 private int heat;
 private float power;
 
-public ItemReactorproton(InternalName internalName, int cells,int time,int heat,float power) {
+public ItemReactorproton(String internalName, int cells,int time,int heat,float power) {
     super(internalName, cells, time);
     this.time = time;
     this.heat=heat;
     this.power = power;
+    this.setCreativeTab(SuperSolarPanels.tabssp3);
   }
   
   protected int getFinalHeat(IReactor reactor, ItemStack stack, int x, int y, int heat) {

@@ -3,7 +3,9 @@ package com.Denfop.block.Base;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.item.ElectricItem;
 import ic2.api.item.IC2Items;
+import ic2.api.item.IElectricItem;
 import ic2.api.tile.IWrenchable;
 import ic2.core.block.TileEntityBlock;
 import ic2.core.util.Util;
@@ -25,34 +27,26 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.mutable.MutableObject;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
-import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
-import com.Denfop.block.advancedmatter.TileEntityAdvancedMatter;
-import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
-import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
-import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
-import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
-import com.Denfop.block.improvematter.TileEntityImprovedMatter;
-import com.Denfop.block.mechanism.TileEntityAlloySmelter;
-import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
-import com.Denfop.block.tripleelecfurnace.TileEntityTripleElectricFurnace;
-import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
-import com.Denfop.block.ultimatematter.TileEntityUltimateMatter;
+import com.Denfop.item.Modules.module7;
 import com.Denfop.item.base.ItemElectricBlock;
 import com.Denfop.proxy.ClientProxy;
-import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFE;
-import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFSU;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
-import com.Denfop.utils.InternalName;;
+import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
+import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
+
+import cofh.api.energy.IEnergyContainerItem;;
 
 
 public class BlockElectric extends BlockContainer {
@@ -61,6 +55,7 @@ public class BlockElectric extends BlockContainer {
     setHardness(1.5F);
     setStepSound(soundTypeMetal);
    this.setCreativeTab(SuperSolarPanels.tabssp);
+   setBlockUnbreakable();
     
   }
   @Override
@@ -189,6 +184,10 @@ public class BlockElectric extends BlockContainer {
       double energy2 = nbttagcompound1.getDouble("energy2");
       te.energy=energy1;
       te.energy2=energy2;
+      if(player instanceof EntityPlayer) {
+     EntityPlayer entityplayer = (EntityPlayer) player;
+     te.UUID = entityplayer.getDisplayName();
+      }
       switch (heading)
       {
       case 0:
@@ -209,14 +208,133 @@ public class BlockElectric extends BlockContainer {
   @Override
   public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
   {
+	  if (entityPlayer.isSneaking()) {
+		  TileEntityElectricBlock tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
+		  if(tile.movementcharge) {
+			 
+				 for(ItemStack armorcharged : entityPlayer.inventory.armorInventory) {
+					 if(armorcharged != null) {
+						 if(armorcharged.getItem() instanceof IElectricItem && tile.energy > 0) {
+							 double  sent = ElectricItem.manager.charge(armorcharged, tile.energy, 2147483647, true, false);
+							 entityPlayer.inventoryContainer.detectAndSendChanges();
+							 tile.energy -= sent;
+							
+							 tile.needsInvUpdate = (sent > 0.0D);
+							 if(sent > 0) {
+
+								   entityPlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("successfully.charged") +String.valueOf(armorcharged.getDisplayName())+" "+ StatCollector.translateToLocal("ssp.sendenergy")+String.valueOf(MathHelper.floor_double(sent))+" EU", new Object[0]));
+
+							 }
+						 }
+						 
+					 }
+					 
+				 }}
+		  if(tile.movementchargerf) {
+				 
+				 for(ItemStack charged : entityPlayer.inventory.armorInventory) {
+					 if(charged != null) {
+						 
+					        ItemStack stack = charged;
+					        if (stack != null && stack.getItem() instanceof IEnergyContainerItem && tile.energy2 >0) {
+					        	int sent =0;
+					        	
+					          IEnergyContainerItem item = (IEnergyContainerItem)stack.getItem();
+					      	for(;item.getEnergyStored(charged) < item.getMaxEnergyStored(charged)&&  tile.energy2 >0;) {
+					      		sent = sent + tile.extractEnergy(null, item.receiveEnergy(stack, (int) tile.energy2, false), false);
+								 
+					      		tile.setTransfer(tile.extractEnergy(null, item.receiveEnergy(stack, (int) tile.energy2, false), false) > 0);
+					       }
+					      	 entityPlayer.inventoryContainer.detectAndSendChanges();
+					      	
+					        } 
+						 
+					 
+				 
+		  }}}
+		  if(tile.movementchargeitem) {
+				 for(ItemStack charged : entityPlayer.inventory.mainInventory) {
+					 if(charged != null) {
+						 if(charged.getItem() instanceof IElectricItem && tile.energy > 0) {
+							 double  sent = ElectricItem.manager.charge(charged, tile.energy, 2147483647, true, false);
+							
+							 tile.energy -= sent;
+							 entityPlayer.inventoryContainer.detectAndSendChanges();
+							 tile.needsInvUpdate = (sent > 0.0D);
+							 if(sent > 0) {
+
+								   entityPlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("successfully.charged") +String.valueOf(charged.getDisplayName())+" "+ StatCollector.translateToLocal("ssp.sendenergy")+String.valueOf(MathHelper.floor_double(sent))+" EU", new Object[0]));
+
+							 }
+						 }
+						 
+					 }
+					 
+				 }
+				 
+		  }
+		  if(tile.movementchargeitemrf) {
+				 for(ItemStack charged : entityPlayer.inventory.mainInventory) {
+					 if(charged != null) {
+						
+					        ItemStack stack = charged;
+					        if (stack != null && stack.getItem() instanceof IEnergyContainerItem&& tile.energy2 >0 ) {
+					        	int sent =0;
+					          IEnergyContainerItem item = (IEnergyContainerItem)stack.getItem();
+					      	for(;item.getEnergyStored(charged) < item.getMaxEnergyStored(charged) &&  tile.energy2 >0;) {
+					      		tile.setTransfer(tile.extractEnergy(null, item.receiveEnergy(stack, (int) tile.energy2, false), false) >0);
+					      		sent =+ tile.extractEnergy(null, item.receiveEnergy(stack, (int) tile.energy2, false), false);
+					       }
+					      	
+					      	 entityPlayer.inventoryContainer.detectAndSendChanges();
+					      
+					        } 
+						 
+					 
+				 
+		  }}
+	  }}
       if (!entityPlayer.isSneaking())
       {
-          entityPlayer.openGui(SuperSolarPanels.instance, 0, world, x, y, z);
-          return true;
+    	  final TileEntity tileentity = world.getTileEntity(x, y, z);
+          if (tileentity != null) {
+          	
+          	if(world.getTileEntity(x, y, z) instanceof TileEntityElectricBlock) {
+          		TileEntityElectricBlock	tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
+          		
+          		if(tile.chargeSlots[0] != null&& tile.chargeSlots[0].getItem() instanceof module7&& tile.chargeSlots[0].getItemDamage() == 0 && tile.UUID == entityPlayer.getDisplayName()) {
+          			entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);
+          				 
+          			
+          				
+          				
+             }else {
+          	   if(tile.personality == false) {
+            
+          		 entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);}else {
+              	
+          			entityPlayer.addChatMessage(new ChatComponentTranslation(String.format("ssp.error", new Object[0]), new Object[0]));
+
+              }}
+          		
+          		
+          		}
+          
+          	}
+    	  
+      }else {
+    	  
+      
+    			return false;
+        	
+        
+        }
+        
+      return true;
       }
 
-      return false;
-  }
+      
+  
   private boolean isActive(IBlockAccess iba, int x, int y, int z)
   {
       return ((TileEntityBlock) iba.getTileEntity(x, y, z)).getActive();

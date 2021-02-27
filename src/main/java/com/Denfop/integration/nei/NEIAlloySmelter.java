@@ -4,7 +4,6 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import ic2.api.recipe.ICannerBottleRecipeManager;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeOutput;
 import ic2.core.IC2;
@@ -18,9 +17,11 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.mechanism.GuiAlloySmelter;
-import com.Denfop.block.mechanism.Recipes;
+import com.Denfop.api.IAlloySmelterRecipeManager;
+import com.Denfop.api.Recipes;
+import com.Denfop.gui.GuiAlloySmelter;
 
 public class NEIAlloySmelter extends TemplateRecipeHandler {
   int ticks;
@@ -66,14 +67,14 @@ public class NEIAlloySmelter extends TemplateRecipeHandler {
   
   public String getGuiTexture() {
 	  
-    return SuperSolarPanels.TEXTURES + ":textures/gui/GUIAlloySmelter.png";
+    return Constants.TEXTURES + ":textures/gui/GUIAlloySmelter.png";
   }
   
   public String getOverlayIdentifier() {
     return "alloysmelter";
   }
   
-  public Map<ICannerBottleRecipeManager.Input, RecipeOutput> getRecipeList() {
+  public Map<IAlloySmelterRecipeManager.Input, RecipeOutput> getRecipeList() {
     return Recipes.Alloysmelter.getRecipes();
   }
   
@@ -101,26 +102,26 @@ public class NEIAlloySmelter extends TemplateRecipeHandler {
   
   public void loadCraftingRecipes(String outputId, Object... results) {
     if (outputId.equals(getRecipeId())) {
-      for (Map.Entry<ICannerBottleRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet())
-        this.arecipes.add(new AlloySmelterRecipe(((ICannerBottleRecipeManager.Input)entry.getKey()).container, ((ICannerBottleRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
+      for (Map.Entry<IAlloySmelterRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet())
+        this.arecipes.add(new AlloySmelterRecipe(((IAlloySmelterRecipeManager.Input)entry.getKey()).container, ((IAlloySmelterRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
     } else {
       super.loadCraftingRecipes(outputId, results);
     } 
   }
   
   public void loadCraftingRecipes(ItemStack result) {
-    for (Map.Entry<ICannerBottleRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet()) {
+    for (Map.Entry<IAlloySmelterRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet()) {
       for (ItemStack output : ((RecipeOutput)entry.getValue()).items) {
         if (NEIServerUtils.areStacksSameTypeCrafting(output, result))
-          this.arecipes.add(new AlloySmelterRecipe(((ICannerBottleRecipeManager.Input)entry.getKey()).container, ((ICannerBottleRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
+          this.arecipes.add(new AlloySmelterRecipe(((IAlloySmelterRecipeManager.Input)entry.getKey()).container, ((IAlloySmelterRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
       } 
     } 
   }
   
   public void loadUsageRecipes(ItemStack ingredient) {
-    for (Map.Entry<ICannerBottleRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet()) {
-      if (((ICannerBottleRecipeManager.Input)entry.getKey()).container.matches(ingredient) || ((ICannerBottleRecipeManager.Input)entry.getKey()).fill.matches(ingredient))
-        this.arecipes.add(new AlloySmelterRecipe(((ICannerBottleRecipeManager.Input)entry.getKey()).container, ((ICannerBottleRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
+    for (Map.Entry<IAlloySmelterRecipeManager.Input, RecipeOutput> entry : getRecipeList().entrySet()) {
+      if (((IAlloySmelterRecipeManager.Input)entry.getKey()).container.matches(ingredient) || ((IAlloySmelterRecipeManager.Input)entry.getKey()).fill.matches(ingredient))
+        this.arecipes.add(new AlloySmelterRecipe(((IAlloySmelterRecipeManager.Input)entry.getKey()).container, ((IAlloySmelterRecipeManager.Input)entry.getKey()).fill, entry.getValue())); 
     } 
   }
 }

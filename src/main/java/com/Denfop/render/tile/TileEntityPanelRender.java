@@ -2,8 +2,9 @@ package com.Denfop.render.tile;
 
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.AdminPanel.TileEntityAdminSolarPanel;
+import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +15,7 @@ import net.minecraftforge.client.model.IModelCustom;
 public class TileEntityPanelRender extends TileEntitySpecialRenderer {
 
 	  static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("supersolarpanel", "textures/models/panel.obj") ); 
-	public static final ResourceLocation texture = new ResourceLocation(SuperSolarPanels.TEXTURES,
+	public static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES,
 			"textures/model/panel.png");
 
 	@Override

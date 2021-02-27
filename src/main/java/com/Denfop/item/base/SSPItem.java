@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SSPItem extends Item {
 
 	public SSPItem() {
-		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp3);
 	}
 
 	public int getItemStackLimit() {

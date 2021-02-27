@@ -1,4 +1,5 @@
 package com.Denfop.integration.DE;
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.brandonscore.BrandonsCore;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
@@ -41,7 +42,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem, IInventoryTool, IRenderTweak, IUpgradableItem, IHudDisplayItem {
-  protected int capacity = (int) (BalanceConfigHandler.draconicWeaponsBaseStorage);
+  protected int capacity = (int) ( BalanceConfigHandler.draconicWeaponsBaseStorage* 1.5);
   
   protected int maxReceive = BalanceConfigHandler.draconicWeaponsMaxTransfer;
   
@@ -51,7 +52,7 @@ public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem,
 	  super(DraconicIntegration.CHAOS);
     setUnlocalizedName("ChaosSword");
 
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
       GameRegistry.registerItem((Item)this, "ChaosSword"); 
   }
   
@@ -74,7 +75,7 @@ public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem,
   
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
-    this.itemIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + "ChaosSword");
+    this.itemIcon = iconRegister.registerIcon(Constants.TEXTURES + ":" + "ChaosSword");
   }
   
   public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
@@ -138,7 +139,8 @@ public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem,
   
   public int getMaxEnergyStored(ItemStack container) {
     int points = IUpgradableItem.EnumUpgrade.RF_CAPACITY.getUpgradePoints(container);
-    return (int) (BalanceConfigHandler.draconicWeaponsBaseStorage);
+    return (int) (BalanceConfigHandler.draconicToolsBaseStorage * 1.5 + points * BalanceConfigHandler.draconicToolsStoragePerUpgrade);
+
   }
   
   public boolean showDurabilityBar(ItemStack stack) {
@@ -220,9 +222,9 @@ public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem,
     if (upgradeIndex == IUpgradableItem.EnumUpgrade.RF_CAPACITY.index)
       return BalanceConfigHandler.draconicWeaponsMaxCapacityUpgradePoints; 
     if (upgradeIndex == IUpgradableItem.EnumUpgrade.ATTACK_AOE.index)
-      return 5; 
+      return 12; 
     if (upgradeIndex == IUpgradableItem.EnumUpgrade.ATTACK_DAMAGE.index)
-      return 16; 
+      return 28; 
     return BalanceConfigHandler.draconicWeaponsMaxUpgradePoints  ;
   }
   
@@ -231,11 +233,10 @@ public class ChaosSword extends ItemSword implements IEnergyContainerWeaponItem,
   }
   
   public int getBaseUpgradePoints(int upgradeIndex) {
-	  if (upgradeIndex == IUpgradableItem.EnumUpgrade.RF_CAPACITY.index)
-	      return BalanceConfigHandler.draconicWeaponsMaxCapacityUpgradePoints; 
+	  
     if (upgradeIndex == IUpgradableItem.EnumUpgrade.ATTACK_AOE.index)
       return 2; 
-    if (upgradeIndex == IUpgradableItem.EnumUpgrade.ARROW_DAMAGE.index)
+    if (upgradeIndex == IUpgradableItem.EnumUpgrade.ATTACK_DAMAGE.index)
       return 0; 
     return 0;
   }

@@ -1,29 +1,45 @@
 package com.Denfop.item.energy;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.item.base.ItemElectricTool;
-import com.Denfop.utils.InternalName;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IBoxable;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.IItemHudInfo;
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
+
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -32,38 +48,105 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemNanoSaber1 extends ItemElectricTool {
-  public ItemNanoSaber1(InternalName internalName) {
-    this(internalName, 10, ItemElectricTool.HarvestLevel.Diamond);
+public class ItemNanoSaber1 extends ItemTool implements IElectricItem, IBoxable, IItemHudInfo{
+  private static int activedamage;
+  public double operationEnergyCost;
+  
+  public int maxCharge;
+  
+  public int transferLimit;
+  
+  public int tier;
+  
+  private final EnumSet<ToolClass> toolClasses;
+private static int damage1;
+public ItemNanoSaber1(String internalName,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
+    this(internalName, 10, HarvestLevel.Diamond,maxCharge, transferLimit, tier, activedamage, damage);
   }
   
-  public ItemNanoSaber1(InternalName internalName, int operationEnergyCost, ItemElectricTool.HarvestLevel harvestLevel) {
-    super(internalName, operationEnergyCost, harvestLevel, EnumSet.of(ItemElectricTool.ToolClass.Sword));
+  public ItemNanoSaber1(String name, int operationEnergyCost, HarvestLevel harvestLevel,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
+    super(0,harvestLevel.toolMaterial, null);
     this.soundTicker = 0;
-    this.maxCharge = SuperSolarPanels.maxCharge1;
-    this.transferLimit = SuperSolarPanels.transferLimit1;
-    this.tier = SuperSolarPanels.tier1;
+    this.operationEnergyCost = operationEnergyCost;
+    this.toolClasses = EnumSet.of(ToolClass.Sword);
+    this.maxCharge = maxCharge;
+    this.transferLimit = transferLimit;
+    this.tier = tier;
+    this.activedamage = activedamage;
+    this.damage1 = damage;
+    setMaxDamage(27);
+    setMaxStackSize(1);
+    setNoRepair();
+    setUnlocalizedName(name);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
+    for (ToolClass toolClass : toolClasses) {
+        if (toolClass.name != null)
+          setHarvestLevel(toolClass.name, harvestLevel.level); 
+      } 
+      
+      GameRegistry.registerItem((Item)this,name);
   }
   public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + SuperSolarPanels.spectralsaberactive1);
+  	  info.add(StatCollector.translateToLocal("ssp.spectralsaberactive") + activedamage);
       
-      info.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + this.tier);
-      info.add(StatCollector.translateToLocal("ssp.maxCharge") + this.maxCharge + " EU");
-      info.add(StatCollector.translateToLocal("ssp.transferLimit") + this.transferLimit);
+      info.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + tier);
+      info.add(StatCollector.translateToLocal("ssp.maxCharge") + maxCharge + " EU");
+      info.add(StatCollector.translateToLocal("ssp.transferLimit") + transferLimit);
  
   }
+  
+  @Override
+  public double getMaxCharge(ItemStack itemStack) {
+	    return this.maxCharge;
+	  }
+  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+      return true;
+    }
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
     this.textures = new IIcon[2];
-    this.textures[0] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.off.name());
-    this.textures[1] = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + InternalName.active.name());
+    this.textures[0] = iconRegister.registerIcon(Constants.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + "off");
+    this.textures[1] = iconRegister.registerIcon(Constants.TEXTURES + ":" + getUnlocalizedName().substring(4) + "." + "active");
+  }
+ @Override
+  public boolean canProvideEnergy(ItemStack itemStack) {
+	    return true;
+	  }
+ public int getItemEnchantability() {
+     return super.getItemEnchantability();
+   }
+  @SideOnly(Side.CLIENT)
+  public void getSubItems(Item item, CreativeTabs tab, List subs) {
+    ItemStack stack = new ItemStack((Item)this, 1);
+  
+    
+	
+
+    ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
+    subs.add(stack);
+ ItemStack itemstack = new ItemStack((Item)this,1,getMaxDamage());
+    
+    
+    subs.add(itemstack);
   }
   
+  @SideOnly(Side.CLIENT)
+  public EnumRarity getRarity(ItemStack var1) {
+    return EnumRarity.uncommon;
+  }
+  @Override
+  public Item getChargedItem(ItemStack itemStack) {
+    return (Item)this;
+  }
+  @Override
+  public Item getEmptyItem(ItemStack itemStack) {
+    return (Item)this;
+  }
   @SideOnly(Side.CLIENT)
   public boolean requiresMultipleRenderPasses() {
     return true;
   }
-  
+  @Override
   @SideOnly(Side.CLIENT)
   public IIcon getIcon(ItemStack itemStack, int pass) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
@@ -71,7 +154,7 @@ public class ItemNanoSaber1 extends ItemElectricTool {
       return this.textures[1]; 
     return this.textures[0];
   }
-  
+  @Override
   public float getDigSpeed(ItemStack itemStack, Block block, int meta) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (nbtData.getBoolean("active")) {
@@ -82,19 +165,19 @@ public class ItemNanoSaber1 extends ItemElectricTool {
     } 
     return 1.0F;
   }
-  
+  @Override
   public Multimap getAttributeModifiers(ItemStack stack) {
-    int dmg = SuperSolarPanels.spectralsabernotactive1;
+    int dmg = this.damage1;
     if (ElectricItem.manager.canUse(stack, 400.0D)) {
       NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
       if (nbtData.getBoolean("active"))
-        dmg = SuperSolarPanels.spectralsaberactive1; 
+        dmg = this.activedamage; 
     } 
     HashMultimap hashMultimap = HashMultimap.create();
     hashMultimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", dmg, 0));
     return (Multimap)hashMultimap;
   }
-  
+  @Override
   public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase source) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
     if (!nbtData.getBoolean("active"))
@@ -136,14 +219,14 @@ public class ItemNanoSaber1 extends ItemElectricTool {
     } 
     return "Tools/Nanosabre/NanosabreSwing3.ogg";
   }
-  
+  @Override
   public boolean onBlockStartBreak(ItemStack itemStack, int i, int j, int k, EntityPlayer player) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (nbtData.getBoolean("active"))
       drainSaber(itemStack, 80.0D, (EntityLivingBase)player); 
     return false;
   }
-  
+  @Override
   public boolean isFull3D() {
     return true;
   }
@@ -155,7 +238,7 @@ public class ItemNanoSaber1 extends ItemElectricTool {
       updateAttributes(nbtData);
     } 
   }
-  
+  @Override
   public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityplayer) {
     if (!IC2.platform.isSimulating())
       return itemStack; 
@@ -172,27 +255,12 @@ public class ItemNanoSaber1 extends ItemElectricTool {
   }
   
   public static int ticker = 0;
-  @SideOnly(Side.CLIENT)
-  public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
-    ItemStack itemStack = new ItemStack(this, 1);
-    if (getChargedItem(itemStack) == this) {
-      ItemStack charged = new ItemStack(this, 1);
-      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
-      itemList.add(charged);
-      
-    } 
-   
-    if (getEmptyItem(itemStack) == this) {
-      ItemStack charged = new ItemStack(this, 1);
-      ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
-      itemList.add(charged);
-    } 
-  }
+  
   @SideOnly(Side.CLIENT)
   private IIcon[] textures;
   
   private int soundTicker;
-  
+  @Override
   public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, boolean par5) {
     NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
     if (!nbtData.getBoolean("active"))
@@ -204,15 +272,57 @@ public class ItemNanoSaber1 extends ItemElectricTool {
         drainSaber(itemStack, 16.0D, (EntityLivingBase)entity);
       }  
   }
-  
-  @SideOnly(Side.CLIENT)
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.uncommon;
+  protected enum HarvestLevel {
+	    Wood(0, Item.ToolMaterial.WOOD),
+	    Stone(1, Item.ToolMaterial.STONE),
+	    Iron(2, Item.ToolMaterial.IRON),
+	    Diamond(3, Item.ToolMaterial.EMERALD),
+	    Iridium(100, Item.ToolMaterial.EMERALD);
+	    
+	    public final int level;
+	    
+	    public final Item.ToolMaterial toolMaterial;
+	    
+	    HarvestLevel(int level, Item.ToolMaterial toolMaterial) {
+	      this.level = level;
+	      this.toolMaterial = toolMaterial;
+	    }
+	  }
+  protected enum ToolClass {
+	    Axe("axe", new Object[] { Material.wood, Material.plants, Material.vine }),
+	    Pickaxe("pickaxe", new Object[] { Material.iron, Material.anvil, Material.rock }),
+	    Shears("shears", new Object[] { Blocks.web, Blocks.wool, Blocks.redstone_wire, Blocks.tripwire, Material.leaves }),
+	    Shovel("shovel", new Object[] { Blocks.snow_layer, Blocks.snow }),
+	    Sword("sword", new Object[] { Blocks.web, Material.plants, Material.vine, Material.coral, Material.leaves, Material.gourd }),
+	    Hoe(null, new Object[] { Blocks.dirt, Blocks.grass, Blocks.mycelium });
+	    
+	    public final String name;
+	    
+	    public final Set<Object> whitelist;
+	    
+	    ToolClass(String name, Object... whitelist) {
+	      this.name = name;
+	      this.whitelist = new HashSet(Arrays.asList(whitelist));
+	    }
+	  }
+  @Override
+  public String getUnlocalizedName() {
+    return "ssp." + super.getUnlocalizedName().substring(5);
   }
-  
+  @Override
+  public String getUnlocalizedName(ItemStack itemStack) {
+    return getUnlocalizedName();
+  }
+  @Override
+  public String getItemStackDisplayName(ItemStack itemStack) {
+    return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
+  }
   private static void updateAttributes(NBTTagCompound nbtData) {
     boolean active = nbtData.getBoolean("active");
-    int damage = active ? SuperSolarPanels.spectralsaberactive1 : SuperSolarPanels.spectralsabernotactive1;
+    int damage= damage1;
+    if(active)
+    	damage = activedamage;
+   
     NBTTagCompound entry = new NBTTagCompound();
     entry.setString("AttributeName", SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
     entry.setLong("UUIDMost", field_111210_e.getMostSignificantBits());
@@ -224,4 +334,53 @@ public class ItemNanoSaber1 extends ItemElectricTool {
     list.appendTag((NBTBase)entry);
     nbtData.setTag("AttributeModifiers", (NBTBase)list);
   }
+
+
+@Override
+public List<String> getHudInfo(ItemStack itemStack) {
+    List<String> info = new LinkedList<String>();
+    info.add(ElectricItem.manager.getToolTip(itemStack));
+    info.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + this.tier);
+    return info;
+  }
+
+@Override
+public int getTier(ItemStack itemStack) {
+
+	return this.tier;
+}
+
+@Override
+public double getTransferLimit(ItemStack itemStack) {
+	
+	return this.transferLimit;
+}
+@Override
+public boolean canHarvestBlock(Block block, ItemStack stack) {
+  Material material = block.getMaterial();
+  for (ToolClass toolClass : this.toolClasses) {
+    if (toolClass.whitelist.contains(block) || toolClass.whitelist
+      .contains(material))
+      return true; 
+  } 
+  return super.canHarvestBlock(block, stack);
+}
+public boolean canBeStoredInToolbox(ItemStack itemstack) {
+    return true;
+  }
+
+@Override
+public float func_150893_a(ItemStack stack, Block block) {
+  if (canHarvestBlock(block, stack))
+    return this.efficiencyOnProperMaterial; 
+  return super.func_150893_a(stack, block);
+}
+
+
+
+public boolean isRepairable() {
+  return false;
+}
+
+
 }

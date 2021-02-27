@@ -39,4 +39,8 @@ public class MaceratorRecipe {
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.invaringot)), (NBTTagCompound)null, new ItemStack[] {new ItemStack(SuperSolarPanels.invardust) });
 		
 	}
+	public static void addmacerator(ItemStack input,int n,ItemStack output) {
+		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(input,n), (NBTTagCompound)null, new ItemStack[] {output });
+
+	}
 }

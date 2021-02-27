@@ -1,5 +1,7 @@
 package com.Denfop.gui;
 
+import com.Denfop.Constants;
+import com.Denfop.SuperSolarPanels;
 import com.Denfop.container.ContainerMatter;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 
@@ -66,6 +68,6 @@ public class GuiMatter extends GuiIC2 {
   }
   
   public ResourceLocation getResourceLocation() {
-    return new ResourceLocation(IC2.textureDomain, "textures/gui/GUIMatter.png");
+    return new ResourceLocation(Constants.TEXTURES, "textures/gui/NeutronGeneratorGUI.png");
   }
 }

@@ -2,7 +2,6 @@ package com.Denfop;
 
 import java.io.File;
 
-import com.Denfop.utils.MTRecipeConfig;
 import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -15,6 +14,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 public static final boolean EnglishFix = false;
+public static boolean EnableNetherOres;
 public static int limit;
 public static int tier;
 public static int neutrongenday;
@@ -90,13 +90,41 @@ public static boolean enablefortune;
 public static int fortunelevel;
 public static boolean enableexlposion;
 public static boolean enableIC2EasyMode;
+public static boolean EnableEndOres;
+public static boolean EnableMickailOre;
+public static boolean EnableSpinelOre;
+public static boolean EnablePlatiumOre;
+public static boolean EnableWolframOre;
+public static boolean EnableChromiumOre;
+public static boolean EnableIridiumOre;
+public static boolean EnableMagnesiumOre;
+public static boolean EnableNickelOre;
+public static boolean EnableToriyOre;
+public static boolean EnableMagnetitOre;
+public static boolean damagecable;
+public static boolean newsystem;
+public static int armor_maxcharge;
+public static int armor_transferlimit;
+public static int armor_tier;
+public static int armor_maxcharge_body;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
          configFile = event.getSuggestedConfigurationFile();
         //
-         
+         damagecable=config.get("Events", "Damage", true).getBoolean(true);
+         newsystem=config.get("Events", "New system transfer energy", true).getBoolean(true);
+         EnableMagnetitOre=config.get("Generation", "Spawn Magnetit Ore", true).getBoolean(true);
+         EnableToriyOre=config.get("Generation", "Spawn Toriy Ore", true).getBoolean(true);
+         EnableNickelOre=config.get("Generation", "Spawn Nickel Ore", true).getBoolean(true);
+         EnableMagnesiumOre=config.get("Generation", "Spawn Magnesium Ore", true).getBoolean(true);
+         EnableIridiumOre=config.get("Generation", "Spawn Iridium Ore", true).getBoolean(true);
+         EnableChromiumOre=config.get("Generation", "Spawn Chromium Ore", true).getBoolean(true);
+         EnableWolframOre=config.get("Generation", "Spawn Wolfram Ore", true).getBoolean(true);
+         EnablePlatiumOre=config.get("Generation", "Spawn Platium Ore", true).getBoolean(true);
+         EnableSpinelOre=config.get("Generation", "Spawn Spinel Ore", true).getBoolean(true);
+         EnableMickailOre=config.get("Generation", "Spawn Mickail Ore", true).getBoolean(true);
          effPower= config.get("UltimateDrill", "Mode 0 efficiency", 35).getInt(35); 
          lowPower=config.get("UltimateDrill", "Mode 1 efficiency", 20).getInt(20); 
          bigHolePower =config.get("UltimateDrill", "Mode 2 efficiency", 16).getInt(16); 
@@ -113,8 +141,14 @@ public static void config(final FMLPreInitializationEvent event) {
          efficiencylevel=config.get("UltimateDrill", "Level efficiency(tool mode 0)", 10).getInt(10); }else {
         	 efficiencylevel =10;
          }
+         EnableNetherOres=config.get("Generation", "Spawn ores in Nether", true).getBoolean(true);
+         EnableEndOres=config.get("Generation", "Spawn ores in End", true).getBoolean(true);
          enableIC2EasyMode=config.get("general", "Easy Mode", false).getBoolean(false);
-         enableexlposion=config.get("general", "Enable exlposion", true).getBoolean(true);
+         
+         enableexlposion=config.get("Events", "Enable exlposion", true).getBoolean(true);
+         if(damagecable == false) {
+        	 newsystem = true;
+         }
          enableefficiency=config.get("UltimateDrill", "Enable Efficiency tool mode 1", true).getBoolean(true); 
          if(efficiencylevel1 > 1 && efficiencylevel1 <15) {
          efficiencylevel1=config.get("UltimateDrill", "Level efficiency(tool mode 1)", 10).getInt(10); }else {
@@ -141,17 +175,17 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.spectralpanelOutput = config.get("Spectral Solar panel", "SpectralSPOutput", 5120).getInt(5120);
          SuperSolarPanels.adminpanelGenDay = config.get("Light-Adbord Solar panel", "AdminPanelGenDay", 163840).getInt(163840);
          SuperSolarPanels.adminpanelGenNight = config.get("Light-Adbord Solar panel", "AdminPanelGenNight", 163840).getInt(163840);
-         SuperSolarPanels.AdminpanelStorage = config.get("Light-Adbord Solar panel", "AdminPanelStorage", 10000000).getInt(10000000);
+         SuperSolarPanels.AdminpanelStorage = config.get("Light-Adbord Solar panel", "AdminPanelStorage", 20000000).getInt(20000000);
          SuperSolarPanels.AdminpanelOutput = config.get("Light-Adbord Solar panel", "AdminPanelOutput", 327680).getInt(327680);
          SuperSolarPanels.photonicpanelGenDay = config.get("Photonic Solar panel", "PhotonicPanelGenDay", 655360).getInt(655360);
          SuperSolarPanels.photonicpanelGenNight = config.get("Photonic Solar panel", "PhotonicPanelGenNight", 655360).getInt(655360);
          SuperSolarPanels.photonicpanelOutput = config.get("Photonic Solar panel", "PhotonicPanelOutput", 1310720).getInt(1310720);
-         SuperSolarPanels.photonicpanelStorage = config.get("Photonic Solar panel", "PhotonicPanelStorage", 10000000).getInt(10000000);
+         SuperSolarPanels.photonicpanelStorage = config.get("Photonic Solar panel", "PhotonicPanelStorage", 40000000).getInt(40000000);
          SuperSolarPanels.neutronpanelGenDay = config.get("Neutronium Solar panel", "NeutronPanelGenDay", 2621440).getInt(2621440);
          SuperSolarPanels.neutronpanelGenNight = config.get("Neutronium Solar panel", "NeutronPanelGenNight", 2621440).getInt(2621440);
          SuperSolarPanels.neutronpanelOutput = config.get("Neutronium Solar panel", "NeutronPanelOutput", 5242880).getInt(5242880);
-         SuperSolarPanels.neutronpanelStorage = config.get("Neutronium Solar panel", "NeutronPanelStorage", 30000000).getInt(30000000);
-         SuperSolarPanels.Storagequantumsuit = config.get("Quantum armor", "Storage Enriched Quantum Suit", 100000000).getInt(100000000);
+         SuperSolarPanels.neutronpanelStorage = config.get("Neutronium Solar panel", "NeutronPanelStorage", 60000000).getInt(60000000);
+        
          SuperSolarPanels.spectralsaberactive1 = config.get("Quantum Saber", "QuantumSaber Damage Active", 40).getInt(40);
          SuperSolarPanels.spectralsabernotactive1 = config.get("Quantum Saber", "QuantumSaber Damage Not Active", 8).getInt(8);
          SuperSolarPanels.maxCharge1 = config.get("Quantum Saber", "SpectralSaber max Charge", 200000).getInt(200000);
@@ -166,7 +200,7 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.spectralsaberactive = config.get("Spectral Saber", "SpectralSaber Damage Active", 60).getInt(60);
          SuperSolarPanels.spectralsabernotactive = config.get("Spectral Saber", "SpectralSaber Damage Not Active", 12).getInt(12);
        
-         
+        
          SuperSolarPanels.enegry1= config.get("Imroved MFSU", "energy transfer Et/t", 32768).getInt(32768);
          SuperSolarPanels.storage1= config.get("Imroved MFSU", "energy storage", 100000000).getInt(100000000);
          SuperSolarPanels.tier1= config.get("Imroved MFSU", "tier", 5).getInt(5);
@@ -180,10 +214,10 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.neutronpaneltier= config.get("Neutronium Solar panel", "tier", 10).getInt(10);
          
          //
-         InfinityGenDay = config.get("Infinity Solar panel", "GenDay", 10485760).getInt(10485760);
-         InfinityGenNight = config.get("Infinity Solar panel", "GenNight", 10485760).getInt(10485760);
-         InfinityOutput = config.get("Infinity Solar panel", "Output", 20971520).getInt(20971520);
-         InfinityStorage= config.get("Infinity Solar panel", "Storage", 60000000).getInt(60000000);
+         InfinityGenDay = config.get("Infinity Solar panel", "GenDay", 1048576).getInt(1048576);
+         InfinityGenNight = config.get("Infinity Solar panel", "GenNight", 1048576).getInt(1048576);
+         InfinityOutput = config.get("Infinity Solar panel", "Output", 2097152).getInt(2097152);
+         InfinityStorage= config.get("Infinity Solar panel", "Storage", 30000000).getInt(30000000);
          
          tier = config.get("Neutron Solar panel(Avaritia)", "tier", 8).getInt(8);
          neutrongenday = config.get("Neutron Solar panel(Avaritia)", "GenDay", 1310720).getInt(1310720);
@@ -214,7 +248,7 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.disableeffect1 = config.get("Disable Effect", "Disable waterBreathing", false).getBoolean(false);
          SuperSolarPanels.disableeffect2 = config.get("Disable Effect", "Disable jump", false).getBoolean(false);
          SuperSolarPanels.disableeffect3 = config.get("Disable Effect", "Disable moveSpeed", false).getBoolean(false);
-         SuperSolarPanels.thaumcraft= config.get("Integrestion", "DIntegrestion Thaumcraft", false).getBoolean(false);
+         SuperSolarPanels.thaumcraft= config.get("Integrestion", "Integrestion Thaumcraft", false).getBoolean(false);
          SuperSolarPanels.wireless = config.get("Integrestion", "Integrestion Wireless Solar Panels", false).getBoolean(false);
          SuperSolarPanels.Draconic = config.get("Integrestion", "Integrestion Draconic Evolution", true).getBoolean(true);
          SuperSolarPanels.Botania = config.get("Integrestion", "Integrestion Botania", true).getBoolean(true); 
@@ -225,7 +259,7 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.advStorage = config.get("general", "AdvancedSPStorage", 3200).getInt(3200);
          SuperSolarPanels.advOutput = config.get("general", "AdvancedSPOutput", 20).getInt(20);
          SuperSolarPanels.hGenDay = config.get("general", "HybrydSPGenDay", 40).getInt(40);
-         SuperSolarPanels.hGenNight = config.get("general", "HybrydSPGenNight", 15).getInt(15);
+         SuperSolarPanels.hGenNight = config.get("general", "HybrydSPGenNight", 20).getInt(20);
          SuperSolarPanels.hStorage = config.get("general", "HybrydSPStorage", 10000).getInt(10000);
          SuperSolarPanels.hOutput = config.get("general", "HybrydSPOutput", 80).getInt(80);
          SuperSolarPanels.uhGenDay = config.get("general", "UltimateHSPGenDay", 160).getInt(160);
@@ -233,7 +267,7 @@ public static void config(final FMLPreInitializationEvent event) {
          SuperSolarPanels.uhStorage = config.get("general", "UltimateHSPStorage", 100000).getInt(100000);
          SuperSolarPanels.uhOutput = config.get("general", "UltimateHSPOutput", 320).getInt(320);
          SuperSolarPanels.qpGenDay = config.get("general", "QuantumSPGenDay", 640).getInt(640);
-         SuperSolarPanels.qpGenNight = config.get("general", "QuantumSPGenNight", 160).getInt(160);
+         SuperSolarPanels.qpGenNight = config.get("general", "QuantumSPGenNight", 320).getInt(320);
          SuperSolarPanels.qpStorage = config.get("general", "QuantumSPStorage", 200000).getInt(200000);
          SuperSolarPanels.qpOutput = config.get("general", "QuantumSPOutput", 1280).getInt(1280);
       //
@@ -325,6 +359,10 @@ public static void config(final FMLPreInitializationEvent event) {
          chaostier= config.get("Chaos Solar Panel", "tier", 10).getInt(10);
          ASP = config.get("Integrestion", "Integrestion Advanced Solar Panels", true).getBoolean(true);
          
+         armor_maxcharge= config.get("Improvemed Quantum Armor", "maxcharge exept Improvemed Quantum Body", 100000000).getInt(100000000);
+         armor_transferlimit= config.get("Improvemed Quantum Armor", "transferlimit", 10000).getInt(10000);
+         armor_tier = config.get("Improvemed Quantum Armor", "tier", 4).getInt(4);
+         armor_maxcharge_body= config.get("Improvemed Quantum Armor", "maxcharge Improvemed Quantum Body", 300000000).getInt(300000000);
          //
      }
      catch (Exception e) {

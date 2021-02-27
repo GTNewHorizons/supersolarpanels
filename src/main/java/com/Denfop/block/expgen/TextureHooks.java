@@ -17,17 +17,13 @@ public class TextureHooks {
 		public static IIcon xpJuiceFlowing;
 	}
 	
-/*	 public static void init()
-	    {
-	        MinecraftForge.EVENT_BUS.register(new TextureHooks());
-	        
-	    } */
+
 	
 	@SubscribeEvent
 	 public void textureHook(TextureStitchEvent.Pre event) {
 	  if (event.map.getTextureType() == 0) {
-		  Icons.xpJuiceStill = event.map.registerIcon("wirelessvajra:xpliquid_still");
-		  Icons.xpJuiceFlowing = event.map.registerIcon("wirelessvajra:xpjuice_flowing");
+		  Icons.xpJuiceStill = event.map.registerIcon("supersolarpanel:xpliquid_still");
+		  Icons.xpJuiceFlowing = event.map.registerIcon("supersolarpanel:xpjuice_flowing");
 		  SuperSolarPanels.FluidXP.xpJuice.setIcons(Icons.xpJuiceStill, Icons.xpJuiceFlowing);
 		  
 		  

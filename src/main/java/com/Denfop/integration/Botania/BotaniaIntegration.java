@@ -8,13 +8,13 @@ import com.Denfop.integration.DE.TileEntityChaosSolarPanel;
 import com.Denfop.integration.DE.TileEntityDraconSolarPanel;
 import com.Denfop.integration.DE.blockDESolarPanel;
 import com.Denfop.item.base.SSPItem;
-import com.Denfop.utils.StackUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import ic2.core.Ic2Items;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,7 +73,7 @@ public class BotaniaIntegration {
 		 Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(ModItems.manaResource, 1, 0), 1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(manasteel_plate) });
 		 Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(ModItems.manaResource, 1, 7),1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(elementium_plate) });
 		 Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(ModItems.manaResource, 1, 4),1), (NBTTagCompound)null, new ItemStack[] { new ItemStack(terrasteel_plate) });
-		 GameRegistry.addRecipe(new ItemStack(teraDDrill,1,OreDictionary.WILDCARD_VALUE), new Object[] { " L ", "ODO", "COC",  'O',  SuperSolarPanels.overclockerUpgrade, 'D' , StackUtils.copyWithWildCard(IC2Items.getItem("diamondDrill")), 'C' ,terrasteel_plate,'L',ModItems.terraPick});
+		 GameRegistry.addRecipe(new ItemStack(teraDDrill,1,OreDictionary.WILDCARD_VALUE), new Object[] { " L ", "ODO", "COC",  'O',  SuperSolarPanels.overclockerUpgrade, 'D' , new ItemStack(Ic2Items.diamondDrill.getItem(),1,OreDictionary.WILDCARD_VALUE), 'C' ,terrasteel_plate,'L',ModItems.terraPick});
 		 GameRegistry.addRecipe(new ItemStack(terrasteel_core), new Object[] { "KLM", "DOD", "CHC",  'C',  terrasteel_plate, 'D' ,SuperSolarPanels.itemIrradiantGlassPane, 'O' ,terrasteel_plate,'L',IC2Items.getItem("advancedAlloy"),'K',rune_night,'M',rune_sun,'H',rune_energy});
 		 GameRegistry.addRecipe(new ItemStack(elementium_core), new Object[] { "KLM", "DOD", "CHC",  'C',  elementium_plate, 'D' ,SuperSolarPanels.photoniy_ingot, 'O' ,manasteel_core,'L',IC2Items.getItem("advancedCircuit"),'K',rune_night,'M',rune_sun,'H',rune_energy});
 		 GameRegistry.addRecipe(new ItemStack(manasteel_core), new Object[] { "KLM", "DOD", "CHC",  'C',  manasteel_plate, 'D' ,SuperSolarPanels.photoniy_ingot, 'O' ,SuperSolarPanels.advanced_core ,'L',IC2Items.getItem("advancedCircuit"),'K',rune_night,'M',rune_sun,'H',rune_energy});

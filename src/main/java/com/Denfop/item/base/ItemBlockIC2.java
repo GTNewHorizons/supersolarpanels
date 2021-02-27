@@ -1,7 +1,7 @@
 package com.Denfop.item.base;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.Base.BlockBase;
+import com.Denfop.block.cable.BlockCable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,8 +46,8 @@ public class ItemBlockIC2 extends ItemBlock {
   
   @SideOnly(Side.CLIENT)
   public EnumRarity getRarity(ItemStack stack) {
-    if (this.block instanceof BlockBase)
-      return ((BlockBase)this.block).getRarity(stack); 
+    if (this.block instanceof BlockCable)
+      return ((BlockCable)this.block).getRarity(stack); 
     return super.getRarity(stack);
   }
 }

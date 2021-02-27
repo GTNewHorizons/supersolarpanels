@@ -88,7 +88,7 @@ public int mode;
     super(0.0F, toolMaterial, new HashSet());
     setMaxDamage(27);
     this.efficiencyOnProperMaterial = this.normalPower;
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(SuperSolarPanels.tabssp2);
   }
   
   public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {

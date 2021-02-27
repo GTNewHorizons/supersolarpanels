@@ -1,30 +1,88 @@
 package com.Denfop.item.energy;
 
 
-import com.Denfop.item.base.BaseElectricItem;
-import com.Denfop.utils.InternalName;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.Denfop.Constants;
+import com.Denfop.SuperSolarPanels;
+
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.IItemHudInfo;
 import ic2.core.IC2;
 import ic2.core.Ic2Items;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemBattery extends BaseElectricItem {
-  public ItemBattery(InternalName internalName, double maxCharge, double transferLimit, int tier) {
-    super(internalName, maxCharge, transferLimit, tier);
+public class ItemBattery extends Item implements IElectricItem, IItemHudInfo {
+	  protected final double maxCharge;
+	  protected IIcon[] textures;
+	  protected final double transferLimit;
+	  private int rarity;
+	  protected final int tier;
+  public ItemBattery(String name, double maxCharge, double transferLimit, int tier) {
+    super();
+    this.maxCharge = maxCharge;
+    this.transferLimit = transferLimit;
+    this.tier = tier;
+    setMaxDamage(27);
+    setMaxStackSize(1);
+    setNoRepair();
+    setUnlocalizedName(name);
+    this.setRarity(1);
+    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    GameRegistry.registerItem(this, name);
   }
-  
+  public ItemBattery setRarity(int aRarity) {
+	    this.rarity = aRarity;
+	    return this;
+	  }
+	  
+	  @SideOnly(Side.CLIENT)
+	  public EnumRarity getRarity(ItemStack stack) {
+	    return EnumRarity.values()[this.rarity];
+	  }
   public String getTextureName(int index) {
     if (index < 5)
       return getUnlocalizedName().substring(4) + "." + index; 
     return null;
   }
+  public String getUnlocalizedName() {
+	    return "ssp." + super.getUnlocalizedName().substring(5);
+	  }
+  public String getUnlocalizedName(ItemStack itemStack) {
+	    return getUnlocalizedName();
+	  }
+	  
+	  public String getItemStackDisplayName(ItemStack itemStack) {
+	    return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
+	  }
+  @SideOnly(Side.CLIENT)
+  public void registerIcons(IIconRegister iconRegister) {
+    int indexCount = 0;
+    while (getTextureName(indexCount) != null) {
+      indexCount++;
+      if (indexCount > 32767)
+        throw new RuntimeException("More Item Icons than actually possible @ " + getUnlocalizedName()); 
+    } 
+    this.textures = new IIcon[indexCount];
+    
+    for (int index = 0; index < indexCount; index++)
+      this.textures[index] = iconRegister.registerIcon(Constants.TEXTURES + ":"  + getTextureName(index)); 
+  }
+  
   
   @SideOnly(Side.CLIENT)
   public IIcon getIconFromDamage(int meta) {
@@ -41,11 +99,7 @@ public class ItemBattery extends BaseElectricItem {
   public double getTransferLimit(ItemStack itemStack) {
 	    return this.transferLimit;
 	  }
-  public Item getEmptyItem(ItemStack itemStack) {
-    if (this == Ic2Items.chargedReBattery.getItem())
-      return Ic2Items.reBattery.getItem(); 
-    return super.getEmptyItem(itemStack);
-  }
+  
   
   public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityplayer) {
     if (IC2.platform.isSimulating() && itemStack.getItem() == Ic2Items.chargedReBattery.getItem()) {
@@ -73,4 +127,50 @@ public Item setRarity() {
 	 
 	return null;
 }
+
+  
+  public Item getChargedItem(ItemStack itemStack) {
+    return this;
+  }
+  
+ 
+  public List<String> getHudInfo(ItemStack itemStack) {
+	    List<String> info = new LinkedList<String>();
+	    info.add(ElectricItem.manager.getToolTip(itemStack));
+	    return info;
+	  }
+	  
+	  @SideOnly(Side.CLIENT)
+	  public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+	    ItemStack itemStack = new ItemStack(this, 1);
+	    if (getChargedItem(itemStack) == this) {
+	      ItemStack charged = new ItemStack(this, 1);
+	      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, 2147483647, true, false);
+	      itemList.add(charged);
+	      
+	    } 
+	   
+	    if (getEmptyItem(itemStack) == this) {
+	      ItemStack charged = new ItemStack(this, 1);
+	      ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
+	      itemList.add(charged);
+	    } 
+	  }
+
+	@Override
+	public double getMaxCharge(ItemStack itemStack) {
+		return this.maxCharge;
+	}
+
+	@Override
+	public int getTier(ItemStack itemStack) {
+		
+		return this.tier;
+	}
+	@Override
+	public Item getEmptyItem(ItemStack itemStack) {
+		// TODO Auto-generated method stub
+		return itemStack.getItem();
+	}
+ 
 }

@@ -2,14 +2,13 @@ package com.Denfop.integration.Botania;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.reactor.ItemReactorUranium;
-import com.Denfop.utils.InternalName;
 
 import ic2.api.reactor.IReactor;
 import ic2.core.Ic2Items;
 import net.minecraft.item.ItemStack;
 
 public class ItemReactorTerasteel extends ItemReactorUranium {
-  public ItemReactorTerasteel(InternalName internalName, int cells) {
+  public ItemReactorTerasteel(String internalName, int cells) {
     super(internalName, cells, SuperSolarPanels.TerrasteelRodCells);
   }
   

@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.Base.BlockBase;
 import com.Denfop.block.Base.BlockElectric;
 
 import net.minecraft.block.Block;

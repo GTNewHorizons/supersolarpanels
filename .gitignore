@@ -115,3 +115,12 @@ run/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 /.gradle/
+/bin/
+eclipse/asm/ccl_modular/net#minecraft#block#BlockFire.txt
+*.txt
+*.cfg
+*.properties
+*.prefs
+*.jar
+.project
+.classpath

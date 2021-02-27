@@ -136,7 +136,7 @@ public class ItemSSPSolarPanel extends ItemBlock
         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.protongennitht  + " EU/t " );
               
             info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.protonOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.AdminpanelStorage + " EU ");
+            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.protontier + " EU ");
             info.add(StatCollector.translateToLocal("ssp.tier") + "6");
             break;
        

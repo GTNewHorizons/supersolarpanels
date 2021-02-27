@@ -26,7 +26,7 @@ public class ItemSSPCrafring extends Item
         this.IIconsList = new IIcon[11];
         this.itemsCount = 10;
         this.setHasSubtypes(true);
-        this.setCreativeTab(SuperSolarPanels.tabssp);
+        this.setCreativeTab(SuperSolarPanels.tabssp3);
         this.setMaxStackSize(64);
         this.addItemsNames();
     }

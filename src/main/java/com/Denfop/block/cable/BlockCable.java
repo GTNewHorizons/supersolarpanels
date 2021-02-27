@@ -8,15 +8,25 @@ import ic2.api.Direction;
 import ic2.api.energy.EnergyNet;
 import ic2.api.event.PaintEvent;
 import ic2.api.event.RetextureEvent;
+import ic2.api.tile.IWrenchable;
+import ic2.core.ContainerBase;
+import ic2.core.IC2;
 import ic2.core.IC2Potion;
+import ic2.core.IHasGui;
 import ic2.core.block.BlockTextureStitched;
+import ic2.core.block.TileEntityBlock;
 import ic2.core.item.armor.ItemArmorHazmat;
 import ic2.core.item.tool.ItemToolCutter;
 import ic2.core.util.AabbUtil;
+import ic2.core.util.LogCategory;
 import ic2.core.util.StackUtil;
 import ic2.core.util.Util;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -27,89 +37,320 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.apache.commons.lang3.mutable.MutableObject;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.Base.BlockMultiID;
-import com.Denfop.item.armour.ItemArmorQuantumSuit1;
+import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.base.ItemBlockIC2;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
-import com.Denfop.utils.InternalName;
+import com.Denfop.tiles.base.TileEntityCable;
 
-public class BlockCable extends BlockMultiID {
-  private static final int[] coloredMetas = new int[] { 0, 3, 4, 6, 7, 8, 9, 13 };
+public class BlockCable extends Block {
+ 
   
-  protected int colorMultiplier;
-  
+  public int colorMultiplier;
+  public int renderMask;
   @SideOnly(Side.CLIENT)
   private IIcon[][] coloredTextures;
-  
-  public BlockCable(InternalName internalName1) {
-    super(internalName1, Material.iron,ItemBlockIC2.class);
+  public String internalName;
+  public BlockCable() {
+    super(Material.iron);
     this.colorMultiplier = -1;
     setHardness(0.2F);
+    this.renderMask = 63;
     setStepSound(soundTypeCloth);
-    setCreativeTab(null);
-    SuperSolarPanels.copperCableBlock = new ItemStack((Block)this, 1, 1);
-    SuperSolarPanels.insulatedCopperCableBlock = new ItemStack((Block)this, 1, 0);
-    SuperSolarPanels.goldCableBlock = new ItemStack((Block)this, 1, 2);
-    SuperSolarPanels.insulatedGoldCableBlock = new ItemStack((Block)this, 1, 3);
-    SuperSolarPanels.doubleInsulatedGoldCableBlock = new ItemStack((Block)this, 1, 4);
-    SuperSolarPanels.ironCableBlock = new ItemStack((Block)this, 1, 5);
-    SuperSolarPanels.insulatedIronCableBlock = new ItemStack((Block)this, 1, 6);
-    SuperSolarPanels.doubleInsulatedIronCableBlock = new ItemStack((Block)this, 1, 7);
-    SuperSolarPanels.trippleInsulatedIronCableBlock = new ItemStack((Block)this, 1, 8);
-    SuperSolarPanels.glassFiberCableBlock = new ItemStack((Block)this, 1, 9);
-    GameRegistry.registerTileEntity(TileEntityCable.class, "Cable1");
+    setCreativeTab(SuperSolarPanels.tabssp);
+
+
     MinecraftForge.EVENT_BUS.register(this);
+    setBlockName("blockCable");
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    
+  
+    
+  }
+  @SideOnly(Side.CLIENT)
+  public void registerBlockIcons(IIconRegister iconRegister) {
+    int metaCount = getMetaCount();
+    this.textures = new IIcon[metaCount][12];
+    for (int index = 0; index < metaCount; index++) {
+      String textureFolder = getTextureFolder(index);
+      textureFolder = (textureFolder == null) ? "" : (textureFolder + "/");
+      String name = Constants.TEXTURES + ":" + getTextureName(index);
+      for (int active = 0; active < 2; active++) {
+        for (int side = 0; side < 6; side++) {
+          int subIndex = active * 6 + side;
+          String subName = name + ":" + subIndex;
+          TextureAtlasSprite texture = new BlockTextureStitched(subName, subIndex);
+          this.textures[index][subIndex] = (IIcon)texture;
+          ((TextureMap)iconRegister).setTextureEntry(subName, texture);
+        } 
+      } 
+    } 
   }
   
+
+@SideOnly(Side.CLIENT)
+public IIcon getIcon(int side, int meta) {
+  int facing = getFacing(meta);
+  int index = getTextureIndex(meta);
+  int subIndex = getTextureSubIndex(facing, side);
+  if (index >= this.textures.length)
+    return null; 
+  try {
+    return this.textures[index][subIndex];
+  } catch (Exception e) {
+    IC2.platform.displayError(e, "Side: " + side + "\nBlock: " + this + "\nMeta: " + meta + "\nFacing: " + facing + "\nIndex: " + index + "\nSubIndex: " + subIndex, new Object[0]);
+    return null;
+  } 
+}
+  public String getUnlocalizedName() {
+	    return super.getUnlocalizedName().substring(5);
+	  }
+	  
+	  protected int getFacing(int meta) {
+	    return 3;
+	  }
+	  @SideOnly(Side.CLIENT)
+	  public void onRender(IBlockAccess blockAccess, int x, int y, int z) {
+	    TileEntity te = getOwnTe(blockAccess, x, y, z);
+	    if (te instanceof TileEntityBlock)
+	      ((TileEntityBlock)te).onRender(); 
+	  }
+	  
+  public int getFacing(IBlockAccess iBlockAccess, int x, int y, int z) {
+	    TileEntity te = getOwnTe(iBlockAccess, x, y, z);
+	    if (te instanceof TileEntityBlock)
+	      return ((TileEntityBlock)te).getFacing(); 
+	    int meta = iBlockAccess.getBlockMetadata(x, y, z);
+	    return getFacing(meta);
+	  }
+  @SideOnly(Side.CLIENT)
+  public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y, int z, int side) {
+    if ((this.renderMask & 1 << side) != 0)
+      return super.shouldSideBeRendered(blockAccess, x, y, z, side); 
+    return false;
+  }
   public String getTextureFolder(int id) {
     return null;
   }
- 
+  public boolean canBeReplacedByLeaves(IBlockAccess aWorld, int aX, int aY, int aZ) {
+	    return false;
+	  }
+	  
+	  protected int getTextureIndex(int meta) {
+	    return meta;
+	  }
+	  public static final int getTextureSubIndex(int facing, int side) {
+		    return facingAndSideToSpriteOffset[facing][side];
+		  }
+	  private static final int[][] facingAndSideToSpriteOffset = new int[][] { { 3, 5, 1, 0, 4, 2 }, { 5, 3, 1, 0, 2, 4 }, { 0, 1, 3, 5, 4, 2 }, { 0, 1, 5, 3, 2, 4 }, { 0, 1, 2, 4, 3, 5 }, { 0, 1, 4, 2, 5, 3 } };
+	  protected int getMetaCount() {
+		    int metaCount = 0;
+		    for (; getTextureName(metaCount) != null; metaCount++);
+		    return metaCount;
+		  }
+		  @SideOnly(Side.CLIENT)
+		  protected IIcon[][] textures;
+		  @SideOnly(Side.CLIENT)
+		  public EnumRarity getRarity(ItemStack stack) {
+		    return EnumRarity.common;
+		  }
+		  public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
+			    TileEntity te = getOwnTe((IBlockAccess)world, x, y, z);
+			    if (te instanceof TileEntityBlock) {
+			      TileEntityBlock teb = (TileEntityBlock)te;
+			      teb.onBlockBreak(this, meta);
+			      teb.onUnloaded();
+			    } 
+			    if (te != null) {
+			      if (te instanceof IHasGui)
+			        for (Object obj : world.playerEntities) {
+			          if (!(obj instanceof EntityPlayerMP))
+			            continue; 
+			          EntityPlayerMP player = (EntityPlayerMP)obj;
+			          if (player.openContainer instanceof ContainerBase) {
+			            ContainerBase<?> container = (ContainerBase)player.openContainer;
+			            if (container.base == te)
+			              player.closeScreen(); 
+			          } 
+			        }  
+			      if (tesBeforeBreak.size() >= 8)
+			        tesBeforeBreak.pop(); 
+			      tesBeforeBreak.push(te);
+			    } 
+			  
+			  }
+		  public final boolean hasTileEntity(int metadata) {
+			    return true;
+			  }
+			  
+			  public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
+			    return false;
+			  }
+			  public TileEntity getOwnTe(IBlockAccess blockAccess, int x, int y, int z) {
+				    Block block;
+				    int meta;
+				    TileEntity te;
+				    if (blockAccess instanceof World) {
+				      Chunk chunk = Util.getLoadedChunk((World)blockAccess, x >> 4, z >> 4);
+				      if (chunk == null)
+				        return null; 
+				      block = chunk.getBlock(x & 0xF, y, z & 0xF);
+				      meta = chunk.getBlockMetadata(x & 0xF, y, z & 0xF);
+				      te = blockAccess.getTileEntity(x, y, z);
+				    } else {
+				      block = blockAccess.getBlock(x, y, z);
+				      meta = blockAccess.getBlockMetadata(x, y, z);
+				      te = blockAccess.getTileEntity(x, y, z);
+				    } 
+				    Class<? extends TileEntity> expectedClass = getTeClass(meta, (MutableObject<Class<?>[]>)null, (MutableObject<Object[]>)null);
+				    Class<? extends TileEntity> actualClass = (te != null) ? (Class)te.getClass() : null;
+				    if (actualClass != expectedClass) {
+				      if (block != this) {
+				        if (Util.inDev()) {
+				          StackTraceElement[] st = (new Throwable()).getStackTrace();
+				          IC2.log.warn(LogCategory.Block, "Own tile entity query from %s to foreign block %s instead of %s at %s.", new Object[] { (st.length > 1) ? st[1] : "?", (block != null) ? block.getClass() : null, getClass(), Util.formatPosition(blockAccess, x, y, z) });
+				        } 
+				        return null;
+				      } 
+				      IC2.log.warn(LogCategory.Block, "Mismatched tile entity at %s, got %s, expected %s.", new Object[] { Util.formatPosition(blockAccess, x, y, z), actualClass, expectedClass });
+				      if (blockAccess instanceof World) {
+				        World world = (World)blockAccess;
+				        te = createTileEntity(world, meta);
+				        world.setTileEntity(x, y, z, te);
+				      } else {
+				        return null;
+				      } 
+				    } 
+				    return te;
+				  }
+			  public final boolean isActive(IBlockAccess blockAccess, int x, int y, int z) {
+				    TileEntity te = getOwnTe(blockAccess, x, y, z);
+				    if (te instanceof TileEntityBlock)
+				      return ((TileEntityBlock)te).getActive(); 
+				    return false;
+				  }
+				  
+			  public final TileEntity createTileEntity(World world, int metadata) {
+				    MutableObject<Class<?>[]> ctorArgTypes = new MutableObject(emptyClassArray);
+				    MutableObject<Object[]> ctorArgs = new MutableObject(emptyObjArray);
+				    Class<? extends TileEntity> teClass = getTeClass(metadata, ctorArgTypes, ctorArgs);
+				    if (teClass == null)
+				      return null; 
+				    try {
+				      Constructor<? extends TileEntity> ctor = teClass.getConstructor((Class[])ctorArgTypes.getValue());
+				      return ctor.newInstance((Object[])ctorArgs.getValue());
+				    } catch (Throwable t) {
+				      throw new RuntimeException("Error constructing " + teClass + " with " + Arrays.asList((Object[])ctorArgTypes.getValue()) + ", " + Arrays.asList((Object[])ctorArgs.getValue()) + ".", t);
+				    } 
+				  }
+		  public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack) {
+			    if (!IC2.platform.isSimulating())
+			      return; 
+			    TileEntity tileEntity = getOwnTe((IBlockAccess)world, x, y, z);
+			    if (tileEntity instanceof IWrenchable) {
+			      IWrenchable te = (IWrenchable)tileEntity;
+			      if (entityliving == null) {
+			        te.setFacing((short)2);
+			      } else {
+			        int l = MathHelper.floor_double((entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 0x3;
+			        switch (l) {
+			          case 0:
+			            te.setFacing((short)2);
+			            break;
+			          case 1:
+			            te.setFacing((short)5);
+			            break;
+			          case 2:
+			            te.setFacing((short)3);
+			            break;
+			          case 3:
+			            te.setFacing((short)4);
+			            break;
+			        } 
+			      } 
+			    } 
+			  }
+			  
+			  public void onBlockAdded(World world, int x, int y, int z) {
+			    for (Iterator<TileEntity> it = tesBeforeBreak.descendingIterator(); it.hasNext(); ) {
+			      TileEntity te = it.next();
+			      if (te.getWorldObj() == world && te.xCoord == x && te.yCoord == y && te.zCoord == z) {
+			        it.remove();
+			        break;
+			      } 
+			    } 
+			  }
   public String getTextureName(int index) {
-	    Item item = SuperSolarPanels.copperCableItem.getItem();
+	    
 	    ItemStack itemStack = new ItemStack((Block)this, 1, index);
-	    String ret = item.getUnlocalizedName(itemStack);
-	    if (ret == null)
-	      return null; 
-	    return ret.substring(4).replace("item", "block");
-	  }
-	  
-	  @SideOnly(Side.CLIENT)
-	  public void registerBlockIcons(IIconRegister iconRegister) {
-	    super.registerBlockIcons(iconRegister);
-	    this.coloredTextures = new IIcon[coloredMetas.length][90];
-	    for (int index = 0; index < coloredMetas.length; index++) {
-	      int meta = coloredMetas[index];
-	      for (int color = 1; color < 16; color++) {
-	        String name = SuperSolarPanels.TEXTURES + ":" + getTextureFolder(index) + "/" + getTextureName(meta) + "." + Util.getColorName(color).name();
-	        for (int side = 0; side < 6; side++) {
-	          String subName = name + ":" + side;
-	          BlockTextureStitched blockTextureStitched = new BlockTextureStitched(subName, side);
-	          this.coloredTextures[index][(color - 1) * 6 + side] = (IIcon)blockTextureStitched;
-	          ((TextureMap)iconRegister).setTextureEntry(subName, (TextureAtlasSprite)blockTextureStitched);
-	        } 
-	      } 
+	    String ret = null;
+	   
+	    switch (index) {
+	      case 0:
+	        ret = "blockCable";
+	        
+	        return ret;
+	      case 1:
+	        ret = "blockCableO";
+	        return ret;
+	      case 2:
+	        ret = "blockGoldCable";
+	        return ret;
+	      case 3:
+	        ret = "blockGoldCableI";
+	        return ret;
+	      case 4:
+	        ret = "blockGoldCableII";
+	        return ret;
+	      case 5:
+	        ret = "blockIronCable";
+	        return ret;
+	      case 6:
+	        ret = "blockIronCableI";
+	        return ret;
+	      case 7:
+	        ret = "blockIronCableII";
+	        return ret;
+	      case 8:
+	        ret = "blockIronCableIIII";
+	        return ret;
+	      case 9:
+	        ret = "blockGlassCable";
+	        return ret;
+	      case 10:
+		        ret = "blockGlassCableI";
+		        return ret;
 	    } 
+	   
+		return ret; 
+	   
 	  }
 	  
+	  
+	 
 	  @SideOnly(Side.CLIENT)
 	  public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side) {
 	    TileEntityCable te = (TileEntityCable)getOwnTe(blockAccess, x, y, z);
@@ -118,8 +359,7 @@ public class BlockCable extends BlockMultiID {
 	    if (te.foamed == 0) {
 	      if (  te.color == 0)
 	        return super.getIcon(blockAccess, x, y, z, side); 
-	      int cableType = (te.cableType == 14) ? 13 : te.cableType;
-	      return this.coloredTextures[Arrays.binarySearch(coloredMetas, cableType)][(te.color - 1) * 6 + side];
+	      
 	    } 
 	    if (te.foamed == 1)
 	      return StackUtil.getBlock(SuperSolarPanels.constructionFoam).getIcon(side, 0); 
@@ -355,7 +595,19 @@ public class BlockCable extends BlockMultiID {
     return 0;
   }
   
-  public void getSubBlocks(Item item, CreativeTabs tabs, List itemList) {}
+  public void getSubBlocks(Item j, CreativeTabs tabs, List itemList) {
+	    Item item = Item.getItemFromBlock(this);
+	    if (!item.getHasSubtypes()) {
+	      itemList.add(new ItemStack(this));
+	    } else {
+	      for (int i = 0; i < 16; i++) {
+	        ItemStack is = new ItemStack(this, 1, i);
+	        if (is.getItem().getUnlocalizedName(is) == null)
+	          break; 
+	        itemList.add(is);
+	      } 
+	    } 
+	  }
   
   public float getBlockHardness(World world, int x, int y, int z) {
     TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
@@ -410,7 +662,28 @@ public class BlockCable extends BlockMultiID {
     } 
     return 0;
   }
-  
+
+	  
+	  public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
+	    if (axis == ForgeDirection.UNKNOWN)
+	      return false; 
+	    TileEntity tileEntity = getOwnTe((IBlockAccess)worldObj, x, y, z);
+	    if (tileEntity instanceof IWrenchable) {
+	      IWrenchable te = (IWrenchable)tileEntity;
+	      int newFacing = ForgeDirection.getOrientation(te.getFacing()).getRotation(axis).ordinal();
+	      if (te.wrenchCanSetFacing(null, newFacing))
+	        te.setFacing((short)newFacing); 
+	    } 
+	    return false;
+	  }
+	  
+	  private static final Class<?>[] emptyClassArray = new Class[0];
+	  
+	  private static final Object[] emptyObjArray = new Object[0];
+	  
+	  private static final int tesBeforeBreakLimit = 8;
+	  
+	  private static ArrayDeque<TileEntity> tesBeforeBreak = new ArrayDeque<TileEntity>(8);
   @SubscribeEvent
   public void onRetexture(RetextureEvent event) {
     if (event.world.getBlock(event.x, event.y, event.z) != this)

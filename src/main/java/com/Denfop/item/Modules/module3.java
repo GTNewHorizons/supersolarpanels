@@ -12,7 +12,7 @@ import net.minecraft.util.StatCollector;
 
 public class module3 extends Item{
 	public module3() {
-		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp1);
 	}
 
 	public int getItemStackLimit() {

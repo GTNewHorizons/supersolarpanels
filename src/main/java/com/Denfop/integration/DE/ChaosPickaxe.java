@@ -25,7 +25,7 @@ public class ChaosPickaxe extends MiningTool implements IInventoryTool, IRenderT
     setMaxReceive(BalanceConfigHandler.draconicToolsMaxTransfer);
     this.energyPerOperation = BalanceConfigHandler.draconicToolsEnergyPerAction;
     DraconicIntegration.register((ItemDC)this);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
   }
   
   public List<ItemConfigField> getFields(ItemStack stack, int slot) {

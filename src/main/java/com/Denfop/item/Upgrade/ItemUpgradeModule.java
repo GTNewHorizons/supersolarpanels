@@ -1,5 +1,6 @@
 package com.Denfop.item.Upgrade;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.Direction;
@@ -12,15 +13,16 @@ import ic2.core.util.LiquidUtil;
 import ic2.core.util.StackUtil;
 import ic2.core.util.Util;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.item.base.ItemSSP;
-import com.Denfop.utils.InternalName;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -33,27 +35,49 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class ItemUpgradeModule extends ItemSSP implements IUpgradeItem, IItemHudInfo {
+public class ItemUpgradeModule extends Item implements IUpgradeItem, IItemHudInfo {
   
-
-public ItemUpgradeModule(InternalName internalName) {
-    super(internalName);
+    private List<String> itemNames;
+    private IIcon[] IIconsList;
+    private int itemsCount;
+public ItemUpgradeModule() {
+    super();
     setHasSubtypes(true);
+    this.setCreativeTab(SuperSolarPanels.tabssp3);
     SuperSolarPanels.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
     SuperSolarPanels.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
+    SuperSolarPanels.overclockerUpgrade= new ItemStack((Item)this, 1, 0);
+    SuperSolarPanels.overclockerUpgrade1= new ItemStack((Item)this, 1, 1);
     this.fluidAmountPerTick = 50;
+    this.itemNames = new ArrayList<String>();
+    this.IIconsList = new IIcon[2];
+    this.itemsCount = 1;
+    this.addItemsNames();
   }
+public String getUnlocalizedName(final ItemStack stack) {
+    return this.itemNames.get(stack.getItemDamage());
+}
+
+public IIcon getIconFromDamage(final int par1) {
+    return this.IIconsList[par1];
+}
+public void addItemsNames() {
+    this.itemNames.add("ssp.overclockerUpgrade1");
+    this.itemNames.add("ssp.overclockerUpgrade2");
+}
+	  
+@SideOnly(Side.CLIENT)
+public void registerIcons(final IIconRegister IIconRegister) {
+    this.IIconsList[0] = IIconRegister.registerIcon(Constants.TEXTURES_MAIN + "overclockerUpgrade1");
+    this.IIconsList[1] = IIconRegister.registerIcon(Constants.TEXTURES_MAIN + "overclockerUpgrade2");
+
+}
+	  
+	  public String getItemStackDisplayName(ItemStack itemStack) {
+	    return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
+	  }
+	  
   
-  public String getTextureFolder() {
-    return null;
-  }
-  
-  public String getTextureName(int index) {
-    if (index < Type.Values.length)
-      return super.getTextureName(index); 
-    
-    return null;
-  }
   
   public IIcon getIcon(ItemStack stack, int pass) {
     int dir;
@@ -75,22 +99,7 @@ public ItemUpgradeModule(InternalName internalName) {
     return info;
   }
   
-  public String getUnlocalizedName(ItemStack stack) {
-    Type type = getType(stack.getItemDamage());
-    if (type == null)
-      return null; 
-    InternalName ret = null;
-    switch (type) {
-      case Overclocker1:
-        ret = InternalName.overclockerUpgrade1;
-        break;
-      case Overclocker2:
-          ret = InternalName.overclockerUpgrade2;
-          break;
-      
-    } 
-    return "ssp." + ret.name();
-  }
+
   
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
@@ -144,13 +153,13 @@ public ItemUpgradeModule(InternalName internalName) {
     return false;
   }
   
-  public void getSubItems(Item item, CreativeTabs tabs, List itemList) {
-    for (int meta = 0; meta <= 32767; meta++) {
-      ItemStack stack = new ItemStack(this, 1, meta);
-      if (getUnlocalizedName(stack) != null)
-        itemList.add(stack); 
-    } 
+  public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
+      for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
+          final ItemStack stack = new ItemStack((Item)this, 1, meta);
+          itemList.add(stack);
+      }
   }
+  
   
   public boolean isSuitableFor(ItemStack stack, Set<UpgradableProperty> types) {
     Type type = getType(stack.getItemDamage());
@@ -190,9 +199,9 @@ public ItemUpgradeModule(InternalName internalName) {
       return 1.0D; 
     switch (type) {
       case Overclocker1:
-        return 0.55D;
+        return 0.5D;
       case Overclocker2:
-          return 0.5D;
+          return 0.4D;
     } 
     return 1.0D;
   }
@@ -207,9 +216,9 @@ public ItemUpgradeModule(InternalName internalName) {
       return 1.0D; 
     switch (type) {
       case Overclocker1:
-        return 1.2D;
+        return 1.3D;
       case Overclocker2:
-          return 1.1D;
+          return 1.2D;
     } 
     return 1.0D;
   }

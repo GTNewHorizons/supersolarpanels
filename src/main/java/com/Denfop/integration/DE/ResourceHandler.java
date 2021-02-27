@@ -1,4 +1,5 @@
 package com.Denfop.integration.DE;
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.draconicevolution.client.gui.componentguis.GUIManual;
 import com.brandon3055.draconicevolution.client.utill.CustomResourceLocation;
@@ -37,7 +38,7 @@ public class ResourceHandler {
   
   private static ResourceLocation defaultParticles;
   
-  private static ResourceLocation particles = new ResourceLocation(SuperSolarPanels.TEXTURES + "textures/particle/particles.png");
+  private static ResourceLocation particles = new ResourceLocation(Constants.TEXTURES + "textures/particle/particles.png");
   
   private static Map<String, ResourceLocation> cachedResources = new HashMap<String, ResourceLocation>();
   
@@ -220,7 +221,7 @@ public class ResourceHandler {
   
   public static ResourceLocation getResource(String rs) {
     if (!cachedResources.containsKey(rs))
-      cachedResources.put(rs, new ResourceLocation(SuperSolarPanels.TEXTURES + ":" + rs)); 
+      cachedResources.put(rs, new ResourceLocation(Constants.TEXTURES + ":" + rs)); 
     return cachedResources.get(rs);
   }
   

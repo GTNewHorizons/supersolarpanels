@@ -1,132 +1,108 @@
-
 package com.Denfop.gui;
 
-import com.Denfop.container.ContainerMolecularTransformer;
-import com.Denfop.tiles.base.TileEntityMolecularTransformer;
-import com.Denfop.utils.MTRecipeManager;
-import com.google.common.collect.Lists;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.item.ItemStack;
-import net.minecraft.client.resources.I18n;
-import cpw.mods.fml.client.FMLClientHandler;
-import net.minecraft.inventory.Container;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.client.Minecraft;
-import java.util.List;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import java.text.DecimalFormat;
 
-public class GuiMolecularTransformer extends GuiContainer
-{
-    public TileEntityMolecularTransformer tileentity;
-    private int maxTextXPos;
-    private static ResourceLocation tex;
-    public static List<captionRecord> guiTextList;
-    public Minecraft field_146297_k;
+import com.Denfop.container.ContainerBaseMolecular;
+import com.Denfop.tiles.base.TileEntityMolecularTransformer;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.recipe.RecipeOutput;
+import ic2.core.ContainerBase;
+import ic2.core.GuiIC2;
+import ic2.core.GuiIconButton;
+import ic2.core.IC2;
+import ic2.core.network.NetworkManager;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
+@SideOnly(Side.CLIENT)
+public class GuiMolecularTransformer extends GuiSSP {
+  public ContainerBaseMolecular<? extends TileEntityMolecularTransformer> container;
+  
+  public GuiMolecularTransformer(ContainerBaseMolecular<? extends TileEntityMolecularTransformer> container1) {
+    super((ContainerBase)container1);
+    this.container = container1;
+  }
+  public void initGui() {
+	    super.initGui();
+	    this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 180, (this.height - this.ySize) / 2 +3, 17, 17, I18n.format("button.rg")));
+	  }
+  protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+    super.drawGuiContainerBackgroundLayer(f, x, y);
+    String input = I18n.format("gui.MolecularTransformer.input", new Object[0]) + ": ";
+    String output = I18n.format("gui.MolecularTransformer.output", new Object[0]) + ": ";
+    String energyPerOperation = I18n.format("gui.MolecularTransformer.energyPerOperation", new Object[0]) + ": ";
+   
+    //
+    String energyPerTick = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]) + ": ";
+    String progress = I18n.format("gui.MolecularTransformer.progress", new Object[0]) + ": ";
+    float chargeLevel = (15.0F * ((TileEntityMolecularTransformer)this.container.base).getChargeLevel());
+   
+   RecipeOutput output1 = this.container.base.getOutput();
+    if (chargeLevel > 0 && !this.container.base.inputSlot.isEmpty()&&output1 != null ) {
+      drawTexturedModalRect(this.xoffset + 23, this.yoffset + 48, 221, 7, 10, (int) chargeLevel); 
+      this.fontRendererObj.drawString(input + this.container.base.inputSlot.get().getDisplayName(), this.xoffset+ 60+10, this.yoffset+25, 13487565);
+     
     
-    public GuiMolecularTransformer(final InventoryPlayer inventoryplayer, final TileEntityMolecularTransformer tileentitymoleculartransformer) {
-        super((Container)new ContainerMolecularTransformer(inventoryplayer, tileentitymoleculartransformer));
-        this.field_146297_k = FMLClientHandler.instance().getClient();
-        this.tileentity = tileentitymoleculartransformer;
-        this.allowUserInput = false;
-        this.xSize = 220;
-        this.ySize = 193;
-        this.setCaptionText();
+      this.fontRendererObj.drawString(output + output1.items.get(0).getDisplayName(), this.xoffset+ 60+10, this.yoffset+25+11, 13487565);
+   
+      this.fontRendererObj.drawString(energyPerOperation +  output1.metadata.getInteger("energy") + " EU", this.xoffset+ 60+10, this.yoffset+25+22, 13487565);
+      this.fontRendererObj.drawString(progress +  String.valueOf(MathHelper.floor_double(this.container.base.getProgress()*100) + "%"), this.xoffset+ 60+10, this.yoffset+25+33, 13487565);
+      this.fontRendererObj.drawString(energyPerTick +  String.valueOf((int)this.container.base.getPower()) , this.xoffset+ 60+10, this.yoffset+25+44, 13487565);
+      
+      
     }
     
-    public void setCaptionText() {
-        captionRecord textToAdd = new captionRecord();
-        textToAdd.textCaption = I18n.format("gui.MolecularTransformer.input", new Object[0]) + ": ";
-        textToAdd.textWidth = this.field_146297_k.fontRenderer.getStringWidth(textToAdd.textCaption);
-        GuiMolecularTransformer.guiTextList.add(textToAdd);
-        textToAdd = new captionRecord();
-        textToAdd.textCaption = I18n.format("gui.MolecularTransformer.output", new Object[0]) + ": ";
-        textToAdd.textWidth = this.field_146297_k.fontRenderer.getStringWidth(textToAdd.textCaption);
-        GuiMolecularTransformer.guiTextList.add(textToAdd);
-        textToAdd = new captionRecord();
-        textToAdd.textCaption = I18n.format("gui.MolecularTransformer.energyPerOperation", new Object[0]) + ": ";
-        textToAdd.textWidth = this.field_146297_k.fontRenderer.getStringWidth(textToAdd.textCaption);
-        GuiMolecularTransformer.guiTextList.add(textToAdd);
-        textToAdd = new captionRecord();
-        textToAdd.textCaption = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]) + ": ";
-        textToAdd.textWidth = this.field_146297_k.fontRenderer.getStringWidth(textToAdd.textCaption);
-        GuiMolecularTransformer.guiTextList.add(textToAdd);
-        textToAdd = new captionRecord();
-        textToAdd.textCaption = I18n.format("gui.MolecularTransformer.progress", new Object[0]) + ": ";
-        textToAdd.textWidth = this.field_146297_k.fontRenderer.getStringWidth(textToAdd.textCaption);
-        GuiMolecularTransformer.guiTextList.add(textToAdd);
-        this.maxTextXPos = 0;
-        for (int i = 0; i < GuiMolecularTransformer.guiTextList.size(); ++i) {
-            if (GuiMolecularTransformer.guiTextList.get(i).textWidth > this.maxTextXPos) {
-                this.maxTextXPos = GuiMolecularTransformer.guiTextList.get(i).textWidth;
-            }
-        }
-    }
-    
-    public static String parsingNumber(final String number) {
-        String tmpString = "";
-        int count = 0;
-        for (int i = number.length() - 1; i >= 0; --i) {
-            if (count == 3) {
-                tmpString = " " + tmpString;
-                count = 0;
-            }
-            ++count;
-            tmpString = number.charAt(i) + tmpString;
-        }
-        return tmpString;
-    }
-    
-    protected void drawGuiContainerForegroundLayer(final int par1, final int par2) {
-        final int xOffset = 56;
-        final int yOffset = 26;
-        final int yTextInterval = 12;
-        final String formatDeviceName = I18n.format("blockMolecularTransformer.name", new Object[0]);
-        final int nmPos = (this.xSize - this.fontRendererObj.getStringWidth(formatDeviceName)) / 2;
-        this.fontRendererObj.drawString(formatDeviceName, nmPos, 8, 16777215);
-        if (this.tileentity.lastProgress > 0 || this.tileentity.doWork) {
-            final ItemStack inputStack = MTRecipeManager.transformerRecipes.get(this.tileentity.lastRecipeNumber).inputStack;
-            final ItemStack outputStack = MTRecipeManager.transformerRecipes.get(this.tileentity.lastRecipeNumber).outputStack;
-            final String inputEuFormated = parsingNumber(String.valueOf(this.tileentity.inputEU));
-            final String energyPerOpFormated = parsingNumber(String.valueOf(MTRecipeManager.transformerRecipes.get(this.tileentity.lastRecipeNumber).energyPerOperation));
-            this.fontRendererObj.drawString(GuiMolecularTransformer.guiTextList.get(0).textCaption + inputStack.getDisplayName(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(0).textWidth, yOffset, 16777215);
-            this.fontRendererObj.drawString(GuiMolecularTransformer.guiTextList.get(1).textCaption + outputStack.getDisplayName(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(1).textWidth, yOffset + yTextInterval * 1, 16777215);
-            this.fontRendererObj.drawString(GuiMolecularTransformer.guiTextList.get(2).textCaption + energyPerOpFormated + " EU", xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(2).textWidth, yOffset + yTextInterval * 2, 16777215);
-            this.fontRendererObj.drawString(GuiMolecularTransformer.guiTextList.get(3).textCaption + inputEuFormated, xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(3).textWidth, yOffset + yTextInterval * 3, 16777215);
-            this.fontRendererObj.drawString(GuiMolecularTransformer.guiTextList.get(4).textCaption + this.tileentity.lastProgress + "%", xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(4).textWidth, yOffset + yTextInterval * 4, 16777215);
-        }
-        else {
-            this.fontRendererObj.drawString(new StringBuilder().append(GuiMolecularTransformer.guiTextList.get(0).textCaption).toString(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(0).textWidth, yOffset, 16777215);
-            this.fontRendererObj.drawString(new StringBuilder().append(GuiMolecularTransformer.guiTextList.get(1).textCaption).toString(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(1).textWidth, yOffset + yTextInterval * 1, 16777215);
-            this.fontRendererObj.drawString(new StringBuilder().append(GuiMolecularTransformer.guiTextList.get(2).textCaption).toString(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(2).textWidth, yOffset + yTextInterval * 2, 16777215);
-            this.fontRendererObj.drawString(new StringBuilder().append(GuiMolecularTransformer.guiTextList.get(3).textCaption).toString(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(3).textWidth, yOffset + yTextInterval * 3, 16777215);
-            this.fontRendererObj.drawString(new StringBuilder().append(GuiMolecularTransformer.guiTextList.get(4).textCaption).toString(), xOffset + this.maxTextXPos - GuiMolecularTransformer.guiTextList.get(4).textWidth, yOffset + yTextInterval * 4, 16777215);
-        }
-    }
-    
-    protected void drawGuiContainerBackgroundLayer(final float f, final int i, final int j) {
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        this.field_146297_k.renderEngine.bindTexture(GuiMolecularTransformer.tex);
-        final int h = (this.width - this.xSize) / 2;
-        final int k = (this.height - this.ySize) / 2;
-        GL11.glEnable(3042);
-        GL11.glBlendFunc(770, 771);
-        this.drawTexturedModalRect(h, k, 0, 0, this.xSize, this.ySize);
-        GL11.glDisable(3042);
-        if (this.tileentity.lastProgress > 0) {
-            final int l = this.tileentity.lastProgress * 15 / 100;
-            this.drawTexturedModalRect(h + 23, k + 48, 221, 7, 10, l + 1);
-        }
-    }
-    
-    static {
-        GuiMolecularTransformer.tex = new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew.png");
-        GuiMolecularTransformer.guiTextList = Lists.newArrayList();
-    }
-    
-    public class captionRecord
-    {
-        public String textCaption;
-        public int textWidth;
-    }
+  }
+  protected void actionPerformed(GuiButton guibutton) {
+	    super.actionPerformed(guibutton);
+	    if (guibutton.id == 0) {
+	      ((NetworkManager)IC2.network.get()).initiateClientTileEntityEvent((TileEntity)this.container.base, 0); 
+	    
+	    }
+	  }
+
+  public String getName() {
+    return StatCollector.translateToLocal("blockMolecularTransformer.name");
+  }
+
+  public ResourceLocation getResourceLocation() {
+	
+ //   return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew.png");}
+	   if(this.container.base.redstoneMode == 1) {
+		  
+		  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_chemical_green.png");}
+  else if (this.container.base.redstoneMode == 2) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_gold.png");}
+ else if (this.container.base.redstoneMode == 3) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_red.png");}
+ else if (this.container.base.redstoneMode == 4) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_silver.png");}
+ else if (this.container.base.redstoneMode == 5) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_violet.png");}
+ else if (this.container.base.redstoneMode == 6) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_blue.png");}
+ else if (this.container.base.redstoneMode == 7) {
+	  
+	  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew_green.png");}
+
+ 
+
+  
+  else {
+		  
+		  return  new ResourceLocation("supersolarpanel", "textures/gui/guiMolecularTransformerNew.png");}
+}
 }

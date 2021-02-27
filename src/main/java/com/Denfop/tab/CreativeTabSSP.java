@@ -10,7 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 public class CreativeTabSSP extends CreativeTabs
 {
     public CreativeTabSSP() {
-        super("Super Solar Panels");
+        super("sspblocks");
     }
     
     public Item getTabIconItem() {

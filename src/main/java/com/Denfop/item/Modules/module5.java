@@ -31,7 +31,7 @@ public class module5 extends Item
         this.IIconsList = new IIcon[7];
         this.itemsCount = 6;
         this.setHasSubtypes(true);
-        this.setCreativeTab(SuperSolarPanels.tabssp);
+        this.setCreativeTab(SuperSolarPanels.tabssp1);
         this.setMaxStackSize(64);
         this.addItemsNames();
     }

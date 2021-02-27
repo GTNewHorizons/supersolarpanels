@@ -2,34 +2,20 @@ package com.Denfop.proxy;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import com.Denfop.tiles.base.TileEntityTripleMachine;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.api.MTAPI;
-import com.Denfop.block.TileEntityDoubleMetalFormer.TileEntityDoubleMetalFormer;
-import com.Denfop.block.TileEntityTripleMetalFormer.TileEntityTripleMetalFormer;
-import com.Denfop.block.advancedmatter.TileEntityAdvancedMatter;
-import com.Denfop.block.containerbase.ContainerDoubleMachine;
-import com.Denfop.block.containerbase.GuiDoubleMacerator;
-import com.Denfop.block.doublecompressor.TileEntityDoubleCompressor;
-import com.Denfop.block.doubleelecfurnace.TileEntityDoubleElectricFurnace;
-import com.Denfop.block.doubleextractor.TileEntityDoubleExtractor;
-import com.Denfop.block.doublemacertator.TileEntityDoubleMacerator;
-import com.Denfop.block.expgen.TileExpGen2;
-import com.Denfop.block.improvematter.TileEntityImprovedMatter;
-import com.Denfop.block.mechanism.TileEntityAlloySmelter;
-import com.Denfop.block.triplecompressor.TileEntityTripleCompressor;
-import com.Denfop.block.tripleelecfurnace.TileEntityTripleElectricFurnace;
-import com.Denfop.block.triplemacerator.TileEntityTripleMacerator;
-import com.Denfop.block.ultimatematter.TileEntityUltimateMatter;
+import com.Denfop.Recipes.CentrifugeRecipe;
 import com.Denfop.render.Cable.RenderBlock;
-import com.Denfop.tiles.ElectricalBase.ContainerElectricBlock;
-import com.Denfop.tiles.ElectricalBase.GuiElectricBlock;
-import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFE;
-import com.Denfop.tiles.ElectricalBase.TileEntityElectricMFSU;
+import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.Mechanism.*;
+import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.base.TileEntityChargepadBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
+import com.Denfop.tiles.base.TileEntityMultiMachine;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
-import com.Denfop.utils.MTRecipeManager;
+import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
+import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -93,7 +79,7 @@ public class CommonProxy implements IGuiHandler{
           return ((TileSintezator)te).getGuiContainer(player.inventory);
       }
       if (te instanceof TileEntityMolecularTransformer) {
-          return ((TileEntityMolecularTransformer)te).getGuiContainer(player.inventory);
+          return ((TileEntityMolecularTransformer)te).getGuiContainer(player);
       }
       if (te instanceof TileEntityDoubleMacerator) {
           return ((TileEntityDoubleMacerator)te).getGuiContainer(player);
@@ -146,6 +132,20 @@ public class CommonProxy implements IGuiHandler{
       {
     	  return ((TileEntityElectricMFSU)te).getGuiContainer(player);
       }
+      if (te instanceof TileBitGen2)
+      {
+    	  return ((TileBitGen2)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityGenerationMicrochip)
+      {
+    	  return ((TileEntityGenerationMicrochip)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityMultiMachine) {
+			return ((TileEntityMultiMachine) te).getGuiContainer(player);
+		}
+      if (te instanceof TileEntityChargepadBlock) {
+			return ((TileEntityChargepadBlock) te).getGuiContainer(player);
+		}
       return null;
   }
  
@@ -153,10 +153,6 @@ public class CommonProxy implements IGuiHandler{
       return null;
   }
   
-  public void initRecipes() {
-      MTAPI.manager = MTRecipeManager.instance;
-      MTRecipeManager.instance.initRecipes();
-  }
   
   public int addArmor(final String armorName) {
       return 0;
@@ -175,6 +171,11 @@ public static void sendPlayerMessage(EntityPlayer player, String message) {
  public Void throwInitException(LoaderException e) {
 	    throw e;
 	  }
+
+public void registerRecipe() {
+	
+	
+}
   
   
 

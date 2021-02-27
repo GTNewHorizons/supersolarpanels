@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.ClientProxy;
+import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;

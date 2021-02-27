@@ -12,14 +12,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-import com.Denfop.block.Base.BlockMultiID;
+
+import com.Denfop.block.cable.BlockCable;
 
 public abstract class RenderBlock implements ISimpleBlockRenderingHandler {
   private final int renderId = RenderingRegistry.getNextAvailableRenderId();
   
   public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelId, RenderBlocks renderblocks) {
-    if (block instanceof BlockMultiID && !fromTesr)
-      ((BlockMultiID)block).onRender(blockAccess, x, y, z); 
+    if (block instanceof BlockCable && !fromTesr)
+      ((BlockCable)block).onRender(blockAccess, x, y, z); 
     return false;
   }
   

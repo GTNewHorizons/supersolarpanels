@@ -14,9 +14,9 @@ public class BlockSSPCoal extends Block{
 
 	public BlockSSPCoal(Material material) {
 		super(material);
-		this.setCreativeTab(SuperSolarPanels.tabssp);
-		this.setHarvestLevel("pickaxe", 1);
-		this.setHardness(0.3F);
+		this.setCreativeTab(SuperSolarPanels.tabssp4);
+		
+		this.setHardness(1F);
 		this.setLightLevel(0.3F);
 		this.setStepSound(Block.soundTypeGlass);
 	}

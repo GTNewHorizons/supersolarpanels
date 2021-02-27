@@ -1,4 +1,5 @@
 package com.Denfop.integration.DE;
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +22,7 @@ public class ItemDC extends Item {
   
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
-    this.itemIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" + getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+    this.itemIcon = iconRegister.registerIcon(Constants.TEXTURES + ":" + getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
   }
   
   public boolean hasCustomEntity(ItemStack stack) {

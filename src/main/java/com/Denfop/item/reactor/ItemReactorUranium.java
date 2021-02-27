@@ -9,25 +9,26 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Queue;
 
-import com.Denfop.item.base.ItemGradualInt;
-import com.Denfop.utils.InternalName;
+import com.Denfop.SuperSolarPanels;
+import com.Denfop.item.base.ReactorItemCore;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemReactorUranium extends ItemGradualInt implements IReactorComponent {
+public class ItemReactorUranium extends ReactorItemCore implements IReactorComponent {
   public final int numberOfCells;
   
-  public ItemReactorUranium(InternalName internalName, int cells) {
+  public ItemReactorUranium(String internalName, int cells) {
     this(internalName, cells, 20000);
   }
   
-  protected ItemReactorUranium(InternalName internalName, int cells, int duration) {
+  protected ItemReactorUranium(String internalName, int cells, int duration) {
     super(internalName, duration);
     setMaxStackSize(64);
     this.numberOfCells = cells;
+    this.setCreativeTab(SuperSolarPanels.tabssp3);
   }
   
   public void processChamber(IReactor reactor, ItemStack stack, int x, int y, boolean heatRun) {

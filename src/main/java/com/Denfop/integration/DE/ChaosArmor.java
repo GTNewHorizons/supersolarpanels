@@ -1,5 +1,6 @@
 package com.Denfop.integration.DE;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.brandonscore.BrandonsCore;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
@@ -76,7 +77,7 @@ public class ChaosArmor extends ItemArmor implements ISpecialArmor, IConfigurabl
   public ChaosArmor(ItemArmor.ArmorMaterial material, int armorType, String name) {
     super(material, 0, armorType);
     setUnlocalizedName(name);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
     if (ModItems.isEnabled((Item)this))
       GameRegistry.registerItem((Item)this, name); 
   }
@@ -100,10 +101,10 @@ public class ChaosArmor extends ItemArmor implements ISpecialArmor, IConfigurabl
   
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister iconRegister) {
-    this.helmIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" +"chaos_helmet");
-    this.chestIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES +  ":" +"chaos_chestplate");
-    this.leggsIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES + ":" +"chaos_leggings");
-    this.bootsIcon = iconRegister.registerIcon(SuperSolarPanels.TEXTURES +  ":" +"chaos_boots");
+    this.helmIcon = iconRegister.registerIcon(Constants.TEXTURES + ":" +"chaos_helmet");
+    this.chestIcon = iconRegister.registerIcon(Constants.TEXTURES +  ":" +"chaos_chestplate");
+    this.leggsIcon = iconRegister.registerIcon(Constants.TEXTURES + ":" +"chaos_leggings");
+    this.bootsIcon = iconRegister.registerIcon(Constants.TEXTURES +  ":" +"chaos_boots");
   }
   
   @SideOnly(Side.CLIENT)

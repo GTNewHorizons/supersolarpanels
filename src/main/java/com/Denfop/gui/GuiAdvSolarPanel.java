@@ -2,6 +2,7 @@ package com.Denfop.gui;
 
 import com.Denfop.Config;
 import com.Denfop.container.ContainerAdvSolarPanel;
+import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -634,54 +635,57 @@ public class GuiAdvSolarPanel extends GuiContainer {
   }
   
   protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-    if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof com.Denfop.item.Modules.module5) {
-      int g = this.tileentity.chargeSlots[8].getItemDamage();
-      if (g == 0) {
-        this.tileentity.solarType = 1;
-        if (this.tileentity.yCoord >= 130) {
-          this.mc.renderEngine.bindTexture(tex4);
-        } else {
-          this.mc.renderEngine.bindTexture(tex);
-        } 
-      } else if (g == 1) {
-        this.tileentity.solarType = 2;
-        if (this.tileentity.yCoord <= 40) {
-          this.mc.renderEngine.bindTexture(tex3);
-        } else {
-          this.mc.renderEngine.bindTexture(tex);
-        } 
-      } else if (g == 2) {
-        this.tileentity.solarType = 3;
-        if ((this.tileentity.getWorldObj()).provider.dimensionId == -1) {
-          this.mc.renderEngine.bindTexture(tex1);
-        } else {
-          this.mc.renderEngine.bindTexture(tex);
-        } 
-      } else if (g == 3) {
-        this.tileentity.solarType = 4;
-        if ((this.tileentity.getWorldObj()).provider.dimensionId == 1) {
-          this.mc.renderEngine.bindTexture(tex2);
-        } else {
-          this.mc.renderEngine.bindTexture(tex);
-        } 
-      } else if (g == 4) {
-        this.tileentity.solarType = 5;
-        this.mc.renderEngine.bindTexture(tex);
-      } else if (g == 5) {
-        this.tileentity.solarType = 6;
-        this.mc.renderEngine.bindTexture(tex);
-      } else if (g == 6) {
-        this.tileentity.solarType = 7;
-        this.mc.renderEngine.bindTexture(tex5);
-      } else {
-        this.tileentity.solarType = 0;
-        this.mc.renderEngine.bindTexture(tex);
-      } 
-    } else {
-      this.tileentity.solarType = 0;
-      this.mc.renderEngine.bindTexture(tex);
-    } 
+	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	    if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof com.Denfop.item.Modules.module5) {
+	      int g = this.tileentity.chargeSlots[8].getItemDamage();
+	      if (g == 0) {
+	        this.tileentity.solarType = 1;
+	        if (this.tileentity.yCoord >= 130) {
+	          this.mc.renderEngine.bindTexture(tex4);
+	        } else {
+	          this.mc.renderEngine.bindTexture(tex);
+	        } 
+	      } else if (g == 1) {
+	        this.tileentity.solarType = 2;
+	        if (this.tileentity.yCoord <= 40) {
+	          this.mc.renderEngine.bindTexture(tex3);
+	        } else {
+	          this.mc.renderEngine.bindTexture(tex);
+	        } 
+	      } else if (g == 2) {
+	        this.tileentity.solarType = 3;
+	        if ((this.tileentity.getWorldObj()).provider.dimensionId == -1) {
+	          this.mc.renderEngine.bindTexture(tex1);
+	        } else {
+	          this.mc.renderEngine.bindTexture(tex);
+	        } 
+	      } else if (g == 3) {
+	        this.tileentity.solarType = 4;
+	        if ((this.tileentity.getWorldObj()).provider.dimensionId == 1) {
+	          this.mc.renderEngine.bindTexture(tex2);
+	        } else {
+	          this.mc.renderEngine.bindTexture(tex);
+	        } 
+	      } else if (g == 4) {
+	        this.tileentity.solarType = 5;
+	        this.mc.renderEngine.bindTexture(tex);
+	      } else if (g == 5) {
+	        this.tileentity.solarType = 6;
+	        this.mc.renderEngine.bindTexture(tex);
+	      } else if (g == 6) {
+	        this.tileentity.solarType = 7;
+	        if(this.tileentity.rain) {
+	        this.mc.renderEngine.bindTexture(tex5);}else {
+	        	this.mc.renderEngine.bindTexture(tex);
+	        }
+	      } else {
+	        this.tileentity.solarType = 0;
+	        this.mc.renderEngine.bindTexture(tex);
+	      } 
+	    } else {
+	      this.tileentity.solarType = 0;
+	      this.mc.renderEngine.bindTexture(tex);
+	    } 
     int h = (this.width - this.xSize) / 2;
     int k = (this.height - this.ySize) / 2;
     drawTexturedModalRect(h, k, 0, 0, this.xSize, this.ySize);

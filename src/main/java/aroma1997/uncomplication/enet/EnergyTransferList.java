@@ -88,7 +88,6 @@ public class EnergyTransferList
         list.put("TileEntityElectricMFE", 512);
         list.put("TileEntityElectricCESU", 128);
         EnergyTransferList.values.putAll(list);
-        EnergyTransferList.acceptingOverride.put("TileEntityMolecularTransformer", 4096);
     }
     
     static {

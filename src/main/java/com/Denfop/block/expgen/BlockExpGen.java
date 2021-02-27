@@ -1,6 +1,8 @@
 package com.Denfop.block.expgen;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileXPGenPublic;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,18 +31,18 @@ public class BlockExpGen extends BlockContainer {
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[1][12];
-		this.icons[0][0] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][1] = reg.registerIcon("wirelessvajra:expgen_top");
-		this.icons[0][2] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][3] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][4] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][5] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][6] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][7] = reg.registerIcon("wirelessvajra:expgen_top_active");
-		this.icons[0][8] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][9] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][10] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
-		this.icons[0][11] = reg.registerIcon("wirelessvajra:blockXPgen_side_bottom");
+		this.icons[0][0] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][1] = reg.registerIcon("supersolarpanel:expgen_top");
+		this.icons[0][2] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][3] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][4] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][5] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][6] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][7] = reg.registerIcon("supersolarpanel:expgen_top_active");
+		this.icons[0][8] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][9] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][10] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
+		this.icons[0][11] = reg.registerIcon("supersolarpanel:blockXPgen_side_bottom");
 	}
 
 	public boolean isActive(IBlockAccess blockaccess, int x, int y, int z) {

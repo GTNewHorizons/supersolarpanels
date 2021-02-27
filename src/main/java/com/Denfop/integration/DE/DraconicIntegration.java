@@ -40,35 +40,33 @@ public static Item ChaosShovel;
 private static ArmorMaterial  CHAOS_ARMOR = EnumHelper.addArmorMaterial("CHAOS_ARMOR", -1, new int[] { 5, 10, 8, 6 }, 30);
 public static void init() {
 	
-	Chaos();
+	   GameRegistry.registerItem(ChaosEnergyCore =   new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("ChaosEnergyCore").setTextureName("supersolarpanel:ChaosEnergyCore"),"ChaosEnergyCore");
+		if(Config.registerChaosFluxCapacitor)
+		   ChaosFluxCapacitor = (ItemDC)new ChaosFluxCapacitor();
+		if(Config.registerChaosDestructionStaff)
+			ChaosDestructionStaff = (Item)new ChaosDistructionStaff();
+		if(Config.registerChaosPickaxe)
+			ChaosPickaxe = (Item)new ChaosPickaxe();
+		if(Config.registerChaosAxe)
+			ChaosAxe = (Item)new ChaosAxe();
+		if(Config.registerChaosShovel)
+			ChaosShovel = (Item)new ChaosShovel();
+		if(Config.registerChaosSword)
+		ChaosSword = (Item)new ChaosSword();
+		if(Config.registerChaosBow)
+		ChaosBow = (Item)new ChaosBow();
+		if(Config.registerChaosArmour) {
+		ChaosHelm = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 0, "ChaosHelm");
+		ChaosChest = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 1, "ChaosChest");
+		ChaosLeggs = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 2, "ChaosLeggs");
+		ChaosBoots = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 3, "ChaosBoots");}
+		 GameRegistry.registerItem( chaosingot = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("chaosingot").setTextureName("supersolarpanel:chaosingot"),"chaosingot");    
+	if(Config.registerDraconicPanels)
+		 GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
+		
 }
 
-public static void Chaos() {
-	   GameRegistry.registerItem(ChaosEnergyCore =   new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("ChaosEnergyCore").setTextureName("supersolarpanel:ChaosEnergyCore"),"ChaosEnergyCore");
-	if(Config.registerChaosFluxCapacitor)
-	   ChaosFluxCapacitor = (ItemDC)new ChaosFluxCapacitor();
-	if(Config.registerChaosDestructionStaff)
-		ChaosDestructionStaff = (Item)new ChaosDistructionStaff();
-	if(Config.registerChaosPickaxe)
-		ChaosPickaxe = (Item)new ChaosPickaxe();
-	if(Config.registerChaosAxe)
-		ChaosAxe = (Item)new ChaosAxe();
-	if(Config.registerChaosShovel)
-		ChaosShovel = (Item)new ChaosShovel();
-	if(Config.registerChaosSword)
-	ChaosSword = (Item)new ChaosSword();
-	if(Config.registerChaosBow)
-	ChaosBow = (Item)new ChaosBow();
-	if(Config.registerChaosArmour) {
-	ChaosHelm = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 0, "ChaosHelm");
-	ChaosChest = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 1, "ChaosChest");
-	ChaosLeggs = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 2, "ChaosLeggs");
-	ChaosBoots = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 3, "ChaosBoots");}
-	 GameRegistry.registerItem( chaosingot = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("chaosingot").setTextureName("supersolarpanel:chaosingot"),"chaosingot");    
-if(Config.registerDraconicPanels)
-	 GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
-	
-}
+
 public static void register(ItemDC item) {
     String name = item.getUnwrappedUnlocalizedName(item.getUnlocalizedName());
     if (isEnabled((Item)item))

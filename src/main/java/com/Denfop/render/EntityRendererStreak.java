@@ -14,13 +14,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.events.EventDarkQuantumSuitEffect;
 import com.Denfop.handler.EntityStreak;
-import com.Denfop.item.armour.ItemArmorQuantumSuit1;
+import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.utils.StreakLocation;
 public class EntityRendererStreak extends Render {
-  private static final ResourceLocation texture = new ResourceLocation(SuperSolarPanels.TEXTURES_ITEMS + "effect.png");
+  private static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect.png");
   
   public void doRender(Entity entity, double par2, double par3, double par4, float par5, float par6) {
     renderStreak((EntityStreak)entity, par2, par3, par4, par5, par6);
@@ -37,7 +38,7 @@ public class EntityRendererStreak extends Render {
       if (!entity.isInvisible() && (player != mc.thePlayer || mc.gameSettings.thirdPersonView != 0)) {
         if (player.inventory.armorInventory[1] == null)
           return; 
-        if (!(player.inventory.armorInventory[1].getItem() instanceof ItemArmorQuantumSuit1))
+        if (!(player.inventory.armorInventory[1].getItem() instanceof ItemArmorImprovemedQuantum))
           return; 
         ArrayList<StreakLocation> loc = EventDarkQuantumSuitEffect.getPlayerStreakLocationInfo((EntityPlayer)player);
         GL11.glPushMatrix();

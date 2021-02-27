@@ -1,11 +1,12 @@
 package com.Denfop.tiles.base;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.container.ContainerElectricBlock;
+import com.Denfop.gui.GuiElectricBlock;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.module7;
-import com.Denfop.tiles.ElectricalBase.ContainerElectricBlock;
-import com.Denfop.tiles.ElectricalBase.GuiElectricBlock;
 
+import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -37,10 +38,11 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
-
+import cofh.api.energy.IEnergyContainerItem;
 public abstract class TileEntityElectricBlock extends TileEntityInventory implements IEnergySink, IEnergySource, IHasGui, INetworkClientTileEntityEventListener, IEnergyStorage,IEnergyHandler,IEnergyReceiver {
   public final int tier;
   
@@ -55,13 +57,21 @@ public abstract class TileEntityElectricBlock extends TileEntityInventory implem
   public  ItemStack[] chargeSlots;
 
 public int maxStorage2;
-
+public String UUID = null; 
 public double energy2;
 public boolean lastenergy_1=false;
 public boolean lastenergy_2=false;
 public boolean rf;
-
+public int x =0;
+public int y =0;
+public int z = 0;
 public boolean rfeu = false;
+public boolean needsInvUpdate = false;
+public boolean movementcharge = false;
+
+public boolean movementchargerf= false;
+
+public boolean movementchargeitemrf= false;
 
   public TileEntityElectricBlock(int tier1, int output1, int maxStorage1) {
     this.energy = 0.0D;
@@ -99,7 +109,7 @@ public boolean rfeu = false;
   }
   public void readFromNBT(NBTTagCompound nbttagcompound) {
     super.readFromNBT(nbttagcompound);
-   
+    this.UUID= nbttagcompound.getString("UUID");
     this.energy2 = Util.limit(nbttagcompound.getDouble("energy2"), 0.0D, this.maxStorage2 + EnergyNet.instance.getPowerFromTier(this.tier));
 	
     this.energy = Util.limit(nbttagcompound.getDouble("energy"), 0.0D, this.maxStorage + EnergyNet.instance.getPowerFromTier(this.tier));
@@ -124,7 +134,7 @@ public boolean rfeu = false;
     nbttagcompound.setDouble("energy2", this.energy2);
     nbttagcompound.setBoolean("active", getActive());
     nbttagcompound.setByte("redstoneMode", this.redstoneMode);
-   
+    nbttagcompound.setString("UUID", this.UUID);
     final NBTTagList nbttaglist = new NBTTagList();
     for (int i = 0; i < this.chargeSlots.length; ++i) {
   	  final NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -237,9 +247,26 @@ public int getInventoryStackLimit() {
    
   protected void updateEntityServer() {
     super.updateEntityServer();
-    boolean needsInvUpdate = false;
-   
+    
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
+		int kk = chargeSlots[0].getItemDamage();
+		if(kk == 0) {
+			personality = true;
+		}
+    }
+    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
+    	if(chargeSlots[0].getItemDamage() == 5) {
+    		this.movementcharge  = true;
+    	}
+    	if(chargeSlots[0].getItemDamage() == 6) {
+    		this.movementchargeitem  = true;
+    	}
+    	if(chargeSlots[0].getItemDamage() == 7) {
+    		this.movementchargerf  = true;
+    	}
+    	if(chargeSlots[0].getItemDamage() == 8) {
+    		this.movementchargeitemrf  = true;
+    	}
     	if(chargeSlots[0].getItemDamage() == 4) {
     	this.rf = true;}else {
     		this.rf=false;
@@ -282,6 +309,15 @@ public int getInventoryStackLimit() {
     }else {
     	this.rf = false;
     }
+   
+    	
+		IEnergyContainerItem item = null;
+		if(this.energy2 >= 1.0D && this.chargeSlots[1] != null && this.chargeSlots[1].getItem() instanceof IEnergyContainerItem) {
+			   item = (IEnergyContainerItem)this.chargeSlots[1].getItem();
+	      setTransfer((extractEnergy(null, item.receiveEnergy(this.chargeSlots[1], (int) this.energy2, false), false) > 0));}else {
+	    	  setTransfer(false);
+	      }
+	    
     
    if(this.energy2 >0) {
     for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
@@ -327,7 +363,10 @@ public int getInventoryStackLimit() {
     if (needsInvUpdate)
       markDirty(); 
   }
-  
+  public boolean transfer = false;
+  public void setTransfer(boolean t) {
+      this.transfer = t;
+    }
   public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
     return !facingMatchesDirection(direction);
   }
@@ -447,7 +486,28 @@ public int getInventoryStackLimit() {
     return (int)this.energy;
   }
   
-  
+  public boolean wrenchCanRemove(final EntityPlayer entityPlayer) {
+	   if( 	this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) instanceof TileEntityElectricBlock) {
+		   TileEntityElectricBlock tile = 	(TileEntityElectricBlock) this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord);
+		
+		   if(tile.chargeSlots[0] != null && tile.chargeSlots[0].getItem() instanceof module7) {
+			   
+			   if(tile.chargeSlots[0].getItemDamage() ==  0) {
+			   if(entityPlayer.getDisplayName() == tile.UUID) {
+				   return true;
+			   }else {
+				   entityPlayer.addChatMessage(new ChatComponentTranslation(String.format("ssp.error", new Object[0]), new Object[0]));
+				      return false;
+			   }
+			   
+		   }else{
+			   return true;
+		   
+		   }}else {
+			  
+		   }}
+			   return true;
+		   }
   public int getCapacity() {
     return this.maxStorage;
   }
@@ -480,6 +540,12 @@ public int getInventoryStackLimit() {
   private int redstoneUpdateInhibit;
   
   public boolean addedToEnergyNet;
+
+public boolean movementchargeitem = false;
+
+public boolean personality = false;
+
+
 
 
   

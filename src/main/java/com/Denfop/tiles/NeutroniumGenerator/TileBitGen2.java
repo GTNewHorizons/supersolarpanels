@@ -51,7 +51,7 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlocksItems;
 import com.Denfop.container.ContainerMatter;
 import com.Denfop.gui.GuiMatter;
-import com.Denfop.utils.InternalName;
+
 
 public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements IHasGui, IUpgradableBlock {
   public final int defaultTier;
@@ -86,7 +86,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   protected final Redstone redstone;
   
   public TileBitGen2() {
-    super(Math.round(SuperSolarPanels.energy * ConfigUtil.getFloat(MainConfig.get(), "balance/uuEnergyFactor")), 3, -1, 8);
+    super(SuperSolarPanels.energy , 3, -1, 8);
     this.scrap = 0;
     this.StateIdle = 0;
     this.StateRunning = 1;
@@ -96,7 +96,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
     this.redstonePowered = false;
     this.soundTicker = IC2.random.nextInt(32);
      this.outputSlot = new InvSlotOutput((TileEntityInventory)this, "output", 1, 1);
-    this.containerslot = (InvSlotConsumableLiquid)new InvSlotConsumableLiquidByList((TileEntityInventory)this, "containerslot", 2, InvSlot.Access.I, 1, InvSlot.InvSide.TOP, InvSlotConsumableLiquid.OpType.Fill, new Fluid[] { com.Denfop.block.Base.BlocksItems.getFluid(InternalName.fluidUuMatter) });
+    this.containerslot = (InvSlotConsumableLiquid)new InvSlotConsumableLiquidByList((TileEntityInventory)this, "containerslot", 2, InvSlot.Access.I, 1, InvSlot.InvSide.TOP, InvSlotConsumableLiquid.OpType.Fill, new Fluid[] { com.Denfop.block.Base.BlocksItems.getFluid("fluidUuMatter") });
     this.upgradeSlot = new InvSlotUpgrade((TileEntityInventory)this, "upgrade", 3, 4);
     this.defaultTier = 3;
     this.redstone = (Redstone)addComponent((TileEntityComponent)new Redstone((TileEntityBlock)this));
@@ -170,7 +170,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   public boolean attemptGeneration() {
     if (this.fluidTank.getFluidAmount() + 1 > this.fluidTank.getCapacity())
       return false; 
-    fill(null, new FluidStack(BlocksItems.getFluid(InternalName.fluidUuMatter), 1), true);
+    fill(null, new FluidStack(BlocksItems.getFluid("fluidUuMatter"), 1), true);
     this.energy -= this.maxEnergy;
     return true;
   }
@@ -260,7 +260,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
  
   
   public boolean canFill(ForgeDirection from, Fluid fluid) {
-    return (fluid == BlocksItems.getFluid(InternalName.fluidUuMatter));
+    return (fluid == BlocksItems.getFluid("fluidUuMatter"));
   }
   
   public boolean canDrain(ForgeDirection from, Fluid fluid) {

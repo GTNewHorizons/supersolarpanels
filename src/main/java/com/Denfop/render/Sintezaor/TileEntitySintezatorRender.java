@@ -2,8 +2,9 @@ package com.Denfop.render.Sintezaor;
 
 import org.lwjgl.opengl.GL11;
 
+import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.Sintezator.TileEntitySintezator;
+import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +15,7 @@ import net.minecraftforge.client.model.IModelCustom;
 public class TileEntitySintezatorRender extends TileEntitySpecialRenderer {
 
 	  static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("supersolarpanel", "textures/models/sintezator.obj") ); 
-	public static final ResourceLocation texture = new ResourceLocation(SuperSolarPanels.TEXTURES,
+	public static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES,
 			"textures/model/sintezator.png");
 
 	@Override

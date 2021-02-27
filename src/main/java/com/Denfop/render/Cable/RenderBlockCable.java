@@ -1,7 +1,7 @@
 package com.Denfop.render.Cable;
 
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.block.cable.TileEntityCable;
+import com.Denfop.tiles.base.TileEntityCable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
