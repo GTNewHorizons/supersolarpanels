@@ -32,7 +32,6 @@ import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
-import com.Denfop.integration.TE.TERecipes;
 import com.Denfop.render.EntityRendererStreak;
 import com.Denfop.render.Cable.RenderBlock;
 import com.Denfop.render.Cable.RenderBlockCable;
@@ -49,6 +48,7 @@ import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
+import com.Denfop.tiles.base.TileEntityMultiMatter;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
@@ -184,9 +184,7 @@ CannerRecipe.recipe();
 FurnaceRecipes.recipe();  
 CentrifugeRecipe.init();
 MaceratorRecipe.recipe();
-if(Loader.isModLoaded("ThermalFoundation")) {
-	TERecipes.init();
-}
+
   }
   public void registerEvents() {
     MinecraftForge.EVENT_BUS.register(new EventDarkQuantumSuitEffect());
@@ -249,18 +247,11 @@ if(Loader.isModLoaded("ThermalFoundation")) {
 		
     
     
-      if (te instanceof TileEntityAdvancedMatter)
-      {
-          return new GuiAdvancedMatter(new ContainerAdvancedMatter(player, (TileEntityAdvancedMatter) te));
-      }
-      if (te instanceof TileEntityImprovedMatter)
-      {
-          return new GuiImprovedMatter(new ContainerImprovedMatter(player, (TileEntityImprovedMatter) te));
-      }
-      if (te instanceof TileEntityUltimateMatter)
-      {
-          return new GuiUltimateMatter(new ContainerUltimateMatter(player, (TileEntityUltimateMatter) te));
-      }
+			if (player.getHeldItem() != Ic2Items.electricWrench) {
+				if (te instanceof TileEntityMultiMatter) {
+					return ((TileEntityMultiMatter) te).getGui(player, false);
+				}
+			}
       if (te instanceof TileEntityAlloySmelter)
       {
           return new GuiAlloySmelter(new ContainerStandardMachine(player, (TileEntityAlloySmelter) te));
@@ -279,7 +270,7 @@ if(Loader.isModLoaded("ThermalFoundation")) {
       if (te instanceof TileBitGen2)
       {
     	  
-          return new GuiMatter(new ContainerMatter(player, (TileBitGen2) te));
+          return new GuiMatter(new ContainerbitGen(player, (TileBitGen2) te));
       }
       if (te instanceof TileEntityGenerationMicrochip)
       {

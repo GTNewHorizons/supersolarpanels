@@ -2,7 +2,7 @@ package com.Denfop.gui;
 
 import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.container.ContainerMatter;
+import com.Denfop.container.ContainerbitGen;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,13 +20,13 @@ import net.minecraftforge.fluids.FluidStack;
 
 @SideOnly(Side.CLIENT)
 public class GuiMatter extends GuiIC2 {
-  public ContainerMatter container;
+  public ContainerbitGen container;
   
   public String progressLabel;
   
   public String amplifierLabel;
   
-  public GuiMatter(ContainerMatter container1) {
+  public GuiMatter(ContainerbitGen container1) {
     super((ContainerBase)container1);
     this.container = container1;
     this.progressLabel = StatCollector.translateToLocal("ic2.Matter.gui.info.progress");

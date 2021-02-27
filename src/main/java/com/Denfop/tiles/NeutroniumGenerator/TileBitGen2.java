@@ -49,7 +49,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlocksItems;
-import com.Denfop.container.ContainerMatter;
+import com.Denfop.container.ContainerbitGen;
 import com.Denfop.gui.GuiMatter;
 
 
@@ -196,12 +196,12 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
 	  }
   
   public ContainerBase<TileBitGen2> getGuiContainer(EntityPlayer entityPlayer) {
-    return (ContainerBase<TileBitGen2>)new ContainerMatter(entityPlayer, this);
+    return (ContainerBase<TileBitGen2>)new ContainerbitGen(entityPlayer, this);
   }
   
   @SideOnly(Side.CLIENT)
   public GuiScreen getGui(EntityPlayer entityPlayer, boolean isAdmin) {
-    return (GuiScreen)new GuiMatter(new ContainerMatter(entityPlayer, this));
+    return (GuiScreen)new GuiMatter(new ContainerbitGen(entityPlayer, this));
   }
   
   public void onGuiClosed(EntityPlayer entityPlayer) {}

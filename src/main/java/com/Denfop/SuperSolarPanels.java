@@ -59,7 +59,6 @@ import com.Denfop.events.MF_EP.SSPMPMFEventHandler;
 import com.Denfop.integration.Avaritia.AvaritiaIntegration;
 import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
-import com.Denfop.integration.TE.TERecipes;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.base.ItemCable;
