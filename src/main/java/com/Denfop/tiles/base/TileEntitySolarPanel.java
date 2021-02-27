@@ -395,10 +395,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         }
         }
+        int wirelees =0;
         for(int i =0;i <9;i++) {
             if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemWirelessModule) {
        		
-        
+            	wirelees = 1;
             	int x = 0;int y = 0; int z = 0; String name = null;int tier1 = 0;
             	
       		NBTTagCompound    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
@@ -423,20 +424,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
       	}
             
         }
-        for(int i =0;i<9;i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7 && this.chargeSlots[i].getItemDamage() == 0) {
-        		NBTTagCompound    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
-        		nbttagcompound.setInteger("Xcoord", this.xCoord);
-        		nbttagcompound.setInteger("Ycoord", this.yCoord);
-        		nbttagcompound.setInteger("Zcoord", this.zCoord);
-        		nbttagcompound.setInteger("SolarType", this.solarType);
-        		nbttagcompound.setInteger("Tier", this.tier);
-        	}
-        }
+       
 
        
      
-        	if(this.worldObj.getTileEntity(panelx, panely, panelz) != null && this.worldObj.getTileEntity(panelx, panely, panelz) instanceof TileEntityElectricBlock&& panelx != 0 && panely != 0 && panelz != 0) {
+        	if(this.worldObj.getTileEntity(panelx, panely, panelz) != null && this.worldObj.getTileEntity(panelx, panely, panelz) instanceof TileEntityElectricBlock&& panelx != 0 && panely != 0 && panelz != 0 && wirelees != 0) {
         		
           		TileEntityElectricBlock tile =  (TileEntityElectricBlock) this.worldObj.getTileEntity(panelx, panely, panelz);
 
@@ -761,7 +753,7 @@ return this.generating = 0;
     	        nbttagcompound.setTag("ownerGameProfile", (NBTBase)ownerNbt);
     	      } 
     	    NBTTagList nbttaglist = new NBTTagList();
-    	    if(panelx !=0&& panely !=0 && panelz !=0) {
+    	   
     	    	nbttagcompound.setInteger("lastX1",panelx);
     	    	nbttagcompound.setInteger("lastY1",panely);
     	    	nbttagcompound.setInteger("lastZ1",panelz);
@@ -771,7 +763,7 @@ return this.generating = 0;
     	    	 
     	    	
     	  
-    	        }
+    	       
     	    if(player != null) {
     	    	nbttagcompound.setString("player",player);
     	    }
