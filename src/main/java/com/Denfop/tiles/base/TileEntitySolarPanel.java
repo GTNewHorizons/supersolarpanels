@@ -35,6 +35,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.integration.GC.ExtraPlanetsIntegration;
 import com.Denfop.integration.GC.GalacticraftIntegration;
@@ -207,15 +208,13 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         this.loaded = false;
     }
-    private int numUsingPlayers;
-	public int wirellesdives =0;
+    
+
 	private String nameblock;
 	private int world1;
 	private int blocktier;
 	
-    private void syncNumUsingPlayers() {
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.numUsingPlayers);
-      }
+    
     public void intialize() {
         this.wetBiome = (this.worldObj.getWorldChunkManager().getBiomeGenAt(this.xCoord, this.zCoord).getIntRainfall() > 0);
         this.noSunWorld = this.worldObj.provider.hasNoSky;
@@ -238,15 +237,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         if (this.worldObj.isRemote) {
             return;
         }
-        for(int i= 0; i < 9; i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
-        		
-        	if(this.chargeSlots[i].getItemDamage() == 5) {
-        if (++this.ticksSinceSync % 20 * 4 == 0 && IC2.platform.isSimulating()) {
-            syncNumUsingPlayers(); }
         
-        }
-        }}
         
         if (this.lastX != this.xCoord || this.lastZ != this.zCoord || this.lastY != this.yCoord) {
             this.lastX = this.xCoord;
@@ -392,10 +383,14 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module6) {
         		int g = chargeSlots[i].getItemDamage();
         		if(o >= g+1) {
-        		a[i] = module6.GenDay(g);
-        		b[i] = module6.GenNight(g);
-        		c[i] = module6.storage(g);
-        		d[i] = module6.Output(g);
+        			NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
+     		       
+        	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
+        	     a[i]=	nbt.getInteger("genday");
+        	     b[i] =	nbt.getInteger("gennight");
+        	     c[i] =	nbt.getInteger("storage");
+        	     d[i] = 	nbt.getInteger("output");
+        		
         		}
         	
         }
@@ -841,7 +836,11 @@ return this.generating = 0;
         	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module6) {
         		int g = chargeSlots[j].getItemDamage();
         		if(o >= g+1) {
-        		c[j] = module6.storage(g);
+        			NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[j]);
+      		       
+        	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
+        	     
+        	     c[j] =	nbt.getInteger("storage");
         		}
         	
         }

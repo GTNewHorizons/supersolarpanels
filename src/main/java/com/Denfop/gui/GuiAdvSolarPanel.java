@@ -1,6 +1,8 @@
 package com.Denfop.gui;
 
 import com.Denfop.Config;
+import com.Denfop.SuperSolarPanels;
+import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -62,73 +65,33 @@ public class GuiAdvSolarPanel extends GuiContainer {
         } 
       } 
     } 
-    int v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0;
-    int b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0, b7 = 0, b8 = 0, b9 = 0;
-    if (this.tileentity.chargeSlots[0] != null && this.tileentity.chargeSlots[0].getItem() instanceof module6) {
-      int g = this.tileentity.chargeSlots[0].getItemDamage();
+    int c[];
+  	c = new int[9];
+  	int d[];
+  	d = new int[9];
+for(int i = 0; i<9;i++) {
+    if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module6) {
+      int g = this.tileentity.chargeSlots[i].getItemDamage();
       if (this.tileentity.tier + tierplus - minus >= g + 1) {
-        v1 = module6.storage(g);
-        b1 = module6.Output(g);
+    	  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.tileentity.chargeSlots[i]);
+	       
+	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
+	   
+	        c[i] =	nbt.getInteger("storage");
+	        d[i] = 	nbt.getInteger("output");
+       
       } 
     } 
-    if (this.tileentity.chargeSlots[1] != null && this.tileentity.chargeSlots[1].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[1].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v2 = module6.storage(kk);
-        b2 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[2] != null && this.tileentity.chargeSlots[2].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[2].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v3 = module6.storage(kk);
-        b3 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[3] != null && this.tileentity.chargeSlots[3].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[3].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v4 = module6.storage(kk);
-        b4 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[4] != null && this.tileentity.chargeSlots[4].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[4].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v5 = module6.storage(kk);
-        b5 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[5] != null && this.tileentity.chargeSlots[5].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[5].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v6 = module6.storage(kk);
-        b6 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[6] != null && this.tileentity.chargeSlots[6].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[6].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v7 = module6.storage(kk);
-        b7 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[7] != null && this.tileentity.chargeSlots[7].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[7].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v8 = module6.storage(kk);
-        b8 = module6.Output(kk);
-      } 
-    } 
-    if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof module6) {
-      int kk = this.tileentity.chargeSlots[8].getItemDamage();
-      if (this.tileentity.tier + tierplus - minus >= kk + 1) {
-        v9 = module6.storage(kk);
-        b9 = module6.Output(kk);
-      } 
-    } 
+}
+int sum1 = 0;
+int sum2 = 0;
+
+for(int i = 0; i<9;i++) {
+	sum1=sum1+c[i];
+	sum2=sum2+d[i];
+}
     float[] a = new float[4];
-    a[0] = (float)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1);
+    a[0] = (float)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1);
     if (maxstorage1 != 0 && !Config.EnglishFix) {
       if (a[0] < 2.14700006E9F && a[0] > 0.0F) {
         float h = a[0];
@@ -208,7 +171,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
         } 
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
         this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-      } else if ((int)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
+      } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
         float h = a[0];
         float hh = 0.0F;
         int k = 0;
@@ -287,7 +250,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
         this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
       } 
-    } else if ((int)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1) < 2147000000 && (int)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1) > 0) {
+    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 2147000000 && (int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) > 0) {
       float h = a[0];
       float hh = 0.0F;
       int k = 0;
@@ -325,7 +288,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
         maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
       } 
       this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } else if ((int)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1) > 2147000000) {
+    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) > 2147000000) {
       float h = 2.14699994E9F;
       float hh = 0.0F;
       int k = 0;
@@ -363,7 +326,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
         maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
       } 
       this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } else if ((int)((this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) + (this.tileentity.p + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
+    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
       float h = a[0];
       float hh = 0.0F;
       int k = 0;
@@ -440,7 +403,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
       } 
       this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
     } 
-    a[1] = (float)((this.tileentity.u + b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) + (this.tileentity.u + b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9) * 0.2D * output);
+    a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) * 0.2D * output);
     if (output != 0 && !Config.EnglishFix) {
       if (a[1] < 2.14700006E9F) {
         float g = a[1];
