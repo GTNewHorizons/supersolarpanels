@@ -36,6 +36,7 @@ import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.IPanel;
+import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.integration.GC.ExtraPlanetsIntegration;
@@ -381,16 +382,14 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	this.solarType = 0;
         }
         for(int i =0;i<9;i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IPanel) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulPanel) {
         		int g = chargeSlots[i].getItemDamage();
         		if(o >= g+1) {
-        			NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
-     		       
-        	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
-        	     a[i]=	nbt.getInteger("genday");
-        	     b[i] =	nbt.getInteger("gennight");
-        	     c[i] =	nbt.getInteger("storage");
-        	     d[i] = 	nbt.getInteger("output");
+        		List<Integer> list = IModulPanel.getData(chargeSlots[i]);
+        	     a[i]=	list.get(0);
+        	     b[i] =	list.get(1);
+        	     c[i] =	list.get(2);
+        	     d[i] = 	list.get(3);
         		
         		}
         	
@@ -834,14 +833,11 @@ return this.generating = 0;
       	int c[];
       	c = new int[9];
       	for(int j =0;j<9;j++) {
-        	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module6) {
+        	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof IModulPanel) {
         		int g = chargeSlots[j].getItemDamage();
         		if(o >= g+1) {
-        			NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[j]);
-      		       
-        	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
-        	     
-        	     c[j] =	nbt.getInteger("storage");
+        		List<Integer> list =	IModulPanel.getData(chargeSlots[j]);
+        	     c[j] =	list.get(2);
         		}
         	
         }
@@ -854,7 +850,8 @@ return this.generating = 0;
         sum2=sum2+c[j];
         }
     	
-
+if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1))) >=1 )
+	return 1;
          return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1)));
 
 }

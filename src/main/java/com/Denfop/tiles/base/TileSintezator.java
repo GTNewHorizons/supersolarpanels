@@ -188,26 +188,18 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         for(int i = 0; i <10;i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IPanel) {
         		ItemStack itemstack = this.chargeSlots[i];
-        		int meta = itemstack.getMaxDamage();
-        		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
-        		int genday = nbt.getInteger("genday");
-        		int gennight = nbt.getInteger("gennight");
-        		
-        		int storage = nbt.getInteger("storage");
-        		int output = nbt.getInteger("output");
+        		List<Integer> list = IPanel.getData(itemstack);
         	
         		int p = chargeSlots[i].stackSize;
-        		if(p <=  Config.limit) {
-        			myArray[i] = genday * p;
-        			myArray1[i] = gennight* p;
-        			myArray2[i] = storage* p;
-        			myArray3[i] = output* p;
-            		}else {
-            			myArray[i] = genday *  Config.limit ;
-            			myArray1[i] = gennight*  Config.limit ;
-            			myArray2[i] = storage*  Config.limit ;
-            			myArray3[i]  = output*  Config.limit ;
-            		}
+        		if(p > Config.limit) {
+        			p = Config.limit;
+        		}
+        		
+        			myArray[i] = list.get(0) * p;
+        			myArray1[i] = list.get(1)* p;
+        			myArray2[i] = list.get(2)* p;
+        			myArray3[i] = list.get(3)* p;
+            		
         	}
         }
        

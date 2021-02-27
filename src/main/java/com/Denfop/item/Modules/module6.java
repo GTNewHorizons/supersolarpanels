@@ -18,12 +18,13 @@ import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.IPanel;
+import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.item.Item;
 
-public class module6 extends Item 
+public class module6 extends Item implements IModulPanel
 {
     private List<String> itemNames;
     private IIcon[] IIconsList;
@@ -98,13 +99,9 @@ public class module6 extends Item
     public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
         for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
             final ItemStack stack = new ItemStack((Item)this, 1, meta);
-            NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+            
             TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-        	nbt.setInteger("genday", tile.genDay);
-        	nbt.setInteger("gennight", tile.genNight);
-        	nbt.setInteger("storage", tile.maxStorage);
-        	nbt.setInteger("output", tile.production);
-        	nbt.setInteger("tier", tile.tier);
+            IModulPanel.setData(stack, meta, tile);
             itemList.add(stack);
         }
     }
