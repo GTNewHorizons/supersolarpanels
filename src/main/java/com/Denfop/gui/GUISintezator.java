@@ -63,8 +63,7 @@ public class GUISintezator extends GuiContainer
        		ItemStack itemstack = this.tileentity.chargeSlots[i];
        		int meta = itemstack.getMaxDamage();
        		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
-       		int genday = nbt.getInteger("genday");
-       		int gennight = nbt.getInteger("gennight");
+
        		
        		int storage = nbt.getInteger("storage");
        		int output = nbt.getInteger("output");
@@ -94,12 +93,21 @@ public class GUISintezator extends GuiContainer
    	sum3 = sum3 + myArray3[i];
    	
    }
-
+    if(sum2 >= 200000000) {
+    	 sum2 = 200000000;
+    }
        		
-       	     
-      
+    if(sum3 >= 200000000) {
+   	 sum3 = 200000000;
+   }   	     
+    if(sum2 <= 0) {
+   	 sum2 = 0;
+   }
+    if(sum3 <= 0) {
+   	 sum3 = 0;
+   }
 
-if(sum2 < 2147000000 && yy != 0 && sum2 > 0) {
+if( yy != 0 ) {
 	float h = sum2;
 	 float hh = 0;
 	 int i = 0;
@@ -151,9 +159,12 @@ maxstorage_2= String.format("%.2fG", gg);	}
 
 
 
-}else	if(sum2 > 2147000000 && yy != 0){	 
-	
-	float h = 2146999999;
+}else {
+	 this.fontRendererObj.drawString(storageString +0 + "/" +0, 50, 22, 13487565);
+}
+//TODO
+if( yy != 0 ) {
+	float h = sum3;
 	 float hh = 0;
 	 int i = 0;
 	 for(;h >= 10;i++) {
@@ -162,170 +173,31 @@ maxstorage_2= String.format("%.2fG", gg);	}
 	
 	 }
 	 String maxstorage_1= "0";
-	if(i >=3 && i <6 && sum2 >= 1000 && sum2 < 1000000) {
-		hh=(float)(2146999999/(1000));
+	 if(i >= 0 && i < 3 && sum3 >= 0 && sum3 < 1000) {
+		 hh=sum3;
+		 maxstorage_1= String.format("%.0f", hh);
+	 }
+	if(i >=3 && i <6 && sum3 >= 1000 && sum3 < 1000000) {
+		hh=(sum3/(1000));
 		 maxstorage_1= String.format("%.2fK", hh);	}
-	else if(i >=6 && i <9&& sum2 >= 1000000 && sum2 < 1000000000) {
-		hh= (float)(2146999999/(1000000));
+	else if(i >=6 && i <9&& sum3 >= 1000000 && sum3 < 1000000000) {
+		hh= (sum3/(1000000));
 	maxstorage_1= String.format("%.2fM", hh);	}
-	else	if(i >=9 && i <12&& sum2 >= 1000000000 && sum2 < 2100000000) {
-		hh= (float)(2146999999/(1000000000));
-  maxstorage_1= String.format("%.2fG", hh);	}
+	else	if(i >=9 && i <12&& sum3 >= 1000000000 && sum3 < 2100000000) {
+		hh= (sum3/(1000000));
+		hh = hh /1000;
+   maxstorage_1= String.format("%.2fG", hh);	}
 		
-		
-	
-		 float g = this.tileentity.storage;
-		 float hhh = this.tileentity.storage;
-		 float gg = 0;
-		  i = 0;
-		 for(;g >= 10;i++) {
-		 g =(float)( g / 10) ;
-
-		
-		 }
-		 String maxstorage_2= "0";
-		 if(i >=0 && i <3 && hhh <= 1000) {
-			 
-		 
-				gg=(float)(hhh);
-				 maxstorage_2= String.format("%.0f", gg);	}
-		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-			gg=(float)(hhh/(1000));
-		 maxstorage_2= String.format("%.2fK", gg);	}
-		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-			gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-			gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	  this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" +maxstorage_1, 50, 22, 13487565);
+		 this.fontRendererObj.drawString(maxOutputString + maxstorage_1 + (" " + energyPerTickString), 50, 32, 13487565);
 
 
 
-	
-	
 
-	}else if(sum2 < 0 && yy != 0 && this.tileentity.storage < 0) {
-		
-		 this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + this.tileentity.maxStorage, 50, 22, 13487565);
+}else {
+	this.fontRendererObj.drawString(maxOutputString + 0 + (" " + energyPerTickString), 50, 32, 13487565);
+}
+//
 
-	}
-else {
-	float h = 2146999999;
-	 float hh = 0;
-	 int i = 0;
-	 for(;h >= 10;i++) {
-	 h =(float)( h / 10) ;
-
-	
-	 }
-	 String maxstorage_1= "0";
-	if(i >=3 && i <6 && sum2 >= 1000 && sum2 < 1000000) {
-		hh=(float)(2146999999/(1000));
-		 maxstorage_1= String.format("%.2fK", hh);	}
-	else if(i >=6 && i <9&& sum2 >= 1000000 && sum2 < 1000000000) {
-		hh= (float)(2146999999/(1000000));
-	maxstorage_1= String.format("%.2fM", hh);	}
-	else	if(i >=9 && i <12&& sum2 >= 1000000000 && sum2 < 2100000000) {
-		hh= (float)(2146999999/(1000000000));
- maxstorage_1= String.format("%.2fG", hh);	}
-		
-		
-	
-		 float g = this.tileentity.storage;
-		 float hhh = this.tileentity.storage;
-		 float gg = 0;
-		  i = 0;
-		 for(;g >= 10;i++) {
-		 g =(float)( g / 10) ;
-
-		
-		 }
-		 String maxstorage_2= "0";
-		 if(i >=0 && i <3 && hhh <= 1000) {
-			 
-		 
-				gg=(float)(hhh);
-				 maxstorage_2= String.format("%.0f", gg);	}
-		 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-			gg=(float)(hhh/(1000));
-		 maxstorage_2= String.format("%.2fK", gg);	}
-		else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-			gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-		else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-			gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	  this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" +maxstorage_1, 50, 22, 13487565);
-
-
-
-		this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 22, 13487565);
-	}
-if(sum3 < 2147000000)	{
-	 float g = sum3;
-	 float hhh = sum3;
-	 float gg = 0;
-	int  i = 0;
-	 for(;g >= 10;i++) {
-	 g =(float)( g / 10) ;
-
-	
-	 }
-	 String maxstorage_2= "0";
-	 if(hhh >= 0 && hhh< 1000) {
-		 
-		 
-			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.0f", gg);	}
-	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
-		 
-	 
-			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.0f", gg);	}
-	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-		gg=(float)(hhh/(1000));
-	 maxstorage_2= String.format("%.2fK", gg);	}
-	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-		gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-		gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	 this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 32, 13487565);
-}else {   	 
-	 float g = 2146999999;
-	 float hhh = 2146999999;
-	 float gg = 0;
-	int  i = 0;
-	 for(;g >= 10;i++) {
-	 g =(float)( g / 10) ;
-
-	
-	 }
-	 String maxstorage_2= "0";
-	 if(hhh >= 0 && hhh< 1000) {
-		 
-		 
-			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.2f", gg);	}
-	 if(i >=0 && i <3 && hhh >= 1000 && hhh< 1000000) {
-		 
-	 
-			gg=(float)(hhh);
-			 maxstorage_2= String.format("%.2f", gg);	}
-	 else if(i >=3 && i <6 && hhh >= 1000 && hhh< 1000000) {
-		gg=(float)(hhh/(1000));
-	 maxstorage_2= String.format("%.2fK", gg);	}
-	else if(i >=6 && i <9&&hhh >= 1000000 && hhh < 1000000000) {
-		gg= (float)(hhh/(1000000));
-maxstorage_2= String.format("%.2fM", gg);	}
-	else	if(i >=9 && i <12&& hhh >= 1000000000 && hhh < 2100000000) {
-		gg= (float)(hhh/(1000000000));
-maxstorage_2= String.format("%.2fG", gg);	}
-	this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + (" " + energyPerTickString), 50, 32, 13487565);
-
-    }
 if(this.tileentity.sunIsUp == true ) {
 	  float g = this.tileentity.generating;
 	 float hhh = this.tileentity.generating;

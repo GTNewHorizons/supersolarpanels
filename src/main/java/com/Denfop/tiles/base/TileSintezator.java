@@ -195,7 +195,7 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         		
         		int storage = nbt.getInteger("storage");
         		int output = nbt.getInteger("output");
-        	 System.out.print(genday + " " + gennight + " " +storage + " " + output + "\n" );
+        	
         		int p = chargeSlots[i].stackSize;
         		if(p <=  Config.limit) {
         			myArray[i] = genday * p;
