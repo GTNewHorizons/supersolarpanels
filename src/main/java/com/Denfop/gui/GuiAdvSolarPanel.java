@@ -2,6 +2,7 @@ package com.Denfop.gui;
 
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.module5;
@@ -15,6 +16,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiAdvSolarPanel extends GuiContainer {
@@ -72,15 +76,15 @@ public class GuiAdvSolarPanel extends GuiContainer {
   	int d[];
   	d = new int[9];
 for(int i = 0; i<9;i++) {
-    if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module6) {
+    if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IModulPanel) {
       int g = this.tileentity.chargeSlots[i].getItemDamage();
       if (this.tileentity.tier + tierplus - minus >= g + 1) {
-    	  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.tileentity.chargeSlots[i]);
+    	 
 	       
-	        TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(g);
-	   
-	        c[i] =	nbt.getInteger("storage");
-	        d[i] = 	nbt.getInteger("output");
+	       
+    	List<Integer> list =  IModulPanel.getData(this.tileentity.chargeSlots[i]);
+	        c[i] =	list.get(2);
+	        d[i] = list.get(3);
        
       } 
     } 

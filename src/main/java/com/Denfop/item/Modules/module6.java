@@ -63,21 +63,18 @@ public class module6 extends Item implements IModulPanel
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
         NBTTagCompound nbttagcompound;
         int meta = itemStack.getItemDamage();
-        NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemStack);
+        
        
         TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-    int day=	nbt.getInteger("genday");
-    int night =	nbt.getInteger("gennight");
-    int storage =	nbt.getInteger("storage");
-   int output = 	nbt.getInteger("output");
-   int tier = 	nbt.getInteger("tier");
+    
+ List<Integer> list =   IModulPanel.getData(itemStack);
     	
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + day  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + night  + " EU/t " );
+        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + list.get(0)  + " EU/t " );
+        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + list.get(1)   + " EU/t " );
               
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +output  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + storage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + tier);
+            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +list.get(3)   + " EU/t " );
+            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + list.get(2)  + " EU ");
+            info.add(StatCollector.translateToLocal("ssp.tier") + list.get(4) );
             info.add(StatCollector.translateToLocal("ssp.modules1") );
             info.add(StatCollector.translateToLocal("ssp.modules2") );
             }

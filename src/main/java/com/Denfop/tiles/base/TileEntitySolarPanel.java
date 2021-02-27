@@ -850,8 +850,9 @@ return this.generating = 0;
         sum2=sum2+c[j];
         }
     	
-if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1))) >=1 )
-	return 1;
+if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1))) > 24 )
+	return 24;
+
          return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1)));
 
 }

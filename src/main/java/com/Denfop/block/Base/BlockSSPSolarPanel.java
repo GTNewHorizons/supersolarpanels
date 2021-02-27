@@ -891,22 +891,22 @@ public class BlockSSPSolarPanel extends BlockContainer  {
           case 3:
             return (TileEntity)new TileEntityQuantumSolarPanel();
             case 4: {
-                return new TileSpectralSolarPanel();
+                return (TileEntity)new TileSpectralSolarPanel();
             }
             case 5: {
-           	 return new TileProtonSolarPanel();
+           	 return (TileEntity)new TileProtonSolarPanel();
            }
             case 6: {
-                return new TileSingularSolarPanel();
+                return (TileEntity)new TileSingularSolarPanel();
             }
             case 8: {
-                return new TilePhotonicSolarPanel();
+                return (TileEntity)new TilePhotonicSolarPanel();
             }
             case 7: {
-                return new TileAdminSolarPanel();
+                return (TileEntity)new TileAdminSolarPanel();
             }
             case 9: {
-                return new TileNeutronSolarPanel();
+                return (TileEntity)new TileNeutronSolarPanel();
             }
            
            
