@@ -4,16 +4,24 @@ package com.Denfop.integration.DE;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import java.util.ArrayList;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
+import com.Denfop.integration.Botania.blockBotSolarPanel;
+import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemDESolarPanel extends ItemBlock
+public class ItemDESolarPanel extends ItemBlock implements IPanel
 {
     private List<String> itemNames;
     
@@ -33,7 +41,18 @@ public class ItemDESolarPanel extends ItemBlock
     public String getUnlocalizedName(final ItemStack itemstack) {
         return this.itemNames.get(itemstack.getItemDamage());
     }
-    
+    public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
+        for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
+            final ItemStack stack = new ItemStack((Item)this, 1, meta);
+            NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+        	TileEntitySolarPanel tile = (TileEntitySolarPanel) blockDESolarPanel.getBlockEntity(meta);
+        	nbt.setInteger("genday", tile.genDay);
+        	nbt.setInteger("gennight", tile.genNight);
+        	nbt.setInteger("storage", tile.maxStorage);
+        	nbt.setInteger("output", tile.production);
+            itemList.add(stack);
+        }
+    }
     public void addItemsNames() {
         this.itemNames.add("blockDraconSolarPanel");
         this.itemNames.add("blockAwakenedSolarPanel");

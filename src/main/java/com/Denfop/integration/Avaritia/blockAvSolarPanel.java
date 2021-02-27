@@ -101,7 +101,7 @@ public class blockAvSolarPanel extends BlockContainer {
     return i;
   }
   
-  public TileEntity getBlockEntity(int i) {
+  public static TileEntity getBlockEntity(int i) {
     switch (i) {
       case 0:
         return (TileEntity)new TileEntityNeutronSolarPanel();

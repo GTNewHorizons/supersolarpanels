@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerSinSolarPanel;
 import com.Denfop.integration.Avaritia.ItemAvSolarPanel;
@@ -180,128 +181,46 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         int[] myArray1; 
         int[] myArray2; 
         int[] myArray3; 
-        int[] k; 
-        int[] k1; 
-        int[] k2; 
-        int[] k3; 
-        int[] m; 
-        int[] m1; 
-        int[] m2; 
-        int[] m3; 
-        int[] n; 
-        int[] n1; 
-        int[] n2; 
-        int[] n3; 
         myArray = new int[10]; 
         myArray1 = new int[10]; 
         myArray2 = new int[10]; 
         myArray3 = new int[10]; 
-        k = new int[10]; 
-        k1= new int[10]; 
-        k2 = new int[10]; 
-        k3 = new int[10]; 
-        m = new int[10]; 
-        m1= new int[10]; 
-        m2 = new int[10]; 
-        m3 = new int[10];
-        n = new int[10]; 
-        n1= new int[10]; 
-        n2 = new int[10]; 
-        n3 = new int[10];
-       
         for(int i = 0; i <10;i++) {
-   
-        		if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemSSPSolarPanel) {
-        			int g = chargeSlots[i].getItemDamage();
-            		int p = chargeSlots[i].stackSize;
-            		if(p <=  Config.limit) {
-            			myArray[i] = module6.GenDay(g) * p;
-            			myArray1[i] = module6.GenNight(g)* p;
-            			myArray2[i] = module6.storage(g)* p;
-            			myArray3[i] = module6.Output(g)* p;
-                		}else {
-                			myArray[i] = module6.GenDay(g) *  Config.limit ;
-                			myArray1[i] = module6.GenNight(g)*  Config.limit ;
-                			myArray2[i] = module6.storage(g)*  Config.limit ;
-                			myArray3[i]  = module6.Output(g)*  Config.limit ;
-                		}
-        		}
-        	
-        }
-        //
-        if(SuperSolarPanels.AvaritiaLoaded && SuperSolarPanels.Avaritia == true) {
-        for(int i = 0; i <10;i++) {
-        	   
-    		if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemAvSolarPanel) {
-    			int g = chargeSlots[i].getItemDamage();
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IPanel) {
+        		ItemStack itemstack = this.chargeSlots[i];
+        		int meta = itemstack.getMaxDamage();
+        		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+        		int genday = nbt.getInteger("genday");
+        		int gennight = nbt.getInteger("gennight");
+        		
+        		int storage = nbt.getInteger("storage");
+        		int output = nbt.getInteger("output");
+        	 System.out.print(genday + " " + gennight + " " +storage + " " + output + "\n" );
         		int p = chargeSlots[i].stackSize;
         		if(p <=  Config.limit) {
-        			k[i] = modules2.GenDay(g) * p;
-        			k1[i] = modules2.GenNight(g)* p;
-        			k2[i] = modules2.storage(g)* p;
-        			k3[i] = modules2.Output(g)* p;
+        			myArray[i] = genday * p;
+        			myArray1[i] = gennight* p;
+        			myArray2[i] = storage* p;
+        			myArray3[i] = output* p;
             		}else {
-            			k[i] = modules2.GenDay(g) *  Config.limit ;
-            			k1[i] = modules2.GenNight(g)*  Config.limit ;
-            			k2[i] = modules2.storage(g)*  Config.limit ;
-            			k3[i]  = modules2.Output(g)*  Config.limit ;
+            			myArray[i] = genday *  Config.limit ;
+            			myArray1[i] = gennight*  Config.limit ;
+            			myArray2[i] = storage*  Config.limit ;
+            			myArray3[i]  = output*  Config.limit ;
             		}
-    		}
-    	
-    }}//
-        if(SuperSolarPanels.BotaniaLoaded && SuperSolarPanels.Botania == true) {
-            for(int i = 0; i <10;i++) {
-            	   
-        		if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemBotSolarPanel) {
-        			int g = chargeSlots[i].getItemDamage();
-            		int p = chargeSlots[i].stackSize;
-            		if(p <=  Config.limit) {
-            			m[i] = modules1.GenDay(g) * p;
-            			m1[i] = modules1.GenNight(g)* p;
-            			m2[i] = modules1.storage(g)* p;
-            			m3[i] = modules1.Output(g)* p;
-                		}else {
-                			m[i] = modules1.GenDay(g) *  Config.limit ;
-                			m1[i] = modules1.GenNight(g)*  Config.limit ;
-                			m2[i] = modules1.storage(g)*  Config.limit ;
-                			m3[i]  = modules1.Output(g)*  Config.limit ;
-                		}
-        		}
-        	
-        }}
-        //
-        if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.Draconic == true) {
-            for(int i = 0; i <10;i++) {
-            	   
-        		if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemDESolarPanel) {
-        			int g = chargeSlots[i].getItemDamage();
-            		int p = chargeSlots[i].stackSize;
-            		if(p <=  Config.limit) {
-            			n[i] = com.Denfop.integration.DE.modules.GenDay(g) * p;
-            			n1[i] =  com.Denfop.integration.DE.modules.GenNight(g)* p;
-            			n2[i] =  com.Denfop.integration.DE.modules.storage(g)* p;
-            			n3[i] =  com.Denfop.integration.DE.modules.Output(g)* p;
-                		}else {
-                			n[i] =  com.Denfop.integration.DE.modules.GenDay(g) *  Config.limit ;
-                			n1[i] =  com.Denfop.integration.DE.modules.GenNight(g)*  Config.limit ;
-                			n2[i] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
-                			n3[i]  =  com.Denfop.integration.DE.modules.Output(g)*  Config.limit ;
-                		}
-        		}
-        	
-        }}
-        //
+        	}
+        }
        
-        //
+      
         int sum = 0;
         int sum1 = 0;
         int sum2 = 0;
         int sum3 = 0;
         for(int i = 0; i <9;i++) {
-        	sum = sum + myArray[i] + k[i]+ m[i]+n[i];
-        	sum1 = sum1 + myArray1[i]+ k1[i]+ m1[i]+n1[i];
-        	sum2 = sum2 + myArray2[i]+ k2[i]+ m2[i]+n2[i];
-        	sum3 = sum3 + myArray3[i]+ k3[i]+ m3[i]+n3[i];
+        	sum = sum + myArray[i];
+        	sum1 = sum1 + myArray1[i];
+        	sum2 = sum2 + myArray2[i];
+        	sum3 = sum3 + myArray3[i];
         	
         }
 if(sum < 2147000000) {
@@ -446,82 +365,35 @@ if(sum1 < 2146999999) {
     }
     
     public float gaugeEnergyScaled(final float i) {
-        int[] m2; 
-        m2 = new int[10]; 
-    	if(SuperSolarPanels.BotaniaLoaded && SuperSolarPanels.Botania == true) {
-            for(int j = 0; j <10;j++) {
-            	   
-        		if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof ItemBotSolarPanel) {
-        			int g = chargeSlots[j].getItemDamage();
-            		int p = chargeSlots[j].stackSize;
-            		if(p <=  Config.limit) {
-            		
-            			m2[j] = modules1.storage(g)* p;
-            			
-                		}else {
-                			
-                			m2[j] = modules1.storage(g)*  Config.limit ;
-                		}
-        		}
-        	
-        }}
-    	//
-    	
-          int[] k2; 
-          k2 = new int[10]; 
-    	  if(SuperSolarPanels.AvaritiaLoaded && SuperSolarPanels.Avaritia == true) {
-    	        for(int j = 0; j <10;j++) {
-    	        	   
-    	    		if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof ItemAvSolarPanel) {
-    	    			int g = chargeSlots[j].getItemDamage();
-    	        		int p = chargeSlots[j].stackSize;
-    	        		if(p <=  Config.limit) {
-    	        			k2[j] = modules2.storage(g)* p;
-    	            		}else {
-    	            			k2[j] = modules2.storage(g)*  Config.limit ;
-    	            		}
-    	    		}
-    	    	
-    	    }}
-     //
-
-          int[] n2; 
-    	  n2 = new int[10]; 
-    	  if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.Draconic == true) {
-              for(int j = 0; j <10;j++) {
-              	   
-          		if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof ItemDESolarPanel) {
-          			int g = chargeSlots[j].getItemDamage();
-              		int p = chargeSlots[j].stackSize;
-              		if(p <=  Config.limit) {
-              			n2[j] =  com.Denfop.integration.DE.modules.storage(g)* p;
-                  		}else {
-                  			n2[j] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
-                  		}
-          		}
-          	
-          }}
-    	  //
+      
          int[] myArray2; 
          myArray2 = new int[10]; 
          
          for(int j = 0; j <10;j++) {
-    
-         		if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof ItemSSPSolarPanel) {
-         			int g = chargeSlots[j].getItemDamage();
-             		int p = chargeSlots[j].stackSize;
-             		if(p <=  Config.limit) {
-             			myArray2[j] = module6.storage(g)* p;
-                 		}else {
-                 			myArray2[j] = module6.storage(g)*  Config.limit ;
-                 		}
-         		}
-         	
+         	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof IPanel) {
+         		ItemStack itemstack = this.chargeSlots[j];
+         		int meta = itemstack.getMaxDamage();
+         		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+         		int genday = nbt.getInteger("genday");
+         		int gennight = nbt.getInteger("gennight");
+         		int storage = nbt.getInteger("storage");
+         		int output = nbt.getInteger("output");
+         		int p = chargeSlots[j].stackSize;
+         		if(p <=  Config.limit) {
+         		
+         			myArray2[j] = storage* p;
+         			
+             		}else {
+             			
+             			myArray2[j] = storage*  Config.limit ;
+             			
+             		}
+         	}
          }
       
          int sum2 = 0;
          for(int j = 0; j <9;j++) {
-         	sum2 = sum2 + myArray2[j]+k2[j]+m2[j]+n2[j];
+         	sum2 = sum2 + myArray2[j];
          	
          }
 if((sum2) !=0) {

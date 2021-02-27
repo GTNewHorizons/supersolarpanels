@@ -5,23 +5,29 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.util.StackUtil;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
 import java.util.ArrayList;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
+import com.Denfop.block.Base.BlockSSPSolarPanel;
+import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemSSPSolarPanel extends ItemBlock 
+public class ItemSSPSolarPanel extends ItemBlock implements IPanel
 {
     private List<String> itemNames;
+	private Block block;
     
     public ItemSSPSolarPanel(final Block b) {
         super(b);
@@ -29,6 +35,7 @@ public class ItemSSPSolarPanel extends ItemBlock
         this.setHasSubtypes(true);
         this.itemNames = new ArrayList<String>();
         this.addItemsNames();
+        this.block = b;
     }
     
     public int getMetadata(final int i) {
@@ -52,7 +59,18 @@ public class ItemSSPSolarPanel extends ItemBlock
         this.itemNames.add("blockNeutronSolarPanel");
        
     }
-    
+    public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
+        for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
+            final ItemStack stack = new ItemStack((Item)this, 1, meta);
+            NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+        	TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
+        	nbt.setInteger("genday", tile.genDay);
+        	nbt.setInteger("gennight", tile.genNight);
+        	nbt.setInteger("storage", tile.maxStorage);
+        	nbt.setInteger("output", tile.production);
+            itemList.add(stack);
+        }
+    }
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
         NBTTagCompound nbttagcompound;
         int meta = itemStack.getItemDamage();

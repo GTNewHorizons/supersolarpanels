@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
 import com.Denfop.container.ContainerSinSolarPanel;
 import com.Denfop.integration.Avaritia.ItemAvSolarPanel;
 import com.Denfop.integration.Avaritia.modules2;
@@ -18,6 +19,8 @@ import com.Denfop.tiles.base.TileSintezator;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -28,15 +31,7 @@ public class GUISintezator extends GuiContainer
 	
     private static ResourceLocation tex;
 
-	private static ResourceLocation tex1;
 
-	private static ResourceLocation tex2;
-
-	private static ResourceLocation tex3;
-
-	private static ResourceLocation tex4;
-
-	private static ResourceLocation tex5;
     
     public GUISintezator(final InventoryPlayer inventoryplayer, final TileSintezator tileentitysolarpanel) {
         super((Container)new ContainerSinSolarPanel(inventoryplayer, tileentitysolarpanel));
@@ -54,107 +49,49 @@ public class GUISintezator extends GuiContainer
         final String maxOutputString = I18n.format("gui.AdvancedSolarPanel.maxOutput", new Object[0]) + ": ";
         final String generatingString = I18n.format("gui.AdvancedSolarPanel.generating", new Object[0]) + ": ";
         final String energyPerTickString = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]);
-        int[] m2; 
-        int[] m3; 
-        int[] k2; 
-        int[] k3; 
-        int[] myArray2; 
-        int[] myArray3; 
 
-        myArray2 = new int[10]; 
-        myArray3 = new int[10]; 
-
-        k2 = new int[10]; 
-        k3 = new int[10]; 
-        m2 = new int[10]; 
-        m3 = new int[10]; 
       
        int yy = 0;
-       if(SuperSolarPanels.BotaniaLoaded && SuperSolarPanels.Botania == true) {
-           for(int i = 0; i <10;i++) {
-           	   
-       		if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof ItemBotSolarPanel) {
-       			int g = this.tileentity.chargeSlots[i].getItemDamage();
-           		int p = this.tileentity.chargeSlots[i].stackSize;
-           		if(p <=  Config.limit) {
-           			yy =1;
-           			m2[i] = modules1.storage(g)* p;
-           			m3[i] = modules1.Output(g)* p;
-               		}else {
-               			
-               			m2[i] = modules1.storage(g)*  Config.limit ;
-               			m3[i]  = modules1.Output(g)*  Config.limit ;
-               			yy =1;
-               		}
-       		}
-       	
-       }}
+    
+       int[] myArray2; 
+       int[] myArray3; 
+
+       myArray2 = new int[10]; 
+       myArray3 = new int[10]; 
        for(int i = 0; i <10;i++) {
+       	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IPanel) {
+       		ItemStack itemstack = this.tileentity.chargeSlots[i];
+       		int meta = itemstack.getMaxDamage();
+       		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+       		int genday = nbt.getInteger("genday");
+       		int gennight = nbt.getInteger("gennight");
+       		
+       		int storage = nbt.getInteger("storage");
+       		int output = nbt.getInteger("output");
        	
-   		if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof ItemSSPSolarPanel) {
-   			int g = this.tileentity.chargeSlots[i].getItemDamage();
        		int p = this.tileentity.chargeSlots[i].stackSize;
-       		if(p <=  Config.limit  ) {
+       		if(p <=  Config.limit) {
        			
-       			myArray2[i] = module6.storage(g)* p;
-       			myArray3[i] = module6.Output(g)* p;
+       			myArray2[i] = storage* p;
+       			myArray3[i] = output* p;
        			yy =1;
            		}else {
-           		
-           			myArray2[i] = module6.storage(g)*  Config.limit ;
-           			myArray3[i]  = module6.Output(g)*  Config.limit ;
+           			
+           			myArray2[i] = storage*  Config.limit ;
+           			myArray3[i]  = output*  Config.limit ;
            			yy =1;
            		}
-   		}
-   	
-   }
-       //
-       int[] n2; 
-       int[] n3;  
-       n2 = new int[10]; 
-       n3 = new int[10];
-       if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.Draconic == true) {
-           for(int i = 0; i <10;i++) {
-           	   
-       		if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof ItemDESolarPanel) {
-       			int g = this.tileentity.chargeSlots[i].getItemDamage();
-           		int p = this.tileentity.chargeSlots[i].stackSize;
-           		if(p <=  Config.limit) {
-           			n2[i] =  com.Denfop.integration.DE.modules.storage(g)* p;
-           			n3[i] =  com.Denfop.integration.DE.modules.Output(g)* p;
-           			yy =1;
-               		}else {
-               			n2[i] =  com.Denfop.integration.DE.modules.storage(g)*  Config.limit ;
-               			n3[i]  =  com.Denfop.integration.DE.modules.Output(g)*  Config.limit ;
-               			yy =1;
-               		}
-       		}
-       	
-       }}
-       //
-       if(SuperSolarPanels.AvaritiaLoaded && SuperSolarPanels.Avaritia == true) {
-           for(int i = 0; i <10;i++) {
-           	   
-       		if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof ItemAvSolarPanel) {
-       			int g = this.tileentity.chargeSlots[i].getItemDamage();
-           		int p = this.tileentity.chargeSlots[i].stackSize;
-           		if(p <=  Config.limit) {
-           			k2[i] = modules2.storage(g)* p;
-           			k3[i] = modules2.Output(g)* p;
-           			yy =1;
-               		}else {
-               			k2[i] = modules2.storage(g)*  Config.limit ;
-               			k3[i]  = modules2.Output(g)*  Config.limit ;
-               			yy =1;
-               		}
-       		}
-       	
-       }}
+       	}
+       }
+      
+     
+       
+       
    int sum2 = 0;
    int sum3 = 0;
    for(int i = 0; i <9;i++) {
-   	sum2 = sum2 + myArray2[i]+k2[i]+m2[i]+n2[i];
-   	sum3 = sum3 + myArray3[i]+k3[i]+m3[i]+n3[i];
+   	sum2 = sum2 + myArray2[i];
+   	sum3 = sum3 + myArray3[i];
    	
    }
 
@@ -512,10 +449,5 @@ maxstorage_2= String.format("%.2fG", gg);	}
     
     static {
         GUISintezator.tex = new ResourceLocation("supersolarpanel", "textures/gui/GUI_Sintezator_Slots.png");
-        GUISintezator.tex1 = new ResourceLocation("supersolarpanel", "textures/gui/GUInetherSolarPanel.png");
-        GUISintezator.tex2 = new ResourceLocation("supersolarpanel", "textures/gui/GUIendSolarPanel.png");
-        GUISintezator.tex3 = new ResourceLocation("supersolarpanel", "textures/gui/GUIearthSolarPanel.png");
-        GUISintezator.tex4 = new ResourceLocation("supersolarpanel", "textures/gui/GUIaerSolarPanel.png");
-        GUISintezator.tex5 = new ResourceLocation("supersolarpanel", "textures/gui/GUIrainSolarPanel.png");
     }
 }

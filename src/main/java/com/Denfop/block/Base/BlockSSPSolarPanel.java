@@ -880,7 +880,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         return world.getBlockMetadata(x, y, z);
       }
   
-    public TileEntity getBlockEntity(final int i) {
+    public static TileEntity getBlockEntity(final int i) {
         switch (i) {
             case 0:
             return (TileEntity)new TileEntityAdvancedSolarPanel();
@@ -987,6 +987,10 @@ public class BlockSSPSolarPanel extends BlockContainer  {
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(final Item item, final CreativeTabs tab, final List subItems) {
         for (int ix = 0; ix < this.iconBuffer.length; ++ix) {
+        	ItemStack itemstack = new ItemStack(this, 1, ix);
+        	NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+        	TileEntitySolarPanel tile = (TileEntitySolarPanel) this.getBlockEntity(ix);
+        	nbt.setInteger("genday", tile.genDay);
             subItems.add(new ItemStack((Block)this, 1, ix));
         }
     }
