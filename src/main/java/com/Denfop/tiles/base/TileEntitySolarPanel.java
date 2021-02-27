@@ -731,7 +731,7 @@ return this.generating = 0;
     	 //TODO
     	   
     	    
-    	   
+    	   this.solarType=nbttagcompound.getInteger("solarType");
     	    
     	    	panelx=nbttagcompound.getInteger("panelx");
     	    	panely=nbttagcompound.getInteger("panely");
@@ -750,13 +750,7 @@ return this.generating = 0;
     	      int j = nbttagcompound1.getByte("Slot") & 0xFF;
     	      if (j >= 0 && j < this.chargeSlots.length)
     	        this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-    	      if(j == 8) {
-    	    	  if(ItemStack.loadItemStackFromNBT(nbttagcompound1) != null && ItemStack.loadItemStackFromNBT(nbttagcompound1).getItem() instanceof module5) {
-    	    		  this.solarType = nbttagcompound.getInteger("solarType"); 
-    	    	  }else {
-    	    		  this.solarType = 0;
-    	    	  }
-    	      }
+    	     
     	    } 
     	    NBTTagList nbttaglist1 = (NBTTagList)nbttagcompound.getTag("positions");
       }
@@ -786,7 +780,7 @@ return this.generating = 0;
     	    if(player != null) {
     	    	nbttagcompound.setString("player",player);
     	    }
-    	
+    	    nbttagcompound.setInteger("solarType", this.solarType);
     	    nbttagcompound.setInteger("storage", this.storage);
     	    nbttagcompound.setInteger("lastX", this.lastX);
     	    nbttagcompound.setInteger("lastY", this.lastY);
@@ -796,9 +790,7 @@ return this.generating = 0;
     	        NBTTagCompound nbttagcompound1 = new NBTTagCompound();
     	       
     	        nbttagcompound1.setByte("Slot", (byte)i);
-    	        if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
-    	        	  nbttagcompound.setInteger("solarType", this.solarType);
-            	    }
+    	        
     	        this.chargeSlots[i].writeToNBT(nbttagcompound1);
     	        nbttaglist.appendTag((NBTBase)nbttagcompound1);
     	      } 
@@ -1065,6 +1057,8 @@ return this.generating = 0;
     	int type = this.solarType;
     	return type;
     }
+
+
 
 
 	

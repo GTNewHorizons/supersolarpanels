@@ -19,7 +19,7 @@ import com.Denfop.SuperSolarPanels;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemSSPSolarPanel extends ItemBlock
+public class ItemSSPSolarPanel extends ItemBlock 
 {
     private List<String> itemNames;
     
@@ -183,4 +183,8 @@ public class ItemSSPSolarPanel extends ItemBlock
             }
         }
     }
+
+		
+
+		
 }

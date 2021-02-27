@@ -270,7 +270,7 @@ MaceratorRecipe.recipe();
       if (te instanceof TileBitGen2)
       {
     	  
-          return new GuiMatter(new ContainerbitGen(player, (TileBitGen2) te));
+          return new GuiMatter(new ContainerbitGen (player, (TileBitGen2) te));
       }
       if (te instanceof TileEntityGenerationMicrochip)
       {

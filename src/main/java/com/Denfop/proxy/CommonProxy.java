@@ -2,7 +2,6 @@ package com.Denfop.proxy;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.Denfop.tiles.base.TileEntityTripleMachine;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.Recipes.CentrifugeRecipe;
 import com.Denfop.render.Cable.RenderBlock;

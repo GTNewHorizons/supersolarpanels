@@ -208,7 +208,7 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         n1= new int[10]; 
         n2 = new int[10]; 
         n3 = new int[10];
-        
+       
         for(int i = 0; i <10;i++) {
    
         		if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof ItemSSPSolarPanel) {
