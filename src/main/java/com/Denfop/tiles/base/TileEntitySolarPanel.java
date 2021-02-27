@@ -478,16 +478,16 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
        
         
         if((int) ((this.p +sum2) + (this.p +  sum2)*0.2*maxstorage1) < 0) {
-    		this.maxStorage = 2146999999;
-    	}else if((int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1) > 2147000000){
-    		this.maxStorage = 2146999999;
+    		this.maxStorage = 0;
+    	}else if((int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1) > 2000000000){
+    		this.maxStorage = 2000000000;
     	}else {
     		this.maxStorage = (int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1);
     	}
         //
-        if((int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output) < 2147000000)	{
+        if((int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output) < 2000000000)	{
         this.production  = (int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output);}else {
-        	this.production = 2146999999;
+        	this.production = 2000000000;
         }
        
 

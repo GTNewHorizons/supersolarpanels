@@ -7,6 +7,8 @@ import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.GuiNumberUtils;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -92,419 +94,36 @@ for(int i = 0; i<9;i++) {
 }
     float[] a = new float[4];
     a[0] = (float)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1);
-    if (maxstorage1 != 0 && !Config.EnglishFix) {
-      if (a[0] < 2.14700006E9F && a[0] > 0.0F) {
-        float h = a[0];
-        float hh = 0.0F;
-        int k = 0;
-        for (; h >= 10.0F; k++)
-          h /= 10.0F; 
-        String maxstorage_1 = "2";
-        if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-          hh = a[0] / 1000.0F;
-          maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-          hh = a[0] / 1000000.0F;
-          maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-          hh = a[0] / 1.0E9F;
-          maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-        } 
-        float g = this.tileentity.storage;
-        float hhh = this.tileentity.storage;
-        float gg = 0.0F;
-        k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
+    if(a[0] > 2000000000) {
+    	a[0] = 2000000000;
+    }
+    else if(a[0] < 0) {
+    	a[0] = 0;
+    }
+    
+      if (a[0] >= 0) {
+    	String maxstorage_1 =  GuiNumberUtils.getString(a[0]);
+    	String maxstorage_2 =  GuiNumberUtils.getString(this.tileentity.storage);
+      
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
+       if(maxstorage1 != 0)
         this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-      } else if (a[0] > 2.14700006E9F) {
-        float h = 2.14699994E9F;
-        float hh = 0.0F;
-        int k = 0;
-        for (; h >= 10.0F; k++)
-          h /= 10.0F; 
-        String maxstorage_1 = "2";
-        if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-          hh = a[0] / 1000.0F;
-          maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-          hh = a[0] / 1000000.0F;
-          maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-          hh = a[0] / 1.0E9F;
-          maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-        } 
-        float g = this.tileentity.storage;
-        float hhh = this.tileentity.storage;
-        float gg = 0.0F;
-        k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
-        this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-        this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-      } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
-        float h = a[0];
-        float hh = 0.0F;
-        int k = 0;
-        for (; h >= 10.0F; k++)
-          h /= 10.0F; 
-        String maxstorage_1 = "2";
-        if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-          hh = a[0] / 1000.0F;
-          maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-          hh = a[0] / 1000000.0F;
-          maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-          hh = a[0] / 1.0E9F;
-          maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-        } 
-        float g = this.tileentity.storage;
-        float hhh = this.tileentity.storage;
-        float gg = 0.0F;
-        k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
-        this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-        this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-      } else {
-        float h = 2.14699994E9F;
-        float hh = 0.0F;
-        int k = 0;
-        for (; h >= 10.0F; k++)
-          h /= 10.0F; 
-        String maxstorage_1 = "2";
-        if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-          hh = a[0] / 1000.0F;
-          maxstorage_1 = String.format("%.1K", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-          hh = a[0] / 1000000.0F;
-          maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-        } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-          hh = a[0] / 1.0E9F;
-          maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-        } 
-        float g = this.tileentity.storage;
-        float hhh = this.tileentity.storage;
-        float gg = 0.0F;
-        k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
-        this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-        this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
       } 
-    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 2147000000 && (int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) > 0) {
-      float h = a[0];
-      float hh = 0.0F;
-      int k = 0;
-      for (; h >= 10.0F; k++)
-        h /= 10.0F; 
-      String maxstorage_1 = "2";
-      if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-        hh = a[0] / 1000.0F;
-        maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-        hh = a[0] / 1000000.0F;
-        maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-        hh = a[0] / 1.0E9F;
-        maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-      } 
-      float g = this.tileentity.storage;
-      float hhh = this.tileentity.storage;
-      float gg = 0.0F;
-      k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) > 2147000000) {
-      float h = 2.14699994E9F;
-      float hh = 0.0F;
-      int k = 0;
-      for (; h >= 10.0F; k++)
-        h /= 10.0F; 
-      String maxstorage_1 = "2";
-      if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-        hh = a[0] / 1000.0F;
-        maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-        hh = a[0] / 1000000.0F;
-        maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-        hh = a[0] / 1.0E9F;
-        maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-      } 
-      float g = this.tileentity.storage;
-      float hhh = this.tileentity.storage;
-      float gg = 0.0F;
-      k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } else if ((int)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1) < 0 && (this.tileentity.storage == 0 || this.tileentity.storage <= 0)) {
-      float h = a[0];
-      float hh = 0.0F;
-      int k = 0;
-      for (; h >= 10.0F; k++)
-        h /= 10.0F; 
-      String maxstorage_1 = "2";
-      if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-        hh = a[0] / 1000.0F;
-        maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-        hh = a[0] / 1000000.0F;
-        maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-        hh = a[0] / 1.0E9F;
-        maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-      } 
-      float g = this.tileentity.storage;
-      float hhh = this.tileentity.storage;
-      float gg = 0.0F;
-      k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.1f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.1fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } else {
-      float h = 1.0E9F;
-      float hh = 0.0F;
-      int k = 0;
-      for (; h >= 10.0F; k++)
-        h /= 10.0F; 
-      String maxstorage_1 = "2";
-      if (k >= 3 && k < 6 && a[0] >= 1000.0F && a[0] < 1000000.0F) {
-        hh = a[0] / 1000.0F;
-        maxstorage_1 = String.format("%.1fK", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 6 && k < 9 && a[0] >= 1000000.0F && a[0] < 1.0E9F) {
-        hh = a[0] / 1000000.0F;
-        maxstorage_1 = String.format("%.1fM", new Object[] { Float.valueOf(hh) });
-      } else if (k >= 9 && k < 12 && a[0] >= 1.0E9F && a[0] < 2.1E9F) {
-        hh = a[0] / 1.0E9F;
-        maxstorage_1 = String.format("%.1fG", new Object[] { Float.valueOf(hh) });
-      } 
-      float g = this.tileentity.storage;
-      float hhh = this.tileentity.storage;
-      float gg = 0.0F;
-      k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.2f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-    } 
+    
     a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) * 0.2D * output);
-    if (output != 0 && !Config.EnglishFix) {
-      if (a[1] < 2.14700006E9F) {
-        float g = a[1];
-        float hhh = a[1];
-        float gg = 0.0F;
-        int k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (hhh < 100.0F)
-          gg = hhh; 
-        if (k >= 0 && k < 3 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.2f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
-        this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + " " + energyPerTickString, 50, 26, 13487565);
-        this.fontRendererObj.drawString(ModulesString3 + (20 * output) + "%", 150, 26, 13487565);
-      } else {
-        float g = 2.14699994E9F;
-        float hhh = 2.14699994E9F;
-        float gg = 0.0F;
-        int k = 0;
-        for (; g >= 10.0F; k++)
-          g /= 10.0F; 
-        String maxstorage_2 = "2";
-        if (hhh < 100.0F)
-          gg = hhh; 
-        if (k >= 0 && k < 3 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh;
-          maxstorage_2 = String.format("%.2f", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-          gg = hhh / 1000.0F;
-          maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-          gg = hhh / 1000000.0F;
-          maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-        } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-          gg = hhh / 1.0E9F;
-          maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-        } 
-        this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + " " + energyPerTickString, 50, 26, 13487565);
-        this.fontRendererObj.drawString(ModulesString3 + (20 * output) + "%", 150, 26, 13487565);
+    if(a[1] > 2000000000) {
+    	a[1] = 2000000000;
+    }
+    else if(a[1] < 0) {
+    	a[1] = 0;
+    }
+ 
+      if (a[1] >=0) {
+        this.fontRendererObj.drawString(maxOutputString +  GuiNumberUtils.getString(a[1]) + " " + energyPerTickString, 50, 26, 13487565);
+        if(output != 0)
+this.fontRendererObj.drawString(ModulesString3 + (20 * output) + "%", 150, 26, 13487565);
       } 
-    } else if (a[1] < 2.14700006E9F) {
-      float g = a[1];
-      float hhh = a[1];
-      float gg = 0.0F;
-      int k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (hhh < 100.0F)
-        gg = hhh; 
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.0f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + " " + energyPerTickString, 50, 26, 13487565);
-    } else {
-      float g = 2.14699994E9F;
-      float hhh = 2.14699994E9F;
-      float gg = 0.0F;
-      int k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (hhh < 100.0F)
-        gg = hhh; 
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.0f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(maxOutputString + maxstorage_2 + " " + energyPerTickString, 50, 26, 13487565);
-    } 
+    
     int gend = 0;
     int genn = 0;
     for (int j = 0; j < 9; j++) {
@@ -513,75 +132,15 @@ for(int i = 0; i<9;i++) {
       if (this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getItem() instanceof com.Denfop.item.Modules.module2)
         genn++; 
     } 
-    if (this.tileentity.sunIsUp == true && gend != 0 && !Config.EnglishFix) {
-      float g = this.tileentity.generating;
-      float hhh = this.tileentity.generating;
-      float gg = 0.0F;
-      int k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.0f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(generatingString + maxstorage_2 + " " + energyPerTickString, 50, 36, 13487565);
+   
+    	String generation =  GuiNumberUtils.getString(this.tileentity.generating);
+     
+      this.fontRendererObj.drawString(generatingString + generation + " " + energyPerTickString, 50, 36, 13487565);
+      if(gend !=0 && this.tileentity.sunIsUp)
       this.fontRendererObj.drawString(ModulesString + (gend * 20) + "%", 165, 36, 13487565);
-    } else if (!this.tileentity.sunIsUp && genn != 0 && !Config.EnglishFix) {
-      float g = this.tileentity.generating;
-      float hhh = this.tileentity.generating;
-      float gg = 0.0F;
-      int k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.0f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(generatingString + maxstorage_2 + " " + energyPerTickString, 50, 36, 13487565);
-      this.fontRendererObj.drawString(ModulesString1 + (genn * 20) + "%", 165, 36, 13487565);
-    } else {
-      float g = this.tileentity.generating;
-      float hhh = this.tileentity.generating;
-      float gg = 0.0F;
-      int k = 0;
-      for (; g >= 10.0F; k++)
-        g /= 10.0F; 
-      String maxstorage_2 = "2";
-      if (k >= 0 && k < 3 && hhh <= 1000.0F) {
-        gg = hhh;
-        maxstorage_2 = String.format("%.0f", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 3 && k < 6 && hhh >= 1000.0F && hhh < 1000000.0F) {
-        gg = hhh / 1000.0F;
-        maxstorage_2 = String.format("%.2fK", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 6 && k < 9 && hhh >= 1000000.0F && hhh < 1.0E9F) {
-        gg = hhh / 1000000.0F;
-        maxstorage_2 = String.format("%.2fM", new Object[] { Float.valueOf(gg) });
-      } else if (k >= 9 && k < 12 && hhh >= 1.0E9F && hhh < 2.1E9F) {
-        gg = hhh / 1.0E9F;
-        maxstorage_2 = String.format("%.2fG", new Object[] { Float.valueOf(gg) });
-      } 
-      this.fontRendererObj.drawString(generatingString + maxstorage_2 + " " + energyPerTickString, 50, 36, 13487565);
-    } 
+      if(genn !=0 && !this.tileentity.sunIsUp)
+          this.fontRendererObj.drawString(ModulesString + (gend * 20) + "%", 165, 36, 13487565);
+     
     if (tierplus != 0 && tierplus - minus > 0 && this.tileentity.o > 0) {
       this.fontRendererObj.drawString(tierString + this.tileentity.o, 50, 46, 13487565);
       this.fontRendererObj.drawString(ModulesString4 + (tierplus - minus), 93, 46, 13487565);
