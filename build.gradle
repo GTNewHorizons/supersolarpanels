@@ -20,7 +20,11 @@ apply plugin: 'forge'
 version = "1.4.3"
 group= "com.Denfop"
 archivesBaseName = "SuperSolarPanels"
-
+apply plugin: 'java'
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
@@ -28,7 +32,7 @@ minecraft {
 
 dependencies {
   
-      compile files("libs/industrialcraft-2-2.2.827-experimental.jar")
+    compile files("libs/industrialcraft-2-2.2.827-experimental.jar")
     compile files("libs/CodeChickenLib-1.7.10-1.1.1.93-universal.jar")
     compile files("libs/NotEnoughItems-1.7.10-1.0.5.120-universal.jar")
     compile files("libs/Avaritia-1.13.jar")
@@ -36,6 +40,13 @@ dependencies {
     compile files("libs/Thaumcraft-1.7.10-4.2.3.5.jar")
     compile files("libs/wireless-panels+improved-vajra-0.42R.jar")
     compile files("libs/Botania r1.8-249.jar")
+	
+	compile files("libs/Galacticraft-API-1.7-3.0.12.504.jar")
+    compile files("libs/GalacticraftCore-Dev-1.7-3.0.12.504.jar")
+    compile files("libs/Galacticraft-Planets-Dev-1.7-3.0.12.504.jar")
+    compile files("libs/GalaxySpace_1.7.10_1.2.7STABLE.jar")
+    compile files("libs/ExtraPlanets_1.7.10_2.1.4.jar")
+    compile files("libs/More-Planets-1.7.10-1.4.4-GC502.jar")
     
 
 }
