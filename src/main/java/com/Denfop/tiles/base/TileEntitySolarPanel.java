@@ -35,6 +35,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.integration.GC.ExtraPlanetsIntegration;
@@ -380,7 +381,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	this.solarType = 0;
         }
         for(int i =0;i<9;i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module6) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IPanel) {
         		int g = chargeSlots[i].getItemDamage();
         		if(o >= g+1) {
         			NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);

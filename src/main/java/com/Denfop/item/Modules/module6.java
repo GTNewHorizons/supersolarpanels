@@ -17,12 +17,13 @@ import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.item.Item;
 
-public class module6 extends Item
+public class module6 extends Item 
 {
     private List<String> itemNames;
     private IIcon[] IIconsList;

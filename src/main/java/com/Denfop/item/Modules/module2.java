@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-public class module2 extends Item{
+public class module2 extends Item   {
 	public module2() {
 		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp1);
 	}

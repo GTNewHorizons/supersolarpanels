@@ -107,12 +107,17 @@ public static int armor_maxcharge;
 public static int armor_transferlimit;
 public static int armor_tier;
 public static int armor_maxcharge_body;
+public static int percent_output;
+public static int percent_storage;
+public static int percent_day;
+public static int percent_night;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
          configFile = event.getSuggestedConfigurationFile();
         //
+         
          damagecable=config.get("Events", "Damage", true).getBoolean(true);
          newsystem=config.get("Events", "New system transfer energy", true).getBoolean(true);
          EnableMagnetitOre=config.get("Generation", "Spawn Magnetit Ore", true).getBoolean(true);
@@ -224,7 +229,11 @@ public static void config(final FMLPreInitializationEvent event) {
          neutronGenNight = config.get("Neutron Solar panel(Avaritia)", "GenNight", 1310720).getInt(1310720);
          neutronOutput = config.get("Neutron Solar panel(Avaritia)", "Output", 2621440).getInt(2621440);
          neutronStorage = config.get("Neutron Solar panel(Avaritia)", "Storage", 40000000).getInt(40000000);
-         //
+         percent_output= config.get("Modules", "percent_output", 20).getInt(20);
+         percent_storage= config.get("Modules", "percent_output", 20).getInt(20);
+         percent_day= config.get("Modules", "percent_output", 20).getInt(20);
+         percent_night= config.get("Modules", "percent_output", 20).getInt(20);
+//
          
          //
          SuperSolarPanels.tier2= config.get("Advanced MFSU", "tier", 6).getInt(6);
