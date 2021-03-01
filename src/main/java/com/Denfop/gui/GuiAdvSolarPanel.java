@@ -31,7 +31,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
     this.tileentity = tileentitysolarpanel;
     this.allowUserInput = false;
     this.xSize = 194;
-    this.ySize = 168;
+    this.ySize = 238;
   }
   
   public static double roundAvoid(double value, int places) {
@@ -150,7 +150,7 @@ if(this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getI
       
         this.fontRendererObj.drawString(maxOutputString +  GuiNumberUtils.getString(a[1]) + " " + energyPerTickString, 50, 26, 13487565);
         if(output_dob != 0)
-this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 150, 26, 13487565);
+this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 20, 180, 13487565);
       
     
     int gend = 0;
