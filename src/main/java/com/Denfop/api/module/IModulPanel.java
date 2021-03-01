@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface IModulPanel {
-	public static void setData(ItemStack stack,int meta, TileEntitySolarPanel tile) {
+	public static void setData(ItemStack stack, TileEntitySolarPanel tile) {
 		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
 		  
     	nbt.setInteger("genday", tile.genDay);

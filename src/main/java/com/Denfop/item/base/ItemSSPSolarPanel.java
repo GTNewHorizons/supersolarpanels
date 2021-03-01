@@ -63,7 +63,7 @@ public class ItemSSPSolarPanel extends ItemBlock implements IPanel
         for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
             final ItemStack stack = new ItemStack((Item)this, 1, meta);
             TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-          IPanel.setData(stack, meta,tile);
+          IPanel.setData(stack,tile);
             itemList.add(stack);
         }
     }

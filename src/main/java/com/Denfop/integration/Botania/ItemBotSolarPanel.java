@@ -46,7 +46,7 @@ public class ItemBotSolarPanel extends ItemBlock implements IPanel
             final ItemStack stack = new ItemStack((Item)this, 1, meta);
             
         	TileEntitySolarPanel tile = (TileEntitySolarPanel) blockBotSolarPanel.getBlockEntity(meta);
-        	  IPanel.setData(stack, meta,tile);
+        	  IPanel.setData(stack,tile);
             itemList.add(stack);
         }
     }

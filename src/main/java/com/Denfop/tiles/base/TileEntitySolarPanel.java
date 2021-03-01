@@ -36,6 +36,7 @@ import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.IPanel;
+import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
@@ -266,7 +267,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         
         int tierplus = 0;
         int minus = 0;
-        int output = 0;
+        int output[];
+        output = new int[9];
     
       
         for(int i= 0; i < 9; i++) {
@@ -278,8 +280,10 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module3) {
         		maxstorage1++;}
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module4) {
-        		output++;}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulOutput) {
+        		output[i] = IModulOutput.getData(this.chargeSlots[i]).get(0);
+        		
+        				}
         	
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
         		int kk = chargeSlots[i].getItemDamage();
@@ -477,8 +481,16 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
     		this.maxStorage = (int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1);
     	}
         //
-        if((int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output) < 2000000000)	{
-        this.production  = (int) ((this.u +  sum3) + (this.u +  sum3)*0.2*output);}else {
+       double output_dob = 0;
+       
+        for(int i = 0; i <9;i++) {
+        	if(output[i] != 0) {
+        	output_dob = output_dob + output[i];
+        	}
+        	
+        }
+        if((int) ((this.u +  sum3) + (this.u +  sum3)*(output_dob/100)) < 2000000000)	{
+        this.production  = (int) ((this.u +  sum3) + (this.u +  sum3)*output_dob);}else {
         	this.production = 2000000000;
         }
        

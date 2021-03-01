@@ -2,6 +2,7 @@ package com.Denfop.gui;
 
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
@@ -54,14 +55,13 @@ public class GuiAdvSolarPanel extends GuiContainer {
     String ModulesString4 = I18n.format("ssp.tier1", new Object[0]);
     String ModulesString5 = I18n.format("ssp.tier2", new Object[0]);
     int maxstorage1 = 0;
-    int output = 0;
+    
     int tierplus = 0;
     int minus = 0;
     for (int i = 0; i < 9; i++) {
       if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module3)
         maxstorage1++; 
-      if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module4)
-        output++; 
+      
       if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module7) {
         int kk = this.tileentity.chargeSlots[i].getItemDamage();
         if (kk == 1) {
@@ -112,9 +112,23 @@ for(int i = 0; i<9;i++) {
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
        if(maxstorage1 != 0)
         this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
-      
-    
-    a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) * 0.2D * output);
+       int output[];
+       output = new int[9];
+       for(int i= 0; i < 9; i++) {
+     
+       if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IModulOutput) {
+   		output[i] = IModulOutput.getData(this.tileentity.chargeSlots[i]).get(0);
+   		
+   				}}
+       double output_dob = 0;
+       
+       for(int i = 0; i <9;i++) {
+       	if(output[i] != 0) {
+       	output_dob = output_dob + output[i];
+       	}
+       	
+       }
+    a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) *(output_dob/100));
     if(a[1] > 2000000000) {
     	a[1] = 2000000000;
     }
@@ -124,8 +138,8 @@ for(int i = 0; i<9;i++) {
  
       
         this.fontRendererObj.drawString(maxOutputString +  GuiNumberUtils.getString(a[1]) + " " + energyPerTickString, 50, 26, 13487565);
-        if(output != 0)
-this.fontRendererObj.drawString(ModulesString3 + (20 * output) + "%", 150, 26, 13487565);
+        if(output_dob != 0)
+this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 150, 26, 13487565);
       
     
     int gend = 0;

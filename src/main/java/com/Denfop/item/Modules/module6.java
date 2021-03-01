@@ -98,7 +98,7 @@ public class module6 extends Item implements IModulPanel
             final ItemStack stack = new ItemStack((Item)this, 1, meta);
             
             TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-            IModulPanel.setData(stack, meta, tile);
+            IModulPanel.setData(stack, tile);
             itemList.add(stack);
         }
     }

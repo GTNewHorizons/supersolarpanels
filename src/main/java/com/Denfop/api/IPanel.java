@@ -17,7 +17,7 @@ public interface IPanel {
 	
 	public  void getSubItems(final Item item, final CreativeTabs tabs, final List itemList);
 	
-	public static void setData(ItemStack stack,int meta, TileEntitySolarPanel tile) {
+	public static void setData(ItemStack stack, TileEntitySolarPanel tile) {
 		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
 		  
       	nbt.setInteger("genday", tile.genDay);
