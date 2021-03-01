@@ -4,6 +4,7 @@ import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
+import com.Denfop.api.module.IModulStorage;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.module5;
@@ -54,13 +55,12 @@ public class GuiAdvSolarPanel extends GuiContainer {
     String ModulesString3 = I18n.format("ssp.output", new Object[0]);
     String ModulesString4 = I18n.format("ssp.tier1", new Object[0]);
     String ModulesString5 = I18n.format("ssp.tier2", new Object[0]);
-    int maxstorage1 = 0;
+    
     
     int tierplus = 0;
     int minus = 0;
     for (int i = 0; i < 9; i++) {
-      if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module3)
-        maxstorage1++; 
+      
       
       if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module7) {
         int kk = this.tileentity.chargeSlots[i].getItemDamage();
@@ -96,8 +96,19 @@ for(int i = 0; i<9;i++) {
 	sum1=sum1+c[i];
 	sum2=sum2+d[i];
 }
+int maxstorage1[];
+maxstorage1 = new int[9];
+double maxstorage_dob = 0;
+for(int j = 0; j <9;j++) {
+if(this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getItem() instanceof IModulStorage) {
+	maxstorage1[j] = IModulStorage.getData(this.tileentity.chargeSlots[j]).get(0);
+	if(maxstorage1[j] != 0) {
+		maxstorage_dob = maxstorage_dob + maxstorage1[j];
+	}
+	
+			}}
     float[] a = new float[4];
-    a[0] = (float)((this.tileentity.p + sum1) + (this.tileentity.p + sum1) * 0.2D * maxstorage1);
+    a[0] = (float)((this.tileentity.p + sum1) + (this.tileentity.p + sum1)*(maxstorage_dob/100));
     if(a[0] > 2000000000) {
     	a[0] = 2000000000;
     }
@@ -110,8 +121,8 @@ for(int i = 0; i<9;i++) {
     	String maxstorage_2 =  GuiNumberUtils.getString(this.tileentity.storage);
       
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
-       if(maxstorage1 != 0)
-        this.fontRendererObj.drawString(ModulesString2 + (20 * maxstorage1) + "%", 160, 16, 13487565);
+       if(maxstorage_dob != 0)
+        this.fontRendererObj.drawString(ModulesString2 + maxstorage_dob + "%", 160, 16, 13487565);
        int output[];
        output = new int[9];
        for(int i= 0; i < 9; i++) {

@@ -38,6 +38,7 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.IPanel;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
+import com.Denfop.api.module.IModulStorage;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.integration.GC.ExtraPlanetsIntegration;
@@ -263,14 +264,15 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         double sentPacket = 0.0;
         int gend = 0;
         int genn = 0;
-        int maxstorage1 = 0;
+       
         
         int tierplus = 0;
         int minus = 0;
         int output[];
         output = new int[9];
     
-      
+        int maxstorage1[];
+        maxstorage1 = new int[9];
         for(int i= 0; i < 9; i++) {
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module1) {
         		
@@ -278,8 +280,10 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module2) {
         		genn++;
         		}
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module3) {
-        		maxstorage1++;}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulStorage) {
+        		maxstorage1[i] = IModulStorage.getData(this.chargeSlots[i]).get(0);
+        		
+        				}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulOutput) {
         		output[i] = IModulOutput.getData(this.chargeSlots[i]).get(0);
         		
@@ -472,13 +476,20 @@ if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
         		this.genNight = 2146999999;
         	}//
        
-        
-        if((int) ((this.p +sum2) + (this.p +  sum2)*0.2*maxstorage1) < 0) {
+double maxstorage_dob = 0;
+
+for(int i = 0; i <9;i++) {
+	if(maxstorage1[i] != 0) {
+		maxstorage_dob = maxstorage_dob + maxstorage1[i];
+	}
+	
+}
+        if((int) ((this.p +sum2) + (this.p +  sum2)*(maxstorage_dob/100)) < 0) {
     		this.maxStorage = 0;
-    	}else if((int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1) > 2000000000){
+    	}else if((int) ((this.p + sum2) + (this.p +  sum2)*(maxstorage_dob/100)) > 2000000000){
     		this.maxStorage = 2000000000;
     	}else {
-    		this.maxStorage = (int) ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1);
+    		this.maxStorage = (int) ((this.p + sum2) + (this.p +  sum2)*(maxstorage_dob/100));
     	}
         //
        double output_dob = 0;
@@ -825,14 +836,18 @@ return this.generating = 0;
           	}
           }
           this.o = this.tier + tierplus -  minus;
-    	int maxstorage1 = 0;
     	
-    	 for(int j= 0; j < 9; j++) {
-         
-         	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module3)
-         		maxstorage1++;
-         	
-         }
+    	  int maxstorage1[];
+          maxstorage1 = new int[9];
+    	 double maxstorage_dob = 0;
+    	 for(int j = 0; j <9;j++) {
+    	 if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof IModulStorage) {
+     		maxstorage1[j] = IModulStorage.getData(this.chargeSlots[j]).get(0);
+     		if(maxstorage1[j] != 0) {
+    	 		maxstorage_dob = maxstorage_dob + maxstorage1[j];
+    	 	}
+     		
+     				}}
     	
       	int c[];
       	c = new int[9];
@@ -854,10 +869,10 @@ return this.generating = 0;
         sum2=sum2+c[j];
         }
     	
-if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1))) > 24 )
+if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage_dob/100)))) > 24 )
 	return 24;
 
-         return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*0.2*maxstorage1)));
+         return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage_dob/100))));
 
 }
         

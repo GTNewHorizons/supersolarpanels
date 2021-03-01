@@ -229,10 +229,10 @@ public static void config(final FMLPreInitializationEvent event) {
          neutronGenNight = config.get("Neutron Solar panel(Avaritia)", "GenNight", 1310720).getInt(1310720);
          neutronOutput = config.get("Neutron Solar panel(Avaritia)", "Output", 2621440).getInt(2621440);
          neutronStorage = config.get("Neutron Solar panel(Avaritia)", "Storage", 40000000).getInt(40000000);
-         percent_output= config.get("Modules", "percent_output", 20).getInt(20);
-         percent_storage= config.get("Modules", "percent_output", 20).getInt(20);
-         percent_day= config.get("Modules", "percent_output", 20).getInt(20);
-         percent_night= config.get("Modules", "percent_output", 20).getInt(20);
+         percent_output= config.get("Modules", "percent output", 20).getInt(20);
+         percent_storage= config.get("Modules", "percent storage", 20).getInt(20);
+         percent_day= config.get("Modules", "percent generation day", 20).getInt(20);
+         percent_night= config.get("Modules", "percent generation night", 20).getInt(20);
 //
          
          //

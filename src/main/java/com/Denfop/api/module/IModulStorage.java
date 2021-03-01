@@ -11,12 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
-public interface IModulOutput {
-	public static void setData(ItemStack stack, int output) {
+public interface IModulStorage {
+	public static void setData(ItemStack stack, int storage) {
 		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
 		  
   
-  	nbt.setInteger("percentoutput",output);
+  	nbt.setInteger("percentstorage",storage);
   	
 	}
 	
@@ -24,7 +24,7 @@ public interface IModulOutput {
 		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
 		List<Integer> list = new ArrayList<Integer>();
 		
-		list.add(nbt.getInteger("percentoutput"));
+		list.add(nbt.getInteger("percentstorage"));
 		
 		return list;
 		
