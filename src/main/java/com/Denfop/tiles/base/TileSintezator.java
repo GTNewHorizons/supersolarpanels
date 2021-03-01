@@ -215,27 +215,27 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
         	sum3 = sum3 + myArray3[i];
         	
         }
-if(sum < 2147000000) {
+if(sum < 2000000000) {
         	this.genDay  = sum;}else if(sum < 0){
         		this.genDay = 0;
         	}else {
-        		this.genDay = 2146999999;
+        		this.genDay = 2000000000;
         	}
-if(sum1 < 2146999999) {
+if(sum1 < 2000000000) {
         	this.genNight  = sum1;}else {
-        		this.genNight = 2146999999;
+        		this.genNight = 2000000000;
         	}//
        if(sum2 < 0) {
-        		this.maxStorage = 2146999999;
-        	}else if(sum2 > 2147000000){
-        		this.maxStorage = 2146999999;
+        		this.maxStorage = 0;
+        	}else if(sum2 > 2000000000){
+        		this.maxStorage = 2000000000;
         	}else {
         		this.maxStorage = sum2;
         	}
         //
-        if(sum3 < 2147000000)	{
+        if(sum3 < 2000000000)	{
         this.production  = sum3;}else {
-        	this.production = 2146999999;
+        	this.production = 2000000000;
         }
 
             		
@@ -368,7 +368,7 @@ if(sum1 < 2146999999) {
          		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
          		int genday = nbt.getInteger("genday");
          		int gennight = nbt.getInteger("gennight");
-         		int storage = nbt.getInteger("storage");
+         		int storage = nbt.getInteger("basestorage");
          		int output = nbt.getInteger("output");
          		int p = chargeSlots[j].stackSize;
          		if(p <=  Config.limit) {

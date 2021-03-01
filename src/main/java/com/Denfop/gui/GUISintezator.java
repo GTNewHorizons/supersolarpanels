@@ -66,7 +66,7 @@ public class GUISintezator extends GuiContainer
        		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
 
        		
-       		int storage = nbt.getInteger("storage");
+       		int storage = nbt.getInteger("basestorage");
        		int output = nbt.getInteger("output");
        	
        		int p = this.tileentity.chargeSlots[i].stackSize;
@@ -94,12 +94,12 @@ public class GUISintezator extends GuiContainer
    	sum3 = sum3 + myArray3[i];
    	
    }
-    if(sum2 >= 200000000) {
-    	 sum2 = 200000000;
+    if(sum2 >= 2000000000) {
+    	 sum2 = 2000000000;
     }
        		
-    if(sum3 >= 200000000) {
-   	 sum3 = 200000000;
+    if(sum3 >= 2000000000) {
+   	 sum3 = 2000000000;
    }   	     
     if(sum2 <= 0) {
    	 sum2 = 0;
@@ -107,7 +107,9 @@ public class GUISintezator extends GuiContainer
     if(sum3 <= 0) {
    	 sum3 = 0;
    }
+  
     String maxstorage_1 = GuiNumberUtils.getString(sum2);
+   
     String maxstorage_2 = GuiNumberUtils.getString(this.tileentity.storage);
 	  this.fontRendererObj.drawString(storageString +maxstorage_2 + "/" +maxstorage_1, 50, 22, 13487565);
 
