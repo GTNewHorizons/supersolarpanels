@@ -22,6 +22,7 @@ import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.energy.ultDDrill;
 import com.Denfop.tiles.base.TileEntityCable;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.NBTData;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -136,12 +137,12 @@ public class SSPEventHandler {
 	    if(event.entityLiving instanceof EntityPlayer) { 
 		 if(player.capabilities.isCreativeMode ==false) {
 			 
-			 NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
+			 NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 			boolean fly = nbtData.getBoolean("isFlyActive");
 			if(!player.capabilities.isCreativeMode) {
 			if(player.inventory.armorInventory[2] != null) {
 			if(player.inventory.armorInventory[2].getItem() == SSPItem.quantumBodyarmor) {
-				NBTTagCompound	 nbtData1 = SuperSolarPanels.getOrCreateNbtData(player.inventory.armorInventory[2]);
+				NBTTagCompound	 nbtData1 = NBTData.getOrCreateNbtData(player.inventory.armorInventory[2]);
 				boolean jetpack = nbtData1.getBoolean("jetpack");
 				if(jetpack == false) {
 					player.capabilities.isFlying = false;
@@ -191,7 +192,7 @@ public class SSPEventHandler {
 		
 		if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) return;
 		 EntityPlayer player = (EntityPlayer) event.entity;
-		 NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
+		 NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 		 if(player.inventory.armorInventory[3] != null) {
 			 if(player.inventory.armorInventory[3].getItem() == SSPItem.quantumHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
@@ -231,7 +232,7 @@ public class SSPEventHandler {
         int z = MathHelper.floor_double(player.posZ);
         int y = MathHelper.floor_double(player.posY);
         int skylight = player.worldObj.getBlockLightValue(x, y, z);
-        NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
+        NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
         if(nbtData.getBoolean("isNightVision")){
         	if(player.posY < 60 && skylight <8) {
            	 player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true));
@@ -252,7 +253,7 @@ public class SSPEventHandler {
 			  //  TODO start Check inventory
 			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill )) {
 				   ItemStack input = player.inventory.mainInventory[i];
-				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input);
+				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
 				   if(nbtData.getBoolean("create") == true) {
 				   Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
 				   ultDDrill drill = (ultDDrill) input.getItem();
@@ -305,7 +306,7 @@ public class SSPEventHandler {
 		 if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
 			  return;
 		 EntityPlayer player = (EntityPlayer) event.entity;
-		 NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
+		 NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 		 if(player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem() == SSPItem.quantumBoots) {
 			 nbtData.setBoolean("stepHeight", true);
 			 player.stepHeight = 1.0F;

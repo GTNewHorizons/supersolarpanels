@@ -15,6 +15,7 @@ import java.util.Map;
 
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -155,7 +156,7 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
           if (worldObj.isRemote)
             return; 
           gainFuel(player);
-          NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(itemStack);
+          NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
           nbtData.setInteger(iconString, energyPerDamage);
           if (this.sunIsUp && this.skyIsVisible) {
         	  this.storage= nbtData.getInteger("storage");
@@ -401,8 +402,8 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
         return this.transferLimit;
     }
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-  	  NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
-  	  NBTTagCompound nbtData1 = SuperSolarPanels.getOrCreateNbtData(itemStack);
+  	  NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
+  	  NBTTagCompound nbtData1 = NBTData.getOrCreateNbtData(itemStack);
   	 
   	
   	

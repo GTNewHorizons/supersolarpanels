@@ -36,6 +36,7 @@ import com.Denfop.integration.Botania.modules1;
 import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.base.ItemSSPSolarPanel;
+import com.Denfop.utils.NBTData;
 
 import ic2.api.network.INetworkUpdateListener;
 import ic2.api.network.INetworkDataProvider;
@@ -365,7 +366,7 @@ if(sum1 < 2000000000) {
          	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof IPanel) {
          		ItemStack itemstack = this.chargeSlots[j];
          		int meta = itemstack.getMaxDamage();
-         		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+         		NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
          		int genday = nbt.getInteger("genday");
          		int gennight = nbt.getInteger("gennight");
          		int storage = nbt.getInteger("basestorage");

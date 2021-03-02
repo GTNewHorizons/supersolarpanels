@@ -17,6 +17,7 @@ import com.Denfop.item.Modules.module6;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.utils.GuiNumberUtils;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
@@ -63,7 +64,7 @@ public class GUISintezator extends GuiContainer
        	if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IPanel) {
        		ItemStack itemstack = this.tileentity.chargeSlots[i];
        		int meta = itemstack.getMaxDamage();
-       		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+       		NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
 
        		
        		int storage = nbt.getInteger("basestorage");

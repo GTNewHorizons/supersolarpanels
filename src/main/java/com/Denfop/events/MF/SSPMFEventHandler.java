@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.utils.NBTData;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -32,7 +33,7 @@ public class SSPMFEventHandler {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   Map<Integer, Integer> map = null;
 				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
-				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input); 
+				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input); 
 				  if((input.getItem() == SSPItem.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
 					 
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 
@@ -64,7 +65,7 @@ public class SSPMFEventHandler {
 				  }
 				if( player.openContainer.getSlot(2).getStack() != null) {
 					ItemStack input2 =  player.openContainer.getSlot(2).getStack();
-					  nbtData = SuperSolarPanels.getOrCreateNbtData(input2); 
+					  nbtData = NBTData.getOrCreateNbtData(input2); 
 					  if((input2.getItem() == SSPItem.ultDDrill   ||input2.getItem() == Ic2Items.iridiumDrill.getItem())) {
 
 						  if(EnchantmentHelper.getEnchantments(input2) != null) { 

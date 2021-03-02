@@ -4,6 +4,7 @@ package com.Denfop.integration.Botania;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
+import com.Denfop.utils.NBTData;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import cpw.mods.fml.relauncher.Side;
@@ -314,7 +315,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
   }
   
   public static int readToolMode(ItemStack itemstack) {
-    NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+    NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
     int toolMode = nbt.getInteger("toolMode");
    
     if (toolMode < 0 || toolMode > 3)
@@ -323,7 +324,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
   }
   
   public void saveToolMode(ItemStack itemstack, int toolMode) {
-    NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+    NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
     nbt.setInteger("toolMode", toolMode);
   }
   

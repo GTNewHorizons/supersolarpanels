@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface IModulPanel {
 	public static void setData(ItemStack stack, TileEntitySolarPanel tile) {
-		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		  NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		  
     	nbt.setInteger("genday", tile.genDay);
     	nbt.setInteger("gennight", tile.genNight);
@@ -20,7 +21,7 @@ public interface IModulPanel {
     	nbt.setInteger("tier", tile.tier);
 	}
 	public static List<Integer> getData(ItemStack stack){
-		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(nbt.getInteger("genday"));
 		list.add(nbt.getInteger("gennight"));

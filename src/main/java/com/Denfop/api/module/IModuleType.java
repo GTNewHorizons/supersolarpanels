@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import net.minecraft.util.StatCollector;
 
 public interface IModuleType {
 	public static void setData(ItemStack stack, String type) {
-		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		  NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		  
   
   	nbt.setString("type",type);
@@ -21,7 +22,7 @@ public interface IModuleType {
 	}
 	
 	public static List<String> getData(ItemStack stack){
-		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		List<String> list = new ArrayList<String>();
 		
 		list.add(nbt.getString("type"));

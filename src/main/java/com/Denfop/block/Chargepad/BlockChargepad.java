@@ -49,6 +49,7 @@ import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFES;
 import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFSUS;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
+import com.Denfop.utils.NBTData;
 
 import cofh.api.energy.IEnergyContainerItem;;
 
@@ -198,7 +199,7 @@ public class BlockChargepad extends BlockContainer {
       int heading = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
       TileEntityChargepadBlock te = (TileEntityChargepadBlock) world.getTileEntity(x, y, z);
      
-      NBTTagCompound nbttagcompound1 = SuperSolarPanels.getOrCreateNbtData(stack);
+      NBTTagCompound nbttagcompound1 = NBTData.getOrCreateNbtData(stack);
       double energy1 = nbttagcompound1.getDouble("energy");
       double energy2 = nbttagcompound1.getDouble("energy2");
       te.energy=energy1;

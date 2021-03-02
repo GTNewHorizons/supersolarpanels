@@ -3,6 +3,7 @@ package com.Denfop.item.Modules;
 import java.util.List;
 
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -23,7 +24,7 @@ public class ItemWirelessModule extends Item {
 		
 	}
 	   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
-	        NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+	        NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
 	        info.add(StatCollector.translateToLocal("ssp.modules"));
       	    info.add(StatCollector.translateToLocal("wirelles") );
 	        info.add(StatCollector.translateToLocal("ssp.Name") + ": " +nbttagcompound.getString("Name"));

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.container.ContainerDissEnchanter;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -30,7 +31,7 @@ public class SSPDEEventHandler {
 			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill || player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem())) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
-				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input); 
+				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input); 
 				  if((input.getItem() == SSPItem.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem() )) {
 					  Map<Integer, Integer> map = null;
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 

@@ -7,6 +7,7 @@ import java.util.List;
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlockElectric;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -70,7 +71,7 @@ public ItemElectricBlock(Block block) {
     switch (meta) {
       case 0:
       case 1:
-        nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+        nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
         info.add(StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbttagcompound.getInteger("energy") + " EU");
         info.add(StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbttagcompound.getInteger("energy2") + " RF");
         break;
@@ -82,15 +83,15 @@ public ItemElectricBlock(Block block) {
     itemList.add(new ItemStack(item, 1, 0));
     itemList.add(new ItemStack(item, 1, 1));
     ItemStack  itemStack = new ItemStack(item, 1, 0);
-    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+    NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     itemStack.setItemDamage(0);
-    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     nbttagcompound.setDouble("energy",  Config.storage1);
     nbttagcompound.setDouble("energy2",  Config.storage1);
     itemList.add(itemStack);
     itemStack = new ItemStack(item, 1, 1);
     itemStack.setItemDamage(1);
-    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     nbttagcompound.setDouble("energy",  Config.storage2);
     nbttagcompound.setDouble("energy2",  Config.storage2);
     itemList.add(itemStack);

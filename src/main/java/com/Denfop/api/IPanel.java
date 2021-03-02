@@ -6,6 +6,7 @@ import java.util.List;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +19,7 @@ public interface IPanel {
 	public  void getSubItems(final Item item, final CreativeTabs tabs, final List itemList);
 	
 	public static void setData(ItemStack stack, TileEntitySolarPanel tile) {
-		  NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		  NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		  
       	nbt.setInteger("genday", tile.genDay);
       	nbt.setInteger("gennight", tile.genNight);
@@ -27,7 +28,7 @@ public interface IPanel {
       	nbt.setInteger("tier", tile.tier);
 	}
 	public static List<Integer> getData(ItemStack stack){
-		NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(stack);
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(nbt.getInteger("genday"));
 		list.add(nbt.getInteger("gennight"));

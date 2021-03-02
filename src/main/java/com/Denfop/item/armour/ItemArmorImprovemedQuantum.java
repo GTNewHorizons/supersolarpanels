@@ -32,6 +32,7 @@ import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
+import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 
 import net.minecraft.client.Minecraft;
@@ -263,7 +264,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
     boolean Nightvision;
     short hubmode;
     boolean jetpack, hoverMode, jetpackUsed, enableQuantumSpeedOnSprint;
-    NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(itemStack);
+    NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
     byte toggleTimer = nbtData.getByte("toggleTimer");
     boolean ret = false;
    
@@ -474,12 +475,12 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
 	  }
   
   public static int getCharge(ItemStack itemstack) {
-	    NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemstack);
+	    NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(itemstack);
 	    int k = nbttagcompound.getInteger("charge");
 	    return k;
 	  }
   public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-	  NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
+	  NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 	 
 	
 	  if(itemStack.getItem() == SSPItem.quantumBodyarmor) {

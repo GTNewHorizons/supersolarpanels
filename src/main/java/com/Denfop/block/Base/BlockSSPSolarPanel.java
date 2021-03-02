@@ -41,6 +41,7 @@ import com.Denfop.tiles.overtimepanel.TilePhotonicSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileProtonSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileSingularSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileSpectralSolarPanel;
+import com.Denfop.utils.NBTData;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -957,7 +958,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         int heading = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         TileEntitySolarPanel te = (TileEntitySolarPanel) world.getTileEntity(x, y, z);
        
-        NBTTagCompound nbttagcompound1 = SuperSolarPanels.getOrCreateNbtData(stack);
+        NBTTagCompound nbttagcompound1 = NBTData.getOrCreateNbtData(stack);
         int storage1 = nbttagcompound1.getInteger("storage");
         int storage2 = nbttagcompound1.getInteger("storage2");
         te.storage=storage1;
@@ -989,7 +990,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
     public void getSubBlocks(final Item item, final CreativeTabs tab, final List subItems) {
         for (int ix = 0; ix < this.iconBuffer.length; ++ix) {
         	ItemStack itemstack = new ItemStack(this, 1, ix);
-        	NBTTagCompound nbt = SuperSolarPanels.getOrCreateNbtData(itemstack);
+        	NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
         	TileEntitySolarPanel tile = (TileEntitySolarPanel) this.getBlockEntity(ix);
         	nbt.setInteger("genday", tile.genDay);
             subItems.add(new ItemStack((Block)this, 1, ix));

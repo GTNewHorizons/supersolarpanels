@@ -55,6 +55,7 @@ import com.Denfop.item.Modules.module4;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.Modules.module7;
+import com.Denfop.utils.NBTData;
 import com.mojang.authlib.GameProfile;
 
 import cofh.api.energy.IEnergyContainerItem;
@@ -380,7 +381,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     	int d[];
     	d = new int[9];
     	Block block =	this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
-    	NBTTagCompound nbttagcompound1 = SuperSolarPanels.getOrCreateNbtData(new ItemStack(block));
+    	NBTTagCompound nbttagcompound1 = NBTData.getOrCreateNbtData(new ItemStack(block));
     	nbttagcompound1.setInteger("type", -1);
         if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
         	int g = chargeSlots[8].getItemDamage();
@@ -419,7 +420,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
             	wirelees = 1;
             	int x = 0;int y = 0; int z = 0; String name = null;int tier1 = 0;
             	
-      		NBTTagCompound    nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[i]);
+      		NBTTagCompound    nbttagcompound = NBTData.getOrCreateNbtData(this.chargeSlots[i]);
       		
       	 x=nbttagcompound.getInteger("Xcoord");
       		 y=nbttagcompound.getInteger("Ycoord");
@@ -903,7 +904,13 @@ if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage
          return  (float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage_dob/100))));
 
 }
-        
+    public float gaugeEnergyScaled2(final float i) {
+    	if( (this.storage2 * i / this.maxStorage2) > 24 )
+    		return 24;
+
+    	         return  (float) (this.storage * i /( this.maxStorage2));
+
+    }
     public boolean canConnectEnergy(ForgeDirection arg0) {
         return true;
       }
@@ -946,7 +953,7 @@ if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         ItemStack ret = super.getWrenchDrop(entityPlayer);
        	
-          NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(ret);
+          NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(ret);
           nbttagcompound.setInteger("storage", this.storage);
           nbttagcompound.setInteger("storage2", this.storage2 );
         

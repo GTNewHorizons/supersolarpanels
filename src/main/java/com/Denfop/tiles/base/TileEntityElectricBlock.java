@@ -5,6 +5,7 @@ import com.Denfop.container.ContainerElectricBlock;
 import com.Denfop.gui.GuiElectricBlock;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.module7;
+import com.Denfop.utils.NBTData;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
@@ -326,7 +327,7 @@ public int getInventoryStackLimit() {
           extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), (this.output * 4), true), false), false); 
       } }
         if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof ItemWirelessModule) {
-   		 NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(this.chargeSlots[0]);
+   		 NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(this.chargeSlots[0]);
    		 nbttagcompound.setInteger("Xcoord", this.xCoord);
    		 nbttagcompound.setInteger("Ycoord", this.yCoord);
    		 nbttagcompound.setInteger("Zcoord", this.zCoord);
@@ -475,7 +476,7 @@ public int getInventoryStackLimit() {
     float energyRetainedInStorageBlockDrops = ConfigUtil.getFloat(MainConfig.get(), "balance/energyRetainedInStorageBlockDrops");
     if (energyRetainedInStorageBlockDrops > 0.0F) {
     	
-      NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(ret);
+      NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(ret);
       nbttagcompound.setDouble("energy", this.energy * energyRetainedInStorageBlockDrops);
       nbttagcompound.setDouble("energy2", this.energy2 * energyRetainedInStorageBlockDrops);
     } 
