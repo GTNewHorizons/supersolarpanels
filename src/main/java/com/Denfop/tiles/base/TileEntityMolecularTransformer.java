@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.Recipes;
 import com.Denfop.container.ContainerBaseMolecular;
@@ -43,10 +44,10 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
     Recipes.molecular = (IMachineRecipeManager)new BasicMachineRecipeManager();
     NBTTagCompound nbt = new NBTTagCompound();
     nbt.setInteger("energy", 9000000);
-    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.spinelore,1)), nbt, new ItemStack[] { new ItemStack(SuperSolarPanels.spinelcrushedore,2 )});
+    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.spinelore,1)), nbt, new ItemStack[] { new ItemStack(SSPItem.spinelcrushedore,2 )});
     NBTTagCompound nbt1 = new NBTTagCompound();
     nbt1.setInteger("energy", 5000000);
-    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.spinel_ingot,1)), nbt1, new ItemStack[] { new ItemStack(SuperSolarPanels.ingotIridium.getItem(),1,7 )});
+    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.spinel_ingot,1)), nbt1, new ItemStack[] { new ItemStack(SSPItem.ingotIridium.getItem(),1,7 )});
 
   }
 

@@ -9,6 +9,7 @@ import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Config;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.DamageSource.SSPDamageSource;
 import com.Denfop.block.Base.BlockIC2Fluid;
@@ -98,30 +99,11 @@ public class SSPEventHandler {
 		{
 			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
 			
-			event.result = SuperSolarPanels.uuMatterCell;
+			event.result = SSPItem.uuMatterCell;
 			event.setResult(Result.ALLOW);
 		}
 	}
-	 @SubscribeEvent
-	    public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
-	      if (SuperSolarPanels.seasonal && (event.entityLiving instanceof net.minecraft.entity.monster.EntityZombie || event.entityLiving instanceof net.minecraft.entity.monster.EntitySkeleton) && event.entityLiving.worldObj.rand.nextFloat() < 0.1F) {
-	        EntityLiving entity = (EntityLiving)event.entityLiving;
-	        for (int i = 0; i <= 4; i++)
-	          entity.setEquipmentDropChance(i, Float.NEGATIVE_INFINITY); 
-	        if (entity instanceof net.minecraft.entity.monster.EntityZombie) {
-	          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber).copy()); 
-	          entity.setCurrentItemOrArmor(0, new ItemStack(SuperSolarPanels.nanoSaber1).copy()); 
-	        }
-	        if (event.entityLiving.worldObj.rand.nextFloat() < 0.1F) {
-	          entity.setCurrentItemOrArmor(1, new ItemStack(SuperSolarPanels.quantumHelmet).copy());
-	          entity.setCurrentItemOrArmor(2, new ItemStack(SuperSolarPanels.quantumBodyarmor).copy());
-	          entity.setCurrentItemOrArmor(3, new ItemStack(SuperSolarPanels.quantumLeggings).copy());
-	          entity.setCurrentItemOrArmor(4, new ItemStack(SuperSolarPanels.quantumBoots).copy());
-	        } else {
-	         
-	        } 
-	      } 
-	    }
+	 
 	    
 	   
 	  @SubscribeEvent
@@ -158,7 +140,7 @@ public class SSPEventHandler {
 			boolean fly = nbtData.getBoolean("isFlyActive");
 			if(!player.capabilities.isCreativeMode) {
 			if(player.inventory.armorInventory[2] != null) {
-			if(player.inventory.armorInventory[2].getItem() == SuperSolarPanels.quantumBodyarmor) {
+			if(player.inventory.armorInventory[2].getItem() == SSPItem.quantumBodyarmor) {
 				NBTTagCompound	 nbtData1 = SuperSolarPanels.getOrCreateNbtData(player.inventory.armorInventory[2]);
 				boolean jetpack = nbtData1.getBoolean("jetpack");
 				if(jetpack == false) {
@@ -174,7 +156,7 @@ public class SSPEventHandler {
 				    nbtData1.setBoolean("isFlyActive",true);
 				    player.capabilities.setFlySpeed((float) 0.2);
 				}
-			}else if(player.inventory.armorInventory[2].getItem() != SuperSolarPanels.quantumBodyarmor&& player.inventory.armorInventory[2] != null) {
+			}else if(player.inventory.armorInventory[2].getItem() != SSPItem.quantumBodyarmor&& player.inventory.armorInventory[2] != null) {
 				if(nbtData.getBoolean("isFlyActive") == true) {
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
@@ -211,27 +193,27 @@ public class SSPEventHandler {
 		 EntityPlayer player = (EntityPlayer) event.entity;
 		 NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
 		 if(player.inventory.armorInventory[3] != null) {
-			 if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.quantumHelmet) {
+			 if(player.inventory.armorInventory[3].getItem() == SSPItem.quantumHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 			 }else if(player.inventory.armorInventory[3].getItem() ==Ic2Items.nanoHelmet.getItem()) {
 				 nbtData.setBoolean("isNightVision", true);
 			 }else if(player.inventory.armorInventory[3].getItem() ==Ic2Items.quantumHelmet.getItem()){
 				 nbtData.setBoolean("isNightVision", true);
-			 }else if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.advancedSolarHelmet) {
+			 }else if(player.inventory.armorInventory[3].getItem() == SSPItem.advancedSolarHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 				 nbtData.setBoolean("isNightVisionEnable", true);
-			 }else if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.hybridSolarHelmet) {
+			 }else if(player.inventory.armorInventory[3].getItem() == SSPItem.hybridSolarHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 				 nbtData.setBoolean("isNightVisionEnable", true);
-			 }else if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.spectralSolarHelmet) {
+			 }else if(player.inventory.armorInventory[3].getItem() == SSPItem.spectralSolarHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 				 nbtData.setBoolean("isNightVisionEnable", true);
-			 }else if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.singularSolarHelmet) {
+			 }else if(player.inventory.armorInventory[3].getItem() == SSPItem.singularSolarHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 				 nbtData.setBoolean("isNightVisionEnable", true);
 			 }else if(player.inventory.armorInventory[3].getItem() ==Ic2Items.nightvisionGoggles.getItem()){
 				 nbtData.setBoolean("isNightVision", true);
-			 }else if(player.inventory.armorInventory[3].getItem() == SuperSolarPanels.ultimateSolarHelmet) {
+			 }else if(player.inventory.armorInventory[3].getItem() == SSPItem.ultimateSolarHelmet) {
 				 nbtData.setBoolean("isNightVision", true);
 				 nbtData.setBoolean("isNightVisionEnable", true);
 			 }
@@ -268,7 +250,7 @@ public class SSPEventHandler {
 		 EntityPlayer player = (EntityPlayer) event.entity;
 		 for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
 			  //  TODO start Check inventory
-			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SuperSolarPanels.ultDDrill )) {
+			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill )) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input);
 				   if(nbtData.getBoolean("create") == true) {
@@ -324,19 +306,19 @@ public class SSPEventHandler {
 			  return;
 		 EntityPlayer player = (EntityPlayer) event.entity;
 		 NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
-		 if(player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem() == SuperSolarPanels.quantumBoots) {
+		 if(player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem() == SSPItem.quantumBoots) {
 			 nbtData.setBoolean("stepHeight", true);
 			 player.stepHeight = 1.0F;
 			 
 			 nbtData.setBoolean("falldamage", true);
 			 player.fallDistance = 0;
-			 if(SuperSolarPanels.disableeffect1) {
+			 if(Config.disableeffect1) {
 			        
 		        }else {
 		        	
 		        	player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 300));
 		        }
-		        if(SuperSolarPanels.disableeffect2) {
+		        if(Config.disableeffect2) {
 		        
 		        }else {
 		        	player.addPotionEffect(new PotionEffect(Potion.jump.id, 300));
@@ -359,7 +341,7 @@ public class SSPEventHandler {
 		 if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
 			  return;
 		 EntityPlayer player = (EntityPlayer) event.entity;
-		 if(player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem() == SuperSolarPanels.quantumBoots) {
+		 if(player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem() == SSPItem.quantumBoots) {
 			 player.motionY =+ 0.8;	
 			 
 	}}

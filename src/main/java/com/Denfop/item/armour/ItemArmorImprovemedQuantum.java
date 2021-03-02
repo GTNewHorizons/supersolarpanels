@@ -26,7 +26,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.Denfop.Config;
 import com.Denfop.Constants;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
@@ -388,7 +390,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
             if (audioSource != null)
               audioSource.updatePosition(); 
           
-          if(SuperSolarPanels.disableeffect) {
+          if(Config.disableeffect) {
               
           } else {
           	
@@ -427,7 +429,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
           } 
           if (speed > 0.0F)
             player.moveFlying(0.0F, 1.0F, speed); 
-        } if(SuperSolarPanels.disableeffect3) {
+        } if(Config.disableeffect3) {
         	
         } else {
         	 player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300));
@@ -480,7 +482,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
 	  NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData1(player);
 	 
 	
-	  if(itemStack.getItem() == SuperSolarPanels.quantumBodyarmor) {
+	  if(itemStack.getItem() == SSPItem.quantumBodyarmor) {
   	  info.add(StatCollector.translateToLocal("ssp.fly") +" " +nbtData.getBoolean("isFlyActive"));
   	for (Object effect : new LinkedList(player.getActivePotionEffects())) {
   		int id = ((PotionEffect) effect).getPotionID();

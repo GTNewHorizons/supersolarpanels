@@ -1,5 +1,6 @@
 package com.Denfop.Recipes;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.item.IC2Items;
@@ -10,8 +11,8 @@ import net.minecraft.item.ItemStack;
 
 public class CannerRecipe {
 	public static void recipe() {
-		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.proton,1),1),SuperSolarPanels.reactorprotonSimple);
-		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.toriy,1),1),SuperSolarPanels.reactortoriySimple);
+		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.proton,1),1),SSPItem.reactorprotonSimple);
+		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.toriy,1),1),SSPItem.reactortoriySimple);
 
 	}
 }

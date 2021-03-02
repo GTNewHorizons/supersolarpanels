@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.Denfop.Config;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.Recipes.AlloySmelterRecipe;
 import com.Denfop.Recipes.BasicRecipe;
@@ -148,7 +149,7 @@ public boolean isClient() {
     this.renders = new HashMap<String, RenderBlock>();
 	  addBlockRenderer("cable", (RenderBlock)new RenderBlockCable());
 	  addBlockRenderer("wall", (RenderBlock)new RenderBlockWall());
-	  if(SuperSolarPanels.DraconicLoaded) {
+	  if(Config.DraconicLoaded) {
 		  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosBow, (IItemRenderer)new RenderBowModel(true));
 		  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosSword, (IItemRenderer)new RenderTool("models/tools/DraconicSword.obj", "textures/models/tools/DraconicSword.png", (IRenderTweak)DraconicIntegration.ChaosSword));
 		  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosPickaxe, (IItemRenderer)new RenderTool("models/tools/DraconicPickaxe.obj", "textures/models/tools/DraconicPickaxe.png", (IRenderTweak)DraconicIntegration.ChaosPickaxe));
@@ -161,22 +162,40 @@ public boolean isClient() {
 	      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosBoots, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosBoots));
 	    } 
 	  ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdminSolarPanel.class, new TileEntityPanelRender());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SuperSolarPanels.blockadmin),
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SSPItem.blockadmin),
 				new TileEntityPanelItemRender());
 		//
 		  ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySintezator.class, new TileEntitySintezatorRender());
-			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SuperSolarPanels.blocksintezator),
+			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SSPItem.blocksintezator),
 					new TileEntitySintezatorItemRender());
 			MinecraftForge.EVENT_BUS.register(new TextureHooks());
   }
+  public void integration() {
+		
+	  Config.DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
+      Config.AvaritiaLoaded = Loader.isModLoaded("Avaritia");
+      Config.BotaniaLoaded = Loader.isModLoaded("Botania");
+      Config.EnchantingPlus = Loader.isModLoaded("eplus");
+      Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
+if(Config.DraconicLoaded && Config.Draconic == true) {
+	DraconicIntegration.init();
+}
+if(Config.AvaritiaLoaded && Config.Avaritia == true) {
+	AvaritiaIntegration.init();
+}
+
+if(Config.BotaniaLoaded && Config.Botania == true) {
+	BotaniaIntegration.init();
+}
+  }
   public void registerRecipe() {
 		
-	  if(SuperSolarPanels.BotaniaLoaded && SuperSolarPanels.Botania == true)
+	  if(Config.BotaniaLoaded && Config.Botania == true)
       	BotaniaIntegration.recipe();
 	  BasicRecipe.recipe();
-if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.Draconic == true)
+if(Config.DraconicLoaded && Config.Draconic == true)
       DraconicIntegration.Recipes();
-if(SuperSolarPanels.AvaritiaLoaded && SuperSolarPanels.Avaritia == true)
+if(Config.AvaritiaLoaded && Config.Avaritia == true)
 	AvaritiaIntegration.recipe();
 AlloySmelterRecipe.recipe();
 CompressorRecipe.recipe();
@@ -188,30 +207,30 @@ MaceratorRecipe.recipe();
   }
   public void registerEvents() {
     MinecraftForge.EVENT_BUS.register(new EventDarkQuantumSuitEffect());
-    if(SuperSolarPanels.Streak == true) {
+    if(Config.Streak == true) {
     FMLCommonHandler.instance().bus().register(new EventDarkQuantumSuitEffect());}
     if(Config.newsystem)
     	SuperSolarPanels.initENet();
     
-	if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.EnchantingPlus &&SuperSolarPanels.MineFactory) {
+	if(Config.DraconicLoaded && Config.EnchantingPlus &&Config.MineFactory) {
 		 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());
 		
-	}else if(SuperSolarPanels.DraconicLoaded &&SuperSolarPanels.EnchantingPlus) {
+	}else if(Config.DraconicLoaded &&Config.EnchantingPlus) {
 		MinecraftForge.EVENT_BUS.register(new SSPDEEPEventHandler());
-	}else if(SuperSolarPanels.DraconicLoaded && SuperSolarPanels.MineFactory) {
+	}else if(Config.DraconicLoaded && Config.MineFactory) {
 		MinecraftForge.EVENT_BUS.register(new SSPDEMFEventHandler());
-	}else if(SuperSolarPanels.EnchantingPlus && SuperSolarPanels.MineFactory) {
+	}else if(Config.EnchantingPlus && Config.MineFactory) {
 		MinecraftForge.EVENT_BUS.register(new SSPMPMFEventHandler());
 	}
 	else {
-		 if(SuperSolarPanels.DraconicLoaded) {
+		 if(Config.DraconicLoaded) {
 			 MinecraftForge.EVENT_BUS.register(new SSPDEEventHandler());
 	        }
 		
-		if(SuperSolarPanels.EnchantingPlus) {
+		if(Config.EnchantingPlus) {
 			 MinecraftForge.EVENT_BUS.register(new SSPEPEventHandler());
 	        }
-		if(SuperSolarPanels.MineFactory) {
+		if(Config.MineFactory) {
 			 MinecraftForge.EVENT_BUS.register(new SSPMFEventHandler());
 	        }}
 	MinecraftForge.EVENT_BUS.register(new SSPEventHandler());

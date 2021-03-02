@@ -70,91 +70,14 @@ public class ItemSSPSolarPanel extends ItemBlock implements IPanel
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
         NBTTagCompound nbttagcompound;
         int meta = itemStack.getItemDamage();
-        switch (meta) {
-        case 0:
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.advGenDay  + " EU/t " );
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.advGenNight  + " EU/t " );
+       TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
+      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + tile.genDay  + " EU/t " );
+      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + tile.genNight  + " EU/t " );
             
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.advOutput  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.advStorage + " EU ");
-          info.add(StatCollector.translateToLocal("ssp.tier") + "1");
-          
-          break;
-        case 1:
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.hGenDay  + " EU/t " );
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.hGenNight  + " EU/t " );
-            
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.hOutput  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.hStorage + " EU ");
-          info.add(StatCollector.translateToLocal("ssp.tier") + "2");
-          break;
-        case 2:
-       	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.uhGenDay  + " EU/t " );
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.uhGenNight  + " EU/t " );
-            
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.uhOutput  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.uhStorage + " EU ");
-          info.add(StatCollector.translateToLocal("ssp.tier") + "3");
-          break;
-        case 3:
-       	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.qpGenDay  + " EU/t " );
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.qpGenNight  + " EU/t " );
-            
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.qpOutput  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.qpStorage + " EU ");
-          info.add(StatCollector.translateToLocal("ssp.tier") + "4");
-          break;
-          case 4:
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.spectralpanelGenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.spectralpanelGenNight  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.spectralpanelOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.spectralpanelstorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.spectralpaneltier);
-            
-            break;
-          case 6:
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.singularpanelGenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.singularpanelGenNight  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.singularpanelOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.singularpanelstorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.singularpaneltier);
-            break;
-          case 8:
-         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.photonicpanelGenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.photonicpanelGenNight  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.photonicpanelOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.photonicpanelStorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.photonicpaneltier);
-            break;
-          case 7:
-         	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.adminpanelGenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.adminpanelGenNight  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.AdminpanelOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.AdminpanelStorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.adminpaneltier);
-            break;
-          case 9:
-          	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.neutronpanelGenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.neutronpanelGenNight  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " + SuperSolarPanels.neutronpanelOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.neutronpanelStorage + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.neutronpaneltier);
-          break;
-          case 5:
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + SuperSolarPanels.protongenDay  + " EU/t " );
-        	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + SuperSolarPanels.protongennitht  + " EU/t " );
-              
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +SuperSolarPanels.protonOutput  + " EU/t " );
-            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.protontier + " EU ");
-            info.add(StatCollector.translateToLocal("ssp.tier") + "6");
-            break;
-       
-        } 
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +tile.production  + " EU/t " );
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + tile.storage + " EU ");
+          info.add(StatCollector.translateToLocal("ssp.tier") + tile.tier);
+        
         }
         @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(final ItemStack itemstack) {

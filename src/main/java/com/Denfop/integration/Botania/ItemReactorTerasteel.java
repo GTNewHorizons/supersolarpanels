@@ -1,5 +1,7 @@
 package com.Denfop.integration.Botania;
 
+import com.Denfop.Config;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.reactor.ItemReactorUranium;
 
@@ -9,14 +11,14 @@ import net.minecraft.item.ItemStack;
 
 public class ItemReactorTerasteel extends ItemReactorUranium {
   public ItemReactorTerasteel(String internalName, int cells) {
-    super(internalName, cells, SuperSolarPanels.TerrasteelRodCells);
+    super(internalName, cells, Config.TerrasteelRodCells);
   }
   
   protected int getFinalHeat(IReactor reactor, ItemStack stack, int x, int y, int heat) {
     if (reactor.isFluidCooled()) {
       float breedereffectiveness = reactor.getHeat() / reactor.getMaxHeat();
       if (breedereffectiveness > 0.5D)
-        heat *= SuperSolarPanels.TerrasteelRodHeat; 
+        heat *= Config.TerrasteelRodHeat; 
     } 
     return heat;
   }
@@ -25,13 +27,13 @@ public class ItemReactorTerasteel extends ItemReactorUranium {
     ItemStack ret;
     switch (this.numberOfCells) {
       case 1:
-        ret = SuperSolarPanels.reactorDepletedprotonSimple;
+        ret = SSPItem.reactorDepletedprotonSimple;
         return new ItemStack(ret.getItem(), 1);
       case 2:
-        ret = SuperSolarPanels.reactorDepletedprotonDual;
+        ret = SSPItem.reactorDepletedprotonDual;
         return new ItemStack(ret.getItem(), 1);
       case 4:
-        ret = SuperSolarPanels.reactorDepletedprotonQuad;
+        ret = SSPItem.reactorDepletedprotonQuad;
         return new ItemStack(ret.getItem(), 1);
     } 
     throw new RuntimeException("invalid cell count: " + this.numberOfCells);
@@ -40,7 +42,7 @@ public class ItemReactorTerasteel extends ItemReactorUranium {
   public boolean acceptUraniumPulse(IReactor reactor, ItemStack yourStack, ItemStack pulsingStack, int youX, int youY, int pulseX, int pulseY, boolean heatrun) {
     if (!heatrun) {
       float breedereffectiveness = reactor.getHeat() / reactor.getMaxHeat();
-      float ReaktorOutput = SuperSolarPanels.TerrasteelPower * breedereffectiveness + 3.0F;
+      float ReaktorOutput = Config.TerrasteelPower * breedereffectiveness + 3.0F;
       reactor.addOutput(ReaktorOutput);
     } 
     return true;

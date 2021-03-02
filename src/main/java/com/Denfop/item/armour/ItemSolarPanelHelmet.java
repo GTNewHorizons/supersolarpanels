@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 
@@ -67,8 +68,8 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
         this.transferLimit = 3000.0;
         this.tier = 3;
         if (this.solarType == 1) {
-            this.genDay = SuperSolarPanels.advGenDay;
-            this.genNight = SuperSolarPanels.advGenNight;
+            this.genDay = Config.advGenDay;
+            this.genNight = Config.advGenNight;
             this.maxCharge = 1000000.0;
             this.transferLimit = 3000.0;
             this.tier = 3;
@@ -76,11 +77,11 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
             this.damageAbsorptionRatio = 0.9;
             this.baseAbsorptionRatio = 0.15;
             this.storage = 0;
-            this.maxstorage = SuperSolarPanels.advStorage /2; 
+            this.maxstorage = Config.advStorage /2; 
         }
         if (this.solarType == 2) {
-            this.genDay = SuperSolarPanels.hGenDay;
-            this.genNight = SuperSolarPanels.hGenNight;
+            this.genDay = Config.hGenDay;
+            this.genNight = Config.hGenNight;
             this.maxCharge = 1.0E7;
             this.transferLimit = 10000.0;
             this.tier = 4;
@@ -88,11 +89,11 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
             this.damageAbsorptionRatio = 1.0;
             this.baseAbsorptionRatio = 0.15;
             this.storage = 0;
-            this.maxstorage = SuperSolarPanels.hStorage /2; 
+            this.maxstorage = Config.hStorage /2; 
         }
         if (this.solarType == 3) {
-            this.genDay = SuperSolarPanels.uhGenDay;
-            this.genNight = SuperSolarPanels.uhGenNight;
+            this.genDay = Config.uhGenDay;
+            this.genNight = Config.uhGenNight;
             this.maxCharge = 1.0E7;
             this.transferLimit = 10000.0;
             this.tier = 4;
@@ -100,12 +101,12 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
             this.damageAbsorptionRatio = 1.0;
             this.baseAbsorptionRatio = 0.15;
             this.storage = 0;
-            this.maxstorage = SuperSolarPanels.uhStorage /2; 
+            this.maxstorage = Config.uhStorage /2; 
         }
         if (this.solarType == 4) {
-            this.genDay = SuperSolarPanels.spectralpanelGenDay;
-            this.genNight = SuperSolarPanels.spectralpanelGenNight;
-            this.maxCharge = SuperSolarPanels.Storagequantumsuit;
+            this.genDay = Config.spectralpanelGenDay;
+            this.genNight = Config.spectralpanelGenNight;
+            this.maxCharge = Config.Storagequantumsuit;
             this.transferLimit = 38000.0;
             this.maxCharge = 100000000.0;
             this.tier = 3;
@@ -113,12 +114,12 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
             this.damageAbsorptionRatio = 0.9;
             this.baseAbsorptionRatio = 0.15;
             this.storage = 0;
-            this.maxstorage = SuperSolarPanels.spectralpanelstorage /2; 
+            this.maxstorage = Config.spectralpanelstorage /2; 
         }
         if (this.solarType == 5) {
-            this.genDay = SuperSolarPanels.singularpanelGenDay;
-            this.genNight = SuperSolarPanels.singularpanelGenNight;
-            this.maxCharge = SuperSolarPanels.Storagequantumsuit;
+            this.genDay = Config.singularpanelGenDay;
+            this.genNight = Config.singularpanelGenNight;
+            this.maxCharge = Config.Storagequantumsuit;
             this.transferLimit = 100000.0;
             this.maxCharge = 100000000.0;
             this.tier = 4;
@@ -126,7 +127,7 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
             this.damageAbsorptionRatio = 1.0;
             this.baseAbsorptionRatio = 0.15;
             this.storage = 0;
-            this.maxstorage = SuperSolarPanels.singularpanelstorage /2; 
+            this.maxstorage = Config.singularpanelstorage /2; 
         }
         this.setCreativeTab(SuperSolarPanels.tabssp2);
         this.setMaxDamage(27);

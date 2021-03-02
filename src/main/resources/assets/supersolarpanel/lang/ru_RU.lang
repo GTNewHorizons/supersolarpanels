@@ -412,10 +412,10 @@ gui.SuperSolarPanel.generating=Генерация
 gui.SuperSolarPanel.energyPerTick=EU/t
 ssp.modules2=§cработает только одно улучшение на слот
 gui.ssp.tier=Уровень
-ssp.genday=§2+
-ssp.gennight=§3+
-ssp.storage=§9+
-ssp.output=§6+
+ssp.genday=§2Повышена генерация днём на: +
+ssp.gennight=§3Повышена генерация ночью на: +
+ssp.storage=§9Повышена вместимость хранилища на: +
+ssp.output=§6Повышен макс. выход на: +
 ssp.tier1=§a+
 ssp.tier2=§c-
 module74.name=Модуль: Зарядка предметом
@@ -512,6 +512,14 @@ ssp.blockExtractor3.name=Ультимативный экстрактор
 ssp.blockMetalFormer.name=Улучшенный металлоформовочный механизм
 ssp.blockMetalFormer2.name=Продвинутый металлоформовочный механизм
 ssp.blockMetalFormer3.name=Ультимативный металлоформовочный механизм
+ssp.moduletype1=Тип панели: §6Воздушная
+ssp.moduletype2=Тип панели: §2Земляная
+ssp.moduletype3=Тип панели: §cАдская
+ssp.moduletype4=Тип панели: §3Эндерова
+ssp.moduletype5=Тип панели: §8Ночная
+ssp.moduletype6=Тип панели: §eДневная
+ssp.moduletype7=Тип панели: §9Дождевая
+ssp.rfmodule=§cВырабатывает рф энергию
 
 
 

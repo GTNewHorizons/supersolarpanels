@@ -3,6 +3,7 @@ package com.Denfop.tiles.ExpGen;
 import java.util.List;
 import java.util.Vector;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.expgen.IStandOn;
 import com.Denfop.container.ContainerExpGen;
@@ -197,7 +198,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 		 if(!this.worldObj.isRemote) {
 			 
 		 FluidStack fluid = getFluidTank().getFluid();
-		 if (fluid != null && fluid.isFluidEqual(new FluidStack(SuperSolarPanels.FluidXP.xpJuice, 0))) {
+		 if (fluid != null && fluid.isFluidEqual(new FluidStack(SSPItem.FluidXP.xpJuice, 0))) {
 			 if(fluid.amount > 0) {
 				
 			 int currentXP = ExperienceUtils.getPlayerXP(entityplayer);
@@ -290,7 +291,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 		if (this.fluidTank.getFluidAmount() + 1 > this.fluidTank.getCapacity()) { return; }
 		
 		if(this.energy > 0) {
-		this.fluidTank.fill(new FluidStack(SuperSolarPanels.FluidXP.xpJuice, 3), true);
+		this.fluidTank.fill(new FluidStack(SSPItem.FluidXP.xpJuice, 3), true);
 		
 		markDirty();
 	
@@ -387,7 +388,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
 		
-		return (fluid == SuperSolarPanels.FluidXP.xpJuice);
+		return (fluid == SSPItem.FluidXP.xpJuice);
 	}
 
 

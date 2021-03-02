@@ -1,5 +1,6 @@
 package com.Denfop.block.expgen;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -24,7 +25,7 @@ public class TextureHooks {
 	  if (event.map.getTextureType() == 0) {
 		  Icons.xpJuiceStill = event.map.registerIcon("supersolarpanel:xpliquid_still");
 		  Icons.xpJuiceFlowing = event.map.registerIcon("supersolarpanel:xpjuice_flowing");
-		  SuperSolarPanels.FluidXP.xpJuice.setIcons(Icons.xpJuiceStill, Icons.xpJuiceFlowing);
+		  SSPItem.FluidXP.xpJuice.setIcons(Icons.xpJuiceStill, Icons.xpJuiceFlowing);
 		  
 		  
 	  }

@@ -10,6 +10,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlocksItems;
 
@@ -43,8 +44,8 @@ public class ItemCell extends Item {
     this.names = new HashMap<Integer, String>();
     this.cells = new IdentityHashMap<Block, ItemStack>();
     setHasSubtypes(true);
-    SuperSolarPanels.cell = addCell(0, "itemCellEmpty");
-    SuperSolarPanels.uuMatterCell = addRegisterCell(1, "itemCellUuMatter", "fluidUuMatter");
+    SSPItem.cell = addCell(0, "itemCellEmpty");
+    SSPItem.uuMatterCell = addRegisterCell(1, "itemCellUuMatter", "fluidUuMatter");
     this.itemNames = new ArrayList<String>();
     this.IIconsList = new IIcon[2];
     this.itemsCount = 1;
@@ -126,7 +127,7 @@ public class ItemCell extends Item {
   
   private ItemStack addRegisterCell(int meta, String name, String blockName) {
     ItemStack ret = addCell(meta, name, new Block[] { BlocksItems.getFluidBlock(blockName) });
-    FluidContainerRegistry.registerFluidContainer(BlocksItems.getFluid(blockName),ret.copy(),  SuperSolarPanels.cell.copy());
+    FluidContainerRegistry.registerFluidContainer(BlocksItems.getFluid(blockName),ret.copy(),  SSPItem.cell.copy());
   
     return ret;
   }

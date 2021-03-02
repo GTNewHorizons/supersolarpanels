@@ -2,6 +2,7 @@ package com.Denfop.events.DE_MF;
 
 import java.util.Map;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.brandon3055.draconicevolution.common.container.ContainerDissEnchanter;
 
@@ -28,11 +29,11 @@ public class SSPDEMFEventHandler {
 		  //TODO start for 
 		  for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
 			  //  TODO start Check inventory
-			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SuperSolarPanels.ultDDrill|| player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem() )) {
+			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill|| player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem() )) {
 				   ItemStack input = player.inventory.mainInventory[i];
-				   ItemStack input1 = new ItemStack(SuperSolarPanels.ultDDrill);
+				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
 				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input); 
-				  if((input.getItem() == SuperSolarPanels.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
+				  if((input.getItem() == SSPItem.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
 					  Map<Integer, Integer> map = null;
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 
 			  map = EnchantmentHelper.getEnchantments(input);

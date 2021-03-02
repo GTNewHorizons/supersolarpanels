@@ -36,6 +36,8 @@ import java.util.Vector;
 
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.IPanel;
+import com.Denfop.api.module.IModulGenDay;
+import com.Denfop.api.module.IModulGenNight;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
 import com.Denfop.api.module.IModulStorage;
@@ -262,23 +264,26 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         }
         boolean needInvUpdate = false;
         double sentPacket = 0.0;
-        int gend = 0;
-        int genn = 0;
+        
        
         
         int tierplus = 0;
         int minus = 0;
         int output[];
         output = new int[9];
-    
+    //
         int maxstorage1[];
         maxstorage1 = new int[9];
+        int gend[];
+        gend = new int[9];
+        int genn[];
+        genn = new int[9];
         for(int i= 0; i < 9; i++) {
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module1) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulGenDay) {
         		
-        	gend++;}
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module2) {
-        		genn++;
+        		gend[i] = IModulGenDay.getData(this.chargeSlots[i]).get(0);}
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulGenNight) {
+        		genn[i] = IModulGenNight.getData(this.chargeSlots[i]).get(0);
         		}
         	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof IModulStorage) {
         		maxstorage1[i] = IModulStorage.getData(this.chargeSlots[i]).get(0);
@@ -356,7 +361,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         }
      
-      
+      if(this.storage2 >= this.maxStorage2) {
+    	  this.storage2 = this.maxStorage2;
+      }else if(this.storage2 < 0) {
+    	  this.storage2 = 0;
+      }
         if(this.tier + tierplus -  minus > 0) {
         this.o = this.tier + tierplus -  minus;}
         else {
@@ -466,14 +475,29 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         sum2=sum2+c[i];
         sum3=sum3+d[i];
         }
-        	
-if((int) ((this.k + sum) + (this.k +sum)*0.2*gend) < 2147000000) {
-        	this.genDay  = (int) ((this.k + sum) + (this.k+sum)*0.2*gend);}else {
-        		this.genDay = 2146999999;
+        double gend_dob = 0;
+
+        for(int i = 0; i <9;i++) {
+        	if(gend[i] != 0) {
+        		gend_dob = gend_dob + gend[i];
         	}
-if((int) ((this.m + sum1) + (this.m + sum1)*0.2*genn) < 2147000000) {
-        	this.genNight  = (int) ((this.m + sum1) + (this.m + sum1)*0.2*genn);}else {
-        		this.genNight = 2146999999;
+        	
+        }
+        double genn_dob = 0;
+
+        for(int i = 0; i <9;i++) {
+        	if(genn[i] != 0) {
+        		genn_dob = genn_dob + genn[i];
+        	}
+        	
+        }
+if((int) ((this.k + sum) + (this.k +sum)*(gend_dob/100)) < 2000000000) {
+        	this.genDay  = (int) ((this.k + sum) + (this.k+sum)*(gend_dob/100));}else {
+        		this.genDay = 2000000000;
+        	}
+if((int) ((this.m + sum1) + (this.m + sum1)*(genn_dob/100)) < 2000000000) {
+        	this.genNight  = (int) ((this.m + sum1) + (this.m + sum1)*(genn_dob/100));}else {
+        		this.genNight = 2000000000 ;
         	}//
        
 double maxstorage_dob = 0;
@@ -734,6 +758,7 @@ return this.generating = 0;
       public void readFromNBT(NBTTagCompound nbttagcompound) {
     	    super.readFromNBT(nbttagcompound);
     	    this.storage = nbttagcompound.getInteger("storage");
+    	    this.storage = nbttagcompound.getInteger("storage2");
     	    this.lastX = nbttagcompound.getInteger("lastX");
     	    this.lastY = nbttagcompound.getInteger("lastY");
     	    this.lastZ = nbttagcompound.getInteger("lastZ");
@@ -780,7 +805,9 @@ return this.generating = 0;
     	    	nbttagcompound.setInteger("lastX1",panelx);
     	    	nbttagcompound.setInteger("lastY1",panely);
     	    	nbttagcompound.setInteger("lastZ1",panelz);
+    	    	if(nameblock != null)
     	    	nbttagcompound.setString("nameblock",nameblock);
+    	    	
     	    	nbttagcompound.setInteger("worldid",world1);
     	    	nbttagcompound.setInteger("blocktier",this.blocktier);
     	    	 
@@ -792,6 +819,7 @@ return this.generating = 0;
     	    }
     	    nbttagcompound.setInteger("solarType", this.solarType);
     	    nbttagcompound.setInteger("storage", this.storage);
+    	    nbttagcompound.setInteger("storage2", this.storage2);
     	    nbttagcompound.setInteger("lastX", this.lastX);
     	    nbttagcompound.setInteger("lastY", this.lastY);
     	    nbttagcompound.setInteger("lastZ", this.lastZ);

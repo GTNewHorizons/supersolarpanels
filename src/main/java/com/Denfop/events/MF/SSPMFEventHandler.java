@@ -2,6 +2,7 @@ package com.Denfop.events.MF;
 
 import java.util.Map;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -27,12 +28,12 @@ public class SSPMFEventHandler {
 		  //TODO start for 
 		  for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
 			  //  TODO start Check inventory
-			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SuperSolarPanels.ultDDrill || player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem()) ) {
+			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill || player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem()) ) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   Map<Integer, Integer> map = null;
-				   ItemStack input1 = new ItemStack(SuperSolarPanels.ultDDrill);
+				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
 				   NBTTagCompound nbtData = SuperSolarPanels.getOrCreateNbtData(input); 
-				  if((input.getItem() == SuperSolarPanels.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
+				  if((input.getItem() == SSPItem.ultDDrill  ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
 					 
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 
 			  map = EnchantmentHelper.getEnchantments(input);
@@ -64,13 +65,13 @@ public class SSPMFEventHandler {
 				if( player.openContainer.getSlot(2).getStack() != null) {
 					ItemStack input2 =  player.openContainer.getSlot(2).getStack();
 					  nbtData = SuperSolarPanels.getOrCreateNbtData(input2); 
-					  if((input2.getItem() == SuperSolarPanels.ultDDrill   ||input2.getItem() == Ic2Items.iridiumDrill.getItem())) {
-						  System.out.print("1");
+					  if((input2.getItem() == SSPItem.ultDDrill   ||input2.getItem() == Ic2Items.iridiumDrill.getItem())) {
+
 						  if(EnchantmentHelper.getEnchantments(input2) != null) { 
 				  map = EnchantmentHelper.getEnchantments(input2);
 				  int id = 0;
 				  int lvl = 0;
-				  System.out.print("2");
+		
 				  for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 			             id = entry.getKey();
 			             lvl = entry.getValue();

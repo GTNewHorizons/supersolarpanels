@@ -18,8 +18,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.Denfop.Config;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.SuperSolarPanels.FluidXP;
+import com.Denfop.SSPItem.FluidXP;
 import com.Denfop.block.Chargepad.BlockChargepad;
 import com.Denfop.block.cable.BlockCable;
 import com.Denfop.block.expgen.BlockExpGen;
@@ -87,58 +88,58 @@ public class BlocksItems {
   }
   
   private static void initItems() {
-	  SuperSolarPanels.photon = new ItemStack((Item)new ItemAdvancedWindRotor("photon", SuperSolarPanels.Radius3, SuperSolarPanels.durability3, SuperSolarPanels.efficiency3, SuperSolarPanels.minWindStrength3, SuperSolarPanels.maxWindStrength3, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model6.png")));
-	  SuperSolarPanels.neutron = new ItemStack((Item)new ItemAdvancedWindRotor("neutron", SuperSolarPanels.Radius4, SuperSolarPanels.durability4, SuperSolarPanels.efficiency4, SuperSolarPanels.minWindStrength4, SuperSolarPanels.maxWindStrength4, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model5.png")));
-	  SuperSolarPanels.myphical = new ItemStack((Item)new ItemAdvancedWindRotor("myphical", SuperSolarPanels.Radius5, SuperSolarPanels.durability5, SuperSolarPanels.efficiency5, SuperSolarPanels.minWindStrength5, SuperSolarPanels.maxWindStrength5, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model4.png")));
-	  SuperSolarPanels.electricblock = new BlockElectric();
-      SuperSolarPanels.mfeUnit = new ItemStack(SuperSolarPanels.electricblock, 1, 0);
-      SuperSolarPanels.mfsUnit = new ItemStack(SuperSolarPanels.electricblock, 1, 1);
-      SuperSolarPanels.electricblock.setCreativeTab(SuperSolarPanels.tabssp);
-      SuperSolarPanels.machines = new BlockMachine();
-      SuperSolarPanels.machines.setCreativeTab(SuperSolarPanels.tabssp);
-      SuperSolarPanels.ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
+	  SSPItem.photon = new ItemStack((Item)new ItemAdvancedWindRotor("photon", Config.Radius3, Config.durability3, Config.efficiency3, Config.minWindStrength3, Config.maxWindStrength3, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model6.png")));
+	  SSPItem.neutron = new ItemStack((Item)new ItemAdvancedWindRotor("neutron", Config.Radius4, Config.durability4, Config.efficiency4, Config.minWindStrength4, Config.maxWindStrength4, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model5.png")));
+	  SSPItem.myphical = new ItemStack((Item)new ItemAdvancedWindRotor("myphical", Config.Radius5, Config.durability5, Config.efficiency5, Config.minWindStrength5, Config.maxWindStrength5, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model4.png")));
+	  SSPItem.electricblock = new BlockElectric();
+	  SSPItem.mfeUnit = new ItemStack(SSPItem.electricblock, 1, 0);
+	  SSPItem.mfsUnit = new ItemStack(SSPItem.electricblock, 1, 1);
+	  SSPItem.electricblock.setCreativeTab(SuperSolarPanels.tabssp);
+	  SSPItem.machines = new BlockMachine();
+      SSPItem.machines.setCreativeTab(SuperSolarPanels.tabssp);
+      SSPItem.ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
 
-      SuperSolarPanels.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", SuperSolarPanels.Storagequantumsuit, 8092.0D, 4);
-      SuperSolarPanels.  nanoSaber = new ItemNanoSaber("itemNanoSaber",SuperSolarPanels.maxCharge,SuperSolarPanels.transferLimit,SuperSolarPanels.tier,SuperSolarPanels.spectralsaberactive,SuperSolarPanels.spectralsabernotactive);
-      SuperSolarPanels.   nanoSaber1 = new ItemNanoSaber1("itemNanoSaber1",SuperSolarPanels.maxCharge1,SuperSolarPanels.transferLimit1,SuperSolarPanels.tier1,SuperSolarPanels.spectralsaberactive1,SuperSolarPanels.spectralsabernotactive1);
-      SuperSolarPanels.  quantumHelmet = new ItemArmorImprovemedQuantum("itemArmorQuantumHelmet", 0, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
-      SuperSolarPanels.   quantumBodyarmor = new ItemArmorImprovemedQuantum("itemArmorQuantumChestplate", 1, Config.armor_maxcharge_body, Config.armor_transferlimit, Config.tier);
-      SuperSolarPanels.    quantumLeggings = new ItemArmorImprovemedQuantum("itemArmorQuantumLegs", 2, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
-      SuperSolarPanels.   quantumBoots = new ItemArmorImprovemedQuantum("itemArmorQuantumBoots", 3, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
+      SSPItem.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", Config.Storagequantumsuit, 8092.0D, 4);
+      SSPItem.  nanoSaber = new ItemNanoSaber("itemNanoSaber",Config.maxCharge,Config.transferLimit,Config.tier,Config.spectralsaberactive,Config.spectralsabernotactive);
+      SSPItem.   nanoSaber1 = new ItemNanoSaber1("itemNanoSaber1",Config.maxCharge1,Config.transferLimit1,Config.tier1,Config.spectralsaberactive1,Config.spectralsabernotactive1);
+      SSPItem.  quantumHelmet = new ItemArmorImprovemedQuantum("itemArmorQuantumHelmet", 0, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
+      SSPItem.   quantumBodyarmor = new ItemArmorImprovemedQuantum("itemArmorQuantumChestplate", 1, Config.armor_maxcharge_body, Config.armor_transferlimit, Config.tier);
+      SSPItem.    quantumLeggings = new ItemArmorImprovemedQuantum("itemArmorQuantumLegs", 2, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
+      SSPItem.   quantumBoots = new ItemArmorImprovemedQuantum("itemArmorQuantumBoots", 3, Config.armor_maxcharge, Config.armor_transferlimit, Config.tier);
     
 		
-      SuperSolarPanels.expgen = new BlockExpGen("expGen", Material.rock);
-      SuperSolarPanels.module8 = new ItemWirelessModule();
+      SSPItem.expgen = new BlockExpGen("expGen", Material.rock);
+      SSPItem.module8 = new ItemWirelessModule();
 	  //
-	  SuperSolarPanels.iridium = new ItemStack((Item)new ItemAdvancedWindRotor("iridium", SuperSolarPanels.Radius, SuperSolarPanels.durability, SuperSolarPanels.efficiency, SuperSolarPanels.minWindStrength, SuperSolarPanels.maxWindStrength, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model1.png")));
-	  SuperSolarPanels.compressiridium = new ItemStack((Item)new ItemAdvancedWindRotor("compressiridium", SuperSolarPanels.Radius1, SuperSolarPanels.durability1, SuperSolarPanels.efficiency1, SuperSolarPanels.minWindStrength1, SuperSolarPanels.maxWindStrength1, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model2.png")));
-	  SuperSolarPanels.spectral = new ItemStack((Item)new ItemAdvancedWindRotor("spectral", SuperSolarPanels.Radius2, SuperSolarPanels.durability2, SuperSolarPanels.efficiency2, SuperSolarPanels.minWindStrength2, SuperSolarPanels.maxWindStrength2, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model3.png")));
-	  SuperSolarPanels.reactorDepletedprotonSimple = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonSimple", 10, 100));
-	  SuperSolarPanels.reactorDepletedprotonDual = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonDual", 10, 100));
-	    SuperSolarPanels.reactorDepletedprotonQuad = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonQuad", 10, 100));
-	    SuperSolarPanels.reactorDepletedprotoneit = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotoneit", 10, 100));
-	    SuperSolarPanels.reactorprotonSimple = new ItemStack((Item)new ItemReactorproton("reactorprotonSimple", 1,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
-	    SuperSolarPanels.reactorprotonDual = new ItemStack((Item)new ItemReactorproton("reactorprotonDual", 2,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
-	    SuperSolarPanels.reactorprotonQuad = new ItemStack((Item)new ItemReactorproton("reactorprotonQuad", 4,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
-	    SuperSolarPanels.reactorprotoneit = new ItemStack((Item)new ItemReactorproton("reactorprotoneit", 8,SuperSolarPanels.ProtonRodCells,SuperSolarPanels.ProtonRodHeat,SuperSolarPanels.ProtonPower));
-	    SuperSolarPanels.proton = new ItemRadioactive("proton", 150, 100);
-	    SuperSolarPanels.toriy = new ItemRadioactive("toriy", 150, 100);
+      SSPItem.iridium = new ItemStack((Item)new ItemAdvancedWindRotor("iridium", Config.Radius, Config.durability, Config.efficiency, Config.minWindStrength, Config.maxWindStrength, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model1.png")));
+      SSPItem.compressiridium = new ItemStack((Item)new ItemAdvancedWindRotor("compressiridium", Config.Radius1, Config.durability1, Config.efficiency1, Config.minWindStrength1, Config.maxWindStrength1, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model2.png")));
+      SSPItem.spectral = new ItemStack((Item)new ItemAdvancedWindRotor("spectral", Config.Radius2, Config.durability2, Config.efficiency2, Config.minWindStrength2, Config.maxWindStrength2, new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model3.png")));
+      SSPItem.reactorDepletedprotonSimple = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonSimple", 10, 100));
+      SSPItem.reactorDepletedprotonDual = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonDual", 10, 100));
+      SSPItem.reactorDepletedprotonQuad = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotonQuad", 10, 100));
+      SSPItem.reactorDepletedprotoneit = new ItemStack((Item)new ItemRadioactive("reactorDepletedprotoneit", 10, 100));
+      SSPItem.reactorprotonSimple = new ItemStack((Item)new ItemReactorproton("reactorprotonSimple", 1,Config.ProtonRodCells,Config.ProtonRodHeat,Config.ProtonPower));
+      SSPItem.reactorprotonDual = new ItemStack((Item)new ItemReactorproton("reactorprotonDual", 2,Config.ProtonRodCells,Config.ProtonRodHeat,Config.ProtonPower));
+      SSPItem.reactorprotonQuad = new ItemStack((Item)new ItemReactorproton("reactorprotonQuad", 4,Config.ProtonRodCells,Config.ProtonRodHeat,Config.ProtonPower));
+      SSPItem.reactorprotoneit = new ItemStack((Item)new ItemReactorproton("reactorprotoneit", 8,Config.ProtonRodCells,Config.ProtonRodHeat,Config.ProtonPower));
+      SSPItem.proton = new ItemRadioactive("proton", 150, 100);
+      SSPItem.toriy = new ItemRadioactive("toriy", 150, 100);
 	    //
-	    SuperSolarPanels.reactortoriySimple = new ItemStack((Item)new ItemReactorproton("reactortoriySimple", 1,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
-	    SuperSolarPanels.reactortoriyDual = new ItemStack((Item)new ItemReactorproton("reactortoriyDual", 2,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
-	    SuperSolarPanels.reactortoriyQuad = new ItemStack((Item)new ItemReactorproton("reactortoriyQuad", 4,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
-		  SuperSolarPanels.reactorDepletedtoriySimple = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriySimple", 10, 100));
-		  SuperSolarPanels.reactorDepletedtoriyDual = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriyDual", 10, 100));
-		    SuperSolarPanels.reactorDepletedtoriyQuad = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriyQuad", 10, 100));
+      SSPItem.reactortoriySimple = new ItemStack((Item)new ItemReactorproton("reactortoriySimple", 1,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+      SSPItem.reactortoriyDual = new ItemStack((Item)new ItemReactorproton("reactortoriyDual", 2,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+      SSPItem.reactortoriyQuad = new ItemStack((Item)new ItemReactorproton("reactortoriyQuad", 4,Config.toriyRodCells,Config.toriyRodHeat,Config.toriyPower));
+      SSPItem.reactorDepletedtoriySimple = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriySimple", 10, 100));
+      SSPItem.reactorDepletedtoriyDual = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriyDual", 10, 100));
+      SSPItem.reactorDepletedtoriyQuad = new ItemStack((Item)new ItemRadioactive("reactorDepletedtoriyQuad", 10, 100));
 	    //
 		 
-	    SuperSolarPanels.protonshard = new ItemRadioactive("protonshard", 150, 100);
-	    SuperSolarPanels.reactorCoolantmax = new ItemStack((Item)new ItemReactorHeatStorage("reactorCoolantmax", 240000));
-	    SuperSolarPanels.reactorCoolanttwelve = new ItemStack((Item)new ItemReactorHeatStorage("reactorCoolanttwelve", 120000));
-	  SuperSolarPanels.module =new ItemUpgradeModule();
-	  SuperSolarPanels.cable = new ItemCable();
+      SSPItem.protonshard = new ItemRadioactive("protonshard", 150, 100);
+	    SSPItem.reactorCoolantmax = new ItemStack((Item)new ItemReactorHeatStorage("reactorCoolantmax", 240000));
+	    SSPItem.reactorCoolanttwelve = new ItemStack((Item)new ItemReactorHeatStorage("reactorCoolanttwelve", 120000));
+	    SSPItem.module =new ItemUpgradeModule();
+	    SSPItem.cable = new ItemCable();
 	
-	    if(SuperSolarPanels.BotaniaLoaded) {
+	    if(Config.BotaniaLoaded) {
 	    	BotaniaIntegration.reactorterastrellSimple = new ItemStack((Item)new ItemReactorTerasteel("reactorterastrellSimple", 1));
 	    	BotaniaIntegration.reactorterastrellDual = new ItemStack((Item)new ItemReactorTerasteel("reactorterastrellDual", 2));
 	    	BotaniaIntegration.reactorterastrellQuad = new ItemStack((Item)new ItemReactorTerasteel("reactorterastrellQuad", 4));
@@ -214,72 +215,72 @@ public class BlocksItems {
   private static Set<String> dropped = new HashSet<String>();
 
 public static void registermetadata() {
-	  SuperSolarPanels.   itemIrradiantUranium = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemIrradiantUranium"), 1, 0);
-      SuperSolarPanels.   itemEnrichedPhotoniyAlloy = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemEnrichedSunnariumAlloy"), 1, 1);
-      SuperSolarPanels.   itemIrradiantGlassPane = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemIrradiantGlassPlane"), 1, 3);
-      SuperSolarPanels.    itemIridiumIronPlate = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemIridiumIronPlate"), 1, 4);
-      SuperSolarPanels.    itemReinforcedIridiumIronPlate = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemReinforcedIridiumIronPlate"), 1, 5);
-      SuperSolarPanels.   itemIrradiantReinforcedPlate = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemIrradiantReinforcedPlate"), 1, 6);
+	SSPItem.   itemIrradiantUranium = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIrradiantUranium"), 1, 0);
+	SSPItem.   itemEnrichedPhotoniyAlloy = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemEnrichedSunnariumAlloy"), 1, 1);
+	SSPItem.   itemIrradiantGlassPane = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIrradiantGlassPlane"), 1, 3);
+	SSPItem.    itemIridiumIronPlate = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIridiumIronPlate"), 1, 4);
+	SSPItem.    itemReinforcedIridiumIronPlate = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemReinforcedIridiumIronPlate"), 1, 5);
+	SSPItem.   itemIrradiantReinforcedPlate = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIrradiantReinforcedPlate"), 1, 6);
       
-      SuperSolarPanels.  ingotIridium = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("ingotIridium"), 1, 7);
-      SuperSolarPanels.   itemUranIngot = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemUranIngot"), 1, 8);
-      SuperSolarPanels.  itemMTCore = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemMTCore"), 1, 9);
-      SuperSolarPanels.   itemQuantumCore = new ItemStack(SuperSolarPanels.itemSSP.setUnlocalizedName("itemQuantumCore"), 1, 10);
+	SSPItem.  ingotIridium = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("ingotIridium"), 1, 7);
+      SSPItem.   itemUranIngot = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemUranIngot"), 1, 8);
+      SSPItem.  itemMTCore = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemMTCore"), 1, 9);
+      SSPItem.   itemQuantumCore = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemQuantumCore"), 1, 10);
       
 
-      SuperSolarPanels.      module61  = new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module61"), 1, 0);
-      SuperSolarPanels.   module62 = new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module62"), 1, 1);
-      SuperSolarPanels.   module63= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module63"), 1, 2);
-    SuperSolarPanels.   module64= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module64"), 1, 3);
-    SuperSolarPanels.  module65= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module65"), 1, 4);
-    SuperSolarPanels.   module66= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module66"), 1, 5);
-    SuperSolarPanels.    module67= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module67"), 1, 6);
-    SuperSolarPanels.   module68= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module68"), 1, 7);
-    SuperSolarPanels.   module69= new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module69"), 1, 8);
-    SuperSolarPanels.    module70 = new ItemStack(SuperSolarPanels.module6.setUnlocalizedName("module70"), 1, 9);
-    SuperSolarPanels.   module71  = new ItemStack(SuperSolarPanels.module7.setUnlocalizedName("module71"), 1, 0);
-     SuperSolarPanels. module72 = new ItemStack(SuperSolarPanels.module7.setUnlocalizedName("module72"), 1, 1);
-    SuperSolarPanels.module73= new ItemStack(SuperSolarPanels.module7.setUnlocalizedName("module73"), 1, 2);
-    SuperSolarPanels.copperCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 1);
-    SuperSolarPanels.insulatedCopperCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 0);
-    SuperSolarPanels.goldCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 2);
-    SuperSolarPanels.insulatedGoldCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 3);
-    SuperSolarPanels.doubleInsulatedGoldCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 4);
-    SuperSolarPanels.ironCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 5);
-    SuperSolarPanels.insulatedIronCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 6);
-    SuperSolarPanels.doubleInsulatedIronCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 7);
-    SuperSolarPanels.trippleInsulatedIronCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 8);
-    SuperSolarPanels.glassFiberCableBlock = new ItemStack((Block)SuperSolarPanels.BlockCable, 1, 9);
+      SSPItem.      module61  = new ItemStack(SSPItem.module6.setUnlocalizedName("module61"), 1, 0);
+      SSPItem.   module62 = new ItemStack(SSPItem.module6.setUnlocalizedName("module62"), 1, 1);
+      SSPItem.   module63= new ItemStack(SSPItem.module6.setUnlocalizedName("module63"), 1, 2);
+      SSPItem.   module64= new ItemStack(SSPItem.module6.setUnlocalizedName("module64"), 1, 3);
+    SSPItem.  module65= new ItemStack(SSPItem.module6.setUnlocalizedName("module65"), 1, 4);
+    SSPItem.   module66= new ItemStack(SSPItem.module6.setUnlocalizedName("module66"), 1, 5);
+    SSPItem.    module67= new ItemStack(SSPItem.module6.setUnlocalizedName("module67"), 1, 6);
+    SSPItem.   module68= new ItemStack(SSPItem.module6.setUnlocalizedName("module68"), 1, 7);
+    SSPItem.   module69= new ItemStack(SSPItem.module6.setUnlocalizedName("module69"), 1, 8);
+    SSPItem.    module70 = new ItemStack(SSPItem.module6.setUnlocalizedName("module70"), 1, 9);
+    SSPItem.   module71  = new ItemStack(SSPItem.module7.setUnlocalizedName("module71"), 1, 0);
+    SSPItem. module72 = new ItemStack(SSPItem.module7.setUnlocalizedName("module72"), 1, 1);
+    SSPItem.module73= new ItemStack(SSPItem.module7.setUnlocalizedName("module73"), 1, 2);
+    SSPItem.copperCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 1);
+    SSPItem.insulatedCopperCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 0);
+    SSPItem.goldCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 2);
+    SSPItem.insulatedGoldCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 3);
+    SSPItem.doubleInsulatedGoldCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 4);
+    SSPItem.ironCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 5);
+    SSPItem.insulatedIronCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 6);
+    SSPItem.doubleInsulatedIronCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 7);
+    SSPItem.trippleInsulatedIronCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 8);
+    SSPItem.glassFiberCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 9);
 
 
-    SuperSolarPanels.copperCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 1);
-    SuperSolarPanels.insulatedCopperCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 0);
-    SuperSolarPanels.goldCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 2);
-    SuperSolarPanels.insulatedGoldCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 3);
-    SuperSolarPanels.doubleInsulatedGoldCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 4);
-    SuperSolarPanels.ironCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 5);
-    SuperSolarPanels.insulatedIronCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 6);
-    SuperSolarPanels.doubleInsulatedIronCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 7);
-    SuperSolarPanels.trippleInsulatedIronCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 8);
-    SuperSolarPanels.glassFiberCableItem = new ItemStack((Item)SuperSolarPanels.cable, 1, 9);
+    SSPItem.copperCableItem = new ItemStack((Item)SSPItem.cable, 1, 1);
+    SSPItem.insulatedCopperCableItem = new ItemStack((Item)SSPItem.cable, 1, 0);
+    SSPItem.goldCableItem = new ItemStack((Item)SSPItem.cable, 1, 2);
+    SSPItem.insulatedGoldCableItem = new ItemStack((Item)SSPItem.cable, 1, 3);
+    SSPItem.doubleInsulatedGoldCableItem = new ItemStack((Item)SSPItem.cable, 1, 4);
+    SSPItem.ironCableItem = new ItemStack((Item)SSPItem.cable, 1, 5);
+    SSPItem.insulatedIronCableItem = new ItemStack((Item)SSPItem.cable, 1, 6);
+    SSPItem.doubleInsulatedIronCableItem = new ItemStack((Item)SSPItem.cable, 1, 7);
+    SSPItem.trippleInsulatedIronCableItem = new ItemStack((Item)SSPItem.cable, 1, 8);
+    SSPItem.glassFiberCableItem = new ItemStack((Item)SSPItem.cable, 1, 9);
   //  SuperSolarPanels.macerator = new ItemStack(SuperSolarPanels.machines, 1, 1);
   //  SuperSolarPanels.extractor = new ItemStack(SuperSolarPanels.machines, 1, 2);
  //   SuperSolarPanels.compressor = new ItemStack(SuperSolarPanels.machines, 1, 3);
 
 
-    SuperSolarPanels.massFabricator = new ItemStack(SuperSolarPanels.machines, 1, 5);
+    SSPItem.massFabricator = new ItemStack(SSPItem.machines, 1, 5);
  //   SuperSolarPanels.compressor1 = new ItemStack(SuperSolarPanels.machines, 1, 4);
-    SuperSolarPanels.massFabricator1 = new ItemStack(SuperSolarPanels.machines, 1, 1);
+    SSPItem.massFabricator1 = new ItemStack(SSPItem.machines, 1, 1);
    // SuperSolarPanels.macerator1 = new ItemStack(SuperSolarPanels.machines, 1, 6);
   //  SuperSolarPanels.electroFurnace = new ItemStack(SuperSolarPanels.machines, 1, 7);
  //   SuperSolarPanels.electroFurnace1 = new ItemStack(SuperSolarPanels.machines, 1, 8);
-    SuperSolarPanels.massFabricator2 = new ItemStack(SuperSolarPanels.machines, 1, 2);
-    SuperSolarPanels.massFabricator3 = new ItemStack(SuperSolarPanels.machines, 1, 3);
+    SSPItem.massFabricator2 = new ItemStack(SSPItem.machines, 1, 2);
+    SSPItem.massFabricator3 = new ItemStack(SSPItem.machines, 1, 3);
  //   SuperSolarPanels.metalformer = new ItemStack(SuperSolarPanels.machines, 1, 11);
  //   SuperSolarPanels.metalformer1 = new ItemStack(SuperSolarPanels.machines, 1, 12);
-    SuperSolarPanels.alloymachine = new ItemStack(SuperSolarPanels.machines, 1, 4);
-    SuperSolarPanels.generationmicrochip = new ItemStack(SuperSolarPanels.machines, 1, 6);
-    SuperSolarPanels.moleculartransformer= new ItemStack(SuperSolarPanels.machines, 1, 0);
+    SSPItem.alloymachine = new ItemStack(SSPItem.machines, 1, 4);
+    SSPItem.generationmicrochip = new ItemStack(SSPItem.machines, 1, 6);
+    SSPItem.moleculartransformer= new ItemStack(SSPItem.machines, 1, 0);
 		
 	
 }

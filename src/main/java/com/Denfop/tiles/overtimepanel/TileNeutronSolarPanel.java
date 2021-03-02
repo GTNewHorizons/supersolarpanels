@@ -2,6 +2,7 @@
 package com.Denfop.tiles.overtimepanel;
 
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
@@ -9,6 +10,6 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 public class TileNeutronSolarPanel extends TileEntitySolarPanel
 {
     public TileNeutronSolarPanel() {
-        super("blockNeutronSolarPanel.name",10, 0, SuperSolarPanels.neutronpanelGenDay, SuperSolarPanels.neutronpanelGenNight, SuperSolarPanels.neutronpanelOutput, SuperSolarPanels.neutronpanelStorage);
+        super("blockNeutronSolarPanel.name",10, 0, Config.neutronpanelGenDay, Config.neutronpanelGenNight, Config.neutronpanelOutput, Config.neutronpanelStorage);
     }
 }

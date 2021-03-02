@@ -423,6 +423,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
   }
   
   public String getRandomDrillSound() {
+	  
     switch (SuperSolarPanels.random.nextInt(4)) {
       case 1:
         return "drillOne";

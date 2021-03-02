@@ -59,6 +59,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.Denfop.Constants;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.base.ItemBlockIC2;
@@ -362,13 +363,13 @@ public IIcon getIcon(int side, int meta) {
 	      
 	    } 
 	    if (te.foamed == 1)
-	      return StackUtil.getBlock(SuperSolarPanels.constructionFoam).getIcon(side, 0); 
+	      return StackUtil.getBlock(SSPItem.constructionFoam).getIcon(side, 0); 
 	    Block referencedBlock = te.getReferencedBlock(side);
 	    if (referencedBlock != null)
 	      try {
 	        return referencedBlock.getIcon(te.retextureRefSide[side], te.retextureRefMeta[side]);
 	      } catch (Exception exception) {} 
-	    return StackUtil.getBlock(SuperSolarPanels.constructionFoamWall).getIcon(side, te.foamColor);
+	    return StackUtil.getBlock(SSPItem.constructionFoamWall).getIcon(side, te.foamColor);
 	  }
 	  
   public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 absDirection) {
@@ -481,7 +482,7 @@ public IIcon getIcon(int side, int meta) {
         return false; 
       
       
-      if ((StackUtil.equals((Block)Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte)2)) || (cur.getItem() == SuperSolarPanels.constructionFoam.getItem() && te.foamed == 0 && te.changeFoam((byte)1))) {
+      if ((StackUtil.equals((Block)Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte)2)) || (cur.getItem() == SSPItem.constructionFoam.getItem() && te.foamed == 0 && te.changeFoam((byte)1))) {
         if (SuperSolarPanels.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
           cur.stackSize--;
           if (cur.stackSize <= 0)
@@ -549,12 +550,12 @@ public IIcon getIcon(int side, int meta) {
     TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
     if (te != null) {
       if (te.cableType == 14) {
-        ret.add(new ItemStack(SuperSolarPanels.insulatedCopperCableItem.getItem(), 1, 13));
+        ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, 13));
         return ret;
       } 
-      ret.add(new ItemStack(SuperSolarPanels.insulatedCopperCableItem.getItem(), 1, te.cableType));
+      ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, te.cableType));
     } else {
-      ret.add(new ItemStack(SuperSolarPanels.insulatedCopperCableItem.getItem(), 1, metadata));
+      ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, metadata));
     } 
     return ret;
   }

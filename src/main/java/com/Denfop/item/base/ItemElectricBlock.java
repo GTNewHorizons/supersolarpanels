@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlockElectric;
 
@@ -55,15 +56,15 @@ public ItemElectricBlock(Block block) {
     int meta = itemStack.getItemDamage();
     switch (meta) {
       case 0:
-        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " + SuperSolarPanels.enegry1  + " EU/t " );
-        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.storage1  + " EU ");
-        info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.tier1);
+        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " + Config.enegry1  + " EU/t " );
+        info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + Config.storage1  + " EU ");
+        info.add(StatCollector.translateToLocal("ssp.tier") + Config.tier3_MFSU);
         
         break;
       case 1:
-    	   info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " + SuperSolarPanels.enegry2  + " EU/t " );
-           info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + SuperSolarPanels.storage2  + " EU ");
-           info.add(StatCollector.translateToLocal("ssp.tier") + SuperSolarPanels.tier2);
+    	   info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " + Config.enegry2  + " EU/t " );
+           info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + Config.storage2  + " EU ");
+           info.add(StatCollector.translateToLocal("ssp.tier") + Config.tier2_MFSU);
          break;
     } 
     switch (meta) {
@@ -84,14 +85,14 @@ public ItemElectricBlock(Block block) {
     NBTTagCompound nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
     itemStack.setItemDamage(0);
     nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
-    nbttagcompound.setDouble("energy",  SuperSolarPanels.storage1);
-    nbttagcompound.setDouble("energy2",  SuperSolarPanels.storage1);
+    nbttagcompound.setDouble("energy",  Config.storage1);
+    nbttagcompound.setDouble("energy2",  Config.storage1);
     itemList.add(itemStack);
     itemStack = new ItemStack(item, 1, 1);
     itemStack.setItemDamage(1);
     nbttagcompound = SuperSolarPanels.getOrCreateNbtData(itemStack);
-    nbttagcompound.setDouble("energy",  SuperSolarPanels.storage2);
-    nbttagcompound.setDouble("energy2",  SuperSolarPanels.storage2);
+    nbttagcompound.setDouble("energy",  Config.storage2);
+    nbttagcompound.setDouble("energy2",  Config.storage2);
     itemList.add(itemStack);
   }
 

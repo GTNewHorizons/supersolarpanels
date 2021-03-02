@@ -1,5 +1,6 @@
 package com.Denfop.item.reactor;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.reactor.IReactor;
@@ -32,13 +33,13 @@ public ItemRadiationToriyRod(String internalName, int cells,int time,int heat,fl
     ItemStack ret;
     switch (this.numberOfCells) {
       case 1:
-        ret = SuperSolarPanels.reactorDepletedtoriySimple;
+        ret = SSPItem.reactorDepletedtoriySimple;
         return new ItemStack(ret.getItem(), 1);
       case 2:
-        ret = SuperSolarPanels.reactorDepletedtoriyDual;
+        ret = SSPItem.reactorDepletedtoriyDual;
         return new ItemStack(ret.getItem(), 1);
       case 4:
-        ret = SuperSolarPanels.reactorDepletedtoriyQuad;
+        ret = SSPItem.reactorDepletedtoriyQuad;
         return new ItemStack(ret.getItem(), 1);
       
     } 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Denfop.Constants;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.cable.BlockCable;
 import com.Denfop.tiles.base.TileEntityCable;
@@ -128,7 +129,7 @@ public void registerIcons(final IIconRegister IIconRegister) {
             break;
         } 
       }  
-    BlockCable block = (BlockCable)getBlock(new ItemStack(SuperSolarPanels.cableblock));
+    BlockCable block = (BlockCable)getBlock(new ItemStack(SSPItem.cableblock));
     if ((oldBlock.isAir((IBlockAccess)world, x, y, z) || world.canPlaceEntityOnSide(block, x, y, z, false, side, (Entity)entityplayer, itemstack)) && world
       .checkNoEntityCollision(block.getCollisionBoundingBoxFromPool(world, x, y, z, itemstack.getItemDamage())) && world
       .setBlock(x, y, z, (Block)block, itemstack.getItemDamage(), 3)) {

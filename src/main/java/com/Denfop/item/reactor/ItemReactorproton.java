@@ -1,5 +1,6 @@
 package com.Denfop.item.reactor;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.reactor.IReactor;
@@ -32,16 +33,16 @@ public ItemReactorproton(String internalName, int cells,int time,int heat,float 
     ItemStack ret;
     switch (this.numberOfCells) {
       case 1:
-        ret = SuperSolarPanels.reactorDepletedprotonSimple;
+        ret = SSPItem.reactorDepletedprotonSimple;
         return new ItemStack(ret.getItem(), 1);
       case 2:
-        ret = SuperSolarPanels.reactorDepletedprotonDual;
+        ret = SSPItem.reactorDepletedprotonDual;
         return new ItemStack(ret.getItem(), 1);
       case 4:
-        ret = SuperSolarPanels.reactorDepletedprotonQuad;
+        ret = SSPItem.reactorDepletedprotonQuad;
         return new ItemStack(ret.getItem(), 1);
       case 8:
-          ret = SuperSolarPanels.reactorDepletedprotoneit;
+          ret = SSPItem.reactorDepletedprotoneit;
           return new ItemStack(ret.getItem(), 1);
     } 
     throw new RuntimeException("invalid cell count: " + this.numberOfCells);

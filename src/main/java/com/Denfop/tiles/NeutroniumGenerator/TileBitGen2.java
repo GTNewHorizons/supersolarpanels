@@ -47,6 +47,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import org.apache.commons.lang3.mutable.MutableObject;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.block.Base.BlocksItems;
 import com.Denfop.container.ContainerbitGen;
@@ -86,7 +87,7 @@ public class TileBitGen2 extends TileEntityLiquidTankElectricMachine implements 
   protected final Redstone redstone;
   
   public TileBitGen2() {
-    super(SuperSolarPanels.energy , 3, -1, 8);
+    super(Config.energy , 3, -1, 8);
     this.scrap = 0;
     this.StateIdle = 0;
     this.StateRunning = 1;

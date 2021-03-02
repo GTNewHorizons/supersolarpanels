@@ -2,13 +2,17 @@ package com.Denfop.gui;
 
 import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.api.module.IModulGenDay;
+import com.Denfop.api.module.IModulGenNight;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulPanel;
 import com.Denfop.api.module.IModulStorage;
+import com.Denfop.api.module.IModuleType;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
+import com.Denfop.item.Modules.module7;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.GuiNumberUtils;
 
@@ -55,6 +59,14 @@ public class GuiAdvSolarPanel extends GuiContainer {
     String ModulesString3 = I18n.format("ssp.output", new Object[0]);
     String ModulesString4 = I18n.format("ssp.tier1", new Object[0]);
     String ModulesString5 = I18n.format("ssp.tier2", new Object[0]);
+    String ModulesString6 = I18n.format("ssp.moduletype1", new Object[0]);
+    String ModulesString61 = I18n.format("ssp.moduletype2", new Object[0]); 
+    String ModulesString62 = I18n.format("ssp.moduletype3", new Object[0]);
+    String ModulesString63 = I18n.format("ssp.moduletype4", new Object[0]);
+    String ModulesString64 = I18n.format("ssp.moduletype5", new Object[0]);
+    String ModulesString65 = I18n.format("ssp.moduletype6", new Object[0]);
+    String ModulesString66 = I18n.format("ssp.moduletype7", new Object[0]);
+    String ModulesString7 = I18n.format("ssp.rfmodule", new Object[0]);
     
     
     int tierplus = 0;
@@ -122,22 +134,42 @@ if(this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getI
       
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16, 13487565);
        if(maxstorage_dob != 0)
-        this.fontRendererObj.drawString(ModulesString2 + maxstorage_dob + "%", 160, 16, 13487565);
+        this.fontRendererObj.drawString(ModulesString2 + maxstorage_dob + "%", 15, 182, 13487565);
        int output[];
        output = new int[9];
+       int gend[];
+       gend = new int[9];
+       int genn[];
+       genn = new int[9];
        for(int i= 0; i < 9; i++) {
      
        if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IModulOutput) {
    		output[i] = IModulOutput.getData(this.tileentity.chargeSlots[i]).get(0);
    		
-   				}}
-       double output_dob = 0;
+   				}
+       if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IModulGenDay) {
+    	   gend[i] = IModulGenDay.getData(this.tileentity.chargeSlots[i]).get(0);
+      		
+      				}
+       if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof IModulGenNight) {
+    	   genn[i] = IModulGenNight.getData(this.tileentity.chargeSlots[i]).get(0);
+      		
+      				}
        
+       }
+       double output_dob = 0;
+       double gend_dob = 0;
+       double genn_dob = 0;
        for(int i = 0; i <9;i++) {
        	if(output[i] != 0) {
        	output_dob = output_dob + output[i];
        	}
-       	
+       	if(gend[i] != 0) {
+       		gend_dob = gend_dob + gend[i];
+           	}
+       	if(genn[i] != 0) {
+       		genn_dob = genn_dob + genn[i];
+           	}
        }
     a[1] = (float)((this.tileentity.u + sum2) + (this.tileentity.u + sum2) *(output_dob/100));
     if(a[1] > 2000000000) {
@@ -150,25 +182,51 @@ if(this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getI
       
         this.fontRendererObj.drawString(maxOutputString +  GuiNumberUtils.getString(a[1]) + " " + energyPerTickString, 50, 26, 13487565);
         if(output_dob != 0)
-this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 20, 180, 13487565);
+this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175, 13487565);
       
     
-    int gend = 0;
-    int genn = 0;
-    for (int j = 0; j < 9; j++) {
-      if (this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getItem() instanceof com.Denfop.item.Modules.module1)
-        gend++; 
-      if (this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getItem() instanceof com.Denfop.item.Modules.module2)
-        genn++; 
-    } 
+   
    
     	String generation =  GuiNumberUtils.getString(this.tileentity.generating);
-     
+    	 
+    	 if(this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof IModuleType) {
+    		
+    	   		
+    	   				
+    	
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 0)
+             this.fontRendererObj.drawString(ModulesString6, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 1)
+                 this.fontRendererObj.drawString( ModulesString61, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 2)
+                 this.fontRendererObj.drawString(ModulesString62, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 3)
+                 this.fontRendererObj.drawString(ModulesString63, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 4)
+                 this.fontRendererObj.drawString(ModulesString64, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 5)
+                 this.fontRendererObj.drawString(ModulesString65, 15, 196, 13487565);
+    		 if(this.tileentity.chargeSlots[8].getItemDamage() == 6)
+                 this.fontRendererObj.drawString(ModulesString66, 15, 196, 13487565);
+    	 
+    	 
+    	 }
+    	 for(int i = 0;i <9;i++) {
+    		 if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module7) {
+    			 if(this.tileentity.chargeSlots[i].getItemDamage() ==4)
+    				 this.fontRendererObj.drawString(ModulesString7, 15, 203, 13487565);
+    			 String rf =  GuiNumberUtils.getString(this.tileentity.storage2);
+    			 String rf1 =  GuiNumberUtils.getString(this.tileentity.maxStorage2);
+    			     this.fontRendererObj.drawString(storageString +rf +"/"+rf1, 15, 209, 13487565);
+    		 }
+    		    	
+    			 
+    	 }
       this.fontRendererObj.drawString(generatingString + generation + " " + energyPerTickString, 50, 36, 13487565);
-      if(gend !=0 && this.tileentity.sunIsUp)
-      this.fontRendererObj.drawString(ModulesString + (gend * 20) + "%", 165, 36, 13487565);
-      if(genn !=0 && !this.tileentity.sunIsUp)
-          this.fontRendererObj.drawString(ModulesString + (gend * 20) + "%", 165, 36, 13487565);
+      if(gend_dob !=0 && this.tileentity.sunIsUp)
+      this.fontRendererObj.drawString(ModulesString + (gend_dob) + "%", 15, 189, 13487565);
+      if(genn_dob !=0 && !this.tileentity.sunIsUp)
+          this.fontRendererObj.drawString(ModulesString1 + (genn_dob) + "%", 15, 189, 13487565);
      
     if (tierplus != 0 && tierplus - minus > 0 && this.tileentity.o > 0) {
       this.fontRendererObj.drawString(tierString + this.tileentity.o, 50, 46, 13487565);

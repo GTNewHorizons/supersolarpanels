@@ -1,5 +1,6 @@
 package com.Denfop.Recipes;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.item.IC2Items;
@@ -18,26 +19,26 @@ public class CompressorRecipe {
 		
 		
 		
-	      addcompressor(Ic2Items.carbonFiber,9, new ItemStack(SuperSolarPanels.coal_chunk1));
-	        addcompressor(Ic2Items.carbonPlate,9, new ItemStack(SuperSolarPanels.compresscarbon));
-	        addcompressor(Ic2Items.advancedAlloy,9, new ItemStack(SuperSolarPanels.compresscarbonultra));
-	        addcompressor(Ic2Items.iridiumPlate, 4, new ItemStack(SuperSolarPanels.QuantumItems2));
-	        addcompressor(SuperSolarPanels.uuMatterCell, 1, new ItemStack(SuperSolarPanels.neutronium));
-	        addcompressor(new ItemStack(SuperSolarPanels.QuantumItems2), 9, new ItemStack(SuperSolarPanels.QuantumItems4));
-	        addcompressor(new ItemStack(SuperSolarPanels.wolfram_plate), 9, SuperSolarPanels.cell);
-	        addcompressor(new ItemStack(SuperSolarPanels.neutronium), 9,  new ItemStack(SuperSolarPanels.neutroniumingot,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.spinel_ingot), 9,  new ItemStack(SuperSolarPanels.spinel_plate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.chromium_ingot), 9,  new ItemStack(SuperSolarPanels.chromium_plate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.wolfram_ingot), 9,  new ItemStack(SuperSolarPanels.wolfram_plate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.mikhail_ingot), 9,  new ItemStack(SuperSolarPanels.michail_plate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.nickel), 9,  new ItemStack(SuperSolarPanels.nickelplate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.electriumingot), 9,  new ItemStack(SuperSolarPanels.electriumplate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.invaringot), 9,  new ItemStack(SuperSolarPanels.invarplate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.magnesium_ingot), 9,  new ItemStack(SuperSolarPanels.magnesium_plate,1));
-	        addcompressor(new ItemStack(SuperSolarPanels.platium_ingot), 9,  new ItemStack(SuperSolarPanels.platium_plate,1));
-	        addcompressor(Ic2Items.uraniumOre,1,new ItemStack(SuperSolarPanels.itemSSP,1,8));
-	  		addcompressor(IC2Items.getItem("UranFuel"),1,new ItemStack(SuperSolarPanels.itemSSP,1,8));
-	  		addcompressor(IC2Items.getItem("crushedUraniumOre"),1,new ItemStack(SuperSolarPanels.itemSSP,1,8));
+	      addcompressor(Ic2Items.carbonFiber,9, new ItemStack(SSPItem.coal_chunk1));
+	        addcompressor(Ic2Items.carbonPlate,9, new ItemStack(SSPItem.compresscarbon));
+	        addcompressor(Ic2Items.advancedAlloy,9, new ItemStack(SSPItem.compresscarbonultra));
+	        addcompressor(Ic2Items.iridiumPlate, 4, new ItemStack(SSPItem.QuantumItems2));
+	        addcompressor(SSPItem.uuMatterCell, 1, new ItemStack(SSPItem.neutronium));
+	        addcompressor(new ItemStack(SSPItem.QuantumItems2), 9, new ItemStack(SSPItem.QuantumItems4));
+	        addcompressor(new ItemStack(SSPItem.wolfram_plate), 9, SSPItem.cell);
+	        addcompressor(new ItemStack(SSPItem.neutronium), 9,  new ItemStack(SSPItem.neutroniumingot,1));
+	        addcompressor(new ItemStack(SSPItem.spinel_ingot), 9,  new ItemStack(SSPItem.spinel_plate,1));
+	        addcompressor(new ItemStack(SSPItem.chromium_ingot), 9,  new ItemStack(SSPItem.chromium_plate,1));
+	        addcompressor(new ItemStack(SSPItem.wolfram_ingot), 9,  new ItemStack(SSPItem.wolfram_plate,1));
+	        addcompressor(new ItemStack(SSPItem.mikhail_ingot), 9,  new ItemStack(SSPItem.michail_plate,1));
+	        addcompressor(new ItemStack(SSPItem.nickel), 9,  new ItemStack(SSPItem.nickelplate,1));
+	        addcompressor(new ItemStack(SSPItem.electriumingot), 9,  new ItemStack(SSPItem.electriumplate,1));
+	        addcompressor(new ItemStack(SSPItem.invaringot), 9,  new ItemStack(SSPItem.invarplate,1));
+	        addcompressor(new ItemStack(SSPItem.magnesium_ingot), 9,  new ItemStack(SSPItem.magnesium_plate,1));
+	        addcompressor(new ItemStack(SSPItem.platium_ingot), 9,  new ItemStack(SSPItem.platium_plate,1));
+	        addcompressor(Ic2Items.uraniumOre,1,new ItemStack(SSPItem.itemSSP,1,8));
+	  		addcompressor(IC2Items.getItem("UranFuel"),1,new ItemStack(SSPItem.itemSSP,1,8));
+	  		addcompressor(IC2Items.getItem("crushedUraniumOre"),1,new ItemStack(SSPItem.itemSSP,1,8));
 	}
 	public static void addcompressor(ItemStack input,int n,ItemStack output) {
 		  Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(input, n), null, new ItemStack[] {output });

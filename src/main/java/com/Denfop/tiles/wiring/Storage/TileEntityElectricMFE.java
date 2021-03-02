@@ -1,5 +1,6 @@
 package com.Denfop.tiles.wiring.Storage;
 
+import com.Denfop.Config;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
 
@@ -8,7 +9,7 @@ import com.Denfop.tiles.base.TileEntityElectricBlock;
 
 public class TileEntityElectricMFE extends TileEntityElectricBlock {
   public TileEntityElectricMFE() {
-    super(SuperSolarPanels.tier1, SuperSolarPanels.enegry1, SuperSolarPanels.storage1);
+    super(Config.tier3_MFSU, Config.enegry1, Config.storage1);
   }
   
   public String getInventoryName() {

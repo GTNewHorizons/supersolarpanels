@@ -1,5 +1,6 @@
 package com.Denfop.Recipes;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import ic2.api.recipe.IRecipeInput;
@@ -11,15 +12,15 @@ import net.minecraft.nbt.NBTTagCompound;
 public class CentrifugeRecipe {
 
 	public static void init() {
-		addcentrifuge(SuperSolarPanels.reactorDepletedtoriyDual, 1,new ItemStack(SuperSolarPanels.toriy,2) );
-		addcentrifuge(SuperSolarPanels.reactorDepletedtoriyQuad, 1,  new ItemStack(SuperSolarPanels.toriy,4) );
-		addcentrifuge(SuperSolarPanels.reactorDepletedtoriySimple, 1,  new ItemStack(SuperSolarPanels.toriy,1) );
+		addcentrifuge(SSPItem.reactorDepletedtoriyDual, 1,new ItemStack(SSPItem.toriy,2) );
+		addcentrifuge(SSPItem.reactorDepletedtoriyQuad, 1,  new ItemStack(SSPItem.toriy,4) );
+		addcentrifuge(SSPItem.reactorDepletedtoriySimple, 1,  new ItemStack(SSPItem.toriy,1) );
 		
 		
-		addcentrifuge(SuperSolarPanels.reactorDepletedprotonDual, 1,new ItemStack(SuperSolarPanels.proton,2) );
-		addcentrifuge(SuperSolarPanels.reactorDepletedprotonQuad, 1, new ItemStack(SuperSolarPanels.proton,4) );
-		addcentrifuge(SuperSolarPanels.reactorDepletedprotoneit, 1,new ItemStack(SuperSolarPanels.proton,8) );
-		addcentrifuge(SuperSolarPanels.reactorDepletedprotonSimple, 1,new ItemStack(SuperSolarPanels.proton,1));
+		addcentrifuge(SSPItem.reactorDepletedprotonDual, 1,new ItemStack(SSPItem.proton,2) );
+		addcentrifuge(SSPItem.reactorDepletedprotonQuad, 1, new ItemStack(SSPItem.proton,4) );
+		addcentrifuge(SSPItem.reactorDepletedprotoneit, 1,new ItemStack(SSPItem.proton,8) );
+		addcentrifuge(SSPItem.reactorDepletedprotonSimple, 1,new ItemStack(SSPItem.proton,1));
 	 
 	}
 	

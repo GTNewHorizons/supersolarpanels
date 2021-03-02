@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.InvSlot.InvSlotProcessableAlloy;
 import com.Denfop.RecipeManager.AlloyRecipeManager;
@@ -39,8 +40,8 @@ public TileEntityAlloySmelter() {
   public static void init() {
 	  Recipes.Alloysmelter = new AlloyRecipeManager();
 	  addAlloysmelter((IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.iron_ingot), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.coal), 1),new ItemStack(Ic2Items.advIronIngot.getItem(),1,3) );
-	addAlloysmelter((IRecipeInput)new RecipeInputItemStack( new ItemStack(Items.gold_ingot), 1),(IRecipeInput)new RecipeInputItemStack(Ic2Items.silverIngot, 1),new ItemStack(SuperSolarPanels.electriumingot,1) );
-		addAlloysmelter((IRecipeInput)new RecipeInputItemStack(new ItemStack(SuperSolarPanels.nickel), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.iron_ingot), 1), new ItemStack(SuperSolarPanels.invaringot) );
+	addAlloysmelter((IRecipeInput)new RecipeInputItemStack( new ItemStack(Items.gold_ingot), 1),(IRecipeInput)new RecipeInputItemStack(Ic2Items.silverIngot, 1),new ItemStack(SSPItem.electriumingot,1) );
+		addAlloysmelter((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.nickel), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.iron_ingot), 1), new ItemStack(SSPItem.invaringot) );
   }
   
   public String getInventoryName() {

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.Denfop.Constants;
+import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -44,10 +45,10 @@ public ItemUpgradeModule() {
     super();
     setHasSubtypes(true);
     this.setCreativeTab(SuperSolarPanels.tabssp3);
-    SuperSolarPanels.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
-    SuperSolarPanels.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
-    SuperSolarPanels.overclockerUpgrade= new ItemStack((Item)this, 1, 0);
-    SuperSolarPanels.overclockerUpgrade1= new ItemStack((Item)this, 1, 1);
+    SSPItem.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
+    SSPItem.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
+    SSPItem.overclockerUpgrade= new ItemStack((Item)this, 1, 0);
+    SSPItem.overclockerUpgrade1= new ItemStack((Item)this, 1, 1);
     this.fluidAmountPerTick = 50;
     this.itemNames = new ArrayList<String>();
     this.IIconsList = new IIcon[2];
