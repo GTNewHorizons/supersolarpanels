@@ -300,11 +300,12 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175, 13
     drawTexturedModalRect(h, k, 0, 0, this.xSize, this.ySize);
     if (this.tileentity.storage > 0 || this.tileentity.storage <= this.tileentity.maxStorage) {
       float l = this.tileentity.gaugeEnergyScaled(24.0F);
-      drawTexturedModalRect(h + 19, k + 24, 195, 0, (int)(l + 1.0F), 14);
+      drawTexturedModalRect(h + 18, k + 24, 194, 0, (int)(l + 1.0F), 14);
     } 
     if (this.tileentity.storage2 > 0 || this.tileentity.storage2 <= this.tileentity.maxStorage2) {
-    	float l = this.tileentity.gaugeEnergyScaled2(24.0F);
-        drawTexturedModalRect(h + 19, k + 24+72, 219, 0, (int)(l + 1.0F), 14);
+    	float l = this.tileentity.gaugeEnergyScaled2(25.0F);
+    	
+        drawTexturedModalRect(h + 19+72+40+23+1, k + 24, 219, 0, (int)(l), 14);
       } 
     if (this.tileentity.skyIsVisible && this.tileentity.solarType != 3 && this.tileentity.solarType != 4) {
     	if(this.tileentity.rain == false) {

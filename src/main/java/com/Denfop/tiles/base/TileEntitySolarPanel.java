@@ -908,7 +908,7 @@ if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage
     	if( (this.storage2 * i / this.maxStorage2) > 24 )
     		return 24;
 
-    	         return  (float) (this.storage * i /( this.maxStorage2));
+    	         return  (float) (this.storage2 * i /( this.maxStorage2));
 
     }
     public boolean canConnectEnergy(ForgeDirection arg0) {
