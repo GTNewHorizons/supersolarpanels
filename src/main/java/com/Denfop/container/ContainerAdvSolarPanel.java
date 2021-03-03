@@ -1,16 +1,23 @@
 package com.Denfop.container;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.ModUtils;
 
+import ic2.core.IC2;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class ContainerAdvSolarPanel extends Container
 {
@@ -23,6 +30,9 @@ public class ContainerAdvSolarPanel extends Container
 	private int storage2;
 	private int solarType;
 	private boolean rain;
+	private int panelx;
+	private int panely;
+	private int panelz;
 
 	public ContainerAdvSolarPanel(InventoryPlayer inventoryplayer, TileEntitySolarPanel tileentitysolarpanel)
 	{
@@ -66,9 +76,13 @@ public class ContainerAdvSolarPanel extends Container
 		ModUtils.sendContainerInt(this, icrafting, 2, 5, this.tileentity.generating);
 		ModUtils.sendContainerInt(this, icrafting, 3, 4, this.tileentity.storage);
 		ModUtils.sendContainerInt(this, icrafting, 6, 7, this.tileentity.storage2);
+		ModUtils.sendContainerInt(this, icrafting, 9, 10, this.tileentity.panelx);
+		ModUtils.sendContainerInt(this, icrafting, 11, 12, this.tileentity.panely);
+		ModUtils.sendContainerInt(this, icrafting, 13, 14, this.tileentity.panelz);
 		
 	}
-
+	
+	
 	@Override
 	public void detectAndSendChanges()
 	{
@@ -77,7 +91,8 @@ public class ContainerAdvSolarPanel extends Container
 		for (int i = 0; i < this.crafters.size(); ++i)
 		{
 			ICrafting icrafting = (ICrafting) this.crafters.get(i);
-
+			
+			
 					if (this.sunIsUp != this.tileentity.sunIsUp)
 				icrafting.sendProgressBarUpdate(this, 0, this.tileentity.sunIsUp ? 1 : 0);
 					if (this.rain != this.tileentity.rain)
@@ -90,6 +105,12 @@ public class ContainerAdvSolarPanel extends Container
 				ModUtils.sendContainerInt(this, icrafting, 3, 4, this.tileentity.storage);
 			if (this.storage2 != this.tileentity.storage2)
 				ModUtils.sendContainerInt(this, icrafting, 6, 7, this.tileentity.storage2);
+			if (this.panelx != this.tileentity.panelx)
+				ModUtils.sendContainerInt(this, icrafting, 9, 10, this.tileentity.panelx);
+			if (this.panely != this.tileentity.panely)
+				ModUtils.sendContainerInt(this, icrafting, 11, 12, this.tileentity.panely);
+			if (this.panelz != this.tileentity.panelz)
+				ModUtils.sendContainerInt(this, icrafting, 13, 14, this.tileentity.panelz);
 		
 		}
 		this.rain = this.tileentity.rain;
@@ -98,6 +119,10 @@ public class ContainerAdvSolarPanel extends Container
 		this.generating = this.tileentity.generating;
 		this.storage = this.tileentity.storage;
 		this.storage2 = this.tileentity.storage2;
+		this.panelx = this.tileentity.panelx;
+		this.panely = this.tileentity.panely;
+		this.panelz = this.tileentity.panelz;
+		
 	}
 
 	@Override
@@ -114,6 +139,10 @@ public class ContainerAdvSolarPanel extends Container
 			this.tileentity.generating = ModUtils.recieveContainerInt(2, 5, id, val, this.tileentity.generating);
 		this.tileentity.storage = ModUtils.recieveContainerInt(3, 4, id, val, this.tileentity.storage);
 		this.tileentity.storage2 = ModUtils.recieveContainerInt(6, 7, id, val, this.tileentity.storage2);
+		
+		this.tileentity.panelx = ModUtils.recieveContainerInt(9, 10, id, val, this.tileentity.panelx);
+		this.tileentity.panely = ModUtils.recieveContainerInt(11, 12, id, val, this.tileentity.panely);
+		this.tileentity.panelz = ModUtils.recieveContainerInt(13, 14, id, val, this.tileentity.panelz);
 			}
 
 	@Override

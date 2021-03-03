@@ -61,6 +61,7 @@ import com.mojang.authlib.GameProfile;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import ic2.api.network.INetworkUpdateListener;
+import ic2.api.network.INetworkClientTileEntityEventListener;
 import ic2.api.network.INetworkDataProvider;
 import net.minecraft.inventory.IInventory;
 import ic2.api.energy.tile.IEnergySource;
@@ -73,7 +74,7 @@ import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
 import ic2.api.energy.tile.IEnergyTile;
 
-public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile, IWrenchable, IEnergySource, IInventory, INetworkDataProvider, INetworkUpdateListener,IEnergyHandler
+public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,INetworkDataProvider, INetworkUpdateListener, IWrenchable, IEnergySource, IInventory, IEnergyHandler, INetworkClientTileEntityEventListener
 {private TileEntitySolarPanel tileentity;
     public static Random randomizer;
     public int ticker;
@@ -345,8 +346,12 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			       
         			          this.storage2 += this.storage*4;
         			          this.storage -= this.storage;
-        			       
+        			          if(this.storage2 > this.maxStorage2) {
+        			       int temp = 	  this.storage2 -  this.maxStorage2;
+        			       this.storage += temp / 4;
+        			          }
         			      } 
+        			      
         			
         			for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
         		        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
@@ -435,39 +440,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
       	this.panelz = z;
       	this.nameblock = name;
       	this.world1 = world;
-      	this.blocktier = tier1;
-      	
+      	this.blocktier = tier1;}
+      break;
       }
-      	
-      	}
-            
-        }
-       
-
-       
-     
+            }
         	if(this.worldObj.getTileEntity(panelx, panely, panelz) != null && this.worldObj.getTileEntity(panelx, panely, panelz) instanceof TileEntityElectricBlock&& panelx != 0 && panely != 0 && panelz != 0 && wirelees != 0) {
-        		
-          		TileEntityElectricBlock tile =  (TileEntityElectricBlock) this.worldObj.getTileEntity(panelx, panely, panelz);
-
-          		if(tile.tier == this.blocktier && tile.getWorldObj().provider.dimensionId == this.world1) {
+        		TileEntityElectricBlock tile =  (TileEntityElectricBlock) this.worldObj.getTileEntity(panelx, panely, panelz);
+                if(tile.tier == this.blocktier && tile.getWorldObj().provider.dimensionId == this.world1) {
           		if( this.storage > 0 &&  tile.energy <= tile.maxStorage ) {
-          			
           			tile.energy +=(this.storage);
-          			this.storage=0;
-          			
-          		}else {
-          			
-          		}
-          	}else {
-      			
-      		}
-          		
-        	}else {
-        		panelx=0;
-        		panely=0;
-        		panelz=0;
-          	}
+          			this.storage=0;}}}else {
+          				this.panelx=0;
+          				this.panely=0;
+          				this.panelz=0;}
         	
         int sum = 0,sum1 = 0,sum2 = 0,sum3 = 0;
         for(int i =0;i<9;i++) {
@@ -769,9 +754,9 @@ return this.generating = 0;
     	    
     	   this.solarType=nbttagcompound.getInteger("solarType");
     	    
-    	    	panelx=nbttagcompound.getInteger("panelx");
-    	    	panely=nbttagcompound.getInteger("panely");
-    	    	panelz=nbttagcompound.getInteger("panelz");
+    	   this.panelx=nbttagcompound.getInteger("panelx");
+    	    	this.panely=nbttagcompound.getInteger("panely");
+    	    	this.panelz=nbttagcompound.getInteger("panelz");
     	    	this.nameblock=nbttagcompound.getString("nameblock");
     	    	this.world1=nbttagcompound.getInteger("worldid");
     	    	this.player = nbttagcompound.getString("player");
@@ -803,9 +788,9 @@ return this.generating = 0;
     	      } 
     	    NBTTagList nbttaglist = new NBTTagList();
     	   
-    	    	nbttagcompound.setInteger("lastX1",panelx);
-    	    	nbttagcompound.setInteger("lastY1",panely);
-    	    	nbttagcompound.setInteger("lastZ1",panelz);
+    	    	nbttagcompound.setInteger("panelx",this.panelx);
+    	    	nbttagcompound.setInteger("panely",this.panely);
+    	    	nbttagcompound.setInteger("panelz",this.panelz);
     	    	if(nameblock != null)
     	    	nbttagcompound.setString("nameblock",nameblock);
     	    	
@@ -1109,6 +1094,12 @@ if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage
     	int type = this.solarType;
     	return type;
     }
+
+	@Override
+	public void onNetworkEvent(EntityPlayer player, int event) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

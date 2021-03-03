@@ -416,8 +416,8 @@ ssp.genday=§2Повышена генерация днём на: +
 ssp.gennight=§3Повышена генерация ночью на: +
 ssp.storage=§9Повышена вместимость хранилища на: +
 ssp.output=§6Повышен макс. выход на: +
-ssp.tier1=§a+
-ssp.tier2=§c-
+ssp.tier1=§aУровень повысился на: +
+ssp.tier2=§cУровень понизился на: -
 module74.name=Модуль: Зарядка предметом
 module75.name=Модуль: РФ-Энергия
 item.electriumdust.name=Электрум пыль
@@ -519,7 +519,11 @@ ssp.moduletype4=Тип панели: §3Эндерова
 ssp.moduletype5=Тип панели: §8Ночная
 ssp.moduletype6=Тип панели: §eДневная
 ssp.moduletype7=Тип панели: §9Дождевая
-ssp.rfmodule=§cВырабатывает рф энергию
+ssp.rfmodule=§cВырабатывает RF энергию
+ssp.rfstorage=Ёмкость RF: 
+ssp.modulewirelles=§bБеспроводная связь: §2работает
+ssp.modulewirelles1=Координаты: 
+ssp.modulewirelles2=§bБеспроводная связь: §cне работает
 
 
 

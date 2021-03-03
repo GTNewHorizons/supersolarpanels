@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class NBTData {
-	 public static NBTTagCompound getOrCreateNbtData(final ItemStack itemstack) {
+	public static NBTTagCompound getOrCreateNbtData(final ItemStack itemstack) {
 	        NBTTagCompound nbttagcompound = itemstack.getTagCompound();
 	        if (nbttagcompound == null) {
 	            nbttagcompound = new NBTTagCompound();
@@ -16,8 +16,6 @@ public class NBTData {
 	            nbttagcompound.setInteger("energy", 0);
 	            nbttagcompound.setInteger("energy2", 0);
 	            nbttagcompound.setBoolean("isFlyActive", false);
-	            nbttagcompound.setBoolean("EnableWirelles", false);
-	            nbttagcompound.setBoolean("create", true);
 	            nbttagcompound.setString("World", "");
 	            nbttagcompound.setInteger("World1", 0);
 	            nbttagcompound.setInteger("Xcoord", 0);
