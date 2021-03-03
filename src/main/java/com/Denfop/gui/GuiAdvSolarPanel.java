@@ -234,7 +234,7 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175-2, 
     			 
     			 if(this.tileentity.panelx != 0 && this.tileentity.panely != 0 && this.tileentity.panelz != 0 ) {
     				 this.fontRendererObj.drawString(ModulesString8, 15, 209-2, 13487565);
-    				 this.fontRendererObj.drawString(ModulesString9 + this.tileentity.panelx  + " "+ this.tileentity.panely  + " " + this.tileentity.panelz,  15, 215-2, 13487565);
+    				 this.fontRendererObj.drawString(ModulesString9 +"X:"+ this.tileentity.panelx  + " Y:"+ this.tileentity.panely  + " Z:" + this.tileentity.panelz,  15, 215-2, 13487565);
     			
     			 }
     			 else if(this.tileentity.panelx == 0 && this.tileentity.panely == 0 && this.tileentity.panelz == 0 )
@@ -351,11 +351,19 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175-2, 
         drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
       }  
     if (this.tileentity.solarType == 3 && (this.tileentity.getWorldObj()).provider.dimensionId != -1)
-      if (this.tileentity.sunIsUp) {
-        drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-      } else if (!this.tileentity.sunIsUp) {
-        drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-      }  
+    	if(this.tileentity.rain == false) {
+       	 if (this.tileentity.sunIsUp) {
+           drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
+         } else if (!this.tileentity.sunIsUp) {
+           drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
+         }  
+       	}else {
+       		if (this.tileentity.sunIsUp) {
+       	        drawTexturedModalRect(h + 24, k + 42, 225, 15, 14, 14);
+       	      } else if (!this.tileentity.sunIsUp) {
+       	        drawTexturedModalRect(h + 24, k + 42, 240, 15, 14, 14);
+       	      } 
+       	}  
     if (this.tileentity.solarType == 4 && (this.tileentity.getWorldObj()).provider.dimensionId == 1)
       if (this.tileentity.sunIsUp) {
         drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
@@ -363,11 +371,19 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175-2, 
         drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
       }  
     if (this.tileentity.solarType == 4 && (this.tileentity.getWorldObj()).provider.dimensionId != 1)
-      if (this.tileentity.sunIsUp) {
-        drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
-      } else if (!this.tileentity.sunIsUp) {
-        drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
-      }  
+    	if(this.tileentity.rain == false) {
+       	 if (this.tileentity.sunIsUp) {
+           drawTexturedModalRect(h + 24, k + 42, 195, 15, 14, 14);
+         } else if (!this.tileentity.sunIsUp) {
+           drawTexturedModalRect(h + 24, k + 42, 210, 15, 14, 14);
+         }  
+       	}else {
+       		if (this.tileentity.sunIsUp) {
+       	        drawTexturedModalRect(h + 24, k + 42, 225, 15, 14, 14);
+       	      } else if (!this.tileentity.sunIsUp) {
+       	        drawTexturedModalRect(h + 24, k + 42, 240, 15, 14, 14);
+       	      } 
+       	} 
   }
   
   private static ResourceLocation tex = new ResourceLocation("supersolarpanel", "textures/gui/GUIAdvancedSolarPanel.png");

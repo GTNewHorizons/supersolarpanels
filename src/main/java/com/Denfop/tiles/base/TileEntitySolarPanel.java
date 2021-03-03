@@ -108,11 +108,11 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int u;
 	private module6 panel;
 	public int tier;
-	public int l;
+
 	public int convertState = 0;
 	 public int elapsedTicks;
 	public boolean changesolartype = false;
-	private GameProfile owner = null;
+	
 	 public int panelx=0;
 	  public int panely=0;
 	  public int panelz=0;
@@ -121,7 +121,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	
 	  public long lastTimeStamp;
 
-	  public int outputEnergyValue;
+	  
 
 
 	  public int inputEnergyBuffer;
@@ -134,13 +134,8 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
 	public int storage2;
 	public boolean rain;
 	 public int tickRate = 40;  
-	  public int inputEnergyValue;
+	 
 	  public int maxStorage2;
-	public int jj; 
-	public int jj1; 
-	public int jj2; 
-	public int jj3;
-	 public int maxRFproduction;
 	  public int tickRateFlush = 5;
     public TileEntitySolarPanel(final String gName,final int tier, final int typeSolar, final int gDay, final int gNight, final int gOutput, final int gmaxStorage) {
     	
@@ -158,13 +153,13 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         this.p =  gmaxStorage;
         this.k =  gDay;
         this.m = gNight;
-        this.l = 0;
+     
         this.maxStorage2 = this.maxStorage;
         this.chargeSlots = new ItemStack[9];
         this.initialized = false;
         this.production = gOutput;
         this.u = gOutput;
-        this.maxRFproduction = gOutput * 8;
+       
         this.ticker = TileEntitySolarPanel.randomizer.nextInt(this.tickRate());
         this.lastX = this.xCoord;
         this.lastY = this.yCoord;
@@ -744,7 +739,7 @@ return this.generating = 0;
       public void readFromNBT(NBTTagCompound nbttagcompound) {
     	    super.readFromNBT(nbttagcompound);
     	    this.storage = nbttagcompound.getInteger("storage");
-    	    this.storage = nbttagcompound.getInteger("storage2");
+    	    this.storage2 = nbttagcompound.getInteger("storage2");
     	    this.lastX = nbttagcompound.getInteger("lastX");
     	    this.lastY = nbttagcompound.getInteger("lastY");
     	    this.lastZ = nbttagcompound.getInteger("lastZ");
@@ -763,8 +758,7 @@ return this.generating = 0;
     	    	blocktier=	nbttagcompound.getInteger("blocktier");
     	    	
     	    NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-    	    if (nbttagcompound.hasKey("ownerGameProfile"))
-    	        this.owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("ownerGameProfile")); 
+    	   
     	    this.chargeSlots = new ItemStack[getSizeInventory()];
     	    for (int i = 0; i < nbttaglist.tagCount(); i++) {
     	      NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
@@ -781,11 +775,7 @@ return this.generating = 0;
     	  public void writeToNBT(NBTTagCompound nbttagcompound) {
     	    super.writeToNBT(nbttagcompound);
     
-    	    if (this.owner != null) {
-    	        NBTTagCompound ownerNbt = new NBTTagCompound();
-    	        NBTUtil.func_152460_a(ownerNbt, this.owner);
-    	        nbttagcompound.setTag("ownerGameProfile", (NBTBase)ownerNbt);
-    	      } 
+    	    
     	    NBTTagList nbttaglist = new NBTTagList();
     	   
     	    	nbttagcompound.setInteger("panelx",this.panelx);
