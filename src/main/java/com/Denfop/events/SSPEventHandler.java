@@ -126,7 +126,7 @@ public class SSPEventHandler {
 		int chance = (rand.nextInt(16)+1);
 		
 		ItemStack itemstack =Ic2Items.smallPlutonium;
-		if(chance >= 15 ) {
+		if(chance == 16 ) {
 	for(int i =0;i<36;i++) {
 		 if(event.getPlayer().inventory.mainInventory[i] == Ic2Items.smallPlutonium) {
 	   		event.getPlayer().inventory.mainInventory[i].stackSize = event.getPlayer().inventory.mainInventory[i].stackSize + 1;
