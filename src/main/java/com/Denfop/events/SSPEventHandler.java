@@ -124,9 +124,12 @@ public class SSPEventHandler {
 		if(Ic2Items.uraniumOre.getItem() == item.getItem()) {
 		Random rand = new Random();
 		int chance = (rand.nextInt(16)+1);
-		
+		int chance1 = (rand.nextInt(16)+1);
+		double k = chance/16;
+		double k1 = chance1/8;
+		double dob = (k * k1)*100;
 		ItemStack itemstack =Ic2Items.smallPlutonium;
-		if(chance == 16 ) {
+		if(dob <= 1 ) {
 	for(int i =0;i<36;i++) {
 		 if(event.getPlayer().inventory.mainInventory[i] == Ic2Items.smallPlutonium) {
 	   		event.getPlayer().inventory.mainInventory[i].stackSize = event.getPlayer().inventory.mainInventory[i].stackSize + 1;
