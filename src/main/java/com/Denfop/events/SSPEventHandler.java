@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
@@ -38,6 +39,7 @@ import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.core.IC2;
 import ic2.core.Ic2Items;
 import ic2.core.WorldData;
+import ic2.core.block.BlockMetaData;
 import ic2.core.item.armor.ItemArmorHazmat;
 import ic2.core.item.tool.ItemDrill;
 import ic2.core.util.LogCategory;
@@ -75,6 +77,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.event.world.*;
@@ -105,7 +108,38 @@ public class SSPEventHandler {
 		}
 	}
 	 
-	    
+	@SubscribeEvent
+	public void UraniumOre(BreakEvent event) {
+		if(!(event.block instanceof  BlockMetaData))
+				return;
+		
+		
+		Block block = event.block;
+		int meta = event.blockMetadata;
+		ItemStack item = new ItemStack(block,1,meta);
+		if(!(Ic2Items.uraniumOre.getItem() == item.getItem()))
+			return;
+		
+	
+		if(Ic2Items.uraniumOre.getItem() == item.getItem()) {
+		Random rand = new Random();
+		int chance = (rand.nextInt(16)+1);
+		
+		ItemStack itemstack =Ic2Items.smallPlutonium;
+		if(chance >= 15 ) {
+	for(int i =0;i<36;i++) {
+		 if(event.getPlayer().inventory.mainInventory[i] == Ic2Items.smallPlutonium) {
+	   		event.getPlayer().inventory.mainInventory[i].stackSize = event.getPlayer().inventory.mainInventory[i].stackSize + 1;
+	   	 break;
+		 }else if(event.getPlayer().inventory.mainInventory[i] == null) {
+   		 event.getPlayer().inventory.mainInventory[i] = Ic2Items.smallPlutonium;
+   		 break;
+   	 }
+	}
+         
+        
+         }}}
+	//}
 	   
 	  @SubscribeEvent
 	    @SideOnly(Side.CLIENT)
@@ -233,7 +267,7 @@ public class SSPEventHandler {
         int y = MathHelper.floor_double(player.posY);
         int skylight = player.worldObj.getBlockLightValue(x, y, z);
         NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
-        if(nbtData.getBoolean("isNightVision")){
+        if(nbtData.getBoolean("isNightVision")) {
         	if(player.posY < 60 && skylight <8) {
            	 player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true));
            }

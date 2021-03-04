@@ -152,101 +152,103 @@ public class ItemSolarPanelHelmet extends ItemArmor implements IElectricItem, IM
   	  public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
   	    return IConfigurableItem.ProfileHelper.getBoolean(itemstack, "GogglesOfRevealing", true);
   	  }
-  	  public void onArmorTick(World worldObj, EntityPlayer player, ItemStack itemStack) {
-          if (worldObj.isRemote)
-            return; 
-          gainFuel(player);
-          NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
-          nbtData.setInteger(iconString, energyPerDamage);
-          if (this.sunIsUp && this.skyIsVisible) {
-        	  this.storage= nbtData.getInteger("storage");
-              this.storage = this.storage + this.genDay;
-              nbtData.setInteger("storage", this.storage);
-            } 
-            if (this.skyIsVisible) {
-            	this.storage= nbtData.getInteger("storage");
-                this.storage = this.storage + this.genNight;
-                nbtData.setInteger("storage", this.storage);
-              
-            } 
-            if(nbtData.getInteger("storage") >= maxstorage) {
-            	 nbtData.setInteger("storage", this.maxstorage);
-            }
-            if(nbtData.getInteger("storage") < 0) {
-            	nbtData.setInteger("storage", 0);
-            }
-     
-          for (Object effect : new LinkedList(player.getActivePotionEffects())) {
-              int id = ((PotionEffect) effect).getPotionID();
-              Integer cost = potionRemovalCost.get(Integer.valueOf(id));
-              if (cost != null) {
-                cost = Integer.valueOf(cost.intValue() * (((PotionEffect) effect).getAmplifier() + 1));
-                if (ElectricItem.manager.canUse(itemStack, cost.intValue())) {
-                  ElectricItem.manager.use(itemStack, cost.intValue(), null);
-                  IC2.platform.removePotion((EntityLivingBase)player, id);
-                } 
-              } 
-            } 
-          if (ElectricItem.manager.canUse(itemStack, 1000.0D) && player.getFoodStats().needFood()) {
-              int slot = -1;
-              for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-                if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i]
-                  .getItem() instanceof ItemFood) {
-                  slot = i;
-                  break;
-                } 
-              } 
-              if (slot > -1) {
-                ItemStack stack = player.inventory.mainInventory[slot];
-                ItemFood can = (ItemFood)stack.getItem();
-                stack = can.onEaten(stack, worldObj, player);
-                if (stack.stackSize <= 0)
-                  player.inventory.mainInventory[slot] = null; 
-                ElectricItem.manager.use(itemStack, 1000.0D, null);
-                ret = true;
-              } 
-            } else if (player.getFoodStats().getFoodLevel() <= 0) {
-              IC2.achievements.issueAchievement(player, "starveWithQHelmet");
-            } 
-          if (this.solarType == 2 || this.solarType == 3) {
-            int airLevel = player.getAir();
-            if (ElectricItem.manager.canUse(itemStack, 1000.0D) && airLevel < 100) {
-              player.setAir(airLevel + 200);
-              ElectricItem.manager.use(itemStack, 1000.0D, (EntityLivingBase)null);
-            } 
-          } 
-          this.generating = nbtData.getInteger("storage");
-          if (this.generating > 0) {
-            int energyLeft = this.generating;
-            for (int i = 0; i < player.inventory.armorInventory.length; i++) {
-              if (energyLeft > 0) {
-                if (player.inventory.armorInventory[i] != null && player.inventory.armorInventory[i].getItem() instanceof IElectricItem) {
-                  double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], energyLeft,2147483647, false, false);
-                  energyLeft = (int)(energyLeft - sentPacket);
-                  nbtData.setInteger("storage",energyLeft);
-                } 
-              } else {
-                return;
-              } 
-            } 
-            for (int j = 0; j < player.inventory.mainInventory.length; j++) {
-              if (energyLeft > 0) {
-            	  if (player.inventory.mainInventory[j] != null && player.inventory.mainInventory[j].getItem() instanceof ic2.api.item.IElectricItem && energyLeft > 0.0D) {
-            		  double	  sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], energyLeft, 2147483647, false, false);
-      		        if (sentPacket > 0.0D) {
+  	 public void onArmorTick(World worldObj, EntityPlayer player, ItemStack itemStack) {
+         if (worldObj.isRemote)
+           return; 
+         gainFuel(player);
+         NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
+
+         if (this.sunIsUp && this.skyIsVisible) {
+       	  this.storage= nbtData.getInteger("storage");
+             this.storage = this.storage + this.genDay;
+             nbtData.setInteger("storage", this.storage);
+           } 
+           if (this.skyIsVisible) {
+           	this.storage= nbtData.getInteger("storage");
+               this.storage = this.storage + this.genNight;
+               nbtData.setInteger("storage", this.storage);
+             
+           } 
+           if(nbtData.getInteger("storage") >= maxstorage) {
+           	 nbtData.setInteger("storage", this.maxstorage);
+           }
+           if(nbtData.getInteger("storage") < 0) {
+           	nbtData.setInteger("storage", 0);
+           }
+    
+         for (Object effect : new LinkedList(player.getActivePotionEffects())) {
+             int id = ((PotionEffect) effect).getPotionID();
+             Integer cost = potionRemovalCost.get(Integer.valueOf(id));
+             if (cost != null) {
+               cost = Integer.valueOf(cost.intValue() * (((PotionEffect) effect).getAmplifier() + 1));
+               if (ElectricItem.manager.canUse(itemStack, cost.intValue())) {
+                 ElectricItem.manager.use(itemStack, cost.intValue(), null);
+                 IC2.platform.removePotion((EntityLivingBase)player, id);
+               } 
+             } 
+           } 
+         if (ElectricItem.manager.canUse(itemStack, 1000.0D) && player.getFoodStats().needFood()) {
+             int slot = -1;
+             for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+               if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i]
+                 .getItem() instanceof ItemFood) {
+                 slot = i;
+                 break;
+               } 
+             } 
+             if (slot > -1) {
+               ItemStack stack = player.inventory.mainInventory[slot];
+               ItemFood can = (ItemFood)stack.getItem();
+               stack = can.onEaten(stack, worldObj, player);
+               if (stack.stackSize <= 0)
+                 player.inventory.mainInventory[slot] = null; 
+               ElectricItem.manager.use(itemStack, 1000.0D, null);
+               ret = true;
+             } 
+           } else if (player.getFoodStats().getFoodLevel() <= 0) {
+             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
+           } 
+         if (this.solarType == 2 || this.solarType == 3) {
+           int airLevel = player.getAir();
+           if (ElectricItem.manager.canUse(itemStack, 1000.0D) && airLevel < 100) {
+             player.setAir(airLevel + 200);
+             ElectricItem.manager.use(itemStack, 1000.0D, (EntityLivingBase)null);
+           } 
+         } 
+         this.generating = nbtData.getInteger("storage");
+         if (this.generating > 0) {
+           int energyLeft = this.generating;
+           for (int i = 0; i < player.inventory.armorInventory.length; i++) {
+             if (energyLeft > 0) {
+               if (player.inventory.armorInventory[i] != null && player.inventory.armorInventory[i].getItem() instanceof IElectricItem) {
+                 double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], energyLeft,2147483647, false, false);
+                 energyLeft = (int)(energyLeft - sentPacket);
+                 nbtData.setInteger("storage",energyLeft);
+               } 
+             } else {
+               return;
+             } 
+           } 
+           for (int j = 0; j < player.inventory.mainInventory.length; j++) {
+             if (energyLeft > 0) {
+           	  if (player.inventory.mainInventory[j] != null && player.inventory.mainInventory[j].getItem() instanceof ic2.api.item.IElectricItem && energyLeft > 0.0D) {
+           		  double	  sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], energyLeft, 2147483647, false, false);
+     		        if (sentPacket > 0.0D) {
 					} 
-      		      energyLeft -= (int)sentPacket;
-      		    nbtData.setInteger("storage",energyLeft);
-      		      }  
-                 
-              } else {
-                return;
-              } 
-            } 
-          } 
-          if (ret )
-              player.inventoryContainer.detectAndSendChanges(); 
-        }
+     		      energyLeft -= (int)sentPacket;
+     		    nbtData.setInteger("storage",energyLeft);
+     		      }  
+                
+             } else {
+               return;
+             } 
+           } 
+         } 
+         if (ret )
+             player.inventoryContainer.detectAndSendChanges(); 
+       }
+ 
+       
   
         public int gainFuel(EntityPlayer player) {
           if (this.ticker++ % tickRate() == 0)

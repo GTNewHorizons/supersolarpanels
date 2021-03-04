@@ -141,3 +141,7 @@ eclipse/asm/ccl_modular/net#minecraft#block#BlockFire.txt
 *.lock
 *.baub
 *.thaum
+eclipse/saves/New World/playerdata/7d461d5d-f429-32b0-a043-0156fa837406.dat.tmp
+eclipse/saves/New World/playerdata/5b0c46c0-894b-30a6-bd31-bf02da63882f.dat.tmp
+eclipse/saves/New World/playerdata/6b0be7c5-d502-342b-9566-f3750127a843.dat.tmp
+*.tmp
