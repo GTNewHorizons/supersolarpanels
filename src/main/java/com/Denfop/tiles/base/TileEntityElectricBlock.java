@@ -111,6 +111,7 @@ public boolean movementchargeitemrf= false;
   public void readFromNBT(NBTTagCompound nbttagcompound) {
     super.readFromNBT(nbttagcompound);
     this.UUID= nbttagcompound.getString("UUID");
+    this.personality= nbttagcompound.getBoolean("personality");
     this.energy2 = Util.limit(nbttagcompound.getDouble("energy2"), 0.0D, this.maxStorage2 + EnergyNet.instance.getPowerFromTier(this.tier));
 	
     this.energy = Util.limit(nbttagcompound.getDouble("energy"), 0.0D, this.maxStorage + EnergyNet.instance.getPowerFromTier(this.tier));
@@ -136,6 +137,7 @@ public boolean movementchargeitemrf= false;
     nbttagcompound.setBoolean("active", getActive());
     nbttagcompound.setByte("redstoneMode", this.redstoneMode);
     nbttagcompound.setString("UUID", this.UUID);
+    nbttagcompound.setBoolean("personality", this.personality);
     final NBTTagList nbttaglist = new NBTTagList();
     for (int i = 0; i < this.chargeSlots.length; ++i) {
   	  final NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -335,6 +337,7 @@ public int getInventoryStackLimit() {
    		nbttagcompound.setInteger("World1", this.worldObj.provider.dimensionId);
    		nbttagcompound.setString("World", this.worldObj.provider.getDimensionName());
    		nbttagcompound.setString("Name", this.getInventoryName());
+   	
    		
    		
    	

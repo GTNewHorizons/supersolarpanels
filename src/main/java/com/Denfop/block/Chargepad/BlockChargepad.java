@@ -322,14 +322,14 @@ public class BlockChargepad extends BlockContainer {
           	if(world.getTileEntity(x, y, z) instanceof TileEntityElectricBlock) {
           		TileEntityElectricBlock	tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
           		
-          		if(tile.chargeSlots[0] != null&& tile.chargeSlots[0].getItem() instanceof module7&& tile.chargeSlots[0].getItemDamage() == 0 && tile.UUID == entityPlayer.getDisplayName()) {
+          		if(tile.personality && tile.UUID == entityPlayer.getDisplayName()) {
           			entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);
           				 
           			
           				
           				
              }else {
-          	   if(tile.personality == false) {
+          	   if(!tile.personality) {
             
           		 entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);}else {
               	

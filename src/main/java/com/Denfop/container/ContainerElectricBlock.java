@@ -34,6 +34,8 @@ public ContainerElectricBlock(EntityPlayer entityPlayer, TileEntityElectricBlock
     ret.add("energy");
     ret.add("redstoneMode");
     ret.add("chargeSlots");
+    ret.add("personality");
+    
     return ret;
   }
   
