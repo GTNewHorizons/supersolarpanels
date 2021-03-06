@@ -121,7 +121,6 @@ eclipse/asm/ccl_modular/net#minecraft#block#BlockFire.txt
 *.cfg
 *.properties
 *.prefs
-*.jar
 .project
 .classpath
 *.recipe

@@ -300,6 +300,9 @@ MaceratorRecipe.recipe();
     	  
           return new GuiChargepadBlock(new ContainerChargepadBlock(player, (TileEntityChargepadBlock) te));
       }
+      if (te instanceof TileEntityGenerationStone)
+      return new GuiGenStone(new ContainerGenStone(player, (TileEntityGenerationStone) te));
+      
       }
       return null;
   }

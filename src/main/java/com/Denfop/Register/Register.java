@@ -320,7 +320,8 @@ public static void register() {
 }
 public static void registertiles() {
 	 GameRegistry.registerTileEntity(TileBitGen2.class, "Mass Fabricator1");
-
+	 
+	 GameRegistry.registerTileEntity(TileEntityGenerationStone.class, "Generation Stone");
     GameRegistry.registerTileEntity(TileEntityAdvancedMatter.class, "Mass Fabricator Advanced");
     GameRegistry.registerTileEntity(TileEntityImprovedMatter.class, "Mass Fabricator Improved");
     GameRegistry.registerTileEntity(TileEntityUltimateMatter.class, "Mass Fabricator Ultimate");

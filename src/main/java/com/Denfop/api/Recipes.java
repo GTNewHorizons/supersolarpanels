@@ -6,4 +6,5 @@ public class Recipes {
 	public static IAlloySmelterRecipeManager Alloysmelter;
 	public static IMicrochipFarbricatorRecipeManager GenerationMicrochip;
 	public static IMachineRecipeManager molecular;
+	public static IGenStoneRecipeManager GenStone;
 }
