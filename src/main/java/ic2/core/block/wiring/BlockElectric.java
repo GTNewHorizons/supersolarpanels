@@ -93,12 +93,7 @@ public class BlockElectric extends BlockMultiID {
     return 1;
   }
   
-  public int isProvidingWeakPower(IBlockAccess blockAccess, int x, int y, int z, int side) {
-    TileEntityBlock te = (TileEntityBlock)getOwnTe(blockAccess, x, y, z);
-    if (!(te instanceof TileEntityElectricBlock))
-      return 0; 
-    return ((TileEntityElectricBlock)te).isEmittingRedstone() ? 15 : 0;
-  }
+  
   
   public boolean canProvidePower() {
     return true;

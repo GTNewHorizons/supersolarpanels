@@ -442,9 +442,13 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	if(this.worldObj.getTileEntity(panelx, panely, panelz) != null && this.worldObj.getTileEntity(panelx, panely, panelz) instanceof TileEntityElectricBlock&& panelx != 0 && panely != 0 && panelz != 0 && wirelees != 0) {
         		TileEntityElectricBlock tile =  (TileEntityElectricBlock) this.worldObj.getTileEntity(panelx, panely, panelz);
                 if(tile.tier == this.blocktier && tile.getWorldObj().provider.dimensionId == this.world1) {
-          		if( this.storage > 0 &&  tile.energy <= tile.maxStorage ) {
+          		if( this.storage > 0 &&  tile.energy < tile.maxStorage 
+          				) {
           			tile.energy +=(this.storage);
-          			this.storage=0;}}}else {
+          			this.storage=0;
+          			
+          		
+          		}}}else {
           				this.panelx=0;
           				this.panely=0;
           				this.panelz=0;}

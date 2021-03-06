@@ -81,19 +81,19 @@ public boolean movementchargeitemrf= false;
 
 public int storage_plus;
 
-private int p;
+public int p;
 
-private int storage_plus1;
+public int storage_plus1;
 
-private int tier_plus;
+public int tier_plus;
 
-private int tier_plus1;
+public int tier_plus1;
 
-private int output_plus;
+public int output_plus;
 
-private int output_plus1;
+public int output_plus1;
 
-private int l;
+public int l;
 
 
   public TileEntityElectricBlock(int tier1, int output1, int maxStorage1) {
@@ -295,12 +295,12 @@ public int getInventoryStackLimit() {
     	if(this.chargeSlots[0].stackSize <= Config.storage_limit) {
     int percent = 	IModulStorage.getData(this.chargeSlots[0]).get(0);
    
-    this.storage_plus = (this.p/100) * percent * this.chargeSlots[0].stackSize/2;
+    this.storage_plus = (this.p/100) * percent * this.chargeSlots[0].stackSize;
    
     	}else {
     		   int percent = 	IModulStorage.getData(this.chargeSlots[0]).get(0);
     		   
-    		    this.storage_plus = (this.p/100) * percent*Config.storage_limit/2;
+    		    this.storage_plus = (this.p/100) * percent*Config.storage_limit;
     		    
     	}
     }else {
@@ -313,11 +313,11 @@ public int getInventoryStackLimit() {
     	if(this.chargeSlots[3].stackSize <= Config.storage_limit) {
         int percent = 	IModulStorage.getData(this.chargeSlots[3]).get(0);
      
-        this.storage_plus1 = (this.p/100) * percent * this.chargeSlots[3].stackSize/2;
+        this.storage_plus1 = (this.p/100) * percent * this.chargeSlots[3].stackSize;
     	}else {
     		int percent = 	IModulStorage.getData(this.chargeSlots[3]).get(0);
             
-            this.storage_plus1 = (this.p/100) * percent*Config.storage_limit/2;
+            this.storage_plus1 = (this.p/100) * percent*Config.storage_limit;
     	}
         }else {
         	 this.storage_plus1 = 0;
@@ -361,6 +361,9 @@ public int getInventoryStackLimit() {
     //
     
 this.maxStorage = this.p + this.storage_plus+storage_plus1;
+if(this.energy > this.maxStorage) {
+	this.energy = this.maxStorage;
+}
 this.output=this.l+this.output_plus+this.output_plus1;
 
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
