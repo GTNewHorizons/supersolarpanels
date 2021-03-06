@@ -80,6 +80,8 @@ public class BlockMachine extends BlockContainer {
         	return new TileEntityGenerationMicrochip();
         case 7:
         	return new TileEntityGenerationStone();
+        case 8:
+        	return new TileEntityQuantumQuarry();
        
     } 
     return null;
@@ -89,7 +91,7 @@ public class BlockMachine extends BlockContainer {
   private IIcon[][] iconBuffer;
   @Override
   public void registerBlockIcons(final IIconRegister par1IconRegister) {
-      this.iconBuffer = new IIcon[8][12];
+      this.iconBuffer = new IIcon[9][12];
      
 	      
    

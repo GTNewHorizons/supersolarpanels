@@ -143,6 +143,8 @@ public class CommonProxy implements IGuiHandler{
 		}
       if (te instanceof TileEntityGenerationStone)
 			return ((TileEntityGenerationStone) te).getGuiContainer(player);
+      if (te instanceof TileEntityQuantumQuarry)
+			return ((TileEntityQuantumQuarry) te).getGuiContainer(player);
 		
       return null;
   }

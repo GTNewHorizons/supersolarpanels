@@ -2,7 +2,7 @@ package com.Denfop.gui;
 
 import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.tiles.Mechanism.ContainerGenStone;
+import com.Denfop.container.ContainerGenStone;
 import com.Denfop.tiles.Mechanism.TileEntityGenerationStone;
 
 import cpw.mods.fml.relauncher.Side;

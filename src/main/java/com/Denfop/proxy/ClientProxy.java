@@ -290,7 +290,7 @@ MaceratorRecipe.recipe();
       if (te instanceof TileBitGen2)
       {
     	  
-          return new GuiMatter(new ContainerbitGen (player, (TileBitGen2) te));
+          return new GuiMatter(new ContainerNeutrniumGenerator (player, (TileBitGen2) te));
       }
       if (te instanceof TileEntityGenerationMicrochip)
       {
@@ -303,7 +303,8 @@ MaceratorRecipe.recipe();
       }
       if (te instanceof TileEntityGenerationStone)
       return new GuiGenStone(new ContainerGenStone(player, (TileEntityGenerationStone) te));
-      
+      if (te instanceof TileEntityQuantumQuarry)
+          return new GuiQuantumQuarry(new ContainerQuantumQuarry(player, (TileEntityQuantumQuarry) te));
       }
       return null;
   }

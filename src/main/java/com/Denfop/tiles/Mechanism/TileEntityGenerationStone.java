@@ -21,6 +21,7 @@ import com.Denfop.InvSlot.InvSlotProcessableStone;
 
 import com.Denfop.RecipeManager.GenStoneRecipeManager;
 import com.Denfop.api.Recipes;
+import com.Denfop.container.ContainerGenStone;
 import com.Denfop.gui.GuiGenStone;
 import com.Denfop.tiles.base.TileEntityBaseGenStone;
 

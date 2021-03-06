@@ -16,13 +16,15 @@ import ic2.core.upgrade.IUpgradableBlock;
 import ic2.core.upgrade.IUpgradeItem;
 import java.util.List;
 
+import com.Denfop.container.ContainerGenStone;
 import com.Denfop.container.ContainerStandardMachine;
-import com.Denfop.tiles.Mechanism.ContainerGenStone;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
 
 public abstract class TileEntityBaseGenStone extends TileEntityElectricMachine implements IHasGui, INetworkTileEntityEventListener, IUpgradableBlock {
   protected short progress;
@@ -70,6 +72,8 @@ public abstract class TileEntityBaseGenStone extends TileEntityElectricMachine i
     this.defaultEnergyStorage = energyPerTick * length;
     this.outputSlot = new InvSlotOutput(this, "output", 2, outputSlots);
     this.upgradeSlot = new InvSlotUpgrade(this, "upgrade", 3, 4);
+  
+  
   }
   
   public void readFromNBT(NBTTagCompound nbttagcompound) {

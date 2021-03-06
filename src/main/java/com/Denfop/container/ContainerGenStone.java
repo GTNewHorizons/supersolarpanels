@@ -1,10 +1,11 @@
-package com.Denfop.tiles.Mechanism;
+package com.Denfop.container;
 
 import ic2.core.block.invslot.InvSlot;
 import ic2.core.block.machine.container.ContainerElectricMachine;
 import ic2.core.slot.SlotInvSlot;
 import java.util.List;
 
+import com.Denfop.tiles.Mechanism.TileEntityGenerationStone;
 import com.Denfop.tiles.base.TileEntityBaseAlloySmelter;
 import com.Denfop.tiles.base.TileEntityBaseGenStone;
 

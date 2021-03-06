@@ -444,9 +444,15 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
                 if(tile.tier == this.blocktier && tile.getWorldObj().provider.dimensionId == this.world1) {
           		if( this.storage > 0 &&  tile.energy < tile.maxStorage 
           				) {
+          		int temp =	(int) (tile.maxStorage - tile.energy);
+          		if(this.storage > temp ) {
+          			tile.energy=temp;
+          			this.storage-=temp;
+          		}else if(temp > this.storage){
+          			
           			tile.energy +=(this.storage);
           			this.storage=0;
-          			
+          		}	
           		
           		}}}else {
           				this.panelx=0;
@@ -771,7 +777,7 @@ return this.generating = 0;
     	        this.chargeSlots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
     	     
     	    } 
-    	    NBTTagList nbttaglist1 = (NBTTagList)nbttagcompound.getTag("positions");
+    	   
       }
     
     	  
