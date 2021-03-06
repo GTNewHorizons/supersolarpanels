@@ -1,4 +1,4 @@
-package com.Denfop.tiles.Mechanism;
+package com.Denfop.tiles.base;
 
 import ic2.api.network.INetworkTileEntityEventListener;
 import ic2.api.recipe.RecipeOutput;
@@ -17,6 +17,7 @@ import ic2.core.upgrade.IUpgradeItem;
 import java.util.List;
 
 import com.Denfop.container.ContainerStandardMachine;
+import com.Denfop.tiles.Mechanism.ContainerGenStone;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -109,6 +110,9 @@ public abstract class TileEntityBaseGenStone extends TileEntityElectricMachine i
     super.updateEntityServer();
     boolean needsInvUpdate = false;
     RecipeOutput output = getOutput();
+    if(this.energy > this.maxEnergy) {
+    	this.energy = this.maxEnergy;
+    }
     if (output != null && this.energy >= this.energyConsume) {
       setActive(true);
       if (this.progress == 0)
@@ -176,7 +180,7 @@ public abstract class TileEntityBaseGenStone extends TileEntityElectricMachine i
   
   public void operateOnce(RecipeOutput output, List<ItemStack> processResult) {
 	  
-    this.inputSlotA.consume();
+   
     
     this.outputSlot.add(processResult);
   }

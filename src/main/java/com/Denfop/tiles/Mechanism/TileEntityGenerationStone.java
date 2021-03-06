@@ -17,39 +17,37 @@ import java.util.Vector;
 
 import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
-import com.Denfop.InvSlot.InvSlotProcessableAlloy;
 import com.Denfop.InvSlot.InvSlotProcessableStone;
-import com.Denfop.RecipeManager.AlloyRecipeManager;
+
 import com.Denfop.RecipeManager.GenStoneRecipeManager;
 import com.Denfop.api.Recipes;
-import com.Denfop.container.ContainerStandardMachine;
-import com.Denfop.gui.GuiAlloySmelter;
-import com.Denfop.tiles.base.TileEntityBaseAlloySmelter;
+import com.Denfop.gui.GuiGenStone;
+import com.Denfop.tiles.base.TileEntityBaseGenStone;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityGenerationStone extends TileEntityBaseGenStone {
 
 public TileEntityGenerationStone() {
-    super(1, 300, 1);
+    super(1, 100, 1);
     this.inputSlotA = (InvSlotProcessable)new InvSlotProcessableStone(this, "inputA", 0, 1, Recipes.GenStone);
     this.inputSlotB = (InvSlotProcessable)new InvSlotProcessableStone(this, "inputB", 1, 1, Recipes.GenStone); 
   }
   
   public static void init() {
 	  Recipes.GenStone = new GenStoneRecipeManager();
-	  addGen((IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.lava_bucket), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.water_bucket), 1),new ItemStack(Blocks.cobblestone) );
-//	addAlloysmelter((IRecipeInput)new RecipeInputItemStack( new ItemStack(Items.gold_ingot), 1),(IRecipeInput)new RecipeInputItemStack(Ic2Items.silverIngot, 1),new ItemStack(SSPItem.electriumingot,1) );
-//		addAlloysmelter((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.nickel), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.iron_ingot), 1), new ItemStack(SSPItem.invaringot) );
+	  addGen((IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.lava_bucket), 1), (IRecipeInput)new RecipeInputItemStack(new ItemStack(Items.water_bucket), 1),new ItemStack(Blocks.cobblestone,4) );
   }
   
   public String getInventoryName() {
+	return null;
 	  
-    return "GenerationStone";
+ //  return StatCollector.translateToLocal("ssp.genstone");
   }
   
   public static void addGen(IRecipeInput container, IRecipeInput fill, ItemStack output) {

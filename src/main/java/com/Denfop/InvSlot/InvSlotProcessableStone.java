@@ -1,7 +1,7 @@
 package com.Denfop.InvSlot;
 
 
-import ic2.api.recipe.IMachineRecipeManager;
+
 import ic2.api.recipe.RecipeOutput;
 import ic2.core.block.TileEntityInventory;
 import ic2.core.block.invslot.InvSlotProcessable;
@@ -26,7 +26,7 @@ public class InvSlotProcessableStone extends InvSlotProcessable {
   
   public boolean accepts(ItemStack itemStack) {
 	    if (itemStack != null && 
-	      itemStack.getItem() instanceof ic2.core.item.ItemUpgradeModule)
+	      itemStack.getItem() instanceof ic2.core.item.ItemUpgradeModule )
 	      return false;
 		return true; 
 	  

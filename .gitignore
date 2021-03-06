@@ -126,7 +126,6 @@ eclipse/asm/ccl_modular/net#minecraft#block#BlockFire.txt
 *.recipe
 *.csv
 *.json
-*.png
 *.html
 *.dat
 *.gz
@@ -144,3 +143,12 @@ eclipse/saves/New World/playerdata/7d461d5d-f429-32b0-a043-0156fa837406.dat.tmp
 eclipse/saves/New World/playerdata/5b0c46c0-894b-30a6-bd31-bf02da63882f.dat.tmp
 eclipse/saves/New World/playerdata/6b0be7c5-d502-342b-9566-f3750127a843.dat.tmp
 *.tmp
+eclipse/config/draconicevolution/resources/assets/
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore7.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore4.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore3.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/chaosIsland.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/comet.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/dislocatorReceptical.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore1.png
+eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore11.png

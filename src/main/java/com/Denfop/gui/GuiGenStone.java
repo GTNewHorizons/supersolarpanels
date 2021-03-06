@@ -1,7 +1,9 @@
-package com.Denfop.tiles.Mechanism;
+package com.Denfop.gui;
 
 import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
+import com.Denfop.tiles.Mechanism.ContainerGenStone;
+import com.Denfop.tiles.Mechanism.TileEntityGenerationStone;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,11 +25,13 @@ public class GuiGenStone extends GuiIC2 {
   protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
     super.drawGuiContainerBackgroundLayer(f, x, y);
     int chargeLevel = (int)(14.0F * ((TileEntityGenerationStone)this.container.base).getChargeLevel());
-    int progress = (int)(24.0F * ((TileEntityGenerationStone)this.container.base).getProgress());
+    int progress = (int)(32.0F * ((TileEntityGenerationStone)this.container.base).getProgress());
     if (chargeLevel > 0)
-      drawTexturedModalRect(this.xoffset + 56+1, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
-    if (progress > 0)
-      drawTexturedModalRect(this.xoffset + 79, this.yoffset + 34, 176, 14, progress + 1, 16); 
+      drawTexturedModalRect(this.xoffset + 56+1-48, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
+    if (progress > 0) {
+    	
+      drawTexturedModalRect(this.xoffset + 51, this.yoffset + 17+17+1-8+1, 176+1, 32, 25,  progress + 1);
+ }
   }
   
   public String getName() {
@@ -35,6 +39,6 @@ public class GuiGenStone extends GuiIC2 {
   }
   
   public ResourceLocation getResourceLocation() {
-    return new ResourceLocation(Constants.TEXTURES, "textures/gui/GUIAlloySmelter.png");
+    return new ResourceLocation(Constants.TEXTURES, "textures/gui/GUIGenStone.png");
   }
 }

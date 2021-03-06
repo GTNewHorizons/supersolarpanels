@@ -138,6 +138,7 @@ public boolean isClient() {
 	       TileEntityAlloySmelter.init();
 	       TileEntityMolecularTransformer.init();
 	       TileEntityGenerationMicrochip.init();
+	       TileEntityGenerationStone.init();
 	       
 	  }
   public void registerRenderers() {
