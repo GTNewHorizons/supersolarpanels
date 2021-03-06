@@ -24,6 +24,7 @@ public class ContainerChargepadBlock extends ContainerFullInv<TileEntityChargepa
 	}  
 
     addSlotToContainer((Slot)new Slot(this.tileentity, 2, 56, 53));
+    this.addSlotToContainer(new Slot(this.tileentity, 3, 56-36 , 17+18));
   }
   
   

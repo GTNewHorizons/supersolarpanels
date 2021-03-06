@@ -384,12 +384,7 @@ public class BlockChargepad extends BlockContainer {
       return false;
   }
 
-  public int isProvidingWeakPower(World world, int x, int y, int z, int side) {
-    TileEntity te = world.getTileEntity(x, y, z);
-    if (!(te instanceof TileEntityElectricBlock))
-      return 0; 
-    return ((TileEntityElectricBlock)te).isEmittingRedstone() ? 15 : 0;
-  }
+ 
   @Override
   public boolean canProvidePower() {
     return true;

@@ -51,11 +51,11 @@ public class GuiElectricBlock extends GuiContainer {
     this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
     this.fontRendererObj.drawString(this.armorInv, 8, this.ySize - 126 + 3, 4210752);
 
-    int e1 = (int)Math.min(((TileEntityElectricBlock)this.container.base).energy2, ((TileEntityElectricBlock)this.container.base).maxStorage2);
-    int e = (int)Math.min(((TileEntityElectricBlock)this.container.base).energy, ((TileEntityElectricBlock)this.container.base).maxStorage);
+    int e1 = (int)this.container.base.energy2;
+    int e = (int)this.container.base.energy;
     this.fontRendererObj.drawString(" " + e, 76, 55, 4210752);
     this.fontRendererObj.drawString(" " + e1, 124, 55, 4210752);
-    String output = StatCollector.translateToLocalFormatted("ic2.EUStorage.gui.info.output", new Object[] { Integer.valueOf(((TileEntityElectricBlock)this.container.base).output) });
+    String output = StatCollector.translateToLocalFormatted("ic2.EUStorage.gui.info.output", new Object[] { Integer.valueOf(this.container.base.getOutput()) });
     this.fontRendererObj.drawString(output, 85, 70, 4210752);
     }
   
@@ -71,7 +71,7 @@ public class GuiElectricBlock extends GuiContainer {
     } 
     if (this.container.base.energy2 > 0.0D) {
     	
-        int i1 = (int)(24.0F * this.container.base.energy2/this.container.base.maxStorage2);
+        int i1 = (int)(24.0F * ((TileEntityElectricBlock)this.container.base).getChargeLevel1());
         drawTexturedModalRect(j + 79+54, k + 34, 176, 31, i1 + 1, 16);}
       
     

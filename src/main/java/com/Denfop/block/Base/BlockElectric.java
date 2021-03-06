@@ -303,7 +303,7 @@ public class BlockElectric extends BlockContainer {
           	if(world.getTileEntity(x, y, z) instanceof TileEntityElectricBlock) {
           		TileEntityElectricBlock	tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
           		
-          		if(tile.chargeSlots[0] != null&& tile.chargeSlots[0].getItem() instanceof module7&& tile.chargeSlots[0].getItemDamage() == 0 && tile.UUID == entityPlayer.getDisplayName()) {
+          		if(tile.personality && tile.UUID == entityPlayer.getDisplayName()) {
           			entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);
           				 
           			
@@ -365,12 +365,7 @@ public class BlockElectric extends BlockContainer {
       return false;
   }
 
-  public int isProvidingWeakPower(World world, int x, int y, int z, int side) {
-    TileEntity te = world.getTileEntity(x, y, z);
-    if (!(te instanceof TileEntityElectricBlock))
-      return 0; 
-    return ((TileEntityElectricBlock)te).isEmittingRedstone() ? 15 : 0;
-  }
+
   @Override
   public boolean canProvidePower() {
     return true;

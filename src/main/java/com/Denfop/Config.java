@@ -257,13 +257,14 @@ public static boolean DraconicLoaded;
  public static int maxCharge1;
 public static int transferLimit1;
 public static String configFileName;
+public static int storage_limit;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
          configFile = event.getSuggestedConfigurationFile();
         //
-         
+         storage_limit=config.get("Module", "Limit in energy storage", 2).getInt(2);
          damagecable=config.get("Events", "Damage", true).getBoolean(true);
          newsystem=config.get("Events", "New system transfer energy", true).getBoolean(true);
          EnableMagnetitOre=config.get("Generation", "Spawn Magnetit Ore", true).getBoolean(true);

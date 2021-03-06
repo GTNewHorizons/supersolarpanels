@@ -26,6 +26,7 @@ public ContainerElectricBlock(EntityPlayer entityPlayer, TileEntityElectricBlock
 	}  
 
     addSlotToContainer((Slot)new Slot(this.tileentity, 2, 56, 53));
+    this.addSlotToContainer(new Slot(this.tileentity, 3, 56-36 , 17+18));
   }
   
   public List<String> getNetworkedFields() {
@@ -35,7 +36,10 @@ public ContainerElectricBlock(EntityPlayer entityPlayer, TileEntityElectricBlock
     ret.add("redstoneMode");
     ret.add("chargeSlots");
     ret.add("personality");
-    
+    ret.add("storage_plus");
+    ret.add("storage_plus1");
+    ret.add("output_plus");
+    ret.add("output_plus1");
     return ret;
   }
   
