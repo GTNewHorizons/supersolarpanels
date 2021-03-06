@@ -56,14 +56,14 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 	public boolean active;
 	public boolean lastState;
 	
-	public TileExpGen2(int maxenergy, int tier1, String tileName, int maxtankcapacity) {
+	public TileExpGen2(int maxenergy, String tileName, int maxtankcapacity) {
 		this.loaded = false;
 		this.fluidTank = new FluidTank(1000 * maxtankcapacity);
 		this.initialized = false;
 		this.loaded = false;
 		this.energy = 0;
 		this.maxEnergy = maxenergy;
-		this.tier = tier1;
+		this.tier = 11;
 		this.nametile = tileName;
 		this.lastState = false;
 		this.active = false;
