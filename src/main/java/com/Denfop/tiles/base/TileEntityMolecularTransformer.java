@@ -1,7 +1,9 @@
-package com.Denfop.tiles.base;
+  package com.Denfop.tiles.base;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fox.spiteful.avaritia.items.LudicrousItems;
 import ic2.api.network.INetworkClientTileEntityEventListener;
 import ic2.api.recipe.IMachineRecipeManager;
 import ic2.api.recipe.IRecipeInput;
@@ -9,10 +11,14 @@ import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.RecipeOutput;
 import ic2.core.BasicMachineRecipeManager;
 import ic2.core.IC2;
+import ic2.core.Ic2Items;
 import ic2.core.block.invslot.InvSlotProcessable;
 import ic2.core.block.invslot.InvSlotProcessableGeneric; 
 import ic2.core.upgrade.UpgradableProperty;
+
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,12 +29,16 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.api.Recipes;
 import com.Denfop.container.ContainerBaseMolecular;
 import com.Denfop.gui.GuiMolecularTransformer;
+import com.Denfop.integration.Avaritia.AvaritiaIntegration;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityMolecularTransformer extends TileEntityBaseMolecular implements INetworkClientTileEntityEventListener {
 	public byte redstoneMode;
@@ -42,15 +52,109 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
 
   public static void init() {
     Recipes.molecular = (IMachineRecipeManager)new BasicMachineRecipeManager();
-    NBTTagCompound nbt = new NBTTagCompound();
-    nbt.setInteger("energy", 9000000);
-    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.spinelore,1)), nbt, new ItemStack[] { new ItemStack(SSPItem.spinelcrushedore,2 )});
-    NBTTagCompound nbt1 = new NBTTagCompound();
-    nbt1.setInteger("energy", 5000000);
-    Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.spinel_ingot,1)), nbt1, new ItemStack[] { new ItemStack(SSPItem.ingotIridium.getItem(),1,7 )});
+   
+
+    NBTTagCompound   nbt = new NBTTagCompound();
+    NBTTagCompound   nbt1 = new NBTTagCompound();
+    NBTTagCompound   nbt2 = new NBTTagCompound();
+    NBTTagCompound   nbt3 = new NBTTagCompound();
+    NBTTagCompound   nbt4 = new NBTTagCompound();
+    NBTTagCompound   nbt5 = new NBTTagCompound();
+    NBTTagCompound   nbt6 = new NBTTagCompound();
+    NBTTagCompound   nbt7 = new NBTTagCompound();
+    NBTTagCompound   nbt8 = new NBTTagCompound();
+    NBTTagCompound   nbt9 = new NBTTagCompound();
+    NBTTagCompound   nbt10 = new NBTTagCompound();
+    NBTTagCompound   nbt11 = new NBTTagCompound();
+    NBTTagCompound   nbt12 = new NBTTagCompound();
+    NBTTagCompound   nbt13 = new NBTTagCompound();
+    NBTTagCompound   nbt14 = new NBTTagCompound();
+    NBTTagCompound   nbt15 = new NBTTagCompound();
+    NBTTagCompound   nbt16 = new NBTTagCompound();
+    NBTTagCompound   nbt17 = new NBTTagCompound();
+    NBTTagCompound   nbt18 = new NBTTagCompound();
+    NBTTagCompound   nbt19 = new NBTTagCompound();
+    NBTTagCompound   nbt20 = new NBTTagCompound();
+    NBTTagCompound   nbt21 = new NBTTagCompound();
+    NBTTagCompound   nbt22 = new NBTTagCompound();
+    NBTTagCompound   nbt23 = new NBTTagCompound();
+    NBTTagCompound   nbt24 = new NBTTagCompound();
+    NBTTagCompound   nbt25 = new NBTTagCompound();
+    NBTTagCompound   nbt26 = new NBTTagCompound();
+
+    NBTTagCompound   nbt27 = new NBTTagCompound();
+    NBTTagCompound   nbt28 = new NBTTagCompound();
+    NBTTagCompound   nbt29 = new NBTTagCompound();
+    NBTTagCompound   nbt30 = new NBTTagCompound();
+  nbt.setInteger("energy", 1000000);
+  nbt1.setInteger("energy", 150000000);
+  nbt2.setInteger("energy", 15500000);
+  nbt3.setInteger("energy", 7500000);
+  nbt4.setInteger("energy", 1000000);
+  nbt5.setInteger("energy", 8000000);
+  nbt6.setInteger("energy", 50000);
+  nbt7.setInteger("energy", 25000);
+  nbt8.setInteger("energy", 7000000);
+  nbt9.setInteger("energy", 250000);
+  nbt10.setInteger("energy", 250000);
+  nbt11.setInteger("energy", 450000);
+  nbt12.setInteger("energy", 400000);
+  nbt13.setInteger("energy", 500000);
+  nbt14.setInteger("energy", 500000);
+  nbt15.setInteger("energy", 450000);
+  nbt16.setInteger("energy", 600000);
+  nbt17.setInteger("energy", 1500);
+  nbt18.setInteger("energy", 7500);
+  nbt19.setInteger("energy", 40000);
+  nbt20.setInteger("energy", 90000);
+  nbt21.setInteger("energy", 150000);
+  nbt22.setInteger("energy", 205000);
+  nbt23.setInteger("energy", 275000);
+  nbt24.setInteger("energy", 400000);
+  nbt25.setInteger("energy", 800000);
+  nbt26.setInteger("energy", 1000000000);
+nbt27.setInteger("energy", 150000000);
+nbt28.setInteger("energy", 1050000000);
+  nbt29.setInteger("energy", 40000);
+  nbt30.setInteger("energy", 40000);
+  addrecipe(new ItemStack(Items.skull,1,0),nbt,new ItemStack(Items.skull,1,1));
+  addrecipe(new ItemStack(Items.skull,1,1),nbt1,new ItemStack(Items.nether_star,1));
+  addrecipe(new ItemStack(Items.iron_ingot,1,0),nbt2,Ic2Items.iridiumOre);
+  addrecipe(Ic2Items.Plutonium,nbt3,new ItemStack(SSPItem.proton,1));
+  addrecipe(OreDictionary.getOres("ingotSpinel").get(0),nbt4,OreDictionary.getOres("ingotIridium").get(0));
+  addrecipe(OreDictionary.getOres("orePhoton").get(0),nbt5,OreDictionary.getOres("ingotPhoton").get(0));
+
+  addrecipe(new ItemStack(Blocks.netherrack),nbt6,new ItemStack(Items.gunpowder,2));
+  addrecipe(new ItemStack(Blocks.sand),nbt7,new ItemStack(Blocks.gravel,1));
+  addrecipe(OreDictionary.getOres("dustCoal").get(0),nbt8,OreDictionary.getOres("gemDiamond").get(0));
+  addrecipe(OreDictionary.getOres("ingotCopper").get(0),nbt9,OreDictionary.getOres("ingotNickel").get(0));
+  addrecipe(OreDictionary.getOres("ingotLead").get(0),nbt10,OreDictionary.getOres("ingotGold").get(0));
+if(OreDictionary.getOres("ingotSilver").size() >=1)
+  addrecipe(OreDictionary.getOres("ingotTin").get(0),nbt11,OreDictionary.getOres("ingotSilver").get(0));
+if(OreDictionary.getOres("ingotSilver").size() >=1)
+addrecipe(OreDictionary.getOres("ingotSilver").get(0),nbt12,OreDictionary.getOres("ingotTungsten").get(0));
+
+addrecipe(OreDictionary.getOres("ingotTungsten").get(0),nbt13,OreDictionary.getOres("ingotSpinel").get(0));
+addrecipe(OreDictionary.getOres("ingotChromium").get(0),nbt14,OreDictionary.getOres("ingotMikhalov").get(0));
+addrecipe(OreDictionary.getOres("ingotPlatinum").get(0),nbt15,OreDictionary.getOres("ingotChromium").get(0));
+addrecipe(OreDictionary.getOres("ingotGold").get(0),nbt16,OreDictionary.getOres("ingotPlatinum").get(0));
+addrecipe(OreDictionary.getOres("ingotIridium").get(0),nbt17,new ItemStack(SSPItem.advanced_core,1));
+
+addrecipe(new ItemStack(SSPItem.advanced_core,4),nbt18,new ItemStack(SSPItem.hybrid_core,1));
+addrecipe(new ItemStack(SSPItem.hybrid_core,4),nbt19,new ItemStack(SSPItem.ultimate_core,1));
+addrecipe(new ItemStack(SSPItem.ultimate_core,4),nbt20,new ItemStack(SSPItem.itemSSP,1,10));
+addrecipe(new ItemStack(SSPItem.itemSSP,4,10),nbt21,new ItemStack(SSPItem.spectralcore,1));
+addrecipe(new ItemStack(SSPItem.spectralcore,4),nbt22,new ItemStack(SSPItem.protoncore,1));
+addrecipe(new ItemStack(SSPItem.protoncore,4),nbt23,new ItemStack(SSPItem.singularcore,1));
+addrecipe(new ItemStack(SSPItem.singularcore,4),nbt24,new ItemStack(SSPItem.admincore,1));
+addrecipe(new ItemStack(SSPItem.admincore,4),nbt25,new ItemStack(SSPItem.photoniccore,1));
+addrecipe(new ItemStack(SSPItem.photoniccore,4),nbt26,new ItemStack(SSPItem.blocksintezator,1));
 
   }
-
+ public static void addrecipe(ItemStack stack,NBTTagCompound nbt,ItemStack stack1) {
+	 
+	 Recipes.molecular.addRecipe((IRecipeInput)new RecipeInputItemStack(stack), nbt, new ItemStack[] { stack1});
+ }
 	public boolean isActive()
 	{
 		return this.isActive;
