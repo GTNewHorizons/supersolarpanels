@@ -26,14 +26,14 @@ public class GuiQuantumQuarry extends GuiIC2 {
   
   protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
     super.drawGuiContainerBackgroundLayer(f, x, y);
-    
+
+    int chargeLevel = (int) (48.0F * ((TileEntityQuantumQuarry)this.container.base).getEnergy()/((TileEntityQuantumQuarry)this.container.base).maxEnergy);
   
-    this.fontRendererObj.drawString(""+this.container.base.getblock, this.xoffset+50, this.yoffset +7, 7718655);
-    int chargeLevel = (int)(14.0F * ((TileEntityQuantumQuarry)this.container.base).getChargeLevel());
-    
     if (chargeLevel > 0)
-      drawTexturedModalRect(this.xoffset + 56+1, this.yoffset + 36 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel); 
-    
+      drawTexturedModalRect(this.xoffset + 140+1+5, this.yoffset + 28 + 48 - chargeLevel, 176, 48 - chargeLevel, 48, chargeLevel); 
+
+    this.fontRendererObj.drawString(""+((TileEntityQuantumQuarry)this.container.base).getblock, this.xoffset+140, this.yoffset +7, 7718655);
+      
   }
   
   public String getName() {
@@ -41,6 +41,6 @@ public class GuiQuantumQuarry extends GuiIC2 {
   }
   
   public ResourceLocation getResourceLocation() {
-    return new ResourceLocation(Constants.TEXTURES, "textures/gui/GUIAlloySmelter.png");
+    return new ResourceLocation(Constants.TEXTURES, "textures/gui/GUIQuantumQuerry.png");
   }
 }

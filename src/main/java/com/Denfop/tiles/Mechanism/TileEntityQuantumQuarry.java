@@ -44,19 +44,22 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 	 public int energyconsume;
 
 	 public int getblock;
+
+	
 	
 		  
 		  public TileEntityQuantumQuarry() {
 		    super(10000000, 11, 1);
 		    this.progress = 0;
 		  this.getblock =0;
-		   this.energyconsume=25000;
+		   this.energyconsume=35000;
 		  
 		    this.chargeSlots = new ItemStack[24];
 		  }
 		  protected void updateEntityServer() {
 			    super.updateEntityServer();
-		    	
+		    	if(this.energy > this.maxEnergy)
+		    		this.energy=this.maxEnergy;
 		        if(this.energy >= this.energyconsume) {
 		        	
 		        	this.energy-=(this.energyconsume);
@@ -284,6 +287,8 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 							        		}
 						        		}
 						        	}else if(chance1 > 50 && chance1 <=75) {
+						        		int chance3 = rand.nextInt(100)+1;
+						        		if(chance3 <=50) {
 						        		for(int i =0;i <getSizeInventory();i++) { 
 						        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("oreQuartz").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
 						        				this.chargeSlots[i].stackSize++;
@@ -297,6 +302,22 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 							        				this.chargeSlots[i]= OreDictionary.getOres("oreQuartz").get(0);
 							        				break;
 							        			}
+							        		}
+						        		}}else {
+						        			for(int i =0;i <getSizeInventory();i++) { 
+							        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("oreUranium").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
+							        				this.chargeSlots[i].stackSize++;
+							        				get = true;
+							        				break;
+							        			}
+							        		}
+							        		if(!get) {
+							        			for(int i =0;i <getSizeInventory();i++) {
+								        			if(this.chargeSlots[i] == null) {
+								        				this.chargeSlots[i]= OreDictionary.getOres("oreUranium").get(0);
+								        				break;
+								        			}
+								        		}
 							        		}
 						        		}
 						        	}else if(chance1 > 75 && chance1 <=100) {
@@ -387,7 +408,77 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 								        		}
 								        	}
 								        	
-								        		}
+								        		}else if(chance2 > 81 &&  chance2 <=100) {
+									        		if(chance1 <=25) {
+										        		for(int i =0;i <getSizeInventory();i++) {
+										        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("gemDiamond").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
+										        				this.chargeSlots[i].stackSize++;
+										        				get = true;
+										        				break;
+										        			}
+										        		}
+										        		if(!get) {
+										        			for(int i =0;i <getSizeInventory();i++) {
+											        			if(this.chargeSlots[i] == null) {
+											        				this.chargeSlots[i]=OreDictionary.getOres("gemDiamond").get(0);
+											        				break;
+											        			}
+											        		}
+										        		}
+										        	}else if(chance1 > 25 && chance1 <=50) {
+										        	
+										        		for(int i =0;i <getSizeInventory();i++) {
+										        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("gemEmerald").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
+										        				this.chargeSlots[i].stackSize++;
+										        				get = true;
+										        				break;
+										        			}
+										        		}
+										        		if(!get) {
+										        			for(int i =0;i <getSizeInventory();i++) {
+											        			if(this.chargeSlots[i] == null) {
+											        				this.chargeSlots[i]=OreDictionary.getOres("gemEmerald").get(0);
+											        				break;
+											        			}
+											        		}
+										        		}
+										        	}else if(chance1 > 50 && chance1 <=75) {
+										        		for(int i =0;i <getSizeInventory();i++) { 
+										        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("oreLead").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
+										        				this.chargeSlots[i].stackSize++;
+										        				get = true;
+										        				break;
+										        			}
+										        		}
+										        		if(!get) {
+										        			for(int i =0;i <getSizeInventory();i++) {
+											        			if(this.chargeSlots[i] == null) {
+											        				this.chargeSlots[i]= OreDictionary.getOres("oreLead").get(0);
+											        				break;
+											        			}
+											        		}
+										        		}
+										        	}else if(chance1 > 75 && chance1 <=100) {
+										        		if(OreDictionary.getOres("oreSilver").size() >=1) {
+										        		for(int i =0;i <getSizeInventory();i++) { 
+										        			
+										        			if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() == OreDictionary.getOres("oreSilver").get(0).getItem()&& this.chargeSlots[i].stackSize < 64) {
+										        				this.chargeSlots[i].stackSize++;
+										        				get = true;
+										        				break;
+										        			}
+										        		}
+										        		if(!get) {
+										        			for(int i =0;i <getSizeInventory();i++) {
+											        			if(this.chargeSlots[i] == null) {
+											        				this.chargeSlots[i]= OreDictionary.getOres("oreSilver").get(0);
+											        				break;
+											        			}
+											        		}
+										        		}
+										        	}}
+										        	
+										        		}
 		        		//
 		        	
 		        	}
@@ -438,7 +529,17 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 			 public ItemStack getStackInSlot(final int i) {
 			        return this.chargeSlots[i];
 			    }
-			    
+			  public double getEnergy() {
+				    return this.energy;
+				  }
+				  
+				  public boolean useEnergy(double amount) {
+				    if (this.energy >= amount) {
+				      this.energy -= amount;
+				      return true;
+				    } 
+				    return false;
+				  }
 			    
 			    public ItemStack decrStackSize(final int i, final int j) {
 			        if (this.chargeSlots[i] == null) {
@@ -543,6 +644,7 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	
 }
