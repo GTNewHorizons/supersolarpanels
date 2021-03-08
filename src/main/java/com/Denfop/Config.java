@@ -459,7 +459,7 @@ public static void config(final FMLPreInitializationEvent event) {
          percent_day= config.get("Modules", "percent generation day", 20).getInt(20);
          percent_night= config.get("Modules", "percent generation night", 20).getInt(20);
 //
-         
+         Storagequantumsuit=config.get("Battery", "MaxEnergy", 100000000).getInt(100000000);
          //
          tier3_MFSU= config.get("Advanced MFSU", "tier", 6).getInt(6);
          singularpaneltier= config.get("Singular Solar panel", "tier", 7).getInt(7);

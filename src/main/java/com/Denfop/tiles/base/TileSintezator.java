@@ -499,7 +499,7 @@ if((sum2) !=0 ) {
     }
     
     public int getInventoryStackLimit() {
-        return 64;
+        return Config.limit;
     }
     
     public Container getGuiContainer(final InventoryPlayer inventoryplayer) {
