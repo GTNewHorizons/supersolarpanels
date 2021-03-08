@@ -109,19 +109,19 @@ public static void recipe() {
 				"BAB", Character.valueOf('A'), IC2Items.getItem("advancedMachine"), Character.valueOf('B'), IC2Items.getItem("cell"), Character.valueOf('C'), IC2Items.getItem("massFabricator")});
 
 		//TODO Start Recipe  Helmet
-		Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.spectralSolarHelmet, 1), new Object[] { "A", "B", 'A', new ItemStack(SSPItem.blockSSPSolarPanel, 1, 4), 'B', SSPItem.ultimateSolarHelmet});
-	    Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.singularSolarHelmet, 1), new Object[] { "A", "B", 'A',new ItemStack(SSPItem.blockSSPSolarPanel, 1, 6), 'B', new ItemStack(SSPItem.spectralSolarHelmet, 1) });
-	    Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.advancedSolarHelmet, 1), new Object[] { 
+		Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.spectralSolarHelmet, 1,OreDictionary.WILDCARD_VALUE), new Object[] { "A", "B", 'A', new ItemStack(SSPItem.blockSSPSolarPanel, 1, 4), 'B', new ItemStack(SSPItem.ultimateSolarHelmet,1,OreDictionary.WILDCARD_VALUE)});
+	    Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.singularSolarHelmet, 1,OreDictionary.WILDCARD_VALUE), new Object[] { "A", "B", 'A',new ItemStack(SSPItem.blockSSPSolarPanel, 1, 6), 'B', new ItemStack(SSPItem.spectralSolarHelmet, 1,OreDictionary.WILDCARD_VALUE) });
+	    Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.advancedSolarHelmet, 1,OreDictionary.WILDCARD_VALUE), new Object[] { 
 	            " A ", "RBR", "FDF", Character.valueOf('A'), new ItemStack(SSPItem.blockSSPSolarPanel, 1, 0), Character.valueOf('B'), new ItemStack(IC2Items.getItem("nanoHelmet").getItem(),1,OreDictionary.WILDCARD_VALUE), Character.valueOf('R'), IC2Items.getItem("advancedCircuit"), Character.valueOf('D'), 
 	            IC2Items.getItem("lvTransformer"), Character.valueOf('F'), IC2Items.getItem("insulatedGoldCableItem") }); 
 	            
 	   
-	      Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.hybridSolarHelmet, 1), new Object[] { 
+	      Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.hybridSolarHelmet, 1,OreDictionary.WILDCARD_VALUE), new Object[] { 
 	            " A ", "RBR", "FDF", Character.valueOf('A'), new ItemStack(SSPItem.blockSSPSolarPanel, 1, 1), Character.valueOf('B'),new ItemStack(IC2Items.getItem("quantumHelmet").getItem(),1,OreDictionary.WILDCARD_VALUE), Character.valueOf('R'), IC2Items.getItem("advancedCircuit"), Character.valueOf('D'), 
 	            IC2Items.getItem("hvTransformer"), Character.valueOf('F'), IC2Items.getItem("glassFiberCableItem") });
 	      
 	    
-	      Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.ultimateSolarHelmet, 1), new Object[] { 
+	      Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.ultimateSolarHelmet, 1,OreDictionary.WILDCARD_VALUE), new Object[] { 
 	            " A ", "RBR", "FDF", Character.valueOf('A'), new ItemStack(SSPItem.blockSSPSolarPanel, 1, 2), Character.valueOf('B'), new ItemStack(IC2Items.getItem("quantumHelmet").getItem(),1,OreDictionary.WILDCARD_VALUE), Character.valueOf('R'), IC2Items.getItem("advancedCircuit"), Character.valueOf('D'), 
 	            IC2Items.getItem("hvTransformer"), Character.valueOf('F'), IC2Items.getItem("glassFiberCableItem") });
 	      //TODO End Recipe Helmet
@@ -142,12 +142,7 @@ public static void recipe() {
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.enderquantumcomponent, 1), new Object[] { "ABA", "BCB", "ABA", 'A', IC2Items.getItem("iridiumPlate"), 'B', Items.ender_eye, 'C', Items.nether_star });
 	     GameRegistry.addRecipe(new ItemStack(SSPItem.QuantumItems3, 1), new Object[] { "CBC", "BAB", "CBC", 'A', new ItemStack(SSPItem.QuantumItems7, 1), 'B' ,new ItemStack(SSPItem.itemSSP, 1, 4), 'C' ,IC2Items.getItem("carbonPlate")});
 
-		
-		
-		//TODO Recipe Vajra
-		   GameRegistry.addRecipe(new ItemStack(SSPItem.enderquantumcomponent, 1), new Object[] { "ABA", "BCB", "ABA", 'A', IC2Items.getItem("iridiumPlate"), 'B', Items.ender_eye, 'C', Items.nether_star });
-
-		// TODO Recipes Chargepad MFSU
+			// TODO Recipes Chargepad MFSU
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,0), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',SSPItem.QuantumItems9,'D',new ItemStack(SSPItem.electricblock,1,0),'C',Ic2Items.rubber});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,1), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',SSPItem.QuantumItems8,'D',new ItemStack(SSPItem.electricblock,1,0),'C',Ic2Items.rubber});
 
@@ -193,6 +188,8 @@ public static void recipe() {
 		GameRegistry.addRecipe(SSPItem.doubleInsulatedIronCableItem, new Object[] { "BBB","AAA","BBB", 'B', SSPItem.insulatedIronCableItem,'A',SSPItem.photoniy });
 		GameRegistry.addRecipe(SSPItem.trippleInsulatedIronCableItem, new Object[] { "BBB","AAA","BBB", 'B', SSPItem.doubleInsulatedIronCableItem,'A',SSPItem.photoniy });
 		GameRegistry.addRecipe(SSPItem.glassFiberCableItem, new Object[] { "BBB","AAA","BBB", 'B', SSPItem.trippleInsulatedIronCableItem,'A',SSPItem.photoniy_ingot });
+		GameRegistry.addRecipe(SSPItem.glassFiberCableItem1, new Object[] { "BBB","AAA","BBB", 'B', SSPItem.glassFiberCableItem,'A',SSPItem.photoniy_ingot });
+		
 		// TODO recipes Molecolar Core and Recipe Molecular Transformer
 		GameRegistry.addRecipe(SSPItem.itemMTCore, new Object[] { "MXM", "M M", "MXM", 'M', SSPItem.itemIrradiantGlassPane, 'X', new ItemStack(Ic2Items.reactorReflector.getItem(),1 ,OreDictionary.WILDCARD_VALUE)});
 //		GameRegistry.addRecipe(SuperSolarPanels.itemMolecularTransformer, new Object[] { 

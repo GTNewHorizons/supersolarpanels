@@ -321,6 +321,7 @@ public static void register() {
 public static void registertiles() {
 	 GameRegistry.registerTileEntity(TileBitGen2.class, "Mass Fabricator1");
 	 
+	 GameRegistry.registerTileEntity(TileEntityMolecularTransformer.class, "MolecularTransformer");
 	 GameRegistry.registerTileEntity(TileEntityQuantumQuarry.class, "QuantumQuarry");
 	 GameRegistry.registerTileEntity(TileEntityGenerationStone.class, "Generation Stone");
     GameRegistry.registerTileEntity(TileEntityAdvancedMatter.class, "Mass Fabricator Advanced");

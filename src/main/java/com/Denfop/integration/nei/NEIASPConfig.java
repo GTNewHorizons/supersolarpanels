@@ -13,7 +13,8 @@ public class NEIASPConfig implements IConfigureNEI
    
         API.registerRecipeHandler((ICraftingHandler)new NEIAlloySmelter());
         API.registerUsageHandler((IUsageHandler)new NEIAlloySmelter());
-        
+        API.registerRecipeHandler((ICraftingHandler)new NEIGenStone());
+        API.registerUsageHandler((IUsageHandler)new NEIGenStone());
         API.registerRecipeHandler((ICraftingHandler)new NeiMolecularTransfomator());
         API.registerUsageHandler((IUsageHandler)new NeiMolecularTransfomator());
     }

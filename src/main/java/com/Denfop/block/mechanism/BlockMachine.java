@@ -143,16 +143,16 @@ public class BlockMachine extends BlockContainer {
 	      
       this.iconBuffer[4][0] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
       this.iconBuffer[4][1] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
-      this.iconBuffer[4][2] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter1");
+      this.iconBuffer[4][2] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
       this.iconBuffer[4][3] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter3");
       this.iconBuffer[4][4] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter1");
-      this.iconBuffer[4][5] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter2");
+      this.iconBuffer[4][5] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter1");
       this.iconBuffer[4][6] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
       this.iconBuffer[4][7] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
-      this.iconBuffer[4][8] = par1IconRegister.registerIcon("supersolarpanel:smelter4");
+      this.iconBuffer[4][8] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
       this.iconBuffer[4][9] = par1IconRegister.registerIcon("supersolarpanel:smelter5");
       this.iconBuffer[4][10] = par1IconRegister.registerIcon("supersolarpanel:smelter4");
-      this.iconBuffer[4][11] = par1IconRegister.registerIcon("supersolarpanel:blocksmelter2");
+      this.iconBuffer[4][11] = par1IconRegister.registerIcon("supersolarpanel:smelter4");
       
       this.iconBuffer[5][0] = par1IconRegister.registerIcon("supersolarpanel:Blockgenbase");
       this.iconBuffer[5][1] = par1IconRegister.registerIcon("supersolarpanel:blockgentop");
@@ -166,6 +166,32 @@ public class BlockMachine extends BlockContainer {
       this.iconBuffer[5][9] = par1IconRegister.registerIcon("supersolarpanel:Blockgenbase");
       this.iconBuffer[5][10] = par1IconRegister.registerIcon("supersolarpanel:Blockgenbase");
       this.iconBuffer[5][11] = par1IconRegister.registerIcon("supersolarpanel:Blockgenbase");
+      
+      this.iconBuffer[6][0] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][1] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][2] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][3] = par1IconRegister.registerIcon("supersolarpanel:genmicro");
+      this.iconBuffer[6][4] = par1IconRegister.registerIcon("supersolarpanel:genmicro2");
+      this.iconBuffer[6][5] = par1IconRegister.registerIcon("supersolarpanel:genmicro2");
+      this.iconBuffer[6][6] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][7] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][8] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[6][9] = par1IconRegister.registerIcon("supersolarpanel:genmicro");
+      this.iconBuffer[6][10] = par1IconRegister.registerIcon("supersolarpanel:genmicro1");
+      this.iconBuffer[6][11] = par1IconRegister.registerIcon("supersolarpanel:genmicro1");
+      
+      this.iconBuffer[7][0] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][1] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][2] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][3] = par1IconRegister.registerIcon("supersolarpanel:genstone");
+      this.iconBuffer[7][4] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][5] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][6] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][7] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][8] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][9] = par1IconRegister.registerIcon("supersolarpanel:genstone1");
+      this.iconBuffer[7][10] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[7][11] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
   }
   
   @Override

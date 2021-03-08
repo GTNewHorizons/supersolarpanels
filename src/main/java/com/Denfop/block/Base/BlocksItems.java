@@ -252,7 +252,7 @@ public static void registermetadata() {
     SSPItem.trippleInsulatedIronCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 8);
     SSPItem.glassFiberCableBlock = new ItemStack((Block)SSPItem.BlockCable, 1, 9);
 
-
+    SSPItem.glassFiberCableItem1= new ItemStack((Block)SSPItem.BlockCable, 1, 10);
     SSPItem.copperCableItem = new ItemStack((Item)SSPItem.cable, 1, 1);
     SSPItem.insulatedCopperCableItem = new ItemStack((Item)SSPItem.cable, 1, 0);
     SSPItem.goldCableItem = new ItemStack((Item)SSPItem.cable, 1, 2);

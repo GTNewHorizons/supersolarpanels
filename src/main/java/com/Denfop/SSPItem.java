@@ -312,6 +312,9 @@ public class SSPItem {
 			public static Block machines_base;
 			public static Block Chargepadelectricblock;
 			public static Block cableblock;
+
+			public static ItemStack glassFiberCableItem1;
+
 			
 			public static class FluidXP {
 				public static Fluid xpJuice = new Fluid("xpjuice.wv");
