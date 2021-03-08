@@ -35,19 +35,19 @@ public class GuiMultiMetalFormer extends GuiMultiMachine {
 		RenderHelper.enableGUIStandardItemLighting();
 		switch (((TileEntityMultiMachine) this.container.base).getMode()) {
 		case 0:
-			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.copperCableItem, 8, 22);
+			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.copperCableItem, 18, 8);
 			tooltip = StatCollector.translateToLocal("ic2.MetalFormer.gui.switch.Extruding");
 			break;
 		case 1:
-			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.ForgeHammer, 8, 22);
+			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.ForgeHammer, 18, 8);
 			tooltip = StatCollector.translateToLocal("ic2.MetalFormer.gui.switch.Rolling");
 			break;
 		case 2:
-			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.cutter, 8, 22);
+			renderItem.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, Ic2Items.cutter, 18, 8);
 			tooltip = StatCollector.translateToLocal("ic2.MetalFormer.gui.switch.Cutting");
 			break;
 		}
-		GuiTooltipHelper.drawAreaTooltip(mouseX - this.guiLeft, mouseY - this.guiTop, tooltip, 6, 22, 26, 42);
+		GuiTooltipHelper.drawAreaTooltip(mouseX - this.guiLeft+4, mouseY  - this.guiTop, tooltip, 6, 22, 26, 42);
 		GL11.glPopAttrib();
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 	}
@@ -60,7 +60,7 @@ public class GuiMultiMetalFormer extends GuiMultiMachine {
 
 	public void initGui() {
 		super.initGui();
-		this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 6, (this.height - this.ySize) / 2 + 20, 20, 20, ""));
+		this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 6 + 10, (this.height - this.ySize + 1) / 2 + 6, 20, 20, ""));
 	}
 
 }
