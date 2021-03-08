@@ -75,7 +75,7 @@ public class ItemSSPSolarPanel extends ItemBlock implements IPanel
       	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + tile.genNight  + " EU/t " );
             
           info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +tile.production  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + tile.storage + " EU ");
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + tile.maxStorage + " EU ");
           info.add(StatCollector.translateToLocal("ssp.tier") + tile.tier);
         
         }

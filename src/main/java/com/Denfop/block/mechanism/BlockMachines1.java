@@ -34,7 +34,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMachines1 extends BlockContainer {
 	public static final String[] names = new String[] {
-			"Recycler","Recycler2","Recycler3"
+			"Recycler","Recycler1","Recycler2"
 	};
 	
 	private static int[][] sideAndFacingToSpriteOffset = new int[][] { 
@@ -239,23 +239,7 @@ public class BlockMachines1 extends BlockContainer {
 			float f3 = 0.52F;
 			float f4 = random.nextFloat() * 0.6F - 0.3F;
 
-			switch (facing) {
-			case 4:
-				world.spawnParticle("smoke", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				break;
-			case 5:
-				world.spawnParticle("smoke", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				break;
-			case 2:
-				world.spawnParticle("smoke", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
-				break;
-			case 3:
-				world.spawnParticle("smoke", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
-			}
+		
 
 		}
 		if ((meta == 3) && (isActive(world, i, j, k))) {

@@ -77,12 +77,12 @@ public static void recipe() {
     GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,8),new Object[] {"AAA","BCB","DDD", 'A',SSPItem.michail_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base,1,7),'D',SSPItem.QuantumItems3});
     
     GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,3),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.wolfram_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.compressor,'D',SSPItem.QuantumItems6});
-      GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,4),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.platium_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base,1,3),'D',SSPItem.QuantumItems3});
+      GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,4),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.magnesium_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base,1,3),'D',SSPItem.QuantumItems3});
       GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,5),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.chromium_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base,1,4),'D',SSPItem.QuantumItems3});
       
-      GameRegistry.addRecipe(SSPItem.massFabricator1,new Object[] {"AAA","BCB","DDD", 'A', SSPItem.spinel_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.massFabricator,'D',SSPItem.QuantumItems6});
+      GameRegistry.addRecipe(SSPItem.massFabricator1,new Object[] {"AAA","BCB","DDD", 'A', SSPItem.magnesium_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.massFabricator,'D',SSPItem.QuantumItems6});
       GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,1),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.chromium_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base,1,0),'D',SSPItem.QuantumItems3});
-      GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,2),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.spinel_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base,1,1),'D',SSPItem.QuantumItems3});
+      GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,2),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.magnesium_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base,1,1),'D',SSPItem.QuantumItems3});
       
        GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,9),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.chromium_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.extractor,'D',SSPItem.QuantumItems6});
       GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,10),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.wolfram_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base,1,9),'D',SSPItem.QuantumItems3});
@@ -90,11 +90,18 @@ public static void recipe() {
       
       GameRegistry.addRecipe(SSPItem.massFabricator2,new Object[] {"AAA","BCB","DDD", 'A', SSPItem.platium_plate,'B',SSPItem.QuantumItems8,'C',SSPItem.massFabricator1,'D',SSPItem.QuantumItems6});
       GameRegistry.addRecipe(SSPItem.massFabricator3,new Object[] {"AAA","BCB","DDD", 'A', SSPItem.spinel_plate,'B',SSPItem.QuantumItems5,'C',SSPItem.massFabricator2,'D',SSPItem.QuantumItems3});
-    GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,12),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.spinel_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.metalformer,'D',SSPItem.QuantumItems6});
+    GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,12),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.magnesium_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.metalformer,'D',SSPItem.QuantumItems6});
       GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,13),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.platium_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base,1,12),'D',SSPItem.QuantumItems3});
     GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,14),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.chromium_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base,1,13),'D',SSPItem.QuantumItems3});
       
-      
+    GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base1,1,0),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.wolfram_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.recycler,'D',SSPItem.QuantumItems6});
+    GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base1,1,1),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.chromium_plate,'B',SSPItem.QuantumItems8,'C',new ItemStack(SSPItem.machines_base1,1,0),'D',SSPItem.QuantumItems3});
+  GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base1,1,2),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.michail_plate,'B',SSPItem.QuantumItems5,'C',new ItemStack(SSPItem.machines_base1,1,1),'D',SSPItem.QuantumItems3});
+ 
+  GameRegistry.addRecipe(new ItemStack(SSPItem.machines,1,4),new Object[] {"AAA","BCB","DDD", 'A', Ic2Items.plateadviron,'B',SSPItem.QuantumItems5,'C',Ic2Items.inductionFurnace,'D',SSPItem.QuantumItems6});
+  GameRegistry.addRecipe(new ItemStack(SSPItem.machines,1,7),new Object[] {"AAA","BCB","DDD", 'A', Blocks.cobblestone,'B',Ic2Items.advancedCircuit,'C',Ic2Items.generator,'D',SSPItem.QuantumItems6});
+  GameRegistry.addRecipe(new ItemStack(SSPItem.machines,1,8),new Object[] {"A A","BCB","A A", 'A', SSPItem.protoncore,'B',SSPItem.QuantumItems6,'C',new ItemStack(SSPItem.machines,1,0)});
+  
       // TODO Recipe Neutron Generator
       GameRegistry.addRecipe(SSPItem.massFabricator, new Object[] { " B ", "ACA", " B ", 'C', Ic2Items.massFabricator, 'A', new ItemStack(SSPItem.QuantumItems5, 1), 'B',new ItemStack(SSPItem.enderquantumcomponent, 1) });
 
@@ -124,7 +131,7 @@ public static void recipe() {
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass2,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platelead,'C',Ic2Items.platecopper,'D',Ic2Items.platetin ,'H',SSPItem.photoniyglass1});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass3,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platelead,'C',Ic2Items.platetin,'D',Items.iron_ingot ,'H',SSPItem.photoniyglass2});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass4,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SSPItem.wolfram_ingot,'D',Items.redstone ,'H',SSPItem.photoniyglass3});
-	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass5,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SSPItem.wolfram_ingot,'D',Ic2Items.platecopper ,'H',SSPItem.photoniyglass4});
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass5,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SSPItem.magnesium_ingot,'D',Ic2Items.platecopper ,'H',SSPItem.photoniyglass4});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass6,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SSPItem.chromium_ingot,'D',Ic2Items.plategold ,'H',SSPItem.photoniyglass5});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.photoniyglass7,1) ,new Object[] {  "DCD","HCH",   'A' , Ic2Items.platecopper,'C',SSPItem.chromium_plate,'D',Ic2Items.tinBlock ,'H',SSPItem.photoniyglass6});
 	  
@@ -209,6 +216,12 @@ public static void recipe() {
 	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 3) ,new Object[] {  "AAA","BDB","ECE",   'A' , SSPItem.compresscarbon,'B',SSPItem.nickelplate,'C',SSPItem.invarplate,'D',new ItemStack(SSPItem.itemSSP, 1,4),'E',SSPItem.QuantumItems8  });
 	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 4) ,new Object[] {  "AAA","BDB","ECE",   'A' , SSPItem.compresscarbonultra,'B',SSPItem.spinel_plate,'C',SSPItem.electriumplate,'D',new ItemStack(SSPItem.itemSSP, 1,4),'E',SSPItem.QuantumItems9  });
 	       
+	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 0) ,new Object[] {  "ACB","A B","   ",   'A' , SSPItem.invarplate,'B',SSPItem.electriumplate,'C',SSPItem.module3 });
+	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 6) ,new Object[] {  "AC ","   ","   ",   'A' , new ItemStack(SSPItem.module8),'C',new ItemStack(SSPItem.module7, 1, 3) });
+	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 8) ,new Object[] {  "AC ","   ","   ",   'A' , new ItemStack(SSPItem.module7, 1, 6),'C',new ItemStack(SSPItem.module7, 1, 4) });
+	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 5) ,new Object[] {  "ACA","   ","   ",   'A' , new ItemStack(SSPItem.module7, 1, 6),'C',new ItemStack(SSPItem.module8) });
+	       GameRegistry.addRecipe(new ItemStack(SSPItem.module7, 1, 7) ,new Object[] {  "ACA","   ","   ",   'A' , new ItemStack(SSPItem.module7, 1, 8),'C',new ItemStack(SSPItem.module8) });
+			
 	       //TODO Recipes cables
 		GameRegistry.addRecipe(SSPItem.insulatedCopperCableItem, new Object[] { "BBB","AAA","BBB", 'B', Ic2Items.glassFiberCableItem,'A',SSPItem.photoniy });
 		GameRegistry.addRecipe(SSPItem.copperCableItem, new Object[] { "BBB","AAA","BBB", 'B', SSPItem.insulatedCopperCableItem,'A',SSPItem.photoniy });

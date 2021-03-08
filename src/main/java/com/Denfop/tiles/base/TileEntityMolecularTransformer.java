@@ -3,7 +3,6 @@
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fox.spiteful.avaritia.items.LudicrousItems;
 import ic2.api.network.INetworkClientTileEntityEventListener;
 import ic2.api.recipe.IMachineRecipeManager;
 import ic2.api.recipe.IRecipeInput;
@@ -90,6 +89,7 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
     NBTTagCompound   nbt32 = new NBTTagCompound();
     NBTTagCompound   nbt33 = new NBTTagCompound();
     NBTTagCompound   nbt34 = new NBTTagCompound();
+    NBTTagCompound   nbt35 = new NBTTagCompound();
   nbt.setInteger("energy", 1000000);
   nbt1.setInteger("energy", 150000000);
   nbt2.setInteger("energy", 5000000);
@@ -126,6 +126,7 @@ nbt28.setInteger("energy", 15000000);
   nbt32.setInteger("energy", 15000000);
   nbt33.setInteger("energy", 15000000);
   nbt34.setInteger("energy", 750000);
+  nbt35.setInteger("energy", 450000);
   addrecipe(new ItemStack(Items.skull,1,0),nbt,new ItemStack(Items.skull,1,1));
   addrecipe(new ItemStack(Items.skull,1,1),nbt1,new ItemStack(Items.nether_star,1));
   addrecipe(new ItemStack(Items.iron_ingot,1,0),nbt2,Ic2Items.iridiumOre);
@@ -167,7 +168,7 @@ addrecipe(new ItemStack(SSPItem.matter,1,5),nbt31,new ItemStack(SSPItem.earthlin
 addrecipe(new ItemStack(SSPItem.matter,1,6),nbt32,new ItemStack(SSPItem.endlinse,1));
 addrecipe(new ItemStack(SSPItem.matter,1,7),nbt33,new ItemStack(SSPItem.aerlinse,1));
 
-
+addrecipe(OreDictionary.getOres("ingotMikhalov").get(0),nbt35,OreDictionary.getOres("ingotMagnesium").get(0));
   }
  public static void addrecipe(ItemStack stack,NBTTagCompound nbt,ItemStack stack1) {
 	 
