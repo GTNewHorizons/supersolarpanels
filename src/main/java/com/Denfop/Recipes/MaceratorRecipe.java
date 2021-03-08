@@ -3,6 +3,7 @@ package com.Denfop.Recipes;
 import com.Denfop.SSPItem;
 import com.Denfop.SuperSolarPanels;
 
+import cpw.mods.fml.common.Loader;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class MaceratorRecipe {
 	public static void recipe() {
+		if(!Loader.isModLoaded("aobd")) {
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.spinelore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.spinelcrushedore,2) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.platiumore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.platiumcrushedore,2) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.chromiumore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.chromiumcrushedore,2) });
@@ -21,7 +23,7 @@ public class MaceratorRecipe {
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.mikhail_ore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.michalovcrushedore,2) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.nicelore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.nickelcrushedore,2) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.wolframore)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(SSPItem.wolframcrushedore,2) });
-			//
+		}//
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.endiron_stone)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(IC2Items.getItem("crushedIronOre").getItem(),2,0)});
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.netherironrack)), (NBTTagCompound)null, new ItemStack[] {  new ItemStack(IC2Items.getItem("crushedIronOre").getItem(),2,0) });
 		   Recipes.macerator.addRecipe((IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.endgold_stone)), (NBTTagCompound)null, new ItemStack[] { new ItemStack(IC2Items.getItem("crushedGoldOre").getItem(),2,2) });
