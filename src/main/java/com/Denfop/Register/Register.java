@@ -78,7 +78,9 @@ public static void register() {
 	 GameRegistry.registerItem(SSPItem.magnesium_ingot = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("magnesium_ingot").setTextureName("supersolarpanel:magnesium_ingot"), "magnesium_ingot");
 	 GameRegistry.registerItem(SSPItem.magnesium_plate = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("magnesium_plate").setTextureName("supersolarpanel:magnesium_plate"), "magnesium_plate");
 	 GameRegistry.registerItem(SSPItem.magnesium_nugget = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("magnesium_nugget").setTextureName("supersolarpanel:magnesium_nugget"), "magnesium_nugget");
-	    
+	 GameRegistry.registerItem(SSPItem.caravky_ingot = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("caravky").setTextureName("supersolarpanel:caravky"), "caravky");
+		
+	  
 	  GameRegistry.registerItem(SSPItem.advanced_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("advanced_core").setTextureName("supersolarpanel:advanced_core"), "advanced_core");
       GameRegistry.registerItem(SSPItem.hybrid_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("hybrid_core").setTextureName("supersolarpanel:hybrid_core"), "hybrid_core");
       GameRegistry.registerItem(SSPItem.ultimate_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("ultimate_core").setTextureName("supersolarpanel:ultimate_core"), "ultimate_core");

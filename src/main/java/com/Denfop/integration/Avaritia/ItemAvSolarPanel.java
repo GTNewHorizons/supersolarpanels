@@ -7,10 +7,12 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
@@ -55,6 +57,18 @@ public class ItemAvSolarPanel extends ItemBlock implements IPanel
             itemList.add(stack);
         }
     }
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+        NBTTagCompound nbttagcompound;
+        int meta = itemStack.getItemDamage();
+       TileEntitySolarPanel tile = (TileEntitySolarPanel) blockAvSolarPanel.getBlockEntity(meta);
+      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + tile.genDay  + " EU/t " );
+      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + tile.genNight  + " EU/t " );
+            
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +tile.production  + " EU/t " );
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + tile.maxStorage + " EU ");
+          info.add(StatCollector.translateToLocal("ssp.tier") + tile.tier);
+        
+        }
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(final ItemStack itemstack) {
         final int i = itemstack.getItemDamage();

@@ -36,9 +36,9 @@ public class EntityRendererStreak extends Render {
       AbstractClientPlayer player = (AbstractClientPlayer)entity.parent;
       Minecraft mc = Minecraft.getMinecraft();
       if (!entity.isInvisible() && (player != mc.thePlayer || mc.gameSettings.thirdPersonView != 0)) {
-        if (player.inventory.armorInventory[1] == null)
+        if (player.inventory.armorInventory[2] == null)
           return; 
-        if (!(player.inventory.armorInventory[1].getItem() instanceof ItemArmorImprovemedQuantum))
+        if (!(player.inventory.armorInventory[2].getItem() instanceof ItemArmorImprovemedQuantum))
           return; 
         ArrayList<StreakLocation> loc = EventDarkQuantumSuitEffect.getPlayerStreakLocationInfo((EntityPlayer)player);
         GL11.glPushMatrix();

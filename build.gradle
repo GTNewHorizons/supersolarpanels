@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.4.3"
+version = "1.5RC3"
 group= "com.Denfop"
 archivesBaseName = "SuperSolarPanels"
 apply plugin: 'java'
@@ -32,14 +32,13 @@ minecraft {
 
 dependencies {
   
-    compile files("libs/industrialcraft-2-2.2.827-experimental.jar")
+    compile files("libs/industrialcraft-2-2.2.828-experimental-dev-deobf.jar")
     compile files("libs/CodeChickenLib-1.7.10-1.1.1.93-universal.jar")
     compile files("libs/NotEnoughItems-1.7.10-1.0.5.120-universal.jar")
-    compile files("libs/Avaritia-1.13.jar")
-    compile files("libs/Draconic-Evolution-1.7.10-1.0.2h.jar")
+    compile files("libs/Avaritia-1.13-deobf.jar")
+    compile files("libs/Draconic-Evolution-1.7.10-1.0.2h-deobf.jar")
     compile files("libs/Thaumcraft-1.7.10-4.2.3.5.jar")
-    compile files("libs/wireless-panels+improved-vajra-0.42R.jar")
-    compile files("libs/Botania r1.8-249.jar")
+    compile files("libs/Botania r1.8-249-deobf.jar")
 	
 	compile files("libs/Galacticraft-API-1.7-3.0.12.504.jar")
     compile files("libs/GalacticraftCore-Dev-1.7-3.0.12.504.jar")

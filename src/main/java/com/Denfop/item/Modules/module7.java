@@ -88,14 +88,15 @@ public class module7 extends Item
         	  
         	  
           case 5:  
-        	  info.add(StatCollector.translateToLocal("storagemodul") );           break;
+        	 
           case 6:  
-        	  info.add(StatCollector.translateToLocal("storagemodul") );           break;  
+        	  
           case 7:  
-        	  info.add(StatCollector.translateToLocal("storagemodul") );           break;
+        	  
           case 8:  
-        	  info.add(StatCollector.translateToLocal("storagemodul") );           break;
-        	 //storagemodul
+        	  info.add(StatCollector.translateToLocal("storagemodul") );           
+        	  info.add(StatCollector.translateToLocal("storagemodul1") );           break;
+        	
          
          }}
     public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {

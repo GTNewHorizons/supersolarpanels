@@ -480,11 +480,11 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
 	    return k;
 	  }
   public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
-	  NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
+	  NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
 	 
 	
 	  if(itemStack.getItem() == SSPItem.quantumBodyarmor) {
-  	  info.add(StatCollector.translateToLocal("ssp.fly") +" " +nbtData.getBoolean("isFlyActive"));
+  	  info.add(StatCollector.translateToLocal("ssp.fly") +" " +nbtData.getBoolean("jetpack"));
   	for (Object effect : new LinkedList(player.getActivePotionEffects())) {
   		int id = ((PotionEffect) effect).getPotionID();
   		if(id == Potion.fireResistance.id) {

@@ -20,10 +20,10 @@ public class ContainerGenStone<T extends TileEntityBaseGenStone> extends Contain
   public ContainerGenStone(EntityPlayer entityPlayer, T tileEntity1, int height, int dischargeX, int dischargeY, int inputX, int inputY, int outputX, int outputY, int upgradeX, int upgradeY) {
     super(entityPlayer, tileEntity1, height, dischargeX, dischargeY);
     if (((TileEntityGenerationStone)tileEntity1).inputSlotB != null)
-        addSlotToContainer((Slot)new SlotInvSlot((InvSlot)((TileEntityGenerationStone)tileEntity1).inputSlotB, 0, inputX-18, inputY-8)); 
+        addSlotToContainer((Slot)new SlotInvSlot((InvSlot)((TileEntityGenerationStone)tileEntity1).inputSlotB, 0, inputX-18, inputY-8+1)); 
     
     if (((TileEntityGenerationStone)tileEntity1).inputSlotA != null)
-      addSlotToContainer((Slot)new SlotInvSlot((InvSlot)((TileEntityGenerationStone)tileEntity1).inputSlotA, 0, inputX+18-1, inputY-8)); 
+      addSlotToContainer((Slot)new SlotInvSlot((InvSlot)((TileEntityGenerationStone)tileEntity1).inputSlotA, 0, inputX+18-1, inputY-8+1)); 
     if (((TileEntityGenerationStone)tileEntity1).outputSlot != null)
       addSlotToContainer((Slot)new SlotInvSlot((InvSlot)((TileEntityGenerationStone)tileEntity1).outputSlot, 0, 54+1+1, 35+28+3)); 
     for (int i = 0; i < 4; i++)

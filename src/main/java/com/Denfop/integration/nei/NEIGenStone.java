@@ -101,7 +101,7 @@ public class NEIGenStone extends TemplateRecipeHandler {
   }
   
   public void loadTransferRects() {
-    this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(84, 19, 25, 16), getRecipeId(), new Object[0]));
+    this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(51, 17+17+1, 25, 32), getRecipeId(), new Object[0]));
   }
   
   public void loadCraftingRecipes(String outputId, Object... results) {

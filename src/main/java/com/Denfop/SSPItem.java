@@ -318,6 +318,8 @@ public class SSPItem {
 
 			public static Block machines_base1;
 
+			public static Item caravky_ingot;
+
 			
 			public static class FluidXP {
 				public static Fluid xpJuice = new Fluid("xpjuice.wv");
