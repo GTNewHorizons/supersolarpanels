@@ -132,8 +132,10 @@ protected double inputEU;
        double p = (k/ output.metadata.getInteger("energy"));
      double u = this.inputEU;
      this.inputEU =u;
-     
+     if(p <= 1)
        this.guiProgress = p;
+     if(p > 1)
+    	 this.guiProgress = 1;
       if (this.progress >=output.metadata.getInteger("energy")) {
         operate(output);
         needsInvUpdate = true;

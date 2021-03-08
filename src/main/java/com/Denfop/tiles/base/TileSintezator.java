@@ -389,7 +389,10 @@ if(sum1 < 2000000000) {
          	sum2 = sum2 + myArray2[j];
          	
          }
-if((sum2) !=0) {
+if((sum2) !=0 ) {
+	if((this.storage * i /( sum2)) > 24)
+		return 24;
+	else
          return  (float)(this.storage * i /( sum2));
         
 }else {

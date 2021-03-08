@@ -54,7 +54,11 @@ public class GuiMolecularTransformer extends GuiSSP {
       this.fontRendererObj.drawString(output + output1.items.get(0).getDisplayName(), this.xoffset+ 60+10, this.yoffset+25+11, 13487565);
    
       this.fontRendererObj.drawString(energyPerOperation +  output1.metadata.getInteger("energy") + " EU", this.xoffset+ 60+10, this.yoffset+25+22, 13487565);
+      if(this.container.base.getProgress()*100 <=100)
       this.fontRendererObj.drawString(progress +  String.valueOf(MathHelper.floor_double(this.container.base.getProgress()*100) + "%"), this.xoffset+ 60+10, this.yoffset+25+33, 13487565);
+      if(this.container.base.getProgress()*100 >100)
+    	  this.fontRendererObj.drawString(progress +  String.valueOf(MathHelper.floor_double(this.container.base.getProgress()*100) + "%"), this.xoffset+ 60+10, this.yoffset+25+33, 13487565);
+       
       this.fontRendererObj.drawString(energyPerTick +  String.valueOf((int)this.container.base.getPower()) , this.xoffset+ 60+10, this.yoffset+25+44, 13487565);
       
       
