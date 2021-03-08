@@ -27,7 +27,7 @@ public static void oredict() {
     OreDictionary.registerOre("oreMagnesium", SSPItem.magnesiumore);
     OreDictionary.registerOre("oreTungsten", SSPItem.wolframore);
     OreDictionary.registerOre("ingotPhoton", SSPItem.photoniy_ingot);
-    OreDictionary.registerOre("orePhoton", SSPItem.photoniy);
+    OreDictionary.registerOre("Photon", SSPItem.photoniy);
     OreDictionary.registerOre("ingotMagnesium", SSPItem.magnesium_ingot);  
     
 }

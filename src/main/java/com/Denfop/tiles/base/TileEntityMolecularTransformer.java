@@ -168,7 +168,7 @@ addrecipe(new ItemStack(SSPItem.matter,1,4),nbt30,new ItemStack(SSPItem.nightlin
 addrecipe(new ItemStack(SSPItem.matter,1,5),nbt31,new ItemStack(SSPItem.earthlinse,1));
 addrecipe(new ItemStack(SSPItem.matter,1,6),nbt32,new ItemStack(SSPItem.endlinse,1));
 addrecipe(new ItemStack(SSPItem.matter,1,7),nbt33,new ItemStack(SSPItem.aerlinse,1));
-addrecipe(Ic2Items.iridiumOre,nbt34,OreDictionary.getOres("orePhoton").get(0));
+addrecipe(Ic2Items.iridiumOre,nbt34,OreDictionary.getOres("Photon").get(0));
 addrecipe(OreDictionary.getOres("ingotMikhalov").get(0),nbt35,OreDictionary.getOres("ingotMagnesium").get(0));
   }
  public static void addrecipe(ItemStack stack,NBTTagCompound nbt,ItemStack stack1) {
