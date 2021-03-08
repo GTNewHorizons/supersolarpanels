@@ -175,7 +175,7 @@ public ItemStack getStackInSlot(final int i) {
   }
   
 public int getInventoryStackLimit() {
-    return 64;
+    return 1;
 }
 
   public ItemStack decrStackSize(final int i, final int j) {
@@ -195,7 +195,9 @@ public int getInventoryStackLimit() {
   }
   
   public void setInventorySlotContents(final int i, final ItemStack itemstack) {
+	 
       this.chargeSlots[i] = itemstack;
+      
       if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {
           itemstack.stackSize = this.getInventoryStackLimit();
       }

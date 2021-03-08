@@ -1007,7 +1007,7 @@ if((float) (this.storage * i /(  ((this.p + sum2) + (this.p +  sum2)*(maxstorage
     }
     
     public int getInventoryStackLimit() {
-        return 64;
+        return 1;
     }
     
     public Container getGuiContainer(final InventoryPlayer inventoryplayer) {
