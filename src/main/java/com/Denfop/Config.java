@@ -294,13 +294,17 @@ public static int  molecular31;
 public static int  molecular32; 
 public static int  molecular33; 
 public static int  molecular34; 
-public static int  molecular35; 
+public static int  molecular35;
+public static int enerycost;
+public static int expstorage; 
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
          config.load();
          configFile = event.getSuggestedConfigurationFile();
         //
+         expstorage=config.get("Basic Mechanisms", "exp storage", 500).getInt(500);
+         enerycost=config.get("Quantum Querry", "energy consume", 35000).getInt(35000);
          molecular=config.get("Crafts Molecular Transformer", "Wither Skeleton skull", 1000000).getInt(1000000);
          molecular1=config.get("Crafts Molecular Transformer", "Nether Star", 150000000).getInt(150000000);
          molecular2=config.get("Crafts Molecular Transformer", "Iridium Ore", 5000000).getInt(5000000);
