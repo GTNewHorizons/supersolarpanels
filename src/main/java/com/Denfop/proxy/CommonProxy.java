@@ -11,6 +11,7 @@ import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
+import com.Denfop.tiles.base.TileEntityMultiMachine1;
 import com.Denfop.tiles.base.TileEntityMultiMatter;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
@@ -114,7 +115,7 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntityMultiMatter) {
 			return ((TileEntityMultiMatter) te).getGuiContainer(player);
 		}
-
+      
      
       if (te instanceof TileEntityAlloySmelter) {
           return ((TileEntityAlloySmelter)te).getGuiContainer(player);
@@ -137,6 +138,9 @@ public class CommonProxy implements IGuiHandler{
       }
       if (te instanceof TileEntityMultiMachine) {
 			return ((TileEntityMultiMachine) te).getGuiContainer(player);
+		}
+      if (te instanceof TileEntityMultiMachine1) {
+			return ((TileEntityMultiMachine1) te).getGuiContainer(player);
 		}
       if (te instanceof TileEntityChargepadBlock) {
 			return ((TileEntityChargepadBlock) te).getGuiContainer(player);

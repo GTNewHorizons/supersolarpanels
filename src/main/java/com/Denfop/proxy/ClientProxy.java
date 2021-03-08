@@ -49,6 +49,7 @@ import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
+import com.Denfop.tiles.base.TileEntityMultiMachine1;
 import com.Denfop.tiles.base.TileEntityMultiMatter;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileSintezator;
@@ -264,9 +265,12 @@ MaceratorRecipe.recipe();
 			if (te instanceof TileEntityMultiMachine) {
 				return ((TileEntityMultiMachine) te).getGui(player, false);
 			}
-		
-    
-    
+      
+			if (player.getHeldItem() != Ic2Items.electricWrench) {
+				if (te instanceof TileEntityMultiMachine1) {
+					return ((TileEntityMultiMachine1) te).getGui(player, false);
+				}
+			}
 			if (player.getHeldItem() != Ic2Items.electricWrench) {
 				if (te instanceof TileEntityMultiMatter) {
 					return ((TileEntityMultiMatter) te).getGui(player, false);

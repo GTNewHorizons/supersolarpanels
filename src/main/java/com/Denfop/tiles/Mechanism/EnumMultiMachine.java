@@ -26,7 +26,12 @@ public enum EnumMultiMachine {
 	
 	DOUBLE_METAL_FORMER(TileEntityDoubleMetalFormer.class, "Metal Former Double", 10, 200, 2),
 	TRIPLE_METAL_FORMER(TileEntityTripleMetalFormer.class, "Metal Former Triple", 10, 200, 3),
-	QUAD_METAL_FORMER(TileEntityQuadMetalFormer.class, "Metal Former Quad", 10, 200, 4);
+	QUAD_METAL_FORMER(TileEntityQuadMetalFormer.class, "Metal Former Quad", 10, 200, 4),
+	
+	DOUBLE_RECYCLER(TileEntityDoubleRecycler.class, "Double Recycler", 1, 45, 2),
+	TRIPLE_RECYCLER(TileEntityTripleRecycler.class, "Triple Recycler", 1, 45, 3),
+	QUAD_RECYCLER(TileEntityQuadRecycler.class, "Quad Recycler", 1, 45, 4)
+	;
 	
 	private final Class<? extends TileEntity> clazz;
 	private final String name;

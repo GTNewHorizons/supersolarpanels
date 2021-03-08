@@ -32,11 +32,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockMachines extends BlockContainer {
+public class BlockMachines1 extends BlockContainer {
 	public static final String[] names = new String[] {
-			"Macerator", "Macerator2", "Macerator3", "Compressor", "Compressor2", "Compressor3", 
-			"ElecFurnace", "ElecFurnace2", "ElecFurnace3", "Extractor", "Extractor2", "Extractor3", 
-			"MetalFormer", "MetalFormer2", "MetalFormer3"
+			"Recycler","Recycler2","Recycler3"
 	};
 	
 	private static int[][] sideAndFacingToSpriteOffset = new int[][] { 
@@ -47,7 +45,7 @@ public class BlockMachines extends BlockContainer {
 		{ 4, 5, 4, 2, 3, 5 }, 
 		{ 5, 4, 2, 4, 5, 3 } };
 	
-	public BlockMachines() {
+	public BlockMachines1() {
 		super(Material.iron);
 		setHardness(2.0F);
 		setStepSound(soundTypeMetal);
@@ -58,35 +56,12 @@ public class BlockMachines extends BlockContainer {
 	public TileEntity createTileEntity(World world, int meta) {
 		switch (meta) {
 		case 0:
-			return new TileEntityDoubleMacerator();
+			return new TileEntityDoubleRecycler();
 		case 1:
-			return new TileEntityTripleMacerator();
+			return new TileEntityTripleRecycler();
 		case 2:
-			return new TileEntityQuadMacerator();
-		case 3:
-			return new TileEntityDoubleCompressor();
-		case 4:
-			return new TileEntityTripleCompressor();
-		case 5:
-			return new TileEntityQuadCompressor();
-		case 6:
-			return new TileEntityDoubleElectricFurnace();
-		case 7:
-			return new TileEntityTripleElectricFurnace();
-		case 8:
-			return new TileEntityQuadElectricFurnace();
-		case 9:
-			return new TileEntityDoubleExtractor();
-		case 10:
-			return new TileEntityTripleExtractor();
-		case 11:
-			return new TileEntityQuadExtractor();
-		case 12:
-			return new TileEntityDoubleMetalFormer();
-		case 13:
-			return new TileEntityTripleMetalFormer();
-		case 14:
-			return new TileEntityQuadMetalFormer();
+			return new TileEntityQuadRecycler();
+		
 			
 		}
 		return null;
@@ -96,7 +71,7 @@ public class BlockMachines extends BlockContainer {
 
 	@Override
 	public void registerBlockIcons(final IIconRegister par1IconRegister) {
-		this.iconBuffer = new IIcon[15][12];
+		this.iconBuffer = new IIcon[16][12];
 		
         for (int i = 0; i < names.length; i++) {
             IIcon[] icons = TextureAtlasSheet.unstitchIcons(par1IconRegister, "supersolarpanel:block" + names[i], 12, 1);

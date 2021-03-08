@@ -86,15 +86,19 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
     NBTTagCompound   nbt28 = new NBTTagCompound();
     NBTTagCompound   nbt29 = new NBTTagCompound();
     NBTTagCompound   nbt30 = new NBTTagCompound();
+    NBTTagCompound   nbt31 = new NBTTagCompound();
+    NBTTagCompound   nbt32 = new NBTTagCompound();
+    NBTTagCompound   nbt33 = new NBTTagCompound();
+    NBTTagCompound   nbt34 = new NBTTagCompound();
   nbt.setInteger("energy", 1000000);
   nbt1.setInteger("energy", 150000000);
-  nbt2.setInteger("energy", 15500000);
+  nbt2.setInteger("energy", 5000000);
   nbt3.setInteger("energy", 7500000);
   nbt4.setInteger("energy", 1000000);
   nbt5.setInteger("energy", 8000000);
   nbt6.setInteger("energy", 50000);
   nbt7.setInteger("energy", 25000);
-  nbt8.setInteger("energy", 7000000);
+  nbt8.setInteger("energy", 700000);
   nbt9.setInteger("energy", 250000);
   nbt10.setInteger("energy", 250000);
   nbt11.setInteger("energy", 450000);
@@ -113,17 +117,22 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
   nbt24.setInteger("energy", 400000);
   nbt25.setInteger("energy", 800000);
   nbt26.setInteger("energy", 1000000000);
-nbt27.setInteger("energy", 150000000);
-nbt28.setInteger("energy", 1050000000);
-  nbt29.setInteger("energy", 40000);
-  nbt30.setInteger("energy", 40000);
+  //
+nbt27.setInteger("energy", 15000000);
+nbt28.setInteger("energy", 15000000);
+  nbt29.setInteger("energy", 15000000);
+  nbt30.setInteger("energy", 15000000);
+  nbt31.setInteger("energy", 15000000);
+  nbt32.setInteger("energy", 15000000);
+  nbt33.setInteger("energy", 15000000);
+  nbt34.setInteger("energy", 750000);
   addrecipe(new ItemStack(Items.skull,1,0),nbt,new ItemStack(Items.skull,1,1));
   addrecipe(new ItemStack(Items.skull,1,1),nbt1,new ItemStack(Items.nether_star,1));
   addrecipe(new ItemStack(Items.iron_ingot,1,0),nbt2,Ic2Items.iridiumOre);
   addrecipe(Ic2Items.Plutonium,nbt3,new ItemStack(SSPItem.proton,1));
   addrecipe(OreDictionary.getOres("ingotSpinel").get(0),nbt4,OreDictionary.getOres("ingotIridium").get(0));
   addrecipe(OreDictionary.getOres("orePhoton").get(0),nbt5,OreDictionary.getOres("ingotPhoton").get(0));
-
+  addrecipe(Ic2Items.iridiumOre,nbt34,OreDictionary.getOres("orePhoton").get(0));
   addrecipe(new ItemStack(Blocks.netherrack),nbt6,new ItemStack(Items.gunpowder,2));
   addrecipe(new ItemStack(Blocks.sand),nbt7,new ItemStack(Blocks.gravel,1));
   addrecipe(OreDictionary.getOres("dustCoal").get(0),nbt8,OreDictionary.getOres("gemDiamond").get(0));
@@ -149,6 +158,15 @@ addrecipe(new ItemStack(SSPItem.protoncore,4),nbt23,new ItemStack(SSPItem.singul
 addrecipe(new ItemStack(SSPItem.singularcore,4),nbt24,new ItemStack(SSPItem.admincore,1));
 addrecipe(new ItemStack(SSPItem.admincore,4),nbt25,new ItemStack(SSPItem.photoniccore,1));
 addrecipe(new ItemStack(SSPItem.photoniccore,4),nbt26,new ItemStack(SSPItem.blocksintezator,1));
+//
+addrecipe(new ItemStack(SSPItem.matter,1,1),nbt27,new ItemStack(SSPItem.sunlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,2),nbt28,new ItemStack(SSPItem.rainlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,3),nbt29,new ItemStack(SSPItem.netherlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,4),nbt30,new ItemStack(SSPItem.nightlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,5),nbt31,new ItemStack(SSPItem.earthlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,6),nbt32,new ItemStack(SSPItem.endlinse,1));
+addrecipe(new ItemStack(SSPItem.matter,1,7),nbt33,new ItemStack(SSPItem.aerlinse,1));
+
 
   }
  public static void addrecipe(ItemStack stack,NBTTagCompound nbt,ItemStack stack1) {

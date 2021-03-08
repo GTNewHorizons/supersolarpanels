@@ -18,7 +18,7 @@ public class CompressorRecipe {
 	      
 		
 		
-		
+		 addcompressor(Ic2Items.uuMatterCell, new ItemStack(SSPItem.matter,2,0));
 	      addcompressor(Ic2Items.carbonFiber,9, new ItemStack(SSPItem.coal_chunk1));
 	        addcompressor(Ic2Items.carbonPlate,9, new ItemStack(SSPItem.compresscarbon));
 	        addcompressor(Ic2Items.advancedAlloy,9, new ItemStack(SSPItem.compresscarbonultra));
@@ -41,8 +41,11 @@ public class CompressorRecipe {
 	  		addcompressor(IC2Items.getItem("crushedUraniumOre"),1,new ItemStack(SSPItem.itemSSP,1,8));
 	}
 	public static void addcompressor(ItemStack input,int n,ItemStack output) {
-		  Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(input, n), null, new ItemStack[] {output });
-
 		
-	}
+		  Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(input, n), null, new ItemStack[] {output });
+			}
+	public static void addcompressor(ItemStack input,ItemStack output) {
+		
+		  Recipes.compressor.addRecipe((IRecipeInput)new RecipeInputItemStack(input, 1), null, new ItemStack[] {output });
+			}
 }

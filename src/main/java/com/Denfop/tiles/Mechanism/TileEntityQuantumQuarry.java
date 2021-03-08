@@ -57,11 +57,12 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 		    this.chargeSlots = new ItemStack[24];
 		  }
 		  protected void updateEntityServer() {
+			  
 			    super.updateEntityServer();
 		    	if(this.energy > this.maxEnergy)
 		    		this.energy=this.maxEnergy;
 		        if(this.energy >= this.energyconsume) {
-		        	
+		        	this.setActive(true);
 		        	this.energy-=(this.energyconsume);
 		        	
 		        	int chance = rand.nextInt(100)+1;
@@ -482,6 +483,8 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 		        		//
 		        	
 		        	}
+		        }else {
+		        	this.setActive(false);
 		        }
 		        	
 		        

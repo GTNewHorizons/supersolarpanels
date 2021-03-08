@@ -1,6 +1,7 @@
 package com.Denfop;
 
 import com.Denfop.block.mechanism.BlockMachine;
+import com.Denfop.block.mechanism.BlockMachines1;
 import com.Denfop.item.base.ItemCable;
 
 import net.minecraft.block.Block;
@@ -314,6 +315,8 @@ public class SSPItem {
 			public static Block cableblock;
 
 			public static ItemStack glassFiberCableItem1;
+
+			public static Block machines_base1;
 
 			
 			public static class FluidXP {

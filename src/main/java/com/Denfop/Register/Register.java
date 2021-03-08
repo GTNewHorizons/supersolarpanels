@@ -17,6 +17,7 @@ import com.Denfop.block.cable.BlockCable;
 import com.Denfop.block.expgen.ItemBlockEG;
 import com.Denfop.block.mechanism.BlockMachine;
 import com.Denfop.block.mechanism.BlockMachines;
+import com.Denfop.block.mechanism.BlockMachines1;
 import com.Denfop.block.ore.BlockOre;
 import com.Denfop.block.ore.BlockSSPCoal;
 import com.Denfop.block.ore.BlockSSPDiamond;
@@ -27,6 +28,7 @@ import com.Denfop.item.ItemCell;
 import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Machina.ItemMachine1;
 import com.Denfop.item.Machina.ItemMachines;
+import com.Denfop.item.Machina.ItemMachines2;
 import com.Denfop.item.RadionBlock.ItemToriyOre;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.ItemBlockIC2;
@@ -285,6 +287,7 @@ public static void register() {
       GameRegistry.registerItem(SSPItem.photoniyglass10 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass10").setTextureName("supersolarpanel:photoniyglass10"), "photoniyglass10");
 
 		GameRegistry.registerBlock(SSPItem.machines_base = new BlockMachines(), ItemMachines.class, "machines_base");
+		GameRegistry.registerBlock(SSPItem.machines_base1 = new BlockMachines1(), ItemMachines2.class, "machines_base1");
 			 GameRegistry.registerBlock(SSPItem.expgen, ItemBlockEG.class, "ExpGen1");
 		 GameRegistry.registerItem(SSPItem.module8, "WirelessModule1");
 		

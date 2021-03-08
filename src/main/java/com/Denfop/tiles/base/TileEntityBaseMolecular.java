@@ -157,13 +157,13 @@ protected double inputEU;
  
   
  
-	  
 
   public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
 	    if (this.energy >= this.maxEnergy)
 	      return 0; 
 	    this.energy += amount;
 	    double p =amount;
+
 	    this.inputEU=p;
 	    
 	    return 0.0D;

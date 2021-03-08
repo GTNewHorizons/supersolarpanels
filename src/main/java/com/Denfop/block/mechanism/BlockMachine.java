@@ -203,6 +203,18 @@ public class BlockMachine extends BlockContainer {
       this.iconBuffer[7][9] = par1IconRegister.registerIcon("supersolarpanel:genstone1");
       this.iconBuffer[7][10] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
       this.iconBuffer[7][11] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][0] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][1] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][2] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][3] = par1IconRegister.registerIcon("supersolarpanel:quantumquerry");
+      this.iconBuffer[8][4] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][5] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][6] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][7] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][8] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][9] = par1IconRegister.registerIcon("supersolarpanel:quantumquerry1");
+      this.iconBuffer[8][10] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
+      this.iconBuffer[8][11] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
   }
   
   @Override
