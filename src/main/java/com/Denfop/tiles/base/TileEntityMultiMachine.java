@@ -3,6 +3,7 @@ package com.Denfop.tiles.base;
 import java.util.List;
 import java.util.Random;
 
+import com.Denfop.Config;
 import com.Denfop.api.inv.IInvSlotProcessableMulti;
 import com.Denfop.container.ContainerMultiMachine;
 import com.Denfop.gui.GuiMultiMachine;
@@ -81,7 +82,7 @@ public int expstorage = 0;
 		this.outputSlots = new InvSlotOutput(this, "output", 1, sizeWorkingSlot);
 		this.upgradeSlot = new InvSlotUpgrade(this, "upgrade", 4, 4);
 		this.maxEnergy = energyConsume * defaultOperationsPerTick;
-		this.expmaxstorage = 500;
+		this.expmaxstorage = Config.expstorage;
 	}
 	
 	protected abstract EnumMultiMachine getMachine();

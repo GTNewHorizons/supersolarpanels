@@ -3,6 +3,7 @@ package com.Denfop.tiles.Mechanism;
 import java.util.Random;
 import java.util.Set;
 
+import com.Denfop.Config;
 import com.Denfop.container.ContainerGenStone;
 import com.Denfop.container.ContainerQuantumQuarry;
 import com.Denfop.container.ContainerStandardMachine;
@@ -52,7 +53,7 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 		    super(10000000, 11, 1);
 		    this.progress = 0;
 		  this.getblock =0;
-		   this.energyconsume=35000;
+		   this.energyconsume=Config.enerycost;
 		  
 		    this.chargeSlots = new ItemStack[24];
 		  }

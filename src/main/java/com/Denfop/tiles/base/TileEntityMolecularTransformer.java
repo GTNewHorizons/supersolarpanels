@@ -133,7 +133,7 @@ nbt28.setInteger("energy",  Config.molecular28);
   addrecipe(new ItemStack(Items.iron_ingot,1,0),nbt2,Ic2Items.iridiumOre);
   addrecipe(Ic2Items.Plutonium,nbt3,new ItemStack(SSPItem.proton,1));
   addrecipe(OreDictionary.getOres("ingotSpinel").get(0),nbt4,OreDictionary.getOres("ingotIridium").get(0));
-  addrecipe(OreDictionary.getOres("orePhoton").get(0),nbt5,OreDictionary.getOres("ingotPhoton").get(0));
+  addrecipe(OreDictionary.getOres("Photon").get(0),nbt5,OreDictionary.getOres("ingotPhoton").get(0));
  
   addrecipe(new ItemStack(Blocks.netherrack),nbt6,new ItemStack(Items.gunpowder,2));
   addrecipe(new ItemStack(Blocks.sand),nbt7,new ItemStack(Blocks.gravel,1));
