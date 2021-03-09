@@ -3,6 +3,8 @@ package com.Denfop.proxy;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
@@ -33,6 +35,7 @@ import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
+import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.render.EntityRendererStreak;
 import com.Denfop.render.Cable.RenderBlock;
 import com.Denfop.render.Cable.RenderBlockCable;
@@ -68,6 +71,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.IGuiHandler;
 import ic2.core.ContainerBase;
 import ic2.core.Ic2Items;
+import modtweaker2.utils.TweakerPlugin;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -100,7 +104,7 @@ public boolean isClient() {
   public RenderBlock getRender(String name) {
 	    return this.renders.get(name);
 	  }
-  
+  public static Logger logger = LogManager.getLogger("supersolarpanel");
   public static int[][] sideAndFacingToSpriteOffset;
   
   @Override
@@ -179,6 +183,10 @@ public boolean isClient() {
       Config.BotaniaLoaded = Loader.isModLoaded("Botania");
       Config.EnchantingPlus = Loader.isModLoaded("eplus");
       Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
+      if(Loader.isModLoaded("modtweaker2")) {
+    	  TweakerPlugin.register("supersolarpanel", CTCore.class);
+    	  logger.info("Starting Initialization for SuperSolarPanels");
+    	  }
 if(Config.DraconicLoaded && Config.Draconic == true) {
 	DraconicIntegration.init();
 }
