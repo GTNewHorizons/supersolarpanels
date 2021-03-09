@@ -305,6 +305,30 @@ public class SSPEventHandler {
 			  }}}
 	}
 	@SubscribeEvent
+	public void check(LivingEvent.LivingUpdateEvent event) {
+		if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
+			  return;
+		EntityPlayer player = (EntityPlayer) event.entity;
+		for(int i = 0;i <36;i++) {
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ic2.core.item.block.ItemElectricBlock) {
+				int meta = player.inventory.mainInventory[i].getItemDamage();
+				if(meta ==0) {
+					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock,1,2);
+				}
+				if(meta ==7) {
+					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock,1,5);
+				}
+				if(meta ==1) {
+					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock,1,3);
+				}
+				if(meta ==2) {
+					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock,1,4);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public void DamageCable(LivingEvent.LivingUpdateEvent event) {
 		
 		   if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 

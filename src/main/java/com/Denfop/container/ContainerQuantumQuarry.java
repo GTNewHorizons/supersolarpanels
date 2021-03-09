@@ -6,6 +6,7 @@ import ic2.core.block.machine.container.ContainerElectricMachine;
 import ic2.core.slot.SlotInvSlot;
 import java.util.List;
 
+import com.Denfop.tiles.Mechanism.TileEntityBaseQuantumQuarry;
 import com.Denfop.tiles.Mechanism.TileEntityQuantumQuarry;
 import com.Denfop.tiles.base.TileEntityBaseAlloySmelter;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
@@ -15,11 +16,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-public class ContainerQuantumQuarry<T extends TileEntityQuantumQuarry> extends ContainerFullInv<T> {
-	 private TileEntityQuantumQuarry tileentity;
-  public ContainerQuantumQuarry(EntityPlayer entityPlayer, TileEntityQuantumQuarry tileEntity1) {
-	  this(entityPlayer, (T) tileEntity1, 166);
-    this.tileentity = tileEntity1;
+public class ContainerQuantumQuarry<T extends TileEntityBaseQuantumQuarry> extends ContainerFullInv<T> {
+	 private TileEntityBaseQuantumQuarry tileentity;
+  public ContainerQuantumQuarry(EntityPlayer entityPlayer, TileEntityBaseQuantumQuarry tileEntityBaseQuantumQuarry) {
+	  this(entityPlayer, (T) tileEntityBaseQuantumQuarry, 166);
+    this.tileentity = tileEntityBaseQuantumQuarry;
     for (int j = 0; j < 6; ++j)
 	{
 		

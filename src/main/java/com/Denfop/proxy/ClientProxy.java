@@ -50,6 +50,7 @@ import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
+import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
 import com.Denfop.tiles.base.TileEntityMultiMachine1;
@@ -294,10 +295,10 @@ MaceratorRecipe.recipe();
           return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricMFE) te));
       }
       
-      if (te instanceof TileEntityElectricMFSU)
+      if (te instanceof TileEntityElectricBlock)
       {
     	  
-          return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricMFSU) te));
+          return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricBlock) te));
       }
       if (te instanceof TileBitGen2)
       {

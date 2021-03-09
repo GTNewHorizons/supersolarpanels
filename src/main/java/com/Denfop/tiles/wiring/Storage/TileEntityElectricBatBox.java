@@ -1,5 +1,7 @@
-package ic2.core.block.wiring;
+package com.Denfop.tiles.wiring.Storage;
+
 import com.Denfop.tiles.base.TileEntityElectricBlock;
+
 public class TileEntityElectricBatBox extends TileEntityElectricBlock {
   public TileEntityElectricBatBox() {
     super(1, 32, 40000);

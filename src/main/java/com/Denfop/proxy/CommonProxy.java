@@ -9,6 +9,7 @@ import com.Denfop.tiles.ExpGen.TileExpGen2;
 import com.Denfop.tiles.Mechanism.*;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
+import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
 import com.Denfop.tiles.base.TileEntityMultiMachine1;
@@ -127,6 +128,10 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntityElectricMFSU)
       {
     	  return ((TileEntityElectricMFSU)te).getGuiContainer(player);
+      }
+      if (te instanceof TileEntityElectricBlock)
+      {
+    	  return ((TileEntityElectricBlock )te).getGuiContainer(player);
       }
       if (te instanceof TileBitGen2)
       {

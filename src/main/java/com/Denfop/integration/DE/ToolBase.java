@@ -161,7 +161,8 @@ public class ToolBase extends RFItemBase {
       return EnumRarity.rare; 
     if (stack.getUnlocalizedName().contains(":draconic"))
       return EnumRarity.epic; 
-    return EnumRarity.uncommon;
+    
+    return EnumRarity.epic;
   }
   
   public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

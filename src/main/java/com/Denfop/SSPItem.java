@@ -320,6 +320,12 @@ public class SSPItem {
 
 			public static Item caravky_ingot;
 
+			public static Block electricblock1;
+
+			public static ItemStack mfeUnit1;
+
+			public static ItemStack mfsUnit1;
+
 			
 			public static class FluidXP {
 				public static Fluid xpJuice = new Fluid("xpjuice.wv");

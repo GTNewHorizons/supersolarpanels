@@ -57,9 +57,10 @@ import com.Denfop.tiles.overtimepanel.TileProtonSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileSingularSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileSpectralSolarPanel;
 import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFES;
-import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFSUS;
+import com.Denfop.tiles.wiring.Chargepad.*;
+import com.Denfop.tiles.wiring.Storage.TileEntityElectricBatBox;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
-import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
+import com.Denfop.tiles.wiring.Storage.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -95,7 +96,6 @@ public static void register() {
       GameRegistry.registerBlock(SSPItem.machines = (Block)new BlockMachine(), (Class)ItemMachine1.class, "machines");
       GameRegistry.registerBlock(SSPItem.electricblock = (Block)new BlockElectric(), (Class)ItemElectricBlock.class, "electricblock");
       GameRegistry.registerBlock(SSPItem.Chargepadelectricblock = (Block)new BlockChargepad(), (Class)ItemBlockChargepad.class, "BlockChargepad");
-      
       
       
       GameRegistry.registerItem( SSPItem.singularcore = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("singularcore").setTextureName("supersolarpanel:singularcore"),"singularcore");
@@ -340,6 +340,7 @@ public static void registertiles() {
 	 GameRegistry.registerTileEntity(TileXPGenPublic.class, "GeneratorXP");
 	 GameRegistry.registerTileEntity(TileEntityElectricMFE.class, "MFES");
 	    GameRegistry.registerTileEntity(TileEntityElectricMFSU.class, "MFSUS");
+	    GameRegistry.registerTileEntity(TileEntityElectricBatBox.class, "MFSUS1");
 	    EnumMultiMachine.registerTile();
 	 GameRegistry.registerTileEntity((Class)TileAdminSolarPanel.class, "Admin Solar Panel");
      GameRegistry.registerTileEntity((Class)TilePhotonicSolarPanel.class, "Photonic Solar Panel");

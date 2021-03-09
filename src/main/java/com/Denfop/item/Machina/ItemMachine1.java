@@ -45,8 +45,7 @@ public class ItemMachine1 extends ItemBlock {
     	  return "ssp.blockGenerationMicrochip";
       case 7:
     	  return "ssp.blockGenerationStone";
-      case 8:
-    	  return "ssp.blockQuantumQuarry";
+      
       case 0:
     	  return "blockMolecularTransformer";
     } 

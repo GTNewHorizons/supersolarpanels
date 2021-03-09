@@ -41,6 +41,14 @@ public ItemElectricBlock(Block block) {
         return "ssp.blockMFE";
       case 1:
         return "ssp.blockMFSU";
+      case 2:
+          return "ssp.blockBatBox";
+        case 3:
+          return "ssp.blockMFE1";
+        case 4:
+          return "ssp.blockMFSU1";
+        case 5:
+            return "ssp.blockCESU";
     } 
     return null;
   }
@@ -82,6 +90,10 @@ public ItemElectricBlock(Block block) {
   public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
     itemList.add(new ItemStack(item, 1, 0));
     itemList.add(new ItemStack(item, 1, 1));
+    itemList.add(new ItemStack(item, 1, 2));
+    itemList.add(new ItemStack(item, 1, 3));
+    itemList.add(new ItemStack(item, 1, 4));
+    itemList.add(new ItemStack(item, 1, 5));
     ItemStack  itemStack = new ItemStack(item, 1, 0);
     NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     itemStack.setItemDamage(0);
@@ -95,6 +107,33 @@ public ItemElectricBlock(Block block) {
     nbttagcompound.setDouble("energy",  Config.storage2);
     nbttagcompound.setDouble("energy2",  Config.storage2);
     itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1, 2);
+    itemStack.setItemDamage(2);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy",  40000);
+    nbttagcompound.setDouble("energy2",  40000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1, 5);
+    itemStack.setItemDamage(5);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy",  300000);
+    nbttagcompound.setDouble("energy2",  300000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1, 3);
+    itemStack.setItemDamage(3);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy",  4000000);
+    nbttagcompound.setDouble("energy2",  4000000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1, 4);
+    itemStack.setItemDamage(4);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy",  4.0E7D);
+    nbttagcompound.setDouble("energy2",  4.0E7D);
+    itemList.add(itemStack);
+    //
+    //
+    
   }
 
   

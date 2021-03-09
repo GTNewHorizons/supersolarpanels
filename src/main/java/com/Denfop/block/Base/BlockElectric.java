@@ -44,7 +44,7 @@ import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
-import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
+import com.Denfop.tiles.wiring.Storage.*;
 import com.Denfop.utils.NBTData;
 
 import cofh.api.energy.IEnergyContainerItem;;
@@ -66,6 +66,14 @@ public class BlockElectric extends BlockContainer {
  	   return new TileEntityElectricMFE();
        case 1:
     	   return new TileEntityElectricMFSU();
+       case 2:
+    	   return new TileEntityElectricBatBox();
+       case 3:
+    	   return new TileEntityElectricMFEMin();
+       case 4:
+    	   return new TileEntityElectricMFSUMin();
+    	   case 5:
+    		   return new TileEntityElectricCESU();
         	
     } 
     return null;
@@ -73,7 +81,7 @@ public class BlockElectric extends BlockContainer {
   private IIcon[][] iconBuffer;
   @Override
   public void registerBlockIcons(final IIconRegister par1IconRegister) {
-      this.iconBuffer = new IIcon[2][6];
+      this.iconBuffer = new IIcon[6][6];
       this.iconBuffer[1][0] = par1IconRegister.registerIcon("supersolarpanel:blockmfsu2");
       this.iconBuffer[1][1] = par1IconRegister.registerIcon("supersolarpanel:blockmfsu2");
       this.iconBuffer[1][2] = par1IconRegister.registerIcon("supersolarpanel:blockmfsu2");
@@ -86,6 +94,13 @@ public class BlockElectric extends BlockContainer {
       this.iconBuffer[0][3] = par1IconRegister.registerIcon("supersolarpanel:blockChargepadMFSUtop");
       this.iconBuffer[0][4] = par1IconRegister.registerIcon("supersolarpanel:blockMFSU");
       this.iconBuffer[0][5] = par1IconRegister.registerIcon("supersolarpanel:blockMFSU");
+      
+      this.iconBuffer[2][0] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_bottom");
+      this.iconBuffer[2][1] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_top");
+      this.iconBuffer[2][2] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_side");
+      this.iconBuffer[2][3] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_main");
+      this.iconBuffer[2][4] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_side");
+      this.iconBuffer[2][5] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_side_1");
   }
   
   @Override

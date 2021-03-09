@@ -1,5 +1,7 @@
-package ic2.core.block.wiring;
+package com.Denfop.tiles.wiring.Storage;
+
 import com.Denfop.tiles.base.TileEntityElectricBlock;
+
 public class TileEntityElectricCESU extends TileEntityElectricBlock {
   public TileEntityElectricCESU() {
     super(2, 128, 300000);

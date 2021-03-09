@@ -94,6 +94,8 @@ public class BlocksItems {
 	  SSPItem.electricblock = new BlockElectric();
 	  SSPItem.mfeUnit = new ItemStack(SSPItem.electricblock, 1, 0);
 	  SSPItem.mfsUnit = new ItemStack(SSPItem.electricblock, 1, 1);
+	  SSPItem.mfeUnit1 = new ItemStack(SSPItem.electricblock1, 1, 0);
+	  SSPItem.mfsUnit1 = new ItemStack(SSPItem.electricblock1, 1, 1);
 	  SSPItem.electricblock.setCreativeTab(SuperSolarPanels.tabssp);
 	  SSPItem.machines = new BlockMachine();
       SSPItem.machines.setCreativeTab(SuperSolarPanels.tabssp);
