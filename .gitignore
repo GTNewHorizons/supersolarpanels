@@ -152,3 +152,4 @@ eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui
 eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/dislocatorReceptical.png
 eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore1.png
 eclipse/config/draconicevolution/resources/assets/draconicevolution/textures/gui/manualimages/ECore11.png
+*.zs
