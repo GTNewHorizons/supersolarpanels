@@ -5,7 +5,6 @@ import com.Denfop.SuperSolarPanels;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 
 
-import cofh.lib.util.helpers.ItemHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
@@ -67,7 +66,7 @@ public static void recipe() {
       
        //TODO Recipes Machines and Quantum/Nano Chip
       Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.QuantumItems9, 1), new Object[] { 
-    		  " D ","BAB"," C ", Character.valueOf('A'), Ic2Items.advancedCircuit, Character.valueOf('B'), new ItemStack(SSPItem.nanoBox,1), Character.valueOf('C'), ItemHelper.getOreName(new ItemStack(SSPItem.nickel)), Character.valueOf('D'), 
+    		  " D ","BAB"," C ", Character.valueOf('A'), Ic2Items.advancedCircuit, Character.valueOf('B'), new ItemStack(SSPItem.nanoBox,1), Character.valueOf('C'), OreDictionary.getOres("ingotNickel").get(0), Character.valueOf('D'), 
     		  SSPItem.compresscarbon }); 
    
        GameRegistry.addRecipe(new ItemStack(SSPItem.QuantumItems8,1) ,new Object[] {  "DCD","HAH",   'A' , SSPItem.QuantumItems9,'C',SSPItem.magnesium_ingot,'D',SSPItem.compresscarbonultra ,'H',SSPItem.QuantumItems6});
