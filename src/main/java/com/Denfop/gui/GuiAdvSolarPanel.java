@@ -15,6 +15,7 @@ import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module6;
 import com.Denfop.item.Modules.module7;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.GUIUtilsStorage;
 import com.Denfop.utils.GuiNumberUtils;
 import com.Denfop.utils.NBTData;
 
@@ -48,7 +49,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
   protected void drawGuiContainerForegroundLayer(int par1, int par2) {
     String formatPanelName = I18n.format(this.tileentity.panelName, new Object[0]);
     int nmPos = (this.xSize - this.fontRendererObj.getStringWidth(formatPanelName)) / 2;
-    this.fontRendererObj.drawString(formatPanelName, nmPos, 7, 7718655);
+    this.fontRendererObj.drawString(formatPanelName, nmPos, 4, 7718655);
     String storageString = I18n.format("gui.SuperSolarPanel.storage", new Object[0]) + ": ";
     String maxOutputString = I18n.format("gui.SuperSolarPanel.maxOutput", new Object[0]) + ": ";
     String generatingString = I18n.format("gui.SuperSolarPanel.generating", new Object[0]) + ": ";
@@ -134,12 +135,12 @@ if(this.tileentity.chargeSlots[j] != null && this.tileentity.chargeSlots[j].getI
     }
     
      
-    	String maxstorage_1 =  GuiNumberUtils.getString(a[0]);
-    	String maxstorage_2 =  GuiNumberUtils.getString(this.tileentity.storage);
+    	String maxstorage_1 =  GUIUtilsStorage.getString(a[0]);
+    	String maxstorage_2 =  GUIUtilsStorage.getString(this.tileentity.storage);
       
         this.fontRendererObj.drawString(storageString + maxstorage_2 + "/" + maxstorage_1, 50, 16-2, 13487565);
-        String rf =  GuiNumberUtils.getString(this.tileentity.storage2);
-		 String rf1 =  GuiNumberUtils.getString(this.tileentity.maxStorage2);
+        String rf =  GUIUtilsStorage.getString(this.tileentity.storage2);
+		 String rf1 =  GUIUtilsStorage.getString(this.tileentity.maxStorage2);
 		     this.fontRendererObj.drawString(rfstorageString +rf +"/"+rf1, 50, 20+2, 13487565);
        if(maxstorage_dob != 0)
         this.fontRendererObj.drawString(ModulesString2 + maxstorage_dob + "%", 15, 182-2, 13487565);

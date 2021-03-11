@@ -21,6 +21,8 @@ import com.Denfop.Constants;
 import com.Denfop.SuperSolarPanels;
 import com.Denfop.container.ContainerElectricBlock;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
+import com.Denfop.utils.GUIUtilsStorage;
+import com.Denfop.utils.GuiNumberUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiElectricBlock extends GuiContainer {
@@ -44,17 +46,16 @@ public class GuiElectricBlock extends GuiContainer {
   
   public void initGui() {
     super.initGui();
-    this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 113, (this.height - this.ySize) / 2 + 34, 17, 17, I18n.format("button.rg")));
+    this.buttonList.add(new GuiButton(0, (this.width - this.xSize) / 2 + 110, (this.height - this.ySize) / 2 + 34, 22, 17, I18n.format("button.rg")));
   }
   
   protected void drawGuiContainerForegroundLayer(int par1, int par2) {
     this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
     this.fontRendererObj.drawString(this.armorInv, 8, this.ySize - 126 + 3, 4210752);
 
-    int e1 = (int)this.container.base.energy2;
-    int e = (int)this.container.base.energy;
-    this.fontRendererObj.drawString(" " + e, 76, 55, 4210752);
-    this.fontRendererObj.drawString(" " + e1, 124, 55, 4210752);
+   
+    this.fontRendererObj.drawString(  GuiNumberUtils.getString((float) this.container.base.energy), 90, 55, 4210752);
+    this.fontRendererObj.drawString(  GuiNumberUtils.getString((float) this.container.base.energy2), 138, 55, 4210752);
     String output = StatCollector.translateToLocalFormatted("ic2.EUStorage.gui.info.output", new Object[] { Integer.valueOf(this.container.base.getOutput()) });
     this.fontRendererObj.drawString(output, 85, 70, 4210752);
     }
@@ -67,12 +68,12 @@ public class GuiElectricBlock extends GuiContainer {
     drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);
     if (((TileEntityElectricBlock)this.container.base).energy > 0.0D) {
       int i1 = (int)(24.0F * ((TileEntityElectricBlock)this.container.base).getChargeLevel());
-      drawTexturedModalRect(j + 79+6, k + 34, 176, 14, i1 + 1, 16);
+      drawTexturedModalRect(j + 79+6-2-1, k + 34, 176, 14, i1 + 1, 16);
     } 
     if (this.container.base.energy2 > 0.0D) {
     	
         int i1 = (int)(24.0F * ((TileEntityElectricBlock)this.container.base).getChargeLevel1());
-        drawTexturedModalRect(j + 79+54, k + 34, 176, 31, i1 + 1, 16);}
+        drawTexturedModalRect(j + 79+54+2, k + 34, 176, 31, i1 + 1, 16);}
       
     
   }

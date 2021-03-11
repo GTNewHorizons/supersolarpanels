@@ -79,11 +79,8 @@ public boolean movementchargerf= false;
 
 public boolean movementchargeitemrf= false;
 
-public int storage_plus;
 
 public int p;
-
-public int storage_plus1;
 
 public int tier_plus;
 
@@ -110,9 +107,9 @@ public int l;
     this.maxStorage2 = maxStorage1;
     this.chargeSlots = new ItemStack[4];
     this.rf = false;
-    this.storage_plus = 0;
+ 
     this.p=maxStorage1;
-    this.storage_plus1 = 0;
+    
     this.output_plus = 0;
     this.output_plus1 = 0;
     this.l = output1;
@@ -251,7 +248,7 @@ public int getInventoryStackLimit() {
     }
   public float getChargeLevel() {
 		 
-	  float   ret = (float)this.energy / (this.maxStorage+storage_plus+storage_plus1);
+	  float   ret = (float)this.energy / (this.maxStorage);
     
 	  
     if (ret > 1.0F)
@@ -293,39 +290,8 @@ public int getInventoryStackLimit() {
 			personality = true;
 		}
     }
-    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof IModulStorage) {
-    	if(this.chargeSlots[0].stackSize <= Config.storage_limit) {
-    int percent = 	IModulStorage.getData(this.chargeSlots[0]).get(0);
-   
-    this.storage_plus = (this.p/100) * percent * this.chargeSlots[0].stackSize;
-   
-    	}else {
-    		   int percent = 	IModulStorage.getData(this.chargeSlots[0]).get(0);
-    		   
-    		    this.storage_plus = (this.p/100) * percent*Config.storage_limit;
-    		    
-    	}
-    }else {
-    	
-    	 this.storage_plus = 0;
-    	
-    }
- 
-    if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof IModulStorage) {
-    	if(this.chargeSlots[3].stackSize <= Config.storage_limit) {
-        int percent = 	IModulStorage.getData(this.chargeSlots[3]).get(0);
-     
-        this.storage_plus1 = (this.p/100) * percent * this.chargeSlots[3].stackSize;
-    	}else {
-    		int percent = 	IModulStorage.getData(this.chargeSlots[3]).get(0);
-            
-            this.storage_plus1 = (this.p/100) * percent*Config.storage_limit;
-    	}
-        }else {
-        	 this.storage_plus1 = 0;
-        	
-        	
-        }
+    
+  
     //
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof IModulOutput) {
     	if(this.chargeSlots[0].stackSize <= Config.storage_limit) {
@@ -362,10 +328,8 @@ public int getInventoryStackLimit() {
         }
     //
     
-this.maxStorage = this.p + this.storage_plus+storage_plus1;
-if(this.energy > this.maxStorage) {
-	this.energy = this.maxStorage;
-}
+
+
 this.output=this.l+this.output_plus+this.output_plus1;
 
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
@@ -559,11 +523,11 @@ this.output=this.l+this.output_plus+this.output_plus1;
   }
   
   public double getDemandedEnergy() {
-    return this.maxStorage+this.storage_plus+storage_plus1 - this.energy;
+    return this.maxStorage - this.energy;
   }
   
   public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
-    if (this.energy >= this.maxStorage+this.storage_plus+storage_plus1)
+    if (this.energy >= this.maxStorage)
       return amount; 
     this.energy += amount;
     return 0.0D;
