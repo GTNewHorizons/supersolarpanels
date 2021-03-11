@@ -536,10 +536,21 @@ ssp.effect=Включена огнестойкость:
 storagemodul=Ложить только в хранилища с заряжающей плитой
 storagemodul1=По хранилищу зажать SHIFT + правая кнопка мишки
 item.caravky.name=Каравковый сплав
-ssp.blockBatBox=Энергохранилище
-ssp.blockMFE1=МФЭ
-ssp.blockMFSU1=МФЭХ
-ssp.blockCESU=МЭХ
+
+ssp.blockBatBox.name=Энергохранилище
+ssp.blockMFE1.name=МФЭ
+ssp.blockMFSU1.name=МФЭХ
+ssp.blockCESU.name=МЭХ
+ssp.quarry=Использовать в квантовом карьере
+ssp.quarry1=Переплавляет руду
+ssp.quarry2=Уменьшает затраты, увеличивает скорость
+module81.name=Модуль: Переплавка руд
+module82.name=Модуль: Эффективность I
+module83.name=Модуль: Эффективность II
+module84.name=Модуль: Эффективность III
+module85.name=Модуль: Эффективность IV
+module86.name=Модуль: Эффективность V
+
 
 
 

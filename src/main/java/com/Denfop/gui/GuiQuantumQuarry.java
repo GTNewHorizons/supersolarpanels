@@ -32,7 +32,7 @@ public class GuiQuantumQuarry extends GuiIC2 {
     if (chargeLevel > 0)
       drawTexturedModalRect(this.xoffset + 140+1+5, this.yoffset + 28 + 48 - chargeLevel, 176, 48 - chargeLevel, 48, chargeLevel); 
 
- //   this.fontRendererObj.drawString(""+((TileEntityQuantumQuarry)this.container.base).getblock, this.xoffset+146, this.yoffset +7, 7718655);
+    this.fontRendererObj.drawString(""+((TileEntityQuantumQuarry)this.container.base).getblock, this.xoffset+146, this.yoffset +7, 7718655);
       
   }
   

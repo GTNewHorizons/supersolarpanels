@@ -80,7 +80,8 @@ public class BlockMachine extends BlockContainer {
         	return new TileEntityGenerationMicrochip();
         case 7:
         	return new TileEntityGenerationStone();
-       
+        case 8:
+        	return new TileEntityQuantumQuarry();
        
     } 
     return null;

@@ -29,6 +29,7 @@ import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Machina.ItemMachine1;
 import com.Denfop.item.Machina.ItemMachines;
 import com.Denfop.item.Machina.ItemMachines2;
+import com.Denfop.item.Modules.module8;
 import com.Denfop.item.RadionBlock.ItemToriyOre;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.ItemBlockIC2;
@@ -277,6 +278,7 @@ public static void register() {
       GameRegistry.registerItem(SSPItem.endlinse = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("endlinse").setTextureName("supersolarpanel:endlinse"), "endlinse");
 
       GameRegistry.registerItem(SSPItem.module7 = new com.Denfop.item.Modules.module7(), "module7");
+      GameRegistry.registerItem(SSPItem.module9 = new module8(), "module8");
       GameRegistry.registerItem(SSPItem.photoniyglass1 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass1").setTextureName("supersolarpanel:photoniyglass1"), "photoniyglass1");
       GameRegistry.registerItem(SSPItem.photoniyglass2 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass2").setTextureName("supersolarpanel:photoniyglass2"), "photoniyglass2");
       GameRegistry.registerItem(SSPItem.photoniyglass3 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass3").setTextureName("supersolarpanel:photoniyglass3"), "photoniyglass3");

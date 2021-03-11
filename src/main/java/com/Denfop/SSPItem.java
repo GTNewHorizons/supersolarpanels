@@ -326,6 +326,8 @@ public class SSPItem {
 
 			public static ItemStack mfsUnit1;
 
+			public static Item module9;
+
 			
 			public static class FluidXP {
 				public static Fluid xpJuice = new Fluid("xpjuice.wv");

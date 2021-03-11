@@ -48,9 +48,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class ultDDrill extends ItemTool implements IElectricItem {
-  public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] { (Block)Blocks.grass, Blocks.dirt, (Block)Blocks.mycelium, (Block)Blocks.sand, Blocks.gravel, Blocks.snow, Blocks.snow_layer, Blocks.clay, Blocks.soul_sand });
+  public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] {  Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, 
+	        Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, 
+	        Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail,Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, });
   
-  private static final Set<Material> materials = Sets.newHashSet(new Material[] { Material.rock, Material.grass, Material.ground, Material.sand, Material.clay });
+  private static final Set<Material> materials = Sets.newHashSet(new Material[] { Material.iron, Material.anvil, Material.rock, Material.glass, Material.ice, Material.packedIce, 
+	        Material.grass, Material.ground, Material.sand, Material.snow, Material.craftedSnow, Material.clay});
   
   private static final Set<String> toolType = (Set<String>)ImmutableSet.of("pickaxe", "shovel");
   
