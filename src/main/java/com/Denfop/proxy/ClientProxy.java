@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.Recipes.AlloySmelterRecipe;
 import com.Denfop.Recipes.BasicRecipe;
 import com.Denfop.Recipes.CannerRecipe;
@@ -61,6 +61,7 @@ import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
 import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFES;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFSU;
+import com.Denfop.utils.Check;
 import com.brandon3055.draconicevolution.client.render.IRenderTweak;
 import com.brandon3055.draconicevolution.client.render.item.RenderBow;
 
@@ -107,7 +108,9 @@ public boolean isClient() {
 	  }
   public static Logger logger = LogManager.getLogger("supersolarpanel");
   public static int[][] sideAndFacingToSpriteOffset;
-  
+  public void check() {
+	  Check.check();
+  }
   @Override
   public void load() {
 	
@@ -221,7 +224,7 @@ MaceratorRecipe.recipe();
     if(Config.Streak == true) {
     FMLCommonHandler.instance().bus().register(new EventDarkQuantumSuitEffect());}
     if(Config.newsystem)
-    	SuperSolarPanels.initENet();
+    	IUCore.initENet();
     
 	if(Config.DraconicLoaded && Config.EnchantingPlus &&Config.MineFactory) {
 		 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());

@@ -43,14 +43,14 @@ import com.Denfop.tiles.Mechanism.*;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 public class BlockMachine extends BlockContainer {
   public BlockMachine() {
     super(Material.iron);
     setHardness(2.0F);
     setStepSound(soundTypeMetal);
-    this.setCreativeTab(SuperSolarPanels.tabssp);
+    this.setCreativeTab(IUCore.tabssp);
    
 
   }
@@ -332,7 +332,7 @@ public class BlockMachine extends BlockContainer {
   {
       if (!entityPlayer.isSneaking())
       {
-          entityPlayer.openGui(SuperSolarPanels.instance, 0, world, x, y, z);
+          entityPlayer.openGui(IUCore.instance, 0, world, x, y, z);
           return true;
       }
 

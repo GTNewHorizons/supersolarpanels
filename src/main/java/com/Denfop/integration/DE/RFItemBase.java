@@ -1,5 +1,5 @@
 package com.Denfop.integration.DE;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import cofh.api.energy.IEnergyContainerItem;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
@@ -29,7 +29,7 @@ public class RFItemBase extends ItemDC implements IEnergyContainerItem, IConfigu
   
   public RFItemBase() {
     setMaxStackSize(1);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)IUCore.tabssp);
   }
   
   public boolean hasCustomEntity(ItemStack stack) {

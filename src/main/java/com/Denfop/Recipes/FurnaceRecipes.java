@@ -1,7 +1,7 @@
 package com.Denfop.Recipes;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.core.Ic2Items;

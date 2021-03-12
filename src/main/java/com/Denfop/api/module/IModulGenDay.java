@@ -3,7 +3,7 @@ package com.Denfop.api.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.NBTData;
 

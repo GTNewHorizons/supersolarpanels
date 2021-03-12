@@ -2,7 +2,7 @@ package com.Denfop.proxy;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.Recipes.CentrifugeRecipe;
 import com.Denfop.render.Cable.RenderBlock;
 import com.Denfop.tiles.ExpGen.TileExpGen2;
@@ -168,7 +168,7 @@ public class CommonProxy implements IGuiHandler{
   }
 
 public static void sendPlayerMessage(EntityPlayer player, String message) {
-    if (SuperSolarPanels.isSimulating())
+    if (IUCore.isSimulating())
       player.addChatMessage((IChatComponent)new ChatComponentTranslation(message, new Object[0])); 
   }
 
@@ -177,7 +177,7 @@ public static void sendPlayerMessage(EntityPlayer player, String message) {
 
  public void initCore() {}
 
- public Void throwInitException(LoaderException e) {
+ public static Void throwInitException(LoaderException e) {
 	    throw e;
 	  }
 
@@ -190,6 +190,8 @@ public void integration() {
 	
 	
 }
+
+public void check() {}
   
   
 

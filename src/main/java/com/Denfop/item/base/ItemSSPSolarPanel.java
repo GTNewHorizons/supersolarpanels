@@ -17,7 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;

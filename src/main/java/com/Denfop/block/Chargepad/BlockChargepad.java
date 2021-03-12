@@ -37,7 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.mutable.MutableObject;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.Modules.module7;
 import com.Denfop.item.base.ItemElectricBlock;
 import com.Denfop.proxy.ClientProxy;
@@ -59,7 +59,7 @@ public class BlockChargepad extends BlockContainer {
     super(Material.iron);
     setHardness(1.5F);
     setStepSound(soundTypeMetal);
-   this.setCreativeTab(SuperSolarPanels.tabssp);
+   this.setCreativeTab(IUCore.tabssp);
    setBlockUnbreakable();
    setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.95F, 1.0F);
     
@@ -323,7 +323,7 @@ public class BlockChargepad extends BlockContainer {
           		TileEntityElectricBlock	tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
           		
           		if(tile.personality && tile.UUID == entityPlayer.getDisplayName()) {
-          			entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);
+          			entityPlayer.openGui((Object)IUCore.instance, 1, world, x, y, z);
           				 
           			
           				
@@ -331,7 +331,7 @@ public class BlockChargepad extends BlockContainer {
              }else {
           	   if(!tile.personality) {
             
-          		 entityPlayer.openGui((Object)SuperSolarPanels.instance, 1, world, x, y, z);}else {
+          		 entityPlayer.openGui((Object)IUCore.instance, 1, world, x, y, z);}else {
               	
           			entityPlayer.addChatMessage(new ChatComponentTranslation(String.format("ssp.error", new Object[0]), new Object[0]));
 

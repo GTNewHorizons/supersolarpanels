@@ -1,6 +1,6 @@
 package com.Denfop.integration.DE;
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 import com.brandon3055.draconicevolution.common.utills.LogHelper;
 import net.minecraft.item.ItemArmor;

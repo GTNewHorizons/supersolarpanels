@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.Recipes;
 
 import codechicken.lib.gui.GuiDraw;

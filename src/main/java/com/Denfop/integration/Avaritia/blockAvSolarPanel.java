@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
@@ -35,7 +35,7 @@ public class blockAvSolarPanel extends BlockContainer {
   public blockAvSolarPanel() {
     super(Material.iron);
     setHardness(3.0F);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
     this.qgActive = false;
   }
   
@@ -120,7 +120,7 @@ public class blockAvSolarPanel extends BlockContainer {
       return true; 
     TileEntity tileentity = world.getTileEntity(i, j, k);
     if (tileentity != null)
-      player.openGui(SuperSolarPanels.instance, 1, world, i, j, k); 
+      player.openGui(IUCore.instance, 1, world, i, j, k); 
     return true;
   }
   

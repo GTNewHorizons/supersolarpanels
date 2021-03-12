@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.block.expgen.IStandOn;
 import com.Denfop.container.ContainerExpGen;
 import com.Denfop.utils.ExperienceUtils;

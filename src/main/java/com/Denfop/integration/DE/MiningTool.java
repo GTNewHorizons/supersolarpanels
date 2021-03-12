@@ -1,5 +1,5 @@
 package com.Denfop.integration.DE;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.brandon3055.brandonscore.common.utills.Utills;

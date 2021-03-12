@@ -1,7 +1,7 @@
 package com.Denfop.gui;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.container.ContainerQuantumQuarry;
 import com.Denfop.container.ContainerStandardMachine;
 import com.Denfop.tiles.Mechanism.TileEntityAlloySmelter;

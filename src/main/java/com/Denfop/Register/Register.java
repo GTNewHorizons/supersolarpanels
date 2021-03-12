@@ -1,7 +1,7 @@
 package com.Denfop.Register;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.SSPItem;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
 import com.Denfop.block.AdminPanel.ItemAdminSolarPanel;
@@ -86,8 +86,8 @@ public static void register() {
 	  GameRegistry.registerItem(SSPItem.advanced_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("advanced_core").setTextureName("supersolarpanel:advanced_core"), "advanced_core");
       GameRegistry.registerItem(SSPItem.hybrid_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("hybrid_core").setTextureName("supersolarpanel:hybrid_core"), "hybrid_core");
       GameRegistry.registerItem(SSPItem.ultimate_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("ultimate_core").setTextureName("supersolarpanel:ultimate_core"), "ultimate_core");
-      GameRegistry.registerItem(SSPItem.spectralSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("spectralSolarHelmet"), 0, 4).setUnlocalizedName("spectralSolarHelmet"), "spectral_solar_helmet");
-      GameRegistry.registerItem(SSPItem.singularSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("singularSolarHelmet"), 0, 5).setUnlocalizedName("singularSolarHelmet"), "singular_solar_helmet");
+      GameRegistry.registerItem(SSPItem.spectralSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor("spectralSolarHelmet"), 0, 4).setUnlocalizedName("spectralSolarHelmet"), "spectral_solar_helmet");
+      GameRegistry.registerItem(SSPItem.singularSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor("singularSolarHelmet"), 0, 5).setUnlocalizedName("singularSolarHelmet"), "singular_solar_helmet");
       GameRegistry.registerBlock(SSPItem.blockSSPSolarPanel = (Block)new BlockSSPSolarPanel(), (Class)ItemSSPSolarPanel.class, "BlockSSPSolarPanel");
       
       GameRegistry.registerItem(SSPItem.enderquantumcomponent = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("Ender-QuantumComponent").setTextureName("supersolarpanel:enderquantumcomponent"), "enderquantumcomponent");
@@ -259,9 +259,9 @@ public static void register() {
       GameRegistry.registerItem( SSPItem.neutroniumcore = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("neutroniumcore").setTextureName("supersolarpanel:neutroniumcore"),"neutroniumcore");
       GameRegistry.registerBlock(SSPItem.blocksintezator = (Block)new Sintezator(), (Class)ItemSintezator.class, "BlockSintezator");
      
-        GameRegistry.registerItem(SSPItem.advancedSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("advancedSolarHelmet"), 0, 1).setUnlocalizedName("advancedSolarHelmet"), "advanced_solar_helmet");
-      GameRegistry.registerItem(SSPItem.hybridSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("hybridSolarHelmet"), 0, 2).setUnlocalizedName("hybridSolarHelmet"), "hybrid_solar_helmet");
-      GameRegistry.registerItem(SSPItem.ultimateSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor("ultimateSolarHelmet"), 0, 3).setUnlocalizedName("ultimateSolarHelmet"), "ultimate_solar_helmet");
+        GameRegistry.registerItem(SSPItem.advancedSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor("advancedSolarHelmet"), 0, 1).setUnlocalizedName("advancedSolarHelmet"), "advanced_solar_helmet");
+      GameRegistry.registerItem(SSPItem.hybridSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor("hybridSolarHelmet"), 0, 2).setUnlocalizedName("hybridSolarHelmet"), "hybrid_solar_helmet");
+      GameRegistry.registerItem(SSPItem.ultimateSolarHelmet = new ItemSolarPanelHelmet(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor("ultimateSolarHelmet"), 0, 3).setUnlocalizedName("ultimateSolarHelmet"), "ultimate_solar_helmet");
       GameRegistry.registerItem(SSPItem.itemSSP = new ItemSSPCrafring(), "ssp_crafting_items");
        GameRegistry.registerItem(SSPItem.QuantumItems8 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems8").setTextureName("supersolarpanel:QuantumItems8"), "QuantumItems8");
       GameRegistry.registerItem(SSPItem.QuantumItems9 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems9").setTextureName("supersolarpanel:QuantumItems9"), "QuantumItems9");

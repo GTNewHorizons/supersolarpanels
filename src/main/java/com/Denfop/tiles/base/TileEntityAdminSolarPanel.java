@@ -1,6 +1,6 @@
 package com.Denfop.tiles.base;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.util.AxisAlignedBB;
 

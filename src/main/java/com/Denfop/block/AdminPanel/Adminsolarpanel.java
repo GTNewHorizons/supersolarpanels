@@ -7,7 +7,7 @@ import ic2.api.tile.IWrenchable;
 import java.util.List;
 import java.util.Random;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityBase;
@@ -45,7 +45,7 @@ private IIcon icon;
   public Adminsolarpanel() {
     super(Material.iron);
     setHardness(3.0F);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
    
   }
   public void registerBlockIcons(final IIconRegister par1IconRegister) {
@@ -142,7 +142,7 @@ private IIcon icon;
       return true; 
     TileEntity tileentity = world.getTileEntity(i, j, k);
     if (tileentity != null)
-      player.openGui(SuperSolarPanels.instance, 1, world, i, j, k); 
+      player.openGui(IUCore.instance, 1, world, i, j, k); 
     return true;
   }
   

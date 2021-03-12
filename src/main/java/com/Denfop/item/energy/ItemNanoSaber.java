@@ -1,7 +1,7 @@
 package com.Denfop.item.energy;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -78,7 +78,7 @@ public ItemNanoSaber(String internalName,int maxCharge,int transferLimit,int tie
     setMaxStackSize(1);
     setNoRepair();
     setUnlocalizedName(name);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
+    setCreativeTab((CreativeTabs)IUCore.tabssp2);
     for (ToolClass toolClass : toolClasses) {
         if (toolClass.name != null)
           setHarvestLevel(toolClass.name, harvestLevel.level); 

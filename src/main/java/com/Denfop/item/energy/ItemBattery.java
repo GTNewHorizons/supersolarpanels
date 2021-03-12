@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -42,7 +42,7 @@ public class ItemBattery extends Item implements IElectricItem, IItemHudInfo {
     setNoRepair();
     setUnlocalizedName(name);
     this.setRarity(1);
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
     GameRegistry.registerItem(this, name);
   }
   public ItemBattery setRarity(int aRarity) {

@@ -1,6 +1,6 @@
 package com.Denfop.item.base;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.block.cable.BlockCable;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +20,7 @@ public class ItemBlockIC2 extends ItemBlock {
   public ItemBlockIC2(Block block) {
     super(block);
     this.block = block;
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
   }
   
   public String getUnlocalizedName() {

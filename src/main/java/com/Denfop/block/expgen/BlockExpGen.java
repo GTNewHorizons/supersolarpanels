@@ -1,6 +1,6 @@
 package com.Denfop.block.expgen;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.ExpGen.TileExpGen2;
 import com.Denfop.tiles.ExpGen.TileXPGenPublic;
 
@@ -24,7 +24,7 @@ public class BlockExpGen extends BlockContainer {
 	public BlockExpGen(String unlocalizedName, Material mat) {
 		super(mat);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.95F, 1.0F);
-		this.setBlockName(unlocalizedName); setCreativeTab(SuperSolarPanels.tabssp);
+		this.setBlockName(unlocalizedName); setCreativeTab(IUCore.tabssp);
 		setHardness(3.0F);
 	}
 	
@@ -115,7 +115,7 @@ public class BlockExpGen extends BlockContainer {
 		if(!world.isRemote){
 			
 			
-			player.openGui(SuperSolarPanels.instance, 1, world, x, y, z);
+			player.openGui(IUCore.instance, 1, world, x, y, z);
 			
 			
 		}

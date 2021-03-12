@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import net.minecraft.util.IIcon;
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.item.Item;
 
@@ -26,7 +26,7 @@ public class ItemSSPCrafring extends Item
         this.IIconsList = new IIcon[11];
         this.itemsCount = 10;
         this.setHasSubtypes(true);
-        this.setCreativeTab(SuperSolarPanels.tabssp3);
+        this.setCreativeTab(IUCore.tabssp3);
         this.setMaxStackSize(64);
         this.addItemsNames();
     }

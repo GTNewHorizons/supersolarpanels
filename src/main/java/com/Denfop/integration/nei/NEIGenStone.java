@@ -20,7 +20,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IGenStoneRecipeManager;
 import com.Denfop.api.Recipes;
 import com.Denfop.gui.GuiGenStone;

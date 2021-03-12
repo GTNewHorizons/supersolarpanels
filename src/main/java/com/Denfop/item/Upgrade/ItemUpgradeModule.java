@@ -21,7 +21,7 @@ import java.util.Set;
 
 import com.Denfop.Constants;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,7 +44,7 @@ public class ItemUpgradeModule extends Item implements IUpgradeItem, IItemHudInf
 public ItemUpgradeModule() {
     super();
     setHasSubtypes(true);
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
     SSPItem.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
     SSPItem.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
     SSPItem.overclockerUpgrade= new ItemStack((Item)this, 1, 0);

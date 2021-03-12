@@ -3,7 +3,7 @@ package com.Denfop.events.DE_MF;
 import java.util.Map;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.container.ContainerDissEnchanter;
 

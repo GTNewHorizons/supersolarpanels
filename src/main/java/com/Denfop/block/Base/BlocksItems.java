@@ -19,7 +19,7 @@ import java.util.Set;
 
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.SSPItem.FluidXP;
 import com.Denfop.block.Chargepad.BlockChargepad;
 import com.Denfop.block.cable.BlockCable;
@@ -96,9 +96,9 @@ public class BlocksItems {
 	  SSPItem.mfsUnit = new ItemStack(SSPItem.electricblock, 1, 1);
 	  SSPItem.mfeUnit1 = new ItemStack(SSPItem.electricblock1, 1, 0);
 	  SSPItem.mfsUnit1 = new ItemStack(SSPItem.electricblock1, 1, 1);
-	  SSPItem.electricblock.setCreativeTab(SuperSolarPanels.tabssp);
+	  SSPItem.electricblock.setCreativeTab(IUCore.tabssp);
 	  SSPItem.machines = new BlockMachine();
-      SSPItem.machines.setCreativeTab(SuperSolarPanels.tabssp);
+      SSPItem.machines.setCreativeTab(IUCore.tabssp);
       SSPItem.ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
 
       SSPItem.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", Config.Storagequantumsuit, 8092.0D, 4);

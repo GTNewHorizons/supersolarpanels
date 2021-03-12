@@ -4,7 +4,7 @@ package com.Denfop.block.Base;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +16,7 @@ import net.minecraft.util.StatCollector;
 public class BlockSSP extends Block {
 	public BlockSSP(Material material) {
 		super(material);
-		this.setCreativeTab(SuperSolarPanels.tabssp);
+		this.setCreativeTab(IUCore.tabssp);
 		this.setHarvestLevel("pickaxe", 1);
 		this.setHardness(0.3F);
 		this.setLightLevel(0.3F);

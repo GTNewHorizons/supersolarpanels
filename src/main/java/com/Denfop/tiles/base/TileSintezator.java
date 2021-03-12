@@ -25,7 +25,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import java.util.Random;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerSinSolarPanel;

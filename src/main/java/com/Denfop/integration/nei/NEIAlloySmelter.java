@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IAlloySmelterRecipeManager;
 import com.Denfop.api.Recipes;
 import com.Denfop.gui.GuiAlloySmelter;

@@ -34,11 +34,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, dependencies = Constants.DEPENDENCES,acceptedMinecraftVersions = Constants.acceptedMinecraftVersions,certificateFingerprint = "Denfop-certificate")
-public class SuperSolarPanels
+public class IUCore
 {
 	public static final CreativeTabSSP tabssp;
-    @Mod.Instance("supersolarpanel")
-    public static SuperSolarPanels instance;
+    @Mod.Instance("industrialupgrade")
+    public static IUCore instance;
 		 @SidedProxy(clientSide = "com.Denfop.proxy.ClientProxy", serverSide = "com.Denfop.proxy.CommonProxy")
 		  public static CommonProxy proxy;
 		public static CreativeTabSSP1 tabssp1;
@@ -52,6 +52,7 @@ public class SuperSolarPanels
         if (Loader.isModLoaded("AdvancedSolarPanel"))
             proxy.throwInitException(new LoaderException("SuperSolarPanels is incompatible with Advanced Solar Panels.Please delete Advanced solar Panels")); 
       proxy.integration();
+      proxy.check();
 BlocksItems.init();
 		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
        	GenOre.init();
@@ -59,9 +60,9 @@ BlocksItems.init();
 		 Register.registertiles();
 		 BlocksItems.registermetadata();
         RegisterOreDict.oredict();
-          SuperSolarPanels.proxy.registerRenderers();
-        SuperSolarPanels.proxy.load();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, (IGuiHandler)SuperSolarPanels.proxy);
+          IUCore.proxy.registerRenderers();
+        IUCore.proxy.load();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, (IGuiHandler)IUCore.proxy);
         proxy.initCore();
     }
  
@@ -98,7 +99,7 @@ BlocksItems.init();
          tabssp2 = new CreativeTabSSP2();
          tabssp3 = new CreativeTabSSP3();
          tabssp4 = new CreativeTabSSP4();
-        SuperSolarPanels.instance = new SuperSolarPanels();
+        IUCore.instance = new IUCore();
     }
     static float getColor(int par1) {
         if (par1 >= 255)

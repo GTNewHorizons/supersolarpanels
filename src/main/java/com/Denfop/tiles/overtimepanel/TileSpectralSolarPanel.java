@@ -3,7 +3,7 @@ package com.Denfop.tiles.overtimepanel;
 
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 
 public class TileSpectralSolarPanel extends TileEntitySolarPanel

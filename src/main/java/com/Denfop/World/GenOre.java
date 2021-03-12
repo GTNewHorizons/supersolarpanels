@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

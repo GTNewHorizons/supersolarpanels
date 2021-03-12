@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.item.ItemBlock;
 
@@ -23,7 +23,7 @@ public class ItemAdminSolarPanel extends ItemBlock
         this.setHasSubtypes(true);
         this.itemNames = new ArrayList<String>();
         this.addItemsNames();
-        this.setCreativeTab(SuperSolarPanels.tabssp);
+        this.setCreativeTab(IUCore.tabssp);
     }
     
     public int getMetadata(final int i) {

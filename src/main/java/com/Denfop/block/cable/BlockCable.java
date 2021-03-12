@@ -60,7 +60,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.Denfop.Constants;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.base.ItemBlockIC2;
 import com.Denfop.proxy.ClientProxy;
@@ -81,12 +81,12 @@ public class BlockCable extends Block {
     setHardness(0.2F);
     this.renderMask = 63;
     setStepSound(soundTypeCloth);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
 
 
     MinecraftForge.EVENT_BUS.register(this);
     setBlockName("blockCable");
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)IUCore.tabssp);
     
   
     
@@ -483,7 +483,7 @@ public IIcon getIcon(int side, int meta) {
       
       
       if ((StackUtil.equals((Block)Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte)2)) || (cur.getItem() == SSPItem.constructionFoam.getItem() && te.foamed == 0 && te.changeFoam((byte)1))) {
-        if (SuperSolarPanels.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
+        if (IUCore.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
           cur.stackSize--;
           if (cur.stackSize <= 0)
             player.inventory.mainInventory[player.inventory.currentItem] = null; 
@@ -496,7 +496,7 @@ public IIcon getIcon(int side, int meta) {
   
   public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbor) {
     super.onNeighborBlockChange(world, x, y, z, neighbor);
-    if (SuperSolarPanels.proxy.isSimulating()) {
+    if (IUCore.proxy.isSimulating()) {
       TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
       if (te == null)
         return; 
@@ -576,7 +576,7 @@ public IIcon getIcon(int side, int meta) {
   }
   
   public int getRenderType() {
-    return SuperSolarPanels.proxy.getRenderId("cable");
+    return IUCore.proxy.getRenderId("cable");
   }
   
   public boolean isOpaqueCube() {
@@ -655,7 +655,7 @@ public IIcon getIcon(int side, int meta) {
   }
   
   public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
-    if (SuperSolarPanels.proxy.isSimulating()) {
+    if (IUCore.proxy.isSimulating()) {
       TileEntityCable te = (TileEntityCable)getOwnTe((IBlockAccess)world, x, y, z);
       if (te == null)
         return 0; 

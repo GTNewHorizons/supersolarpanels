@@ -34,7 +34,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 import java.util.Vector;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.api.module.IModulGenDay;
 import com.Denfop.api.module.IModulGenNight;
@@ -365,17 +365,19 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         	
         }
-        if(this.chargeSlots[7] != null && this.chargeSlots[7].getItem() instanceof module7) {
-    		int kk = chargeSlots[7].getItemDamage();
+        for(int m =0; m < 9;m++) {
+        if(this.chargeSlots[m] != null && this.chargeSlots[m].getItem() instanceof module7) {
+    		int kk = chargeSlots[m].getItemDamage();
     		if(kk == 0) {
     			personality = true;
-    			
+    			break;
     		}else {
     			this.personality  = false;
     		}
     	}else {
     		this.personality  = false;
     	}
+        }
       if(this.storage2 >= this.maxStorage2) {
     	  this.storage2 = this.maxStorage2;
       }else if(this.storage2 < 0) {

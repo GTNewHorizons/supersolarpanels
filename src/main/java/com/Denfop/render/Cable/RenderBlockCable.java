@@ -1,6 +1,6 @@
 package com.Denfop.render.Cable;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.base.TileEntityCable;
 
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +26,7 @@ public class RenderBlockCable extends RenderBlock {
     if (cable.foamed == 1)
       return renderblocks.renderStandardBlock(block, x, y, z); 
     if (cable.foamed == 2)
-      return SuperSolarPanels.proxy.getRender("wall").renderWorldBlock(blockAccess, x, y, z, block, modelId, renderblocks); 
+      return IUCore.proxy.getRender("wall").renderWorldBlock(blockAccess, x, y, z, block, modelId, renderblocks); 
     float th = cable.getCableThickness();
     float sp = (1.0F - th) / 2.0F;
     int connectivity = cable.connectivity;

@@ -2,7 +2,7 @@ package com.Denfop.block.ore;
 
 import java.util.Random;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +14,7 @@ public class BlockSSPEmerald extends Block{
 
 	public BlockSSPEmerald(Material material) {
 		super(material);
-		this.setCreativeTab(SuperSolarPanels.tabssp4);
+		this.setCreativeTab(IUCore.tabssp4);
 		this.setHarvestLevel("pickaxe", 3);
 		this.setHardness(1F);
 		this.setLightLevel(0.3F);

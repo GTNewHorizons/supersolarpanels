@@ -2,7 +2,7 @@ package com.Denfop.item.Machina;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.base.ItemBlockIC2;
 
 import net.minecraft.block.Block;
@@ -18,7 +18,7 @@ public class ItemMachine1 extends ItemBlock {
     super(block);
     setMaxDamage(0);
     setHasSubtypes(true);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
   }
   @Override
   public int getMetadata(int i) {

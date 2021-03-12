@@ -3,7 +3,7 @@ package com.Denfop.integration.Avaritia;
 
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 

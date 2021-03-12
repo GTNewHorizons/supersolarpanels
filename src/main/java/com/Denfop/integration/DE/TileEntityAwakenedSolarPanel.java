@@ -1,10 +1,10 @@
 package com.Denfop.integration.DE;
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import com.Denfop.tiles.base.TileEntitySolarPanel;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 
 public class TileEntityAwakenedSolarPanel extends TileEntitySolarPanel

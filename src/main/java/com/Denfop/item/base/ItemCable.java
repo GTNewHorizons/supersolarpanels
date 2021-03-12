@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.Denfop.Constants;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.block.cable.BlockCable;
 import com.Denfop.tiles.base.TileEntityCable;
 
@@ -42,7 +42,7 @@ public ItemCable() {
     
     this.itemNames = new ArrayList<String>();
     this.IIconsList = new IIcon[11];
-    this.setCreativeTab(SuperSolarPanels.tabssp);
+    this.setCreativeTab(IUCore.tabssp);
     this.itemsCount = 10;
     this.addItemsNames();
 //    this.setTextureName(Constants.TEXTURES_MAIN + getUnlocalizedName(new ItemStack( ( (Item)this,1,this.me ) ) ) );

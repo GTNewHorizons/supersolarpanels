@@ -1,7 +1,7 @@
 package com.Denfop.tiles.wiring.Chargepad;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
 
 import net.minecraft.entity.player.EntityPlayer;

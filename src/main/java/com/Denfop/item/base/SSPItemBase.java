@@ -3,7 +3,7 @@ package com.Denfop.item.base;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SSPItemBase extends Item {
 
 	public SSPItemBase() {
-		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp3);
+		this.setCreativeTab((CreativeTabs)IUCore.tabssp3);
 	}
 
 	public int getItemStackLimit() {

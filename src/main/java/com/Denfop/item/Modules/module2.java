@@ -3,7 +3,7 @@ package com.Denfop.item.Modules;
 import java.util.List;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.module.IModulGenDay;
 import com.Denfop.api.module.IModulGenNight;
 
@@ -15,7 +15,7 @@ import net.minecraft.util.StatCollector;
 
 public class module2 extends Item  implements IModulGenNight {
 	public module2() {
-		this.setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp1);
+		this.setCreativeTab((CreativeTabs)IUCore.tabssp1);
 	}
 
 	public int getItemStackLimit() {

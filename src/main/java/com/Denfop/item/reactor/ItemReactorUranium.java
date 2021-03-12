@@ -9,7 +9,7 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Queue;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.base.ReactorItemCore;
 
 import net.minecraft.entity.Entity;
@@ -28,7 +28,7 @@ public class ItemReactorUranium extends ReactorItemCore implements IReactorCompo
     super(internalName, duration);
     setMaxStackSize(64);
     this.numberOfCells = cells;
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
   }
   
   public void processChamber(IReactor reactor, ItemStack stack, int x, int y, boolean heatRun) {

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.block.Base.BlocksItems;
 
 import cpw.mods.fml.relauncher.Side;
@@ -50,7 +50,7 @@ public class ItemCell extends Item {
     this.IIconsList = new IIcon[2];
     this.itemsCount = 1;
     this.addItemsNames();
-   this.setCreativeTab(SuperSolarPanels.tabssp3);
+   this.setCreativeTab(IUCore.tabssp3);
    
     }
   

@@ -2,7 +2,7 @@ package com.Denfop.item.Modules;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.utils.NBTData;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +14,11 @@ import net.minecraft.util.StatCollector;
 public class ItemWirelessModule extends Item {
 	
 	public ItemWirelessModule() {
-		 setCreativeTab(SuperSolarPanels.tabssp);
+		 setCreativeTab(IUCore.tabssp);
 		this.setUnlocalizedName("WirelessModule");
 		this.setTextureName("supersolarpanel:wirelessmodule");
 		this.setMaxStackSize(64);
-		this.setCreativeTab(SuperSolarPanels.tabssp1);
+		this.setCreativeTab(IUCore.tabssp1);
 		
 		
 		

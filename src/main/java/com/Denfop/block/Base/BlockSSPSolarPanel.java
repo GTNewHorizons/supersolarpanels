@@ -24,7 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.Random;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.Modules.module5;
 import com.Denfop.item.Modules.module7;
 import com.Denfop.proxy.ClientProxy;
@@ -70,7 +70,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
     public BlockSSPSolarPanel() {
         super(Material.iron);
         this.setHardness(3.0f);
-        this.setCreativeTab(SuperSolarPanels.tabssp);
+        this.setCreativeTab(IUCore.tabssp);
         this.qgActive = false;
         this.setBlockUnbreakable();
       
@@ -928,23 +928,23 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         	
         	if(world.getTileEntity(i, j, k) instanceof TileEntitySolarPanel) {
         		TileEntitySolarPanel	tile = (TileEntitySolarPanel) world.getTileEntity(i, j, k);
-        		for(int l =0;l <9;l++) {
-        		if(tile.chargeSlots[l] != null&& tile.chargeSlots[l].getItem() instanceof module7&& tile.chargeSlots[l].getItemDamage() == 0 && tile.player == player.getDisplayName()) {
-        			player.openGui((Object)SuperSolarPanels.instance, 1, world, i, j, k);
+        	for(int m =0; m < 9;m++) {
+        		if(tile.chargeSlots[m] != null&& tile.chargeSlots[m].getItem() instanceof module7&& tile.chargeSlots[m].getItemDamage() == 0 && tile.player == player.getDisplayName()) {
+        			player.openGui((Object)IUCore.instance, 1, world, i, j, k);
         				 
         			
-        				
+        				break;
         				
            }else {
         	   if(tile.personality == false) {
           
-            player.openGui((Object)SuperSolarPanels.instance, 1, world, i, j, k);}else {
-            	
+            player.openGui((Object)IUCore.instance, 1, world, i, j, k);}else {
+            	if(tile.personality && tile.player != player.getDisplayName())
             	player.addChatMessage(new ChatComponentTranslation(String.format("ssp.error", new Object[0]), new Object[0]));
             }}
-        		}
         		
-        		}
+        		
+        		}}
         
         	}
 		return true;

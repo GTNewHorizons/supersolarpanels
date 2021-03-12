@@ -16,7 +16,7 @@ import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.api.module.IModulPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
@@ -35,7 +35,7 @@ public class module6 extends Item implements IModulPanel
         this.IIconsList = new IIcon[10];
         this.itemsCount = 9;
         this.setHasSubtypes(true);
-        this.setCreativeTab(SuperSolarPanels.tabssp1);
+        this.setCreativeTab(IUCore.tabssp1);
         this.setMaxStackSize(64);
         this.addItemsNames();
     }

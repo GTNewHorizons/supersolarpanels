@@ -1,5 +1,5 @@
 package com.Denfop.integration.DE;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import cofh.api.energy.IEnergyContainerItem;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
@@ -27,7 +27,7 @@ public class ChaosFluxCapacitor extends RFItemBase implements IUpgradableItem {
   
   public ChaosFluxCapacitor() {
     setUnlocalizedName("ChaosFluxCapacitor");
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
+    setCreativeTab((CreativeTabs)IUCore.tabssp2);
     setHasSubtypes(true);
     setMaxStackSize(1);
     DraconicIntegration.register((ItemDC)this);

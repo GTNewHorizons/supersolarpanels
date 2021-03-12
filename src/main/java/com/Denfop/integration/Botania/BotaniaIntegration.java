@@ -1,7 +1,7 @@
 package com.Denfop.integration.Botania;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.integration.DE.SSPDEItem;
 import com.Denfop.integration.DE.TileEntityAwakenedSolarPanel;

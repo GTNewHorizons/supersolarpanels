@@ -5,7 +5,7 @@ package com.Denfop.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.container.ContainerSinSolarPanel;
 import com.Denfop.integration.Avaritia.ItemAvSolarPanel;

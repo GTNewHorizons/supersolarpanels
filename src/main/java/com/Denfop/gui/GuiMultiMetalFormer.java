@@ -2,7 +2,7 @@ package com.Denfop.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.container.ContainerMultiMachine;
 import com.Denfop.container.ContainerMultiMetalFormer;
 import com.Denfop.tiles.base.TileEntityMultiMachine;

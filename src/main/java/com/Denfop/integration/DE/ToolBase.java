@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 public class ToolBase extends RFItemBase {
   private static final Set SHOVEL_OVERRIDES = Sets.newHashSet(new Object[] { 
         Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, 

@@ -3,7 +3,7 @@ package com.Denfop.events.MF;
 import java.util.Map;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.utils.NBTData;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;

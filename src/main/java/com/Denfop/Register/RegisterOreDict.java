@@ -1,7 +1,7 @@
 package com.Denfop.Register;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraftforge.oredict.OreDictionary;
 

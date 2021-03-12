@@ -10,7 +10,7 @@ import ic2.core.util.StackUtil;
 import java.util.Random;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.base.ItemBlockIC2;
 
 import net.minecraft.block.Block;
@@ -44,7 +44,7 @@ public class BlockIC2Fluid extends BlockFluidClassic {
     super(fluid, material);
     if (!fluid.getName().startsWith("ic3"))
       throw new RuntimeException("Invalid fluid name: " + fluid.getName()); 
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp);
+    setCreativeTab((CreativeTabs)IUCore.tabssp);
     setBlockName(internalName);
     GameRegistry.registerBlock((Block)this, ItemBlockIC2.class, internalName);
     this.fluid = fluid;

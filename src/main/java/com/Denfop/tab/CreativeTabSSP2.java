@@ -4,7 +4,7 @@ package com.Denfop.tab;
 import net.minecraft.item.Item;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 

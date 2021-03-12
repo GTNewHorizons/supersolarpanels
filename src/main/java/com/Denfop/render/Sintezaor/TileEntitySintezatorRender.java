@@ -3,7 +3,7 @@ package com.Denfop.render.Sintezaor;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

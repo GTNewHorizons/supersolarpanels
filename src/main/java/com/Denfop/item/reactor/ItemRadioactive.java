@@ -1,7 +1,7 @@
 package com.Denfop.item.reactor;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +30,7 @@ public class ItemRadioactive extends Item {
     this.radiationLength = radiationLength1;
     this.amplifier = amplifier1;
     setUnlocalizedName(name);
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
     this.setTextureName(Constants.TEXTURES_MAIN + name);
     GameRegistry.registerItem(this, name);
   

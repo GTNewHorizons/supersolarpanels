@@ -3,7 +3,7 @@ package com.Denfop.item.rotor;
 import ic2.api.item.IKineticRotor;
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.base.ReactorItemCore;
 
 import net.minecraft.client.Minecraft;
@@ -35,7 +35,7 @@ public class ItemAdvancedWindRotor extends ReactorItemCore implements IKineticRo
     this.minWindStrength = minWindStrength;
     this.maxWindStrength = maxWindStrength;
     this.water = false;
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
   }
   
   public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {

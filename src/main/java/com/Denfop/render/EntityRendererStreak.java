@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Constants;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.events.EventDarkQuantumSuitEffect;
 import com.Denfop.handler.EntityStreak;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;

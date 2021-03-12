@@ -1,7 +1,7 @@
 package com.Denfop.integration.Botania;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 public class modules1 {
 	   public static int GenDay(int meta) {

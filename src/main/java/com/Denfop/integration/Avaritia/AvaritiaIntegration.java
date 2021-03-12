@@ -1,7 +1,7 @@
 package com.Denfop.integration.Avaritia;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.integration.Botania.TileEntityElementumSolarPanel;
 import com.Denfop.integration.Botania.TileEntityManasteelSolarPanel;
 import com.Denfop.integration.DE.ItemDESolarPanel;

@@ -1,7 +1,7 @@
 package com.Denfop.item.reactor;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 
 import ic2.api.reactor.IReactor;
 import ic2.core.Ic2Items;
@@ -17,7 +17,7 @@ public ItemRadiationToriyRod(String internalName, int cells,int time,int heat,fl
     this.time = time;
     this.heat=heat;
     this.power = power;
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
   }
   
   protected int getFinalHeat(IReactor reactor, ItemStack stack, int x, int y, int heat) {

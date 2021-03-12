@@ -1,7 +1,7 @@
 package com.Denfop.tiles.base;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.api.module.IModulStorage;
 import com.Denfop.container.ContainerElectricBlock;
@@ -289,6 +289,8 @@ public int getInventoryStackLimit() {
 		if(kk == 0) {
 			personality = true;
 		}
+    }else {
+    	personality = false;
     }
     
   

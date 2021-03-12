@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.DamageSource.SSPDamageSource;
 import com.Denfop.block.Base.BlockIC2Fluid;
 import com.Denfop.block.Base.BlockSSP;

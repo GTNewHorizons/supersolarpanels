@@ -1,7 +1,7 @@
 package com.Denfop.gui;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.api.module.IModulGenDay;
 import com.Denfop.api.module.IModulGenNight;
 import com.Denfop.api.module.IModulOutput;

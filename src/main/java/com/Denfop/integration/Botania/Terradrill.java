@@ -1,7 +1,7 @@
 package com.Denfop.integration.Botania;
 
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
 import com.Denfop.utils.NBTData;
@@ -85,7 +85,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
     super(0.0F, toolMaterial, new HashSet());
     setMaxDamage(27);
     this.efficiencyOnProperMaterial = this.normalPower;
-    setCreativeTab(SuperSolarPanels.tabssp2);
+    setCreativeTab(IUCore.tabssp2);
   }
   
   public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {
@@ -210,7 +210,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
       } 
       if (lowPower) {
         CommonProxy.sendPlayerMessage(player, "Not enough energy to complete this operation !");
-      } else if (!SuperSolarPanels.isSimulating()) {
+      } else if (!IUCore.isSimulating()) {
         world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
       } 
       return true;
@@ -280,7 +280,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
           } 
           if (lowPower) {
             CommonProxy.sendPlayerMessage(player, "Not enough energy to complete this operation !");
-          } else if (!SuperSolarPanels.isSimulating()) {
+          } else if (!IUCore.isSimulating()) {
             world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
           } 
           return true;
@@ -290,7 +290,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
   }
   
   public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int xPos, int yPos, int zPos, EntityLivingBase entity) {
-    if (!SuperSolarPanels.isSimulating())
+    if (!IUCore.isSimulating())
       return true; 
     if (block == null)
       return false; 
@@ -425,7 +425,7 @@ public class Terradrill extends ItemTool implements IElectricItem {
   
   public String getRandomDrillSound() {
 	  
-    switch (SuperSolarPanels.random.nextInt(4)) {
+    switch (IUCore.random.nextInt(4)) {
       case 1:
         return "drillOne";
       case 2:

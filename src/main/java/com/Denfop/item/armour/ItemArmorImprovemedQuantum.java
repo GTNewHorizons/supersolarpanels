@@ -29,7 +29,7 @@ import java.util.Map;
 import com.Denfop.Config;
 import com.Denfop.Constants;
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
 import com.Denfop.utils.NBTData;
@@ -81,7 +81,7 @@ private final String armorName;
 
 private final Object repairMaterial;
 public ItemArmorImprovemedQuantum(String name, int armorType1, double maxCharge1, double transferLimit1, int tier1) {
-    super(ItemArmor.ArmorMaterial.DIAMOND, SuperSolarPanels.proxy.addArmor(name), armorType1);
+    super(ItemArmor.ArmorMaterial.DIAMOND, IUCore.proxy.addArmor(name), armorType1);
     if (armorType1 == 3)
       MinecraftForge.EVENT_BUS.register(this); 
     potionRemovalCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(100));
@@ -99,7 +99,7 @@ public ItemArmorImprovemedQuantum(String name, int armorType1, double maxCharge1
     this.armorName = name;
     setMaxDamage(ItemArmor.ArmorMaterial.DIAMOND.getDurability(armorType1));
     setUnlocalizedName(name);
-    setCreativeTab((CreativeTabs)SuperSolarPanels.tabssp2);
+    setCreativeTab((CreativeTabs)IUCore.tabssp2);
     GameRegistry.registerItem((Item)this, name);
   }
 public List<String> getHudInfo(ItemStack itemStack) {

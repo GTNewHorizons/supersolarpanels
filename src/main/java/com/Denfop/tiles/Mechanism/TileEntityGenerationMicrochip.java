@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.InvSlot.InvSlotProcessableGenerationMicrochip;
 import com.Denfop.RecipeManager.MicrochipRecipeManager;
 import com.Denfop.api.IMicrochipFarbricatorRecipeManager;

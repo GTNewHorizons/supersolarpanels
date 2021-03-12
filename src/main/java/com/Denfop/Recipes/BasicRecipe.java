@@ -1,7 +1,7 @@
 package com.Denfop.Recipes;
 
 import com.Denfop.SSPItem;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
 
 

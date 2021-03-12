@@ -4,7 +4,7 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorComponent;
 import java.util.List;
 
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.item.base.ReactorItemCore;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +14,7 @@ import net.minecraft.util.StatCollector;
 public class ItemReactorHeatStorage extends ReactorItemCore implements IReactorComponent {
   public ItemReactorHeatStorage(String internalName, int heatStorage1) {
     super(internalName, heatStorage1);
-    this.setCreativeTab(SuperSolarPanels.tabssp3);
+    this.setCreativeTab(IUCore.tabssp3);
   }
   
   public void processChamber(IReactor reactor, ItemStack yourStack, int x, int y, boolean heatrun) {}

@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
 import com.Denfop.Config;
-import com.Denfop.SuperSolarPanels;
+import com.Denfop.IUCore;
 import com.Denfop.block.Base.BlockElectric;
 import com.Denfop.utils.NBTData;
 
@@ -27,7 +27,7 @@ public ItemElectricBlock(Block block) {
     setMaxDamage(0);
     setHasSubtypes(true);
     setMaxStackSize(1);
-    setCreativeTab(SuperSolarPanels.tabssp);
+    setCreativeTab(IUCore.tabssp);
   }
   @Override
   public int getMetadata(int i) {
