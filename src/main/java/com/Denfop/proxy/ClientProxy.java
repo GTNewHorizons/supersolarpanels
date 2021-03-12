@@ -35,7 +35,7 @@ import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
-import com.Denfop.integration.Waila.WailaHandler;
+import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.render.EntityRendererStreak;
 import com.Denfop.render.Cable.RenderBlock;
@@ -75,7 +75,6 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import ic2.core.ContainerBase;
 import ic2.core.Ic2Items;
 import modtweaker2.utils.TweakerPlugin;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -182,27 +181,7 @@ public boolean isClient() {
 					new TileEntitySintezatorItemRender());
 			MinecraftForge.EVENT_BUS.register(new TextureHooks());
   }
-  public void integration() {
-	  Config.DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
-      Config.AvaritiaLoaded = Loader.isModLoaded("Avaritia");
-      Config.BotaniaLoaded = Loader.isModLoaded("Botania");
-      Config.EnchantingPlus = Loader.isModLoaded("eplus");
-      Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
-      if(Loader.isModLoaded("modtweaker2")) {
-    	  TweakerPlugin.register("supersolarpanel", CTCore.class);
-    	  
-    	  }
-if(Config.DraconicLoaded && Config.Draconic) {
-	DraconicIntegration.init();
-}
-if(Config.AvaritiaLoaded && Config.Avaritia ) {
-	AvaritiaIntegration.init();
-}
 
-if(Config.BotaniaLoaded && Config.Botania) {
-	BotaniaIntegration.init();
-}
-  }
   public void registerRecipe() {
 		
 	  if(Config.BotaniaLoaded && Config.Botania)
