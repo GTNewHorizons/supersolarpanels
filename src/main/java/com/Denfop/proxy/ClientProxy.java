@@ -35,6 +35,7 @@ import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
+import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.render.EntityRendererStreak;
 import com.Denfop.render.Cable.RenderBlock;
@@ -189,28 +190,29 @@ public boolean isClient() {
       Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
       if(Loader.isModLoaded("modtweaker2")) {
     	  TweakerPlugin.register("supersolarpanel", CTCore.class);
-    	  logger.info("Starting Initialization for SuperSolarPanels");
+    	  
     	  }
-if(Config.DraconicLoaded && Config.Draconic == true) {
+if(Config.DraconicLoaded && Config.Draconic) {
 	DraconicIntegration.init();
 }
-if(Config.AvaritiaLoaded && Config.Avaritia == true) {
+if(Config.AvaritiaLoaded && Config.Avaritia ) {
 	AvaritiaIntegration.init();
 }
 
-if(Config.BotaniaLoaded && Config.Botania == true) {
+if(Config.BotaniaLoaded && Config.Botania) {
 	BotaniaIntegration.init();
 }
   }
   public void registerRecipe() {
 		
-	  if(Config.BotaniaLoaded && Config.Botania == true)
+	  if(Config.BotaniaLoaded && Config.Botania)
       	BotaniaIntegration.recipe();
 	  BasicRecipe.recipe();
-if(Config.DraconicLoaded && Config.Draconic == true)
+if(Config.DraconicLoaded && Config.Draconic)
       DraconicIntegration.Recipes();
-if(Config.AvaritiaLoaded && Config.Avaritia == true)
+if(Config.AvaritiaLoaded && Config.Avaritia )
 	AvaritiaIntegration.recipe();
+
 AlloySmelterRecipe.recipe();
 CompressorRecipe.recipe();
 CannerRecipe.recipe();

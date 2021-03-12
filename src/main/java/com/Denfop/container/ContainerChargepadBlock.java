@@ -2,6 +2,7 @@ package com.Denfop.container;
 
 import ic2.core.ContainerFullInv;
 import ic2.core.block.invslot.InvSlot;
+import ic2.core.block.invslot.InvSlotArmor;
 import ic2.core.slot.SlotInvSlot;
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class ContainerChargepadBlock extends ContainerFullInv<TileEntityChargepa
   public ContainerChargepadBlock(EntityPlayer entityPlayer, TileEntityChargepadBlock tileEntity1) {
     super(entityPlayer, tileEntity1, 196);
     this.tileentity = tileEntity1;
+    for (int col = 0; col < 4; col++)
+        addSlotToContainer((Slot)new InvSlotArmor(entityPlayer.inventory, col, 8 + col * 18, 84)); 
     for (int j = 0; j < 2; ++j)
 	{
 		

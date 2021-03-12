@@ -23,6 +23,7 @@ public class NBTData {
 	            nbttagcompound.setInteger("Zcoord", 0);
 	            nbttagcompound.setInteger("tier", 0);
 	            nbttagcompound.setString("Name", "");
+	           
 	            
 	        }
 	        return nbttagcompound;

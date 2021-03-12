@@ -8,6 +8,7 @@ import com.Denfop.Register.Register;
 import com.Denfop.Register.RegisterOreDict;
 import com.Denfop.World.GenOre;
 import com.Denfop.block.Base.BlocksItems;
+import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.CreativeTabSSP;
 import com.Denfop.tab.CreativeTabSSP1;
@@ -57,6 +58,7 @@ BlocksItems.init();
 		 NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
        	GenOre.init();
         Register.register();
+    
 		 Register.registertiles();
 		 BlocksItems.registermetadata();
         RegisterOreDict.oredict();
@@ -64,6 +66,7 @@ BlocksItems.init();
         IUCore.proxy.load();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, (IGuiHandler)IUCore.proxy);
         proxy.initCore();
+        
     }
  
     public static ItemStack setItemsSize(final ItemStack itemStack, final int newSize) {

@@ -24,6 +24,7 @@ import com.Denfop.block.ore.BlockSSPDiamond;
 import com.Denfop.block.ore.BlockSSPEmerald;
 import com.Denfop.block.ore.BlockSSPLapis;
 import com.Denfop.block.ore.BlockSSPRedstone;
+import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.item.ItemCell;
 import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Machina.ItemMachine1;
@@ -61,6 +62,7 @@ import com.Denfop.tiles.wiring.Chargepad.TileEntityChargepadMFES;
 import com.Denfop.tiles.wiring.Chargepad.*;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricBatBox;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
+import com.Denfop.utils.NBTData;
 import com.Denfop.tiles.wiring.Storage.*;
 
 import cpw.mods.fml.common.Loader;
@@ -70,6 +72,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class Register {
 public static void register() {
@@ -83,7 +86,7 @@ public static void register() {
 	 GameRegistry.registerItem(SSPItem.magnesium_nugget = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("magnesium_nugget").setTextureName("supersolarpanel:magnesium_nugget"), "magnesium_nugget");
 	 GameRegistry.registerItem(SSPItem.caravky_ingot = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("caravky").setTextureName("supersolarpanel:caravky"), "caravky");
 		
-	  
+	   
 	  GameRegistry.registerItem(SSPItem.advanced_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("advanced_core").setTextureName("supersolarpanel:advanced_core"), "advanced_core");
       GameRegistry.registerItem(SSPItem.hybrid_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("hybrid_core").setTextureName("supersolarpanel:hybrid_core"), "hybrid_core");
       GameRegistry.registerItem(SSPItem.ultimate_core = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("ultimate_core").setTextureName("supersolarpanel:ultimate_core"), "ultimate_core");
@@ -296,7 +299,7 @@ public static void register() {
 		if(!Loader.isModLoaded("wirelessvajra"))
 			 GameRegistry.registerBlock(SSPItem.expgen, ItemBlockEG.class, "ExpGen1");
 		 GameRegistry.registerItem(SSPItem.module8, "WirelessModule1");
-		
+	
 	    GameRegistry.registerItem(SSPItem.ultDDrill , "ultDDrill");
       GameRegistry.registerItem(SSPItem.module1 = new com.Denfop.item.Modules.module1().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
       GameRegistry.registerItem(SSPItem.module2 = new com.Denfop.item.Modules.module2().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
@@ -325,8 +328,10 @@ public static void register() {
       GameRegistry.registerItem(SSPItem.nickelplate = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("nickelplate").setTextureName("supersolarpanel:nickelplate"), "nickelplate");
       GameRegistry.registerItem(SSPItem.michalovcrushedore = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("michalovcrushedore").setTextureName("supersolarpanel:michalovcrushedore"), "michalovcrushedore");
       
+     
       
 }
+
 public static void registertiles() {
 	 GameRegistry.registerTileEntity(TileBitGen2.class, "Mass Fabricator1");
 	 
