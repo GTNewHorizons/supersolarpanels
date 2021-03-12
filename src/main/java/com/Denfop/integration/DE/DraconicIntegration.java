@@ -39,8 +39,7 @@ public static Item ChaosShovel;
  public static Item chaosingot;
  public static Block blockDESolarPanel;
 private static ArmorMaterial  CHAOS_ARMOR = EnumHelper.addArmorMaterial("CHAOS_ARMOR", -1, new int[] { 5, 10, 8, 6 }, 30);
-public static void init() {
-	
+	public static void init() {
 	   GameRegistry.registerItem(ChaosEnergyCore =   new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("ChaosEnergyCore").setTextureName("supersolarpanel:ChaosEnergyCore"),"ChaosEnergyCore");
 		if(Config.registerChaosFluxCapacitor)
 		   ChaosFluxCapacitor = (ItemDC)new ChaosFluxCapacitor();
@@ -61,11 +60,14 @@ public static void init() {
 		ChaosChest = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 1, "ChaosChest");
 		ChaosLeggs = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 2, "ChaosLeggs");
 		ChaosBoots = (ItemArmor)new ChaosArmor(CHAOS_ARMOR, 3, "ChaosBoots");}
-		 GameRegistry.registerItem( chaosingot = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("chaosingot").setTextureName("supersolarpanel:chaosingot"),"chaosingot");    
-	if(Config.registerDraconicPanels)
-		 GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
-		
-}
+		GameRegistry.registerItem( chaosingot = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("chaosingot").setTextureName("supersolarpanel:chaosingot"),"chaosingot");    
+		if(Config.registerDraconicPanels){
+			GameRegistry.registerBlock(blockDESolarPanel = (Block)new blockDESolarPanel(), (Class)ItemDESolarPanel.class, "blockDESolarPanel");
+			GameRegistry.registerTileEntity((Class)TileEntityDraconSolarPanel.class, "Dracon Solar Panel"); 
+		}
+		GameRegistry.registerTileEntity((Class)TileEntityAwakenedSolarPanel.class, "Awakened Solar Panel");
+		GameRegistry.registerTileEntity((Class)TileEntityChaosSolarPanel.class, "Chaos Solar Panel");	
+	}
 
 
 public static void register(ItemDC item) {
@@ -95,9 +97,6 @@ public static void Recipes() {
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SSPItem.blockSSPSolarPanel, 1) ,'A',ModItems.wyvernCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,1), new Object[] { "AB ","BAB"," BA", 'B', new ItemStack(blockDESolarPanel, 1,0) ,'A',ModItems.awakenedCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,2), new Object[] { "ABC","BAB","CBA", 'B', new ItemStack(blockDESolarPanel, 1,1) ,'A',ModItems.chaoticCore , 'C',ChaosEnergyCore});
-    GameRegistry.registerTileEntity((Class)TileEntityDraconSolarPanel.class, "Dracon Solar Panel");
-    GameRegistry.registerTileEntity((Class)TileEntityAwakenedSolarPanel.class, "Awakened Solar Panel");
-    GameRegistry.registerTileEntity((Class)TileEntityChaosSolarPanel.class, "Chaos Solar Panel");
 }
 }
 

@@ -181,28 +181,7 @@ public boolean isClient() {
 					new TileEntitySintezatorItemRender());
 			MinecraftForge.EVENT_BUS.register(new TextureHooks());
   }
-  public void integration() {
-		
-	  Config.DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
-      Config.AvaritiaLoaded = Loader.isModLoaded("Avaritia");
-      Config.BotaniaLoaded = Loader.isModLoaded("Botania");
-      Config.EnchantingPlus = Loader.isModLoaded("eplus");
-      Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
-      if(Loader.isModLoaded("modtweaker2")) {
-    	  TweakerPlugin.register("supersolarpanel", CTCore.class);
-    	  
-    	  }
-if(Config.DraconicLoaded && Config.Draconic) {
-	DraconicIntegration.init();
-}
-if(Config.AvaritiaLoaded && Config.Avaritia ) {
-	AvaritiaIntegration.init();
-}
 
-if(Config.BotaniaLoaded && Config.Botania) {
-	BotaniaIntegration.init();
-}
-  }
   public void registerRecipe() {
 		
 	  if(Config.BotaniaLoaded && Config.Botania)
