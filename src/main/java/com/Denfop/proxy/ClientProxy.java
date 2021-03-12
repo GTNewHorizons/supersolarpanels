@@ -35,7 +35,6 @@ import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.DE.RenderArmor;
 import com.Denfop.integration.DE.RenderBowModel;
 import com.Denfop.integration.DE.RenderTool;
-import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.render.EntityRendererStreak;
 import com.Denfop.render.Cable.RenderBlock;
@@ -142,7 +141,27 @@ public boolean isClient() {
 	    RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)renderer);
 	    this.renders.put(name, renderer);
 	  }  
- 
+  public void integration() {	
+		Config.DraconicLoaded = Loader.isModLoaded("DraconicEvolution");
+		Config.AvaritiaLoaded = Loader.isModLoaded("Avaritia");
+		Config.BotaniaLoaded = Loader.isModLoaded("Botania");
+		Config.EnchantingPlus = Loader.isModLoaded("eplus");
+		Config.MineFactory = Loader.isModLoaded("MineFactoryReloaded");
+		if(Loader.isModLoaded("modtweaker2")) {
+			TweakerPlugin.register("supersolarpanel", CTCore.class);
+				  
+		}
+		if(Config.DraconicLoaded && Config.Draconic) {
+			DraconicIntegration.init();
+		}
+		if(Config.AvaritiaLoaded && Config.Avaritia ) {
+			AvaritiaIntegration.init();
+		}
+
+		if(Config.BotaniaLoaded && Config.Botania) {
+			BotaniaIntegration.init();
+		}
+	}
   public void initCore() {
 	    
 	       TileEntityAlloySmelter.init();
