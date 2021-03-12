@@ -8,7 +8,6 @@ import com.Denfop.Register.Register;
 import com.Denfop.Register.RegisterOreDict;
 import com.Denfop.World.GenOre;
 import com.Denfop.block.Base.BlocksItems;
-import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.CreativeTabSSP;
 import com.Denfop.tab.CreativeTabSSP1;
@@ -23,6 +22,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -68,14 +68,17 @@ BlocksItems.init();
         proxy.initCore();
         
     }
- 
+  
     public static ItemStack setItemsSize(final ItemStack itemStack, final int newSize) {
         final ItemStack newStack = itemStack.copy();
         newStack.stackSize = newSize;
         return newStack;
     }
     @Mod.EventHandler
-    public void load(final FMLInitializationEvent event) {}
+    public void load(final FMLInitializationEvent event) {
+    	if(Loader.isModLoaded("Waila"))
+    	FMLInterModComms.sendMessage("Waila", "register", "com.Denfop.integration.Waila.WailaHandler.callbackRegister");
+    	}
     public static void initENet() {EnergyNet.instance = (IEnergyNet)EnergyNetGlobal.initialize();  }
 
     public static int getSeaLevel(World world) {return world.provider.getAverageGroundLevel(); }

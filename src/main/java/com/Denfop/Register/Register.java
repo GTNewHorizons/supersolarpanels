@@ -24,7 +24,6 @@ import com.Denfop.block.ore.BlockSSPDiamond;
 import com.Denfop.block.ore.BlockSSPEmerald;
 import com.Denfop.block.ore.BlockSSPLapis;
 import com.Denfop.block.ore.BlockSSPRedstone;
-import com.Denfop.integration.EMC.EMCIntegraion;
 import com.Denfop.item.ItemCell;
 import com.Denfop.item.ItemSSPCrafring;
 import com.Denfop.item.Machina.ItemMachine1;
