@@ -63,6 +63,7 @@ import com.Denfop.tiles.wiring.Storage.TileEntityElectricBatBox;
 import com.Denfop.tiles.wiring.Storage.TileEntityElectricMFE;
 import com.Denfop.tiles.wiring.Storage.*;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -292,6 +293,7 @@ public static void register() {
 
 		GameRegistry.registerBlock(SSPItem.machines_base = new BlockMachines(), ItemMachines.class, "machines_base");
 		GameRegistry.registerBlock(SSPItem.machines_base1 = new BlockMachines1(), ItemMachines2.class, "machines_base1");
+		if(!Loader.isModLoaded("wirelessvajra"))
 			 GameRegistry.registerBlock(SSPItem.expgen, ItemBlockEG.class, "ExpGen1");
 		 GameRegistry.registerItem(SSPItem.module8, "WirelessModule1");
 		
