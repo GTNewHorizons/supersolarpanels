@@ -50,12 +50,13 @@ import net.minecraftforge.event.ForgeEventFactory;
 public class ultDDrill extends ItemTool implements IElectricItem {
   public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] {  Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, 
 	        Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, 
-	        Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail,Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, });
+	        Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail,Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin ,Blocks.leaves,Blocks.leaves2, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, });
   
-  private static final Set<Material> materials = Sets.newHashSet(new Material[] { Material.iron, Material.anvil, Material.rock, Material.glass, Material.ice, Material.packedIce, 
+  private static final Set<Material> materials = Sets.newHashSet(new Material[] { Material.iron, Material.anvil, Material.rock, Material.glass, Material.ice, Material.packedIce, Material.wood, Material.leaves, Material.coral, 
+	        Material.cactus, Material.plants, Material.vine,
 	        Material.grass, Material.ground, Material.sand, Material.snow, Material.craftedSnow, Material.clay});
   
-  private static final Set<String> toolType = (Set<String>)ImmutableSet.of("pickaxe", "shovel");
+  private static final Set<String> toolType = (Set<String>)ImmutableSet.of("pickaxe", "shovel","axe");
   
 
   
@@ -123,7 +124,7 @@ public int mode;
   }
   
   public boolean canHarvestBlock(Block block, ItemStack stack) {
-    return (Items.diamond_pickaxe.canHarvestBlock(block, stack) || Items.diamond_pickaxe.func_150893_a(stack, block) > 1.0F || Items.diamond_shovel.canHarvestBlock(block, stack) || Items.diamond_shovel.func_150893_a(stack, block) > 1.0F || mineableBlocks.contains(block));
+    return (Items.diamond_axe.canHarvestBlock(block, stack) || Items.diamond_axe.func_150893_a(stack, block) > 1.0F || Items.diamond_pickaxe.canHarvestBlock(block, stack) || Items.diamond_pickaxe.func_150893_a(stack, block) > 1.0F || Items.diamond_shovel.canHarvestBlock(block, stack) || Items.diamond_shovel.func_150893_a(stack, block) > 1.0F || mineableBlocks.contains(block));
   }
   
   public float getDigSpeed(ItemStack tool, Block block, int meta) {
@@ -131,7 +132,7 @@ public int mode;
   }
   
   public int getHarvestLevel(ItemStack stack, String toolType) {
-    return (!toolType.equals("pickaxe") && !toolType.equals("shovel")) ? super.getHarvestLevel(stack, toolType) : this.toolMaterial.getHarvestLevel();
+    return (!toolType.equals("pickaxe") && !toolType.equals("shovel")&& !toolType.equals("axe")) ? super.getHarvestLevel(stack, toolType) : this.toolMaterial.getHarvestLevel();
   }
   
   public boolean hitEntity(ItemStack stack, EntityLiving entity1, EntityLiving entity2) {

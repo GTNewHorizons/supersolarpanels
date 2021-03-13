@@ -325,6 +325,12 @@ public class SSPEventHandler {
 					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock,1,4);
 				}
 			}
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ic2.core.item.block.ItemChargepadBlock) {
+				int meta = player.inventory.mainInventory[i].getItemDamage();
+				
+					player.inventory.mainInventory[i] = new ItemStack(SSPItem.Chargepadelectricblock,1,meta+2);
+				
+			}
 		}
 	}
 	

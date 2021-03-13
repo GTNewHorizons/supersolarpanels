@@ -33,6 +33,9 @@ import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Upgrade.ItemUpgradeModule;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.base.ItemCable;
+import com.Denfop.item.energy.EnergyAxe;
+import com.Denfop.item.energy.EnergyPickaxe;
+import com.Denfop.item.energy.EnergyShovel;
 import com.Denfop.item.energy.ItemBattery;
 import com.Denfop.item.energy.ItemNanoSaber;
 import com.Denfop.item.energy.ItemNanoSaber1;
@@ -100,7 +103,7 @@ public class BlocksItems {
 	  SSPItem.machines = new BlockMachine();
       SSPItem.machines.setCreativeTab(IUCore.tabssp);
       SSPItem.ultDDrill = new ultDDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
-
+     
       SSPItem.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", Config.Storagequantumsuit, 8092.0D, 4);
       SSPItem.  nanoSaber = new ItemNanoSaber("itemNanoSaber",Config.maxCharge,Config.transferLimit,Config.tier,Config.spectralsaberactive,Config.spectralsabernotactive);
       SSPItem.   nanoSaber1 = new ItemNanoSaber1("itemNanoSaber1",Config.maxCharge1,Config.transferLimit1,Config.tier1,Config.spectralsaberactive1,Config.spectralsabernotactive1);

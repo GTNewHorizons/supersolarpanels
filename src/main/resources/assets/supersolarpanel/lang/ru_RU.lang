@@ -407,7 +407,7 @@ tile.expGen.name=Генератор опыта
 tile.wirelessNeutronSP.name=Беспроводная Нейтронная солнечная панель
 wirelessNeutronPanel.name=Беспроводная Нейтронная солнечная панель
 gui.SuperSolarPanel.storage=EU
-gui.SuperSolarPanel.maxOutput=Макс. выход
+gui.SuperSolarPanel.maxOutput=Выход
 gui.SuperSolarPanel.generating=Генерация
 gui.SuperSolarPanel.energyPerTick=EU/t
 ssp.modules2=§cработает только одно улучшение на слот
@@ -551,6 +551,11 @@ module84.name=Модуль: Эффективность III
 module85.name=Модуль: Эффективность IV
 module86.name=Модуль: Эффективность V
 ssp.moduletype=Модуль тип: Круглосуточная 
+
+ssp.blockChargepadBatBox.name=Заряжаючая плита (Энергохранилище)
+ssp.blockChargepadMFE.name=Заряжаючая плита (МФЭ)
+ssp.blockChargepadMFSU.name=Заряжаючая плита (МФЭХ)
+ssp.blockChargepadCESU.name=Заряжаючая плита (МЭХ)
 
 
 

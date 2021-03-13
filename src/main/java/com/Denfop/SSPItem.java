@@ -328,6 +328,24 @@ public class SSPItem {
 
 			public static Item module9;
 
+			public static Item nanopickaxe;
+
+			public static Item nanoshovel;
+
+			public static Item nanoaxe;
+
+			public static Item quantumpickaxe;
+
+			public static Item quantumshovel;
+
+			public static Item quantumaxe;
+
+			public static Item spectralpickaxe;
+
+			public static Item spectralshovel;
+
+			public static Item spectralaxe;
+
 			
 			public static class FluidXP {
 				public static Fluid xpJuice = new Fluid("xpjuice.wv");

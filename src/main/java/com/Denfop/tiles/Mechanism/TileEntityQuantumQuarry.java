@@ -227,8 +227,8 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 				  list.add(OreDictionary.getOres("ingotMagnesium").get(0));
 				  list.add(OreDictionary.getOres("ingotTungsten").get(0));
 				  list.add(OreDictionary.getOres("ingotPlatinum").get(0));
-				  if(OreDictionary.getOres("oreAluminium").size() > 0)
-				  list.add(OreDictionary.getOres("ingotAluminium").get(0));
+				  if(OreDictionary.getOres("oreAluminum").size() > 0)
+				  list.add(OreDictionary.getOres("ingotAluminum").get(0));
 				  if(OreDictionary.getOres("oreDraconium").size() > 0)
 				  list.add(OreDictionary.getOres("ingotDraconium").get(0));
 				  if(OreDictionary.getOres("oreEssence").size() > 0)
