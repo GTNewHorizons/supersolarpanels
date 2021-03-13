@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "1.5RC4"
 group= "com.Denfop"
-archivesBaseName = "SuperSolarPanels"
+archivesBaseName = "IndustrialUpgrade"
 apply plugin: 'java'
 compileJava {
     sourceCompatibility = '1.8'

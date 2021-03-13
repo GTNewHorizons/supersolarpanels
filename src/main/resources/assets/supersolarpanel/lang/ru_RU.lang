@@ -479,11 +479,11 @@ ssp.storage.helmet=Ёмкость:
 successfully.charged=Успешно заряжено 
 ssp.sendenergy=Потрачено: 
 
-itemGroup.sspblocks=Super Solar Panels Блоки
-itemGroup.sspmodules=Super Solar Panels Модули
-itemGroup.ssptools=Super Solar Panels Инструменты/Броня
-itemGroup.sspitems=Super Solar Panels Предметы
-itemGroup.sspores=Super Solar Panels Руды
+itemGroup.sspblocks=Industrial Upgrade Блоки
+itemGroup.sspmodules=Industrial Upgrade  Модули
+itemGroup.ssptools=Industrial Upgrade  Инструменты/Броня
+itemGroup.sspitems=Industrial Upgrade  Предметы
+itemGroup.sspores=Industrial Upgrade  Руды
 
 itemCellEmpty.name=Хранилище Нейтрония
 itemCellUuMatter.name=Жидкосный нейтроний

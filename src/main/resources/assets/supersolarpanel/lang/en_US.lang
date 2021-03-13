@@ -482,11 +482,11 @@ ssp.storage.helmet=Storage:
 
 successfully.charged=Successfully Charged
 ssp.sendenergy=Spent:
-itemGroup.sspblocks=Super Solar Panels Blocks
-itemGroup.sspmodules=Super Solar Panels Modules
-itemGroup.ssptools=Super Solar Panels Tools / Armor
-itemGroup.sspitems=Super Solar Panels Items
-itemGroup.sspores=Super Solar Panels Ores
+itemGroup.sspblocks=Industrial Upgrade  Blocks
+itemGroup.sspmodules=Industrial Upgrade  Modules
+itemGroup.ssptools=Industrial Upgrade  Tools / Armor
+itemGroup.sspitems=Industrial Upgrade  Items
+itemGroup.sspores=Industrial Upgrade  Ores
 
 itemCellEmpty.name=Neutronium Storage
 itemCellUuMatter.name=Liquid Neutronium
