@@ -91,6 +91,7 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular impl
     NBTTagCompound   nbt33 = new NBTTagCompound();
     NBTTagCompound   nbt34 = new NBTTagCompound();
     NBTTagCompound   nbt35 = new NBTTagCompound();
+    NBTTagCompound   nbt36 = new NBTTagCompound();
   nbt.setInteger("energy", Config.molecular);
   nbt1.setInteger("energy",  Config.molecular1);
   nbt2.setInteger("energy",  Config.molecular2);
@@ -128,48 +129,84 @@ nbt28.setInteger("energy",  Config.molecular28);
   nbt33.setInteger("energy",  Config.molecular33);
   nbt34.setInteger("energy",  Config.molecular34);
   nbt35.setInteger("energy",  Config.molecular35);
+  nbt36.setInteger("energy",  Config.molecular36);
+  if(Config.recipemolecular)
   addrecipe(new ItemStack(Items.skull,1,0),nbt,new ItemStack(Items.skull,1,1));
+  if(Config.recipemolecular1)
   addrecipe(new ItemStack(Items.skull,1,1),nbt1,new ItemStack(Items.nether_star,1));
+  if(Config.recipemolecular2)
   addrecipe(new ItemStack(Items.iron_ingot,1,0),nbt2,Ic2Items.iridiumOre);
+  if(Config.recipemolecular3)
   addrecipe(Ic2Items.Plutonium,nbt3,new ItemStack(SSPItem.proton,1));
+  if(Config.recipemolecular4)
   addrecipe(OreDictionary.getOres("ingotSpinel").get(0),nbt4,OreDictionary.getOres("ingotIridium").get(0));
+  if(Config.recipemolecular5)
   addrecipe(OreDictionary.getOres("Photon").get(0),nbt5,OreDictionary.getOres("ingotPhoton").get(0));
- 
+  if(Config.recipemolecular6)
   addrecipe(new ItemStack(Blocks.netherrack),nbt6,new ItemStack(Items.gunpowder,2));
+  if(Config.recipemolecular7)
   addrecipe(new ItemStack(Blocks.sand),nbt7,new ItemStack(Blocks.gravel,1));
+  if(Config.recipemolecular8)
   addrecipe(OreDictionary.getOres("dustCoal").get(0),nbt8,OreDictionary.getOres("gemDiamond").get(0));
+  if(Config.recipemolecular9)
   addrecipe(OreDictionary.getOres("ingotCopper").get(0),nbt9,OreDictionary.getOres("ingotNickel").get(0));
+  if(Config.recipemolecular10)
   addrecipe(OreDictionary.getOres("ingotLead").get(0),nbt10,OreDictionary.getOres("ingotGold").get(0));
+  if(Config.recipemolecular11)
 if(OreDictionary.getOres("ingotSilver").size() >=1)
   addrecipe(OreDictionary.getOres("ingotTin").get(0),nbt11,OreDictionary.getOres("ingotSilver").get(0));
+  if(Config.recipemolecular12)
 if(OreDictionary.getOres("ingotSilver").size() >=1)
 addrecipe(OreDictionary.getOres("ingotSilver").get(0),nbt12,OreDictionary.getOres("ingotTungsten").get(0));
-
+  if(Config.recipemolecular13)
 addrecipe(OreDictionary.getOres("ingotTungsten").get(0),nbt13,OreDictionary.getOres("ingotSpinel").get(0));
+  if(Config.recipemolecular14)
 addrecipe(OreDictionary.getOres("ingotChromium").get(0),nbt14,OreDictionary.getOres("ingotMikhalov").get(0));
+  if(Config.recipemolecular15)
 addrecipe(OreDictionary.getOres("ingotPlatinum").get(0),nbt15,OreDictionary.getOres("ingotChromium").get(0));
+  if(Config.recipemolecular16)
 addrecipe(OreDictionary.getOres("ingotGold").get(0),nbt16,OreDictionary.getOres("ingotPlatinum").get(0));
+  if(Config.recipemolecular17)
 addrecipe(OreDictionary.getOres("ingotIridium").get(0),nbt17,new ItemStack(SSPItem.advanced_core,1));
-
+  if(Config.recipemolecular18)
 addrecipe(new ItemStack(SSPItem.advanced_core,4),nbt18,new ItemStack(SSPItem.hybrid_core,1));
+  if(Config.recipemolecular19)
 addrecipe(new ItemStack(SSPItem.hybrid_core,4),nbt19,new ItemStack(SSPItem.ultimate_core,1));
+  if(Config.recipemolecular20)
 addrecipe(new ItemStack(SSPItem.ultimate_core,4),nbt20,new ItemStack(SSPItem.itemSSP,1,10));
+  if(Config.recipemolecular21)
 addrecipe(new ItemStack(SSPItem.itemSSP,4,10),nbt21,new ItemStack(SSPItem.spectralcore,1));
+  if(Config.recipemolecular22)
 addrecipe(new ItemStack(SSPItem.spectralcore,4),nbt22,new ItemStack(SSPItem.protoncore,1));
+  if(Config.recipemolecular23)
 addrecipe(new ItemStack(SSPItem.protoncore,4),nbt23,new ItemStack(SSPItem.singularcore,1));
+  if(Config.recipemolecular24)
 addrecipe(new ItemStack(SSPItem.singularcore,4),nbt24,new ItemStack(SSPItem.admincore,1));
+  if(Config.recipemolecular25)
 addrecipe(new ItemStack(SSPItem.admincore,4),nbt25,new ItemStack(SSPItem.photoniccore,1));
+  if(Config.recipemolecular26)
 addrecipe(new ItemStack(SSPItem.photoniccore,4),nbt26,new ItemStack(SSPItem.blocksintezator,1));
 //
+  if(Config.recipemolecular27)
 addrecipe(new ItemStack(SSPItem.matter,1,1),nbt27,new ItemStack(SSPItem.sunlinse,1));
+  if(Config.recipemolecular28)
 addrecipe(new ItemStack(SSPItem.matter,1,2),nbt28,new ItemStack(SSPItem.rainlinse,1));
+  if(Config.recipemolecular29)
 addrecipe(new ItemStack(SSPItem.matter,1,3),nbt29,new ItemStack(SSPItem.netherlinse,1));
+  if(Config.recipemolecular30)
 addrecipe(new ItemStack(SSPItem.matter,1,4),nbt30,new ItemStack(SSPItem.nightlinse,1));
+  if(Config.recipemolecular31)
 addrecipe(new ItemStack(SSPItem.matter,1,5),nbt31,new ItemStack(SSPItem.earthlinse,1));
+  if(Config.recipemolecular32)
 addrecipe(new ItemStack(SSPItem.matter,1,6),nbt32,new ItemStack(SSPItem.endlinse,1));
+  if(Config.recipemolecular33)
 addrecipe(new ItemStack(SSPItem.matter,1,7),nbt33,new ItemStack(SSPItem.aerlinse,1));
+  if(Config.recipemolecular34)
 addrecipe(Ic2Items.iridiumOre,nbt34,OreDictionary.getOres("Photon").get(0));
+  if(Config.recipemolecular35)
 addrecipe(OreDictionary.getOres("ingotMikhalov").get(0),nbt35,OreDictionary.getOres("ingotMagnesium").get(0));
+  if(Config.recipemolecular36)
+addrecipe(OreDictionary.getOres("ingotMagnesium").get(0),nbt36,new ItemStack(SSPItem.caravky_ingot,1));
   }
  public static void addrecipe(ItemStack stack,NBTTagCompound nbt,ItemStack stack1) {
 	 

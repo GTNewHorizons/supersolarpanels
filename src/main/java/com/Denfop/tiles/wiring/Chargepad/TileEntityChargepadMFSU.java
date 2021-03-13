@@ -1,4 +1,4 @@
-package ic2.core.block.wiring;
+package com.Denfop.tiles.wiring.Chargepad;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

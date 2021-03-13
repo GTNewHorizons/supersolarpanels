@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraft.inventory.Container;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.block.Block;
@@ -769,7 +770,11 @@ return this.generating = 0;
     	    this.lastX = nbttagcompound.getInteger("lastX");
     	    this.lastY = nbttagcompound.getInteger("lastY");
     	    this.lastZ = nbttagcompound.getInteger("lastZ");
-    	    
+    	    //
+    	    this.production = nbttagcompound.getInteger("production");
+    	    this.generating = nbttagcompound.getInteger("generating");
+    	    this.tier = nbttagcompound.getInteger("tier");
+    	    this.maxStorage = nbttagcompound.getInteger("maxStorage");
     	 //TODO
     	   
     	    
@@ -795,21 +800,29 @@ return this.generating = 0;
     	    } 
     	   
       }
-    
-    	  
+ 
+    	  public  NBTTagCompound nbt() {
+    		 
+    		
+    		  NBTTagCompound  nbttagcompound = NBTData.getOrCreateNbtData(new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)));
+    	
+      		  nbttagcompound.setInteger("solarType", this.solarType);
+      		
+			return nbttagcompound;
+    		  
+    	  }
     	
     	  public void writeToNBT(NBTTagCompound nbttagcompound) {
     	    super.writeToNBT(nbttagcompound);
     
-    	    
-    	    NBTTagList nbttaglist = new NBTTagList();
-    	   
-    	    	nbttagcompound.setInteger("panelx",this.panelx);
+    	     NBTTagList nbttaglist = new NBTTagList();
+    	      	nbttagcompound.setInteger("panelx",this.panelx);
     	    	nbttagcompound.setInteger("panely",this.panely);
     	    	nbttagcompound.setInteger("panelz",this.panelz);
     	    	if(nameblock != null)
     	    	nbttagcompound.setString("nameblock",nameblock);
-    	    	
+    	  	  
+      	
     	    	nbttagcompound.setInteger("worldid",world1);
     	    	nbttagcompound.setInteger("blocktier",this.blocktier);
     	    	 
@@ -819,6 +832,10 @@ return this.generating = 0;
     	    if(player != null) {
     	    	nbttagcompound.setString("player",player);
     	    }
+    	    nbttagcompound.setInteger("maxStorage", this.maxStorage);
+    	    nbttagcompound.setInteger("tier", this.tier);
+    	    nbttagcompound.setInteger("generating", this.generating);
+    	    nbttagcompound.setInteger("production", this.production);
     	    nbttagcompound.setInteger("solarType", this.solarType);
     	    nbttagcompound.setInteger("storage", this.storage);
     	    nbttagcompound.setInteger("storage2", this.storage2);

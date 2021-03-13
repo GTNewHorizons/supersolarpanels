@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.SuperSolarPanel.AlloySmelter")
+@ZenClass("mods.IndustiralUpgrade.AlloySmelter")
 public class CTAlloySmelter {
   @ZenMethod
   public static void addAlloSmelterRecipe(IItemStack output, IIngredient container, IIngredient fill) {

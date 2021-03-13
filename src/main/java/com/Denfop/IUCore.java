@@ -3,33 +3,16 @@
 package com.Denfop;
 
 import java.util.Random;
-
-import com.Denfop.Register.Register;
-import com.Denfop.Register.RegisterOreDict;
+import com.Denfop.Register.*;
 import com.Denfop.World.GenOre;
 import com.Denfop.block.Base.BlocksItems;
 import com.Denfop.proxy.CommonProxy;
-import com.Denfop.tab.CreativeTabSSP;
-import com.Denfop.tab.CreativeTabSSP1;
-import com.Denfop.tab.CreativeTabSSP2;
-import com.Denfop.tab.CreativeTabSSP3;
-import com.Denfop.tab.CreativeTabSSP4;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.LoaderException;
-import cpw.mods.fml.common.Mod;
+import com.Denfop.tab.*;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import ic2.api.energy.EnergyNet;
-import ic2.api.energy.IEnergyNet;
+import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.*;
+import ic2.api.energy.*;
 import ic2.core.energy.EnergyNetGlobal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -64,7 +47,7 @@ BlocksItems.init();
         RegisterOreDict.oredict();
           IUCore.proxy.registerRenderers();
         IUCore.proxy.load();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, (IGuiHandler)IUCore.proxy);
+      
         proxy.initCore();
         
     }

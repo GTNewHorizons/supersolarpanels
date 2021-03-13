@@ -54,12 +54,18 @@ public class WailaHandler implements IWailaDataProvider {
 
     if(accessor.getWorld().getTileEntity(accessor.getPosition().blockX, accessor.getPosition().blockY,accessor.getPosition().blockZ) instanceof TileEntitySolarPanel) {
     	  int energy = accessor.getNBTInteger(accessor.getNBTData(), "storage");
-    	  int solartype = accessor.getNBTInteger(accessor.getNBTData(), "solartype");
-    
+    	  int solartype = accessor.getNBTInteger(accessor.getNBTData(), "solarType");
+    	  int generating = accessor.getNBTInteger(accessor.getNBTData(), "generating");
+    	  int production = accessor.getNBTInteger(accessor.getNBTData(), "production");
+    	  int tier = accessor.getNBTInteger(accessor.getNBTData(), "tier");
+    	    Block blockEMC =accessor.getWorld().getBlock(accessor.getPosition().blockX, accessor.getPosition().blockY,accessor.getPosition().blockZ);
+    	    NBTTagCompound nbttagcompound  = NBTData.getOrCreateNbtData(new ItemStack(blockEMC));
+    	    nbttagcompound.setInteger("solarType", solartype);
+    	   
     	TileEntitySolarPanel tile = (TileEntitySolarPanel) accessor.getWorld().getTileEntity(accessor.getPosition().blockX, accessor.getPosition().blockY,accessor.getPosition().blockZ);
-    	currenttip.add(StatCollector.translateToLocal("gui.SuperSolarPanel.generating") +" "+ tile.generating+" EU/t" + EnumChatFormatting.RESET); 
-    	currenttip.add(StatCollector.translateToLocal("gui.SuperSolarPanel.maxOutput") +" "+ tile.production+" EU/t" + EnumChatFormatting.RESET); 
-    	currenttip.add(StatCollector.translateToLocal("ssp.tier") +" "+ tile.tier + EnumChatFormatting.RESET); 
+    	currenttip.add(StatCollector.translateToLocal("gui.SuperSolarPanel.generating") +" "+ generating+" EU/t" + EnumChatFormatting.RESET); 
+    	currenttip.add(StatCollector.translateToLocal("gui.SuperSolarPanel.maxOutput") +" "+ production+" EU/t" + EnumChatFormatting.RESET); 
+    	currenttip.add(StatCollector.translateToLocal("ssp.tier") + tier + EnumChatFormatting.RESET); 
     	String ModulesString6 = I18n.format("ssp.moduletype", new Object[0]);
     	String ModulesString61 = I18n.format("ssp.moduletype1", new Object[0]);
     	    String ModulesString62 = I18n.format("ssp.moduletype2", new Object[0]); 

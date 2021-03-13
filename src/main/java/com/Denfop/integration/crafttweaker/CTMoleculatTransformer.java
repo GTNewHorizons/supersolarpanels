@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.SuperSolarPanel.MoleculatTransformer")
+@ZenClass("mods.IndustiralUpgrade.MoleculatTransformer")
 public class CTMoleculatTransformer {
   @ZenMethod
   public static void addRecipe(IItemStack[] output, IIngredient ingredient, int minHeat) {

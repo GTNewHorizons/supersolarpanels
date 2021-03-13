@@ -803,8 +803,12 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         TileEntity te = world.getTileEntity(x, y, z);
         TileEntitySolarPanel tile = (TileEntitySolarPanel)world.getTileEntity(x, y, z);
         int facing = (te instanceof TileEntityBase) ? ((TileEntityBase)te).getFacing() : 0;
-       
-          int g = tile.solarType;
+       ItemStack item = new ItemStack(tile.getWorldObj().getBlock(x, y, z));
+       NBTTagCompound nbttagcompound  = tile.nbt();
+       System.out.println( nbttagcompound.getInteger("solarType") + " " + item);
+
+          int g = nbttagcompound.getInteger("solarType");
+          
           if (g == 1)
             return this.iconBuffer1[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]]; 
           if (g == 2)
@@ -821,8 +825,9 @@ public class BlockSSPSolarPanel extends BlockContainer  {
             return this.iconBuffer7[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]]; 
           if (g == 0)
           return this.iconBuffer[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][facing]];
-        
-          return null;
+       
+	return null;
+         
          
        
       }

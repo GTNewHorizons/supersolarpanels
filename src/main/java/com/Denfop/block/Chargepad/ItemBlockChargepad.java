@@ -41,6 +41,14 @@ public ItemBlockChargepad(Block block) {
         return "ssp.blockChargepadMFE";
       case 1:
         return "ssp.blockChargepadMFES";
+      case 2:
+          return "ssp.blockChargepadBatBox";
+        case 3:
+          return "ssp.blockChargepadCESU";
+        case 4:
+          return "ssp.blockChargepadMFE";
+        case 5:
+          return "ssp.blockChargepadMFSU";
     } 
     return null;
   }
@@ -67,10 +75,26 @@ public ItemBlockChargepad(Block block) {
            info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + Config.storage2  + " EU ");
            info.add(StatCollector.translateToLocal("ssp.tier") + Config.tier2_MFSU);
          break;
+      case 2:
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " 32EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " 40k EU ");
+          break;
+        case 3:
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " 128EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " 300k EU");
+          break;
+        case 4:
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " 512EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " 4m EU");
+          break;
+        case 5:
+          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " 2048EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " 40m EU");
+          break;
     } 
     switch (meta) {
       case 0:
       case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
         nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
         info.add(StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbttagcompound.getInteger("energy") + " EU");
         info.add(StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbttagcompound.getInteger("energy2") + " RF");
@@ -82,6 +106,10 @@ public ItemBlockChargepad(Block block) {
   public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
     itemList.add(new ItemStack(item, 1, 0));
     itemList.add(new ItemStack(item, 1, 1));
+    itemList.add(new ItemStack(item, 1, 2));
+    itemList.add(new ItemStack(item, 1, 3));
+    itemList.add(new ItemStack(item, 1, 4));
+    itemList.add(new ItemStack(item, 1, 5));
     ItemStack  itemStack = new ItemStack(item, 1, 0);
     NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     itemStack.setItemDamage(0);
@@ -94,6 +122,32 @@ public ItemBlockChargepad(Block block) {
     nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
     nbttagcompound.setDouble("energy",  Config.storage2);
     nbttagcompound.setDouble("energy2",  Config.storage2);
+    itemList.add(itemStack);
+    
+    //
+     itemStack = new ItemStack(item, 1,2);
+    itemStack.setItemDamage(2);
+     nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy", 40000.0D);
+    nbttagcompound.setDouble("energy2",  40000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item,1, 3);
+    itemStack.setItemDamage(3);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy", 300000.0D);
+    nbttagcompound.setDouble("energy2",  300000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1,4);
+    itemStack.setItemDamage(4);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy", 4000000.0D);
+    nbttagcompound.setDouble("energy2",  4000000);
+    itemList.add(itemStack);
+    itemStack = new ItemStack(item, 1,5);
+    itemStack.setItemDamage(5);
+    nbttagcompound = NBTData.getOrCreateNbtData(itemStack);
+    nbttagcompound.setDouble("energy", 4.0E7D);
+    nbttagcompound.setDouble("energy2",  4.0E7D);
     itemList.add(itemStack);
   }
 

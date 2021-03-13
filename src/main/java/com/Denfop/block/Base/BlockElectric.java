@@ -101,6 +101,27 @@ public class BlockElectric extends BlockContainer {
       this.iconBuffer[2][3] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_main");
       this.iconBuffer[2][4] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_side");
       this.iconBuffer[2][5] = par1IconRegister.registerIcon("supersolarpanel:blockBatBox_side_1");
+      
+      this.iconBuffer[3][0] = par1IconRegister.registerIcon("supersolarpanel:blockMFE");
+      this.iconBuffer[3][1] = par1IconRegister.registerIcon("supersolarpanel:blockMFE");
+      this.iconBuffer[3][2] = par1IconRegister.registerIcon("supersolarpanel:blockMFE2");
+      this.iconBuffer[3][3] = par1IconRegister.registerIcon("supersolarpanel:blockMFE3");
+      this.iconBuffer[3][4] = par1IconRegister.registerIcon("supersolarpanel:blockMFE2");
+      this.iconBuffer[3][5] = par1IconRegister.registerIcon("supersolarpanel:blockMFE4");
+      
+      this.iconBuffer[4][0] = par1IconRegister.registerIcon("supersolarpanel:MFSU");
+      this.iconBuffer[4][1] = par1IconRegister.registerIcon("supersolarpanel:MFSU");
+      this.iconBuffer[4][2] = par1IconRegister.registerIcon("supersolarpanel:MFSU2");
+      this.iconBuffer[4][3] = par1IconRegister.registerIcon("supersolarpanel:MFSU3");
+      this.iconBuffer[4][4] = par1IconRegister.registerIcon("supersolarpanel:MFSU2");
+      this.iconBuffer[4][5] = par1IconRegister.registerIcon("supersolarpanel:MFSU2");
+      
+      this.iconBuffer[5][0] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_side");
+      this.iconBuffer[5][1] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_side");
+      this.iconBuffer[5][2] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_side_1");
+      this.iconBuffer[5][3] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_main");
+      this.iconBuffer[5][4] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_side_1");
+      this.iconBuffer[5][5] = par1IconRegister.registerIcon("supersolarpanel:blockCESU_side_2");
   }
   
   @Override
