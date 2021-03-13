@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import com.Denfop.Config;
 import com.Denfop.SSPItem;
 import com.Denfop.IUCore;
-import com.Denfop.Recipes.AlloySmelterRecipe;
 import com.Denfop.Recipes.BasicRecipe;
 import com.Denfop.Recipes.CannerRecipe;
 import com.Denfop.Recipes.CentrifugeRecipe;
@@ -211,7 +210,7 @@ if(Config.DraconicLoaded && Config.Draconic)
 if(Config.AvaritiaLoaded && Config.Avaritia )
 	AvaritiaIntegration.recipe();
 
-AlloySmelterRecipe.recipe();
+
 CompressorRecipe.recipe();
 CannerRecipe.recipe();
 FurnaceRecipes.recipe();  

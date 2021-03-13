@@ -334,7 +334,8 @@ public static boolean recipemolecular33;
 public static boolean recipemolecular34; 
 public static boolean recipemolecular35;
 public static boolean recipemolecular36;
-public static int molecular36; 
+
+public static int molecular36;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {

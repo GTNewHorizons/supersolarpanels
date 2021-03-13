@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.Denfop.Config;
 import com.Denfop.IUCore;
-import com.Denfop.Recipes.AlloySmelterRecipe;
 import com.Denfop.Recipes.BasicRecipe;
 import com.Denfop.Recipes.CannerRecipe;
 import com.Denfop.Recipes.CentrifugeRecipe;
@@ -212,7 +211,7 @@ if(Config.DraconicLoaded && Config.Draconic)
 if(Config.AvaritiaLoaded && Config.Avaritia )
 	AvaritiaIntegration.recipe();
 
-AlloySmelterRecipe.recipe();
+
 CompressorRecipe.recipe();
 CannerRecipe.recipe();
 FurnaceRecipes.recipe();  

@@ -46,8 +46,28 @@ public static void recipe() {
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module5,1,3), new Object[] { " B ", "AAA", "   ",  'A',  new ItemStack(SSPItem.endlinse,1), 'B', new ItemStack(SSPItem.QuantumItems8,1)});
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module5,1,0), new Object[] { " B ", "AAA", "   ",  'A',  new ItemStack(SSPItem.aerlinse,1), 'B', new ItemStack(SSPItem.QuantumItems8,1)});
 	
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,0), new Object[] { "CBD", " A ", "DBC",  'A',  Ic2Items.advancedCircuit, 'B', new ItemStack(SSPItem.caravky_ingot,1),'C', new ItemStack(SSPItem.invaringot,1),'D', new ItemStack(SSPItem.electriumingot,1) });
+		
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,1), new Object[] { "CBD", " A ", "DBC",  'A',  SSPItem.overclockerUpgrade1, 'B', new ItemStack(SSPItem.caravky_ingot,1),'C', new ItemStack(SSPItem.invarplate,1),'D', new ItemStack(SSPItem.electriumplate,1) });
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,2), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,1), 'B', new ItemStack(SSPItem.QuantumItems,1),'C', new ItemStack(SSPItem.photoniy,1),'D', new ItemStack(SSPItem.advanced_core,1) });
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,3), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,2), 'B', new ItemStack(SSPItem.QuantumItems3,1),'C', new ItemStack(SSPItem.photoniy_ingot,1),'D', new ItemStack(SSPItem.hybrid_core,1) });
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,4), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,3), 'B', new ItemStack(SSPItem.QuantumItems8,1),'C', new ItemStack(SSPItem.QuantumItems6,1),'D', new ItemStack(SSPItem.ultimate_core,1) });
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,5), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,4), 'B', new ItemStack(SSPItem.QuantumItems9,1),'C', new ItemStack(SSPItem.QuantumItems7,1),'D', new ItemStack(SSPItem.spectralcore,1) });
+	//
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.nanoaxe,1), new Object[] { " B ", "CAC", " B ",  'A', Items.diamond_axe, 'B', new ItemStack(SSPItem.QuantumItems9,1),'C', new ItemStack(SSPItem.photoniy,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.nanopickaxe,1), new Object[] { " B ", "CAC", " B ",   'A', Items.diamond_pickaxe, 'B', new ItemStack(SSPItem.QuantumItems9,1),'C', new ItemStack(SSPItem.photoniy,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.nanoshovel,1), new Object[] {  " B ", "CAC", " B ",   'A',  Items.diamond_shovel, 'B', new ItemStack(SSPItem.QuantumItems9,1),'C', new ItemStack(SSPItem.photoniy,1) });
 	
-	//TODO Recipe Ultimate Drill
+	 
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.quantumaxe,1), new Object[] { " B ", "CAC", " B ",  'A', new ItemStack(SSPItem.nanoaxe,1), 'B', new ItemStack(SSPItem.QuantumItems8,1),'C', new ItemStack(SSPItem.QuantumItems6,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.quantumpickaxe,1), new Object[] { " B ", "CAC", " B ",   'A', new ItemStack(SSPItem.nanopickaxe,1), 'B', new ItemStack(SSPItem.QuantumItems8,1),'C', new ItemStack(SSPItem.QuantumItems6,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.quantumshovel,1), new Object[] {  " B ", "CAC", " B ",   'A',  new ItemStack(SSPItem.nanoshovel,1), 'B', new ItemStack(SSPItem.QuantumItems8,1),'C', new ItemStack(SSPItem.QuantumItems6,1) });
+	
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.spectralaxe,1), new Object[] { " B ", "CAC", " B ",  'A', new ItemStack(SSPItem.quantumaxe,1), 'B', new ItemStack(SSPItem.QuantumItems5,1),'C', new ItemStack(SSPItem.QuantumItems3,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.spectralpickaxe,1), new Object[] { " B ", "CAC", " B ",   'A', new ItemStack(SSPItem.quantumpickaxe,1), 'B', new ItemStack(SSPItem.QuantumItems5,1),'C', new ItemStack(SSPItem.QuantumItems3,1)});
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.spectralshovel,1), new Object[] {  " B ", "CAC", " B ",   'A',  new ItemStack(SSPItem.quantumshovel,1), 'B', new ItemStack(SSPItem.QuantumItems5,1),'C', new ItemStack(SSPItem.QuantumItems3,1) });
+	
+	 //TODO Recipe Ultimate Drill
 	  GameRegistry.addRecipe(new ItemStack(SSPItem.ultDDrill,1,OreDictionary.WILDCARD_VALUE), new Object[] { " L ", "ODO", "COC",  'O',  SSPItem.overclockerUpgrade1, 'D' , new ItemStack(Ic2Items.diamondDrill.getItem(),1,OreDictionary.WILDCARD_VALUE), 'C' ,SSPItem.QuantumItems5,'L',SSPItem.QuantumItems3});
   	
       //TODO Recipe Advanced and Improvemed Overclockers

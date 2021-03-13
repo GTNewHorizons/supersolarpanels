@@ -230,7 +230,7 @@ item.sunlinse.name=Линза Сонца
 item.teraDDrill.name=Террабур
 item.terrasteel_core.name=Террастальное ядро
 item.terrasteel_plate.name=Террастальная пластина
-item.advDDrill.name=Продвинутый бур
+item.advDDrill.name=Продвинутый мультиинструмент
 item.ultimate_core.name=Ультимативное ядро
 ssp.overclockerUpgrade1=Улучшенный ускоритель
 ssp.overclockerUpgrade2=Продвинутый ускоритель
@@ -258,7 +258,7 @@ blockChaosSolarPanel.name=Хаотическая Солнечная панель
 blockProtonSolarPanel.name=§9Протонная Солнечная панель
 blockElementumSolarPanel.name=Элементиум Солнечная панель
 blockTerrasteelSolarPanel.name=Террастальная Солнечная панель
-message.text.mode=Режим бура 
+message.text.mode=Режим инструмента
 message.ultDDrill.mode.normal=Нормальный
 message.ultDDrill.mode.lowPower=Лёгкий режим
 message.ultDDrill.mode.bigHoles=Большой режим
@@ -557,6 +557,15 @@ ssp.blockChargepadMFE.name=Заряжаючая плита (МФЭ)
 ssp.blockChargepadMFSU.name=Заряжаючая плита (МФЭХ)
 ssp.blockChargepadCESU.name=Заряжаючая плита (МЭХ)
 
+item.nanopickaxe.name=Нано-кирка
+item.nanoaxe.name=Нано-топор
+item.nanoshovel.name=Нано-лопата
+item.quantumpickaxe.name=Квантовая кирка
+item.quantumaxe.name=Квантовый топор
+item.quantumshovel.name=Квантовая лопата
+item.spectralpickaxe.name=Спектральная кирка
+item.spectralaxe.name=Спектральный топор
+item.spectralshovel.name=Спектральная лопата
 
 
 
