@@ -330,6 +330,12 @@ public static void registertiles() {
 	    GameRegistry.registerTileEntity(TileEntityChargepadCESU.class, "Chargepad CESU1");
 	    GameRegistry.registerTileEntity(TileEntityChargepadMFE.class, "Chargepad MFE1");
 	    GameRegistry.registerTileEntity(TileEntityChargepadMFSU.class, "Chargepad MFSU1");
+	    
+		
+		    GameRegistry.registerTileEntity(TileEntityElectricCESU.class, " CESU1");
+		    GameRegistry.registerTileEntity(TileEntityElectricMFEMin.class, " MFE1");
+		    GameRegistry.registerTileEntity(TileEntityElectricMFSUMin.class, " MFSU1");
+	    
 	 GameRegistry.registerTileEntity(TileEntityMolecularTransformer.class, "MolecularTransformer");
 	 GameRegistry.registerTileEntity(TileEntityQuantumQuarry.class, "QuantumQuarry");
 	 GameRegistry.registerTileEntity(TileEntityGenerationStone.class, "Generation Stone");
