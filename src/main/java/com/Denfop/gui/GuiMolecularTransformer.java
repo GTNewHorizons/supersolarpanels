@@ -41,7 +41,7 @@ public class GuiMolecularTransformer extends GuiSSP {
     String energyPerOperation = I18n.format("gui.MolecularTransformer.energyPerOperation", new Object[0]) + ": ";
    
     //
-    String energyPerTick = I18n.format("gui.AdvancedSolarPanel.energyPerTick", new Object[0]) + ": ";
+    String energyPerTick = I18n.format("gui.SuperSolarPanel.energyPerTick", new Object[0]) + ": ";
     String progress = I18n.format("gui.MolecularTransformer.progress", new Object[0]) + ": ";
     float chargeLevel = (15.0F * ((TileEntityMolecularTransformer)this.container.base).getChargeLevel());
    
