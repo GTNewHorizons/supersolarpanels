@@ -805,8 +805,6 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         int facing = (te instanceof TileEntityBase) ? ((TileEntityBase)te).getFacing() : 0;
        ItemStack item = new ItemStack(tile.getWorldObj().getBlock(x, y, z));
        NBTTagCompound nbttagcompound  = tile.nbt();
-       System.out.println( nbttagcompound.getInteger("solarType") + " " + item);
-
           int g = nbttagcompound.getInteger("solarType");
           
           if (g == 1)

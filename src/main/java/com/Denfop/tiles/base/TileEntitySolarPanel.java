@@ -75,7 +75,7 @@ import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
 import ic2.api.energy.tile.IEnergyTile;
 
-public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,INetworkDataProvider, INetworkUpdateListener, IWrenchable, IEnergySource, IInventory, IEnergyHandler, INetworkClientTileEntityEventListener
+public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,INetworkDataProvider, INetworkUpdateListener, IWrenchable, IEnergySource, IInventory, IEnergyHandler, INetworkClientTileEntityEventListener,IEnergyReceiver
 {private TileEntitySolarPanel tileentity;
     public static Random randomizer;
     public int ticker;
@@ -353,9 +353,12 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			
         			for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
         		        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
-        		        if (tile instanceof IEnergyHandler)
+        		        if (tile instanceof IEnergyReceiver)
         		          extractEnergy(side.getOpposite(), ((IEnergyReceiver)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), (this.production * 8), true), false), false); 
-        		      } 
+        		        else if (tile instanceof IEnergyHandler)
+        		        	   extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), 8182, true), false), false); 
+        		       
+        			} 
         			
         			}
         		}

@@ -282,7 +282,10 @@ public int getInventoryStackLimit() {
         TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
         if (tile instanceof IEnergyReceiver)
           extractEnergy(side.getOpposite(), ((IEnergyReceiver)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), 8182, true), false), false); 
-      }
+        else if (tile instanceof IEnergyHandler)
+        	   extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), 8182, true), false), false); 
+        
+    }
     
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof AdditionModule) {
 		int kk = chargeSlots[0].getItemDamage();
