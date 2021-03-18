@@ -139,7 +139,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer1[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer1[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer1[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer1[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer1[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer1[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer1[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topaer");
         this.iconBuffer1[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -187,7 +187,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer2[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer2[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer2[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer2[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer2[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer2[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer2[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topearth");
         this.iconBuffer2[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -235,7 +235,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer3[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer3[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer3[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer3[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer3[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer3[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer3[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topnether");
         this.iconBuffer3[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -283,7 +283,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer4[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer4[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer4[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer4[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer4[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer4[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer4[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topend");
         this.iconBuffer4[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -331,7 +331,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer5[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer5[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer5[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer5[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer5[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer5[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer5[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topmoon");
         this.iconBuffer5[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -379,7 +379,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer6[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer6[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer6[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer6[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer6[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer6[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer6[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_topsun");
         this.iconBuffer6[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
@@ -427,7 +427,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         this.iconBuffer7[0][8] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer7[0][9] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer7[0][10] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
-        this.iconBuffer7[0][11] = par1IconRegister.registerIcon("superolarpanel:asp_side");
+        this.iconBuffer7[0][11] = par1IconRegister.registerIcon("supersolarpanel:asp_side");
         this.iconBuffer7[1][0] = par1IconRegister.registerIcon("supersolarpanel:hsp_bottom");
         this.iconBuffer7[1][1] = par1IconRegister.registerIcon("supersolarpanel:hsp_toprain");
         this.iconBuffer7[1][2] = par1IconRegister.registerIcon("supersolarpanel:hsp_side");
