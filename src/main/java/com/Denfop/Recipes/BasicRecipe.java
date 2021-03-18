@@ -68,8 +68,8 @@ public static void recipe() {
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.spectralshovel,1,OreDictionary.WILDCARD_VALUE), new Object[] {  " B ", "CAC", " B ",   'A',  new ItemStack(SSPItem.quantumshovel,1,OreDictionary.WILDCARD_VALUE), 'B', new ItemStack(SSPItem.QuantumItems5,1),'C', new ItemStack(SSPItem.QuantumItems3,1) });
 	
 	 //TODO Recipe Ultimate Drill
-	  GameRegistry.addRecipe(new ItemStack(SSPItem.ultDDrill,1,OreDictionary.WILDCARD_VALUE), new Object[] { " L ", "ODO", "COC",  'O',  SSPItem.overclockerUpgrade1, 'D' , new ItemStack(Ic2Items.diamondDrill.getItem(),1,OreDictionary.WILDCARD_VALUE), 'C' ,SSPItem.QuantumItems5,'L',SSPItem.QuantumItems3});
-  	
+	  GameRegistry.addRecipe(new ItemStack(SSPItem.ultDDrill,1,OreDictionary.WILDCARD_VALUE), new Object[] { "MLQ", "ODO", "COC",  'O',  SSPItem.overclockerUpgrade1, 'D' , new ItemStack(SSPItem.spectralpickaxe,1,OreDictionary.WILDCARD_VALUE), 'C' ,SSPItem.QuantumItems5,'L',SSPItem.QuantumItems3, 'Q' , new ItemStack(SSPItem.spectralaxe,1,OreDictionary.WILDCARD_VALUE), 'D' , new ItemStack(SSPItem.spectralshovel,1,OreDictionary.WILDCARD_VALUE)});
+  //,OreDictionary.WILDCARD_VALUE
       //TODO Recipe Advanced and Improvemed Overclockers
       GameRegistry.addRecipe(SSPItem.overclockerUpgrade ,new Object[] {  "BAB",   'A' , Ic2Items.overclockerUpgrade,'B',SSPItem.QuantumItems9 });
       GameRegistry.addRecipe(SSPItem.overclockerUpgrade1 ,new Object[] {  "BAB",   'A' ,SSPItem.overclockerUpgrade,'B',SSPItem.QuantumItems8 });

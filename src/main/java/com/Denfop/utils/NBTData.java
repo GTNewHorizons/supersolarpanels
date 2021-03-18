@@ -16,6 +16,7 @@ public class NBTData {
 	            nbttagcompound.setInteger("energy", 0);
 	            nbttagcompound.setInteger("energy2", 0);
 	            nbttagcompound.setBoolean("isFlyActive", false);
+	            nbttagcompound.setBoolean("create", false);
 	            nbttagcompound.setString("World", "");
 	            nbttagcompound.setInteger("World1", 0);
 	            nbttagcompound.setInteger("Xcoord", 0);

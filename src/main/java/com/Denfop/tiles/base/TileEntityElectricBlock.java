@@ -278,6 +278,11 @@ public int getInventoryStackLimit() {
    
   protected void updateEntityServer() {
     super.updateEntityServer();
+    for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
+        if (tile instanceof IEnergyReceiver)
+          extractEnergy(side.getOpposite(), ((IEnergyReceiver)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), 8182, true), false), false); 
+      }
     
     if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof AdditionModule) {
 		int kk = chargeSlots[0].getItemDamage();
@@ -456,12 +461,12 @@ this.output=this.l+this.output_plus+this.output_plus1;
 	      }
 	    
     
-   if(this.energy2 >0) {
-    for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
-        if (tile instanceof IEnergyHandler)
-          extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), ((this.output+this.output_plus+this.output_plus1) * 4), true), false), false); 
-      } }
+   if(this.energy >= this.maxStorage) {
+	   this.energy =  this.maxStorage;
+   }
+   if(this.energy2 >= this.maxStorage2) {
+	   this.energy2 =  this.maxStorage2;
+   }
         if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof ItemWirelessModule) {
    		 NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(this.chargeSlots[0]);
    		 nbttagcompound.setInteger("Xcoord", this.xCoord);
@@ -494,6 +499,7 @@ this.output=this.l+this.output_plus+this.output_plus1;
     if (needsInvUpdate)
       markDirty(); 
   }
+  
   public boolean transfer = false;
   public void setTransfer(boolean t) {
       this.transfer = t;

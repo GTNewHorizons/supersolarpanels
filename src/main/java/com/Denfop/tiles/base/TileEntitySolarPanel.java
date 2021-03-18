@@ -2,7 +2,7 @@
 
 
 package com.Denfop.tiles.base;
-
+import cofh.api.energy.IEnergyReceiver;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -354,7 +354,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         			for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
         		        TileEntity tile = this.worldObj.getTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
         		        if (tile instanceof IEnergyHandler)
-        		          extractEnergy(side.getOpposite(), ((IEnergyHandler)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), (this.production * 8), true), false), false); 
+        		          extractEnergy(side.getOpposite(), ((IEnergyReceiver)tile).receiveEnergy(side.getOpposite(), extractEnergy(side.getOpposite(), (this.production * 8), true), false), false); 
         		      } 
         			
         			}
