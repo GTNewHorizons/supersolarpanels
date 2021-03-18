@@ -3,6 +3,9 @@ package com.Denfop.events.DE;
 import java.util.Map;
 
 import com.Denfop.SSPItem;
+import com.Denfop.item.energy.EnergyAxe;
+import com.Denfop.item.energy.EnergyPickaxe;
+import com.Denfop.item.energy.EnergyShovel;
 import com.Denfop.IUCore;
 import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.container.ContainerDissEnchanter;
@@ -27,8 +30,10 @@ public class SSPDEEventHandler {
 		  EntityPlayer player = (EntityPlayer) event.entity;
 		  //TODO start for 
 		  for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
+			  
+			 
 			  //  TODO start Check inventory
-			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill || player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem())) {
+			  if(player.inventory.mainInventory[i] != null&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill|| player.inventory.mainInventory[i].getItem() instanceof EnergyAxe|| player.inventory.mainInventory[i].getItem() instanceof EnergyPickaxe || player.inventory.mainInventory[i].getItem() instanceof EnergyShovel|| player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem())) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
 				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input); 

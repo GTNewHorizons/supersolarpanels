@@ -371,10 +371,10 @@ itemGroup.sspitems=Industrial Upgrade  Предметы
 itemGroup.sspores=Industrial Upgrade  Руды
 itemCellEmpty.name=Хранилище Нейтрония
 itemCellUuMatter.name=Жидкосный нейтроний
-module76.name=Многовенная беспроводная зарядка брони 
-module77.name=Многовенная беспроводная зарядка инструментов
-module78.name=Многовенная беспроводная зарядка брони (RF)
-module79.name=Многовенная беспроводная зарядка инструментов (RF)
+module76.name=Мгновенная беспроводная зарядка брони 
+module77.name=Мгновенная беспроводная зарядка инструментов
+module78.name=Мгновенная беспроводная зарядка брони (RF)
+module79.name=Мгновенная беспроводная зарядка инструментов (RF)
 ssp.blockGenerationMicrochip.name=Производитель микросхем
 ssp.itemGoldCableII=§5Квантовый провод
 ssp.itemIronCableII=§bУльтимативный провод
@@ -449,8 +449,8 @@ item.spectralpickaxe.name=Спектральная кирка
 item.spectralaxe.name=Спектральный топор
 item.spectralshovel.name=Спектральная лопата
 
-supsolpans.SSP.GenerationDay.toollip=Генерация днём:
-supsolpans.SSP.GenerationNight.toollip=Генерация ночью:
+supsolpans.SSP.GenerationDay.tooltip=Генерация днём:
+supsolpans.SSP.GenerationNight.tooltip=Генерация ночью:
 message.ultDDrill.mode.bigHoles2=Ультимативный большой режим
 
 

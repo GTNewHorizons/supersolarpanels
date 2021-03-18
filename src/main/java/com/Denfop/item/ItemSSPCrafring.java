@@ -71,12 +71,16 @@ public class ItemSSPCrafring extends Item
     public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
         for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
             final ItemStack stack = new ItemStack((Item)this, 1, meta);
+            if(meta == 1 || meta == 2 || meta == 6)
+            	continue;
             itemList.add(stack);
         }
     }
     
     public void getSubItems(final int par1, final CreativeTabs par2CreativeTabs, final List par3List) {
         for (int i = 0; i <= this.IIconsList.length - 1; ++i) {
+        	 if(i == 1 || i == 2 || i == 6)
+             	continue;
             par3List.add(new ItemStack((Item)this, 1, i));
         }
     }
