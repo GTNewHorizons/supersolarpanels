@@ -371,6 +371,7 @@ itemGroup.sspitems=Industrial Upgrade  Предметы
 itemGroup.sspores=Industrial Upgrade  Руды
 itemCellEmpty.name=Хранилище Нейтрония
 itemCellUuMatter.name=Жидкосный нейтроний
+ssp.itemGlassCableI=§7Бесконечный провод
 module76.name=Мгновенная беспроводная зарядка брони 
 module77.name=Мгновенная беспроводная зарядка инструментов
 module78.name=Мгновенная беспроводная зарядка брони (RF)

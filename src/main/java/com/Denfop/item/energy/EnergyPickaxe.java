@@ -388,12 +388,18 @@ mode = 0;
     ItemStack stack = new ItemStack((Item)this, 1);
     
     
+Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
+    
+	
+	enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(this.efficienty));
+	enchantmentMap.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(this.lucky));
+    EnchantmentHelper.setEnchantments(enchantmentMap, stack);
 	
 	
     ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
     subs.add(stack);
  ItemStack itemstack = new ItemStack((Item)this,1,getMaxDamage());
- 
+ EnchantmentHelper.setEnchantments(enchantmentMap, itemstack);
     
     subs.add(itemstack);
   }

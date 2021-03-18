@@ -21,6 +21,9 @@ import com.Denfop.block.cable.BlockCable;
 import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.item.energy.AdvancedMultiTool;
+import com.Denfop.item.energy.EnergyAxe;
+import com.Denfop.item.energy.EnergyPickaxe;
+import com.Denfop.item.energy.EnergyShovel;
 import com.Denfop.tiles.base.TileEntityCable;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.NBTData;
@@ -281,6 +284,32 @@ public class SSPEventHandler {
        
 		}
 	}
+	//
+	@SubscribeEvent
+	public void checkinstruments(LivingEvent.LivingUpdateEvent event) {
+		if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
+			  return;
+		 EntityPlayer player = (EntityPlayer) event.entity;
+		 for(int i = 0 ; i < player.inventory.mainInventory.length ; i++) {
+			  //  TODO start Check inventory
+			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() instanceof EnergyAxe ||player.inventory.mainInventory[i].getItem() instanceof EnergyPickaxe || player.inventory.mainInventory[i].getItem() instanceof EnergyShovel  )) {
+				   ItemStack input = player.inventory.mainInventory[i];
+				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
+				   if(nbtData.getBoolean("create") == true) {
+				   Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
+				   EnergyAxe drill = (EnergyAxe) input.getItem();
+		        	  if(Config.enableefficiency && drill.mode == 0) {
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(drill.efficienty));
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(drill.lucky));
+		        	 nbtData.setBoolean("create",false);
+		        	 EnchantmentHelper.setEnchantments(enchantmentMap4, input);
+		        	  }
+		        	  
+		        	 
+		        	  
+			  }}}
+	}
+	//
 	@SubscribeEvent
 	public void checkdrill(LivingEvent.LivingUpdateEvent event) {
 		if (event.entityLiving == null || !(event.entityLiving instanceof EntityPlayer)) 
