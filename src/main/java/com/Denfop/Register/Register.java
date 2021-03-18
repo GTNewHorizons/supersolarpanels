@@ -227,8 +227,7 @@ public static void register() {
      //
      
       //
-      GameRegistry.registerItem(SSPItem.QuantumItems = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems").setTextureName("supersolarpanel:QuantumItems"), "QuantumItems");
-      GameRegistry.registerItem(SSPItem.QuantumItems2 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems2").setTextureName("supersolarpanel:QuantumItems2"), "QuantumItems2");
+       GameRegistry.registerItem(SSPItem.QuantumItems2 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems2").setTextureName("supersolarpanel:QuantumItems2"), "QuantumItems2");
       GameRegistry.registerItem(SSPItem.QuantumItems3 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems3").setTextureName("supersolarpanel:QuantumItems3"), "QuantumItems3");
       GameRegistry.registerItem(SSPItem.QuantumItems4 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems4").setTextureName("supersolarpanel:QuantumItems4"), "QuantumItems4");
       GameRegistry.registerItem(SSPItem.QuantumItems5 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("QuantumItems5").setTextureName("supersolarpanel:QuantumItems5"), "QuantumItems5");

@@ -46,7 +46,7 @@ public ItemBlockChargepad(Block block) {
         case 3:
           return "ssp.blockChargepadCESU";
         case 4:
-          return "ssp.blockChargepadMFE";
+          return "ssp.blockChargepadMFE1";
         case 5:
           return "ssp.blockChargepadMFSU";
     } 

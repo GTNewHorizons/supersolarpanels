@@ -45,7 +45,6 @@ public class SSPItem {
 	public static ItemStack copperCableBlock;
 	public static ItemStack copperCableItem;
 	public static ItemStack insulatedCopperCableItem;
-	public static Item QuantumItems;
 	public static Item QuantumItems2;
 	public static Item QuantumItems3;
 	public static Item QuantumItems4;

@@ -49,7 +49,7 @@ public static void recipe() {
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,0), new Object[] { "CBD", " A ", "DBC",  'A',  Ic2Items.advancedCircuit, 'B', new ItemStack(SSPItem.caravky_ingot,1),'C', new ItemStack(SSPItem.invaringot,1),'D', new ItemStack(SSPItem.electriumingot,1) });
 		
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,1), new Object[] { "CBD", " A ", "DBC",  'A',  SSPItem.overclockerUpgrade1, 'B', new ItemStack(SSPItem.caravky_ingot,1),'C', new ItemStack(SSPItem.invarplate,1),'D', new ItemStack(SSPItem.electriumplate,1) });
-	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,2), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,1), 'B', new ItemStack(SSPItem.QuantumItems,1),'C', new ItemStack(SSPItem.photoniy,1),'D', new ItemStack(SSPItem.advanced_core,1) });
+	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,2), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,1), 'B', new ItemStack(SSPItem.QuantumItems7,1),'C', new ItemStack(SSPItem.photoniy,1),'D', new ItemStack(SSPItem.advanced_core,1) });
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,3), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,2), 'B', new ItemStack(SSPItem.QuantumItems3,1),'C', new ItemStack(SSPItem.photoniy_ingot,1),'D', new ItemStack(SSPItem.hybrid_core,1) });
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,4), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,3), 'B', new ItemStack(SSPItem.QuantumItems8,1),'C', new ItemStack(SSPItem.QuantumItems6,1),'D', new ItemStack(SSPItem.ultimate_core,1) });
 	 GameRegistry.addRecipe(new ItemStack(SSPItem.module9,1,5), new Object[] { "CBD", " A ", "DBC",  'A',  new ItemStack(SSPItem.module9,1,4), 'B', new ItemStack(SSPItem.QuantumItems9,1),'C', new ItemStack(SSPItem.QuantumItems7,1),'D', new ItemStack(SSPItem.spectralcore,1) });
@@ -135,7 +135,11 @@ public static void recipe() {
     
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.neutroniumcore,1), new Object[] { " A ", "ACA", " A ", 'C', SSPItem.photoniccore,  'A' ,SSPItem.neutroniumingot});
 	   //TODO Recipe Advanced and Improvemed MFSU
-	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,0), new Object[] {  "ACA", 'C', Ic2Items.mfsUnit,  'A' , SSPItem.photoniy_ingot });
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,4), new Object[] {  "ABA","ACA","ADA", 'C',new ItemStack(SSPItem.electricblock,1,3),  'A' , new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B' ,Ic2Items.advancedCircuit,'D', Ic2Items.advancedMachine });
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,3), new Object[] {  "ABA","BCB","ABA", 'C',Ic2Items.machine,  'A' , new ItemStack(Ic2Items.energyCrystal.getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B' ,Ic2Items.insulatedGoldCableItem });
+		 
+
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,0), new Object[] {  "ACA", 'C',new ItemStack(SSPItem.electricblock,1,4),  'A' , SSPItem.photoniy_ingot });
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,1), new Object[] {  "ACA", 'C', new ItemStack(SSPItem.electricblock,1,0),  'A' , SSPItem.QuantumItems5 });
 	    //TODO Recipe dust
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.dust,1) ,new Object[] {  "AAA","AAA","AAA",   'A' , IC2Items.getItem("energiumDust") });
@@ -205,6 +209,10 @@ public static void recipe() {
 			// TODO Recipes Chargepad MFSU
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,0), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',SSPItem.QuantumItems9,'D',new ItemStack(SSPItem.electricblock,1,0),'C',Ic2Items.rubber});
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,1), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',SSPItem.QuantumItems8,'D',new ItemStack(SSPItem.electricblock,1,1),'C',Ic2Items.rubber});
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,2), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',Ic2Items.electronicCircuit,'D',new ItemStack(SSPItem.electricblock,1,2),'C',Ic2Items.rubber});
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,3), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',Ic2Items.electronicCircuit,'D',new ItemStack(SSPItem.electricblock,1,5),'C',Ic2Items.rubber});
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,4), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',Ic2Items.advancedCircuit,'D',new ItemStack(SSPItem.electricblock,1,3),'C',Ic2Items.rubber});
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.Chargepadelectricblock,1,5), new Object[] { "ABA","CDC", 'B',Blocks.stone_pressure_plate ,'A',Ic2Items.advancedCircuit,'D',new ItemStack(SSPItem.electricblock,1,4),'C',Ic2Items.rubber});
 
 		//
 	 // TODO Panels --> modules

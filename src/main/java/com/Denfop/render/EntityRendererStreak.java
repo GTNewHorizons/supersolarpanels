@@ -128,7 +128,7 @@ public class EntityRendererStreak extends Render {
         		break;
         	case 1:
         		mc.renderEngine.bindTexture(texture1);
-        		break;
+        		break; 
         	case 2:
         		mc.renderEngine.bindTexture(texture2);
         		break;
