@@ -336,6 +336,8 @@ public static boolean recipemolecular35;
 public static boolean recipemolecular36;
 
 public static int molecular36;
+public static float energyPerultraLowPowerOperation1;
+public static int ultraLowPower1;
 public static void config(final FMLPreInitializationEvent event) {
 	final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
      try {
@@ -436,14 +438,16 @@ public static void config(final FMLPreInitializationEvent event) {
          effPower= config.get("UltimateDrill", "Mode 0 efficiency", 35).getInt(35); 
          lowPower=config.get("UltimateDrill", "Mode 1 efficiency", 20).getInt(20); 
          bigHolePower =config.get("UltimateDrill", "Mode 2 efficiency", 16).getInt(16); 
-         ultraLowPower=config.get("UltimateDrill", "Mode 3 efficiency", 10).getInt(10); 
+         ultraLowPower=config.get("UltimateDrill", "Mode 3 efficiency", 12).getInt(12); 
+         ultraLowPower1=config.get("UltimateDrill", "Mode 4 efficiency", 10).getInt(10); 
          ultdrillmaxCharge=config.get("UltimateDrill", "maxCharge", 750000).getInt(750000); 
          ultdrilltier=config.get("UltimateDrill", "tier", 2).getInt(2); 
          ultdrilltransferLimit=config.get("UltimateDrill", "transfer Limit", 500).getInt(500); 
          energyPerOperation=config.get("UltimateDrill", "energyPerOperation", 160).getInt(160); 
          energyPerLowOperation=config.get("UltimateDrill", "energyPerLowOperation", 80).getInt(80); 
-         energyPerbigHolePowerOperation=config.get("UltimateDrill", "energyPerBigHolesOperation",300).getInt(300); 
-         energyPerultraLowPowerOperation=config.get("UltimateDrill", "energyPerUltraBigHolesOperation", 500).getInt(500); 
+         energyPerbigHolePowerOperation=config.get("UltimateDrill", "energyPerBigHolesOperation (3x3)",300).getInt(300); 
+         energyPerultraLowPowerOperation=config.get("UltimateDrill", "energyPerUltraBigHolesOperation (5x5)", 500).getInt(500); 
+         energyPerultraLowPowerOperation1=config.get("UltimateDrill", "energyPerUltraBigHolesOperation (7x7)", 700).getInt(700); 
          enableefficiency=config.get("UltimateDrill", "Enable Efficiency tool mode 0", true).getBoolean(true); 
          if(efficiencylevel > 1 && efficiencylevel <15) {
          efficiencylevel=config.get("UltimateDrill", "Level efficiency(tool mode 0)", 10).getInt(10); }else {

@@ -20,13 +20,13 @@ import com.Denfop.IUCore;
 
 import net.minecraft.item.Item;
 
-public class module7 extends Item
+public class AdditionModule extends Item
 {
     private List<String> itemNames;
     private IIcon[] IIconsList;
     private int itemsCount;
     
-    public module7() {
+    public AdditionModule() {
         this.itemNames = new ArrayList<String>();
         this.IIconsList = new IIcon[9];
 

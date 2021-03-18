@@ -15,16 +15,16 @@ import com.Denfop.block.Sintezator.ItemSintezator;
 import com.Denfop.block.Sintezator.Sintezator;
 import com.Denfop.block.cable.BlockCable;
 import com.Denfop.block.expgen.ItemBlockEG;
-import com.Denfop.block.mechanism.BlockMachine;
-import com.Denfop.block.mechanism.BlockMachines;
-import com.Denfop.block.mechanism.BlockMachines1;
+import com.Denfop.block.mechanism.BlockBaseMachine;
+import com.Denfop.block.mechanism.BlockMoreMachine;
+import com.Denfop.block.mechanism.BlockMoreMachine2;
 import com.Denfop.block.ore.*;
 import com.Denfop.item.ItemCell;
 import com.Denfop.item.ItemSSPCrafring;
-import com.Denfop.item.Machina.ItemMachine1;
-import com.Denfop.item.Machina.ItemMachines;
-import com.Denfop.item.Machina.ItemMachines2;
-import com.Denfop.item.Modules.module8;
+import com.Denfop.item.Machina.ItemBaseMachine;
+import com.Denfop.item.Machina.ItemMoreMachine;
+import com.Denfop.item.Machina.ItemMoreMachine2;
+import com.Denfop.item.Modules.QuarryModule;
 import com.Denfop.item.RadionBlock.ItemToriyOre;
 import com.Denfop.item.armour.ItemSolarPanelHelmet;
 import com.Denfop.item.base.*;
@@ -32,11 +32,11 @@ import com.Denfop.item.block.ItemBlockOre;
 import com.Denfop.item.energy.EnergyAxe;
 import com.Denfop.item.energy.EnergyPickaxe;
 import com.Denfop.item.energy.EnergyShovel;
-import com.Denfop.item.matter.matter;
+import com.Denfop.item.matter.SolidMatter;
 import com.Denfop.item.reactor.ItemRadioactive;
 import com.Denfop.tiles.ExpGen.TileXPGenPublic;
 import com.Denfop.tiles.Mechanism.*;
-import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 import com.Denfop.tiles.base.*;
 import com.Denfop.tiles.overtimepanel.*;
@@ -78,7 +78,7 @@ public static void register() {
     
       
       GameRegistry.registerBlock(SSPItem.blockadmin = (Block)new Adminsolarpanel(), (Class)ItemAdminSolarPanel.class, "Aminpanel");
-      GameRegistry.registerBlock(SSPItem.machines = (Block)new BlockMachine(), (Class)ItemMachine1.class, "machines");
+      GameRegistry.registerBlock(SSPItem.machines = (Block)new BlockBaseMachine(), (Class)ItemBaseMachine.class, "machines");
       GameRegistry.registerBlock(SSPItem.electricblock = (Block)new BlockElectric(), (Class)ItemElectricBlock.class, "electricblock");
       GameRegistry.registerBlock(SSPItem.Chargepadelectricblock = (Block)new BlockChargepad(), (Class)ItemBlockChargepad.class, "BlockChargepad");
       
@@ -272,8 +272,8 @@ public static void register() {
 
       
       //
-      GameRegistry.registerItem(SSPItem.module7 = new com.Denfop.item.Modules.module7(), "module7");
-      GameRegistry.registerItem(SSPItem.module9 = new module8(), "module8");
+      GameRegistry.registerItem(SSPItem.module7 = new com.Denfop.item.Modules.AdditionModule(), "module7");
+      GameRegistry.registerItem(SSPItem.module9 = new QuarryModule(), "module8");
       GameRegistry.registerItem(SSPItem.photoniyglass1 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass1").setTextureName("supersolarpanel:photoniyglass1"), "photoniyglass1");
       GameRegistry.registerItem(SSPItem.photoniyglass2 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass2").setTextureName("supersolarpanel:photoniyglass2"), "photoniyglass2");
       GameRegistry.registerItem(SSPItem.photoniyglass3 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass3").setTextureName("supersolarpanel:photoniyglass3"), "photoniyglass3");
@@ -285,27 +285,27 @@ public static void register() {
       GameRegistry.registerItem(SSPItem.photoniyglass9 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass9").setTextureName("supersolarpanel:photoniyglass9"), "photoniyglass9");
       GameRegistry.registerItem(SSPItem.photoniyglass10 = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("photoniyglass10").setTextureName("supersolarpanel:photoniyglass10"), "photoniyglass10");
 
-		GameRegistry.registerBlock(SSPItem.machines_base = new BlockMachines(), ItemMachines.class, "machines_base");
-		GameRegistry.registerBlock(SSPItem.machines_base1 = new BlockMachines1(), ItemMachines2.class, "machines_base1");
+		GameRegistry.registerBlock(SSPItem.machines_base = new BlockMoreMachine(), ItemMoreMachine.class, "machines_base");
+		GameRegistry.registerBlock(SSPItem.machines_base1 = new BlockMoreMachine2(), ItemMoreMachine2.class, "machines_base1");
 		if(!Loader.isModLoaded("wirelessvajra"))
 			 GameRegistry.registerBlock(SSPItem.expgen, ItemBlockEG.class, "ExpGen1");
 		 GameRegistry.registerItem(SSPItem.module8, "WirelessModule1");
 	
 	    GameRegistry.registerItem(SSPItem.ultDDrill , "ultDDrill");
-      GameRegistry.registerItem(SSPItem.module1 = new com.Denfop.item.Modules.module1().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
-      GameRegistry.registerItem(SSPItem.module2 = new com.Denfop.item.Modules.module2().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
-      GameRegistry.registerItem(SSPItem.module3 = new com.Denfop.item.Modules.module3().setMaxStackSize(64).setUnlocalizedName("module3").setTextureName("supersolarpanel:module3"), "module3");
-      GameRegistry.registerItem(SSPItem.module4 = new com.Denfop.item.Modules.module4().setMaxStackSize(64).setUnlocalizedName("module4").setTextureName("supersolarpanel:module4"), "module4");
-      GameRegistry.registerItem(SSPItem.module5 = new com.Denfop.item.Modules.module5().setMaxStackSize(64).setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");
+      GameRegistry.registerItem(SSPItem.module1 = new com.Denfop.item.Modules.ModuleGenerationDay().setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"), "module1");
+      GameRegistry.registerItem(SSPItem.module2 = new com.Denfop.item.Modules.ModuleGenerationNight().setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"), "module2");
+      GameRegistry.registerItem(SSPItem.module3 = new com.Denfop.item.Modules.ModuleStorage().setMaxStackSize(64).setUnlocalizedName("module3").setTextureName("supersolarpanel:module3"), "module3");
+      GameRegistry.registerItem(SSPItem.module4 = new com.Denfop.item.Modules.ModuleOutput().setMaxStackSize(64).setUnlocalizedName("module4").setTextureName("supersolarpanel:module4"), "module4");
+      GameRegistry.registerItem(SSPItem.module5 = new com.Denfop.item.Modules.ModuleType().setMaxStackSize(64).setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");
       
-      GameRegistry.registerItem(SSPItem.module6 = new com.Denfop.item.Modules.module6(), "module6");
+      GameRegistry.registerItem(SSPItem.module6 = new com.Denfop.item.Modules.ModuleTypePanel(), "module6");
       GameRegistry.registerBlock(SSPItem.cableblock =  new BlockCable(), ItemBlockIC2.class, "blockCable");
       GameRegistry.registerItem(SSPItem.cable, "cable");
       
       GameRegistry.registerItem(SSPItem.module, "upgrademodule");
       GameRegistry.registerItem(SSPItem.cell_all = new ItemCell(), "cell");
 //
-      GameRegistry.registerItem(SSPItem.matter = new matter().setMaxStackSize(64).setUnlocalizedName("matter").setTextureName("supersolarpanel:matter"), "matter");
+      GameRegistry.registerItem(SSPItem.matter = new SolidMatter().setMaxStackSize(64).setUnlocalizedName("matter").setTextureName("supersolarpanel:matter"), "matter");
       //
       GameRegistry.registerItem(SSPItem.chromiumcrushedore = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("chromiumcrushedore").setTextureName("supersolarpanel:chromiumcrushedore"), "chromiumcrushedore");
       GameRegistry.registerItem(SSPItem.electriumdust = new SSPItemBase().setMaxStackSize(64).setUnlocalizedName("electriumdust").setTextureName("supersolarpanel:electriumdust"), "electriumdust");
@@ -324,7 +324,7 @@ public static void register() {
 }
 
 public static void registertiles() {
-	 GameRegistry.registerTileEntity(TileBitGen2.class, "Mass Fabricator1");
+	 GameRegistry.registerTileEntity(TileneutronGenerator.class, "Mass Fabricator1");
 	 GameRegistry.registerTileEntity(TileEntityChargepadBatBox.class, "Chargepad BatBox1");
 	    GameRegistry.registerTileEntity(TileEntityChargepadCESU.class, "Chargepad CESU1");
 	    GameRegistry.registerTileEntity(TileEntityChargepadMFE.class, "Chargepad MFE1");

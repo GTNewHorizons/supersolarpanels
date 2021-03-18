@@ -41,7 +41,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, IFluidHandler, IStandOn {
+public class TileExpGen extends TileEntity implements IEnergySink, IInventory, IFluidHandler, IStandOn {
 	
 	
 	public int energy;
@@ -56,7 +56,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 	public boolean active;
 	public boolean lastState;
 	
-	public TileExpGen2(int maxenergy, String tileName, int maxtankcapacity) {
+	public TileExpGen(int maxenergy, String tileName, int maxtankcapacity) {
 		this.loaded = false;
 		this.fluidTank = new FluidTank(1000 * maxtankcapacity);
 		this.initialized = false;
@@ -221,7 +221,7 @@ public class TileExpGen2 extends TileEntity implements IEnergySink, IInventory, 
 	}
 	
 	public void setActiveVoid(boolean bool, int x, int y, int z, World world) {
-		if(world.getTileEntity(x, y, z) instanceof TileExpGen2) {
+		if(world.getTileEntity(x, y, z) instanceof TileExpGen) {
 		
 					
 					this.active = bool;

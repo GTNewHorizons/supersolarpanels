@@ -32,7 +32,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockMachines1 extends BlockContainer {
+public class BlockMoreMachine2 extends BlockContainer {
 	public static final String[] names = new String[] {
 			"Recycler","Recycler1","Recycler2"
 	};
@@ -45,7 +45,7 @@ public class BlockMachines1 extends BlockContainer {
 		{ 4, 5, 4, 2, 3, 5 }, 
 		{ 5, 4, 2, 4, 5, 3 } };
 	
-	public BlockMachines1() {
+	public BlockMoreMachine2() {
 		super(Material.iron);
 		setHardness(2.0F);
 		setStepSound(soundTypeMetal);

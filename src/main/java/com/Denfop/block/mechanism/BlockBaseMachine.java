@@ -37,16 +37,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.mutable.MutableObject;
-import com.Denfop.item.Machina.ItemMachine1;
+import com.Denfop.item.Machina.ItemBaseMachine;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.Mechanism.*;
-import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
 import com.Denfop.IUCore;
 
-public class BlockMachine extends BlockContainer {
-  public BlockMachine() {
+public class BlockBaseMachine extends BlockContainer {
+  public BlockBaseMachine() {
     super(Material.iron);
     setHardness(2.0F);
     setStepSound(soundTypeMetal);
@@ -75,7 +75,7 @@ public class BlockMachine extends BlockContainer {
         case 4:
         	return new TileEntityAlloySmelter();
         case 5:
-        	return new TileBitGen2();
+        	return new TileneutronGenerator();
         case 6:
         	return new TileEntityGenerationMicrochip();
         case 7:
@@ -380,8 +380,8 @@ public class BlockMachine extends BlockContainer {
   public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
 	    TileEntityBlock te = (TileEntityBlock)world.getTileEntity( x, y, z);
 	  
-	    if (te instanceof TileBitGen2)
-	      return (int)Math.floor(((TileBitGen2)te).energy / 1000000.0D * 15.0D); 
+	    if (te instanceof TileneutronGenerator)
+	      return (int)Math.floor(((TileneutronGenerator)te).energy / 1000000.0D * 15.0D); 
 	    
 	    
 	    return 0;

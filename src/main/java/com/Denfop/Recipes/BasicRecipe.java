@@ -2,7 +2,7 @@ package com.Denfop.Recipes;
 
 import com.Denfop.SSPItem;
 import com.Denfop.IUCore;
-import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 
 
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -43,9 +43,9 @@ import com.Denfop.render.Sintezaor.TileEntitySintezatorItemRender;
 import com.Denfop.render.Sintezaor.TileEntitySintezatorRender;
 import com.Denfop.render.tile.TileEntityPanelItemRender;
 import com.Denfop.render.tile.TileEntityPanelRender;
-import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen;
 import com.Denfop.tiles.Mechanism.*;
-import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 import com.Denfop.tiles.Sintezator.TileEntitySintezator;
 import com.Denfop.tiles.base.TileEntityAdminSolarPanel;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
@@ -255,9 +255,9 @@ MaceratorRecipe.recipe();
       if (te == null) {
           return null;
       }
-      if(te instanceof TileExpGen2) {
+      if(te instanceof TileExpGen) {
 			
-			return new GuiExpGen(player.inventory, (TileExpGen2) te,X, Y, Z, world);
+			return new GuiExpGen(player.inventory, (TileExpGen) te,X, Y, Z, world);
 			
 		}
 	
@@ -302,10 +302,10 @@ MaceratorRecipe.recipe();
     	  
           return new GuiElectricBlock(new ContainerElectricBlock(player, (TileEntityElectricBlock) te));
       }
-      if (te instanceof TileBitGen2)
+      if (te instanceof TileneutronGenerator)
       {
     	  
-          return new GuiMatter(new ContainerNeutrniumGenerator (player, (TileBitGen2) te));
+          return new GuiMatter(new ContainerNeutrniumGenerator (player, (TileneutronGenerator) te));
       }
       if (te instanceof TileEntityGenerationMicrochip)
       {

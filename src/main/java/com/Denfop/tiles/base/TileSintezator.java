@@ -34,7 +34,7 @@ import com.Denfop.integration.Avaritia.modules2;
 import com.Denfop.integration.Botania.ItemBotSolarPanel;
 import com.Denfop.integration.Botania.modules1;
 import com.Denfop.integration.DE.ItemDESolarPanel;
-import com.Denfop.item.Modules.module6;
+import com.Denfop.item.Modules.ModuleTypePanel;
 import com.Denfop.item.base.ItemSSPSolarPanel;
 import com.Denfop.utils.NBTData;
 
@@ -76,7 +76,7 @@ public class TileSintezator extends TileEntityBase implements IEnergyTile, IWren
 	private int k;
 	private int m;
 	public int u;
-	private module6 panel;
+	private ModuleTypePanel panel;
 	public int tier;
 	public int l;
 	public boolean modules;

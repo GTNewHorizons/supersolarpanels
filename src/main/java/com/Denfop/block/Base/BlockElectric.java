@@ -37,7 +37,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.mutable.MutableObject;
 import com.Denfop.IUCore;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.item.base.ItemElectricBlock;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;

@@ -16,9 +16,9 @@ import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
 import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.render.Cable.RenderBlock;
-import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen;
 import com.Denfop.tiles.Mechanism.*;
-import com.Denfop.tiles.NeutroniumGenerator.TileBitGen2;
+import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 import com.Denfop.tiles.base.TileEntityChargepadBlock;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntityMolecularTransformer;
@@ -86,9 +86,9 @@ public class CommonProxy implements IGuiHandler{
       if (te instanceof TileEntitySolarPanel) {
           return ((TileEntitySolarPanel)te).getGuiContainer(player.inventory);
       }
-      if(te instanceof TileExpGen2) {
+      if(te instanceof TileExpGen) {
 			
-			return ((TileExpGen2) te).getGuiContainer(player.inventory);			
+			return ((TileExpGen) te).getGuiContainer(player.inventory);			
 		}
       if (te instanceof TileSintezator) {
           return ((TileSintezator)te).getGuiContainer(player.inventory);
@@ -146,9 +146,9 @@ public class CommonProxy implements IGuiHandler{
       {
     	  return ((TileEntityElectricBlock )te).getGuiContainer(player);
       }
-      if (te instanceof TileBitGen2)
+      if (te instanceof TileneutronGenerator)
       {
-    	  return ((TileBitGen2)te).getGuiContainer(player);
+    	  return ((TileneutronGenerator)te).getGuiContainer(player);
       }
       if (te instanceof TileEntityGenerationMicrochip)
       {

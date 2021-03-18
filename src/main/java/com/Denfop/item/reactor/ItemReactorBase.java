@@ -17,14 +17,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemReactorUranium extends ReactorItemCore implements IReactorComponent {
+public class ItemReactorBase extends ReactorItemCore implements IReactorComponent {
   public final int numberOfCells;
   
-  public ItemReactorUranium(String internalName, int cells) {
+  public ItemReactorBase(String internalName, int cells) {
     this(internalName, cells, 20000);
   }
   
-  protected ItemReactorUranium(String internalName, int cells, int duration) {
+  protected ItemReactorBase(String internalName, int cells, int duration) {
     super(internalName, duration);
     setMaxStackSize(64);
     this.numberOfCells = cells;

@@ -449,7 +449,8 @@ item.spectralpickaxe.name=Спектральная кирка
 item.spectralaxe.name=Спектральный топор
 item.spectralshovel.name=Спектральная лопата
 
-supsolpans.SSP.GeneratationDay.toollip=Генерация днём:
-supsolpans.SSP.GeneratationNight.toollip=Генерация ночью:
+supsolpans.SSP.GenerationDay.toollip=Генерация днём:
+supsolpans.SSP.GenerationNight.toollip=Генерация ночью:
+message.ultDDrill.mode.bigHoles2=Ультимативный большой режим
 
 

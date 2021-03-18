@@ -3,7 +3,7 @@ package com.Denfop.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen;
 
 import ic2.core.IC2;
 import ic2.core.network.NetworkManager;
@@ -20,12 +20,12 @@ import net.minecraftforge.fluids.FluidStack;
 
 
 public class ContainerExpGen extends Container {
-	public TileExpGen2 tileentity;
+	public TileExpGen tileentity;
 	
 	
 	
 	
-	public ContainerExpGen(InventoryPlayer inventoryplayer, TileExpGen2 tileExpGen2) {
+	public ContainerExpGen(InventoryPlayer inventoryplayer, TileExpGen tileExpGen2) {
 		this.tileentity = tileExpGen2;
 		for (int i = 0; i < 3; i++) {
 		       

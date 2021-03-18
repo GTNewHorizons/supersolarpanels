@@ -13,8 +13,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-public class ItemMachine1 extends ItemBlock {
-  public ItemMachine1(Block block) {
+public class ItemBaseMachine extends ItemBlock {
+  public ItemBaseMachine(Block block) {
     super(block);
     setMaxDamage(0);
     setHasSubtypes(true);

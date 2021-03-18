@@ -11,9 +11,9 @@ import com.Denfop.api.module.IModuleType;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.container.ContainerAdvSolarPanel;
 import com.Denfop.item.Modules.ItemWirelessModule;
-import com.Denfop.item.Modules.module5;
-import com.Denfop.item.Modules.module6;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.ModuleType;
+import com.Denfop.item.Modules.ModuleTypePanel;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.GUIUtilsStorage;
 import com.Denfop.utils.GuiNumberUtils;
@@ -80,7 +80,7 @@ public class GuiAdvSolarPanel extends GuiContainer {
     for (int i = 0; i < 9; i++) {
       
       
-      if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.module7) {
+      if (this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof com.Denfop.item.Modules.AdditionModule) {
         int kk = this.tileentity.chargeSlots[i].getItemDamage();
         if (kk == 1) {
           tierplus++;
@@ -221,7 +221,7 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175-2, 
     	 
     	 }
     	 for(int i = 0;i <9;i++) {
-    		 if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof module7) {
+    		 if(this.tileentity.chargeSlots[i] != null && this.tileentity.chargeSlots[i].getItem() instanceof AdditionModule) {
     			 if(this.tileentity.chargeSlots[i].getItemDamage() ==4)
     				 this.fontRendererObj.drawString(ModulesString7, 15, 203-2, 13487565);
     			
@@ -268,7 +268,7 @@ this.fontRendererObj.drawString(ModulesString3 + (output_dob) + "%", 15, 175-2, 
   
   protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof com.Denfop.item.Modules.module5) {
+	    if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof com.Denfop.item.Modules.ModuleType) {
 	      int g = this.tileentity.chargeSlots[8].getItemDamage();
 	      if (g == 0) {
 	        this.tileentity.solarType = 1;

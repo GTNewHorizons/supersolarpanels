@@ -1,7 +1,7 @@
 package com.Denfop.block.expgen;
 
 import com.Denfop.IUCore;
-import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen;
 import com.Denfop.tiles.ExpGen.TileXPGenPublic;
 
 import net.minecraft.block.BlockContainer;
@@ -48,7 +48,7 @@ public class BlockExpGen extends BlockContainer {
 	public boolean isActive(IBlockAccess blockaccess, int x, int y, int z) {
 		
 		
-		return ((TileExpGen2)blockaccess.getTileEntity(x, y, z)).getActive();
+		return ((TileExpGen)blockaccess.getTileEntity(x, y, z)).getActive();
 	
 		
 	}
@@ -93,7 +93,7 @@ public class BlockExpGen extends BlockContainer {
 	
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		
-		TileExpGen2 te = (TileExpGen2) world.getTileEntity(x, y, z);
+		TileExpGen te = (TileExpGen) world.getTileEntity(x, y, z);
 		if(entity instanceof EntityPlayer & entity != null) {
 			
 			if (te == null) return; 

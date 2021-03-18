@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.Denfop.Config;
-import com.Denfop.InvSlot.InvSlotQQ;
+import com.Denfop.InvSlot.InvSlotQuantumQuarry;
 import com.Denfop.container.ContainerGenStone;
 import com.Denfop.container.ContainerQuantumQuarry;
 import com.Denfop.container.ContainerStandardMachine;
@@ -52,7 +52,7 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 	 public int getblock;
 
 	public InvSlotOutput outputSlot;
-	public InvSlotQQ inputslot;
+	public InvSlotQuantumQuarry inputslot;
 	
 	
 		  
@@ -63,7 +63,7 @@ public class TileEntityQuantumQuarry extends TileEntityElectricMachine implement
 		   this.energyconsume=Config.enerycost;
 		  
 		   this.outputSlot = new InvSlotOutput(this, "output", 2, 24);
-		   this.inputslot =  (InvSlotQQ) new InvSlotQQ(this, 3);
+		   this.inputslot =  (InvSlotQuantumQuarry) new InvSlotQuantumQuarry(this, 3);
 		  }
 		  public List<ItemStack> list(){
 			 

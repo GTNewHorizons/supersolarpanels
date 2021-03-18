@@ -18,9 +18,9 @@ import com.Denfop.block.Base.BlockSSP;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.block.Base.BlocksItems;
 import com.Denfop.block.cable.BlockCable;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
-import com.Denfop.item.energy.ultDDrill;
+import com.Denfop.item.energy.AdvancedMultiTool;
 import com.Denfop.tiles.base.TileEntityCable;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.NBTData;
@@ -293,7 +293,7 @@ public class SSPEventHandler {
 				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
 				   if(nbtData.getBoolean("create") == true) {
 				   Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
-				   ultDDrill drill = (ultDDrill) input.getItem();
+				   AdvancedMultiTool drill = (AdvancedMultiTool) input.getItem();
 		        	  if(Config.enableefficiency && drill.mode == 0) {
 		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(Config.efficiencylevel));
 		        	 nbtData.setBoolean("create",false);

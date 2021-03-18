@@ -48,7 +48,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemNanoSaber1 extends ItemTool implements IElectricItem, IBoxable, IItemHudInfo{
+public class ItemSpectralSaber extends ItemTool implements IElectricItem, IBoxable, IItemHudInfo{
   private static int activedamage;
   public double operationEnergyCost;
   
@@ -60,11 +60,11 @@ public class ItemNanoSaber1 extends ItemTool implements IElectricItem, IBoxable,
   
   private final EnumSet<ToolClass> toolClasses;
 private static int damage1;
-public ItemNanoSaber1(String internalName,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
+public ItemSpectralSaber(String internalName,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
     this(internalName, 10, HarvestLevel.Diamond,maxCharge, transferLimit, tier, activedamage, damage);
   }
   
-  public ItemNanoSaber1(String name, int operationEnergyCost, HarvestLevel harvestLevel,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
+  public ItemSpectralSaber(String name, int operationEnergyCost, HarvestLevel harvestLevel,int maxCharge,int transferLimit,int tier,int activedamage,int damage) {
     super(0,harvestLevel.toolMaterial, null);
     this.soundTicker = 0;
     this.operationEnergyCost = operationEnergyCost;

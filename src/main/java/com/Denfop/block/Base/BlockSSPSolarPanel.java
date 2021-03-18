@@ -25,8 +25,8 @@ import java.util.Random;
 
 import com.Denfop.SSPItem;
 import com.Denfop.IUCore;
-import com.Denfop.item.Modules.module5;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.ModuleType;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
@@ -934,7 +934,7 @@ public class BlockSSPSolarPanel extends BlockContainer  {
         	if(world.getTileEntity(i, j, k) instanceof TileEntitySolarPanel) {
         		TileEntitySolarPanel	tile = (TileEntitySolarPanel) world.getTileEntity(i, j, k);
         	for(int m =0; m < 9;m++) {
-        		if(tile.chargeSlots[m] != null&& tile.chargeSlots[m].getItem() instanceof module7&& tile.chargeSlots[m].getItemDamage() == 0 && tile.player == player.getDisplayName()) {
+        		if(tile.chargeSlots[m] != null&& tile.chargeSlots[m].getItem() instanceof AdditionModule&& tile.chargeSlots[m].getItemDamage() == 0 && tile.player == player.getDisplayName()) {
         			player.openGui((Object)IUCore.instance, 1, world, i, j, k);
         				 
         			

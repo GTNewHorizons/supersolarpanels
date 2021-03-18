@@ -49,13 +49,13 @@ import com.Denfop.integration.GC.GalacticraftIntegration;
 import com.Denfop.integration.GC.GalaxySpaceIntegration;
 import com.Denfop.integration.GC.MorePlanetsIntegration;
 import com.Denfop.item.Modules.ItemWirelessModule;
-import com.Denfop.item.Modules.module1;
-import com.Denfop.item.Modules.module2;
-import com.Denfop.item.Modules.module3;
-import com.Denfop.item.Modules.module4;
-import com.Denfop.item.Modules.module5;
-import com.Denfop.item.Modules.module6;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.ModuleGenerationDay;
+import com.Denfop.item.Modules.ModuleGenerationNight;
+import com.Denfop.item.Modules.ModuleStorage;
+import com.Denfop.item.Modules.ModuleOutput;
+import com.Denfop.item.Modules.ModuleType;
+import com.Denfop.item.Modules.ModuleTypePanel;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.utils.NBTData;
 import com.mojang.authlib.GameProfile;
 
@@ -107,7 +107,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     public int k;
     public int m;
 	public int u;
-	private module6 panel;
+	private ModuleTypePanel panel;
 	public int tier;
 
 	public int convertState = 0;
@@ -294,7 +294,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         	
         	
-        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof module7) {
+        	if(this.chargeSlots[i] != null && this.chargeSlots[i].getItem() instanceof AdditionModule) {
         		int kk = chargeSlots[i].getItemDamage();
         		if(kk == 0) {
         			personality = true;
@@ -315,7 +315,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         		      }     
         			}
         			for(int j = 0; j < 9;j++) {
-        				if (this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module7) {
+        				if (this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof AdditionModule) {
         					int meta = chargeSlots[j].getItemDamage();
         					if(meta == 4) {
         						for(int jj =0; jj <9;jj++) {
@@ -367,7 +367,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
         	
         }
         for(int m =0; m < 9;m++) {
-        if(this.chargeSlots[m] != null && this.chargeSlots[m].getItem() instanceof module7) {
+        if(this.chargeSlots[m] != null && this.chargeSlots[m].getItem() instanceof AdditionModule) {
     		int kk = chargeSlots[m].getItemDamage();
     		if(kk == 0) {
     			personality = true;
@@ -400,7 +400,7 @@ public class TileEntitySolarPanel extends TileEntityBase implements IEnergyTile,
     	Block block =	this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
     	NBTTagCompound nbttagcompound1 = NBTData.getOrCreateNbtData(new ItemStack(block));
     	nbttagcompound1.setInteger("type", -1);
-        if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof module5) {
+        if(this.chargeSlots[8] != null && this.chargeSlots[8].getItem() instanceof ModuleType) {
         	int g = chargeSlots[8].getItemDamage();
 
 			
@@ -870,7 +870,7 @@ return this.generating = 0;
           int minus = 0;
           int gg = 0;
           for(int j = 0; j < 9;j++) {
-          	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof module7) {
+          	if(this.chargeSlots[j] != null && this.chargeSlots[j].getItem() instanceof AdditionModule) {
           		int kk = chargeSlots[j].getItemDamage();
           		
           		 if(kk == 1) {

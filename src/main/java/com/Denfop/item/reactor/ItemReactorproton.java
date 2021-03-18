@@ -7,7 +7,7 @@ import ic2.api.reactor.IReactor;
 import ic2.core.Ic2Items;
 import net.minecraft.item.ItemStack;
 
-public class ItemReactorproton extends ItemReactorUranium {
+public class ItemReactorproton extends ItemReactorBase {
   private int time;
 private int heat;
 private float power;

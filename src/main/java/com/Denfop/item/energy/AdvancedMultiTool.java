@@ -47,7 +47,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ultDDrill extends ItemTool implements IElectricItem {
+public class AdvancedMultiTool extends ItemTool implements IElectricItem {
   public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] {  Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, 
 	        Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, 
 	        Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail,Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin ,Blocks.leaves,Blocks.leaves2, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, });
@@ -88,8 +88,12 @@ public class ultDDrill extends ItemTool implements IElectricItem {
   public int damageVsEntity = 1;
 
 public int mode;
+
+public float energyPerultraLowPowerOperation1 = Config.energyPerultraLowPowerOperation1;
+
+private float ultraLowPower1 = Config.ultraLowPower1;
   
-  public ultDDrill(Item.ToolMaterial toolMaterial) {
+  public AdvancedMultiTool(Item.ToolMaterial toolMaterial) {
     super(0.0F, toolMaterial, new HashSet());
     setMaxDamage(27);
     this.efficiencyOnProperMaterial = this.normalPower;
@@ -293,6 +297,76 @@ public int mode;
           return true;
         } }
     //
+    if (readToolMode(stack) == 4) {
+        World world = player.worldObj;
+        Block block = world.getBlock(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        if (block == null)
+          return super.onBlockStartBreak(stack, x, y, z, player); 
+        MovingObjectPosition mop = raytraceFromEntity(world, (Entity)player, true, 4.5D);
+        if (mop != null && (materials.contains(block.getMaterial()) || block == Blocks.monster_egg)) {
+          byte xRange = 3;
+          byte yRange = 3;
+          byte zRange = 3;
+          switch (mop.sideHit) {
+            case 0:
+            case 1:
+              yRange = 0;
+              break;
+            case 2:
+            case 3:
+              zRange = 0;
+              break;
+            case 4:
+            case 5:
+              xRange = 0;
+              break;
+          } 
+          boolean lowPower = false;
+          boolean silktouch = EnchantmentHelper.getSilkTouchModifier((EntityLivingBase)player);
+          int fortune = EnchantmentHelper.getFortuneModifier((EntityLivingBase)player);
+         
+          for (int xPos = x - xRange; xPos <= x + xRange; xPos++) {
+            for (int yPos = y - yRange; yPos <= y + yRange; yPos++) {
+              for (int zPos = z - zRange; zPos <= z + zRange; zPos++) {
+                if (ElectricItem.manager.canUse(stack, this.energyPerOperation)) {
+                  Block localBlock = world.getBlock(xPos, yPos, zPos);
+                  if (localBlock != null && canHarvestBlock(localBlock, stack) && 
+                    localBlock.getBlockHardness(world, xPos, yPos, zPos) >= 0.0F && (
+                    materials.contains(localBlock.getMaterial()) || block == Blocks.monster_egg))
+                    
+                      if (!player.capabilities.isCreativeMode) {
+                        int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
+                        if (localBlock.getBlockHardness(world, xPos, yPos, zPos) > 0.0F)
+                          onBlockDestroyed(stack, world, localBlock, xPos, yPos, zPos, (EntityLivingBase)player); 
+                        if (!silktouch)
+                          localBlock.dropXpOnBlockBreak(world, xPos, yPos, zPos, localBlock.getExpDrop((IBlockAccess)world, localMeta, fortune)); 
+                        localBlock.onBlockHarvested(world, xPos, yPos, zPos, localMeta, player);
+                        if (localBlock.removedByPlayer(world, player, xPos, yPos, zPos, true)) {
+                          localBlock.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, localMeta);
+                          localBlock.harvestBlock(world, player, xPos, yPos, zPos, localMeta);
+                        } 
+                        ElectricItem.manager.use(stack, this.energyPerOperation, (EntityLivingBase)player);
+                      } else {
+                        world.setBlockToAir(xPos, yPos, zPos);
+                      } 
+                      world.func_147479_m(xPos, yPos, zPos);
+                      
+                } else {
+                  lowPower = true;
+                  break;
+                } 
+              } 
+            } 
+          } 
+          if (lowPower) {
+            CommonProxy.sendPlayerMessage(player, "Not enough energy to complete this operation !");
+          } else if (!IUCore.isSimulating()) {
+            world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
+          } 
+          return true;
+        } }
+    //
     return super.onBlockStartBreak(stack, x, y, z, player);
   }
   
@@ -317,6 +391,9 @@ public int mode;
         case 3:
         	energy = this.energyPerultraLowPowerOperation;
             break;
+        case 4:
+        	energy = this.energyPerultraLowPowerOperation1 ;
+            break;   
         default:
           energy = 0.0F;
           break;
@@ -331,7 +408,7 @@ public int mode;
     NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
     int toolMode = nbt.getInteger("toolMode");
    
-    if (toolMode < 0 || toolMode > 3)
+    if (toolMode < 0 || toolMode > 4)
       toolMode = 0; 
     return toolMode;
   }
@@ -369,7 +446,7 @@ public int mode;
     if (IC2.keyboard.isModeSwitchKeyDown(player)) {
       int toolMode = readToolMode(itemStack) + 1;
       
-      if (toolMode > 3)
+      if (toolMode > 4)
         toolMode = 0; 
       saveToolMode(itemStack, toolMode);
       switch (toolMode) {
@@ -430,6 +507,12 @@ mode = 0;
           if(Config.enablefortune || Config.enablesilkTouch)
           EnchantmentHelper.setEnchantments(enchantmentMap1, itemStack);
           break;
+        case 4:
+          CommonProxy.sendPlayerMessage(player, EnumChatFormatting.DARK_PURPLE + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.bigHoles2"));
+          this.efficiencyOnProperMaterial = this.ultraLowPower1 ;
+          
+          
+          break;
       } 
     } 
     return itemStack;
@@ -468,6 +551,9 @@ mode = 0;
       par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.bigHoles")); 
     if (toolMode.intValue() == 3)
       par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.bigHoles1")); 
+    if (toolMode.intValue() == 4)
+        par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.bigHoles2")); 
+
   }
   
   public String getRandomDrillSound() {
@@ -478,6 +564,8 @@ mode = 0;
         return "drillTwo";
       case 3:
         return "drillThree";
+      case 4:
+          return "drillFour";
     } 
     return "drill";
   }

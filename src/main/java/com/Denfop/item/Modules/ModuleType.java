@@ -22,13 +22,13 @@ import com.Denfop.api.module.IModuleType;
 
 import net.minecraft.item.Item;
 
-public class module5 extends Item implements IModuleType
+public class ModuleType extends Item implements IModuleType
 {
     private List<String> itemNames;
     private IIcon[] IIconsList;
     private int itemsCount;
     
-    public module5() {
+    public ModuleType() {
         this.itemNames = new ArrayList<String>();
         this.IIconsList = new IIcon[7];
         this.itemsCount = 6;

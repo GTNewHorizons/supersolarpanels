@@ -1,7 +1,7 @@
 package com.Denfop;
 
-import com.Denfop.block.mechanism.BlockMachine;
-import com.Denfop.block.mechanism.BlockMachines1;
+import com.Denfop.block.mechanism.BlockBaseMachine;
+import com.Denfop.block.mechanism.BlockMoreMachine2;
 import com.Denfop.item.base.ItemCable;
 
 import net.minecraft.block.Block;
@@ -264,7 +264,7 @@ public class SSPItem {
 			public static Item wolfram_plate;
 			public static ItemCable cable;
 			public static Item itemSSP;
-			public static BlockMachine machine1;
+			public static BlockBaseMachine machine1;
 			public static Block blocksintezator;
 
 			public static Item magnesium_ingot;

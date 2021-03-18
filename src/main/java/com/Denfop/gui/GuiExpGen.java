@@ -3,7 +3,7 @@ package com.Denfop.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.container.ContainerExpGen;
-import com.Denfop.tiles.ExpGen.TileExpGen2;
+import com.Denfop.tiles.ExpGen.TileExpGen;
 
 import ic2.core.util.DrawUtil;
 import ic2.core.util.GuiTooltipHelper;
@@ -22,14 +22,14 @@ public class GuiExpGen extends GuiContainer {
 	
 	private static ResourceLocation tex = new ResourceLocation("supersolarpanel", "textures/gui/GUIExpGen.png");
 	
-	public TileExpGen2 tileentity;
+	public TileExpGen tileentity;
 	
 	private int xpamount = 0;
 	
 
-	public GuiExpGen(InventoryPlayer inventoryplayer, TileExpGen2 te, int x, int y, int z, World world) {
+	public GuiExpGen(InventoryPlayer inventoryplayer, TileExpGen te, int x, int y, int z, World world) {
 		super(new ContainerExpGen(inventoryplayer, te));
-		this.tileentity = (TileExpGen2) world.getTileEntity(x, y, z);
+		this.tileentity = (TileExpGen) world.getTileEntity(x, y, z);
 		
 	}
 

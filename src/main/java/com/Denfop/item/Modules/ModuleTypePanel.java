@@ -24,13 +24,13 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 
 import net.minecraft.item.Item;
 
-public class module6 extends Item implements IModulPanel
+public class ModuleTypePanel extends Item implements IModulPanel
 {
     private List<String> itemNames;
     private IIcon[] IIconsList;
     private int itemsCount;
     
-    public module6() {
+    public ModuleTypePanel() {
         this.itemNames = new ArrayList<String>();
         this.IIconsList = new IIcon[10];
         this.itemsCount = 9;

@@ -7,7 +7,7 @@ import com.Denfop.api.module.IModulStorage;
 import com.Denfop.container.ContainerElectricBlock;
 import com.Denfop.gui.GuiElectricBlock;
 import com.Denfop.item.Modules.ItemWirelessModule;
-import com.Denfop.item.Modules.module7;
+import com.Denfop.item.Modules.AdditionModule;
 import com.Denfop.utils.NBTData;
 
 import cofh.api.energy.IEnergyContainerItem;
@@ -279,12 +279,12 @@ public int getInventoryStackLimit() {
   protected void updateEntityServer() {
     super.updateEntityServer();
     
-    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
+    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof AdditionModule) {
 		int kk = chargeSlots[0].getItemDamage();
 		if(kk == 0) {
 			personality = true;
 		}
-    }else if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module7) {
+    }else if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof AdditionModule) {
 		int kk = chargeSlots[3].getItemDamage();
 		if(kk == 0) {
 			personality = true;
@@ -334,7 +334,7 @@ public int getInventoryStackLimit() {
 
 this.output=this.l+this.output_plus+this.output_plus1;
 
-    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof module7) {
+    if(this.chargeSlots[0] != null && this.chargeSlots[0].getItem() instanceof AdditionModule) {
     	if(chargeSlots[0].getItemDamage() == 5) {
     		this.movementcharge  = true;
     	}
@@ -386,7 +386,7 @@ this.output=this.l+this.output_plus+this.output_plus1;
 			this.energy=this.maxStorage2;
 			}}
 		}
-    }else if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof module7) {
+    }else if(this.chargeSlots[3] != null && this.chargeSlots[3].getItem() instanceof AdditionModule) {
     	if(chargeSlots[3].getItemDamage() == 5) {
     		this.movementcharge  = true;
     	}
