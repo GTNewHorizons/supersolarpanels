@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
+import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.NBTData;
 
@@ -49,8 +50,7 @@ public class WailaHandler implements IWailaDataProvider {
       Block blockx = (item instanceof net.minecraft.item.ItemBlock && !accessor.getBlock().isFlowerPot()) ? Block.getBlockFromItem(item) : accessor.getBlock();
      Block blockEMC =accessor.getWorld().getBlock(accessor.getPosition().blockX, accessor.getPosition().blockY,accessor.getPosition().blockZ);
   
-    } 
-
+    }
     if(accessor.getWorld().getTileEntity(accessor.getPosition().blockX, accessor.getPosition().blockY,accessor.getPosition().blockZ) instanceof TileEntitySolarPanel) {
     	  int energy = accessor.getNBTInteger(accessor.getNBTData(), "storage");
     	  int solartype = accessor.getNBTInteger(accessor.getNBTData(), "solarType");
