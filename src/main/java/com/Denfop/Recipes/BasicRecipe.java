@@ -134,11 +134,14 @@ public static void recipe() {
     //TODO recipe neutron core
     
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.neutroniumcore,1), new Object[] { " A ", "ACA", " A ", 'C', SSPItem.photoniccore,  'A' ,SSPItem.neutroniumingot});
-	   //TODO Recipe Advanced and Improvemed MFSU
+	   //TODO Recipe Electric Storage
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,4), new Object[] {  "ABA","ACA","ADA", 'C',new ItemStack(SSPItem.electricblock,1,3),  'A' , new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B' ,Ic2Items.advancedCircuit,'D', Ic2Items.advancedMachine });
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,3), new Object[] {  "ABA","BCB","ABA", 'C',Ic2Items.machine,  'A' , new ItemStack(Ic2Items.energyCrystal.getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B' ,Ic2Items.insulatedGoldCableItem });
 		 
-
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,2), new Object[] {  "ABA","CCC","AAA", 'C',new ItemStack(Ic2Items.reBattery.getItem(), 1, OreDictionary.WILDCARD_VALUE),  'A' , OreDictionary.getOres("plankWood").get(0), 'B' ,Ic2Items.insulatedTinCableItem });
+	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,5), new Object[] {   "ABA","CCC","AAA", 'C',new ItemStack(Ic2Items.advBattery.getItem(), 1, OreDictionary.WILDCARD_VALUE),  'A' , Ic2Items.platebronze, 'B' ,Ic2Items.insulatedCopperCableItem  });
+		
+	    
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,0), new Object[] {  "ACA", 'C',new ItemStack(SSPItem.electricblock,1,4),  'A' , SSPItem.photoniy_ingot });
 	    GameRegistry.addRecipe(new ItemStack(SSPItem.electricblock,1,1), new Object[] {  "ACA", 'C', new ItemStack(SSPItem.electricblock,1,0),  'A' , SSPItem.QuantumItems5 });
 	    //TODO Recipe dust
