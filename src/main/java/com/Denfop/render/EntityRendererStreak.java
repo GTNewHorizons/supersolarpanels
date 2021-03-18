@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -22,13 +24,27 @@ import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
 import com.Denfop.utils.StreakLocation;
 public class EntityRendererStreak extends Render {
   private static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect.png");
+  private static final ResourceLocation texture1 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect1.png");
+  private static final ResourceLocation texture2 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect2.png");
+  private static final ResourceLocation texture3 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect3.png");
+  private static final ResourceLocation texture4 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect4.png");
+  private static final ResourceLocation texture5 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect5.png");
+  private static final ResourceLocation texture6 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect6.png");
+  private static final ResourceLocation texture7 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect7.png");
+  private static final ResourceLocation texture8 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect8.png");
+  private static final ResourceLocation texture9 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect9.png");
+  private static final ResourceLocation texture10 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect10.png");
+  private static final ResourceLocation texture11 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect11.png");
+  private static final ResourceLocation texture12 = new ResourceLocation(Constants.TEXTURES_ITEMS + "effect12.png");
+  
   
   public void doRender(Entity entity, double par2, double par3, double par4, float par5, float par6) {
     renderStreak((EntityStreak)entity, par2, par3, par4, par5, par6);
   }
   
   protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-    return texture;
+	
+	return texture;
   }
   
   private void renderStreak(EntityStreak entity, double par2, double par3, double par4, float par5, float par6) {
@@ -102,8 +118,52 @@ public class EntityRendererStreak extends Render {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(2896);
-            
-            mc.renderEngine.bindTexture(texture);
+            ItemStack itemstack =	 player.inventory.armorInventory[2];
+        	NBTTagCompound NBTTagCompound =	itemstack.getTagCompound();
+        	int color = NBTTagCompound.getInteger("color1");
+        	
+        	switch(color) {
+        	case 0:
+        		mc.renderEngine.bindTexture(texture);
+        		break;
+        	case 1:
+        		mc.renderEngine.bindTexture(texture1);
+        		break;
+        	case 2:
+        		mc.renderEngine.bindTexture(texture2);
+        		break;
+        	case 3:
+        		mc.renderEngine.bindTexture(texture3);
+        		break;
+        	case 4:
+        		mc.renderEngine.bindTexture(texture4);
+        		break;
+        	case 5:
+        		mc.renderEngine.bindTexture(texture5);
+        		break;
+        	case 6:
+        		mc.renderEngine.bindTexture(texture6);
+        		break;
+        	case 7:
+        		mc.renderEngine.bindTexture(texture7);
+        		break;
+        	case 8:
+        		mc.renderEngine.bindTexture(texture8);
+        		break;
+        	case 9:
+        		mc.renderEngine.bindTexture(texture9);
+        		break;
+        	case 10:
+        		mc.renderEngine.bindTexture(texture10);
+        		break;
+        	case 11:
+        		mc.renderEngine.bindTexture(texture11);
+        		break;
+        	case 12:
+        		mc.renderEngine.bindTexture(texture12);
+        		break;
+        	}
+         
             tessellator.startDrawingQuads();
             tessellator.setColorRGBA_F(1.0F, 1.0F, 1.0F, startAlpha);
             tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, infoStart.startU, 1.0D);

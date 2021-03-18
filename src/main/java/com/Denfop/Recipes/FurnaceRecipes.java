@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class FurnaceRecipes {
 	public static void recipe() {
 		GameRegistry.addSmelting(SSPItem.platiumore,new ItemStack(SSPItem.platium_ingot),5.0F);
-
+		
 		  GameRegistry.addSmelting(SSPItem.wolframore,new ItemStack(SSPItem.wolfram_ingot),5.0F);
 	        GameRegistry.addSmelting(SSPItem.spinelore,new ItemStack(SSPItem.spinel_ingot),5.0F);
 	        GameRegistry.addSmelting(SSPItem.mikhail_ore,new ItemStack(SSPItem.mikhail_ingot),5.0F);

@@ -88,7 +88,9 @@ public static void recipe() {
       Recipes.advRecipes.addRecipe(new ItemStack(SSPItem.QuantumItems9, 1), new Object[] { 
     		  " D ","BAB"," C ", Character.valueOf('A'), Ic2Items.advancedCircuit, Character.valueOf('B'), new ItemStack(SSPItem.nanoBox,1), Character.valueOf('C'), OreDictionary.getOres("ingotNickel").get(0), Character.valueOf('D'), 
     		  SSPItem.compresscarbon }); 
-   
+   //
+      
+      //
        GameRegistry.addRecipe(new ItemStack(SSPItem.QuantumItems8,1) ,new Object[] {  "DCD","HAH",   'A' , SSPItem.QuantumItems9,'C',SSPItem.magnesium_ingot,'D',SSPItem.compresscarbonultra ,'H',SSPItem.QuantumItems6});
       GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,0),new Object[] {"AAA","BCB","DDD", 'A', SSPItem.platium_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.macerator,'D',SSPItem.QuantumItems6});
     GameRegistry.addRecipe(new ItemStack(SSPItem.machines_base,1,6),new Object[] {"AAA","BCB","DDD", 'A',SSPItem. chromium_plate,'B',SSPItem.QuantumItems9,'C',Ic2Items.electroFurnace,'D',SSPItem.QuantumItems6});

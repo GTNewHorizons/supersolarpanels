@@ -262,7 +262,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
   public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
     int air;
     boolean Nightvision;
-    short hubmode;
+    short hubmode,color1;
     boolean jetpack, hoverMode, jetpackUsed, enableQuantumSpeedOnSprint;
     NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
     byte toggleTimer = nbtData.getByte("toggleTimer");
@@ -366,7 +366,7 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
               } 
             } 
           } 
-          
+    
           if (IC2.keyboard.isBoostKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
             toggleTimer = 10;
             jetpack = !jetpack;
@@ -384,6 +384,61 @@ public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
                 IC2.platform.messagePlayer(player, "Quantum Jetpack disabled.", new Object[0]);
        
 
+              } 
+            } 
+          }
+          color1 = nbtData.getShort("color1");
+         
+          if (IC2.keyboard.isHudModeKeyDown(player) && toggleTimer == 0) {
+            toggleTimer = 10;
+           
+            if (color1 == 12) {
+            	color1 = 0;
+            } else {
+            	color1 = (short)(color1 + 1);
+            } 
+            if (IC2.platform.isSimulating()) {
+              nbtData.setShort("color1", color1);
+              switch (color1) {
+                case 0:
+                  IC2.platform.messagePlayer(player, "Color default.", new Object[0]);
+                  break;
+                case 1:
+                  IC2.platform.messagePlayer(player, "Color Yellow", new Object[0]);
+                  break;
+                case 2:
+                  IC2.platform.messagePlayer(player, "Color Red", new Object[0]);
+                  break;
+                case 3:
+                    IC2.platform.messagePlayer(player, "Color Orange", new Object[0]);
+                    break;
+                case 4:
+                    IC2.platform.messagePlayer(player, "Color Lime", new Object[0]);
+                    break;
+                case 5:
+                    IC2.platform.messagePlayer(player, "Color Green", new Object[0]);
+                    break;
+                case 6:
+                    IC2.platform.messagePlayer(player, "Color Turquoise", new Object[0]);
+                    break;
+                case 7:
+                    IC2.platform.messagePlayer(player, "Color Pink", new Object[0]);
+                    break;
+                case 8:
+                    IC2.platform.messagePlayer(player, "Color Purple", new Object[0]);
+                    break;
+                case 9:
+                    IC2.platform.messagePlayer(player, "Color Dark Grey", new Object[0]);
+                    break;
+                case 10:
+                    IC2.platform.messagePlayer(player, "Color Black", new Object[0]);
+                    break;
+                case 11:
+                    IC2.platform.messagePlayer(player, "Color Grey", new Object[0]);
+                    break;
+                case 12:
+                    IC2.platform.messagePlayer(player, "Color White", new Object[0]);
+                    break;
               } 
             } 
           } 
