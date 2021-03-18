@@ -11,6 +11,15 @@ import com.Denfop.Recipes.CentrifugeRecipe;
 import com.Denfop.Recipes.CompressorRecipe;
 import com.Denfop.Recipes.FurnaceRecipes;
 import com.Denfop.Recipes.MaceratorRecipe;
+import com.Denfop.events.EventDarkQuantumSuitEffect;
+import com.Denfop.events.SSPEventHandler;
+import com.Denfop.events.DE.SSPDEEventHandler;
+import com.Denfop.events.DE_MF.SSPDEMFEventHandler;
+import com.Denfop.events.DE_MF_EP.SSPMFDEEventHandler;
+import com.Denfop.events.EP.SSPEPEventHandler;
+import com.Denfop.events.EP_DE.SSPDEEPEventHandler;
+import com.Denfop.events.MF.SSPMFEventHandler;
+import com.Denfop.events.MF_EP.SSPMPMFEventHandler;
 import com.Denfop.integration.Avaritia.AvaritiaIntegration;
 import com.Denfop.integration.Botania.BotaniaIntegration;
 import com.Denfop.integration.DE.DraconicIntegration;
@@ -47,6 +56,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy implements IGuiHandler{
   public boolean isClient() {
@@ -70,8 +80,35 @@ public class CommonProxy implements IGuiHandler{
   public void registerRenderers() {}
   
   public void registerEvents() {
-	  
-  }
+	    MinecraftForge.EVENT_BUS.register(new EventDarkQuantumSuitEffect());
+	    if(Config.Streak == true) {
+	    FMLCommonHandler.instance().bus().register(new EventDarkQuantumSuitEffect());}
+	    if(Config.newsystem)
+	    	IUCore.initENet();
+	    
+		if(Config.DraconicLoaded && Config.EnchantingPlus &&Config.MineFactory) {
+			 MinecraftForge.EVENT_BUS.register(new SSPMFDEEventHandler());
+			
+		}else if(Config.DraconicLoaded &&Config.EnchantingPlus) {
+			MinecraftForge.EVENT_BUS.register(new SSPDEEPEventHandler());
+		}else if(Config.DraconicLoaded && Config.MineFactory) {
+			MinecraftForge.EVENT_BUS.register(new SSPDEMFEventHandler());
+		}else if(Config.EnchantingPlus && Config.MineFactory) {
+			MinecraftForge.EVENT_BUS.register(new SSPMPMFEventHandler());
+		}
+		else {
+			 if(Config.DraconicLoaded) {
+				 MinecraftForge.EVENT_BUS.register(new SSPDEEventHandler());
+		        }
+			
+			if(Config.EnchantingPlus) {
+				 MinecraftForge.EVENT_BUS.register(new SSPEPEventHandler());
+		        }
+			if(Config.MineFactory) {
+				 MinecraftForge.EVENT_BUS.register(new SSPMFEventHandler());
+		        }}
+		MinecraftForge.EVENT_BUS.register(new SSPEventHandler());
+	  }
   
   public void registerPackets(SimpleNetworkWrapper netInstance) {}
 
