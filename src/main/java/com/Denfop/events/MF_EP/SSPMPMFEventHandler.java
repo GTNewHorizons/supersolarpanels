@@ -38,7 +38,7 @@ public class SSPMPMFEventHandler {
 				   Map<Integer, Integer> map = null;
 				   ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
 				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input); 
-				  if((input.getItem() == SSPItem.ultDDrill   ||input.getItem() == Ic2Items.iridiumDrill.getItem())) {
+		
 					 
 					  if(EnchantmentHelper.getEnchantments(input) != null) { 
 			  map = EnchantmentHelper.getEnchantments(input);
@@ -56,7 +56,7 @@ public class SSPMPMFEventHandler {
 			  
 			  }
 				  
-				  }
+				  
 				  Map<Integer, Integer>  map1 = null;
 				  if(map != null) {
 					  map1 =map;

@@ -6,6 +6,7 @@ import java.util.Random;
 import com.Denfop.Register.*;
 import com.Denfop.World.GenOre;
 import com.Denfop.block.Base.BlocksItems;
+import com.Denfop.integration.crafttweaker.CTCore;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.tab.*;
 import cpw.mods.fml.common.*;
@@ -61,6 +62,8 @@ BlocksItems.init();
     public void load(final FMLInitializationEvent event) {
     	if(Loader.isModLoaded("Waila"))
     	FMLInterModComms.sendMessage("Waila", "register", "com.Denfop.integration.Waila.WailaHandler.callbackRegister");
+    	if(Loader.isModLoaded("modtweaker2"))
+    		CTCore.register();
     	}
     public static void initENet() {EnergyNet.instance = (IEnergyNet)EnergyNetGlobal.initialize();  }
 

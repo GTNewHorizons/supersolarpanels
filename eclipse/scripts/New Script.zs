@@ -1,3 +1,3 @@
 # CREATED USING EXTERNAL TWEAKER
 
-mods.SuperSolarPanel.MoleculatTransformer.addRecipe(<industrialupgrade:reactorDepletedprotonQuad:*>, <Botania:swapRing>, 444440);
+mods.industrialupgrade.MoleculatTransformer.addRecipe(<Botania:rune>, <minecraft:stone_sword>, 9990);

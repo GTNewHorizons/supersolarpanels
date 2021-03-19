@@ -28,12 +28,12 @@ itemQuantumCore.name=Квантовое Ядро
 blockMolecularTransformer.name=Молекулярный Преобразователь
 blockAdvancedSolarPanel.name=Улучшенная Солнечная Панель
 blockHybridSolarPanel.name=Гибридная Солнечная Панель
-blockUltimateSolarPanel.name=Ультимейт Гибридная солнечная Панель
+blockUltimateSolarPanel.name=Совершенная Гибридная солнечная Панель
 blockQuantumSolarPanel.name=Квантовая Солнечная Панель
 blockQuantumGenerator.name=Квантовый генератор
 item.advancedSolarHelmet.name=Улучшенный солнечный шлем
 item.hybridSolarHelmet.name=Гибридный солнечный шлем
-item.ultimateSolarHelmet.name=Ультимейт солнечный шлем
+item.ultimateSolarHelmet.name=Совершенный солнечный шлем
 gui.MolecularTransformer.input=Вход
 gui.MolecularTransformer.output=Выход
 gui.MolecularTransformer.energyPerOperation=Энергия
@@ -450,5 +450,5 @@ item.spectralshovel.name=Спектральная лопата
 supsolpans.SSP.GenerationDay.tooltip=Генерация днём:
 supsolpans.SSP.GenerationNight.tooltip=Генерация ночью:
 message.ultDDrill.mode.bigHoles2=Совершенный большой режим
-
+gui.AdvancedSolarPanel.energyPerTick
 

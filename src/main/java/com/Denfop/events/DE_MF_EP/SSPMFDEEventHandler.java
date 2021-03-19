@@ -71,7 +71,7 @@ public class SSPMFDEEventHandler {
 				if( player.openContainer.getSlot(2).getStack() != null) {
 					ItemStack input2 =  player.openContainer.getSlot(2).getStack();
 					  nbtData = NBTData.getOrCreateNbtData(input2); 
-					  if((input2.getItem() == SSPItem.ultDDrill   ||input2.getItem() == Ic2Items.iridiumDrill.getItem())) {
+					  
 						  
 						  if(EnchantmentHelper.getEnchantments(input2) != null) { 
 				  map = EnchantmentHelper.getEnchantments(input2);
@@ -94,7 +94,7 @@ public class SSPMFDEEventHandler {
 				  EnchantmentHelper.setEnchantments(map1, input2);
 				  }
 					  
-					  }
+					  
 					
 				}
 			  }

@@ -295,18 +295,36 @@ public class SSPEventHandler {
 			  if(player.inventory.mainInventory[i] != null && (player.inventory.mainInventory[i].getItem() instanceof EnergyAxe ||player.inventory.mainInventory[i].getItem() instanceof EnergyPickaxe || player.inventory.mainInventory[i].getItem() instanceof EnergyShovel  )) {
 				   ItemStack input = player.inventory.mainInventory[i];
 				   NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
-				   if(nbtData.getBoolean("create") == true) {
+				   if(nbtData.getBoolean("create")) {
 				   Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
-				   EnergyAxe drill = (EnergyAxe) input.getItem();
+				 
+				if(input.getItem() instanceof EnergyAxe) {
+					EnergyAxe   drill = (EnergyAxe) input.getItem();
 		        	  if(Config.enableefficiency && drill.mode == 0) {
 		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(drill.efficienty));
 		        	enchantmentMap4.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(drill.lucky));
 		        	 nbtData.setBoolean("create",false);
 		        	 EnchantmentHelper.setEnchantments(enchantmentMap4, input);
 		        	  }
-		        	  
-		        	 
-		        	  
+				}
+				if(input.getItem() instanceof EnergyPickaxe) {
+					EnergyPickaxe   drill = (EnergyPickaxe) input.getItem();
+		        	  if(Config.enableefficiency && drill.mode == 0) {
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(drill.efficienty));
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(drill.lucky));
+		        	 nbtData.setBoolean("create",false);
+		        	 EnchantmentHelper.setEnchantments(enchantmentMap4, input);
+		        	  }
+				}	 
+				if(input.getItem() instanceof EnergyShovel) {
+					EnergyShovel   drill = (EnergyShovel) input.getItem();
+		        	  if(Config.enableefficiency && drill.mode == 0) {
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(drill.efficienty));
+		        	enchantmentMap4.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(drill.lucky));
+		        	 nbtData.setBoolean("create",false);
+		        	 EnchantmentHelper.setEnchantments(enchantmentMap4, input);
+		        	  }
+				}	  
 			  }}}
 	}
 	//
