@@ -5,6 +5,7 @@ import com.Denfop.SSPItem;
 import com.Denfop.IUCore;
 import com.Denfop.item.base.SSPItemBase;
 import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
+import com.brandon3055.draconicevolution.client.render.IRenderTweak;
 import com.brandon3055.draconicevolution.common.ModItems;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 
@@ -18,6 +19,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 public class DraconicIntegration {
 
@@ -97,6 +100,19 @@ public static void Recipes() {
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SSPItem.blockSSPSolarPanel, 1) ,'A',ModItems.wyvernCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,1), new Object[] { "AB ","BAB"," BA", 'B', new ItemStack(blockDESolarPanel, 1,0) ,'A',ModItems.awakenedCore});
     GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1,2), new Object[] { "ABC","BAB","CBA", 'B', new ItemStack(blockDESolarPanel, 1,1) ,'A',ModItems.chaoticCore , 'C',ChaosEnergyCore});
+}
+public static void render() {
+	  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosBow, (IItemRenderer)new RenderBowModel(true));
+	  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosSword, (IItemRenderer)new RenderTool("models/tools/DraconicSword.obj", "textures/models/tools/DraconicSword.png", (IRenderTweak)DraconicIntegration.ChaosSword));
+	  MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosPickaxe, (IItemRenderer)new RenderTool("models/tools/DraconicPickaxe.obj", "textures/models/tools/DraconicPickaxe.png", (IRenderTweak)DraconicIntegration.ChaosPickaxe));
+      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosAxe, (IItemRenderer)new RenderTool("models/tools/DraconicLumberAxe.obj", "textures/models/tools/DraconicLumberAxe.png", (IRenderTweak)DraconicIntegration.ChaosAxe));
+      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosShovel, (IItemRenderer)new RenderTool("models/tools/DraconicShovel.obj", "textures/models/tools/DraconicShovel.png", (IRenderTweak)DraconicIntegration.ChaosShovel));
+      MinecraftForgeClient.registerItemRenderer(DraconicIntegration.ChaosDestructionStaff, (IItemRenderer)new RenderTool("models/tools/DraconicStaffOfPower.obj", "textures/models/tools/DraconicStaffOfPower.png", (IRenderTweak)DraconicIntegration.ChaosDestructionStaff));
+       MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosHelm, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosHelm));
+      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosChest, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosChest));
+      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosLeggs, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosLeggs));
+      MinecraftForgeClient.registerItemRenderer((Item)DraconicIntegration.ChaosBoots, (IItemRenderer)new RenderArmor(DraconicIntegration.ChaosBoots));
+
 }
 }
 
