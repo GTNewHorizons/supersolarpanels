@@ -507,21 +507,17 @@ this.output=this.l+this.output_plus+this.output_plus1;
   public void setTransfer(boolean t) {
       this.transfer = t;
     }
-  public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-	  
-	 if(this.energy < (this.maxStorage))
-    return !facingMatchesDirection(direction);
-	 else 
-		 return false;
-  }
-  
-  public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
-    return facingMatchesDirection(direction);
-  }
-  
-  public boolean facingMatchesDirection(ForgeDirection direction) {
-    return (direction.ordinal() == getFacing());
-  }
+ 	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+		return !facingMatchesDirection(direction);
+	}
+
+	public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+		return facingMatchesDirection(direction);
+	}
+
+	public boolean facingMatchesDirection(ForgeDirection direction) {
+		return (direction.ordinal() == getFacing());
+	}
   
   public double getOfferedEnergy() {
     if (this.energy >= (this.output+this.output_plus+this.output_plus1))
