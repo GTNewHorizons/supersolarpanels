@@ -458,9 +458,7 @@ public static void config(final FMLPreInitializationEvent event) {
          enableIC2EasyMode=config.get("general", "Easy Mode", false).getBoolean(false);
          
          enableexlposion=config.get("Events", "Enable exlposion", true).getBoolean(true);
-         if(damagecable == false) {
-        	 newsystem = true;
-         }
+         
          enableefficiency=config.get("UltimateDrill", "Enable Efficiency tool mode 1", true).getBoolean(true); 
          if(efficiencylevel1 > 1 && efficiencylevel1 <15) {
          efficiencylevel1=config.get("UltimateDrill", "Level efficiency(tool mode 1)", 10).getInt(10); }else {
