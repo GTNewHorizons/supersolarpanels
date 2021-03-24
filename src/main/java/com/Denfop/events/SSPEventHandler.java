@@ -93,60 +93,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 public class SSPEventHandler {
-	@SubscribeEvent
-	public void onBucketFill(FillBucketEvent event)
-	{
-		World world = event.world;
-		MovingObjectPosition pos = event.target;
-		Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-		int meta = world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ);
-		  String fluidName = "ic3" + "fluidUuMatter".substring("fluid".length()).toLowerCase(Locale.ENGLISH);
-		  Fluid  fluid = FluidRegistry.getFluid(fluidName);
-		if (block == fluid.getBlock())
-		{
-			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-			
-			event.result = SSPItem.uuMatterCell;
-			event.setResult(Result.ALLOW);
-		}
-	}
-	 
-	@SubscribeEvent
-	public void UraniumOre(BreakEvent event) {
-		if(!(event.block instanceof  BlockMetaData))
-				return;
-		
-		
-		Block block = event.block;
-		int meta = event.blockMetadata;
-		ItemStack item = new ItemStack(block,1,meta);
-		if(!(Ic2Items.uraniumOre.getItem() == item.getItem()))
-			return;
-		
 	
-		if(Ic2Items.uraniumOre.getItem() == item.getItem()) {
-		Random rand = new Random();
-		int chance = (rand.nextInt(16)+1);
-		int chance1 = (rand.nextInt(16)+1);
-		double k = chance/16;
-		double k1 = chance1/8;
-		double dob = (k * k1)*100;
-		ItemStack itemstack =Ic2Items.smallPlutonium;
-		if(dob <= 1 ) {
-	for(int i =0;i<36;i++) {
-		 if(event.getPlayer().inventory.mainInventory[i] == Ic2Items.smallPlutonium) {
-	   		event.getPlayer().inventory.mainInventory[i].stackSize = event.getPlayer().inventory.mainInventory[i].stackSize + 1;
-	   	 break;
-		 }else if(event.getPlayer().inventory.mainInventory[i] == null) {
-   		 event.getPlayer().inventory.mainInventory[i] = Ic2Items.smallPlutonium;
-   		 break;
-   	 }
-	}
-         
-        
-         }}}
-	//}
-	   
 	  @SubscribeEvent
 	    @SideOnly(Side.CLIENT)
 	    public void onViewRenderFogDensity(EntityViewRenderEvent.FogDensity event) {
