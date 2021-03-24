@@ -80,9 +80,7 @@ public class CommonProxy implements IGuiHandler{
   public void registerRenderers() {}
   
   public void registerEvents() {
-	    MinecraftForge.EVENT_BUS.register(new EventDarkQuantumSuitEffect());
-	    if(Config.Streak == true) {
-	    FMLCommonHandler.instance().bus().register(new EventDarkQuantumSuitEffect());}
+	   
 	    if(Config.newsystem)
 	    	IUCore.initENet();
 	    
