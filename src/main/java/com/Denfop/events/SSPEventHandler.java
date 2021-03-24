@@ -136,12 +136,14 @@ public class SSPEventHandler {
 					player.capabilities.allowFlying = false;
 					nbtData1.setBoolean("isFlyActive",false);
 					nbtData.setBoolean("isFlyActive",false);
+					if (player.getEntityWorld().isRemote)
 					player.capabilities.setFlySpeed((float) 0.05);
 				}else {
 					player.capabilities.isFlying = true;
 					player.capabilities.allowFlying = true;
 				    nbtData.setBoolean("isFlyActive",true);
 				    nbtData1.setBoolean("isFlyActive",true);
+					if (player.getEntityWorld().isRemote)
 				    player.capabilities.setFlySpeed((float) 0.2);
 				}
 			}else if(player.inventory.armorInventory[2].getItem() != SSPItem.quantumBodyarmor&& player.inventory.armorInventory[2] != null) {
@@ -149,6 +151,7 @@ public class SSPEventHandler {
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
 				    nbtData.setBoolean("isFlyActive",false);
+					if (player.getEntityWorld().isRemote)
 				    player.capabilities.setFlySpeed((float) 0.05);
 				}
 			}	
@@ -157,12 +160,14 @@ public class SSPEventHandler {
 					player.capabilities.isFlying = false;
 					player.capabilities.allowFlying = false;
 				    nbtData.setBoolean("isFlyActive",false);
+					if (player.getEntityWorld().isRemote)
 				    player.capabilities.setFlySpeed((float) 0.05);
 				}}}else {
 					if(nbtData.getBoolean("isFlyActive") == true) {
 						player.capabilities.isFlying = false;
 						player.capabilities.allowFlying = false;
 					    nbtData.setBoolean("isFlyActive",false);
+						if (player.getEntityWorld().isRemote)
 					    player.capabilities.setFlySpeed((float) 0.05);
 					}
 				}
