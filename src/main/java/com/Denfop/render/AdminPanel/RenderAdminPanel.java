@@ -1,6 +1,5 @@
 package com.Denfop.render.AdminPanel;
 
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -13,30 +12,25 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.util.ForgeDirection;
 
+public class RenderAdminPanel extends TileEntitySpecialRenderer {
 
-public class RenderAdminPanel extends TileEntitySpecialRenderer
-{
-    
-    private static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("supersolarpanel", "textures/models/panel.obj") ); 
-    private ResourceLocation CubeTest; 
+	private static final IModelCustom model = AdvancedModelLoader
+			.loadModel(new ResourceLocation("supersolarpanel", "textures/models/panel.obj"));
+	private ResourceLocation CubeTest;
 
-    public RenderAdminPanel()
-    {
-        CubeTest = new ResourceLocation("supersolarpanel", "textures/model/panel.png"); 
-    }
+	public RenderAdminPanel() {
+		CubeTest = new ResourceLocation("supersolarpanel", "textures/model/panel.png");
+	}
 
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f)
-    {
-        
-        GL11.glPushMatrix();
-        GL11.glTranslated(x, y, z);
-        
-        bindTexture(CubeTest); 
-        model.renderAll(); 
-        
-        GL11.glPopMatrix();
-    }
-    
- 
-    
+	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
+
+		GL11.glPushMatrix();
+		GL11.glTranslated(x, y, z);
+
+		bindTexture(CubeTest);
+		model.renderAll();
+
+		GL11.glPopMatrix();
+	}
+
 }

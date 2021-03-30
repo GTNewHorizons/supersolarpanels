@@ -23,7 +23,9 @@ public class InvSlotProcessableMultiSmelting extends InvSlot implements IInvSlot
 
 	public RecipeOutput process(int slotId) {
 		ItemStack input = this.get(slotId);
-		return input == null ? null : new RecipeOutput((NBTTagCompound) null, new ItemStack[]{FurnaceRecipes.smelting().getSmeltingResult(input).copy()});
+		return input == null ? null
+				: new RecipeOutput((NBTTagCompound) null,
+						new ItemStack[] { FurnaceRecipes.smelting().getSmeltingResult(input).copy() });
 	}
 
 	public void consume(int slotId) {

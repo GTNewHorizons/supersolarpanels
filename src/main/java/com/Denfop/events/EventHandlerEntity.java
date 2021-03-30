@@ -1,8 +1,5 @@
 package com.Denfop.events;
 
-
-
-
 import com.google.common.io.Files;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
@@ -55,11 +52,11 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 public class EventHandlerEntity {
-  @SubscribeEvent
-  public void droppedItem(ItemTossEvent event) {
-    NBTTagCompound itemData = event.entityItem.getEntityData();
-    itemData.setString("thrower", event.player.getCommandSenderName());
-  }
-  
-  public HashMap<Integer, Float> prevStep = new HashMap<Integer, Float>();
+	@SubscribeEvent
+	public void droppedItem(ItemTossEvent event) {
+		NBTTagCompound itemData = event.entityItem.getEntityData();
+		itemData.setString("thrower", event.player.getCommandSenderName());
+	}
+
+	public HashMap<Integer, Float> prevStep = new HashMap<Integer, Float>();
 }

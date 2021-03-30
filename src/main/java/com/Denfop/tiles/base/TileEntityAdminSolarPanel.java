@@ -3,6 +3,7 @@ package com.Denfop.tiles.base;
 import com.Denfop.IUCore;
 
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.StatCollector;
 
 
 public class TileEntityAdminSolarPanel extends TileEntitySolarPanel 
@@ -13,7 +14,7 @@ public class TileEntityAdminSolarPanel extends TileEntitySolarPanel
     
     @Override
     public String getInvName() {
-        return "Manasteel Solar Panel";
+        return StatCollector.translateToLocal("blockAdministatorSolarPanel.name");
     }
     
     

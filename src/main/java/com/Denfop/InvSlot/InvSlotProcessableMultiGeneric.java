@@ -20,7 +20,8 @@ public class InvSlotProcessableMultiGeneric extends InvSlot implements IInvSlotP
 	public IMachineRecipeManager recipeManager;
 	private int SIZE;
 
-	public InvSlotProcessableMultiGeneric(TileEntityInventory base1, String name1, int count, IMachineRecipeManager recipeManager1) {
+	public InvSlotProcessableMultiGeneric(TileEntityInventory base1, String name1, int count,
+			IMachineRecipeManager recipeManager1) {
 		super(base1, name1, 1, Access.I, count, InvSide.TOP);
 		this.recipeManager = recipeManager1;
 		this.SIZE = count;
@@ -74,7 +75,7 @@ public class InvSlotProcessableMultiGeneric extends InvSlot implements IInvSlotP
 			}
 		}
 	}
-	
+
 	public boolean isEmpty(int slotId) {
 		return this.get(slotId) == null;
 	}

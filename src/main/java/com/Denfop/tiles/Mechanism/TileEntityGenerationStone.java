@@ -46,9 +46,8 @@ public TileEntityGenerationStone() {
   }
   
   public String getInventoryName() {
-	return null;
-	  
- //  return StatCollector.translateToLocal("ssp.genstone");
+	
+	  return StatCollector.translateToLocal("ssp.genstone");
   }
   
   public static void addGen(IRecipeInput container, IRecipeInput fill, ItemStack output) {

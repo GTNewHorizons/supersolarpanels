@@ -20,14 +20,10 @@ public class ContainerChargepadBlock extends ContainerFullInv<TileEntityChargepa
     this.tileentity = tileEntity1;
     for (int col = 0; col < 4; col++)
         addSlotToContainer((Slot)new InvSlotArmor(entityPlayer.inventory, col, 8 + col * 18, 84)); 
-    for (int j = 0; j < 2; ++j)
-	{
-		
-		this.addSlotToContainer(new Slot(this.tileentity, j, 56-36 + (j*(j+1) * 18)*j , 17));
-	}  
-
-    addSlotToContainer((Slot)new Slot(this.tileentity, 2, 56, 53));
-    this.addSlotToContainer(new Slot(this.tileentity, 3, 56-36 , 17+18));
+	addSlotToContainer((Slot) new SlotInvSlot(tileentity.inputslotA, 0, 56, 17));
+	addSlotToContainer((Slot) new SlotInvSlot(tileentity.inputslotB, 0, 56, 53));
+	addSlotToContainer((Slot) new SlotInvSlot(tileentity.inputslotC, 0, 56 - 36, 17));
+	addSlotToContainer((Slot) new SlotInvSlot(tileentity.inputslotC, 1, 56 - 36, 17 + 18));
   }
   
   
@@ -35,8 +31,11 @@ public class ContainerChargepadBlock extends ContainerFullInv<TileEntityChargepa
     List<String> ret = super.getNetworkedFields();
     ret.add("energy2");
     ret.add("energy");
-    ret.add("redstoneMode");
-    ret.add("chargeSlots");
+	ret.add("personality");
+	ret.add("inputslotA");
+	ret.add("inputslotB");
+	ret.add("inputslotC");
+	ret.add("output_plus");
     return ret;
   }
 }

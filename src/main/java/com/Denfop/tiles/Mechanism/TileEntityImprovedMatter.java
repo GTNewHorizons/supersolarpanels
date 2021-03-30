@@ -2,15 +2,17 @@ package com.Denfop.tiles.Mechanism;
 
 import com.Denfop.tiles.base.TileEntityMultiMatter;
 
+import net.minecraft.util.StatCollector;
+
 public class TileEntityImprovedMatter extends TileEntityMultiMatter {
 
 	public TileEntityImprovedMatter() {
-		super(666666.6F, 8);
+		super(800000F, 8);
 	}
 
 	@Override
 	public String getInventoryName() {
-		return "Improved Mass Fabricator";
+		return StatCollector.translateToLocal("ssp.blockMatter2.name");
 	}
 
 }

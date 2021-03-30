@@ -12,24 +12,25 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface IModulPanel {
 	public static void setData(ItemStack stack, TileEntitySolarPanel tile) {
-		  NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
-		  
-    	nbt.setInteger("genday", tile.genDay);
-    	nbt.setInteger("gennight", tile.genNight);
-    	nbt.setInteger("basestorage", tile.maxStorage);
-    	nbt.setInteger("output", tile.production);
-    	nbt.setInteger("tier", tile.tier);
-	}
-	public static List<Integer> getData(ItemStack stack){
 		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(nbt.getInteger("genday"));
-		list.add(nbt.getInteger("gennight"));
-		list.add(nbt.getInteger("basestorage"));
-		list.add(nbt.getInteger("output"));
-		list.add(nbt.getInteger("tier"));
-		
+
+		nbt.setDouble("genday", tile.genDay);
+		nbt.setDouble("gennight", tile.genNight);
+		nbt.setDouble("basestorage", tile.maxStorage);
+		nbt.setDouble("output", tile.production);
+		nbt.setDouble("tier", tile.tier);
+	}
+
+	public static List<Double> getData(ItemStack stack) {
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
+		List<Double> list = new ArrayList<Double>();
+		list.add(nbt.getDouble("genday"));
+		list.add(nbt.getDouble("gennight"));
+		list.add(nbt.getDouble("basestorage"));
+		list.add(nbt.getDouble("output"));
+		list.add(nbt.getDouble("tier"));
+
 		return list;
-		
+
 	}
 }

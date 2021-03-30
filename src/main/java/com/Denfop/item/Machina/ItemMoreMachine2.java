@@ -21,7 +21,7 @@ public class ItemMoreMachine2 extends ItemBlock {
 		super(block);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		  this.setCreativeTab(IUCore.tabssp);
+		this.setCreativeTab(IUCore.tabssp);
 	}
 
 	@Override
@@ -35,8 +35,10 @@ public class ItemMoreMachine2 extends ItemBlock {
 	}
 
 	@Override
-	public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {		
-		info.add(StatCollector.translateToLocal("ic2.item.tooltip.power") + " " + EnumMultiMachine.values()[itemStack.getItemDamage()+14].usagePerTick + " EU/t, 32 EU/t " + StatCollector.translateToLocal("ic2.item.tooltip.max"));
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+		info.add(StatCollector.translateToLocal("ic2.item.tooltip.power") + " "
+				+ EnumMultiMachine.values()[itemStack.getItemDamage() + 14].usagePerTick + " EU/t, 32 EU/t "
+				+ StatCollector.translateToLocal("ic2.item.tooltip.max"));
 	}
 
 	@Override

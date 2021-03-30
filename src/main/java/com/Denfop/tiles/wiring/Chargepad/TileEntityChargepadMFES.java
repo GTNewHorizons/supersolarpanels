@@ -6,6 +6,7 @@ import com.Denfop.tiles.base.TileEntityChargepadBlock;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityChargepadMFES extends TileEntityChargepadBlock {
   public TileEntityChargepadMFES() {
@@ -13,19 +14,7 @@ public class TileEntityChargepadMFES extends TileEntityChargepadBlock {
   }
   
   public String getInventoryName() {
-    return "Chargepad MFES";
+	  return StatCollector.translateToLocal("ssp.blockChargepadMFE.name");
   }
   
-  protected void getItems(EntityPlayer player) {
-    if (player != null) {
-      for (ItemStack current : player.inventory.armorInventory) {
-        if (current != null)
-          chargeitems(current, Config.enegry1); 
-      } 
-      for (ItemStack current : player.inventory.mainInventory) {
-        if (current != null)
-          chargeitems(current, Config.enegry1); 
-      } 
-    } 
-  }
 }

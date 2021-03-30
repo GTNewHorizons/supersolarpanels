@@ -24,22 +24,28 @@ public class AvaritiaIntegration {
 	public static Item infinitycore;
 
 	public static void init() {
-		GameRegistry.registerBlock(blockAvSolarPanel = (Block)new blockAvSolarPanel(), (Class)ItemAvSolarPanel.class, "blockAvSolarPanel");
-		 GameRegistry.registerItem( neutroncore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("neutroncore").setTextureName("supersolarpanel:neutroncore"),"neutroncore");    
-		 GameRegistry.registerItem( infinitycore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("infinitycore").setTextureName("supersolarpanel:infinitycore"),"infinitycore");    
-	     GameRegistry.registerTileEntity((Class)TileEntityNeutronSolarPanel.class, "Neutron Solar Panel Avaritia");
-	      GameRegistry.registerTileEntity((Class)TileEntityInfinitySolarPanel.class, "Infinity Solar Panel");
-	
+		GameRegistry.registerBlock(blockAvSolarPanel = (Block) new blockAvaritiaSolarPanel(),
+				(Class) ItemAvaritiaSolarPanel.class, "blockAvSolarPanel");
+		GameRegistry.registerItem(neutroncore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("neutroncore")
+				.setTextureName("supersolarpanel:neutroncore"), "neutroncore");
+		GameRegistry.registerItem(infinitycore = new SSPDEItem().setMaxStackSize(64).setUnlocalizedName("infinitycore")
+				.setTextureName("supersolarpanel:infinitycore"), "infinitycore");
+		GameRegistry.registerTileEntity((Class) TileEntityNeutronSolarPanel.class, "Neutron Solar Panel Avaritia");
+		GameRegistry.registerTileEntity((Class) TileEntityInfinitySolarPanel.class, "Infinity Solar Panel");
+
 	}
+
 	public static void recipe() {
-		 GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1,0), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(SSPItem.blockSSPSolarPanel, 1,8) ,'A',neutroncore});
-		 GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1,1), new Object[] { " B ","BAB"," B ", 'B', new ItemStack(blockAvSolarPanel, 1,0) ,'A',infinitycore});
-		
-		  GameRegistry.addRecipe(new ItemStack(neutroncore, 1), new Object[] { " A ","ABA"," A ", 'B', new ItemStack(SSPItem.protoncore, 1) ,'A',new ItemStack(LudicrousItems.resource,1,4)});
-		  GameRegistry.addRecipe(new ItemStack(infinitycore, 1), new Object[] { "BAB","ABA","BAB", 'B', new ItemStack(neutroncore, 1) ,'A',new ItemStack(LudicrousItems.resource,1,6)});
-			 
+		GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1, 0), new Object[] { " B ", "BAB", " B ", 'B',
+				new ItemStack(SSPItem.blockSSPSolarPanel, 1, 8), 'A', neutroncore });
+		GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1, 1),
+				new Object[] { " B ", "BAB", " B ", 'B', new ItemStack(blockAvSolarPanel, 1, 0), 'A', infinitycore });
+
+		GameRegistry.addRecipe(new ItemStack(neutroncore, 1), new Object[] { " A ", "ABA", " A ", 'B',
+				new ItemStack(SSPItem.protoncore, 1), 'A', new ItemStack(LudicrousItems.resource, 1, 4) });
+		GameRegistry.addRecipe(new ItemStack(infinitycore, 1), new Object[] { "BAB", "ABA", "BAB", 'B',
+				new ItemStack(neutroncore, 1), 'A', new ItemStack(LudicrousItems.resource, 1, 6) });
+
 	}
-	
-	
-	
+
 }

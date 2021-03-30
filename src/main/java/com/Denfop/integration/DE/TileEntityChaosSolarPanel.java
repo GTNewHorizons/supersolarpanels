@@ -7,9 +7,9 @@ import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.IUCore;
 
-public class TileEntityChaosSolarPanel extends TileEntitySolarPanel
-{
-    public TileEntityChaosSolarPanel() {
-        super("blockChaosSolarPanel.name",Config.chaostier, 0, Config.chaosgenday, Config.chaosgennight, Config.chaosoutput, Config.chaosstorage);
-    }
+public class TileEntityChaosSolarPanel extends TileEntitySolarPanel {
+	public TileEntityChaosSolarPanel() {
+		super("blockChaosSolarPanel.name", Config.chaostier, 0, Config.chaosgenday, Config.chaosgennight,
+				Config.chaosoutput, Config.chaosstorage);
+	}
 }

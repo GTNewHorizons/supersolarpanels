@@ -2,14 +2,15 @@ package com.Denfop.tiles.wiring.Chargepad;
 import com.Denfop.tiles.base.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
-public class TileEntityChargepadBatBox extends com.Denfop.tiles.base.TileEntityChargepadBlock {
+public class TileEntityChargepadBatBox extends TileEntityChargepadBlock {
   public TileEntityChargepadBatBox() {
     super(1, 32, 40000);
   }
   
   public String getInventoryName() {
-    return "Chargepad BatBox";
+    return StatCollector.translateToLocal("ssp.blockChargepadBatBox.name");
   }
   
   protected void getItems(EntityPlayer player) {

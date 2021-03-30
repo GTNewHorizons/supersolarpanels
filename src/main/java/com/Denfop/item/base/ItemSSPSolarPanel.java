@@ -17,111 +17,117 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
+import com.Denfop.Config;
 import com.Denfop.IUCore;
 import com.Denfop.api.IPanel;
 import com.Denfop.block.Base.BlockSSPSolarPanel;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.utils.ModUtils;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemSSPSolarPanel extends ItemBlock implements IPanel
-{
-    private List<String> itemNames;
+public class ItemSSPSolarPanel extends ItemBlock implements IPanel {
+	private List<String> itemNames;
 	private Block block;
-    
-    public ItemSSPSolarPanel(final Block b) {
-        super(b);
-        this.setMaxDamage(0);
-        this.setHasSubtypes(true);
-        this.itemNames = new ArrayList<String>();
-        this.addItemsNames();
-        this.block = b;
-    }
-    
-    public int getMetadata(final int i) {
-        return i;
-    }
-    
-    public String getUnlocalizedName(final ItemStack itemstack) {
-        return this.itemNames.get(itemstack.getItemDamage());
-    }
-    
-    public void addItemsNames() {
-        this.itemNames.add("blockAdvancedSolarPanel");
-        this.itemNames.add("blockHybridSolarPanel");
-        this.itemNames.add("blockUltimateSolarPanel");
-        this.itemNames.add("blockQuantumSolarPanel");
-        this.itemNames.add("blockSpectralSolarPanel");
-        this.itemNames.add("blockProtonSolarPanel");
-        this.itemNames.add("blockSingularSolarPanel");
-        this.itemNames.add("blockAdminSolarPanel");
-        this.itemNames.add("blockPhotonicSolarPanel");
-        this.itemNames.add("blockNeutronSolarPanel");
-       
-    }
-    public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
-        for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
-            final ItemStack stack = new ItemStack((Item)this, 1, meta);
-            TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-          IPanel.setData(stack,tile);
-            itemList.add(stack);
-        }
-    }
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
-        NBTTagCompound nbttagcompound;
-        int meta = itemStack.getItemDamage();
-       TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " " + tile.genDay  + " EU/t " );
-      	  info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " " + tile.genNight  + " EU/t " );
-            
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " " +tile.production  + " EU/t " );
-          info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " " + tile.maxStorage + " EU ");
-          info.add(StatCollector.translateToLocal("ssp.tier") + tile.tier);
-        
-        }
-        @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(final ItemStack itemstack) {
-        final int i = itemstack.getItemDamage();
-        switch (i) {
-            case 0: {
-                return EnumRarity.uncommon;
-            }
-            case 1: {
-                return EnumRarity.rare;
-            }
-            case 2: {
-                return EnumRarity.rare;
-            }
-            case 3: {
-                return EnumRarity.epic;
-            }
-            case 4: {
-                return EnumRarity.epic;
-            }
-        
-        case 5: {
-            return EnumRarity.rare;
-        }
-        case 6: {
-            return EnumRarity.epic;
-        }
-        case 7: {
-            return EnumRarity.epic;
-        }
-        case 8: {
-            return EnumRarity.epic;
-        }
-          
-        case 9: {
-            return EnumRarity.epic;
-        }
-           default: {
-                return EnumRarity.uncommon;
-            }
-        }
-    }
 
-		
+	public ItemSSPSolarPanel(final Block b) {
+		super(b);
+		this.setMaxDamage(0);
+		this.setHasSubtypes(true);
+		this.itemNames = new ArrayList<String>();
+		this.addItemsNames();
+		this.block = b;
+	}
 
-		
+	public int getMetadata(final int i) {
+		return i;
+	}
+
+	public String getUnlocalizedName(final ItemStack itemstack) {
+		return this.itemNames.get(itemstack.getItemDamage());
+	}
+
+	public void addItemsNames() {
+		this.itemNames.add("blockAdvancedSolarPanel");
+		this.itemNames.add("blockHybridSolarPanel");
+		this.itemNames.add("blockUltimateSolarPanel");
+		this.itemNames.add("blockQuantumSolarPanel");
+		this.itemNames.add("blockSpectralSolarPanel");
+		this.itemNames.add("blockProtonSolarPanel");
+		this.itemNames.add("blockSingularSolarPanel");
+		this.itemNames.add("blockAdminSolarPanel");
+		this.itemNames.add("blockPhotonicSolarPanel");
+		this.itemNames.add("blockNeutronSolarPanel");
+
+	}
+
+	public void getSubItems(final Item item, final CreativeTabs tabs, final List itemList) {
+		for (int meta = 0; meta <= this.itemNames.size() - 1; ++meta) {
+			final ItemStack stack = new ItemStack((Item) this, 1, meta);
+			TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
+			IPanel.setData(stack, tile);
+			itemList.add(stack);
+		}
+	}
+
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+		NBTTagCompound nbttagcompound;
+		if(Config.promt) {
+		int meta = itemStack.getItemDamage();
+		TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);
+		info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationDay.tooltip") + " "
+				+ ModUtils.getString(tile.genDay) + " EU/t ");
+		info.add(StatCollector.translateToLocal("supsolpans.SSP.GenerationNight.tooltip") + " "
+				+ ModUtils.getString(tile.genNight) + " EU/t ");
+
+		info.add(StatCollector.translateToLocal("ic2.item.tooltip.Output") + " "
+				+ ModUtils.getString(tile.production) + " EU/t ");
+		info.add(StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " "
+				+ ModUtils.getString(tile.maxStorage) + " EU ");
+		info.add(StatCollector.translateToLocal("ssp.tier") + ModUtils.getString(tile.tier));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(final ItemStack itemstack) {
+		final int i = itemstack.getItemDamage();
+		switch (i) {
+		case 0: {
+			return EnumRarity.uncommon;
+		}
+		case 1: {
+			return EnumRarity.rare;
+		}
+		case 2: {
+			return EnumRarity.rare;
+		}
+		case 3: {
+			return EnumRarity.epic;
+		}
+		case 4: {
+			return EnumRarity.epic;
+		}
+
+		case 5: {
+			return EnumRarity.rare;
+		}
+		case 6: {
+			return EnumRarity.epic;
+		}
+		case 7: {
+			return EnumRarity.epic;
+		}
+		case 8: {
+			return EnumRarity.epic;
+		}
+
+		case 9: {
+			return EnumRarity.epic;
+		}
+		default: {
+			return EnumRarity.uncommon;
+		}
+		}
+	}
+
 }

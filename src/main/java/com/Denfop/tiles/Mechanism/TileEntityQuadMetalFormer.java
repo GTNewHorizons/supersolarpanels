@@ -20,6 +20,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityQuadMetalFormer extends TileEntityMultiMachine
 		implements INetworkClientTileEntityEventListener {
@@ -63,7 +64,7 @@ public class TileEntityQuadMetalFormer extends TileEntityMultiMachine
 	}
 
 	public String getInventoryName() {
-		return "Quad MetalFormer";
+		return StatCollector.translateToLocal("ssp.blockMetalFormer3.name");
 	}
 
 	public float getWrenchDropRate() {

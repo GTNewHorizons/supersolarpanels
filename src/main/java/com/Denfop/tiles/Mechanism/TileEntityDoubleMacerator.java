@@ -20,6 +20,7 @@ import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityDoubleMacerator extends TileEntityMultiMachine {
 	public TileEntityDoubleMacerator() {
@@ -33,7 +34,7 @@ public class TileEntityDoubleMacerator extends TileEntityMultiMachine {
 	}
 
 	public String getInventoryName() {
-		return "Double Macerator";
+		return StatCollector.translateToLocal("ssp.blockMacerator.name");
 	}
 
 	public String getStartSoundFile() {

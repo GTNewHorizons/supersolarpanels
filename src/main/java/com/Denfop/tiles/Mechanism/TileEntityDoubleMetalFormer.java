@@ -21,6 +21,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityDoubleMetalFormer extends TileEntityMultiMachine
 		implements INetworkClientTileEntityEventListener {
@@ -64,7 +65,7 @@ public class TileEntityDoubleMetalFormer extends TileEntityMultiMachine
 	}
 
 	public String getInventoryName() {
-		return "Double MetalFormer";
+		return StatCollector.translateToLocal("ssp.MetalFormer1.name");
 	}
 
 	public float getWrenchDropRate() {

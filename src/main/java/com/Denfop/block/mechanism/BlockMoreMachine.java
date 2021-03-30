@@ -10,7 +10,9 @@ import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.Mechanism.*;
 import com.Denfop.tiles.base.TileEntityMultiMachine;
 import com.Denfop.utils.ExperienceUtils;
+import com.Denfop.utils.graviSuite;
 
+import cpw.mods.fml.common.Loader;
 import ic2.api.item.IC2Items;
 import ic2.api.tile.IWrenchable;
 import ic2.core.IC2;
@@ -33,25 +35,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMoreMachine extends BlockContainer {
-	public static final String[] names = new String[] {
-			"Macerator", "Macerator2", "Macerator3", "Compressor", "Compressor2", "Compressor3", 
-			"ElecFurnace", "ElecFurnace2", "ElecFurnace3", "Extractor", "Extractor2", "Extractor3", 
-			"MetalFormer", "MetalFormer2", "MetalFormer3"
-	};
-	
-	private static int[][] sideAndFacingToSpriteOffset = new int[][] { 
-		{ 3, 2, 0, 0, 0, 0 }, 
-		{ 2, 3, 1, 1, 1, 1 },
-		{ 1, 1, 3, 5, 2, 4 }, 
-		{ 0, 0, 5, 3, 4, 2 }, 
-		{ 4, 5, 4, 2, 3, 5 }, 
-		{ 5, 4, 2, 4, 5, 3 } };
-	
+	public static final String[] names = new String[] { "Macerator", "Macerator2", "Macerator3", "Compressor",
+			"Compressor2", "Compressor3", "ElecFurnace", "ElecFurnace2", "ElecFurnace3", "Extractor", "Extractor2",
+			"Extractor3", "MetalFormer", "MetalFormer2", "MetalFormer3" };
+
+	private static int[][] sideAndFacingToSpriteOffset = new int[][] { { 3, 2, 0, 0, 0, 0 }, { 2, 3, 1, 1, 1, 1 },
+			{ 1, 1, 3, 5, 2, 4 }, { 0, 0, 5, 3, 4, 2 }, { 4, 5, 4, 2, 3, 5 }, { 5, 4, 2, 4, 5, 3 } };
+
 	public BlockMoreMachine() {
 		super(Material.iron);
 		setHardness(2.0F);
 		setStepSound(soundTypeMetal);
-		  this.setCreativeTab(IUCore.tabssp);
+		this.setCreativeTab(IUCore.tabssp);
 	}
 
 	@Override
@@ -87,7 +82,7 @@ public class BlockMoreMachine extends BlockContainer {
 			return new TileEntityTripleMetalFormer();
 		case 14:
 			return new TileEntityQuadMetalFormer();
-			
+
 		}
 		return null;
 	}
@@ -97,13 +92,14 @@ public class BlockMoreMachine extends BlockContainer {
 	@Override
 	public void registerBlockIcons(final IIconRegister par1IconRegister) {
 		this.iconBuffer = new IIcon[15][12];
-		
-        for (int i = 0; i < names.length; i++) {
-            IIcon[] icons = TextureAtlasSheet.unstitchIcons(par1IconRegister, "supersolarpanel:block" + names[i], 12, 1);
-            for (int k = 0; k < icons.length; k++) {
-                iconBuffer[i][k] = icons[k];
-            }
-        }
+
+		for (int i = 0; i < names.length; i++) {
+			IIcon[] icons = TextureAtlasSheet.unstitchIcons(par1IconRegister, "supersolarpanel:block" + names[i], 12,
+					1);
+			for (int k = 0; k < icons.length; k++) {
+				iconBuffer[i][k] = icons[k];
+			}
+		}
 	}
 
 	@Override
@@ -207,17 +203,26 @@ public class BlockMoreMachine extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7,
 			float par8, float par9) {
 		if (!entityPlayer.isSneaking()) {
+			if(!Loader.isModLoaded("GraviSuite")) {
+				if(graviSuite.gettrue1(entityPlayer)) 
+					return false;
+				}else 
+					if(graviSuite.gettrue(entityPlayer)) 
+						return false;
 			entityPlayer.openGui(IUCore.instance, 0, world, x, y, z);
 			return true;
-		}else {
-			TileEntityMultiMachine	tile = (TileEntityMultiMachine) world.getTileEntity(x, y, z);
+		} else {
+			
+			TileEntityMultiMachine tile = (TileEntityMultiMachine) world.getTileEntity(x, y, z);
 			int currentXP = ExperienceUtils.getPlayerXP(entityPlayer);
-			 int nextLevelXP = ExperienceUtils.getExperienceForLevel(entityPlayer.experienceLevel + 1);
-			 int requiredXP = nextLevelXP - currentXP;
-			 
-			 int requiredXPJuice = 20 * requiredXP;
-			 ExperienceUtils.addPlayerXP(entityPlayer, tile.expstorage);
-			 tile.expstorage =0;
+			int nextLevelXP = ExperienceUtils.getExperienceForLevel(entityPlayer.experienceLevel + 1);
+			int requiredXP = nextLevelXP - currentXP;
+
+			int requiredXPJuice = 20 * requiredXP;
+			
+			ExperienceUtils.addPlayerXP(entityPlayer, tile.expstorage);
+			tile.expstorage = 0;
+			
 		}
 
 		return false;

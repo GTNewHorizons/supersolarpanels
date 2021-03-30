@@ -256,6 +256,7 @@ public class EnergyNetLocal
                         this.entityLivingToShockEnergyMap.put(entityLiving, maxShockEnergy);
                     }
                 }
+              //TODO
                 if (energyInjected2 >= energyPath3.minInsulationBreakdownEnergy) {
                     for (final IEnergyConductor energyConductor2 : energyPath3.conductors) {
                         if (energyInjected2 >= energyConductor2.getInsulationBreakdownEnergy()) {
@@ -268,6 +269,7 @@ public class EnergyNetLocal
                     }
                 }
             }
+            //TODO
             if (energyInjected2 >= energyPath3.minConductorBreakdownEnergy) {
                 for (final IEnergyConductor energyConductor3 : energyPath3.conductors) {
                     if (energyInjected2 >= energyConductor3.getConductorBreakdownEnergy() && !Config.enableIC2EasyMode) {
@@ -535,7 +537,7 @@ public class EnergyNetLocal
             final EntityLivingBase target = entry.getKey();
             final int damage = (entry.getValue() + 63) / 64;
             if (target.isEntityAlive()) {
-                target.attackEntityFrom((DamageSource)IC2DamageSource.electricity, (float)damage);
+               
             }
         }
         this.entityLivingToShockEnergyMap.clear();
@@ -596,6 +598,7 @@ public class EnergyNetLocal
     }
     
     public void explodeTiles(final IEnergySink sink) {
+    	 if(Config.enableexlposion) {
         this.removeTile((TileEntity)sink);
         if (sink instanceof IMetaDelegate) {
             final IMetaDelegate meta = (IMetaDelegate)sink;
@@ -606,6 +609,7 @@ public class EnergyNetLocal
         else {
             this.explodeMachineAt(((TileEntity)sink).xCoord, ((TileEntity)sink).yCoord, ((TileEntity)sink).zCoord, (TileEntity)sink);
         }
+    	 }
     }
     
     public TileEntity getTileEntity(final int x, final int y, final int z) {

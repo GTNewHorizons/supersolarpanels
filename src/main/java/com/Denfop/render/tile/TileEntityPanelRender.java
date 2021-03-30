@@ -14,9 +14,9 @@ import net.minecraftforge.client.model.IModelCustom;
 
 public class TileEntityPanelRender extends TileEntitySpecialRenderer {
 
-	  static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("supersolarpanel", "textures/models/panel.obj") ); 
-	public static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES,
-			"textures/model/panel.png");
+	static final IModelCustom model = AdvancedModelLoader
+			.loadModel(new ResourceLocation("supersolarpanel", "textures/models/panel.obj"));
+	public static final ResourceLocation texture = new ResourceLocation(Constants.TEXTURES, "textures/model/panel.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f) {

@@ -8,13 +8,12 @@ import com.Denfop.IUCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-public class CreativeTabSSP1 extends CreativeTabs
-{
-    public CreativeTabSSP1() {
-        super("sspmodules");
-    }
-    
-    public Item getTabIconItem() {
-        return SSPItem.module1;
-    }
+public class CreativeTabSSP1 extends CreativeTabs {
+	public CreativeTabSSP1() {
+		super("sspmodules");
+	}
+
+	public Item getTabIconItem() {
+		return SSPItem.module1;
+	}
 }

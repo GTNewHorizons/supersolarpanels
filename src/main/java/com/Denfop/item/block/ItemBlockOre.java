@@ -21,11 +21,10 @@ public class ItemBlockOre extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean isAdv) {
-		
-		
-			list.add(StatCollector.translateToLocal("ssp.miny")+ " " +  10); 
-			list.add(StatCollector.translateToLocal("ssp.maxy")+ " " +  60);
-		
+
+		list.add(StatCollector.translateToLocal("ssp.miny") + " " + 10);
+		list.add(StatCollector.translateToLocal("ssp.maxy") + " " + 60);
+
 	}
 
 }

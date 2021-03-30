@@ -11,8 +11,8 @@ import com.Denfop.tiles.base.TileEntityMultiMachine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.ContainerBase;
-import ic2.core.GuiIC2;
 import ic2.core.slot.SlotInvSlot;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
@@ -30,7 +30,7 @@ public class GuiMultiMachine extends GuiIC2 {
 		TileEntityMultiMachine tile = (TileEntityMultiMachine) this.container.base;
 
 		int chargeLevel = (int) (14.0F * tile.getChargeLevel());
-		
+
 		int i = 0;
 		for (Slot slot : (List<Slot>) this.container.inventorySlots) {
 			if (slot instanceof SlotInvSlot) {
@@ -48,15 +48,16 @@ public class GuiMultiMachine extends GuiIC2 {
 				drawTexturedModalRect(xX - 1, yY - 1, 238, 0, 18, 18);
 			}
 		}
-		int exp = (int) (24.0F * tile.expstorage/tile.expmaxstorage);
-		if(exp > 0) {
-			
-			  
-				drawTexturedModalRect(this.xoffset + 9, this.yoffset + 26, 176,134, exp + 1, 16);
-			
+		int exp = (int) (24.0F * tile.expstorage / tile.expmaxstorage);
+		if (exp > 0) {
+
+			drawTexturedModalRect(this.xoffset + 9, this.yoffset + 26, 176, 134, exp + 1, 16);
+
 		}
+
 		if (chargeLevel >= 0)
-			drawTexturedModalRect(this.xoffset + 8, this.yoffset + 46 + 14 - chargeLevel, 176, 14 - chargeLevel, 14, chargeLevel);
+			drawTexturedModalRect(this.xoffset + 8, this.yoffset + 46 + 14 - chargeLevel, 176, 14 - chargeLevel, 14,
+					chargeLevel);
 
 	}
 

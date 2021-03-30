@@ -19,49 +19,47 @@ import com.Denfop.IUCore;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemSintezator extends ItemBlock
-{
-    private List<String> itemNames;
-    
-    public ItemSintezator(final Block b) {
-        super(b);
-        this.setMaxDamage(0);
-        this.setHasSubtypes(true);
-        this.itemNames = new ArrayList<String>();
-        this.addItemsNames();
-        this.setCreativeTab(IUCore.tabssp);
-    }
-    
-    public int getMetadata(final int i) {
-        return i;
-    }
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
-        NBTTagCompound nbttagcompound;
-        
-        
-        	   info.add(StatCollector.translateToLocal("ssp.sintezator") + Config.limit);
-            }
-    public String getUnlocalizedName(final ItemStack itemstack) {
-        return this.itemNames.get(itemstack.getItemDamage());
-    }
-    
-    public void addItemsNames() {
-        this.itemNames.add("blockSintezator");
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(final ItemStack itemstack) {
-        final int i = itemstack.getItemDamage();
-        switch (i) {
-            case 0: {
-                return EnumRarity.epic;
-            }
-            
-            
-           
-            default: {
-                return EnumRarity.uncommon;
-            }
-        }
-    }
+public class ItemSintezator extends ItemBlock {
+	private List<String> itemNames;
+
+	public ItemSintezator(final Block b) {
+		super(b);
+		this.setMaxDamage(0);
+		this.setHasSubtypes(true);
+		this.itemNames = new ArrayList<String>();
+		this.addItemsNames();
+		this.setCreativeTab(IUCore.tabssp);
+	}
+
+	public int getMetadata(final int i) {
+		return i;
+	}
+
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean b) {
+		NBTTagCompound nbttagcompound;
+
+		info.add(StatCollector.translateToLocal("ssp.sintezator") + Config.limit);
+	}
+
+	public String getUnlocalizedName(final ItemStack itemstack) {
+		return this.itemNames.get(itemstack.getItemDamage());
+	}
+
+	public void addItemsNames() {
+		this.itemNames.add("blockSintezator");
+	}
+
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(final ItemStack itemstack) {
+		final int i = itemstack.getItemDamage();
+		switch (i) {
+		case 0: {
+			return EnumRarity.epic;
+		}
+
+		default: {
+			return EnumRarity.uncommon;
+		}
+		}
+	}
 }

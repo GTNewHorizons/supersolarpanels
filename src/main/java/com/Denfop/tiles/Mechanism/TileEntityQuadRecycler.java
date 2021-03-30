@@ -21,6 +21,7 @@ import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityQuadRecycler extends TileEntityMultiMachine1 {
 	public TileEntityQuadRecycler() {
@@ -34,7 +35,7 @@ public class TileEntityQuadRecycler extends TileEntityMultiMachine1 {
 	}
 
 	public String getInventoryName() {
-		return "Quad Recycler";
+		return StatCollector.translateToLocal("ssp.blockRecycler2.name");
 	}
 
 	public String getStartSoundFile() {

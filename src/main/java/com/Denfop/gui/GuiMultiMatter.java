@@ -5,7 +5,6 @@ import com.Denfop.container.ContainerMultiMatter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.ContainerBase;
-import ic2.core.GuiIC2;
 import ic2.core.IC2;
 import ic2.core.util.DrawUtil;
 import ic2.core.util.GuiTooltipHelper;
@@ -37,7 +36,7 @@ public class GuiMultiMatter extends GuiIC2 {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		FluidStack fluidstack = (this.container.base).getFluidStackfromTank();
 		if (fluidstack != null) {
-			String tooltip = fluidstack.getFluid().getName() + ": " + fluidstack.amount
+			String tooltip = StatCollector.translateToLocal("ic2.uumatter") + ": " + fluidstack.amount
 					+ StatCollector.translateToLocal("ic2.generic.text.mb");
 			GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip, 99, 25, 112, 73);
 		}

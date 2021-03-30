@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityQuadElectricFurnace extends TileEntityMultiMachine {
 	public TileEntityQuadElectricFurnace() {
@@ -26,7 +27,7 @@ public class TileEntityQuadElectricFurnace extends TileEntityMultiMachine {
 	}
 
 	public String getInventoryName() {
-		return "Quad Electric Furnace";
+		return StatCollector.translateToLocal("ssp.blockElecFurnace3.name");
 	}
 
 	public String getStartSoundFile() {

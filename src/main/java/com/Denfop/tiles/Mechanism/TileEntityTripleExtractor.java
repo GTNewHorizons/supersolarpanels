@@ -20,6 +20,7 @@ import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityTripleExtractor extends TileEntityMultiMachine {
 	public TileEntityTripleExtractor() {
@@ -37,7 +38,7 @@ public class TileEntityTripleExtractor extends TileEntityMultiMachine {
 	}
 
 	public String getInventoryName() {
-		return "Triple Extractor";
+		return StatCollector.translateToLocal("ssp.blockExtractor2.name");
 	}
 
 	public String getStartSoundFile() {

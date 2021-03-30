@@ -25,36 +25,36 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler.CachedRecipe;
 
 public class NeiMolecularTransfomator extends MolecularRecipeHandler {
-  public Class<? extends GuiContainer> getGuiClass() {
-    return (Class)com.Denfop.gui.GuiMolecularTransformer.class;
-  }
-  public void drawBackground(int i) {
-	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    
-	    RenderHelper.enableGUIStandardItemLighting();
-	    GuiDraw.changeTexture(getGuiTexture());
-	    GuiDraw.drawTexturedModalRect(4, 0, 4, 22, 155, 70);
+	public Class<? extends GuiContainer> getGuiClass() {
+		return (Class) com.Denfop.gui.GuiMolecularTransformer.class;
+	}
 
-	 
-	  
-	  }
-  public String getRecipeName() {
-    return StatCollector.translateToLocal("blockMolecularTransformer.name");
-  }
-  
-  public String getRecipeId() {
-    return  StatCollector.translateToLocal("blockMolecularTransformer.name");
-  }
-  
-  public String getGuiTexture() {
-    return Constants.TEXTURES + ":textures/gui/guiMolecularTransformerNew.png";
-  }
-  
-  public String getOverlayIdentifier() {
-    return StatCollector.translateToLocal("blockMolecularTransformer.name");
-  }
-  
-  public Map<IRecipeInput, RecipeOutput> getRecipeList() {
-    return Recipes.molecular.getRecipes();
-  }
+	public void drawBackground(int i) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+		RenderHelper.enableGUIStandardItemLighting();
+		GuiDraw.changeTexture(getGuiTexture());
+		GuiDraw.drawTexturedModalRect(4, 0, 4, 22, 155, 70);
+
+	}
+
+	public String getRecipeName() {
+		return StatCollector.translateToLocal("blockMolecularTransformer.name");
+	}
+
+	public String getRecipeId() {
+		return StatCollector.translateToLocal("blockMolecularTransformer.name");
+	}
+
+	public String getGuiTexture() {
+		return Constants.TEXTURES + ":textures/gui/guiMolecularTransformerNew.png";
+	}
+
+	public String getOverlayIdentifier() {
+		return StatCollector.translateToLocal("blockMolecularTransformer.name");
+	}
+
+	public Map<IRecipeInput, RecipeOutput> getRecipeList() {
+		return Recipes.molecular.getRecipes();
+	}
 }

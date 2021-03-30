@@ -17,6 +17,7 @@ import ic2.core.block.invslot.InvSlotProcessable;
 import ic2.core.block.invslot.InvSlotProcessableGeneric;
 import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityQuadMacerator extends TileEntityMultiMachine {
 	public TileEntityQuadMacerator() {
@@ -30,7 +31,7 @@ public class TileEntityQuadMacerator extends TileEntityMultiMachine {
 	}
 
 	public String getInventoryName() {
-		return "Quad Macerator";
+		return StatCollector.translateToLocal("ssp.blockMacerator3.name");
 	}
 
 	public String getStartSoundFile() {

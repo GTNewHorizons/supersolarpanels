@@ -20,6 +20,7 @@ import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityTripleCompressor extends TileEntityMultiMachine {
 	public TileEntityTripleCompressor() {
@@ -33,7 +34,7 @@ public class TileEntityTripleCompressor extends TileEntityMultiMachine {
 	}
 
 	public String getInventoryName() {
-		return "Triple Compressor";
+		return StatCollector.translateToLocal("ssp.blockCompressor2.name");
 	}
 
 	public String getStartSoundFile() {

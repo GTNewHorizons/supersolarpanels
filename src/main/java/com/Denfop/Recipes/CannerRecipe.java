@@ -11,8 +11,12 @@ import net.minecraft.item.ItemStack;
 
 public class CannerRecipe {
 	public static void recipe() {
-		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.proton,1),1),SSPItem.reactorprotonSimple);
-		Recipes.cannerBottle.addRecipe((IRecipeInput)new RecipeInputItemStack(IC2Items.getItem("fuelRod"),1),(IRecipeInput)new RecipeInputItemStack(new ItemStack(SSPItem.toriy,1),1),SSPItem.reactortoriySimple);
+		Recipes.cannerBottle.addRecipe((IRecipeInput) new RecipeInputItemStack(IC2Items.getItem("fuelRod"), 1),
+				(IRecipeInput) new RecipeInputItemStack(new ItemStack(SSPItem.proton, 1), 1),
+				SSPItem.reactorprotonSimple);
+		Recipes.cannerBottle.addRecipe((IRecipeInput) new RecipeInputItemStack(IC2Items.getItem("fuelRod"), 1),
+				(IRecipeInput) new RecipeInputItemStack(new ItemStack(SSPItem.toriy, 9), 1),
+				SSPItem.reactortoriySimple);
 
 	}
 }

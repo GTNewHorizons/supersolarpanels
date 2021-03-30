@@ -20,48 +20,50 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemRadioactive extends Item {
-  protected final int radiationLength;
-  
-  protected final int amplifier;
-  private int rarity;
-  public ItemRadioactive(String name,int radiationLength1, int amplifier1) {
-    super();
-    this.rarity =0;
-    this.radiationLength = radiationLength1;
-    this.amplifier = amplifier1;
-    setUnlocalizedName(name);
-    this.setCreativeTab(IUCore.tabssp3);
-    this.setTextureName(Constants.TEXTURES_MAIN + name);
-    GameRegistry.registerItem(this, name);
-  
-  }
-  
-  public void onUpdate(ItemStack stack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
-      if (entity instanceof EntityLivingBase) {
-        EntityLivingBase entityLiving = (EntityLivingBase)entity;
-        if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving))
-          IC2Potion.radiation.applyTo(entityLiving, 200, 100); 
-      } 
-    }
-  public String getUnlocalizedName() {
-	    return "ssp." + super.getUnlocalizedName().substring(5);
-	  }
-	  
-	  public String getUnlocalizedName(ItemStack itemStack) {
-	    return getUnlocalizedName();
-	  }
-	  
-	  public String getItemStackDisplayName(ItemStack itemStack) {
-	    return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
-	  }
-	  
-	  public ItemRadioactive setRarity(int aRarity) {
-	    this.rarity = aRarity;
-	    return this;
-	  }
-	  
-	  @SideOnly(Side.CLIENT)
-	  public EnumRarity getRarity(ItemStack stack) {
-	    return EnumRarity.values()[this.rarity];
-	  }
+	protected final int radiationLength;
+
+	protected final int amplifier;
+	private int rarity;
+
+	public ItemRadioactive(String name, int radiationLength1, int amplifier1) {
+		super();
+		this.rarity = 0;
+		this.radiationLength = radiationLength1;
+		this.amplifier = amplifier1;
+		setUnlocalizedName(name);
+		this.setCreativeTab(IUCore.tabssp3);
+		this.setTextureName(Constants.TEXTURES_MAIN + name);
+		GameRegistry.registerItem(this, name);
+
+	}
+
+	public void onUpdate(ItemStack stack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
+		if (entity instanceof EntityLivingBase) {
+			EntityLivingBase entityLiving = (EntityLivingBase) entity;
+			if (!ItemArmorHazmat.hasCompleteHazmat(entityLiving))
+				IC2Potion.radiation.applyTo(entityLiving, 200, 100);
+		}
+	}
+
+	public String getUnlocalizedName() {
+		return "ssp." + super.getUnlocalizedName().substring(5);
+	}
+
+	public String getUnlocalizedName(ItemStack itemStack) {
+		return getUnlocalizedName();
+	}
+
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
+	}
+
+	public ItemRadioactive setRarity(int aRarity) {
+		this.rarity = aRarity;
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(ItemStack stack) {
+		return EnumRarity.values()[this.rarity];
+	}
 }

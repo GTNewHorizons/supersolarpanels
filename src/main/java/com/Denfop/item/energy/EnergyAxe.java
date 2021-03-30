@@ -1,7 +1,7 @@
 package com.Denfop.item.energy;
 
-
 import com.Denfop.Config;
+import com.Denfop.Constants;
 import com.Denfop.IUCore;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.core.IC2;
+import ic2.core.util.StackUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,6 +41,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -48,369 +50,487 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class EnergyAxe extends ItemTool implements IElectricItem {
-  public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] {   Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin ,Blocks.leaves,Blocks.leaves2 });
-  
-  private static final Set<Material> materials = Sets.newHashSet(new Material[] {Material.wood, Material.leaves, Material.coral, 
-	        Material.cactus, Material.plants, Material.vine });
-  
-  private static final Set<String> toolType = (Set<String>)ImmutableSet.of("axe");
-  
+	public static final Set<Block> mineableBlocks = Sets.newHashSet(new Block[] { Blocks.planks, Blocks.bookshelf,
+			Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin, Blocks.leaves, Blocks.leaves2 });
 
-  
-  private float bigHolePower;
-  
-  private float normalPower ;
-  
-  
-  
-  private int maxCharge ;
-  
-  private int tier ;
-  
-  private int maxWorkRange = 1;
-  
-  private int energyPerOperation ;
-  
- 
-  
-  private int energyPerbigHolePowerOperation ;
-   
-  
-  private int transferLimit ;
-  
-  public int soundTicker;
-  
-  public int damageVsEntity = 1;
+	private static final Set<Material> materials = Sets.newHashSet(new Material[] { Material.wood, Material.leaves,
+			Material.coral, Material.cactus, Material.plants, Material.vine });
 
-public int mode;
+	private static final Set<String> toolType = (Set<String>) ImmutableSet.of("axe");
 
-public String name;
+	private float bigHolePower;
 
-public int efficienty;
+	private float normalPower;
 
-public int lucky;
-  
-  public EnergyAxe(Item.ToolMaterial toolMaterial,String name,int efficienty, int lucky,int transferlimit,int maxCharge,int tier,int normalPower,int bigHolesPower,int energyPerOperation,int energyPerbigHolePowerOperation) {
-    super(0.0F, toolMaterial, new HashSet());
-    setMaxDamage(27);
-   
-    setCreativeTab(IUCore.tabssp2);
-    this.efficienty=efficienty;
-    this.lucky=lucky;
-    this.name = name;
-    this.transferLimit = transferlimit;
-    this.maxCharge = maxCharge;
-    this.tier = tier;
-    this.efficiencyOnProperMaterial =  this.normalPower = normalPower;
-    this.bigHolePower = bigHolesPower;
-    this.energyPerOperation =energyPerOperation;
-    this.energyPerbigHolePowerOperation = energyPerbigHolePowerOperation;
-  }
-  
-  public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {
-    return true;
-  }
+	private int maxCharge;
 
-	  
-  public void init() {}
-  
-  public boolean canProvideEnergy(ItemStack itemStack) {
-    return false;
-  }
-  
-  public double getMaxCharge(ItemStack itemStack) {
-    return this.maxCharge;
-  }
-  
-  public int getTier(ItemStack itemStack) {
-    return this.tier;
-  }
-  
-  public double getTransferLimit(ItemStack itemStack) {
-    return this.transferLimit;
-  }
-  
-  public Set<String> getToolClasses(ItemStack stack) {
-    return toolType;
-  }
-  
-  public boolean canHarvestBlock(Block block, ItemStack stack) {
-    return (Items.diamond_axe.canHarvestBlock(block, stack) || Items.diamond_axe.func_150893_a(stack, block) > 1.0F  || mineableBlocks.contains(block));
-  }
-  
-  public float getDigSpeed(ItemStack tool, Block block, int meta) {
-    return !ElectricItem.manager.canUse(tool, this.energyPerOperation) ? 1.0F : (canHarvestBlock(block, tool) ? this.efficiencyOnProperMaterial : 1.0F);
-  }
-  
-  public int getHarvestLevel(ItemStack stack, String toolType) {
-    return (!toolType.equals("pickaxe") ) ? super.getHarvestLevel(stack, toolType) : this.toolMaterial.getHarvestLevel();
-  }
-  
-  public boolean hitEntity(ItemStack stack, EntityLiving entity1, EntityLiving entity2) {
-    return true;
-  }
-  
-  public int getDamageVsEntity(Entity entity) {
-    return this.damageVsEntity;
-  }
-  
- 
-  
-  @SideOnly(Side.CLIENT)
-  public void registerIcons(IIconRegister register) {
-    this.itemIcon = register.registerIcon("supersolarpanel:"+name);
-  }
-  
-  public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
-    if (readToolMode(stack) == 0)
-      return false; 
-    if (readToolMode(stack) == 1) {
-    World world = player.worldObj;
-    Block block = world.getBlock(x, y, z);
-    int meta = world.getBlockMetadata(x, y, z);
-    if (block == null)
-      return super.onBlockStartBreak(stack, x, y, z, player); 
-    MovingObjectPosition mop = raytraceFromEntity(world, (Entity)player, true, 4.5D);
-    if (mop != null && (materials.contains(block.getMaterial()) || block == Blocks.monster_egg)) {
-      byte xRange = 1;
-      byte yRange = 1;
-      byte zRange = 1;
-      switch (mop.sideHit) {
-        case 0:
-        case 1:
-          yRange = 0;
-          break;
-        case 2:
-        case 3:
-          zRange = 0;
-          break;
-        case 4:
-        case 5:
-          xRange = 0;
-          break;
-      } 
-      boolean lowPower = false;
-      boolean silktouch = EnchantmentHelper.getSilkTouchModifier((EntityLivingBase)player);
-      int fortune = EnchantmentHelper.getFortuneModifier((EntityLivingBase)player);
-     
-      for (int xPos = x - xRange; xPos <= x + xRange; xPos++) {
-        for (int yPos = y - yRange; yPos <= y + yRange; yPos++) {
-          for (int zPos = z - zRange; zPos <= z + zRange; zPos++) {
-            if (ElectricItem.manager.canUse(stack, this.energyPerOperation)) {
-              Block localBlock = world.getBlock(xPos, yPos, zPos);
-              if (localBlock != null && canHarvestBlock(localBlock, stack) && 
-                localBlock.getBlockHardness(world, xPos, yPos, zPos) >= 0.0F && (
-                materials.contains(localBlock.getMaterial()) || block == Blocks.monster_egg))
-                
-                  if (!player.capabilities.isCreativeMode) {
-                    int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
-                    if (localBlock.getBlockHardness(world, xPos, yPos, zPos) > 0.0F)
-                      onBlockDestroyed(stack, world, localBlock, xPos, yPos, zPos, (EntityLivingBase)player); 
-                    if (!silktouch)
-                      localBlock.dropXpOnBlockBreak(world, xPos, yPos, zPos, localBlock.getExpDrop((IBlockAccess)world, localMeta, fortune)); 
-                    localBlock.onBlockHarvested(world, xPos, yPos, zPos, localMeta, player);
-                    if (localBlock.removedByPlayer(world, player, xPos, yPos, zPos, true)) {
-                      localBlock.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, localMeta);
-                      localBlock.harvestBlock(world, player, xPos, yPos, zPos, localMeta);
-                    } 
-                    ElectricItem.manager.use(stack, this.energyPerOperation, (EntityLivingBase)player);
-                  } else {
-                    world.setBlockToAir(xPos, yPos, zPos);
-                  } 
-                  world.func_147479_m(xPos, yPos, zPos);
-                  
-            } else {
-              lowPower = true;
-              break;
-            } 
-          } 
-        } 
-      } 
-      if (lowPower) {
-        CommonProxy.sendPlayerMessage(player, "Not enough energy to complete this operation !");
-      } else if (!IUCore.isSimulating()) {
-        world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
-      } 
-      return true;
-    } }
-    
-    return super.onBlockStartBreak(stack, x, y, z, player);
-  }
-  
-  public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int xPos, int yPos, int zPos, EntityLivingBase entity) {
-    if (!IUCore.isSimulating())
-      return true; 
-    if (block == null)
-      return false; 
-    if (entity != null) {
-      float energy;
-      int toolMode = readToolMode(stack);
-      switch (toolMode) {
-        case 0:
-          energy = this.energyPerOperation;
-          break;
-        case 1:
-          energy = this.energyPerbigHolePowerOperation;
-          break;
-     
-        default:
-          energy = 0.0F;
-          break;
-      } 
-      if (energy != 0.0F && block.getBlockHardness(world, xPos, yPos, zPos) != 0.0F)
-        ElectricItem.manager.use(stack, energy, entity); 
-    } 
-    return true;
-  }
-  
-  public static int readToolMode(ItemStack itemstack) {
-    NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
-    int toolMode = nbt.getInteger("toolMode");
-   
-    if (toolMode < 0 || toolMode > 1)
-      toolMode = 0; 
-    return toolMode;
-  }
-  
-  public void saveToolMode(ItemStack itemstack, int toolMode) {
-    NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
-    nbt.setInteger("toolMode", toolMode);
-  }
-  
-  public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
-    for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-      ItemStack torchStack = player.inventory.mainInventory[i];
-      if (torchStack != null && torchStack.getUnlocalizedName().toLowerCase().contains("torch")) {
-        Item item = torchStack.getItem();
-        if (item instanceof net.minecraft.item.ItemBlock) {
-          int oldMeta = torchStack.getItemDamage();
-          int oldSize = torchStack.stackSize;
-          boolean result = torchStack.tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset, zOffset);
-          if (player.capabilities.isCreativeMode) {
-            torchStack.setItemDamage(oldMeta);
-            torchStack.stackSize = oldSize;
-          } else if (torchStack.stackSize <= 0) {
-            ForgeEventFactory.onPlayerDestroyItem(player, torchStack);
-            player.inventory.mainInventory[i] = null;
-          } 
-          if (result)
-            return true; 
-        } 
-      } 
-    } 
-    return super.onItemUse(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
-  }
-  
-  public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-    if (IC2.keyboard.isModeSwitchKeyDown(player)) {
-      int toolMode = readToolMode(itemStack) + 1;
-      
-      if (toolMode > 1)
-        toolMode = 0; 
-      saveToolMode(itemStack, toolMode);
-      Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
-      switch (toolMode) {
-        case 0:
-          CommonProxy.sendPlayerMessage(player, EnumChatFormatting.GREEN + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.normal"));
-          this.efficiencyOnProperMaterial = this.normalPower;
-mode = 0;
-         
-        
-              enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(this.efficienty));
-              enchantmentMap.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(this.lucky));
-              
-          
-        
-          EnchantmentHelper.setEnchantments(enchantmentMap, itemStack);
-          break;
-          
-        case 1:
-        	Map<Integer, Integer> enchantmentMap4 = new HashMap<Integer, Integer>();
-        	mode = 1;
-        	
-        	 enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(this.efficienty));
-             enchantmentMap.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(this.lucky));
-        	  
-        	 
-            EnchantmentHelper.setEnchantments(enchantmentMap, itemStack);
-         	CommonProxy.sendPlayerMessage(player, EnumChatFormatting.DARK_PURPLE + Helpers.formatMessage("message.text.mode") + ": " + Helpers.formatMessage("message.ultDDrill.mode.bigHoles"));
-               this.efficiencyOnProperMaterial = this.bigHolePower;
-          break;
-      }  
-    } 
-    return itemStack;
-  }
-  
-  public static MovingObjectPosition raytraceFromEntity(World world, Entity player, boolean par3, double range) {
-    float pitch = player.rotationPitch;
-    float yaw = player.rotationYaw;
-    double x = player.posX;
-    double y = player.posY;
-    double z = player.posZ;
-    if (!world.isRemote && player instanceof EntityPlayer)
-      y++; 
-    Vec3 vec3 = Vec3.createVectorHelper(x, y, z);
-    float f3 = MathHelper.cos(-yaw * 0.017453292F - 3.1415927F);
-    float f4 = MathHelper.sin(-yaw * 0.017453292F - 3.1415927F);
-    float f5 = -MathHelper.cos(-pitch * 0.017453292F);
-    float f6 = MathHelper.sin(-pitch * 0.017453292F);
-    float f7 = f4 * f5;
-    float f8 = f3 * f5;
-    if (player instanceof EntityPlayerMP)
-      range = ((EntityPlayerMP)player).theItemInWorldManager.getBlockReachDistance(); 
-    Vec3 vec31 = vec3.addVector(range * f7, range * f6, range * f8);
-    return world.func_147447_a(vec3, vec31, par3, !par3, par3);
-  }
-  
-  @SideOnly(Side.CLIENT)
-  public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-    super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-    Integer toolMode = readToolMode(par1ItemStack);
-    if (toolMode.intValue() == 0)
-      par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.normal")); 
-    if (toolMode.intValue() == 1)
-      par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": " + EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.bigHoles")); 
- }
-  
-  public String getRandomDrillSound() {
-    switch (IUCore.random.nextInt(4)) {
-      case 1:
-        return "drillOne";
-      case 2:
-        return "drillTwo";
-    } 
-    return "drill";
-  }
-  
-  @SideOnly(Side.CLIENT)
-  public void getSubItems(Item item, CreativeTabs tab, List subs) {
-    ItemStack stack = new ItemStack((Item)this, 1);
-    
-    
-Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
-    
-	
-	enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(this.efficienty));
-	enchantmentMap.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(this.lucky));
-    EnchantmentHelper.setEnchantments(enchantmentMap, stack);
-	
-    ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
-    subs.add(stack);
- ItemStack itemstack = new ItemStack((Item)this,1,getMaxDamage());
- EnchantmentHelper.setEnchantments(enchantmentMap, itemstack);
-    subs.add(itemstack);
-  }
-  
-  @SideOnly(Side.CLIENT)
-  public EnumRarity getRarity(ItemStack var1) {
-    return EnumRarity.uncommon;
-  }
-  
-  public Item getChargedItem(ItemStack itemStack) {
-    return (Item)this;
-  }
-  
-  public Item getEmptyItem(ItemStack itemStack) {
-    return (Item)this;
-  }
+	private int tier;
+
+	private int maxWorkRange = 1;
+
+	private int energyPerOperation;
+
+	private int energyPerbigHolePowerOperation;
+
+	private int transferLimit;
+
+	public int soundTicker;
+
+	public int damageVsEntity = 1;
+
+	public int mode;
+
+	public String name;
+
+	public int efficienty;
+
+	public int lucky;
+
+	private IIcon[] textures;
+
+	public EnergyAxe(Item.ToolMaterial toolMaterial, String name, int efficienty, int lucky, int transferlimit,
+			int maxCharge, int tier, int normalPower, int bigHolesPower, int energyPerOperation,
+			int energyPerbigHolePowerOperation) {
+		super(0.0F, toolMaterial, new HashSet());
+		setMaxDamage(27);
+
+		setCreativeTab(IUCore.tabssp2);
+		this.efficienty = efficienty;
+		this.lucky = lucky;
+		this.name = name;
+		this.transferLimit = transferlimit;
+		this.maxCharge = maxCharge;
+		this.tier = tier;
+		this.efficiencyOnProperMaterial = this.normalPower = normalPower;
+		this.bigHolePower = bigHolesPower;
+		this.energyPerOperation = energyPerOperation;
+		this.energyPerbigHolePowerOperation = energyPerbigHolePowerOperation;
+	}
+
+	public boolean hitEntity(ItemStack stack, EntityLivingBase damagee, EntityLivingBase damager) {
+		return true;
+	}
+
+	public void init() {
+	}
+
+	public boolean canProvideEnergy(ItemStack itemStack) {
+		return false;
+	}
+
+	public double getMaxCharge(ItemStack itemStack) {
+		return this.maxCharge;
+	}
+
+	public int getTier(ItemStack itemStack) {
+		return this.tier;
+	}
+
+	public double getTransferLimit(ItemStack itemStack) {
+		return this.transferLimit;
+	}
+
+	public Set<String> getToolClasses(ItemStack stack) {
+		return toolType;
+	}
+
+	public boolean canHarvestBlock(Block block, ItemStack stack) {
+		return (Items.diamond_axe.canHarvestBlock(block, stack) || Items.diamond_axe.func_150893_a(stack, block) > 1.0F
+				|| mineableBlocks.contains(block));
+	}
+
+	public float getDigSpeed(ItemStack tool, Block block, int meta) {
+		return !ElectricItem.manager.canUse(tool, this.energyPerOperation) ? 1.0F
+				: (canHarvestBlock(block, tool) ? this.efficiencyOnProperMaterial : 1.0F);
+	}
+
+	public int getHarvestLevel(ItemStack stack, String toolType) {
+		return !toolType.equals("axe")  ? super.getHarvestLevel(stack, toolType) : this.toolMaterial.getHarvestLevel();
+	}
+
+	public boolean hitEntity(ItemStack stack, EntityLiving entity1, EntityLiving entity2) {
+		return true;
+	}
+
+	public int getDamageVsEntity(Entity entity) {
+		return this.damageVsEntity;
+	}
+
+	@Override
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, boolean par5) {
+
+	}
+	public int getItemEnchantability() {
+		return toolMaterial.getEnchantability();
+	}
+	@SideOnly(value = Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		this.textures = new IIcon[2];
+		this.textures[0] = iconRegister.registerIcon(Constants.TEXTURES + ":" + name + "_" + "off");
+		this.textures[1] = iconRegister.registerIcon(Constants.TEXTURES + ":" + name + "_" + "active");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(ItemStack itemStack, int pass) {
+		NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
+		if (nbtData.getInteger("toolMode") >= 1)
+			return this.textures[1];
+		return this.textures[0];
+	}
+	public static void updateGhostBlocks(EntityPlayer player, World world) {
+	    if (world.isRemote)
+	      return; 
+	    int xPos = (int)player.posX;
+	    int yPos = (int)player.posY;
+	    int zPos = (int)player.posZ;
+	    for (int x = xPos - 6; x < xPos + 6; x++) {
+	      for (int y = yPos - 6; y < yPos + 6; y++) {
+	        for (int z = zPos - 6; z < zPos + 6; z++)
+	          ((EntityPlayerMP)player).playerNetServerHandler.sendPacket((Packet)new S23PacketBlockChange(x, y, z, world)); 
+	      } 
+	    } 
+	  }
+	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
+		if (readToolMode(stack) == 0)
+			return false;
+		if (readToolMode(stack) == 1) {
+			World world = player.worldObj;
+			Block block = world.getBlock(x, y, z);
+			int meta = world.getBlockMetadata(x, y, z);
+			if (block == null)
+				return super.onBlockStartBreak(stack, x, y, z, player);
+			MovingObjectPosition mop = raytraceFromEntity(world, (Entity) player, true, 4.5D);
+			if(mop == null) {
+				updateGhostBlocks(player, player.worldObj);
+			      return true;
+			}
+			if (mop != null && (materials.contains(block.getMaterial()) || block == Blocks.monster_egg)) {
+				byte xRange = 1;
+				byte yRange = 1;
+				byte zRange = 1;
+				switch (mop.sideHit) {
+				case 0:
+				case 1:
+					yRange = 0;
+					break;
+				case 2:
+				case 3:
+					zRange = 0;
+					break;
+				case 4:
+				case 5:
+					xRange = 0;
+					break;
+				}
+				boolean lowPower = false;
+				boolean silktouch = EnchantmentHelper.getSilkTouchModifier((EntityLivingBase) player);
+				int fortune = EnchantmentHelper.getFortuneModifier((EntityLivingBase) player);
+
+				for (int xPos = x - xRange; xPos <= x + xRange; xPos++) {
+					for (int yPos = y - yRange; yPos <= y + yRange; yPos++) {
+						for (int zPos = z - zRange; zPos <= z + zRange; zPos++) {
+							if (ElectricItem.manager.canUse(stack, this.energyPerOperation)) {
+								Block localBlock = world.getBlock(xPos, yPos, zPos);
+								if (localBlock != null && canHarvestBlock(localBlock, stack)
+										&& localBlock.getBlockHardness(world, xPos, yPos, zPos) >= 0.0F
+										&& (materials.contains(localBlock.getMaterial())
+												|| block == Blocks.monster_egg))
+
+									if (!player.capabilities.isCreativeMode) {
+										int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
+										if (localBlock.getBlockHardness(world, xPos, yPos, zPos) > 0.0F)
+											onBlockDestroyed(stack, world, localBlock, xPos, yPos, zPos,
+													(EntityLivingBase) player);
+										if (!silktouch)
+											localBlock.dropXpOnBlockBreak(world, xPos, yPos, zPos,
+													localBlock.getExpDrop((IBlockAccess) world, localMeta, fortune));
+										localBlock.onBlockHarvested(world, xPos, yPos, zPos, localMeta, player);
+										if (localBlock.removedByPlayer(world, player, xPos, yPos, zPos, true)) {
+											localBlock.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, localMeta);
+											localBlock.harvestBlock(world, player, xPos, yPos, zPos, localMeta);
+										}
+										ElectricItem.manager.use(stack, this.energyPerOperation,
+												(EntityLivingBase) player);
+									} else {
+										world.setBlockToAir(xPos, yPos, zPos);
+									}
+								world.markBlockForUpdate(xPos, yPos, zPos);
+
+							} else {
+								lowPower = true;
+								break;
+							}
+						}
+					}
+				}
+				if (lowPower) {
+					CommonProxy.sendPlayerMessage(player, "Not enough energy to complete this operation !");
+				} else if (!IUCore.isSimulating()) {
+					world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
+				}
+				return true;
+			}
+		}
+		if (readToolMode(stack) == 2) {
+			if(isTree(player.worldObj, x, y, z)) {
+				trimLeavs(x, y, z, player, player.worldObj, stack);
+				for (int i = 0; i < 9; i++)
+					player.worldObj.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(player.worldObj.getBlock(x, y, z))
+							+ (player.worldObj.getBlockMetadata(x, y, z) << 12));
+				chopTree(x, y, z, player, player.worldObj, stack);
+			}
+		}
+		return super.onBlockStartBreak(stack, x, y, z, player);
+	}
+	void chopTree(int X, int Y, int Z, EntityPlayer player, World world, ItemStack stack) {
+		for (int xPos = X - 1; xPos <= X + 1; xPos++) {
+			for (int yPos = Y; yPos <= Y + 1; yPos++) {
+				for (int zPos = Z - 1; zPos <= Z + 1; zPos++) {
+					Block block = world.getBlock(xPos, yPos, zPos);
+					int meta = world.getBlockMetadata(xPos, yPos, zPos);
+					if (block.isWood((IBlockAccess) world, xPos, yPos, zPos)) {
+						world.setBlockToAir(xPos, yPos, zPos);
+						if (!player.capabilities.isCreativeMode) {
+							if (block.removedByPlayer(world, player, xPos, yPos, zPos, false))
+								block.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, meta);
+							block.harvestBlock(world, player, xPos, yPos, zPos, meta);
+							block.onBlockHarvested(world, xPos, yPos, zPos, meta, player);
+							onBlockDestroyed(stack, world, block, xPos, yPos, zPos, (EntityLivingBase) player);
+						}
+						chopTree(xPos, yPos, zPos, player, world, stack);
+					}
+				}
+			}
+		}
+	}
+	private boolean isTree(World world, int X, int Y, int Z) {
+		Block wood = world.getBlock(X, Y, Z);
+		if (wood == null || !wood.isWood((IBlockAccess) world, X, Y, Z))
+			return false;
+		int top = Y;
+		for (int y = Y; y <= Y + 50; y++) {
+			if (!world.getBlock(X, y, Z).isWood((IBlockAccess) world, X, y, Z)
+					&& !world.getBlock(X, y, Z).isLeaves((IBlockAccess) world, X, y, Z)) {
+				top += y;
+				break;
+			}
+		}
+		int leaves = 0;
+		for (int xPos = X - 1; xPos <= X + 1; xPos++) {
+			for (int yPos = Y; yPos <= top; yPos++) {
+				for (int zPos = Z - 1; zPos <= Z + 1; zPos++) {
+					if (world.getBlock(xPos, yPos, zPos).isLeaves((IBlockAccess) world, xPos, yPos, zPos))
+						leaves++;
+				}
+			}
+		}
+		if (leaves >= 3)
+			return true;
+		return false;
+	}
+	void trimLeavs(int X, int Y, int Z, EntityPlayer player, World world, ItemStack stack) {
+		scedualUpdates(X, Y, Z, player, world, stack);
+	}
+
+	void scedualUpdates(int X, int Y, int Z, EntityPlayer player, World world, ItemStack stack) {
+		for (int xPos = X - 15; xPos <= X + 15; xPos++) {
+			for (int yPos = Y; yPos <= Y + 50; yPos++) {
+				for (int zPos = Z - 15; zPos <= Z + 15; zPos++) {
+					Block block = world.getBlock(xPos, yPos, zPos);
+					if (block.isLeaves((IBlockAccess) world, xPos, yPos, zPos))
+						world.scheduleBlockUpdate(xPos, yPos, zPos, block, 2 + world.rand.nextInt(10));
+				}
+			}
+		}
+	}
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int xPos, int yPos, int zPos,
+			EntityLivingBase entity) {
+		if (!IUCore.isSimulating())
+			return true;
+		if (block == null)
+			return false;
+		if (entity != null) {
+			float energy;
+			int toolMode = readToolMode(stack);
+			switch (toolMode) {
+			case 0:
+				energy = this.energyPerOperation;
+				break;
+			case 1:
+				energy = this.energyPerbigHolePowerOperation;
+				break;
+			case 2:
+				energy = this.energyPerbigHolePowerOperation;
+				break;
+
+			default:
+				energy = 0.0F;
+				break;
+			}
+			if (energy != 0.0F && block.getBlockHardness(world, xPos, yPos, zPos) != 0.0F)
+				ElectricItem.manager.use(stack, energy, entity);
+		}
+		return true;
+	}
+
+	public static int readToolMode(ItemStack itemstack) {
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
+		int toolMode = nbt.getInteger("toolMode");
+
+		if (toolMode < 0 || toolMode > 2)
+			toolMode = 0;
+		return toolMode;
+	}
+
+	public void saveToolMode(ItemStack itemstack, int toolMode) {
+		NBTTagCompound nbt = NBTData.getOrCreateNbtData(itemstack);
+		nbt.setInteger("toolMode", toolMode);
+	}
+
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+			float xOffset, float yOffset, float zOffset) {
+		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+			ItemStack torchStack = player.inventory.mainInventory[i];
+			if (torchStack != null && torchStack.getUnlocalizedName().toLowerCase().contains("torch")) {
+				Item item = torchStack.getItem();
+				if (item instanceof net.minecraft.item.ItemBlock) {
+					int oldMeta = torchStack.getItemDamage();
+					int oldSize = torchStack.stackSize;
+					boolean result = torchStack.tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset,
+							zOffset);
+					if (player.capabilities.isCreativeMode) {
+						torchStack.setItemDamage(oldMeta);
+						torchStack.stackSize = oldSize;
+					} else if (torchStack.stackSize <= 0) {
+						ForgeEventFactory.onPlayerDestroyItem(player, torchStack);
+						player.inventory.mainInventory[i] = null;
+					}
+					if (result)
+						return true;
+				}
+			}
+		}
+		return super.onItemUse(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
+	}
+
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+		if (IC2.keyboard.isModeSwitchKeyDown(player)) {
+			int toolMode = readToolMode(itemStack) + 1;
+
+			if (toolMode > 2)
+				toolMode = 0;
+			saveToolMode(itemStack, toolMode);
+			Map<Integer, Integer> enchantmentMap = EnchantmentHelper.getEnchantments(itemStack);
+			switch (toolMode) {
+			case 0:
+				CommonProxy.sendPlayerMessage(player,
+						EnumChatFormatting.GREEN + Helpers.formatMessage("message.text.mode") + ": "
+								+ Helpers.formatMessage("message.ultDDrill.mode.normal"));
+				this.efficiencyOnProperMaterial = this.normalPower;
+				mode = 0;
+
+				break;
+
+			case 1:
+				Map<Integer, Integer> enchantmentMap4 = EnchantmentHelper.getEnchantments(itemStack);
+				mode = 1;
+
+					CommonProxy.sendPlayerMessage(player,
+						EnumChatFormatting.DARK_PURPLE + Helpers.formatMessage("message.text.mode") + ": "
+								+ Helpers.formatMessage("message.ultDDrill.mode.bigHoles"));
+				this.efficiencyOnProperMaterial = this.bigHolePower;
+				break;
+			case 2:
+				mode = 2;
+				CommonProxy.sendPlayerMessage(player,
+						EnumChatFormatting.GREEN + Helpers.formatMessage("message.text.mode") + ": "
+								+ Helpers.formatMessage("message.ultDDrill.mode.treemode"));
+				this.efficiencyOnProperMaterial = this.bigHolePower;
+				break;
+			}
+		}
+		return itemStack;
+	}
+
+	public static MovingObjectPosition raytraceFromEntity(World world, Entity player, boolean par3, double range) {
+		float pitch = player.rotationPitch;
+		float yaw = player.rotationYaw;
+		double x = player.posX;
+		double y = player.posY;
+		double z = player.posZ;
+		if (!world.isRemote && player instanceof EntityPlayer)
+			y++;
+		Vec3 vec3 = Vec3.createVectorHelper(x, y, z);
+		float f3 = MathHelper.cos(-yaw * 0.017453292F - 3.1415927F);
+		float f4 = MathHelper.sin(-yaw * 0.017453292F - 3.1415927F);
+		float f5 = -MathHelper.cos(-pitch * 0.017453292F);
+		float f6 = MathHelper.sin(-pitch * 0.017453292F);
+		float f7 = f4 * f5;
+		float f8 = f3 * f5;
+		if (player instanceof EntityPlayerMP)
+			range = ((EntityPlayerMP) player).theItemInWorldManager.getBlockReachDistance();
+		Vec3 vec31 = vec3.addVector(range * f7, range * f6, range * f8);
+		return world.func_147447_a(vec3, vec31, par3, !par3, par3);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+		Integer toolMode = readToolMode(par1ItemStack);
+		if (toolMode.intValue() == 0)
+			par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": "
+					+ EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.normal"));
+		if (toolMode.intValue() == 1)
+			par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": "
+					+ EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.bigHoles"));
+		if (toolMode.intValue() == 2)
+			par3List.add(EnumChatFormatting.GOLD + Helpers.formatMessage("message.text.mode") + ": "
+					+ EnumChatFormatting.WHITE + Helpers.formatMessage("message.ultDDrill.mode.treemode"));
+	}
+
+	public String getRandomDrillSound() {
+		switch (IUCore.random.nextInt(4)) {
+		case 1:
+			return "drillOne";
+		case 2:
+			return "drillTwo";
+		}
+		return "drill";
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs tab, List subs) {
+		ItemStack stack = new ItemStack((Item) this, 1);
+
+		Map<Integer, Integer> enchantmentMap = new HashMap<Integer, Integer>();
+
+		enchantmentMap.put(Integer.valueOf(Enchantment.efficiency.effectId), Integer.valueOf(this.efficienty));
+		enchantmentMap.put(Integer.valueOf(Enchantment.fortune.effectId), Integer.valueOf(this.lucky));
+		EnchantmentHelper.setEnchantments(enchantmentMap, stack);
+
+		ElectricItem.manager.charge(stack, 2.147483647E9D, 2147483647, true, false);
+		subs.add(stack);
+		ItemStack itemstack = new ItemStack((Item) this, 1, getMaxDamage());
+		EnchantmentHelper.setEnchantments(enchantmentMap, itemstack);
+		subs.add(itemstack);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(ItemStack var1) {
+		return EnumRarity.uncommon;
+	}
+
+	public Item getChargedItem(ItemStack itemStack) {
+		return (Item) this;
+	}
+
+	public Item getEmptyItem(ItemStack itemStack) {
+		return (Item) this;
+	}
 }

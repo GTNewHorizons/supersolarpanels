@@ -16,16 +16,14 @@ import net.minecraft.world.World;
 public class SSPDEItem extends Item {
 
 	public SSPDEItem() {
-		this.setCreativeTab((CreativeTabs)IUCore.tabssp3);
+		this.setCreativeTab(IUCore.tabssp3);
 	}
 
 	public int getItemStackLimit() {
 		return this.maxStackSize;
 	}
 
-	
-  public boolean hasEffect(ItemStack par1ItemStack, int pass) {
-	    return true;
-	  }
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return true;
+	}
 }
-
