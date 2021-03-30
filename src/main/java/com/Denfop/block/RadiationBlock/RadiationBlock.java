@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
@@ -42,7 +42,7 @@ public class RadiationBlock extends Block  {
 	}
 
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		return SSPItem.toriy;
+		return IUItem.toriy;
 	}
 
 	public TileEntity createNewTileEntity(World world, int metadata) {

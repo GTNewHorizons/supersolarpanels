@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.api.Recipes;
 import com.Denfop.container.ContainerBaseMolecular;
@@ -140,7 +140,7 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular
 		if (Config.recipemolecular2)
 			addrecipe(new ItemStack(Items.iron_ingot, 1, 0), nbt2, Ic2Items.iridiumOre);
 		if (Config.recipemolecular3)
-			addrecipe(Ic2Items.Plutonium, nbt3, new ItemStack(SSPItem.proton, 1));
+			addrecipe(Ic2Items.Plutonium, nbt3, new ItemStack(IUItem.proton, 1));
 		if (Config.recipemolecular4)
 			addrecipe("ingotSpinel", nbt4, OreDictionary.getOres("ingotIridium").get(0));
 		if (Config.recipemolecular5)
@@ -174,47 +174,47 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular
 		if (Config.recipemolecular16)
 			addrecipe("ingotGold", nbt16, OreDictionary.getOres("ingotPlatinum").get(0));
 		if (Config.recipemolecular17)
-			addrecipe("ingotIridium", nbt17, new ItemStack(SSPItem.advanced_core, 1));
+			addrecipe("ingotIridium", nbt17, new ItemStack(IUItem.advanced_core, 1));
 		if (Config.recipemolecular18)
-			addrecipe(new ItemStack(SSPItem.advanced_core, 4), nbt18, new ItemStack(SSPItem.hybrid_core, 1));
+			addrecipe(new ItemStack(IUItem.advanced_core, 4), nbt18, new ItemStack(IUItem.hybrid_core, 1));
 		if (Config.recipemolecular19)
-			addrecipe(new ItemStack(SSPItem.hybrid_core, 4), nbt19, new ItemStack(SSPItem.ultimate_core, 1));
+			addrecipe(new ItemStack(IUItem.hybrid_core, 4), nbt19, new ItemStack(IUItem.ultimate_core, 1));
 		if (Config.recipemolecular20)
-			addrecipe(new ItemStack(SSPItem.ultimate_core, 4), nbt20, new ItemStack(SSPItem.itemSSP, 1, 10));
+			addrecipe(new ItemStack(IUItem.ultimate_core, 4), nbt20, new ItemStack(IUItem.itemSSP, 1, 10));
 		if (Config.recipemolecular21)
-			addrecipe(new ItemStack(SSPItem.itemSSP, 4, 10), nbt21, new ItemStack(SSPItem.spectralcore, 1));
+			addrecipe(new ItemStack(IUItem.itemSSP, 4, 10), nbt21, new ItemStack(IUItem.spectralcore, 1));
 		if (Config.recipemolecular22)
-			addrecipe(new ItemStack(SSPItem.spectralcore, 4), nbt22, new ItemStack(SSPItem.protoncore, 1));
+			addrecipe(new ItemStack(IUItem.spectralcore, 4), nbt22, new ItemStack(IUItem.protoncore, 1));
 		if (Config.recipemolecular23)
-			addrecipe(new ItemStack(SSPItem.protoncore, 4), nbt23, new ItemStack(SSPItem.singularcore, 1));
+			addrecipe(new ItemStack(IUItem.protoncore, 4), nbt23, new ItemStack(IUItem.singularcore, 1));
 		if (Config.recipemolecular24)
-			addrecipe(new ItemStack(SSPItem.singularcore, 4), nbt24, new ItemStack(SSPItem.admincore, 1));
+			addrecipe(new ItemStack(IUItem.singularcore, 4), nbt24, new ItemStack(IUItem.admincore, 1));
 		if (Config.recipemolecular25)
-			addrecipe(new ItemStack(SSPItem.admincore, 4), nbt25, new ItemStack(SSPItem.photoniccore, 1));
+			addrecipe(new ItemStack(IUItem.admincore, 4), nbt25, new ItemStack(IUItem.photoniccore, 1));
 		if (Config.recipemolecular26)
-			addrecipe(new ItemStack(SSPItem.photoniccore, 4), nbt26, new ItemStack(SSPItem.blocksintezator, 1));
+			addrecipe(new ItemStack(IUItem.photoniccore, 4), nbt26, new ItemStack(IUItem.blocksintezator, 1));
 //
 		if (Config.recipemolecular27)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 1), nbt27, new ItemStack(SSPItem.sunlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 1), nbt27, new ItemStack(IUItem.sunlinse, 1));
 		if (Config.recipemolecular28)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 2), nbt28, new ItemStack(SSPItem.rainlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 2), nbt28, new ItemStack(IUItem.rainlinse, 1));
 		if (Config.recipemolecular29)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 3), nbt29, new ItemStack(SSPItem.netherlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 3), nbt29, new ItemStack(IUItem.netherlinse, 1));
 		if (Config.recipemolecular30)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 4), nbt30, new ItemStack(SSPItem.nightlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 4), nbt30, new ItemStack(IUItem.nightlinse, 1));
 		if (Config.recipemolecular31)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 5), nbt31, new ItemStack(SSPItem.earthlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 5), nbt31, new ItemStack(IUItem.earthlinse, 1));
 		if (Config.recipemolecular32)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 6), nbt32, new ItemStack(SSPItem.endlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 6), nbt32, new ItemStack(IUItem.endlinse, 1));
 		if (Config.recipemolecular33)
-			addrecipe(new ItemStack(SSPItem.matter, 1, 7), nbt33, new ItemStack(SSPItem.aerlinse, 1));
+			addrecipe(new ItemStack(IUItem.matter, 1, 7), nbt33, new ItemStack(IUItem.aerlinse, 1));
 		if (Config.recipemolecular34)
 			addrecipe(Ic2Items.iridiumOre, nbt34, OreDictionary.getOres("Photon").get(0));
 		if (Config.recipemolecular35)
 			addrecipe("ingotMikhalov", nbt35,
 					OreDictionary.getOres("ingotMagnesium").get(0));
 		if (Config.recipemolecular36)
-			addrecipe("ingotMagnesium", nbt36, new ItemStack(SSPItem.caravky_ingot, 1));
+			addrecipe("ingotMagnesium", nbt36, new ItemStack(IUItem.caravky_ingot, 1));
 	}
 
 	public static void addrecipe(ItemStack stack, NBTTagCompound nbt, ItemStack stack1) {

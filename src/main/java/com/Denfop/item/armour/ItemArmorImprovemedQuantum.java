@@ -28,7 +28,7 @@ import java.util.Map;
 
 import com.Denfop.Config;
 import com.Denfop.Constants;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.proxy.CommonProxy;
 import com.Denfop.utils.Helpers;
@@ -577,7 +577,7 @@ public class ItemArmorImprovemedQuantum extends ItemArmor
 	public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List info, final boolean b) {
 		NBTTagCompound nbtData = NBTData.getOrCreateNbtData(itemStack);
 
-		if (itemStack.getItem() == SSPItem.quantumBodyarmor) {
+		if (itemStack.getItem() == IUItem.quantumBodyarmor) {
 			info.add(StatCollector.translateToLocal("ssp.fly") + " " + ModUtils.Boolean(nbtData.getBoolean("jetpack")));
 			for (Object effect : new LinkedList(player.getActivePotionEffects())) {
 				int id = ((PotionEffect) effect).getPotionID();

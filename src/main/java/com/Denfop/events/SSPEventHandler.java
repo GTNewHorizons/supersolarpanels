@@ -10,7 +10,7 @@ import java.util.Random;
 import org.lwjgl.opengl.GL11;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.DamageSource.SSPDamageSource;
 import com.Denfop.api.IPanel;
@@ -170,7 +170,7 @@ public class SSPEventHandler {
 				boolean fly = nbtData.getBoolean("isFlyActive");
 				if (!player.capabilities.isCreativeMode) {
 					if (player.inventory.armorInventory[2] != null) {
-						if (player.inventory.armorInventory[2].getItem() == SSPItem.quantumBodyarmor) {
+						if (player.inventory.armorInventory[2].getItem() == IUItem.quantumBodyarmor) {
 							NBTTagCompound nbtData1 = NBTData.getOrCreateNbtData(player.inventory.armorInventory[2]);
 							boolean jetpack = nbtData1.getBoolean("jetpack");
 							if (jetpack == false) {
@@ -190,7 +190,7 @@ public class SSPEventHandler {
 								if (player.getEntityWorld().isRemote)
 									player.capabilities.setFlySpeed((float) 0.2);
 							}
-						} else if (player.inventory.armorInventory[2].getItem() != SSPItem.quantumBodyarmor
+						} else if (player.inventory.armorInventory[2].getItem() != IUItem.quantumBodyarmor
 								&& player.inventory.armorInventory[2] != null) {
 							if (nbtData.getBoolean("isFlyActive") == true) {
 								player.capabilities.isFlying = false;
@@ -232,27 +232,27 @@ public class SSPEventHandler {
 		EntityPlayer player = (EntityPlayer) event.entity;
 		NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 		if (player.inventory.armorInventory[3] != null) {
-			if (player.inventory.armorInventory[3].getItem() == SSPItem.quantumHelmet) {
+			if (player.inventory.armorInventory[3].getItem() == IUItem.quantumHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 			} else if (player.inventory.armorInventory[3].getItem() == Ic2Items.nanoHelmet.getItem()) {
 				nbtData.setBoolean("isNightVision", true);
 			} else if (player.inventory.armorInventory[3].getItem() == Ic2Items.quantumHelmet.getItem()) {
 				nbtData.setBoolean("isNightVision", true);
-			} else if (player.inventory.armorInventory[3].getItem() == SSPItem.advancedSolarHelmet) {
+			} else if (player.inventory.armorInventory[3].getItem() == IUItem.advancedSolarHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 				nbtData.setBoolean("isNightVisionEnable", true);
-			} else if (player.inventory.armorInventory[3].getItem() == SSPItem.hybridSolarHelmet) {
+			} else if (player.inventory.armorInventory[3].getItem() == IUItem.hybridSolarHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 				nbtData.setBoolean("isNightVisionEnable", true);
-			} else if (player.inventory.armorInventory[3].getItem() == SSPItem.spectralSolarHelmet) {
+			} else if (player.inventory.armorInventory[3].getItem() == IUItem.spectralSolarHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 				nbtData.setBoolean("isNightVisionEnable", true);
-			} else if (player.inventory.armorInventory[3].getItem() == SSPItem.singularSolarHelmet) {
+			} else if (player.inventory.armorInventory[3].getItem() == IUItem.singularSolarHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 				nbtData.setBoolean("isNightVisionEnable", true);
 			} else if (player.inventory.armorInventory[3].getItem() == Ic2Items.nightvisionGoggles.getItem()) {
 				nbtData.setBoolean("isNightVision", true);
-			} else if (player.inventory.armorInventory[3].getItem() == SSPItem.ultimateSolarHelmet) {
+			} else if (player.inventory.armorInventory[3].getItem() == IUItem.ultimateSolarHelmet) {
 				nbtData.setBoolean("isNightVision", true);
 				nbtData.setBoolean("isNightVisionEnable", true);
 			}
@@ -348,7 +348,7 @@ public class SSPEventHandler {
 		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 			// TODO start Check inventory
 			if (player.inventory.mainInventory[i] != null
-					&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill)) {
+					&& (player.inventory.mainInventory[i].getItem() == IUItem.ultDDrill)) {
 				ItemStack input = player.inventory.mainInventory[i];
 				NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
 				if (nbtData.getBoolean("create")) {
@@ -376,23 +376,23 @@ public class SSPEventHandler {
 					&& player.inventory.mainInventory[i].getItem() instanceof ic2.core.item.block.ItemElectricBlock) {
 				int meta = player.inventory.mainInventory[i].getItemDamage();
 				if (meta == 0) {
-					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock, 1, 2);
+					player.inventory.mainInventory[i] = new ItemStack(IUItem.electricblock, 1, 2);
 				}
 				if (meta == 7) {
-					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock, 1, 5);
+					player.inventory.mainInventory[i] = new ItemStack(IUItem.electricblock, 1, 5);
 				}
 				if (meta == 1) {
-					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock, 1, 3);
+					player.inventory.mainInventory[i] = new ItemStack(IUItem.electricblock, 1, 3);
 				}
 				if (meta == 2) {
-					player.inventory.mainInventory[i] = new ItemStack(SSPItem.electricblock, 1, 4);
+					player.inventory.mainInventory[i] = new ItemStack(IUItem.electricblock, 1, 4);
 				}
 			}
 			if (player.inventory.mainInventory[i] != null
 					&& player.inventory.mainInventory[i].getItem() instanceof ic2.core.item.block.ItemChargepadBlock) {
 				int meta = player.inventory.mainInventory[i].getItemDamage();
 
-				player.inventory.mainInventory[i] = new ItemStack(SSPItem.Chargepadelectricblock, 1, meta + 2);
+				player.inventory.mainInventory[i] = new ItemStack(IUItem.Chargepadelectricblock, 1, meta + 2);
 
 			}
 		}
@@ -434,7 +434,7 @@ public class SSPEventHandler {
 		EntityPlayer player = (EntityPlayer) event.entity;
 		NBTTagCompound nbtData = NBTData.getOrCreateNbtData1(player);
 		if (player.inventory.armorInventory[0] != null
-				&& player.inventory.armorInventory[0].getItem() == SSPItem.quantumBoots) {
+				&& player.inventory.armorInventory[0].getItem() == IUItem.quantumBoots) {
 			nbtData.setBoolean("stepHeight", true);
 			player.stepHeight = 1.0F;
 
@@ -471,7 +471,7 @@ public class SSPEventHandler {
 			return;
 		EntityPlayer player = (EntityPlayer) event.entity;
 		if (player.inventory.armorInventory[0] != null
-				&& player.inventory.armorInventory[0].getItem() == SSPItem.quantumBoots) {
+				&& player.inventory.armorInventory[0].getItem() == IUItem.quantumBoots) {
 			player.motionY = +0.8;
 
 		}

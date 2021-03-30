@@ -2,7 +2,7 @@ package com.Denfop.events.MF_EP;
 
 import java.util.Map;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.item.energy.EnergyAxe;
 import com.Denfop.item.energy.EnergyPickaxe;
 import com.Denfop.item.energy.EnergyShovel;
@@ -34,14 +34,14 @@ public class SSPMPMFEventHandler {
 		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 			// TODO start Check inventory
 			if (player.inventory.mainInventory[i] != null
-					&& (player.inventory.mainInventory[i].getItem() == SSPItem.ultDDrill
+					&& (player.inventory.mainInventory[i].getItem() == IUItem.ultDDrill
 							|| player.inventory.mainInventory[i].getItem() instanceof EnergyAxe
 							|| player.inventory.mainInventory[i].getItem() instanceof EnergyPickaxe
 							|| player.inventory.mainInventory[i].getItem() instanceof EnergyShovel
 							|| player.inventory.mainInventory[i].getItem() == Ic2Items.iridiumDrill.getItem())) {
 				ItemStack input = player.inventory.mainInventory[i];
 				Map<Integer, Integer> map = null;
-				ItemStack input1 = new ItemStack(SSPItem.ultDDrill);
+				ItemStack input1 = new ItemStack(IUItem.ultDDrill);
 				NBTTagCompound nbtData = NBTData.getOrCreateNbtData(input);
 
 				if (EnchantmentHelper.getEnchantments(input) != null) {
@@ -73,7 +73,7 @@ public class SSPMPMFEventHandler {
 					if (player.openContainer.getSlot(2).getStack() != null) {
 						ItemStack input2 = player.openContainer.getSlot(2).getStack();
 						nbtData = NBTData.getOrCreateNbtData(input2);
-						if ((input2.getItem() == SSPItem.ultDDrill
+						if ((input2.getItem() == IUItem.ultDDrill
 								|| input2.getItem() == Ic2Items.iridiumDrill.getItem())) {
 
 							if (EnchantmentHelper.getEnchantments(input2) != null) {

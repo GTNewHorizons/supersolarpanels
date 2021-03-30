@@ -1,7 +1,7 @@
 package com.Denfop.integration.Botania;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.item.reactor.ItemReactorBase;
 
@@ -27,13 +27,13 @@ public class ItemReactorTerasteel extends ItemReactorBase {
 		ItemStack ret;
 		switch (this.numberOfCells) {
 		case 1:
-			ret = SSPItem.reactorDepletedprotonSimple;
+			ret = IUItem.reactorDepletedprotonSimple;
 			return new ItemStack(ret.getItem(), 1);
 		case 2:
-			ret = SSPItem.reactorDepletedprotonDual;
+			ret = IUItem.reactorDepletedprotonDual;
 			return new ItemStack(ret.getItem(), 1);
 		case 4:
-			ret = SSPItem.reactorDepletedprotonQuad;
+			ret = IUItem.reactorDepletedprotonQuad;
 			return new ItemStack(ret.getItem(), 1);
 		}
 		throw new RuntimeException("invalid cell count: " + this.numberOfCells);

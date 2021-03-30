@@ -1,6 +1,6 @@
 package com.Denfop.item.reactor;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 
 import ic2.api.reactor.IReactor;
@@ -33,16 +33,16 @@ public class ItemReactorproton extends ItemReactorBase {
 		ItemStack ret;
 		switch (this.numberOfCells) {
 		case 1:
-			ret = SSPItem.reactorDepletedprotonSimple;
+			ret = IUItem.reactorDepletedprotonSimple;
 			return new ItemStack(ret.getItem(), 1);
 		case 2:
-			ret = SSPItem.reactorDepletedprotonDual;
+			ret = IUItem.reactorDepletedprotonDual;
 			return new ItemStack(ret.getItem(), 1);
 		case 4:
-			ret = SSPItem.reactorDepletedprotonQuad;
+			ret = IUItem.reactorDepletedprotonQuad;
 			return new ItemStack(ret.getItem(), 1);
 		case 8:
-			ret = SSPItem.reactorDepletedprotoneit;
+			ret = IUItem.reactorDepletedprotoneit;
 			return new ItemStack(ret.getItem(), 1);
 		}
 		throw new RuntimeException("invalid cell count: " + this.numberOfCells);

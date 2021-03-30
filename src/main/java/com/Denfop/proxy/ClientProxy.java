@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.Recipes.BasicRecipe;
 import com.Denfop.Recipes.CannerRecipe;
@@ -177,11 +177,11 @@ public class ClientProxy extends CommonProxy implements IGuiHandler {
 			DraconicIntegration.render();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdminSolarPanel.class, new TileEntityPanelRender());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SSPItem.blockadmin),
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(IUItem.blockadmin),
 				new TileEntityPanelItemRender());
 		//
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySintezator.class, new TileEntitySintezatorRender());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(SSPItem.blocksintezator),
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(IUItem.blocksintezator),
 				new TileEntitySintezatorItemRender());
 		
 	}

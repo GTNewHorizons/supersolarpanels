@@ -33,7 +33,7 @@ public abstract class GuiSSP extends GuiContainer {
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		this.fontRendererObj.drawString(getName(), (this.xSize - this.fontRendererObj.getStringWidth(getName())) / 2, 6,
-				7718655);
+				13487565);
 	}
 
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {

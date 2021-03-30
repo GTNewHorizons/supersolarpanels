@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.InvSlot.InvSlotProcessableAlloy;
 import com.Denfop.RecipeManager.AlloyRecipeManager;
@@ -46,10 +46,10 @@ public class TileEntityAlloySmelter extends TileEntityBaseAlloySmelter {
 				new ItemStack(Ic2Items.advIronIngot.getItem(), 1, 3));
 		addAlloysmelter((IRecipeInput) new RecipeInputItemStack(new ItemStack(Items.gold_ingot), 1),
 				(IRecipeInput) new RecipeInputItemStack(Ic2Items.silverIngot, 1),
-				new ItemStack(SSPItem.electriumingot, 1));
+				new ItemStack(IUItem.electriumingot, 1));
 		addAlloysmelter((IRecipeInput) new RecipeInputOreDict("ingotNickel", 1),
 				(IRecipeInput) new RecipeInputItemStack(new ItemStack(Items.iron_ingot), 1),
-				new ItemStack(SSPItem.invaringot));
+				new ItemStack(IUItem.invaringot));
 	}
 
 	public String getInventoryName() {

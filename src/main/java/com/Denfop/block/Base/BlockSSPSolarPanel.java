@@ -23,7 +23,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import java.util.Random;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.item.Modules.ModuleType;
 import com.Denfop.item.Modules.AdditionModule;
@@ -875,7 +875,7 @@ public class BlockSSPSolarPanel extends BlockContainer {
 
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		return Item.getItemFromBlock(SSPItem.blockSSPSolarPanel);
+		return Item.getItemFromBlock(IUItem.blockSSPSolarPanel);
 	}
 
 	@Override

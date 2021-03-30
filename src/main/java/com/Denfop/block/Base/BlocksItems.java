@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.block.Chargepad.BlockChargepad;
 import com.Denfop.block.cable.BlockCable;
@@ -80,99 +80,99 @@ public class BlocksItems {
 	}
 
 	private static void initItems() {
-		SSPItem.photon = new ItemStack((Item) new ItemAdvancedWindRotor("photon", Config.Radius3, Config.durability3,
+		IUItem.photon = new ItemStack((Item) new ItemAdvancedWindRotor("photon", Config.Radius3, Config.durability3,
 				Config.efficiency3, Config.minWindStrength3, Config.maxWindStrength3,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model6.png")));
-		SSPItem.neutron = new ItemStack((Item) new ItemAdvancedWindRotor("neutron", Config.Radius4, Config.durability4,
+		IUItem.neutron = new ItemStack((Item) new ItemAdvancedWindRotor("neutron", Config.Radius4, Config.durability4,
 				Config.efficiency4, Config.minWindStrength4, Config.maxWindStrength4,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model5.png")));
-		SSPItem.myphical = new ItemStack((Item) new ItemAdvancedWindRotor("myphical", Config.Radius5,
+		IUItem.myphical = new ItemStack((Item) new ItemAdvancedWindRotor("myphical", Config.Radius5,
 				Config.durability5, Config.efficiency5, Config.minWindStrength5, Config.maxWindStrength5,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model4.png")));
 		
-		SSPItem.adronrotor = new ItemStack((Item) new ItemAdvancedWindRotor("adronrotor", Config.Radius5,
+		IUItem.adronrotor = new ItemStack((Item) new ItemAdvancedWindRotor("adronrotor", Config.Radius5,
 				Config.durability5, (int)(Config.efficiency4*1.8), Config.minWindStrength5, Config.maxWindStrength5,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model8.png")));
-		SSPItem.barionrotor = new ItemStack((Item) new ItemAdvancedWindRotor("barionrotor", Config.Radius5,
+		IUItem.barionrotor = new ItemStack((Item) new ItemAdvancedWindRotor("barionrotor", Config.Radius5,
 				Config.durability5, (int)(Config.efficiency4*3.2), Config.minWindStrength5, Config.maxWindStrength5,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model7.png")));
-		SSPItem.sprengerrotor = new ItemStack((Item) new ItemAdvancedWindRotor("sprengerrotor", Config.Radius5,
+		IUItem.sprengerrotor = new ItemStack((Item) new ItemAdvancedWindRotor("sprengerrotor", Config.Radius5,
 				Config.durability5, (int)(Config.efficiency4*4.5), Config.minWindStrength5, Config.maxWindStrength5,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model9.png")));
-		SSPItem.electricblock = new BlockElectric();
-		SSPItem.mfeUnit = new ItemStack(SSPItem.electricblock, 1, 0);
-		SSPItem.mfsUnit = new ItemStack(SSPItem.electricblock, 1, 1);
-		SSPItem.mfeUnit1 = new ItemStack(SSPItem.electricblock1, 1, 0);
-		SSPItem.mfsUnit1 = new ItemStack(SSPItem.electricblock1, 1, 1);
-		SSPItem.electricblock.setCreativeTab(IUCore.tabssp);
-		SSPItem.machines = new BlockBaseMachine();
-		SSPItem.machines.setCreativeTab(IUCore.tabssp);
-		SSPItem.ultDDrill = new AdvancedMultiTool(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
+		IUItem.electricblock = new BlockElectric();
+		IUItem.mfeUnit = new ItemStack(IUItem.electricblock, 1, 0);
+		IUItem.mfsUnit = new ItemStack(IUItem.electricblock, 1, 1);
+		IUItem.mfeUnit1 = new ItemStack(IUItem.electricblock1, 1, 0);
+		IUItem.mfsUnit1 = new ItemStack(IUItem.electricblock1, 1, 1);
+		IUItem.electricblock.setCreativeTab(IUCore.tabssp);
+		IUItem.machines = new BlockBaseMachine();
+		IUItem.machines.setCreativeTab(IUCore.tabssp);
+		IUItem.ultDDrill = new AdvancedMultiTool(Item.ToolMaterial.EMERALD).setUnlocalizedName("advDDrill");
 
-		SSPItem.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", Config.Storagequantumsuit, 8092.0D, 4);
-		SSPItem.nanoSaber = new ItemSpectralSaber("itemNanoSaber", Config.maxCharge, Config.transferLimit, Config.tier,
+		IUItem.lapotronCrystal = new ItemBattery("itemBatLamaCrystal", Config.Storagequantumsuit, 8092.0D, 4);
+		IUItem.nanoSaber = new ItemSpectralSaber("itemNanoSaber", Config.maxCharge, Config.transferLimit, Config.tier,
 				Config.spectralsaberactive, Config.spectralsabernotactive);
-		SSPItem.nanoSaber1 = new ItemQuantumSaber("itemNanoSaber1", Config.maxCharge1, Config.transferLimit1,
+		IUItem.nanoSaber1 = new ItemQuantumSaber("itemNanoSaber1", Config.maxCharge1, Config.transferLimit1,
 				Config.tier1, Config.spectralsaberactive1, Config.spectralsabernotactive1);
-		SSPItem.quantumHelmet = new ItemArmorImprovemedQuantum("itemArmorQuantumHelmet", 0, Config.armor_maxcharge,
+		IUItem.quantumHelmet = new ItemArmorImprovemedQuantum("itemArmorQuantumHelmet", 0, Config.armor_maxcharge,
 				Config.armor_transferlimit, Config.tier);
-		SSPItem.quantumBodyarmor = new ItemArmorImprovemedQuantum("itemArmorQuantumChestplate", 1,
+		IUItem.quantumBodyarmor = new ItemArmorImprovemedQuantum("itemArmorQuantumChestplate", 1,
 				Config.armor_maxcharge_body, Config.armor_transferlimit, Config.tier);
-		SSPItem.quantumLeggings = new ItemArmorImprovemedQuantum("itemArmorQuantumLegs", 2, Config.armor_maxcharge,
+		IUItem.quantumLeggings = new ItemArmorImprovemedQuantum("itemArmorQuantumLegs", 2, Config.armor_maxcharge,
 				Config.armor_transferlimit, Config.tier);
-		SSPItem.quantumBoots = new ItemArmorImprovemedQuantum("itemArmorQuantumBoots", 3, Config.armor_maxcharge,
+		IUItem.quantumBoots = new ItemArmorImprovemedQuantum("itemArmorQuantumBoots", 3, Config.armor_maxcharge,
 				Config.armor_transferlimit, Config.tier);
 
 		
-		SSPItem.module8 = new ItemWirelessModule();
+		IUItem.module8 = new ItemWirelessModule();
 		//
-		SSPItem.iridium = new ItemStack((Item) new ItemAdvancedWindRotor("iridium", Config.Radius, Config.durability,
+		IUItem.iridium = new ItemStack((Item) new ItemAdvancedWindRotor("iridium", Config.Radius, Config.durability,
 				Config.efficiency, Config.minWindStrength, Config.maxWindStrength,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model1.png")));
-		SSPItem.compressiridium = new ItemStack((Item) new ItemAdvancedWindRotor("compressiridium", Config.Radius1,
+		IUItem.compressiridium = new ItemStack((Item) new ItemAdvancedWindRotor("compressiridium", Config.Radius1,
 				Config.durability1, Config.efficiency1, Config.minWindStrength1, Config.maxWindStrength1,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model2.png")));
-		SSPItem.spectral = new ItemStack((Item) new ItemAdvancedWindRotor("spectral", Config.Radius2,
+		IUItem.spectral = new ItemStack((Item) new ItemAdvancedWindRotor("spectral", Config.Radius2,
 				Config.durability2, Config.efficiency2, Config.minWindStrength2, Config.maxWindStrength2,
 				new ResourceLocation("supersolarpanel", "textures/items/carbon_rotor_model3.png")));
-		SSPItem.reactorDepletedprotonSimple = new ItemStack(
+		IUItem.reactorDepletedprotonSimple = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedprotonSimple", 10, 100));
-		SSPItem.reactorDepletedprotonDual = new ItemStack(
+		IUItem.reactorDepletedprotonDual = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedprotonDual", 10, 100));
-		SSPItem.reactorDepletedprotonQuad = new ItemStack(
+		IUItem.reactorDepletedprotonQuad = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedprotonQuad", 10, 100));
-		SSPItem.reactorDepletedprotoneit = new ItemStack(
+		IUItem.reactorDepletedprotoneit = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedprotoneit", 10, 100));
-		SSPItem.reactorprotonSimple = new ItemStack((Item) new ItemReactorproton("reactorprotonSimple", 1,
+		IUItem.reactorprotonSimple = new ItemStack((Item) new ItemReactorproton("reactorprotonSimple", 1,
 				Config.ProtonRodCells, Config.ProtonRodHeat, Config.ProtonPower));
-		SSPItem.reactorprotonDual = new ItemStack((Item) new ItemReactorproton("reactorprotonDual", 2,
+		IUItem.reactorprotonDual = new ItemStack((Item) new ItemReactorproton("reactorprotonDual", 2,
 				Config.ProtonRodCells, Config.ProtonRodHeat, Config.ProtonPower));
-		SSPItem.reactorprotonQuad = new ItemStack((Item) new ItemReactorproton("reactorprotonQuad", 4,
+		IUItem.reactorprotonQuad = new ItemStack((Item) new ItemReactorproton("reactorprotonQuad", 4,
 				Config.ProtonRodCells, Config.ProtonRodHeat, Config.ProtonPower));
-		SSPItem.reactorprotoneit = new ItemStack((Item) new ItemReactorproton("reactorprotoneit", 8,
+		IUItem.reactorprotoneit = new ItemStack((Item) new ItemReactorproton("reactorprotoneit", 8,
 				Config.ProtonRodCells, Config.ProtonRodHeat, Config.ProtonPower));
-		SSPItem.proton = new ItemRadioactive("proton", 150, 100);
-		SSPItem.toriy = new ItemRadioactive("toriy", 150, 100);
+		IUItem.proton = new ItemRadioactive("proton", 150, 100);
+		IUItem.toriy = new ItemRadioactive("toriy", 150, 100);
 		//
-		SSPItem.reactortoriySimple = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriySimple", 1,
+		IUItem.reactortoriySimple = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriySimple", 1,
 				Config.toriyRodCells, Config.toriyRodHeat, Config.toriyPower));
-		SSPItem.reactortoriyDual = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriyDual", 2,
+		IUItem.reactortoriyDual = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriyDual", 2,
 				Config.toriyRodCells, Config.toriyRodHeat, Config.toriyPower));
-		SSPItem.reactortoriyQuad = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriyQuad", 4,
+		IUItem.reactortoriyQuad = new ItemStack((Item) new ItemRadiationToriyRod("reactortoriyQuad", 4,
 				Config.toriyRodCells, Config.toriyRodHeat, Config.toriyPower));
-		SSPItem.reactorDepletedtoriySimple = new ItemStack(
+		IUItem.reactorDepletedtoriySimple = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedtoriySimple", 10, 100));
-		SSPItem.reactorDepletedtoriyDual = new ItemStack(
+		IUItem.reactorDepletedtoriyDual = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedtoriyDual", 10, 100));
-		SSPItem.reactorDepletedtoriyQuad = new ItemStack(
+		IUItem.reactorDepletedtoriyQuad = new ItemStack(
 				(Item) new ItemRadioactive("reactorDepletedtoriyQuad", 10, 100));
 		//
 
-		SSPItem.protonshard = new ItemRadioactive("protonshard", 150, 100);
-		SSPItem.reactorCoolantmax = new ItemStack((Item) new ItemReactorHeatStorage("reactorCoolantmax", 240000));
-		SSPItem.reactorCoolanttwelve = new ItemStack((Item) new ItemReactorHeatStorage("reactorCoolanttwelve", 120000));
-		SSPItem.module = new ItemUpgradeModule();
-		SSPItem.cable = new ItemCable();
+		IUItem.protonshard = new ItemRadioactive("protonshard", 150, 100);
+		IUItem.reactorCoolantmax = new ItemStack((Item) new ItemReactorHeatStorage("reactorCoolantmax", 240000));
+		IUItem.reactorCoolanttwelve = new ItemStack((Item) new ItemReactorHeatStorage("reactorCoolanttwelve", 120000));
+		IUItem.module = new ItemUpgradeModule();
+		IUItem.cable = new ItemCable();
 
 		if (Config.BotaniaLoaded) {
 			BotaniaIntegration.reactorterastrellSimple = new ItemStack(
@@ -258,79 +258,79 @@ public class BlocksItems {
 	private static Set<String> dropped = new HashSet<String>();
 
 	public static void registermetadata() {
-		SSPItem.itemIrradiantUranium = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIrradiantUranium"), 1, 0);
-		SSPItem.itemEnrichedPhotoniyAlloy = new ItemStack(
-				SSPItem.itemSSP.setUnlocalizedName("itemEnrichedSunnariumAlloy"), 1, 1);
-		SSPItem.itemIrradiantGlassPane = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIrradiantGlassPlane"), 1,
+		IUItem.itemIrradiantUranium = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemIrradiantUranium"), 1, 0);
+		IUItem.itemEnrichedPhotoniyAlloy = new ItemStack(
+				IUItem.itemSSP.setUnlocalizedName("itemEnrichedSunnariumAlloy"), 1, 1);
+		IUItem.itemIrradiantGlassPane = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemIrradiantGlassPlane"), 1,
 				3);
-		SSPItem.itemIridiumIronPlate = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemIridiumIronPlate"), 1, 4);
-		SSPItem.itemReinforcedIridiumIronPlate = new ItemStack(
-				SSPItem.itemSSP.setUnlocalizedName("itemReinforcedIridiumIronPlate"), 1, 5);
-		SSPItem.itemIrradiantReinforcedPlate = new ItemStack(
-				SSPItem.itemSSP.setUnlocalizedName("itemIrradiantReinforcedPlate"), 1, 6);
+		IUItem.itemIridiumIronPlate = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemIridiumIronPlate"), 1, 4);
+		IUItem.itemReinforcedIridiumIronPlate = new ItemStack(
+				IUItem.itemSSP.setUnlocalizedName("itemReinforcedIridiumIronPlate"), 1, 5);
+		IUItem.itemIrradiantReinforcedPlate = new ItemStack(
+				IUItem.itemSSP.setUnlocalizedName("itemIrradiantReinforcedPlate"), 1, 6);
 
-		SSPItem.ingotIridium = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("ingotIridium"), 1, 7);
-		SSPItem.itemUranIngot = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemUranIngot"), 1, 8);
-		SSPItem.itemMTCore = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemMTCore"), 1, 9);
-		SSPItem.itemQuantumCore = new ItemStack(SSPItem.itemSSP.setUnlocalizedName("itemQuantumCore"), 1, 10);
+		IUItem.ingotIridium = new ItemStack(IUItem.itemSSP.setUnlocalizedName("ingotIridium"), 1, 7);
+		IUItem.itemUranIngot = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemUranIngot"), 1, 8);
+		IUItem.itemMTCore = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemMTCore"), 1, 9);
+		IUItem.itemQuantumCore = new ItemStack(IUItem.itemSSP.setUnlocalizedName("itemQuantumCore"), 1, 10);
 
-		SSPItem.module61 = new ItemStack(SSPItem.module6.setUnlocalizedName("module61"), 1, 0);
-		SSPItem.module62 = new ItemStack(SSPItem.module6.setUnlocalizedName("module62"), 1, 1);
-		SSPItem.module63 = new ItemStack(SSPItem.module6.setUnlocalizedName("module63"), 1, 2);
-		SSPItem.module64 = new ItemStack(SSPItem.module6.setUnlocalizedName("module64"), 1, 3);
-		SSPItem.module65 = new ItemStack(SSPItem.module6.setUnlocalizedName("module65"), 1, 4);
-		SSPItem.module66 = new ItemStack(SSPItem.module6.setUnlocalizedName("module66"), 1, 5);
-		SSPItem.module67 = new ItemStack(SSPItem.module6.setUnlocalizedName("module67"), 1, 6);
-		SSPItem.module68 = new ItemStack(SSPItem.module6.setUnlocalizedName("module68"), 1, 7);
-		SSPItem.module69 = new ItemStack(SSPItem.module6.setUnlocalizedName("module69"), 1, 8);
-		SSPItem.module70 = new ItemStack(SSPItem.module6.setUnlocalizedName("module70"), 1, 9);
-		SSPItem.module71 = new ItemStack(SSPItem.module7.setUnlocalizedName("module71"), 1, 0);
-		SSPItem.module72 = new ItemStack(SSPItem.module7.setUnlocalizedName("module72"), 1, 1);
-		SSPItem.module73 = new ItemStack(SSPItem.module7.setUnlocalizedName("module73"), 1, 2);
-		SSPItem.copperCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 1);
-		SSPItem.insulatedCopperCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 0);
-		SSPItem.goldCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 2);
-		SSPItem.insulatedGoldCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 3);
-		SSPItem.doubleInsulatedGoldCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 4);
-		SSPItem.ironCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 5);
-		SSPItem.insulatedIronCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 6);
-		SSPItem.doubleInsulatedIronCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 7);
-		SSPItem.trippleInsulatedIronCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 8);
-		SSPItem.glassFiberCableBlock = new ItemStack((Block) SSPItem.BlockCable, 1, 9);
+		IUItem.module61 = new ItemStack(IUItem.module6.setUnlocalizedName("module61"), 1, 0);
+		IUItem.module62 = new ItemStack(IUItem.module6.setUnlocalizedName("module62"), 1, 1);
+		IUItem.module63 = new ItemStack(IUItem.module6.setUnlocalizedName("module63"), 1, 2);
+		IUItem.module64 = new ItemStack(IUItem.module6.setUnlocalizedName("module64"), 1, 3);
+		IUItem.module65 = new ItemStack(IUItem.module6.setUnlocalizedName("module65"), 1, 4);
+		IUItem.module66 = new ItemStack(IUItem.module6.setUnlocalizedName("module66"), 1, 5);
+		IUItem.module67 = new ItemStack(IUItem.module6.setUnlocalizedName("module67"), 1, 6);
+		IUItem.module68 = new ItemStack(IUItem.module6.setUnlocalizedName("module68"), 1, 7);
+		IUItem.module69 = new ItemStack(IUItem.module6.setUnlocalizedName("module69"), 1, 8);
+		IUItem.module70 = new ItemStack(IUItem.module6.setUnlocalizedName("module70"), 1, 9);
+		IUItem.module71 = new ItemStack(IUItem.module7.setUnlocalizedName("module71"), 1, 0);
+		IUItem.module72 = new ItemStack(IUItem.module7.setUnlocalizedName("module72"), 1, 1);
+		IUItem.module73 = new ItemStack(IUItem.module7.setUnlocalizedName("module73"), 1, 2);
+		IUItem.copperCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 1);
+		IUItem.insulatedCopperCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 0);
+		IUItem.goldCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 2);
+		IUItem.insulatedGoldCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 3);
+		IUItem.doubleInsulatedGoldCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 4);
+		IUItem.ironCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 5);
+		IUItem.insulatedIronCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 6);
+		IUItem.doubleInsulatedIronCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 7);
+		IUItem.trippleInsulatedIronCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 8);
+		IUItem.glassFiberCableBlock = new ItemStack((Block) IUItem.BlockCable, 1, 9);
 
-		SSPItem.glassFiberCableItem1 = new ItemStack((Block) SSPItem.BlockCable, 1, 10);
-		SSPItem.copperCableItem = new ItemStack((Item) SSPItem.cable, 1, 1);
-		SSPItem.insulatedCopperCableItem = new ItemStack((Item) SSPItem.cable, 1, 0);
-		SSPItem.goldCableItem = new ItemStack((Item) SSPItem.cable, 1, 2);
-		SSPItem.insulatedGoldCableItem = new ItemStack((Item) SSPItem.cable, 1, 3);
-		SSPItem.doubleInsulatedGoldCableItem = new ItemStack((Item) SSPItem.cable, 1, 4);
-		SSPItem.ironCableItem = new ItemStack((Item) SSPItem.cable, 1, 5);
-		SSPItem.insulatedIronCableItem = new ItemStack((Item) SSPItem.cable, 1, 6);
-		SSPItem.doubleInsulatedIronCableItem = new ItemStack((Item) SSPItem.cable, 1, 7);
-		SSPItem.trippleInsulatedIronCableItem = new ItemStack((Item) SSPItem.cable, 1, 8);
-		SSPItem.glassFiberCableItem = new ItemStack((Item) SSPItem.cable, 1, 9);
+		IUItem.glassFiberCableItem1 = new ItemStack((Block) IUItem.BlockCable, 1, 10);
+		IUItem.copperCableItem = new ItemStack((Item) IUItem.cable, 1, 1);
+		IUItem.insulatedCopperCableItem = new ItemStack((Item) IUItem.cable, 1, 0);
+		IUItem.goldCableItem = new ItemStack((Item) IUItem.cable, 1, 2);
+		IUItem.insulatedGoldCableItem = new ItemStack((Item) IUItem.cable, 1, 3);
+		IUItem.doubleInsulatedGoldCableItem = new ItemStack((Item) IUItem.cable, 1, 4);
+		IUItem.ironCableItem = new ItemStack((Item) IUItem.cable, 1, 5);
+		IUItem.insulatedIronCableItem = new ItemStack((Item) IUItem.cable, 1, 6);
+		IUItem.doubleInsulatedIronCableItem = new ItemStack((Item) IUItem.cable, 1, 7);
+		IUItem.trippleInsulatedIronCableItem = new ItemStack((Item) IUItem.cable, 1, 8);
+		IUItem.glassFiberCableItem = new ItemStack((Item) IUItem.cable, 1, 9);
 		// SuperSolarPanels.macerator = new ItemStack(SuperSolarPanels.machines, 1, 1);
 		// SuperSolarPanels.extractor = new ItemStack(SuperSolarPanels.machines, 1, 2);
 		// SuperSolarPanels.compressor = new ItemStack(SuperSolarPanels.machines, 1, 3);
 
-		SSPItem.massFabricator = new ItemStack(SSPItem.machines, 1, 5);
+		IUItem.massFabricator = new ItemStack(IUItem.machines, 1, 5);
 		// SuperSolarPanels.compressor1 = new ItemStack(SuperSolarPanels.machines, 1,
 		// 4);
-		SSPItem.massFabricator1 = new ItemStack(SSPItem.machines, 1, 1);
+		IUItem.massFabricator1 = new ItemStack(IUItem.machines, 1, 1);
 		// SuperSolarPanels.macerator1 = new ItemStack(SuperSolarPanels.machines, 1, 6);
 		// SuperSolarPanels.electroFurnace = new ItemStack(SuperSolarPanels.machines, 1,
 		// 7);
 		// SuperSolarPanels.electroFurnace1 = new ItemStack(SuperSolarPanels.machines,
 		// 1, 8);
-		SSPItem.massFabricator2 = new ItemStack(SSPItem.machines, 1, 2);
-		SSPItem.massFabricator3 = new ItemStack(SSPItem.machines, 1, 3);
+		IUItem.massFabricator2 = new ItemStack(IUItem.machines, 1, 2);
+		IUItem.massFabricator3 = new ItemStack(IUItem.machines, 1, 3);
 		// SuperSolarPanels.metalformer = new ItemStack(SuperSolarPanels.machines, 1,
 		// 11);
 		// SuperSolarPanels.metalformer1 = new ItemStack(SuperSolarPanels.machines, 1,
 		// 12);
-		SSPItem.alloymachine = new ItemStack(SSPItem.machines, 1, 4);
-		SSPItem.generationmicrochip = new ItemStack(SSPItem.machines, 1, 6);
-		SSPItem.moleculartransformer = new ItemStack(SSPItem.machines, 1, 0);
+		IUItem.alloymachine = new ItemStack(IUItem.machines, 1, 4);
+		IUItem.generationmicrochip = new ItemStack(IUItem.machines, 1, 6);
+		IUItem.moleculartransformer = new ItemStack(IUItem.machines, 1, 0);
 
 	}
 }

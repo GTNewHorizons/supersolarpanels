@@ -1,6 +1,6 @@
 package com.Denfop.integration.Botania;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.integration.DE.ItemDESolarPanel;
 import com.Denfop.integration.DE.SSPDEItem;
@@ -87,17 +87,17 @@ public class BotaniaIntegration {
 
 	public static void recipe() {
 		BotaniaAPI.registerRuneAltarRecipe(new ItemStack(rune_energy, 1, 0), 12000,
-				new Object[] { LibOreDict.RUNE[0], LibOreDict.RUNE[1], new ItemStack(SSPItem.photoniy),
-						new ItemStack(SSPItem.itemSSP, 1, 0), new ItemStack(SSPItem.itemSSP, 1, 7),
-						new ItemStack(elementium_plate), new ItemStack(SSPItem.compresscarbonultra) });
+				new Object[] { LibOreDict.RUNE[0], LibOreDict.RUNE[1], new ItemStack(IUItem.photoniy),
+						new ItemStack(IUItem.itemSSP, 1, 0), new ItemStack(IUItem.itemSSP, 1, 7),
+						new ItemStack(elementium_plate), new ItemStack(IUItem.compresscarbonultra) });
 		BotaniaAPI.registerRuneAltarRecipe(new ItemStack(rune_sun, 1, 0), 12000,
-				new Object[] { LibOreDict.RUNE[4], LibOreDict.RUNE[3], new ItemStack(SSPItem.photoniy_ingot),
-						new ItemStack(SSPItem.itemSSP, 1, 0), new ItemStack(SSPItem.itemSSP, 1, 7),
-						new ItemStack(elementium_plate), new ItemStack(SSPItem.compresscarbon) });
+				new Object[] { LibOreDict.RUNE[4], LibOreDict.RUNE[3], new ItemStack(IUItem.photoniy_ingot),
+						new ItemStack(IUItem.itemSSP, 1, 0), new ItemStack(IUItem.itemSSP, 1, 7),
+						new ItemStack(elementium_plate), new ItemStack(IUItem.compresscarbon) });
 		BotaniaAPI.registerRuneAltarRecipe(new ItemStack(rune_night, 1, 0), 12000,
-				new Object[] { LibOreDict.RUNE[7], LibOreDict.RUNE[5], new ItemStack(SSPItem.dust),
-						new ItemStack(SSPItem.itemSSP, 1, 0), new ItemStack(SSPItem.itemSSP, 1, 7),
-						new ItemStack(manasteel_plate), new ItemStack(SSPItem.coal_chunk1) });
+				new Object[] { LibOreDict.RUNE[7], LibOreDict.RUNE[5], new ItemStack(IUItem.dust),
+						new ItemStack(IUItem.itemSSP, 1, 0), new ItemStack(IUItem.itemSSP, 1, 7),
+						new ItemStack(manasteel_plate), new ItemStack(IUItem.coal_chunk1) });
 		Recipes.compressor.addRecipe(
 				(IRecipeInput) new RecipeInputItemStack(new ItemStack(ModItems.manaResource, 1, 0), 1),
 				(NBTTagCompound) null, new ItemStack[] { new ItemStack(manasteel_plate) });
@@ -108,23 +108,23 @@ public class BotaniaIntegration {
 				(IRecipeInput) new RecipeInputItemStack(new ItemStack(ModItems.manaResource, 1, 4), 1),
 				(NBTTagCompound) null, new ItemStack[] { new ItemStack(terrasteel_plate) });
 		GameRegistry.addRecipe(new ItemStack(teraDDrill, 1, OreDictionary.WILDCARD_VALUE),
-				new Object[] { " L ", "ODO", "COC", 'O', SSPItem.overclockerUpgrade, 'D',
+				new Object[] { " L ", "ODO", "COC", 'O', IUItem.overclockerUpgrade, 'D',
 						new ItemStack(Ic2Items.diamondDrill.getItem(), 1, OreDictionary.WILDCARD_VALUE), 'C',
 						terrasteel_plate, 'L', ModItems.terraPick });
 		GameRegistry.addRecipe(new ItemStack(terrasteel_core),
-				new Object[] { "KLM", "DOD", "CHC", 'C', terrasteel_plate, 'D', SSPItem.itemIrradiantGlassPane, 'O',
+				new Object[] { "KLM", "DOD", "CHC", 'C', terrasteel_plate, 'D', IUItem.itemIrradiantGlassPane, 'O',
 						terrasteel_plate, 'L', IC2Items.getItem("advancedAlloy"), 'K', rune_night, 'M', rune_sun, 'H',
 						rune_energy });
 		GameRegistry.addRecipe(new ItemStack(elementium_core),
-				new Object[] { "KLM", "DOD", "CHC", 'C', elementium_plate, 'D', SSPItem.photoniy_ingot, 'O',
+				new Object[] { "KLM", "DOD", "CHC", 'C', elementium_plate, 'D', IUItem.photoniy_ingot, 'O',
 						manasteel_core, 'L', IC2Items.getItem("advancedCircuit"), 'K', rune_night, 'M', rune_sun, 'H',
 						rune_energy });
 		GameRegistry.addRecipe(new ItemStack(manasteel_core),
-				new Object[] { "KLM", "DOD", "CHC", 'C', manasteel_plate, 'D', SSPItem.photoniy_ingot, 'O',
-						SSPItem.advanced_core, 'L', IC2Items.getItem("advancedCircuit"), 'K', rune_night, 'M', rune_sun,
+				new Object[] { "KLM", "DOD", "CHC", 'C', manasteel_plate, 'D', IUItem.photoniy_ingot, 'O',
+						IUItem.advanced_core, 'L', IC2Items.getItem("advancedCircuit"), 'K', rune_night, 'M', rune_sun,
 						'H', rune_energy });
 		GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 0), new Object[] { "BBB", "BAB", "BBB", 'A',
-				manasteel_core, 'B', new ItemStack(SSPItem.blockSSPSolarPanel, 1, 0) });
+				manasteel_core, 'B', new ItemStack(IUItem.blockSSPSolarPanel, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 1), new Object[] { "BBB", "BAB", "BBB", 'A',
 				elementium_core, 'B', new ItemStack(blockBotSolarPanel, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(blockBotSolarPanel, 1, 2), new Object[] { "BBB", "BAB", "BBB", 'A',

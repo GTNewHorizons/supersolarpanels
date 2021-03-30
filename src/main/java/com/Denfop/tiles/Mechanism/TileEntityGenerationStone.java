@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.InvSlot.InvSlotProcessableStone;
 

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.Denfop.Constants;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -46,10 +46,10 @@ public class ItemUpgradeModule extends Item implements IUpgradeItem, IItemHudInf
 		super();
 		setHasSubtypes(true);
 		this.setCreativeTab(IUCore.tabssp3);
-		SSPItem.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
-		SSPItem.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
-		SSPItem.overclockerUpgrade = new ItemStack((Item) this, 1, 0);
-		SSPItem.overclockerUpgrade1 = new ItemStack((Item) this, 1, 1);
+		IUItem.overclockerUpgrade = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker1.ordinal()));
+		IUItem.overclockerUpgrade1 = UpgradeRegistry.register(new ItemStack(this, 1, Type.Overclocker2.ordinal()));
+		IUItem.overclockerUpgrade = new ItemStack((Item) this, 1, 0);
+		IUItem.overclockerUpgrade1 = new ItemStack((Item) this, 1, 1);
 		this.fluidAmountPerTick = 50;
 		this.itemNames = new ArrayList<String>();
 		this.IIconsList = new IIcon[2];

@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-public class SSPItem {
+public class IUItem {
 	public static Item dust;
 	public static Block blockSSPSolarPanel;
 	public static Item enderquantumcomponent;

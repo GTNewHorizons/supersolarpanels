@@ -3,7 +3,7 @@ package com.Denfop.tab;
 
 import net.minecraft.item.Item;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,6 +14,6 @@ public class CreativeTabSSP2 extends CreativeTabs {
 	}
 
 	public Item getTabIconItem() {
-		return SSPItem.quantumHelmet;
+		return IUItem.quantumHelmet;
 	}
 }

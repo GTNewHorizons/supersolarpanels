@@ -10,7 +10,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.block.Base.BlocksItems;
 
@@ -44,8 +44,8 @@ public class ItemCell extends Item {
 		this.names = new HashMap<Integer, String>();
 		this.cells = new IdentityHashMap<Block, ItemStack>();
 		setHasSubtypes(true);
-		SSPItem.cell = addCell(0, "itemCellEmpty");
-		SSPItem.uuMatterCell = addRegisterCell(1, "itemCellUuMatter", "fluidNeutron");
+		IUItem.cell = addCell(0, "itemCellEmpty");
+		IUItem.uuMatterCell = addRegisterCell(1, "itemCellUuMatter", "fluidNeutron");
 		this.itemNames = new ArrayList<String>();
 		this.IIconsList = new IIcon[2];
 		this.itemsCount = 1;
@@ -130,7 +130,7 @@ public class ItemCell extends Item {
 
 	private ItemStack addRegisterCell(int meta, String name, String blockName) {
 		ItemStack ret = addCell(meta, name, new Block[] { BlocksItems.getFluidBlock(blockName) });
-		FluidContainerRegistry.registerFluidContainer(BlocksItems.getFluid(blockName), ret.copy(), SSPItem.cell.copy());
+		FluidContainerRegistry.registerFluidContainer(BlocksItems.getFluid(blockName), ret.copy(), IUItem.cell.copy());
 
 		return ret;
 	}

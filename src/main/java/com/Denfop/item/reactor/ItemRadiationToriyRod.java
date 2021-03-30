@@ -1,6 +1,6 @@
 package com.Denfop.item.reactor;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 
 import ic2.api.reactor.IReactor;
@@ -33,13 +33,13 @@ public class ItemRadiationToriyRod extends ItemReactorBase {
 		ItemStack ret;
 		switch (this.numberOfCells) {
 		case 1:
-			ret = SSPItem.reactorDepletedtoriySimple;
+			ret = IUItem.reactorDepletedtoriySimple;
 			return new ItemStack(ret.getItem(), 1);
 		case 2:
-			ret = SSPItem.reactorDepletedtoriyDual;
+			ret = IUItem.reactorDepletedtoriyDual;
 			return new ItemStack(ret.getItem(), 1);
 		case 4:
-			ret = SSPItem.reactorDepletedtoriyQuad;
+			ret = IUItem.reactorDepletedtoriyQuad;
 			return new ItemStack(ret.getItem(), 1);
 
 		}

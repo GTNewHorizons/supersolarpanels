@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Denfop.Constants;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.block.cable.BlockCable;
 import com.Denfop.tiles.base.TileEntityCable;
@@ -125,7 +125,7 @@ public class ItemCable extends Item implements IBoxable {
 					break;
 				}
 			}
-		BlockCable block = (BlockCable) getBlock(new ItemStack(SSPItem.cableblock));
+		BlockCable block = (BlockCable) getBlock(new ItemStack(IUItem.cableblock));
 		if ((oldBlock.isAir((IBlockAccess) world, x, y, z)
 				|| world.canPlaceEntityOnSide(block, x, y, z, false, side, (Entity) entityplayer, itemstack))
 				&& world.checkNoEntityCollision(

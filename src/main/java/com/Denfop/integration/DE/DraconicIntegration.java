@@ -1,7 +1,7 @@
 package com.Denfop.integration.DE;
 
 import com.Denfop.Config;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.item.base.SSPItemBase;
 import com.Denfop.tiles.overtimepanel.TileNeutronSolarPanel;
@@ -129,7 +129,7 @@ public class DraconicIntegration {
 				new Object[] { "CDC", "CAC", "CBC", 'B', new ItemStack(ChaosEnergyCore, 1), 'A',
 						ModItems.draconicFluxCapacitor, 'D', ModItems.chaoticCore, 'C', chaosingot });
 		GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1, 0), new Object[] { " B ", "BAB", " B ", 'B',
-				new ItemStack(SSPItem.blockSSPSolarPanel, 1), 'A', ModItems.wyvernCore });
+				new ItemStack(IUItem.blockSSPSolarPanel, 1), 'A', ModItems.wyvernCore });
 		GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1, 1), new Object[] { "AB ", "BAB", " BA", 'B',
 				new ItemStack(blockDESolarPanel, 1, 0), 'A', ModItems.awakenedCore });
 		GameRegistry.addRecipe(new ItemStack(blockDESolarPanel, 1, 2), new Object[] { "ABC", "BAB", "CBA", 'B',

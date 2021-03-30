@@ -1,6 +1,6 @@
 package com.Denfop.integration.Avaritia;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 import com.Denfop.integration.Botania.TileEntityElementumSolarPanel;
 import com.Denfop.integration.Botania.TileEntityManasteelSolarPanel;
@@ -37,12 +37,12 @@ public class AvaritiaIntegration {
 
 	public static void recipe() {
 		GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1, 0), new Object[] { " B ", "BAB", " B ", 'B',
-				new ItemStack(SSPItem.blockSSPSolarPanel, 1, 8), 'A', neutroncore });
+				new ItemStack(IUItem.blockSSPSolarPanel, 1, 8), 'A', neutroncore });
 		GameRegistry.addRecipe(new ItemStack(blockAvSolarPanel, 1, 1),
 				new Object[] { " B ", "BAB", " B ", 'B', new ItemStack(blockAvSolarPanel, 1, 0), 'A', infinitycore });
 
 		GameRegistry.addRecipe(new ItemStack(neutroncore, 1), new Object[] { " A ", "ABA", " A ", 'B',
-				new ItemStack(SSPItem.protoncore, 1), 'A', new ItemStack(LudicrousItems.resource, 1, 4) });
+				new ItemStack(IUItem.protoncore, 1), 'A', new ItemStack(LudicrousItems.resource, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(infinitycore, 1), new Object[] { "BAB", "ABA", "BAB", 'B',
 				new ItemStack(neutroncore, 1), 'A', new ItemStack(LudicrousItems.resource, 1, 6) });
 

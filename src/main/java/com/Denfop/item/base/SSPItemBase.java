@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.Denfop.Config;
 import com.Denfop.IUCore;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.api.module.IModulGenDay;
 import com.Denfop.utils.NBTData;
 
@@ -33,17 +33,17 @@ public class SSPItemBase extends Item {
 		for (int meta = 0; meta <= 0; ++meta) {
 			final ItemStack stack = new ItemStack((Item) this, 1, 0);
 			NBTTagCompound nbttagcompound = NBTData.getOrCreateNbtData(stack);
-			if (stack.getItem() == SSPItem.magnesium_ingot)
+			if (stack.getItem() == IUItem.magnesium_ingot)
 				nbttagcompound.setDouble("StoredEMC", 100);
-			if (stack.getItem() == SSPItem.wolfram_ingot)
+			if (stack.getItem() == IUItem.wolfram_ingot)
 				nbttagcompound.setDouble("StoredEMC", 80);
 			if (stack.getItem() == OreDictionary.getOres("ingotIridium").get(0).getItem())
 				nbttagcompound.setDouble("StoredEMC", 280);
-			if (stack.getItem() == SSPItem.spinel_ingot)
+			if (stack.getItem() == IUItem.spinel_ingot)
 				nbttagcompound.setDouble("StoredEMC", 120);
-			if (stack.getItem() == SSPItem.mikhail_ingot)
+			if (stack.getItem() == IUItem.mikhail_ingot)
 				nbttagcompound.setDouble("StoredEMC", 90);
-			if (stack.getItem() == SSPItem.chromium_ingot)
+			if (stack.getItem() == IUItem.chromium_ingot)
 				nbttagcompound.setDouble("StoredEMC", 110);
 			itemList.add(stack);
 		}

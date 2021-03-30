@@ -1,6 +1,6 @@
 package com.Denfop.Recipes;
 
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.IUCore;
 
 import cpw.mods.fml.common.Loader;
@@ -15,56 +15,56 @@ import net.minecraft.nbt.NBTTagCompound;
 public class MaceratorRecipe {
 	public static void recipe() {
 		if (!Loader.isModLoaded("aobd")) {
-			addmacerator(new ItemStack(SSPItem.spinelore), new ItemStack(SSPItem.spinelcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.platiumore), new ItemStack(SSPItem.platiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.chromiumore), new ItemStack(SSPItem.chromiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.iridiumore), new ItemStack(SSPItem.iridiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.magnesiumore), new ItemStack(SSPItem.magnesiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.mikhail_ore), new ItemStack(SSPItem.michalovcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.nicelore), new ItemStack(SSPItem.nickelcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.wolframore), new ItemStack(SSPItem.wolframcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.spinelore), new ItemStack(IUItem.spinelcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.platiumore), new ItemStack(IUItem.platiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.chromiumore), new ItemStack(IUItem.chromiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.iridiumore), new ItemStack(IUItem.iridiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.magnesiumore), new ItemStack(IUItem.magnesiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.mikhail_ore), new ItemStack(IUItem.michalovcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.nicelore), new ItemStack(IUItem.nickelcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.wolframore), new ItemStack(IUItem.wolframcrushedore, 2));
 			
 			
 			
-			addmacerator(new ItemStack(SSPItem.endspinel_stone),
-					new ItemStack(SSPItem.spinelcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.netherspinelrack),
-					new ItemStack(SSPItem.spinelcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endspinel_stone),
+					new ItemStack(IUItem.spinelcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.netherspinelrack),
+					new ItemStack(IUItem.spinelcrushedore, 2));
 			
-			addmacerator(new ItemStack(SSPItem.netherplatiumrack),
-					new ItemStack(SSPItem.platiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.endplatium_stone),
-					new ItemStack(SSPItem.platiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.netherplatiumrack),
+					new ItemStack(IUItem.platiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endplatium_stone),
+					new ItemStack(IUItem.platiumcrushedore, 2));
 			
-			addmacerator(new ItemStack(SSPItem.endchromium_stone),
-					new ItemStack(SSPItem.chromiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.netherchromiumrack),
-					new ItemStack(SSPItem.chromiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endchromium_stone),
+					new ItemStack(IUItem.chromiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.netherchromiumrack),
+					new ItemStack(IUItem.chromiumcrushedore, 2));
 
-			addmacerator(new ItemStack(SSPItem.netheriridiumrack),
-					new ItemStack(SSPItem.iridiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.endiridium_stone),
-					new ItemStack(SSPItem.iridiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.netheriridiumrack),
+					new ItemStack(IUItem.iridiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endiridium_stone),
+					new ItemStack(IUItem.iridiumcrushedore, 2));
 			
-			addmacerator(new ItemStack(SSPItem.endmagnesium_stone),
-					new ItemStack(SSPItem.magnesiumcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.nethermagnesiumrack),
-					new ItemStack(SSPItem.magnesiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endmagnesium_stone),
+					new ItemStack(IUItem.magnesiumcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.nethermagnesiumrack),
+					new ItemStack(IUItem.magnesiumcrushedore, 2));
 			
-			addmacerator(new ItemStack(SSPItem.nethermikhailrack),
-					new ItemStack(SSPItem.michalovcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.endmikhail_stone),
-					new ItemStack(SSPItem.michalovcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.nethermikhailrack),
+					new ItemStack(IUItem.michalovcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endmikhail_stone),
+					new ItemStack(IUItem.michalovcrushedore, 2));
 			
-			addmacerator(new ItemStack(SSPItem.endwolfram_stone),
-					new ItemStack(SSPItem.wolframcrushedore, 2));
-			addmacerator(new ItemStack(SSPItem.netherwolfram_rack),
-					new ItemStack(SSPItem.wolframcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.endwolfram_stone),
+					new ItemStack(IUItem.wolframcrushedore, 2));
+			addmacerator(new ItemStack(IUItem.netherwolfram_rack),
+					new ItemStack(IUItem.wolframcrushedore, 2));
 		}
 		
 
-		addmacerator(new ItemStack(SSPItem.electriumingot), new ItemStack(SSPItem.electriumdust));
-		addmacerator(new ItemStack(SSPItem.invaringot), new ItemStack(SSPItem.invardust));
+		addmacerator(new ItemStack(IUItem.electriumingot), new ItemStack(IUItem.electriumdust));
+		addmacerator(new ItemStack(IUItem.invaringot), new ItemStack(IUItem.invardust));
 
 	}
 

@@ -59,7 +59,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.Denfop.Constants;
-import com.Denfop.SSPItem;
+import com.Denfop.IUItem;
 import com.Denfop.DamageSource.SSPDamageSource;
 import com.Denfop.IUCore;
 import com.Denfop.item.armour.ItemArmorImprovemedQuantum;
@@ -386,14 +386,14 @@ public class BlockCable extends Block {
 
 		}
 		if (te.foamed == 1)
-			return StackUtil.getBlock(SSPItem.constructionFoam).getIcon(side, 0);
+			return StackUtil.getBlock(IUItem.constructionFoam).getIcon(side, 0);
 		Block referencedBlock = te.getReferencedBlock(side);
 		if (referencedBlock != null)
 			try {
 				return referencedBlock.getIcon(te.retextureRefSide[side], te.retextureRefMeta[side]);
 			} catch (Exception exception) {
 			}
-		return StackUtil.getBlock(SSPItem.constructionFoamWall).getIcon(side, te.foamColor);
+		return StackUtil.getBlock(IUItem.constructionFoamWall).getIcon(side, te.foamColor);
 	}
 
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 absDirection) {
@@ -519,7 +519,7 @@ public class BlockCable extends Block {
 				return false;
 
 			if ((StackUtil.equals((Block) Blocks.sand, cur) && te.foamed == 1 && te.changeFoam((byte) 2))
-					|| (cur.getItem() == SSPItem.constructionFoam.getItem() && te.foamed == 0
+					|| (cur.getItem() == IUItem.constructionFoam.getItem() && te.foamed == 0
 							&& te.changeFoam((byte) 1))) {
 				if (IUCore.proxy.isSimulating() && !player.capabilities.isCreativeMode) {
 					cur.stackSize--;
@@ -588,12 +588,12 @@ public class BlockCable extends Block {
 		TileEntityCable te = (TileEntityCable) getOwnTe((IBlockAccess) world, x, y, z);
 		if (te != null) {
 			if (te.cableType == 14) {
-				ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, 13));
+				ret.add(new ItemStack(IUItem.insulatedCopperCableItem.getItem(), 1, 13));
 				return ret;
 			}
-			ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, te.cableType));
+			ret.add(new ItemStack(IUItem.insulatedCopperCableItem.getItem(), 1, te.cableType));
 		} else {
-			ret.add(new ItemStack(SSPItem.insulatedCopperCableItem.getItem(), 1, metadata));
+			ret.add(new ItemStack(IUItem.insulatedCopperCableItem.getItem(), 1, metadata));
 		}
 		return ret;
 	}
