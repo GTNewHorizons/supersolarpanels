@@ -88,13 +88,9 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 	    this.energyConsume = applyModifier(this.defaultEnergyConsume, 0, 0.0D);
 	    setTier(applyModifier(this.defaultTier, 0, 1.0D));
 	    RecipeOutput output = getOutput();
-	    if (this.inputSlot.isEmpty()) {
-	      this.maxEnergy = 0;
-	    } else if (output != null) {
-	      this.maxEnergy = output.metadata.getInteger("energy");
-	    } else {
-	      this.maxEnergy = 0;
-	    } 
+	    if (output != null) 
+	      this.maxEnergy = output.metadata.getDouble("energy");
+	    
 	    this.progress = (short)(int)Math.floor(previousProgress * this.operationLength + 0.1D);
 	  }
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
@@ -157,14 +153,15 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 				needsInvUpdate = true;
 				this.progress = 0;
 				this.energy = 0;
-
+			
+				
 				((NetworkManager) IC2.network.get()).initiateTileEntityEvent((TileEntity) this, 2, true);
 			}
 		} else {
 			if (this.progress != 0 && getActive())
 				((NetworkManager) IC2.network.get()).initiateTileEntityEvent((TileEntity) this, 1, true);
 			if (output == null)
-				this.progress = 0;
+				this.energy = 0;
 			setActive(false);
 		}
 

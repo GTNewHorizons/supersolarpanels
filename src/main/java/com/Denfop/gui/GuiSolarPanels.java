@@ -152,7 +152,7 @@ public class GuiSolarPanels extends GuiContainer {
 		String rf = ModUtils.getString(this.tileentity.storage2);
 		String rf1 = ModUtils.getString(this.tileentity.maxStorage2);
 		String tooltip1 = rfstorageString + rf + "/" + rf1;
-		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip1, 155, 24, 180, 38);
+		
 		if (maxstorage_dob != 0)
 			this.fontRendererObj.drawString(ModulesString2 + maxstorage_dob + "%", 15, 182 - 2, 13487565);
 		double output[];
@@ -220,7 +220,7 @@ public class GuiSolarPanels extends GuiContainer {
 		}
 		String tooltip = storageString + maxstorage_2 + "/" + maxstorage_1;
 		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip, 18, 24, 43, 38);
-
+		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip1, 155, 24, 180, 38);
 		if (this.tileentity.chargeSlots[8] != null && this.tileentity.chargeSlots[8].getItem() instanceof IModuleType) {
 
 			if (this.tileentity.chargeSlots[8].getItemDamage() == 0)
