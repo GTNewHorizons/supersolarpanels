@@ -50,23 +50,23 @@ public class GuiMolecularTransformer extends GuiSSP {
 		if (chargeLevel > 0 && !this.container.base.inputSlot.isEmpty() && output1 != null) {
 			drawTexturedModalRect(this.xoffset + 23, this.yoffset + 48, 221, 7, 10, (int) chargeLevel);
 			this.fontRendererObj.drawString(input + this.container.base.inputSlot.get().getDisplayName(),
-					this.xoffset + 60 , this.yoffset + 25, 13487565);
+					this.xoffset + 60 , this.yoffset + 25, 4210752);
 
 			this.fontRendererObj.drawString(output + output1.items.get(0).getDisplayName(), this.xoffset + 60 ,
-					this.yoffset + 25 + 11, 13487565);
+					this.yoffset + 25 + 11, 4210752);
 
 			this.fontRendererObj.drawString(energyPerOperation + ModUtils.getString(output1.metadata.getDouble("energy")) + " EU",
-					this.xoffset + 60 , this.yoffset + 25 + 22, 13487565);
+					this.xoffset + 60 , this.yoffset + 25 + 22, 4210752);
 			if (this.container.base.getProgress() * 100 <= 100)
 				this.fontRendererObj.drawString(
 						progress + String
 								.valueOf(MathHelper.floor_double(this.container.base.getProgress() * 100) + "%"),
-						this.xoffset + 60 , this.yoffset + 25 + 33, 13487565);
+						this.xoffset + 60 , this.yoffset + 25 + 33, 4210752);
 			if (this.container.base.getProgress() * 100 > 100)
 				this.fontRendererObj.drawString(
 						progress + String
 								.valueOf(MathHelper.floor_double(this.container.base.getProgress() * 100) + "%"),
-						this.xoffset + 60 , this.yoffset + 25 + 33, 13487565);
+						this.xoffset + 60 , this.yoffset + 25 + 33, 4210752);
 
 			;
 
