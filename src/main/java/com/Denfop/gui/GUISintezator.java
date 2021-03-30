@@ -86,12 +86,12 @@ public class GUISintezator extends GuiContainer {
 		String maxstorage_1 = ModUtils.getString(sum2);
 		String maxstorage_2 = ModUtils.getString(this.container.tileentity.storage);
 		String tooltip = storageString + maxstorage_2 + "/" + maxstorage_1;
-		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip, 18, 24, 43, 38);
+		
 		String output = ModUtils.getString(sum3);
 		this.fontRendererObj.drawString(maxOutputString + output + (" " + energyPerTickString), 50, 32 - 10, 13487565);
 		this.fontRendererObj.drawString(tierString + this.container.tileentity.machineTire, 50, 32, 13487565);
 		String generation = ModUtils.getString(this.container.tileentity.generating);
-
+		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip, 18, 24, 43, 38);
 		String tooltip2 = generatingString + generation + " " + energyPerTickString;
 		GuiTooltipHelper.drawAreaTooltip(par1 - this.guiLeft, par2 - this.guiTop, tooltip2, 18, 40, 43, 58);
 	}

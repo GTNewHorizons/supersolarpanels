@@ -31,6 +31,7 @@ import com.Denfop.proxy.ClientProxy;
 import com.Denfop.tiles.base.TileEntityBase;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
+import com.Denfop.tiles.base.TileSintezator;
 import com.Denfop.tiles.overtimepanel.TileAdminSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileEntityAdvancedSolarPanel;
 import com.Denfop.tiles.overtimepanel.TileEntityHybridSolarPanel;
@@ -834,50 +835,45 @@ public class BlockSSPSolarPanel extends BlockContainer {
 		return this.iconBuffer[blockMeta][ClientProxy.sideAndFacingToSpriteOffset[blockSide][3]];
 	}
 
-	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		ArrayList<ItemStack> dropList = super.getDrops(world, x, y, z, metadata, fortune);
-		TileEntity te = world.getTileEntity(x, y, z);
-		if (te instanceof IInventory) {
-			IInventory iinv = (IInventory) te;
-			for (int index = 0; index < iinv.getSizeInventory(); index++) {
-				ItemStack itemstack = iinv.getStackInSlot(index);
-				if (itemstack != null) {
-					dropList.add(itemstack);
-					iinv.setInventorySlotContents(index, (ItemStack) null);
-				}
-			}
-		}
-		return dropList;
-	}
+	
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block blockID, int blockMeta) {
-		super.breakBlock(world, x, y, z, blockID, blockMeta);
-		boolean var5 = true;
-		for (Iterator<ItemStack> iter = getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0).iterator(); iter
-				.hasNext(); var5 = false) {
-			ItemStack var7 = iter.next();
-			if (!var5) {
-				if (var7 == null)
-					return;
-				double var8 = 0.7D;
-				double var10 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
-				double var12 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
-				double var14 = world.rand.nextFloat() * var8 + (1.0D - var8) * 0.5D;
-				EntityItem var16 = new EntityItem(world, x + var10, y + var12, z + var14, var7);
-				var16.delayBeforeCanPickup = 10;
-				world.spawnEntityInWorld((Entity) var16);
-				return;
-			}
-		}
+	public void breakBlock(World world, int i, int j, int k, Block par5, int par6) {
+		TileEntity tileentity = world.getTileEntity(i, j, k);
+		if (tileentity != null)
+
+			dropItems((TileEntitySolarPanel) tileentity, world);
+		world.removeTileEntity(i, j, k);
+		super.breakBlock(world, i, j, k, par5, par6);
 	}
 
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return Item.getItemFromBlock(IUItem.blockSSPSolarPanel);
 	}
-
+	private void dropItems(TileEntitySolarPanel tileentity, World world) {
+		Random rand = new Random();
+		if (!(tileentity instanceof net.minecraft.inventory.IInventory))
+			return;
+		TileEntitySolarPanel tileEntitySolarPanel = tileentity;
+		for (int i = 0; i < tileEntitySolarPanel.getSizeInventory(); i++) {
+			ItemStack item = tileEntitySolarPanel.getStackInSlot(i);
+			if (item != null && item.stackSize > 0) {
+				float rx = rand.nextFloat() * 0.8F + 0.1F;
+				float ry = rand.nextFloat() * 0.8F + 0.1F;
+				float rz = rand.nextFloat() * 0.8F + 0.1F;
+				EntityItem entityItem = new EntityItem(world, (tileentity.xCoord + rx), (tileentity.yCoord + ry),
+						(tileentity.zCoord + rz), new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+				if (item.hasTagCompound())
+					entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+				float factor = 0.05F;
+				entityItem.motionX = rand.nextGaussian() * factor;
+				entityItem.motionY = rand.nextGaussian() * factor + 0.20000000298023224D;
+				entityItem.motionZ = rand.nextGaussian() * factor;
+				world.spawnEntityInWorld((Entity) entityItem);
+				item.stackSize = 0;
+			}
+		}
+	}
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);

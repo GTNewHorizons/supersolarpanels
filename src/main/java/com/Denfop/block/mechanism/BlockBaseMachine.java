@@ -188,7 +188,7 @@ public class BlockBaseMachine extends BlockContainer {
 		this.iconBuffer[7][6] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
 		this.iconBuffer[7][7] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
 		this.iconBuffer[7][8] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
-		this.iconBuffer[7][9] = par1IconRegister.registerIcon("supersolarpanel:genstone1");
+		this.iconBuffer[7][9] = par1IconRegister.registerIcon("supersolarpanel:genstone");
 		this.iconBuffer[7][10] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
 		this.iconBuffer[7][11] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");
 		this.iconBuffer[8][0] = par1IconRegister.registerIcon("supersolarpanel:blockAdvMachine");

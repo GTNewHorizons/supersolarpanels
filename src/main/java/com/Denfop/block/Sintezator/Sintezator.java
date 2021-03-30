@@ -40,7 +40,7 @@ public class Sintezator extends Block implements ITileEntityProvider {
 
 	}
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-	    this.icon = par1IconRegister.registerIcon("supersolarpanel:blockMacerator");
+	    this.icon = par1IconRegister.registerIcon("supersolarpanel:genstone");
 	  }
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
