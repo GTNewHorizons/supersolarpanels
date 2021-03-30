@@ -1,11 +1,17 @@
 package com.Denfop.item.reactor;
 
 import com.Denfop.IUItem;
+import com.Denfop.utils.ModUtils;
+
+import java.util.List;
+
 import com.Denfop.IUCore;
 
 import ic2.api.reactor.IReactor;
 import ic2.core.Ic2Items;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class ItemRadiationToriyRod extends ItemReactorBase {
 	private int time;
@@ -45,7 +51,23 @@ public class ItemRadiationToriyRod extends ItemReactorBase {
 		}
 		throw new RuntimeException("invalid cell count: " + this.numberOfCells);
 	}
-
+	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean b) {
+		super.addInformation(stack, player, info, b);
+		
+		if(stack.getItem() == IUItem.reactortoriySimple.getItem()) {
+			info.add(StatCollector.translateToLocal("reactor.info")+ ModUtils.getString((double) 5 * this.power)+" EU");
+			info.add(StatCollector.translateToLocal("reactor.info1")+ModUtils.getString( 5 * this.power+19.8D)+" EU");
+		}
+		
+		if(stack.getItem() == IUItem.reactortoriyDual.getItem()) {
+		info.add(StatCollector.translateToLocal("reactor.info")+ ModUtils.getString((double) 20 * this.power)+" EU");
+		info.add(StatCollector.translateToLocal("reactor.info1")+ModUtils.getString( 20 * this.power+79.2D)+" EU");
+		}
+		if(stack.getItem() == IUItem.reactortoriyQuad.getItem()) {
+			info.add(StatCollector.translateToLocal("reactor.info")+ ModUtils.getString((double) 60 * this.power)+" EU");
+			info.add(StatCollector.translateToLocal("reactor.info1")+ModUtils.getString( 60 * this.power+237.6D)+" EU");
+			}
+	}
 	public boolean acceptUraniumPulse(IReactor reactor, ItemStack yourStack, ItemStack pulsingStack, int youX, int youY,
 			int pulseX, int pulseY, boolean heatrun) {
 		if (!heatrun) {

@@ -490,3 +490,5 @@ ssp.sprengerrotor=§cСпренгерный ротор
 ssp.barionrotor=§5Барионный ротор
 ssp.adronrotor=§3Адронный ротор
 item.WirelessModule.name=Модуль Беспроводной связи
+reactor.info=Вырабатывает в реакторе: 
+reactor.info1=При разгреве(99%) вырабатывает: 

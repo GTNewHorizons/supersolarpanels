@@ -486,4 +486,6 @@ message.ultDDrill.mode.pickaxe=Ores
 ssp.sprengerrotor=§cSprenger rotor
 ssp.barionrotor=§5Baryon rotor
 ssp.adronrotor=§3Adron rotor
-item.WirelessModule.nane=Wireless Module 
+item.WirelessModule.name=Wireless Module 
+reactor.info=Produces in the reactor: 
+reactor.info1=When heated (99%) produces: 
