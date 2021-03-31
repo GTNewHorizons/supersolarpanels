@@ -265,13 +265,7 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular
 
 	}
 
-	public String getStartSoundFile() {
-		return "Machines/MaceratorOp.ogg";
-	}
-
-	public String getInterruptSoundFile() {
-		return "Machines/InterruptOne.ogg";
-	}
+	
 
 	public float getWrenchDropRate() {
 		return 0.85F;

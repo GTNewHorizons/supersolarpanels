@@ -214,6 +214,14 @@ public class BlockMoreMachine extends BlockContainer {
 		} else {
 			
 			TileEntityMultiMachine tile = (TileEntityMultiMachine) world.getTileEntity(x, y, z);
+			if(!Loader.isModLoaded("GraviSuite")) {
+				if(graviSuite.gettrue1(entityPlayer)) 
+					return false;
+				}else {
+					
+					if(graviSuite.gettrue(entityPlayer)) 
+						return false;}
+			if(tile != null) {
 			int currentXP = ExperienceUtils.getPlayerXP(entityPlayer);
 			int nextLevelXP = ExperienceUtils.getExperienceForLevel(entityPlayer.experienceLevel + 1);
 			int requiredXP = nextLevelXP - currentXP;
@@ -222,7 +230,7 @@ public class BlockMoreMachine extends BlockContainer {
 			
 			ExperienceUtils.addPlayerXP(entityPlayer, tile.expstorage);
 			tile.expstorage = 0;
-			
+			}
 		}
 
 		return false;

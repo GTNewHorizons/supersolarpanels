@@ -248,7 +248,14 @@ public class BlockElectric extends BlockContainer {
 		if (entityPlayer.isSneaking()) {
 			
 			TileEntityElectricBlock tile = (TileEntityElectricBlock) world.getTileEntity(x, y, z);
-			
+			if(tile != null) {
+				if(!Loader.isModLoaded("GraviSuite")) {
+					if(graviSuite.gettrue1(entityPlayer)) 
+						return false;
+					}else {
+						
+						if(graviSuite.gettrue(entityPlayer)) 
+							return false;}
 			if (tile.movementcharge) {
 
 				for (ItemStack armorcharged : entityPlayer.inventory.armorInventory) {
@@ -381,7 +388,7 @@ public class BlockElectric extends BlockContainer {
 				}
 			}
 		}
-		
+		}
 		if (!entityPlayer.isSneaking()) {
 			final TileEntity tileentity = world.getTileEntity(x, y, z);
 			

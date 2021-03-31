@@ -33,7 +33,7 @@ public class CompressorRecipe {
 		addcompressor(new ItemStack(IUItem.mikhail_ingot), 9, new ItemStack(IUItem.michail_plate, 1));
 		addcompressor(new ItemStack(IUItem.nickel), 9, new ItemStack(IUItem.nickelplate, 1));
 		addcompressor(new ItemStack(IUItem.electriumingot), 9, new ItemStack(IUItem.electriumplate, 1));
-		addcompressor(OreDictionary.getOres(""), 9, new ItemStack(IUItem.invarplate, 1));
+		addcompressor(OreDictionary.getOres("ingotInvar"), 9, new ItemStack(IUItem.invarplate, 1));
 		addcompressor(new ItemStack(IUItem.magnesium_ingot), 9, new ItemStack(IUItem.magnesium_plate, 1));
 		addcompressor(new ItemStack(IUItem.platium_ingot), 9, new ItemStack(IUItem.platium_plate, 1));
 		addcompressor(Ic2Items.uraniumOre, 1, new ItemStack(IUItem.itemSSP, 1, 8));

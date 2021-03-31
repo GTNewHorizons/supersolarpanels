@@ -294,6 +294,14 @@ public class BlockChargepad extends BlockContainer {
 		if (entityPlayer.isSneaking()) {
 			
 			TileEntityChargepadBlock tile = (TileEntityChargepadBlock) world.getTileEntity(x, y, z);
+			if(tile != null) {
+				if(!Loader.isModLoaded("GraviSuite")) {
+					if(graviSuite.gettrue1(entityPlayer)) 
+						return false;
+					}else {
+						
+						if(graviSuite.gettrue(entityPlayer)) 
+							return false;}
 			if (tile.movementcharge) {
 
 				for (ItemStack armorcharged : entityPlayer.inventory.armorInventory) {
@@ -428,6 +436,7 @@ public class BlockChargepad extends BlockContainer {
 				return true;
 			}
 			
+		}
 		}
 		if (!entityPlayer.isSneaking()) {
 			final TileEntity tileentity = world.getTileEntity(x, y, z);
