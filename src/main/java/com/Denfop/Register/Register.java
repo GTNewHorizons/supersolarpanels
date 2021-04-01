@@ -1,6 +1,7 @@
 package com.Denfop.Register;
 
 import com.Denfop.IUItem;
+import com.Denfop.Config;
 import com.Denfop.IUCore;
 import com.Denfop.IUItem;
 import com.Denfop.block.AdminPanel.Adminsolarpanel;
@@ -599,15 +600,15 @@ public class Register {
 		GameRegistry.registerItem(IUItem.module8, "WirelessModule1");
 
 		GameRegistry.registerItem(IUItem.ultDDrill, "ultDDrill");
-		GameRegistry.registerItem(IUItem.module1 = new com.Denfop.item.Modules.ModuleGenerationDay()
+		GameRegistry.registerItem(IUItem.module1 = new com.Denfop.item.Modules.ModuleGenerationDay(Config.percent_day)
 				.setMaxStackSize(64).setUnlocalizedName("module1").setTextureName("supersolarpanel:module1"),
 				"module1");
-		GameRegistry.registerItem(IUItem.module2 = new com.Denfop.item.Modules.ModuleGenerationNight()
+		GameRegistry.registerItem(IUItem.module2 = new com.Denfop.item.Modules.ModuleGenerationNight(Config.percent_night)
 				.setMaxStackSize(64).setUnlocalizedName("module2").setTextureName("supersolarpanel:module2"),
 				"module2");
-		GameRegistry.registerItem(IUItem.module3 = new com.Denfop.item.Modules.ModuleStorage().setMaxStackSize(64)
+		GameRegistry.registerItem(IUItem.module3 = new com.Denfop.item.Modules.ModuleStorage(Config.percent_storage).setMaxStackSize(64)
 				.setUnlocalizedName("module3").setTextureName("supersolarpanel:module3"), "module3");
-		GameRegistry.registerItem(IUItem.module4 = new com.Denfop.item.Modules.ModuleOutput().setMaxStackSize(64)
+		GameRegistry.registerItem(IUItem.module4 = new com.Denfop.item.Modules.ModuleOutput(Config.percent_output).setMaxStackSize(64)
 				.setUnlocalizedName("module4").setTextureName("supersolarpanel:module4"), "module4");
 		GameRegistry.registerItem(IUItem.module5 = new com.Denfop.item.Modules.ModuleType().setMaxStackSize(64)
 				.setUnlocalizedName("module5").setTextureName("supersolarpanel:module5"), "module5");

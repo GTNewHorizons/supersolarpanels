@@ -18,6 +18,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.network.INetworkTileEntityEventListener;
+import ic2.api.recipe.RecipeOutput;
 import ic2.core.ContainerBase;
 import ic2.core.IC2;
 import ic2.core.IHasGui;
@@ -38,6 +39,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityQuantumQuarry extends TileEntityElectricMachine
@@ -295,7 +297,7 @@ return ret;
 		if (this.energy > this.maxEnergy)
 			this.energy = this.maxEnergy;
 		double proccent = Config.enerycost;
-		if (!this.inputslot.isEmpty() && this.inputslot.get().getItemDamage() != 0) {
+		if (!this.inputslot.isEmpty() && this.inputslot.get().getItemDamage() > 0 && this.inputslot.get().getItemDamage() < 6) {
 			proccent = this.inputslot.get().getItemDamage();
 
 			proccent = (proccent * 0.1);
@@ -304,11 +306,11 @@ return ret;
 			proccent = (Config.enerycost - proccent);
 
 		}
-
+		System.out.println(proccent);
 		if (this.energy >= proccent) {
 
 			this.setActive(true);
-			this.energy -= (proccent);
+			this.energy -= proccent;
 
 			int chance = rand.nextInt(100) + 1;
 			if (chance <= 95) {
@@ -325,7 +327,7 @@ return ret;
 						this.outputSlot.add(list.get(chance1));
 
 					}
-				} else {
+				} else if(!this.inputslot.isEmpty() && this.inputslot.get().getItemDamage() > 0 && this.inputslot.get().getItemDamage() < 6 ){
 					List<ItemStack> list = list();
 					int num = list.size();
 					int chance1 = rand.nextInt(num);
@@ -335,6 +337,9 @@ return ret;
 						this.outputSlot.add(list.get(chance1));
 
 					}
+				}else if (!this.inputslot.isEmpty() && this.inputslot.get().getItemDamage() > 5 && this.inputslot.get().getItemDamage() < 9) {
+					
+					
 				}
 			}
 		} else {
@@ -342,7 +347,21 @@ return ret;
 		}
 
 	}
+	public double getDemandedEnergy() {
+		
+		return this.maxEnergy - this.energy;
+		
+	}
+	public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
+	
+		
+		if (this.energy >= this.maxEnergy)
+			return amount;
+		this.energy += amount;
+		
 
+		return 0.0D;
+	}
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
 		this.progress = nbttagcompound.getInteger("progress");

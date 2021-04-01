@@ -6,6 +6,7 @@ import java.util.List;
 import com.Denfop.Config;
 import com.Denfop.api.module.IModulOutput;
 import com.Denfop.item.Modules.AdditionModule;
+import com.Denfop.item.Modules.BaseModuleOutput;
 import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.QuarryModule;
 import com.Denfop.tiles.base.TileEntityElectricBlock;
@@ -153,8 +154,8 @@ public class InvSlotElectricBlockB extends InvSlot {
 			if (inputslotC.get(i) == null)
 				continue;
 			ItemStack stack = inputslotC.get(i);
-			if (stack.getItem() instanceof IModulOutput) {
-				int percent = IModulOutput.getData(stack).get(0);
+			if (stack.getItem() instanceof BaseModuleOutput) {
+				int percent = BaseModuleOutput.getpercent();
 				list.add((l / 100) * percent);
 			}
 		}

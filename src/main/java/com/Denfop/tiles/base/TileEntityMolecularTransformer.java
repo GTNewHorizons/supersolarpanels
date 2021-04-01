@@ -236,14 +236,14 @@ public class TileEntityMolecularTransformer extends TileEntityBaseMolecular
 
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		this.maxEnergy = nbttagcompound.getDouble("energy");
+		
 
 		this.redstoneMode = nbttagcompound.getByte("redstoneMode");
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setDouble("energy", this.maxEnergy);
+	
 		nbttagcompound.setByte("redstoneMode", this.redstoneMode);
 	}
 

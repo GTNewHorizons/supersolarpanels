@@ -140,7 +140,7 @@ public class ChaosBow extends ItemBow
 	}
 
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return 1.0D - getEnergyStored(stack) / getMaxEnergyStored(stack);
+		return 1.0D - (double)getEnergyStored(stack) / (double)getMaxEnergyStored(stack);
 	}
 
 	public boolean hasCustomEntity(ItemStack stack) {

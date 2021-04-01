@@ -1,5 +1,6 @@
 package com.Denfop.container;
 
+import ic2.core.ContainerBase;
 import ic2.core.block.invslot.InvSlot;
 
 import ic2.core.slot.SlotInvSlot;
@@ -11,14 +12,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-public class ContainerBaseMolecular<T extends TileEntityBaseMolecular> extends ContainerElectricMachine<T> {
+public class ContainerBaseMolecular<T extends TileEntityBaseMolecular> extends ContainerBase<T> {
 	public ContainerBaseMolecular(EntityPlayer entityPlayer, T tileEntity1) {
 		this(entityPlayer, tileEntity1, 166, 56, 53, 56, 17, 116, 35, 152, 8);
 	}
 
 	public ContainerBaseMolecular(EntityPlayer entityPlayer, T tileEntity1, int height, int dischargeX, int dischargeY,
 			int inputX, int inputY, int outputX, int outputY, int upgradeX, int upgradeY) {
-		super(entityPlayer, tileEntity1, height, dischargeX, dischargeY);
+		super(tileEntity1);
 		if (((TileEntityBaseMolecular) tileEntity1).inputSlot != null)
 			addSlotToContainer(
 					(Slot) new SlotInvSlot((InvSlot) ((TileEntityBaseMolecular) tileEntity1).inputSlot, 0, 20, 27));
@@ -40,7 +41,7 @@ public class ContainerBaseMolecular<T extends TileEntityBaseMolecular> extends C
 	public List<String> getNetworkedFields() {
 		List<String> ret = super.getNetworkedFields();
 		ret.add("guiProgress");
-		ret.add("progress");
+		
 		ret.add("inputEU");
 		ret.add("redstoneMode");
 		ret.add("maxEnergy");

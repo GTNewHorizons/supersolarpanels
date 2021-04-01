@@ -36,6 +36,7 @@ import com.Denfop.utils.ModUtils;
 import com.Denfop.utils.NBTData;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 
+import cofh.api.energy.IEnergyContainerItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -58,6 +59,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import java.util.LinkedList;
 
@@ -488,6 +490,64 @@ public class ItemArmorImprovemedQuantum extends ItemArmor
 					}
 				}
 			}
+			
+			for (int i = 0; i < player.inventory.armorInventory.length; i++) {
+			
+					if (player.inventory.armorInventory[i] != null&& player.inventory.armorInventory[i].getItem() instanceof IElectricItem) {
+						if (ElectricItem.manager.getCharge(itemStack) > 0) {
+						double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], ElectricItem.manager.getCharge(itemStack),
+								2147483647, true, false);
+                      
+						if (sentPacket > 0.0D) {
+							 ElectricItem.manager.discharge(itemStack, sentPacket, Integer.MAX_VALUE, true, false, false);
+							ret = true;
+
+						}
+					}
+				} 
+					IEnergyContainerItem item = null;
+					if( player.inventory.armorInventory[i] != null
+							&& player.inventory.armorInventory[i].getItem() instanceof IEnergyContainerItem) {
+						if (ElectricItem.manager.getCharge(itemStack) > 0) {
+						item = (IEnergyContainerItem) player.inventory.armorInventory[i].getItem();
+					
+						int amountRfCanBeReceivedIncludesLimit = item.receiveEnergy( player.inventory.armorInventory[i], Integer.MAX_VALUE, true);
+						double realSentEnergyRF = Math.min(amountRfCanBeReceivedIncludesLimit, ElectricItem.manager.getCharge(itemStack)*Config.coefficientrf);
+						item.receiveEnergy(player.inventory.armorInventory[i], (int)realSentEnergyRF, false);
+						 ElectricItem.manager.discharge(itemStack, (double)(realSentEnergyRF/(double)Config.coefficientrf), Integer.MAX_VALUE, true, false, false);
+						}
+					} 
+			}
+			for (int j = 0; j < player.inventory.mainInventory.length; j++) {
+				
+					if (player.inventory.mainInventory[j] != null
+							&& player.inventory.mainInventory[j].getItem() instanceof ic2.api.item.IElectricItem) {
+						if (ElectricItem.manager.getCharge(itemStack) > 0) {
+							double sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], ElectricItem.manager.getCharge(itemStack),
+									2147483647, true, false);
+
+							if (sentPacket > 0.0D) {
+								 ElectricItem.manager.discharge(itemStack, sentPacket, Integer.MAX_VALUE, true, false, false);
+								ret = true;
+
+							}
+						}
+
+				} 
+					IEnergyContainerItem item = null;
+					if( player.inventory.mainInventory[j] != null
+							&& player.inventory.mainInventory[j].getItem() instanceof IEnergyContainerItem) {
+						if (ElectricItem.manager.getCharge(itemStack) > 0) {
+						item = (IEnergyContainerItem) player.inventory.mainInventory[j].getItem();
+					
+						int amountRfCanBeReceivedIncludesLimit = item.receiveEnergy( player.inventory.mainInventory[j], Integer.MAX_VALUE, true);
+						double realSentEnergyRF = Math.min(amountRfCanBeReceivedIncludesLimit, ElectricItem.manager.getCharge(itemStack)*Config.coefficientrf);
+						item.receiveEnergy(player.inventory.mainInventory[j], (int)realSentEnergyRF, false);
+						 ElectricItem.manager.discharge(itemStack, (double)(realSentEnergyRF/(double)Config.coefficientrf), Integer.MAX_VALUE, true, false, false);
+						}
+					} 
+			}
+			
 			 if (IC2.platform.isSimulating() && toggleTimer > 0) {
 		          toggleTimer = (byte)(toggleTimer - 1);
 		          nbtData.setByte("toggleTimer", toggleTimer);
@@ -501,7 +561,8 @@ public class ItemArmorImprovemedQuantum extends ItemArmor
 
 				player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 300));
 			}
-			ret = jetpackUsed;
+			if (ret)
+				player.inventoryContainer.detectAndSendChanges();
 			player.extinguish();
 			break;
 		case 2:
@@ -542,7 +603,32 @@ public class ItemArmorImprovemedQuantum extends ItemArmor
 			break;
 		case 3:
 			IC2.platform.profilerStartSection("QuantumBoots");
-
+			 if (IC2.platform.isSimulating()) {
+		          boolean wasOnGround = nbtData.hasKey("wasOnGround") ? nbtData.getBoolean("wasOnGround") : true;
+		          if (wasOnGround && !player.onGround && IC2.keyboard
+		            
+		            .isJumpKeyDown(player) && IC2.keyboard
+		            .isBoostKeyDown(player)) {
+		            ElectricItem.manager.use(itemStack, 4000.0D, null);
+		            ret = true;
+		          } 
+		          if (player.onGround != wasOnGround)
+		            nbtData.setBoolean("wasOnGround", player.onGround); 
+		        } else {
+		          if (ElectricItem.manager.canUse(itemStack, 4000.0D) && player.onGround)
+		            this.jumpCharge = 1.0F; 
+		          if (player.motionY >= 0.0D && this.jumpCharge > 0.0F && !player.isInWater())
+		            if (IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isBoostKeyDown(player)) {
+		              if (this.jumpCharge == 1.0F) {
+		                player.motionX *= 3.5D;
+		                player.motionZ *= 3.5D;
+		              } 
+		              player.motionY += (this.jumpCharge * 0.3F);
+		              this.jumpCharge = (float)(this.jumpCharge * 0.75D);
+		            } else if (this.jumpCharge < 1.0F) {
+		              this.jumpCharge = 0.0F;
+		            }  
+		        } 
 			IC2.platform.profilerEndSection();
 			break;
 

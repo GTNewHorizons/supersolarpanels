@@ -135,18 +135,7 @@ public class SSPEventHandler {
 		for(int i = 0;i<36;i++) {
 			if(player.inventory.mainInventory[i] == null)
 				return;
-			if(player.inventory.mainInventory[i].getItem() instanceof ModuleStorage) {
-				IModulStorage.setData(player.inventory.mainInventory[i], Config.percent_storage);
-			}
-			if(player.inventory.mainInventory[i].getItem() instanceof ModuleOutput) {
-				IModulOutput.setData(player.inventory.mainInventory[i], Config.percent_output);
-			}
-			if(player.inventory.mainInventory[i].getItem() instanceof ModuleGenerationDay) {
-				IModulGenDay.setData(player.inventory.mainInventory[i], Config.percent_day);
-			}
-			if(player.inventory.mainInventory[i].getItem() instanceof ModuleGenerationNight) {
-				IModulGenNight.setData(player.inventory.mainInventory[i], Config.percent_night);
-			}
+			
 			if(player.inventory.mainInventory[i].getItem() instanceof ModuleTypePanel) {
 				int meta = player.inventory.mainInventory[i].getItemDamage();
 				TileEntitySolarPanel tile = (TileEntitySolarPanel) BlockSSPSolarPanel.getBlockEntity(meta);

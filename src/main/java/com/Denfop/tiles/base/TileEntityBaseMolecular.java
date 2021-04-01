@@ -1,11 +1,16 @@
 package com.Denfop.tiles.base;
 
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergySink;
+import ic2.api.energy.tile.IEnergyTile;
 import ic2.api.network.INetworkTileEntityEventListener;
 import ic2.api.recipe.RecipeOutput;
 import ic2.core.ContainerBase;
 import ic2.core.IC2;
 import ic2.core.IHasGui;
 import ic2.core.audio.AudioSource;
+import ic2.core.block.TileEntityInventory;
 import ic2.core.block.invslot.InvSlotOutput;
 import ic2.core.block.invslot.InvSlotProcessable;
 import ic2.core.block.invslot.InvSlotUpgrade;
@@ -16,30 +21,24 @@ import java.util.List;
 
 import com.Denfop.container.ContainerBaseMolecular;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
-		implements IHasGui, INetworkTileEntityEventListener {
-	protected double progress;
+public abstract class TileEntityBaseMolecular extends TileEntityInventory
+		implements IHasGui, INetworkTileEntityEventListener , IEnergySink {
 
-	public final int defaultEnergyConsume;
 
-	public final int defaultOperationLength;
 
 	public final int defaultTier;
 
-	public final int defaultEnergyStorage;
 
-	public int energyConsume;
 
-	public int operationLength;
-
-	public int operationsPerTick;
 
 	protected double guiProgress;
 
@@ -58,19 +57,24 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 	private boolean active;
 
 	public double inputEU;
+	public double energy;
 
+	public double maxEnergy;
+	protected boolean addedToEnergyNet;
+
+	private int tier;
 	public TileEntityBaseMolecular(int energyPerTick, int length, int outputSlots) {
 		this(energyPerTick, length, outputSlots, 1);
 	}
 
 	public TileEntityBaseMolecular(int energyPerTick, int length, int outputSlots, int aDefaultTier) {
-		super(0, 10, 1);
-		this.progress = 0;
-		this.defaultEnergyConsume = this.energyConsume = energyPerTick;
-		this.defaultOperationLength = this.operationLength = length;
-
+		super();
+		
+		energy =0;
+		maxEnergy =0;
+		this.addedToEnergyNet = false;
 		this.defaultTier = 11;
-		this.defaultEnergyStorage = energyPerTick * length;
+		
 		this.outputSlot = new InvSlotOutput(this, "output", 2, 1);
 		this.active = false;
 	}
@@ -79,23 +83,59 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 	    if (IC2.platform.isSimulating())
 	      setOverclockRates(); 
 	  }
-	 
+	public double getDemandedEnergy() {
+		RecipeOutput output = getOutput();
+		if(output != null) {
+		return this.maxEnergy - this.energy;
+		}
+		return 0;
+	}
+	public int getSinkTier() {
+		return this.tier;
+	}
+
+	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+		return true;
+	}
+
+	public void onNetworkUpdate(String field) {
+		super.onNetworkUpdate(field);
+		if (field.equals("tier"))
+			setTier(this.tier);
+		RecipeOutput output = getOutput();
+		if (field.equals("maxEnergy"))
+			if (output != null) 
+			      this.maxEnergy = output.metadata.getDouble("energy");
+			else
+				 this.maxEnergy = 0;
+			
+	}
+	public void setTier(int tier1) {
+		if (this.tier == tier1)
+			return;
+		boolean addedToENet = this.addedToEnergyNet;
+		if (addedToENet) {
+			MinecraftForge.EVENT_BUS.post((Event) new EnergyTileUnloadEvent((IEnergyTile) this));
+			this.addedToEnergyNet = false;
+		}
+		this.tier = tier1;
+		
+		if (addedToENet) {
+			MinecraftForge.EVENT_BUS.post((Event) new EnergyTileLoadEvent((IEnergyTile) this));
+			this.addedToEnergyNet = true;
+		}
+	}
 	  public void setOverclockRates() {
-	    double previousProgress = (this.progress / this.operationLength);
-	    double stackOpLen = (this.defaultOperationLength + 0) * 64.0D * 1.0D;
-	    this.operationsPerTick = (int)Math.min(Math.ceil(64.0D / stackOpLen), 2.147483647E9D);
-	    this.operationLength = (int)Math.round(stackOpLen * this.operationsPerTick / 64.0D);
-	    this.energyConsume = applyModifier(this.defaultEnergyConsume, 0, 0.0D);
+	   
+	  
 	    setTier(applyModifier(this.defaultTier, 0, 1.0D));
 	    RecipeOutput output = getOutput();
 	    if (output != null) 
 	      this.maxEnergy = output.metadata.getDouble("energy");
-	    
-	    this.progress = (short)(int)Math.floor(previousProgress * this.operationLength + 0.1D);
 	  }
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		this.progress = nbttagcompound.getDouble("progress");
+		
 		this.maxEnergy = nbttagcompound.getDouble("maxEnergy");
 		this.energy = nbttagcompound.getDouble("energy");
 		this.inputEU = nbttagcompound.getDouble("inputEU");
@@ -103,7 +143,7 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setDouble("progress", this.progress);
+		
 		nbttagcompound.setDouble("inputEU", this.inputEU);
 		nbttagcompound.setDouble("maxEnergy", this.maxEnergy);
 		nbttagcompound.setDouble("energy", this.energy);
@@ -113,19 +153,7 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 		return this.guiProgress;
 	}
 
-	public void onLoaded() {
-		super.onLoaded();
-		
-	}
-
-	public void onUnloaded() {
-		super.onUnloaded();
-		if (IC2.platform.isRendering() && this.audioSource != null) {
-			IC2.audioManager.removeSources(this);
-			this.audioSource = null;
-		}
-		
-	}
+	
 
 	
 
@@ -136,29 +164,28 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 		if (output != null) {
 			setActive(true);
 			this.active = true;
-			if (this.progress == 0)
+			if (this.energy == 0)
 				((NetworkManager) IC2.network.get()).initiateTileEntityEvent((TileEntity) this, 0, true);
 
-			this.progress = this.energy;
-			double k = this.progress;
-			double p = (k / output.metadata.getDouble("energy"));
+			this.maxEnergy= output.metadata.getDouble("energy");
+			double p = (this.energy / output.metadata.getDouble("energy"));
 			
 			
 			if (p <= 1)
 				this.guiProgress = p;
 			if (p > 1)
 				this.guiProgress = 1;
-			if (this.progress >= output.metadata.getDouble("energy")) {
+			if (this.energy >= output.metadata.getDouble("energy")) {
 				operate(output);
 				needsInvUpdate = true;
-				this.progress = 0;
-				this.energy = 0;
+				
+				this.energy = -output.metadata.getDouble("energy");
 			
 				
 				((NetworkManager) IC2.network.get()).initiateTileEntityEvent((TileEntity) this, 2, true);
 			}
 		} else {
-			if (this.progress != 0 && getActive())
+			if (this.energy != 0 && getActive())
 				((NetworkManager) IC2.network.get()).initiateTileEntityEvent((TileEntity) this, 1, true);
 			if (output == null)
 				this.energy = 0;
@@ -169,11 +196,12 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 	}
 
 	public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
-
+		RecipeOutput output = getOutput();
+		if(output != null) {
 		if (this.energy >= this.maxEnergy)
 			return amount;
 		this.energy += amount;
-		
+		}
 
 		return 0.0D;
 	}
@@ -181,14 +209,14 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 
 
 	public void operate(RecipeOutput output) {
-		for (int i = 0; i < this.operationsPerTick; i++) {
+		
 			List<ItemStack> processResult = output.items;
 
 			operateOnce(output, processResult);
 			output = getOutput();
-			if (output == null)
-				break;
-		}
+			
+				
+		
 	}
 
 	public void operateOnce(RecipeOutput output, List<ItemStack> processResult) {
@@ -206,7 +234,22 @@ public abstract class TileEntityBaseMolecular extends TileEntityElectricMachine
 			return output;
 		return null;
 	}
+	public void onLoaded() {
+		super.onLoaded();
+		if (IC2.platform.isSimulating()) {
+			MinecraftForge.EVENT_BUS.post((Event) new EnergyTileLoadEvent((IEnergyTile) this));
+			this.addedToEnergyNet = true;
+		}
+		
+	}
 
+	public void onUnloaded() {
+		if (IC2.platform.isSimulating() && this.addedToEnergyNet) {
+			MinecraftForge.EVENT_BUS.post((Event) new EnergyTileUnloadEvent((IEnergyTile) this));
+			this.addedToEnergyNet = false;
+		}
+		super.onUnloaded();
+	}
 	public abstract String getInventoryName();
 
 	public ContainerBase<? extends TileEntityBaseMolecular> getGuiContainer(EntityPlayer entityPlayer) {

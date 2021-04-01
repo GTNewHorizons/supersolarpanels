@@ -122,9 +122,10 @@ public class ItemQuantumSaber extends ItemTool implements IElectricItem, IBoxabl
 		return true;
 	}
 
-	public int getItemEnchantability() {
-		return toolMaterial.getEnchantability();
-	}
+	 public int getItemEnchantability()
+	    {
+		 return 0;
+	    }
 
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subs) {

@@ -15,6 +15,10 @@ import com.Denfop.item.Modules.ItemWirelessModule;
 import com.Denfop.item.Modules.ModuleType;
 import com.Denfop.item.Modules.ModuleTypePanel;
 import com.Denfop.item.Modules.AdditionModule;
+import com.Denfop.item.Modules.BaseModuleGenDay;
+import com.Denfop.item.Modules.BaseModuleGenNight;
+import com.Denfop.item.Modules.BaseModuleOutput;
+import com.Denfop.item.Modules.BaseModuleStorage;
 import com.Denfop.tiles.NeutroniumGenerator.TileneutronGenerator;
 import com.Denfop.tiles.base.TileEntitySolarPanel;
 import com.Denfop.utils.ModUtils;
@@ -134,8 +138,8 @@ public class GuiSolarPanels extends GuiContainer {
 		double maxstorage_dob = 0;
 		for (int j = 0; j < 9; j++) {
 			if (this.tileentity.chargeSlots[j] != null
-					&& this.tileentity.chargeSlots[j].getItem() instanceof IModulStorage) {
-				maxstorage1[j] = IModulStorage.getData(this.tileentity.chargeSlots[j]).get(0);
+					&& this.tileentity.chargeSlots[j].getItem() instanceof BaseModuleStorage) {
+				maxstorage1[j] = BaseModuleStorage.getpercent();
 				if (maxstorage1[j] != 0) {
 					maxstorage_dob = maxstorage_dob + maxstorage1[j];
 				}
@@ -164,18 +168,18 @@ public class GuiSolarPanels extends GuiContainer {
 		for (int i = 0; i < 9; i++) {
 
 			if (this.tileentity.chargeSlots[i] != null
-					&& this.tileentity.chargeSlots[i].getItem() instanceof IModulOutput) {
-				output[i] = IModulOutput.getData(this.tileentity.chargeSlots[i]).get(0);
+					&& this.tileentity.chargeSlots[i].getItem() instanceof BaseModuleOutput) {
+				output[i] = BaseModuleOutput.getpercent();
 
 			}
 			if (this.tileentity.chargeSlots[i] != null
-					&& this.tileentity.chargeSlots[i].getItem() instanceof IModulGenDay) {
-				gend[i] = IModulGenDay.getData(this.tileentity.chargeSlots[i]).get(0);
+					&& this.tileentity.chargeSlots[i].getItem() instanceof BaseModuleGenDay) {
+				gend[i] = BaseModuleGenDay.percentday();
 
 			}
 			if (this.tileentity.chargeSlots[i] != null
-					&& this.tileentity.chargeSlots[i].getItem() instanceof IModulGenNight) {
-				genn[i] = IModulGenNight.getData(this.tileentity.chargeSlots[i]).get(0);
+					&& this.tileentity.chargeSlots[i].getItem() instanceof BaseModuleGenNight) {
+				genn[i] = BaseModuleGenNight.percentnight();
 
 			}
 

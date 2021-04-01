@@ -59,17 +59,22 @@ public class ItemSpectralSaber extends ItemTool implements IElectricItem, IBoxab
 	public int tier;
 
 	private final EnumSet<ToolClass> toolClasses;
+	private ToolMaterial material;
 	private static int damage1;
 
 	public ItemSpectralSaber(String internalName, int maxCharge, int transferLimit, int tier, int activedamage,
 			int damage) {
 		this(internalName, 10, HarvestLevel.Diamond, maxCharge, transferLimit, tier, activedamage, damage);
 	}
-
+	 public int getItemEnchantability()
+	    {
+		 return 0;
+	    }
 	public ItemSpectralSaber(String name, int operationEnergyCost, HarvestLevel harvestLevel, int maxCharge,
 			int transferLimit, int tier, int activedamage, int damage) {
 		super(0, harvestLevel.toolMaterial, null);
 		this.soundTicker = 0;
+		 material = harvestLevel.toolMaterial;
 		this.operationEnergyCost = operationEnergyCost;
 		this.toolClasses = EnumSet.of(ToolClass.Sword);
 		this.maxCharge = maxCharge;
@@ -122,9 +127,7 @@ public class ItemSpectralSaber extends ItemTool implements IElectricItem, IBoxab
 		return true;
 	}
 
-	public int getItemEnchantability() {
-		return toolMaterial.getEnchantability();
-	}
+	
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subs) {
 		ItemStack stack = new ItemStack((Item) this, 1);

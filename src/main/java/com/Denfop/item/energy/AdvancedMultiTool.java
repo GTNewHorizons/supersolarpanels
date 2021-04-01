@@ -113,7 +113,13 @@ public class AdvancedMultiTool extends ItemTool implements IElectricItem {
 
 	public void init() {
 	}
-
+	 public int getItemEnchantability()
+	    {
+		 return 0;
+	    }
+	 public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+			return false;
+		}
 	public boolean canProvideEnergy(ItemStack itemStack) {
 		return false;
 	}

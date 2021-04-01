@@ -15,7 +15,7 @@ public class CannerRecipe {
 				(IRecipeInput) new RecipeInputItemStack(new ItemStack(IUItem.proton, 1), 1),
 				IUItem.reactorprotonSimple);
 		Recipes.cannerBottle.addRecipe((IRecipeInput) new RecipeInputItemStack(IC2Items.getItem("fuelRod"), 1),
-				(IRecipeInput) new RecipeInputItemStack(new ItemStack(IUItem.toriy, 9), 1),
+				(IRecipeInput) new RecipeInputItemStack(new ItemStack(IUItem.toriy, 1), 9),
 				IUItem.reactortoriySimple);
 
 	}

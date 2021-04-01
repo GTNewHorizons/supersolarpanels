@@ -12,21 +12,4 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
-public interface IModulStorage {
-	public static void setData(ItemStack stack, int storage) {
-		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
-
-		nbt.setInteger("percentstorage", storage);
-
-	}
-public int getpercent();
-	public static List<Integer> getData(ItemStack stack) {
-		NBTTagCompound nbt = NBTData.getOrCreateNbtData(stack);
-		List<Integer> list = new ArrayList<Integer>();
-
-		list.add(nbt.getInteger("percentstorage"));
-
-		return list;
-
-	}
-}
+public interface IModulStorage {}
