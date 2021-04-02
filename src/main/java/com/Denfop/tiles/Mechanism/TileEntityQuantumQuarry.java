@@ -306,7 +306,7 @@ return ret;
 			proccent = (Config.enerycost - proccent);
 
 		}
-		System.out.println(proccent);
+		
 		if (this.energy >= proccent) {
 
 			this.setActive(true);
