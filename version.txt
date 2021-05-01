@@ -1,1 +1,3 @@
-
+Version:1.5RC6
+Snapshot:2
+ReleaseNote:New system
