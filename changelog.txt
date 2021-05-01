@@ -2,10 +2,10 @@
 #                  Changelog                  #
 ###############################################
 Version:1.5RC6
-1. Update some things
-2. fix 2.4
-3. gui
-4. fix
-5. y
+1.Update some things
+2.fix 2.4
+3.gui
+4.fix
+5.y
 Version:1.5RC5
 dssd
