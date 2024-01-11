@@ -45,3 +45,4 @@ Idea.bat
 .project
 .settings/*
 .settings
+*.bat

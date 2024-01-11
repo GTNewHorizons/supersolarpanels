@@ -5,15 +5,13 @@ import net.minecraft.block.material.Material;
 
 abstract public class AbstractSSP extends BlockContainer {
 
-	public AbstractSSP(Material mat)
-	{
-		super(mat);
-		
-	}
+    public AbstractSSP(Material mat) {
+        super(mat);
 
-	public AbstractSSP(){
-		this(Material.rock);
-	}
-	
-	
+    }
+
+    public AbstractSSP() {
+        this(Material.rock);
+    }
+
 }
