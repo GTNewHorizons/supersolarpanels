@@ -1,10 +1,9 @@
 [
 {
-  "modid": "supersolarpanel",
-  "name": "Super Solar Panel",
-  "description": "Advanced solar panels is new generation of using solar power. This is addon for IndustrialCraft 2",
-  "version": "1.7.10-1.1.2-GT-NH-Mod",
-  "mcversion": "1.7.10",
+  "modid": "${modId}",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
+  "name": "${modName}",
   "url": "http://forum.industrial-craft.net/index.php?page=Thread&threadID=3291",
   "updateUrl": "",
   "authorList": ["SeNtiMeL, Icedfire"],
